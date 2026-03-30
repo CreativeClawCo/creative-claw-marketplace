@@ -1,0 +1,9 @@
+{
+  "name": "@creativeclaw/plugin",
+  "version": "0.1.0",
+  "description": "Creative Claw plugin for Claude Code and OpenClaw",
+  "type": "module",
+  "main": "index.mjs",
+  "license": "Apache-2.0",
+  "dependencies": {}
+}
