@@ -1,11 +1,5 @@
 {
-  "name": "creative-claw",
-  "description": "AI media studio — generate images, videos, speech, 3D models, and full productions via Creative Claw",
-  "version": "0.1.0",
-  "mcpServers": {
-    "creative-claw": {
-      "type": "http",
-      "url": "https://app.creativeclaw.co/mcp"
-    }
-  }
+  "name": "creative-claw-marketplace",
+  "description": "AI media studio plugins for Claude Code — generate images, videos, speech, and 3D models via Creative Claw",
+  "version": "1.0.0"
 }

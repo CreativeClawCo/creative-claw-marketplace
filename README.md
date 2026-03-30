@@ -78,18 +78,19 @@ These are our top picks. Use `list_models` to browse 100+ more across all catego
 
 ## Install
 
-### Claude Code
+### Claude Code (Marketplace)
+
+Add the marketplace in Claude Code settings, then browse and install the Creative Claw plugin:
+
+1. Open Claude Code
+2. Go to **Settings > Plugins > Browse plugins**
+3. Add marketplace URL: `CreativeClawCo/creative-claw-marketplace`
+4. Install the **creative-claw** plugin
+
+Or install directly from the repo:
 
 ```bash
-claude plugin install creative-claw
-```
-
-Or install from source:
-
-```bash
-git clone https://github.com/CreativeClawCo/creative-claw-marketplace.git
-cd creative-claw-marketplace
-claude plugin install .
+claude plugin install CreativeClawCo/creative-claw-marketplace/creative-claw
 ```
 
 ### Claude Desktop
@@ -149,28 +150,35 @@ You -> Claude + Skills (model selection, prompt engineering, creative direction)
 
 ## Project Structure
 
+This repo is a **marketplace** — it contains one or more installable plugins.
+
 ```
 .claude-plugin/
-  plugin.json            # Claude Code plugin manifest
-openclaw.plugin.json     # OpenClaw plugin manifest
-skills/
-  image-generation/
-    skill.md             # Image generation workflow + model guide
-    references/
-      gpt-image-1.5.md   # Detailed prompting guide
-      nano-banana-pro.md  # Gemini 3 Pro guide
-      nano-banana-2.md    # Gemini 3.1 Flash guide
-      flux-2-pro.md       # FLUX.2 Pro guide
-      recraft-v3.md       # Recraft V3 guide
-      flux-schnell.md     # FLUX Schnell guide
-  video-generation/
-    skill.md             # Video generation workflow + model guide
-    references/
-      veo-3.1.md          # Google Veo 3.1 guide
-      sora-2-pro.md       # OpenAI Sora 2 Pro guide
-      kling-v3-pro.md     # Kling v3 Pro guide
-      hailuo-02-pro.md    # MiniMax Hailuo-02 Pro guide
-      hailuo-2.3-fast.md  # MiniMax Hailuo 2.3 Fast guide
+  marketplace.json         # Marketplace manifest (required for Claude Code marketplace sync)
+  plugin.json              # Root plugin metadata
+plugins/
+  creative-claw/
+    .claude-plugin/
+      plugin.json          # Plugin manifest (MCP server config)
+    openclaw.plugin.json   # OpenClaw compatibility
+    skills/
+      image-generation/
+        skill.md           # Image generation workflow + model guide
+        references/
+          gpt-image-1.5.md
+          nano-banana-pro.md
+          nano-banana-2.md
+          flux-2-pro.md
+          recraft-v3.md
+          flux-schnell.md
+      video-generation/
+        skill.md           # Video generation workflow + model guide
+        references/
+          veo-3.1.md
+          sora-2-pro.md
+          kling-v3-pro.md
+          hailuo-02-pro.md
+          hailuo-2.3-fast.md
 ```
 
 ---
