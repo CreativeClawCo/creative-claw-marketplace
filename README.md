@@ -78,20 +78,19 @@ These are our top picks. Use `list_models` to browse 100+ more across all catego
 
 ## Install
 
-### Claude Code (Marketplace)
-
-Add the marketplace in Claude Code settings, then browse and install the Creative Claw plugin:
-
-1. Open Claude Code
-2. Go to **Settings > Plugins > Browse plugins**
-3. Add marketplace URL: `CreativeClawCo/creative-claw-marketplace`
-4. Install the **creative-claw** plugin
-
-Or install directly from the repo:
+### Claude Code
 
 ```bash
-claude plugin install CreativeClawCo/creative-claw-marketplace/creative-claw
+# 1. Add the marketplace
+claude plugin marketplace add CreativeClawCo/creative-claw-marketplace
+
+# 2. Install the plugin
+claude plugin install creative-claw@creative-claw-marketplace
+
+# 3. Authenticate — on first use, the MCP server will prompt you to sign in via Clerk OAuth
 ```
+
+That's it. The plugin connects to Creative Claw's MCP server and gives you access to all generation tools + the `/create-image` and `/create-video` skills.
 
 ### Claude Desktop
 
