@@ -1,5 +1,5 @@
 {
-  "name": "creative-claw-marketplace",
+  "name": "Creative Claw Marketplace",
   "description": "AI media studio plugins for Claude Code — generate images, videos, speech, and 3D models via Creative Claw",
   "version": "1.0.0",
   "owner": {
@@ -7,7 +7,7 @@
   },
   "plugins": [
     {
-      "name": "creative-claw",
+      "name": "Creative Claw",
       "source": "./plugins/creative-claw",
       "description": "AI media studio — generate images, videos, speech, 3D models, and full productions via Creative Claw",
       "version": "0.1.0",
