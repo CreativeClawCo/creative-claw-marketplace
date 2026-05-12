@@ -37,6 +37,7 @@ Or connect the MCP directly: `https://app.creativeclaw.co/mcp`
 8. **Edit-video: cut only on word boundaries** from the transcript. Pad cut edges 30–200 ms.
 9. **Tag and name assets at generation time.** Pass `name` and `tags` to every `generate_*` / `render_*` call. Use `update_asset` after if you forgot.
 10. **Don't quote pricing from memory.** Use `get_credits_balance` for the user's balance. Hand them `get_credits_link` for top-up — you cannot complete checkout for them.
+11. **Never use the elicitation form / visualize widget when a question requires an image upload.** Ask in plain chat instead so the user can attach the image directly to the conversation. The elicitation form is fine for everything else (text inputs, choices, parameter pickers) — this rule applies only when image upload is involved.
 
 ## Routing
 
