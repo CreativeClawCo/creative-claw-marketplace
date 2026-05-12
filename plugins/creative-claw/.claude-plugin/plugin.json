@@ -1,7 +1,7 @@
 {
   "name": "creative-claw",
   "description": "AI media studio — generate on-brand images, videos, speech, and HTML-rendered branded graphics. Save brand themes, compose reusable templates, and manage every asset in one library.",
-  "version": "0.4.2",
+  "version": "0.4.3",
   "mcpServers": {
     "Creative Claw": {
       "type": "http",
