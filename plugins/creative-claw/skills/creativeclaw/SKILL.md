@@ -1,6 +1,6 @@
 ---
 name: creativeclaw
-description: Creative Claw AI media studio — the unified creative pipeline for AI-generated and code-driven media. Use when the user wants to (1) generate or edit an AI image (FLUX, Nano Banana, GPT Image, Recraft), (2) generate or edit an AI video clip (Veo, Sora, Kling, Hailuo, Seedance, HeyGen avatars), (3) generate speech, voiceover, or voice-cloned audio, (4) render a branded HTML graphic to PNG (social cards, OG images, quote cards, stat cards, announcements, banners), (5) render a branded code-driven video to MP4 via HyperFrames + GSAP (kinetic typography, animated logos, data viz, branded title cards, content series), (6) build, save, list, or render reusable templates with parameters (repeatable LinkedIn / IG / OG / story posts), (7) create, extract from a website, update, or apply a brand theme (colors, fonts, logos, shapes, photography style), (8) edit existing video footage end-to-end — transcribe, cut on word boundaries, color grade, burn subtitles, reframe vertical, merge clips, smart 9:16 reframe, (9) onboard a new user to the studio, or (10) manage assets (search, tag, upload, import). Routes to deep references in this skill and calls the Creative Claw MCP server's tools (generate_image, generate_video, generate_speech, render_html_image, render_html_video, render_template, get_theme, transcribe, check_job, search_assets, plus ~30 more). Requires the Creative Claw MCP server to be connected. (v0.4.3)
+description: Creative Claw AI media studio. Use to generate or edit AI images (FLUX, Nano Banana, GPT Image, Recraft), AI videos (Veo, Sora, Kling, Hailuo, Seedance, HeyGen avatars), and speech/voiceover; render branded HTML graphics to PNG (social cards, OG images, quote cards, banners); render code-driven branded videos to MP4 in the cloud via HyperFrames; build and render reusable templates with parameters; create, extract, update, or apply brand themes (colors, fonts, logos, photography style); edit existing video footage (transcribe, cut on word boundaries, color grade, burn subtitles, 9:16 reframe, merge); onboard new users; and manage the asset library. Routes to deeper workflow guides and recommends companion skills (/hyperframes, /video-use) where appropriate. Requires the Creative Claw MCP server. (v0.4.3)
 ---
 
 # Creative Claw
@@ -31,28 +31,26 @@ Or connect the MCP directly: `https://app.creativeclaw.co/mcp`
 2. **Always generate a reference image before any AI video.** Even text-to-video. The starting frame controls quality and on-brandness.
 3. **`render_html_image`: never raw external URLs in `<img src>` or `background-image: url()`.** Always use `inline_images` — substituted as data URIs through the SSRF-guarded cache. CORS, redirects, and expired CDN URLs are the #1 cause of broken renders.
 4. **Async tools require `check_job`.** `generate_video`, `render_html_video`, `generate_3d_model`, `transcribe` all return `{ jobId, status: "queued" }`. Poll until completion. See `references/async-jobs.md`.
-5. **HyperFrames: no `repeat: -1`, no async timeline construction.** See `references/hyperframes-primer.md` for the full rule list.
-6. **Edit-video: subtitles last in the filter chain.** Overlays applied first, subtitles last — otherwise overlays hide captions.
-7. **Edit-video: cache transcripts per source.** Same source file → same JSON. Never re-transcribe.
-8. **Edit-video: cut only on word boundaries** from the transcript. Pad cut edges 30–200 ms.
-9. **Tag and name assets at generation time.** Pass `name` and `tags` to every `generate_*` / `render_*` call. Use `update_asset` after if you forgot.
-10. **Don't quote pricing from memory.** Use `get_credits_balance` for the user's balance. Hand them `get_credits_link` for top-up — you cannot complete checkout for them.
-11. **Never use the elicitation form / visualize widget when a question requires an image upload.** Ask in plain chat instead so the user can attach the image directly to the conversation. The elicitation form is fine for everything else (text inputs, choices, parameter pickers) — this rule applies only when image upload is involved.
+5. **HyperFrames knowledge lives in the `/hyperframes` skill.** For any code-driven video composition, install and invoke `/hyperframes` (and `/hyperframes-cli` for local commands). Creative Claw provides the cloud renderer (`render_html_video`) and reusable templates (`create_template` / `render_template`) — the composition rules are owned by the HyperFrames skill.
+6. **Editing existing footage lives in the `/video-use` skill.** Transcribe / cut on word boundaries / color grade / burn subtitles / 9:16 reframe — install and invoke `/video-use`. Use individual MCP tools (`transcribe`, `trim_video`, `add_subtitles`, etc.) only for one-shot ops.
+7. **Tag and name assets at generation time.** Pass `name` and `tags` to every `generate_*` / `render_*` call. Use `update_asset` after if you forgot.
+8. **Don't quote pricing from memory.** Use `get_credits_balance` for the user's balance. Hand them `get_credits_link` for top-up — you cannot complete checkout for them.
+9. **Never use the elicitation form / visualize widget when a question requires an image upload.** Ask in plain chat instead so the user can attach the image directly to the conversation. The elicitation form is fine for everything else (text inputs, choices, parameter pickers) — this rule applies only when image upload is involved.
 
 ## Routing
 
 | User wants… | Read first |
 |---|---|
 | Orientation / "what can this do?" | `references/workflows/onboard.md` |
-| Generate or edit an AI image | `references/workflows/image-gen.md` + `references/models/image/<model>.md` |
-| Generate or edit an AI video | `references/workflows/video-gen.md` + `references/models/video/<model>.md` |
-| Voiceover / TTS / voice cloning | `references/workflows/video-gen.md` (audio section) + `references/models/speech/<model>.md` |
+| Generate or edit an AI image | `references/workflows/image-gen.md` |
+| Generate or edit an AI video | `references/workflows/video-gen.md` |
+| Voiceover / TTS / voice cloning | `references/workflows/video-gen.md` (audio section) |
 | Branded HTML → PNG (one-off banner / OG / card) | `references/workflows/html-image.md` + `references/platform-dimensions.md` |
 | **Create a new template** (HTML or AI-image, with refs + iteration loop) | `references/workflows/template-creation.md` |
 | Reusable banner template (deeper HTML template mechanics) | `references/workflows/banner-from-template.md` |
-| Code-driven branded video (HyperFrames) | `references/workflows/code-video-hyperframes.md` + `references/hyperframes-primer.md` |
+| Code-driven branded video (HyperFrames) | `references/workflows/code-video-hyperframes.md` → install `/hyperframes` |
 | Brand theme (create / extract / update / apply) | `references/workflows/brand-theme.md` |
-| Edit existing footage (cut / grade / subtitle / reframe) | `references/workflows/edit-video.md` (uses `helpers/`) |
+| Edit existing footage (cut / grade / subtitle / reframe) | `references/workflows/edit-video.md` → install `/video-use` |
 
 When the user's request matches a row, **read that file before doing anything**. The workflow files contain the model selection, prompting strategies, parameter sets, and anti-patterns that aren't reproduced here.
 
@@ -60,39 +58,26 @@ When the user's request matches a row, **read that file before doing anything**.
 
 ### Workflows (`references/workflows/`)
 - **onboard.md** — first-time tour. The mission, four playful first-generations, the brand-theme unlock, recipes per goal.
-- **image-gen.md** — AI image generation. Model selection (Nano Banana, FLUX, GPT Image, Recraft), prompting per model, editing vs. generating, branded vs. unbranded.
-- **video-gen.md** — AI video generation. Model selection (Veo, Sora, Kling, Hailuo, Seedance, HeyGen), reference-image-first rule, async polling, multi-segment planning.
+- **image-gen.md** — AI image generation. Model selection picker (Nano Banana, FLUX, GPT Image, Recraft), editing vs. generating, branded vs. unbranded. The MCP server tailors prompts per model server-side.
+- **video-gen.md** — AI video generation. Model selection picker (Veo, Sora, Kling, Hailuo, Seedance, HeyGen), reference-image-first rule, async polling, multi-segment planning, talking-avatar guidance, speech models list.
 - **html-image.md** — `render_html_image` deep dive. Full CSS surface, `inline_images`, fonts, dimensions, theme integration, when to use vs. AI gen.
 - **template-creation.md** — Create a new template (both flavors: HTML render-templates AND AI-image prompt templates). Reference-image collection (existing files, URLs, or `import_media` drop-in), analysis, minimal dynamic params, render → load → iterate loop, prompt recipes for AI-generated background images inside HTML templates, "render one now" handoff.
 - **banner-from-template.md** — Deeper HTML template mechanics: full HTML example, `create_template` parameter shape, batch rendering, the four templates worth building first.
-- **code-video-hyperframes.md** — `render_html_video` workflow. Asset gen → composition → render → iterate. Common patterns (branded series, AI clip + chrome overlay, data viz, talking avatar, product demo).
+- **code-video-hyperframes.md** — how Creative Claw's `render_html_video` and templates fit into a HyperFrames pipeline. Composition rules themselves live in the `/hyperframes` skill — install it before authoring.
 - **brand-theme.md** — full theme lifecycle. Website extraction, local folders, URL lists, generating from scratch, updating, applying in generation.
-- **edit-video.md** — edit existing footage end-to-end. Transcribe via Creative Claw, cut on word boundaries, color grade, burn subtitles, smart 9:16 reframe. Uses Python helpers in `helpers/` and the EDL artifact in `assets/edl-schema.json`.
+- **edit-video.md** — pointer to the `/video-use` skill plus a list of the MCP tools available for one-shot edits (`transcribe`, `trim_video`, `add_subtitles`, etc.).
 
-### Model guides (`references/models/`)
-Per-model prompting guides — read **before** crafting any `generate_image` / `generate_video` / `generate_speech` prompt:
-- **image/** — flux-2-pro, flux-schnell, gpt-image-2, nano-banana-2, nano-banana-pro, recraft-v3
-- **video/** — hailuo-02-pro, hailuo-2.3-fast, heygen-avatar-4, kling-v3-pro, seedance-2.0, sora-2-pro, veo-3.1
-- **speech/** — xai-tts
+### Model selection
+
+Per-modality picker tables live inside the workflow files (`image-gen.md`, `video-gen.md`). The MCP server enhances user prompts server-side using per-model knowledge — write clear creative direction and the server tailors it for the chosen model. Use `list_models` and `get_model_params` at runtime to discover model IDs and extras.
 
 ### Cross-cutting (`references/`)
-- **hyperframes-primer.md** — minimum HyperFrames knowledge. Capture contract, hard rules, layout-before-animation, scene transitions, fonts.
-- **tool-catalog.md** — all 40 MCP tools, grouped (generation, templates, themes, assets, editing, models, jobs, credits).
+- **tool-catalog.md** — MCP tools grouped (generation, templates, themes, assets, editing, models, jobs, credits).
 - **async-jobs.md** — `check_job` polling pattern, parallel jobs, failure modes, timeouts.
 - **platform-dimensions.md** — IG, LI, X, YT, TikTok, OG sizes + safe zones. Machine-readable copy at `assets/platform-dimensions.json`.
 
 ### Assets (`assets/`)
 - **platform-dimensions.json** — JSON copy of dimensions table.
-- **edl-schema.json** — JSON schema for the Edit Decision List (edit-video workflow).
-
-### Helpers (`helpers/`)
-Python scripts for the edit-video workflow:
-- **prepare_audio.py** — extract mono 16 kHz WAV from a video for the Creative Claw `transcribe` tool. Cached against the transcript file.
-- **pack_transcripts.py** — Scribe JSONs → `takes_packed.md` (phrase-level reading view).
-- **timeline_view.py** — filmstrip + waveform PNG for a time range. Use at decision points only.
-- **render.py** — full render pipeline (per-segment extract → concat → overlays → subtitles). Reads `edl.json`.
-- **grade.py** — color grade via ffmpeg filter chain. Auto mode by default; presets and raw filters available.
-- **smart_vertical.py** — face-tracked 16:9 → 1080×1920 reframe.
 
 ## Tool catalog quick reference
 

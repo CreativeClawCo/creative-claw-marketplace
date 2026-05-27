@@ -201,12 +201,4 @@ Always generate dedicated intro and outro frames — then use a `first-last-fram
 - `search_assets` — Search previously generated assets by type, query, tags, or name.
 - `get_theme` — Fetch brand theme for consistent styling across videos.
 
-For detailed prompting guides per model, see the reference files:
-
-- [Veo 3.1](references/veo-3.1.md)
-- [Sora 2 Pro](references/sora-2-pro.md)
-- [Kling v3 Pro](references/kling-v3-pro.md)
-- [Seedance 2.0](references/seedance-2.0.md) (also covers Seedance 2.0 Fast)
-- [Hailuo-02 Pro](references/hailuo-02-pro.md)
-- [Hailuo 2.3 Fast](references/hailuo-2.3-fast.md)
-- [HeyGen Avatar 4](references/heygen-avatar-4.md) (also covers HeyGen Video Agent)
+The MCP server enhances prompts server-side using per-model knowledge — write a clear creative-direction prompt and let the server tailor it for the chosen model. Use `get_model_params` to discover extras (first/last frame, camera controls, etc.).

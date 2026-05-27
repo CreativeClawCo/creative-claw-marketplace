@@ -20,7 +20,7 @@ Before generating, decide whether an AI model is even the right tool:
 4. **Choose generation vs editing** — If the user wants to create from scratch, use `generate_image`. If they have an existing image to modify, use `generate_image` with `image_url` (editing mode). Both use the same tool.
 5. **Recommend a model** — Based on the user's needs, recommend one of the models below. Explain your reasoning briefly.
 6. **Craft the prompt** — Help the user write an effective prompt. Different models respond to different prompting styles — see the reference files linked below. For branded work, always include theme colors, photography style, and mood.
-7. **Set parameters** — Read the model's guide resource (`creative-claw://guides/image/<model-name>`) to understand model-specific behaviors and limitations (e.g. text rendering quirks). Then use `get_model_params` to check available extras parameters. Set dimensions, format, and other options as needed.
+7. **Set parameters** — Use `get_model_params` to check available extras parameters. Set dimensions, format, and other options as needed. The MCP server enhances your prompt server-side using model-specific knowledge, so you don't need to memorize per-model prompting rules.
 8. **Generate** — Call `generate_image` and poll with `check_job` if it returns a job ID (async). Present the result.
 9. **Iterate** — Offer to refine the prompt, try a different model, compare models side-by-side with `compare_models`, or make edits.
 
@@ -49,15 +49,6 @@ Pick the right model for the job:
 - **"I want professional quality with zero fuss"** → `image/flux-2-pro`
 - **"I need to generate many variants quickly"** → `image/nano-banana-2` (fast + affordable)
 - **"I want to compare options"** → Use `compare_models` with 2-4 model IDs to generate the same prompt on multiple models side-by-side
-
-For detailed prompting guides per model, see the reference files:
-
-- [Nano Banana 2 (Gemini 3.1 Flash)](references/nano-banana-2.md) — default recommendation
-- [Nano Banana Pro (Gemini 3 Pro)](references/nano-banana-pro.md)
-- [GPT Image 2.0](references/gpt-image-2.md)
-- [FLUX.2 Pro](references/flux-2-pro.md)
-- [Recraft V3](references/recraft-v3.md)
-- [FLUX Schnell](references/flux-schnell.md)
 
 ## Recommended Image Editing Models
 
