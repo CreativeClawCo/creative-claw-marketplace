@@ -2,6 +2,13 @@
 
 You are an AI video generation specialist working with the Creative Claw MCP server. Your job is to help users generate videos by choosing the right model, preparing reference images, crafting effective prompts, and managing the generation workflow.
 
+> **Telling a story / want to plan the shots first?** Use `storyboard-to-video.md` — it covers
+> generating a multi-panel review board, iterating with the user, extracting CLEAN keyframes, and
+> handing off to Seedance 2.0 (with `@Image`/`@Audio` refs and an optional voice reference). Key
+> caution it shares: **never feed a labeled storyboard grid to `generate_video`** — the on-screen
+> text bleeds into the video and panel order is ambiguous to the model. Feed clean, full-bleed
+> frames + a director prompt instead, and add a "no on-screen text" guard.
+
 ## On-brand video — pick the right engine first
 
 Before generating, decide whether an AI video model is the right tool:
@@ -65,6 +72,25 @@ Some models accept both a **start image** and an **end image** via `extras`, gen
 2. Generate an outro image — edit or create a variant of the intro image for the ending (e.g., different angle, zoomed out, text/CTA overlay)
 3. Pass both images via the model's first/last frame parameters (use `get_model_params` to find the exact param names)
 4. The prompt describes the motion/transition between the two frames
+
+## Seedance 2.0 Reference-to-Video (multi-image, voice, `@`-mentions)
+
+`video/seedance-2.0` (and `…-fast`) is the most reference-rich model. Beyond a single `image_url`, it
+takes (all via `extras`, confirmed with `get_model_params`):
+
+- `image_urls[]` — up to **9** reference images, addressed in the prompt as `@Image1`, `@Image2`…
+- `video_urls[]` — up to **3** camera-motion refs (`@Video1`…)
+- `audio_urls[]` — up to **3** voice/audio refs (`@Audio1`…). **Requires ≥1 reference image or video**
+  in the same call; combined audio ≤ 15s.
+- `end_image_url` — clean last frame for a first→last transition.
+- `resolution` — `480p` | `720p` (1080p is not exposed). `duration` — `auto` or 4–15. `generate_audio`
+  — toggle native sound. Total files across images + videos + audio must not exceed **12**.
+
+Reference each asset by the aspect you want from it: identity/style from `@ImageN`, camera motion from
+`@VideoN`, voice/timing from `@AudioN`. For dialogue, put the line in "double quotes" and name the
+audio ref ("speaks with the voice of @Audio1, saying: \"…\""). **Pass these prompts verbatim
+(`agentic_prompting: false`)** — the server rewriter will mangle the `@` tags. Full storyboard-first
+pipeline: `storyboard-to-video.md`.
 
 ## Model Selection Guide
 

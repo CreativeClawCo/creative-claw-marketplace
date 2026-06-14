@@ -1,6 +1,6 @@
 ---
 name: creativeclaw
-description: Creative Claw AI media studio. Use to generate or edit AI images (FLUX, Nano Banana, GPT Image, Recraft), AI videos (Veo, Sora, Kling, Hailuo, Seedance, HeyGen avatars), and speech/voiceover; render branded HTML graphics to PNG (social cards, OG images, quote cards, banners); render code-driven branded videos to MP4 in the cloud via HyperFrames; build and render reusable templates with parameters; create, extract, update, or apply brand themes (colors, fonts, logos, photography style); edit existing video footage (transcribe, cut on word boundaries, color grade, burn subtitles, 9:16 reframe, merge); onboard new users; and manage the asset library. Routes to deeper workflow guides and recommends companion skills (/hyperframes, /video-use) where appropriate. Requires the Creative Claw MCP server. (v0.4.3)
+description: Creative Claw AI media studio. Use to generate or edit AI images (FLUX, Nano Banana, GPT Image, Recraft), AI videos (Veo, Sora, Kling, Hailuo, Seedance, HeyGen avatars), and speech/voiceover; render branded HTML graphics to PNG (social cards, OG images, quote cards, banners); render code-driven branded videos to MP4 in the cloud via HyperFrames; build and render reusable templates with parameters; create, extract, update, or apply brand themes (colors, fonts, logos, photography style); edit existing video footage (transcribe, cut on word boundaries, color grade, burn subtitles, 9:16 reframe, merge); onboard new users; and manage the asset library. Routes to deeper workflow guides and recommends companion skills (/hyperframes, /video-use) where appropriate. Requires the Creative Claw MCP server. (v0.5.0)
 ---
 
 # Creative Claw
@@ -36,30 +36,34 @@ Or connect the MCP directly: `https://app.creativeclaw.co/mcp`
 7. **Tag and name assets at generation time.** Pass `name` and `tags` to every `generate_*` / `render_*` call. Use `update_asset` after if you forgot.
 8. **Don't quote pricing from memory.** Use `get_credits_balance` for the user's balance. Hand them `get_credits_link` for top-up — you cannot complete checkout for them.
 9. **Never use the elicitation form / visualize widget when a question requires an image upload.** Ask in plain chat instead so the user can attach the image directly to the conversation. The elicitation form is fine for everything else (text inputs, choices, parameter pickers) — this rule applies only when image upload is involved.
+10. **Pass thorough prompts verbatim — set `agentic_prompting: false`.** `generate_image` / `generate_video` rewrite prompts server-side by default. When your prompt already contains literal control tokens (`@Image1` / `@Audio1` mention tags, exact timecodes, quoted dialogue, per-panel layout), disable the rewriter — paraphrasing `@Image1` into "the reference image" silently breaks the model's syntax. Keep it on only for short, loose, single-line creative asks. Send it verbatim when you've done the directing; let the server direct when you haven't.
 
 ## Routing
 
-| User wants… | Read first |
-|---|---|
-| Orientation / "what can this do?" | `references/workflows/onboard.md` |
-| Generate or edit an AI image | `references/workflows/image-gen.md` |
-| Generate or edit an AI video | `references/workflows/video-gen.md` |
-| Voiceover / TTS / voice cloning | `references/workflows/video-gen.md` (audio section) |
-| Branded HTML → PNG (one-off banner / OG / card) | `references/workflows/html-image.md` + `references/platform-dimensions.md` |
-| **Create a new template** (HTML or AI-image, with refs + iteration loop) | `references/workflows/template-creation.md` |
-| Reusable banner template (deeper HTML template mechanics) | `references/workflows/banner-from-template.md` |
-| Code-driven branded video (HyperFrames) | `references/workflows/code-video-hyperframes.md` → install `/hyperframes` |
-| Brand theme (create / extract / update / apply) | `references/workflows/brand-theme.md` |
-| Edit existing footage (cut / grade / subtitle / reframe) | `references/workflows/edit-video.md` → install `/video-use` |
+| User wants…                                                              | Read first                                                                 |
+| ------------------------------------------------------------------------ | -------------------------------------------------------------------------- |
+| Orientation / "what can this do?"                                        | `references/workflows/onboard.md`                                          |
+| Generate or edit an AI image                                             | `references/workflows/image-gen.md`                                        |
+| Generate or edit an AI video                                             | `references/workflows/video-gen.md`                                        |
+| **Storyboard a video, then generate it** (board → iterate → Seedance)    | `references/workflows/storyboard-to-video.md`                              |
+| Voiceover / TTS / voice cloning                                          | `references/workflows/video-gen.md` (audio section)                        |
+| Branded HTML → PNG (one-off banner / OG / card)                          | `references/workflows/html-image.md` + `references/platform-dimensions.md` |
+| **Create a new template** (HTML or AI-image, with refs + iteration loop) | `references/workflows/template-creation.md`                                |
+| Reusable banner template (deeper HTML template mechanics)                | `references/workflows/banner-from-template.md`                             |
+| Code-driven branded video (HyperFrames)                                  | `references/workflows/code-video-hyperframes.md` → install `/hyperframes`  |
+| Brand theme (create / extract / update / apply)                          | `references/workflows/brand-theme.md`                                      |
+| Edit existing footage (cut / grade / subtitle / reframe)                 | `references/workflows/edit-video.md` → install `/video-use`                |
 
 When the user's request matches a row, **read that file before doing anything**. The workflow files contain the model selection, prompting strategies, parameter sets, and anti-patterns that aren't reproduced here.
 
 ## References index
 
 ### Workflows (`references/workflows/`)
+
 - **onboard.md** — first-time tour. The mission, four playful first-generations, the brand-theme unlock, recipes per goal.
 - **image-gen.md** — AI image generation. Model selection picker (Nano Banana, FLUX, GPT Image, Recraft), editing vs. generating, branded vs. unbranded. The MCP server tailors prompts per model server-side.
 - **video-gen.md** — AI video generation. Model selection picker (Veo, Sora, Kling, Hailuo, Seedance, HeyGen), reference-image-first rule, async polling, multi-segment planning, talking-avatar guidance, speech models list.
+- **storyboard-to-video.md** — storyboard-first pipeline. Plan beats → generate a multi-panel review board (`nano-banana-pro`) → iterate by editing → extract CLEAN keyframes → hand off to Seedance 2.0 (`@Image`/`@Audio` refs, first/last frame, optional voice reference). Includes the "review board vs. generation frames" rule and when to disable the prompt rewriter.
 - **html-image.md** — `render_html_image` deep dive. Full CSS surface, `inline_images`, fonts, dimensions, theme integration, when to use vs. AI gen.
 - **template-creation.md** — Create a new template (both flavors: HTML render-templates AND AI-image prompt templates). Reference-image collection (existing files, URLs, or `import_media` drop-in), analysis, minimal dynamic params, render → load → iterate loop, prompt recipes for AI-generated background images inside HTML templates, "render one now" handoff.
 - **banner-from-template.md** — Deeper HTML template mechanics: full HTML example, `create_template` parameter shape, batch rendering, the four templates worth building first.
@@ -72,11 +76,13 @@ When the user's request matches a row, **read that file before doing anything**.
 Per-modality picker tables live inside the workflow files (`image-gen.md`, `video-gen.md`). The MCP server enhances user prompts server-side using per-model knowledge — write clear creative direction and the server tailors it for the chosen model. Use `list_models` and `get_model_params` at runtime to discover model IDs and extras.
 
 ### Cross-cutting (`references/`)
+
 - **tool-catalog.md** — MCP tools grouped (generation, templates, themes, assets, editing, models, jobs, credits).
 - **async-jobs.md** — `check_job` polling pattern, parallel jobs, failure modes, timeouts.
 - **platform-dimensions.md** — IG, LI, X, YT, TikTok, OG sizes + safe zones. Machine-readable copy at `assets/platform-dimensions.json`.
 
 ### Assets (`assets/`)
+
 - **platform-dimensions.json** — JSON copy of dimensions table.
 
 ## Tool catalog quick reference
