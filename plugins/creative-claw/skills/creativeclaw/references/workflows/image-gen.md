@@ -26,23 +26,23 @@ Before generating, decide whether an AI model is even the right tool:
 
 ## Recommended Image Generation Models
 
-Pick the right model for the job:
+**Default to the Google Nano Banana models — they're the top pick for almost everything. Reach for GPT Image only as a second-best alternative.**
 
-| Model ID                | Name                             | Best For                                                               | Speed   | Cost |
-| ----------------------- | -------------------------------- | ---------------------------------------------------------------------- | ------- | ---- |
-| `image/gpt-image`       | GPT Image 2.0                    | Best-in-class text rendering, 4K output, exceptional prompt adherence  | Medium  | $$   |
-| `image/nano-banana-pro` | Nano Banana Pro (Gemini 3 Pro)   | Complex conversational prompts, semantic understanding, text in images | Medium  | $$   |
-| `image/nano-banana-2`   | Nano Banana 2 (Gemini 3.1 Flash) | Fast high-fidelity generation, text rendering, multilingual            | Fast    | $    |
-| `image/flux-2-pro`      | FLUX.2 Pro                       | Zero-config professional quality, no parameter tuning needed           | Medium  | $$   |
-| `image/recraft-v3`      | Recraft V3                       | Design and illustration, #1 on benchmarks                              | Medium  | $$   |
-| `image/flux-schnell`    | FLUX Schnell                     | Quick drafts and testing (~0.5s), cheapest option                      | Fastest | ¢    |
+| Model ID                | Name                             | Best For                                                                                          | Speed   | Cost |
+| ----------------------- | -------------------------------- | ------------------------------------------------------------------------------------------------- | ------- | ---- |
+| `image/nano-banana-2`   | Nano Banana 2 (Gemini 3.1 Flash) | ⭐ Default & top pick — fast, high-fidelity, text rendering, multilingual                         | Fast    | $    |
+| `image/nano-banana-pro` | Nano Banana Pro (Gemini 3 Pro)   | Max-quality Google model — complex conversational prompts, semantic understanding, text in images | Medium  | $$   |
+| `image/gpt-image-2`     | GPT Image 2.0                    | Second-best — best-in-class text rendering, 4K output, exceptional prompt adherence               | Medium  | $$   |
+| `image/flux-2-pro`      | FLUX.2 Pro                       | Zero-config professional quality, no parameter tuning needed                                      | Medium  | $$   |
+| `image/recraft-v3`      | Recraft V3                       | Design and illustration, #1 on benchmarks                                                         | Medium  | $$   |
+| `image/flux-schnell`    | FLUX Schnell                     | Quick drafts and testing (~0.5s), cheapest option                                                 | Fastest | ¢    |
 
 ### Model Selection Guide
 
 **Default recommendation:** When the user doesn't specify a particular need or preference, use `image/nano-banana-2` (Gemini 3.1 Flash). It offers the best cost/quality balance — fast, affordable, and high-fidelity output. This is also the tool default.
 
 - **No specific requirement / general use** → `image/nano-banana-2` (default — great quality at low cost)
-- **"I need the best quality, cost doesn't matter"** → `image/gpt-image` or `image/nano-banana-pro`
+- **"I need the best quality, cost doesn't matter"** → `image/nano-banana-pro` (top quality), then `image/gpt-image-2`
 - **"I need text in the image"** → `image/nano-banana-pro` or `image/nano-banana-2` (Gemini models excel at text rendering)
 - **"I need it fast and cheap for testing"** → `image/flux-schnell`
 - **"I need a design or illustration"** → `image/recraft-v3`
@@ -54,13 +54,15 @@ Pick the right model for the job:
 
 Editing uses the same `generate_image` tool — pass an `image_url` to enter edit mode. The `strength` parameter (0-1, default 0.75) controls how much the image changes.
 
-| Model ID                 | Name             | Best For                                            |
-| ------------------------ | ---------------- | --------------------------------------------------- |
-| `image/gpt-image`        | GPT Image 2.0    | Best-in-class text rendering, 4K edits, exceptional prompt adherence |
-| `image/nano-banana-pro`  | Nano Banana Pro  | Semantic understanding of complex edit instructions |
-| `image/flux-kontext-max` | FLUX Kontext Max | Consistency, typography, and precise edits          |
-| `image/nano-banana-2`    | Nano Banana 2    | Fast, high-fidelity edits                           |
-| `image/flux-dev`         | FLUX Dev         | Cheap and reliable, good for testing                |
+**Default to the Google Nano Banana models for edits too.**
+
+| Model ID                 | Name             | Best For                                                          |
+| ------------------------ | ---------------- | ----------------------------------------------------------------- |
+| `image/nano-banana-2`    | Nano Banana 2    | ⭐ Default — fast, high-fidelity edits                            |
+| `image/nano-banana-pro`  | Nano Banana Pro  | Max quality — semantic understanding of complex edit instructions |
+| `image/gpt-image-2`      | GPT Image 2.0    | Second-best — best-in-class text rendering, 4K edits              |
+| `image/flux-kontext-max` | FLUX Kontext Max | Consistency, typography, and precise edits                        |
+| `image/flux-dev`         | FLUX Dev         | Cheap and reliable, good for testing                              |
 
 ### Editing Tips
 

@@ -24,17 +24,19 @@ Before generating, decide whether an AI video model is the right tool:
 
 ## Recommended Text-to-Video Models
 
-| Model ID                  | Name              | Audio                   | Max Duration | Best For                                                                | Cost |
-| ------------------------- | ----------------- | ----------------------- | ------------ | ----------------------------------------------------------------------- | ---- |
-| `video/veo-3.1`           | Veo 3.1           | Native audio + dialogue | ~8s          | Best overall quality, true 4K                                           | $$$  |
-| `video/veo-3.1-fast`      | Veo 3.1 Fast      | Native audio + dialogue | ~8s          | Same quality, ~50% cheaper                                              | $$   |
-| `video/sora-2-pro`        | Sora 2 Pro        | Native audio            | Up to 25s    | Longer clips, character IDs                                             | $$$  |
-| `video/kling-v3-pro`      | Kling v3 Pro      | Native audio            | ~10s         | Cinematic visuals, multi-shot                                           | $$   |
-| `video/seedance-2.0`      | Seedance 2.0      | Native audio            | ~10s         | ByteDance's best — cinematic, real-world physics, director-level camera | $$   |
-| `video/seedance-2.0-fast` | Seedance 2.0 Fast | Native audio            | ~10s         | Same quality as Seedance 2.0, faster and cheaper                        | $    |
-| `video/hailuo-02-pro`     | Hailuo-02 Pro     | Yes                     | ~6s          | Great physics, director-level camera                                    | $$   |
-| `video/veo-3.1-lite`      | Veo 3.1 Lite      | Native audio + dialogue | ~8s          | Cheap testing with Veo quality, supports I2V and first/last frame       | $    |
-| `video/hailuo-2.3-fast`   | Hailuo 2.3 Fast   | No                      | ~6s          | Cheapest/fastest — **tool default**                                     | $    |
+**Default to the Google Veo models — they're the top pick for quality video. Seedance 2.0 is the next-best alternative.**
+
+| Model ID                  | Name              | Audio                   | Max Duration | Best For                                                                                 | Cost |
+| ------------------------- | ----------------- | ----------------------- | ------------ | ---------------------------------------------------------------------------------------- | ---- |
+| `video/veo-3.1`           | Veo 3.1           | Native audio + dialogue | ~8s          | ⭐ Top pick — best overall quality, true 4K                                              | $$$  |
+| `video/veo-3.1-fast`      | Veo 3.1 Fast      | Native audio + dialogue | ~8s          | Same Veo quality, ~50% cheaper                                                           | $$   |
+| `video/veo-3.1-lite`      | Veo 3.1 Lite      | Native audio + dialogue | ~8s          | ⭐ Tool default — cheap Google Veo, supports I2V and first/last frame                    | $    |
+| `video/seedance-2.0`      | Seedance 2.0      | Native audio            | ~10s         | Second-best — ByteDance's flagship: cinematic, real-world physics, director-level camera | $$   |
+| `video/seedance-2.0-fast` | Seedance 2.0 Fast | Native audio            | ~10s         | Same Seedance quality, faster and cheaper                                                | $    |
+| `video/sora-2-pro`        | Sora 2 Pro        | Native audio            | Up to 25s    | Longer clips, character IDs                                                              | $$$  |
+| `video/kling-v3-pro`      | Kling v3 Pro      | Native audio            | ~10s         | Cinematic visuals, multi-shot                                                            | $$   |
+| `video/hailuo-02-pro`     | Hailuo-02 Pro     | Yes                     | ~6s          | Great physics, director-level camera                                                     | $$   |
+| `video/hailuo-2.3-fast`   | Hailuo 2.3 Fast   | No                      | ~6s          | Cheapest/fastest non-Google option for quick tests                                       | $    |
 
 ## Recommended Talking Avatar Models
 
@@ -68,9 +70,12 @@ Some models accept both a **start image** and an **end image** via `extras`, gen
 
 ### By Priority
 
+**Lead with Google Veo; Seedance 2.0 is the next-best alternative.**
+
+- **No specific requirement / general use** → `video/veo-3.1` (top pick) — or `video/veo-3.1-fast` / `video/veo-3.1-lite` for lower cost
 - **"Best possible quality"** → `video/veo-3.1` (text) or `video/veo-3.1` with `image_url` (image)
-- **"Good quality, lower cost"** → `video/veo-3.1-fast` or `video/kling-v3-pro`
-- **"Cinematic with great physics"** → `video/seedance-2.0` (ByteDance's best) or `video/hailuo-02-pro`
+- **"Good quality, lower cost"** → `video/veo-3.1-fast` or `video/veo-3.1-lite`
+- **"Cinematic with great physics"** → `video/veo-3.1`, then `video/seedance-2.0` (second-best) or `video/hailuo-02-pro`
 - **"I need dialogue/speech in the video"** → `video/veo-3.1` or `video/sora-2-pro` (native audio with dialogue)
 - **"I need a longer clip (>10s)"** → `video/sora-2-pro` (up to 25s)
 - **"I need precise camera control"** → `video/seedance-2.0` or `video/hailuo-02-pro` (director-level camera)
