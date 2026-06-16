@@ -57,6 +57,26 @@ node -e "
 "
 echo "  openclaw.plugin.json → $VERSION"
 
+# 3b. Codex plugin manifest (.codex-plugin/plugin.json)
+node -e "
+  const fs = require('fs');
+  const f = '$PLUGIN_DIR/.codex-plugin/plugin.json';
+  const d = JSON.parse(fs.readFileSync(f, 'utf-8'));
+  d.version = '$VERSION';
+  fs.writeFileSync(f, JSON.stringify(d, null, 2) + '\n');
+"
+echo "  .codex-plugin/plugin.json → $VERSION"
+
+# 3c. Codex marketplace manifest (.agents/plugins/marketplace.json)
+node -e "
+  const fs = require('fs');
+  const f = '$REPO_ROOT/.agents/plugins/marketplace.json';
+  const d = JSON.parse(fs.readFileSync(f, 'utf-8'));
+  d.plugins[0].version = '$VERSION';
+  fs.writeFileSync(f, JSON.stringify(d, null, 2) + '\n');
+"
+echo "  .agents/plugins/marketplace.json → $VERSION"
+
 # 4. Stamp version into all SKILL.md descriptions
 # Replaces existing (vX.Y.Z) or appends it after the description text
 for skill_file in "$PLUGIN_DIR"/skills/*/SKILL.md; do

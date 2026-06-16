@@ -1,0 +1,25 @@
+{
+  "name": "creative-claw",
+  "version": "0.5.1",
+  "description": "AI media studio — generate on-brand images, videos, speech, and HTML-rendered branded graphics. Save brand themes, compose reusable templates, and manage every asset in one library.",
+  "author": {
+    "name": "Creative Claw Co."
+  },
+  "homepage": "https://creativeclaw.co",
+  "repository": "https://github.com/CreativeClawCo/creative-claw-marketplace",
+  "license": "Apache-2.0",
+  "keywords": [
+    "image-generation",
+    "video-generation",
+    "html-to-image",
+    "brand-theme",
+    "ai-media",
+    "creative",
+    "fal-ai",
+    "mcp"
+  ],
+  "skills": [
+    "skills/creativeclaw"
+  ],
+  "mcpServers": "./.codex-plugin/mcp.json"
+}

@@ -4,7 +4,11 @@ node_modules/
 CLAUDE.md
 .claude/settings.local.json
 _refs/
-.agents/
+.agents/*
+# Keep the Codex marketplace source tracked (distributable), ignore the rest of .agents/
+!.agents/plugins/
+.agents/plugins/*
+!.agents/plugins/marketplace.json
 .claude/
 .factory/
 skills-lock.json

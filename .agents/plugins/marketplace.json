@@ -1,0 +1,33 @@
+{
+  "name": "creative-claw-marketplace",
+  "description": "AI media studio plugins for Codex — generate on-brand images, videos, speech, and HTML-rendered branded graphics via Creative Claw",
+  "version": "1.0.0",
+  "owner": {
+    "name": "Creative Claw Co."
+  },
+  "plugins": [
+    {
+      "name": "creative-claw",
+      "source": "./plugins/creative-claw",
+      "description": "AI media studio — generate on-brand images, videos, speech, and HTML-rendered branded graphics. Save brand themes, compose reusable templates, and manage every asset in one library.",
+      "version": "0.5.1",
+      "author": {
+        "name": "Creative Claw Co."
+      },
+      "repository": "https://github.com/CreativeClawCo/creative-claw-marketplace",
+      "homepage": "https://creativeclaw.co",
+      "license": "Apache-2.0",
+      "keywords": [
+        "image-generation",
+        "video-generation",
+        "html-to-image",
+        "brand-theme",
+        "ai-media",
+        "creative",
+        "fal-ai",
+        "mcp"
+      ],
+      "category": "creative"
+    }
+  ]
+}
