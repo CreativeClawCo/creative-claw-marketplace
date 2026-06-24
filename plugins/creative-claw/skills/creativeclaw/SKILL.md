@@ -1,6 +1,6 @@
 ---
 name: creativeclaw
-description: Creative Claw AI media studio. Use to generate or edit AI images (FLUX, Nano Banana, GPT Image, Recraft), AI videos (Veo, Sora, Kling, Hailuo, Seedance, HeyGen avatars), and speech/voiceover; render branded HTML graphics to PNG (social cards, OG images, quote cards, banners); render code-driven branded videos to MP4 in the cloud via HyperFrames; build and render reusable templates with parameters; create, extract, update, or apply brand themes (colors, fonts, logos, photography style); edit existing video footage (transcribe, cut on word boundaries, color grade, burn subtitles, 9:16 reframe, merge); onboard new users; and manage the asset library. Routes to deeper workflow guides and recommends companion skills (/hyperframes, /video-use) where appropriate. Requires the Creative Claw MCP server. (v0.5.1)
+description: Creative Claw AI media studio. Use to generate or edit AI images (FLUX, Nano Banana, GPT Image, Recraft), AI videos (Veo, Sora, Kling, Hailuo, Seedance, HeyGen avatars), and speech/voiceover; create reusable Characters with reference images and cloned voices for consistent multi-shot content; produce multi-shot Films with the 3-gate pipeline (script → storyboard → render → assemble); render branded HTML graphics to PNG (social cards, OG images, quote cards, banners); render code-driven branded videos to MP4 in the cloud via HyperFrames; build and render reusable templates with parameters; create, extract, update, or apply brand themes (colors, fonts, logos, photography style); edit existing video footage (transcribe, cut on word boundaries, color grade, burn subtitles, 9:16 reframe, merge); onboard new users; and manage the asset library. Routes to deeper workflow guides and recommends companion skills (/hyperframes, /video-use) where appropriate. Requires the Creative Claw MCP server. (v0.5.2)
 ---
 
 # Creative Claw
@@ -37,6 +37,7 @@ Or connect the MCP directly: `https://app.creativeclaw.co/mcp`
 8. **Don't quote pricing from memory.** Use `get_credits_balance` for the user's balance. Hand them `get_credits_link` for top-up — you cannot complete checkout for them.
 9. **Never use the elicitation form / visualize widget when a question requires an image upload.** Ask in plain chat instead so the user can attach the image directly to the conversation. The elicitation form is fine for everything else (text inputs, choices, parameter pickers) — this rule applies only when image upload is involved.
 10. **Pass thorough prompts verbatim — set `agentic_prompting: false`.** `generate_image` / `generate_video` rewrite prompts server-side by default. When your prompt already contains literal control tokens (`@Image1` / `@Audio1` mention tags, exact timecodes, quoted dialogue, per-panel layout), disable the rewriter — paraphrasing `@Image1` into "the reference image" silently breaks the model's syntax. Keep it on only for short, loose, single-line creative asks. Send it verbatim when you've done the directing; let the server direct when you haven't.
+11. **For consistent character-driven content, always use a Character.** Create one with `manage_character` — it holds the reference image (visual anchor for video/image generation) and optionally a cloned voice (used automatically by `generate_speech`). Pass `character_id` to `generate_image`, `generate_video`, and `generate_speech` — never manually repeat `image_url` + `voice_id` across calls.
 
 ## Routing
 
@@ -53,6 +54,8 @@ Or connect the MCP directly: `https://app.creativeclaw.co/mcp`
 | Code-driven branded video (HyperFrames)                                  | `references/workflows/code-video-hyperframes.md` → install `/hyperframes`  |
 | Brand theme (create / extract / update / apply)                          | `references/workflows/brand-theme.md`                                      |
 | Edit existing footage (cut / grade / subtitle / reframe)                 | `references/workflows/edit-video.md` → install `/video-use`                |
+| Create a reusable persona / character                                    | `references/workflows/characters-and-film.md`                              |
+| Produce a multi-shot film with consistent characters                     | `references/workflows/characters-and-film.md`                              |
 
 When the user's request matches a row, **read that file before doing anything**. The workflow files contain the model selection, prompting strategies, parameter sets, and anti-patterns that aren't reproduced here.
 
@@ -70,6 +73,7 @@ When the user's request matches a row, **read that file before doing anything**.
 - **code-video-hyperframes.md** — how Creative Claw's `render_html_video` and templates fit into a HyperFrames pipeline. Composition rules themselves live in the `/hyperframes` skill — install it before authoring.
 - **brand-theme.md** — full theme lifecycle. Website extraction, local folders, URL lists, generating from scratch, updating, applying in generation.
 - **edit-video.md** — pointer to the `/video-use` skill plus a list of the MCP tools available for one-shot edits (`transcribe`, `trim_video`, `add_subtitles`, etc.).
+- **characters-and-film.md** — Character creation workflow (`manage_character`, `clone_voice`) and the 3-gate film pipeline (script → storyboard → render → assemble). Covers when to use `character_id` vs manual refs, voice cloning consent flow, and the film preview MCP UI.
 
 ### Model selection
 
@@ -89,10 +93,12 @@ Per-modality picker tables live inside the workflow files (`image-gen.md`, `vide
 
 Full details and grouping in `references/tool-catalog.md`. Common ones:
 
-**Generate** — `generate_image`, `generate_video`, `generate_speech`, `render_html_image`, `render_html_video`, `render_template`, `compare_models`
+**Generate** — `generate_image`, `generate_video`, `generate_speech`, `render_html_image`, `render_html_video`, `render_template`, `compare_models`, `manage_character`, `clone_voice`, `list_characters`
 **Edit** — `remove_background`, `upscale_media`, `trim_video`, `scale_video`, `add_subtitles`, `extract_frames`, `merge_media`, `transcribe`
 **Brand** — `get_theme`, `list_themes`, `update_theme`
 **Templates** — `create_template`, `render_template`, `list_templates`, `update_template`
+**Characters** — `manage_character` (create/edit personas with reference image + cloned voice), `clone_voice` (clone a voice from audio sample), `list_characters` (browse and copy character ids)
+**Film** — `create_film_project`, `update_film_project`, `get_film_project`, `list_film_projects`, `assemble_film`
 **Assets** — `search_assets`, `update_asset`, `upload_asset`, `import_media`, `load_image`
 **Jobs** — `check_job` (poll all async generations)
 **Credits** — `get_credits_balance`, `get_credits_link`

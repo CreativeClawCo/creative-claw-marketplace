@@ -33,17 +33,20 @@ Before generating, decide whether an AI video model is the right tool:
 
 **Default to the Google Veo models — they're the top pick for quality video. Seedance 2.0 is the next-best alternative.**
 
-| Model ID                  | Name              | Audio                   | Max Duration | Best For                                                                                 | Cost |
-| ------------------------- | ----------------- | ----------------------- | ------------ | ---------------------------------------------------------------------------------------- | ---- |
-| `video/veo-3.1`           | Veo 3.1           | Native audio + dialogue | ~8s          | ⭐ Top pick — best overall quality, true 4K                                              | $$$  |
-| `video/veo-3.1-fast`      | Veo 3.1 Fast      | Native audio + dialogue | ~8s          | Same Veo quality, ~50% cheaper                                                           | $$   |
-| `video/veo-3.1-lite`      | Veo 3.1 Lite      | Native audio + dialogue | ~8s          | ⭐ Tool default — cheap Google Veo, supports I2V and first/last frame                    | $    |
-| `video/seedance-2.0`      | Seedance 2.0      | Native audio            | ~10s         | Second-best — ByteDance's flagship: cinematic, real-world physics, director-level camera | $$   |
-| `video/seedance-2.0-fast` | Seedance 2.0 Fast | Native audio            | ~10s         | Same Seedance quality, faster and cheaper                                                | $    |
-| `video/sora-2-pro`        | Sora 2 Pro        | Native audio            | Up to 25s    | Longer clips, character IDs                                                              | $$$  |
-| `video/kling-v3-pro`      | Kling v3 Pro      | Native audio            | ~10s         | Cinematic visuals, multi-shot                                                            | $$   |
-| `video/hailuo-02-pro`     | Hailuo-02 Pro     | Yes                     | ~6s          | Great physics, director-level camera                                                     | $$   |
-| `video/hailuo-2.3-fast`   | Hailuo 2.3 Fast   | No                      | ~6s          | Cheapest/fastest non-Google option for quick tests                                       | $    |
+| Model ID                  | Name                     | Audio                   | Max Duration | Best For                                                                                                                                            | Cost |
+| ------------------------- | ------------------------ | ----------------------- | ------------ | --------------------------------------------------------------------------------------------------------------------------------------------------- | ---- |
+| `video/veo-3.1`           | Veo 3.1                  | Native audio + dialogue | ~8s          | ⭐ Top pick — best overall quality, true 4K                                                                                                         | $$$  |
+| `video/veo-3.1-fast`      | Veo 3.1 Fast             | Native audio + dialogue | ~8s          | Same Veo quality, ~50% cheaper                                                                                                                      | $$   |
+| `video/veo-3.1-lite`      | Veo 3.1 Lite             | Native audio + dialogue | ~8s          | Cheap Google Veo, supports I2V and first/last frame                                                                                                 | $    |
+| `video/seedance-2.0`      | Seedance 2.0             | Native audio            | ~10s         | Second-best — ByteDance's flagship: cinematic, real-world physics, director-level camera                                                            | $$   |
+| `video/seedance-2.0-fast` | Seedance 2.0 Fast        | Native audio            | ~10s         | Same Seedance quality, faster and cheaper                                                                                                           | $    |
+| `video/sora-2-pro`        | Sora 2 Pro               | Native audio            | Up to 25s    | Longer clips, character IDs                                                                                                                         | $$$  |
+| `video/kling-v3-pro`      | Kling v3 Pro             | Native audio            | ~10s         | Cinematic visuals, multi-shot                                                                                                                       | $$   |
+| `video/hailuo-02-pro`     | Hailuo-02 Pro            | Yes                     | ~6s          | Great physics, director-level camera                                                                                                                | $$   |
+| `video/hailuo-2.3-fast`   | Hailuo 2.3 Fast          | No                      | ~6s          | Cheapest/fastest non-Google option for quick tests                                                                                                  | $    |
+| `video/seedance-2.0-mini` | Seedance 2.0 Mini        | Native audio            | ~10s         | ⭐ **Tool default** — ByteDance Seedance: fast, cheap, native audio. Use for most generations.                                                      | $    |
+| `video/happyhorse-1.0`    | HappyHorse 1.0 (Alibaba) | No                      | ~15s         | #1-ranked open model — up to 9 reference images (@character1…@character9 syntax), 720p/1080p, strong multi-character consistency                    | $$   |
+| `video/kling-3.0-omni`    | Kling 3.0 Omni           | Optional native audio   | ~15s         | Multi-shot in ONE generation via multi_prompt — best for 3+ character scenes needing tight continuity. Supports @Element refs for character locking | $$   |
 
 ## Recommended Talking Avatar Models
 
@@ -92,6 +95,10 @@ audio ref ("speaks with the voice of @Audio1, saying: \"…\""). **Pass these pr
 (`agentic_prompting: false`)** — the server rewriter will mangle the `@` tags. Full storyboard-first
 pipeline: `storyboard-to-video.md`.
 
+**HappyHorse 1.0** also accepts up to 9 reference images via `image_urls[]` addressed as `@character1`, `@character2`… (note: uses `characterN` syntax, not `@ImageN`). Unlike Seedance, it does NOT accept `audio_urls`. Ideal when you need many distinct characters in one scene. Pass prompts verbatim (`agentic_prompting: false`).
+
+**Kling 3.0 Omni** offers `multi_prompt` (array of `{prompt, duration}` objects) to render multiple shots in a single generation — the most reliable way to hold 3+ characters across cuts. Lock characters via `elements` array (referenced as `@Element1`, `@Element2`…). Set `shot_type: "customize"` when directing cuts. Pass prompts verbatim.
+
 ## Model Selection Guide
 
 ### By Priority
@@ -109,6 +116,9 @@ pipeline: `storyboard-to-video.md`.
 - **"Quick test / draft"** → `video/seedance-2.0-fast`, `video/veo-3.1-lite` (cheap Veo quality with audio), or `video/hailuo-2.3-fast` (cheapest overall)
 - **"I have a reference image to animate"** → Pass `image_url` to any model that supports I2V
 - **"I have intro and outro images"** → Use a model with first-last-frame support via `extras`
+- **"Multi-character scene needing consistency"** → `video/kling-3.0-omni` (multi_prompt renders multiple shots in one generation, @Element locks each character)
+- **"Long consistent video with many reference images"** → `video/happyhorse-1.0` (up to 9 @characterN refs)
+- **"Quick draft, low credits"** → `video/seedance-2.0-mini` (tool default, cheapest with native audio)
 
 ### Default Workflow: Always Generate Reference Images
 
