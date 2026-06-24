@@ -39,13 +39,20 @@ manage_character({
 ```
 
 **Step 4 — Clone a voice (optional)**
-If the user wants a custom voice, they need to provide an audio sample (~30s of clean speech):
+If the user wants a custom voice, they need to provide an audio sample (~30s of clean speech).
 
-- Ask them to attach a recording to the chat (Claude / Claude Desktop supports file attachments)
-- Upload it with `upload_asset` to get a permanent R2 URL
-- Call `clone_voice({ character_id, audio_url, consent: true })`
+Two ways to get the audio URL:
 
-The cloned voice is then used automatically by `generate_speech` whenever `character_id` is passed.
+- Ask them to use `import_media` (the upload UI supports audio files including .m4a, .mp3, .wav)
+- Or ask them to attach the file in chat, then upload it with `upload_asset` to get an R2 URL
+
+Then pass it directly to `manage_character` — no separate step:
+
+```
+manage_character({ id: "<character_id>", audio_url: "<r2_url>", consent: true })
+```
+
+The cloned voice is then used automatically by `generate_speech` whenever `character_id` is passed. If you call `generate_speech` with a `character_id` that has no voice yet, the server will stop and tell you to clone one first.
 
 ### Using a Character
 
