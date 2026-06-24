@@ -39,12 +39,20 @@ manage_character({
 ```
 
 **Step 4 — Clone a voice (optional)**
-If the user wants a custom voice, they need to provide an audio sample (~30s of clean speech).
+If the user wants a custom voice, brief them on recording best practices **before** they record — the quality of the sample is the #1 factor:
 
-Two ways to get the audio URL:
+> **Recording tips to share with the user:**
+>
+> - **1–2 minutes is the sweet spot** — under 30s sounds noticeably worse, over 3min adds nothing
+> - One clean take beats many mediocre clips (total runtime is what matters, not number of files)
+> - Quiet room, no background music or noise, one speaker only
+> - Phone mic in a quiet room is fine — natural conversational tone works best
+> - The model copies everything it hears: pace, breathing, accent, inflections — so speak naturally
 
-- Ask them to use `import_media` (the upload UI supports audio files including .m4a, .mp3, .wav)
-- Or ask them to attach the file in chat, then upload it with `upload_asset` to get an R2 URL
+Two ways to get the audio URL once they have a recording:
+
+- Ask them to use `import_media` (supports .m4a, .mp3, .wav)
+- Or attach the file in chat → `upload_asset` to get an R2 URL
 
 Then pass it directly to `manage_character` — no separate step:
 
@@ -52,7 +60,7 @@ Then pass it directly to `manage_character` — no separate step:
 manage_character({ id: "<character_id>", audio_url: "<r2_url>", consent: true })
 ```
 
-The cloned voice is then used automatically by `generate_speech` whenever `character_id` is passed. If you call `generate_speech` with a `character_id` that has no voice yet, the server will stop and tell you to clone one first.
+The cloned voice is used automatically by `generate_speech` whenever `character_id` is passed. If `generate_speech` is called with a `character_id` that has no voice yet, the server stops and tells you to clone one first.
 
 ### Using a Character
 
