@@ -99,29 +99,74 @@ Each gate is a user approval checkpoint. **Never generate expensive assets (clip
 
 ### Gate 2 — Storyboards
 
-After script approval:
+After script approval, generate one storyboard image per shot:
 
-1. For each shot: `generate_image({ prompt: shot.description, character_id })` → patch the shot: `update_film_project({ id, patch_shots: [{id: shot.id, storyboardUrl, status: "storyboard"}] })`
-2. Once all shots have storyboards: `update_film_project({ id, status: "storyboard_ok" })`
-3. Show preview, ask for approval
+```
+generate_image({
+  model: "image/flux-2-pro",   // best likeness for real people
+  image_url: character.imageUrl,
+  prompt: "Cinematic vertical 9:16 storyboard frame. [shot description]. Keep the person's exact face and likeness.",
+  agentic_prompting: false,
+  aspect_ratio: "9:16"
+})
+```
 
-**Model tip:** Use Nano Banana Pro for storyboard images — consistent style, fast, not too expensive.
+**Model choice matters:** Use `image/flux-2-pro` for real people — it preserves facial likeness far better than Nano Banana Pro (Gemini), which reinterprets faces in its own style. Nano Banana is fine for stylised/illustrated characters.
+
+Patch each shot: `update_film_project({ id, patch_shots: [{id: shot.id, storyboardUrl, status: "storyboard"}] })`
+
+Once all shots have storyboards: set `status: "storyboard_ok"`, show preview, ask for approval.
 
 ### Gate 3 — Render & Assemble
 
 After storyboard approval:
 
-1. Generate narration: `generate_speech({ text: full_narration_script, character_id })` → `update_film_project({ id, audio_url })`
-2. For each shot: `generate_video({ prompt: shot.prompt || shot.description, character_id, duration: shot.durationS })` → patch shot with `clipUrl` and `status: "clip"`
-3. `assemble_film({ film_project_id: id })` — merges all clips + audio, uploads the assembled cut, sets status to `preview_ok`
-4. Show preview, ask for final approval → `update_film_project({ id, status: "final" })`
+**Narration first:**
 
-### Long-video tips
+```
+generate_speech({ text: full_narration_script, character_id })
+→ update_film_project({ id, audio_url })
+```
 
-- **≤15s per shot** — all models cap here; plan shots accordingly
-- **Kling 3.0 Omni `multi_prompt`** — renders 2-3 shots in ONE generation, cutting total video credits by ~40% for multi-character scenes
-- **Character consistency** — always pass `character_id`; the same reference image anchors every clip
-- **Serial chain** — for maximum continuity, use the last frame of clip N as `image_url` for clip N+1
+Use each shot's narration text to gauge `durationS` — word count ÷ ~2.5 words/sec is a rough guide.
+
+**Generate video clips — Seedance 2.0 with dual reference:**
+
+Use `video/seedance-2.0` (NOT Mini — Mini has weaker face consistency for real people).
+
+Pass **both** reference mechanisms:
+
+```
+generate_video({
+  model: "video/seedance-2.0",
+  image_url: shot.storyboardUrl,         // scene anchor / first frame
+  image_urls: [character.imageUrl],      // identity lock — keeps the person consistent
+  prompt: "The person from @Image1 [action description]. [style line].",
+  agentic_prompting: false,              // required — @Image1 must not be paraphrased
+  duration: String(shot.durationS),
+  aspect_ratio: "9:16"
+})
+```
+
+- `image_url` = storyboard → tells Seedance where the scene starts
+- `image_urls[0]` = character reference → locks the person's identity via `@Image1`
+- Always mention `@Image1` in the prompt to activate the reference
+- Always pass `agentic_prompting: false` when using `@ImageN` syntax
+
+**Serial chain for continuity** (strongly recommended for narrative films):
+After each clip is generated, `extract_frames({ url: clip.clipUrl, mode: "single", position: "last" })` and use the result as `image_url` for the next shot. This makes shot N+1 start exactly where shot N ended.
+
+**Kling 3.0 Omni shortcut:** Use `multi_prompt` to render 2-3 shots in ONE generation — cuts video credits by ~40% and improves continuity since all shots are generated together.
+
+Patch each shot with `clipUrl` and `status: "clip"`.
+
+`assemble_film({ film_project_id: id })` → merges all clips + audio. Show preview, ask for final approval → `update_film_project({ id, status: "final" })`.
+
+### Shot planning rules
+
+- **≤15s per shot** — all models cap here
+- **Never write a shot with two identical people in the same frame** — no video model can duplicate a person convincingly. Rewrite as two consecutive shots instead.
+- **Keep a consistent style line** across every shot prompt (e.g. "Warm domestic lighting, realistic, handheld, 9:16") — copy-paste it verbatim into each prompt for visual cohesion.
 
 ### Tools
 
