@@ -11,7 +11,7 @@ If the user is unsure which they want, decide by what varies per render:
 - **Text/data varies, look is fixed** → HTML template.
 - **Subject/scene varies, style is fixed** → AI-image template.
 
-If they want **a single one-off render and never again** → no template. Use `/create-html-image` or `/create-image` directly.
+If they want **a single one-off render and never again** → no template. Follow `html-image.md` or `image-gen.md` directly.
 
 ---
 
@@ -141,12 +141,12 @@ Ask the user for references one of three ways:
 ### Path A — User points you to existing files
 > "I have the references in `/Users/me/brand/refs/` — point me at them."
 
-Read each one with `upload_asset` (file path → asset library), tag with `template:<name>` and `role:reference`.
+Import each reference using the exact route in `../platform-upload.md`. Do not pass a local filesystem path to `upload_asset`. Tag imported assets with `template:<name>` and `role:reference`.
 
 ### Path B — User has them online
 The user shares URLs (Notion, Drive, Pinterest, an existing brand site). Use `upload_asset` with the URL, same tagging.
 
-### Path C — User has them locally and there are many — use `import_media`
+### Path C — User has them locally but has not attached them — use `import_media`
 > "I'll open the import picker. Drop all your reference images in there."
 
 Call `import_media` — this opens an interactive UI where the user drops files directly. After the import completes, the assets land in the library; tag them with `update_asset`.

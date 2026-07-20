@@ -49,10 +49,7 @@ If the user wants a custom voice, brief them on recording best practices **befor
 > - Phone mic in a quiet room is fine — natural conversational tone works best
 > - The model copies everything it hears: pace, breathing, accent, inflections — so speak naturally
 
-Two ways to get the audio URL once they have a recording:
-
-- Ask them to use `import_media` (supports .m4a, .mp3, .wav)
-- Or attach the file in chat → `upload_asset` to get an R2 URL
+Import the recording using the exact route in `../platform-upload.md` (supports .m4a, .mp3, .wav), then use the durable Creative Claw URL it returns.
 
 Then pass it directly to `manage_character` — no separate step:
 

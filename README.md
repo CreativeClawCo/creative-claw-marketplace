@@ -29,19 +29,9 @@ One connection to Creative Claw's MCP server gives you 30+ tools for media gener
 
 Access 1,000+ production-ready AI models — FLUX, Gemini, Veo, Sora, Kling, Seedance, Hailuo, HeyGen, Recraft, ElevenLabs, and more — through a single unified account with usage-based pricing.
 
-### Skills (Creative Workflows)
+### Skill (Creative Workflows)
 
-Skills are prompt-based workflows that teach Claude _how_ to use the tools effectively — model selection, prompt engineering, multi-step production pipelines, and brand-aware rendering.
-
-| Skill                     | What It Does                                                                                                                                                                                                                            |
-| ------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **creative-claw-onboard** | First-time orientation. Explains the mission, tours the studio's capabilities, and walks new users through their first generation — images, videos, HTML renders, or voice.                                                             |
-| **create-image**          | Helps you pick the right model, craft effective prompts, and generate or edit images. Covers the full roster of recommended models with detailed reference guides.                                                                      |
-| **create-video**          | Guides you through model selection, reference image generation, camera direction, multi-segment video production, and talking avatars. Covers recommended video models with detailed reference guides.                                  |
-| **create-html-image**     | Render on-brand images from HTML/CSS via headless Chromium — quote cards, OG images, social banners, stat cards, hero layouts. Full browser CSS surface (grid, flex, filter, clip-path, variable fonts, inline SVG). Pulls from themes. |
-| **create-brand-theme**    | Create, extract, update, and apply brand themes. Onboards a new brand from a website, local folder, or direct URLs — saves colors, fonts, logos, shapes, and photography style as a reusable theme.                                     |
-
-Each generation skill includes per-model reference files with prompting best practices, parameter tables, example prompts, and comparison guidance.
+The consolidated **creativeclaw** skill teaches an agent how to use the tools effectively: onboarding, model selection, prompt engineering, media import, brand themes, image/video/speech generation, templates, editing, characters, films, and asset management. It routes internally to focused reference files instead of assuming separate slash-command skills are installed.
 
 ---
 
@@ -93,6 +83,16 @@ These are our top picks. Use `list_models` to browse 100+ more across all catego
 
 ## Install
 
+### Agent skills (`npx skills`)
+
+The canonical cross-client skill remains in the standard repository layout, so skill-directory users can install it directly:
+
+```bash
+npx skills add CreativeClawCo/creative-claw-marketplace
+```
+
+The ChatGPT Store installs its plugin and skill bundle separately; Store users do not need this command.
+
 ### Claude Code
 
 ```bash
@@ -105,7 +105,7 @@ claude plugin install creative-claw@creative-claw-marketplace
 # 3. Authenticate — on first use, the MCP server will prompt you to sign in via Clerk OAuth
 ```
 
-That's it. The plugin connects to Creative Claw's MCP server and gives you access to all generation tools plus the `/creative-claw-onboard`, `/create-image`, `/create-video`, `/create-html-image`, and `/create-brand-theme` skills.
+That's it. The plugin connects to Creative Claw's MCP server and installs the consolidated `creativeclaw` workflow skill.
 
 ### Claude Desktop
 
@@ -132,22 +132,22 @@ Just talk to Claude naturally:
 
 ```
 "Generate a product photo of my headphones on a marble surface, golden hour lighting"
-  -> /create-image picks the best model, crafts the prompt, generates
+  -> creativeclaw routes to its image workflow, picks the model, and generates
 
 "Make a 15-second cinematic video of coffee being poured in slow motion"
-  -> /create-video recommends the right model for physics, generates a reference image, then the video
+  -> creativeclaw routes to its video workflow, generates a reference image, then the video
 
 "Edit this image — change the background to a beach sunset, keep the person unchanged"
-  -> /create-image routes to an edit model, preserves identity, swaps background
+  -> creativeclaw routes to an edit model, preserves identity, swaps background
 
 "Make me a LinkedIn quote card with our brand colors"
-  -> /create-html-image writes the HTML, pulls colors/fonts/logo from the saved brand theme, renders via headless Chromium
+  -> creativeclaw writes the HTML, pulls the saved theme, and renders via headless Chromium
 
 "Set up our brand — here's our website"
-  -> /create-brand-theme extracts colors/fonts/logos from the site, uploads the assets, saves as a reusable theme
+  -> creativeclaw extracts colors/fonts/logos, uploads the assets, and saves a reusable theme
 
 "I need a TikTok-style product video for this shoe" [attach image]
-  -> /create-video generates reference frames, picks an I2V model, produces the clip
+  -> creativeclaw imports the attachment, generates reference frames, picks an I2V model, and produces the clip
 ```
 
 ---
@@ -182,19 +182,27 @@ plugins/
       plugin.json          # Plugin manifest (MCP server config)
     openclaw.plugin.json   # OpenClaw compatibility
     skills/
-      creative-claw-onboard/
-        SKILL.md           # /creative-claw-onboard — first-time orientation + studio tour
-      image-generation/
-        SKILL.md           # /create-image — image generation & editing workflow
-        references/        # Per-model prompting guides
-      video-generation/
-        SKILL.md           # /create-video — video generation workflow
-        references/        # Per-model prompting guides
-      create-html-image/
-        SKILL.md           # /create-html-image — HTML → PNG via headless Chromium
-      create-brand-theme/
-        SKILL.md           # /create-brand-theme — create, extract, update, and apply brand themes
+      creativeclaw/
+        SKILL.md           # canonical cross-client skill; discoverable by npx skills
+        references/        # shared workflows and cross-client upload routing
+skill-variants/
+  chatgpt/
+    platform-upload.md     # ChatGPT-only attachment/picker routing overlay
+scripts/
+  build-skill-zips.sh      # builds both upload-ready skill archives
+creativeclaw-skill.zip             # cross-client archive
+creativeclaw-chatgpt-skill.zip     # ChatGPT Store archive
 ```
+
+### Maintaining the two distributions
+
+Edit the canonical skill once under `plugins/creative-claw/skills/creativeclaw`. Put only ChatGPT-specific routing differences in `skill-variants/chatgpt/platform-upload.md`, then run:
+
+```bash
+./scripts/build-skill-zips.sh
+```
+
+The ChatGPT archive contains only `SKILL.md`, `references/`, and `assets/`, matching the Store upload shape. The general archive and the repository skill retain the cross-client instructions used by `npx skills`, Codex, and Claude Code.
 
 ---
 
@@ -208,6 +216,8 @@ Usage-based — pay only for what you generate. No subscriptions, no commitments
 
 - **Claude Code** — via `.claude-plugin/plugin.json`
 - **Claude Desktop** — via MCP server config
+- **Codex and other skill-directory clients** — via the canonical `creativeclaw` skill
+- **ChatGPT Store** — via `creativeclaw-chatgpt-skill.zip`
 - **OpenClaw** — via `openclaw.plugin.json`
 
 All use the same skills and connect to the same MCP server.

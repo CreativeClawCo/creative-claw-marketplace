@@ -1,11 +1,10 @@
 # Async Jobs and `check_job`
 
-Several Creative Claw tools are asynchronous — they submit work to a queue (fal.ai, Modal) and return immediately with a job ID. You poll for completion with `check_job`.
+Several Creative Claw tools are asynchronous — they submit work to a queue and return immediately with a job ID. You poll for completion with `check_job`.
 
 ## Which tools are async
 
 - `generate_video` — always async. 30 s – 2 min typical.
-- `render_html_video` — always async (HyperFrames render on Modal). 30 s – 2 min depending on duration and fps.
 - `generate_image` — async on some models (heavy ones); sync on most. The response shape tells you which.
 - `generate_3d_model` — async. Can take several minutes.
 - `transcribe` — async. 30 s – 3 min depending on audio length.
@@ -35,7 +34,7 @@ Returns one of:
 1. Call the async tool. Save the `jobId`.
 2. Poll `check_job` every 5–10 seconds.
 3. Stop on `completed` (return `result` to the user) or `failed` (surface the error).
-4. Cap at a reasonable timeout. For video gen: 5 minutes. For HyperFrames render: 5 minutes. For transcription: 10 minutes.
+4. Cap at a reasonable timeout. For video gen: 5 minutes. For transcription: 10 minutes.
 
 ## Don't block the user
 

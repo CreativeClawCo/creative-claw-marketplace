@@ -1,68 +1,35 @@
-# Code-driven branded video (HyperFrames + Creative Claw)
+# Code-driven branded video (HyperFrames + Creative Claw assets)
 
-For kinetic typography, animated logos, branded title cards, data viz, lower thirds, end screens, and any deterministic frame-accurate video — author it as an HTML/CSS/JS composition and render with `render_html_video`. Creative Claw runs the render on Modal in the cloud and returns a permanent MP4 URL.
+For kinetic typography, animated logos, branded title cards, data visualizations, lower thirds, end screens, and other deterministic frame-accurate video, the Creative Claw MCP does not render HTML compositions to video; its HTML rendering tools produce static images.
 
-## Get the HyperFrames knowledge from its own skills
+First read `../platform-client.md`. Only continue with a local composition workflow when the current client has filesystem/shell access and explicitly exposes the required companion. Never search for or invoke an absent HTML-video MCP tool.
 
-The full composition contract — timeline rules, capture behavior, scene transitions, layout-before-animation, GSAP patterns, fonts, anti-patterns — lives in the dedicated HyperFrames skills. Install them before authoring:
+## Local composition when supported
 
-```
-/plugin install hyperframes
-/plugin install hyperframes-cli
-```
+The composition contract, timeline rules, capture behavior, scene transitions, GSAP patterns, fonts, and rendering workflow live in the dedicated HyperFrames skills:
 
-Then invoke `/hyperframes` to author the composition (and `/hyperframes-cli` for `init`, `lint`, `preview`, `render`, `transcribe`, `tts`, etc. locally).
+When the HyperFrames authoring and CLI skills are actually exposed, use them for authoring, `init`, `lint`, local preview, and rendering. Follow those skills as the source of truth. If they are absent, explain that deterministic HTML-video rendering is unavailable in the current client and offer `generate_video` for AI-generated motion instead.
 
-## How Creative Claw integrates
+## How Creative Claw fits into the pipeline
 
-Two Creative Claw features handle the rest of the pipeline:
+Use Creative Claw to create and organize the media that the HyperFrames composition consumes:
 
-### 1. Cloud rendering — `render_html_video`
-
-Pass a complete HTML string (the HyperFrames composition) and Creative Claw renders it on Modal with headless Chromium + GSAP, captures the page for `duration` seconds at `fps`, and returns an MP4 URL.
-
-```
-render_html_video({
-  html: "<full HyperFrames composition>",
-  duration: 8,
-  fps: 30,
-  width: 1920,
-  height: 1080,
-  format: "mp4",
-  name: "product-demo-v1",
-  tags: ["product-demo", "hero"],
-})
-```
-
-Returns `{ jobId, status: "queued" }` — always poll `check_job` until `status === "completed"`. Typical render: 30–120 s.
-
-`render_html_image` is the matching primitive for spot-checking a single frame quickly before committing to a full render.
-
-### 2. Reusable video templates — `create_template` + `render_template`
-
-Save the composition once with `{{parameters}}` placeholders, render many variants by passing parameter values. Use this for content series (one composition, swap data per episode), branded social cards across multiple posts, or anything you'll render more than twice.
-
-```
-create_template({ name, html, params: [{ key: "title", type: "string" }, ...] })
-render_template({ templateId, params: { title: "..." }, format: "mp4" })
-```
-
-## Assets pipeline
-
-Generate every visual asset the composition references first — all Creative Claw outputs are permanent URLs, so you reference them directly in `<img>`, `<video>`, `<audio>`:
-
-- **Branded chrome (title cards, lower thirds, stat overlays)** → `render_html_image`
-- **Photoreal hero images / backgrounds** → `generate_image` (always with theme reference image via `image_url` for on-brand work)
-- **Cinematic clips** → `generate_video` → poll `check_job`
+- **Static branded graphics and frame checks** → `render_html_image`
+- **Photoreal hero images and backgrounds** → `generate_image` (for branded work, first call `get_theme` and provide a reference image via `image_url`)
+- **Cinematic clips** → `generate_video`, then poll `check_job`
 - **Voiceover** → `generate_speech`
-- **Cutout product shots** → `generate_image` then `remove_background`
+- **Cutout product shots** → `generate_image`, then `remove_background`
 
-Pull the brand theme first with `get_theme` so every generation uses the right colors, fonts, logos, and photography style.
+Creative Claw outputs have permanent asset URLs that can be used in the local composition's `<img>`, `<video>`, and `<audio>` elements. Tag every generated asset with the project, scene, and role so `search_assets` can retrieve it later.
 
-Tag every asset at generation time (`tags: ["<project>", "scene-N", "<role>"]`) so `search_assets` finds them later.
+Pull the brand theme first with `get_theme` so asset generation uses the correct colors, fonts, logos, and photography style.
 
-## When NOT to use this workflow
+## Reusable layouts
 
-- **Photoreal motion of people, scenes, products** → use `generate_video` with an AI model, not HyperFrames.
-- **Static branded image** → use `render_html_image`.
-- **One-off edits to existing footage** → use the `/video-use` skill (see `edit-video.md`).
+Creative Claw's `create_template` and `render_template` tools support reusable static HTML-to-image layouts. They do not render video. For reusable motion compositions, keep the parameterized composition in the HyperFrames project and render variants through the HyperFrames CLI.
+
+## When not to use this workflow
+
+- **Photoreal motion of people, scenes, or products** → use `generate_video` with an AI video model.
+- **Static branded image** → use `render_html_image` or `render_template`.
+- **One-off edits to existing footage** → follow `edit-video.md`.

@@ -69,13 +69,7 @@ is the next-best alternative). Produce ONE contact sheet. Send the prompt **verb
 
 **Consumes from Step 1:** the beat list, the constants, the camera arc.
 
-If the user supplied reference frames or a character sheet, upload them first (programmatic, no UI):
-
-```
-get_upload_url → curl -X PUT the file → confirm_upload   # returns a permanent cdn.creativeclaw.co URL
-```
-
-Then pass those URLs via `extras.image_urls` so the board matches their characters exactly.
+If the user supplied reference frames or a character sheet, import them first using the exact route in `../platform-upload.md`. Then pass the returned durable URLs via `extras.image_urls` so the board matches their characters exactly.
 
 **Storyboard-board prompt template** (fill the brackets):
 
@@ -230,7 +224,7 @@ Then poll `check_job` until completed.
 If the user wants the characters to speak in a specific voice:
 
 1. **Get a voice clip** — generate one with `generate_speech` (default `speech/elevenlabs-v3`) or
-   upload an existing sample (`get_upload_url` / `upload_asset`). Keep it short (≤15s combined).
+   import an existing sample using `../platform-upload.md`. Keep it short (≤15s combined).
 2. **Pass it** via `extras.audio_urls` (requires ≥1 reference image in the same call — the first
    frame satisfies this).
 3. **Reference it in the prompt** and include the transcript:
@@ -244,7 +238,7 @@ Front-facing, evenly-lit face frames sync best.
 `check_job` → on completion, present the clip. Offer to: adjust the director prompt and regenerate,
 swap to `video/veo-3.1` (top overall quality) or `seedance-2.0-fast` (cheap draft), extend with
 another segment (use the clip's last frame as the next `image_url`), or post-process via the
-`/video-use` skill.
+the included `edit-video.md` workflow.
 
 ## The prompt-rewriter pattern (why `agentic_prompting: false` here)
 
@@ -305,7 +299,7 @@ the render style lives entirely in the video prompt's global line.
 
 ## Tools used
 
-`get_upload_url` / `confirm_upload` / `upload_asset` (bring frames in) · `generate_image`
+Media import route from `../platform-upload.md` · `generate_image`
 (board + clean frames + edits) · `generate_speech` (optional voice) · `get_model_params`
 (confirm Seedance params) · `generate_video` (the clip) · `check_job` (poll) · `update_asset`
 (tag/name). Deeper model picker and camera vocabulary: `video-gen.md`.

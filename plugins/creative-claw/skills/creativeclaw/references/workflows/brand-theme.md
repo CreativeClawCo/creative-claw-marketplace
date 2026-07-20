@@ -105,7 +105,7 @@ Before uploading, run through this checklist:
 
 ## Step 3 — Upload the assets
 
-Use `upload_asset` for each file. **Always pass `name` and `tags`** so they're findable later — the theme is just a set of pointers to assets by URL, and un-named assets disappear into the library.
+Use `upload_asset` for each publicly reachable URL. **Always pass `name` and `tags`** so they're findable later — the theme is just a set of pointers to assets by URL, and un-named assets disappear into the library.
 
 ```
 upload_asset({
@@ -115,7 +115,7 @@ upload_asset({
 })
 ```
 
-For large files (>10 MB), use `get_upload_url` → PUT the bytes → `confirm_upload` instead.
+Import every brand file using the exact route in `../platform-upload.md`, then record the returned durable URL.
 
 Record the returned CDN URL for each asset — you'll reference them in the theme metadata in the next step.
 
@@ -172,19 +172,19 @@ Show the rendered URL to the user and ask whether anything looks off — colors,
 - **Fonts — free to use?** Google Fonts are fine. Custom licensed fonts (Adobe Fonts, Monotype) cannot be hotlinked — ask the user to confirm the closest Google equivalent.
 - **Is there existing brand collateral to match?** If yes, capture one reference URL so future renders can eyeball-diff against it.
 - **Naming collisions.** `list_themes` first. Don't overwrite an existing theme without confirming.
-- **Default promotion.** Making a theme the default is a user decision, not Claude's.
+- **Default promotion.** Making a theme the default is a user decision, not the agent's.
 
 ## Creative Claw MCP calls — quick reference
 
-| Purpose                      | Call                                                                                |
-| ---------------------------- | ----------------------------------------------------------------------------------- |
-| See what's in the library    | `list_themes`, `get_theme`, `search_assets({ tags: [...] })`                        |
-| Upload a brand asset (small) | `upload_asset({ url, name, tags })`                                                 |
-| Upload large assets (>10 MB) | `get_upload_url` → PUT → `confirm_upload`                                           |
-| Clean a flat-background logo | `remove_background({ image_url })`                                                  |
-| Generate a placeholder asset | `generate_image({ model: "image/nano-banana-2", prompt, remove_background: true })` |
-| Save / update the theme      | `update_theme({ ... })`                                                             |
-| Test the theme               | `render_html_image({ html, width, height, inline_images })`                         |
+| Purpose                       | Call                                                                                |
+| ----------------------------- | ----------------------------------------------------------------------------------- |
+| See what's in the library     | `list_themes`, `get_theme`, `search_assets({ tags: [...] })`                        |
+| Upload a brand asset (small)  | `upload_asset({ url, name, tags })`                                                 |
+| Import a user-provided file   | Follow `../platform-upload.md`                                                      |
+| Clean a flat-background logo  | `remove_background({ image_url })`                                                  |
+| Generate a placeholder asset  | `generate_image({ model: "image/nano-banana-2", prompt, remove_background: true })` |
+| Save / update the theme       | `update_theme({ ... })`                                                             |
+| Test the theme                | `render_html_image({ html, width, height, inline_images })`                         |
 
 ## Framework-specific CSS variable patterns
 
@@ -207,7 +207,9 @@ The snippets in Step 1 cover the basics. Here are deeper snippets for harder ext
 
 ```js
 const candidates = [
-  ...document.querySelectorAll('img[class*="logo"], img[alt*="logo"], img[src*="logo"]'),
+  ...document.querySelectorAll(
+    'img[class*="logo"], img[alt*="logo"], img[src*="logo"]',
+  ),
   ...document.querySelectorAll("header img, nav img, .navbar img"),
   ...document.querySelectorAll('svg[class*="logo"]'),
   ...document.querySelectorAll('[class*="logo"] img, [class*="logo"] svg'),
@@ -239,7 +241,9 @@ for (const sheet of document.styleSheets) {
     for (const rule of sheet.cssRules) {
       if (rule instanceof CSSFontFaceRule) {
         customFonts.push({
-          family: rule.style.getPropertyValue("font-family").replace(/['"]/g, ""),
+          family: rule.style
+            .getPropertyValue("font-family")
+            .replace(/['"]/g, ""),
           weight: rule.style.getPropertyValue("font-weight"),
           src: rule.style.getPropertyValue("src").substring(0, 100),
         });
@@ -357,7 +361,7 @@ User: Create a social media post for our summer sale
 
 ```
 User: Promote the 'overcut' theme to default
-→ Confirm the user wants this (default promotion is irreversible from Claude's side)
+→ Confirm the user wants this (default promotion is irreversible from the agent's side)
 → update_theme({ name: "overcut", set_default: true })
 ```
 

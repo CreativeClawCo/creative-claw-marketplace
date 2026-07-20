@@ -17,7 +17,7 @@ Open with something like:
 > - 🖼️ **Images** — generate from a prompt, or edit one you already have (background removal, retouching, restyling)
 > - 🎬 **Videos** — from a prompt or from a reference image, plus trim / scale / subtitle / merge for stitching scenes together
 > - 🗣️ **Speech** — text-to-speech and voice cloning for narration, ads, or product walkthroughs
-> - 🎨 **Branded graphics** — write HTML/CSS once, render as PNG or animated video in your brand colors and fonts
+> - 🎨 **Branded graphics** — write HTML/CSS once and render pixel-perfect PNGs in your brand colors and fonts
 > - 🧱 **Themes & templates** — save your brand once (colors, fonts, logos, shapes, photography style) and have every future generation automatically stay on-brand
 > - 📦 **Asset library** — every result is saved with a permanent URL; search, tag, and reuse
 >
@@ -48,7 +48,7 @@ Whichever you pick, **do it with them, not for them**. Let them suggest the subj
 Once they have one result in hand, drop 2–3 of these prompts to spark curiosity (not all of them):
 
 - "Want to see the same prompt on four different models side by side? That's `compare_models`."
-- "Want to take this and animate it? We have both AI-driven video and an HTML-to-video path."
+- "Want to take this and animate it? We can use AI video, or hand a deterministic composition to HyperFrames in a coding environment."
 - "Want every future image to automatically match your company's colors and fonts? That's a **brand theme** — we can set one up in about 5 minutes if you have a website or a brand kit."
 - "Every result is already saved with a permanent URL — try `search_assets` and you'll see."
 
@@ -60,7 +60,7 @@ Whether they're exploring or on a project, at some point tell them this:
 >
 > A theme is a saved bundle of your brand — colors, fonts, logos, shapes, photography style, even tone of voice. Once it's saved, every future render automatically pulls from it, so every image, video, and graphic you make stays on-brand without you having to think about it.
 >
-> If you have a brand you care about, setting up a theme is the single highest-leverage 10 minutes you'll spend here. I can walk you through it — we have a dedicated skill called `/create-brand-theme` that extracts the brand from your website, a folder of assets, or a list of URLs and saves it as a reusable theme.
+> If you have a brand you care about, setting up a theme is the single highest-leverage 10 minutes you'll spend here. I can walk you through the included brand-theme workflow, which extracts the brand from your website, a folder of assets, or a list of URLs and saves it as a reusable theme.
 >
 > If you're just playing, skip this for now. You can always come back.
 
@@ -68,7 +68,7 @@ Don't hard-sell it. But plant the seed — this is what makes the studio _a stud
 
 ## Branch B — "I have a specific project"
 
-When the user has a concrete goal, match their answer to one of the recipes below and walk them through the thinking, not just the tool list. **If they mention a brand or company**, always suggest `/create-brand-theme` as the first step before any generation — a one-off render without a theme is technical debt.
+When the user has a concrete goal, match their answer to one of the recipes below and walk them through the thinking, not just the tool list. **If they mention a brand or company**, always follow `brand-theme.md` as the first step before any generation — a one-off render without a theme is technical debt.
 
 ## Recipes — match the user's goal
 
@@ -84,13 +84,13 @@ Typical goal: repeatable branded posts — quote cards, announcements, feature l
 - **Repeatable** → Save the layout as a **template** (`create_template`) with text/image parameters, then fire `render_template` every time you need a new post. This is the leverage move for content teams.
 - **No design yet** → Generate a photo-first visual with `generate_image` using `image/nano-banana-2` for the background, then compose over it with an HTML render for the text and logo.
 
-**Before any of that, ask about brand.** If they have a brand they want to match, spend 5 minutes on `/create-brand-theme` first — every future render will pull from the saved theme. Skipping this is technical debt.
+**Before any of that, ask about brand.** If they have a brand they want to match, spend 5 minutes on `brand-theme.md` first — every future render will pull from the saved theme. Skipping this is technical debt.
 
 ### Recipe: Branded graphics for a company
 
 Typical goal: "Make this look like our brand."
 
-**Step 0:** Check if a theme already exists — `get_theme`, `list_themes`. If yes, pull its colors/fonts/logos into whatever you render next. If no, hand off to `/create-brand-theme` to build one (5–10 min if they have a website or a brand folder). A good theme should include a **reference image** — a hero shot or style sample that anchors all future AI generation.
+**Step 0:** Check if a theme already exists — `get_theme`, `list_themes`. If yes, pull its colors/fonts/logos into whatever you render next. If no, follow `brand-theme.md` to build one (5–10 min if they have a website or a brand folder). A good theme should include a **reference image** — a hero shot or style sample that anchors all future AI generation.
 
 Then pick the right engine:
 
@@ -104,7 +104,7 @@ Typical goal: "A picture of my product doing X" or "a lifestyle shot in setting 
 
 **Ask:** Do they have an existing product photo to edit, or are they generating from scratch?
 
-- **From scratch** → `/create-image` skill. Default model: `image/nano-banana-2` (fast, cheap, great quality). If they need text rendered accurately, use `image/nano-banana-pro`.
+- **From scratch** → Follow `image-gen.md`. Default model: `image/nano-banana-2` (fast, cheap, great quality). If they need text rendered accurately, use `image/nano-banana-pro`.
 - **Editing an existing photo** → Same tool, pass `image_url`. Use `image/flux-kontext-max` for precision edits or `image/nano-banana-pro` for semantic ones ("make the shirt red but keep the logo white").
 - **Background removal for a clean product cutout** → `remove_background` (cheaper than a full model call).
 - **Upscale for print** → `upscale_media`.
@@ -115,19 +115,19 @@ Typical goal: "A 5–10 second clip of my product in action" or "an ad cut."
 
 **Ask:** Do they have source footage, or are they generating the clip itself?
 
-- **Generate the clip** → `generate_video` with a video model (e.g. `video/veo-3.1`, `video/seedance`). Always async — returns a job ID, poll with `check_job`. Use `/create-video` for the deeper workflow (model choice, reference images, multi-segment planning).
+- **Generate the clip** → `generate_video` with a video model (e.g. `video/veo-3.1`, `video/seedance`). Always async — returns a job ID, poll with `check_job`. Follow `video-gen.md` for model choice, reference images, and multi-segment planning.
 - **Generate multiple clips and stitch them** → Generate each segment separately, then use `merge_media` to concatenate them into a single video. This is how you build a 30-second ad out of 5× 6-second clips.
 - **Trim / scale / subtitle an existing video** → `trim_video`, `scale_video`, `add_subtitles`, `extract_frames`.
-- **Upload your own source footage first** → `upload_asset` (URL) or `import_media` (interactive picker) or `get_upload_url` → PUT → `confirm_upload` for large files.
-- **Programmatic video with React components** → If they're a developer using a coding environment (Claude Code, Cursor, or similar), suggest **Remotion + Creative Claw** via `/create-video-remotion`. Creative Claw generates the AI media (images, video clips, speech, branded graphics); Remotion composes them into frame-accurate, deterministic video with full control over timing, transitions, and layout. This is the best path for branded content series, product demos, and data visualizations. **Requires a coding environment** — not available in Claude.ai chat alone.
+- **Upload your own source footage first** → Follow the exact route in `../platform-upload.md`, then use the returned durable URL.
+- **Programmatic video with code** → Read `code-video-hyperframes.md` and `../platform-client.md`. Suggest a local composition workflow only when the current client explicitly supports it. Creative Claw can generate the source assets, but the MCP does not render HTML video.
 
-### Recipe: HTML → video (animated branded graphics)
+### Recipe: Deterministic animated branded graphics
 
 Typical goal: a short animated social clip — CSS-animated quote card, countdown, logo reveal, animated stat.
 
-- `render_html_image` has a **video sibling** that records the viewport for a requested duration and outputs a WebM. Same HTML, same full-CSS surface (`@keyframes`, transitions, `requestAnimationFrame`) — you just get motion out. Ideal for quick animated social posts where a full video model is overkill.
-- **This is the best path for on-brand video content.** It pulls directly from the theme — colors, fonts, logos, shapes — and is fully deterministic. No AI randomness, no brand drift.
-- When to pick this over `generate_video`: when the animation is deterministic and branded (typography moving, stats counting up, a logo pulsing). When to pick `generate_video`: when you need photoreal motion that you can't describe in CSS — and in that case, always generate an on-brand reference image first.
+- The Creative Claw MCP does not render HTML compositions to video. Do not search for or call an HTML-video MCP tool.
+- When `../platform-client.md` confirms a supported coding environment and local composition companion, use it to author, preview, and render deterministic motion. Use Creative Claw to generate and store the images, clips, speech, and branded static graphics consumed by that composition.
+- Use `generate_video` when photoreal motion is required; always prepare an on-brand reference image first.
 
 ### Recipe: Voiceover / narration / voice cloning
 
@@ -146,29 +146,28 @@ Typical goal: a short animated social clip — CSS-animated quote card, countdow
 Once the user has one successful generation, briefly tell them:
 
 - **Every result is saved** as a permanent asset — no URLs expire.
-- **Themes make future work stay on-brand** — suggest `/create-brand-theme` if they haven't yet.
+- **Themes make future work stay on-brand** — follow `brand-theme.md` if they haven't created one yet.
 - **Templates turn one-offs into a system** — "That LinkedIn post you just made? If you'll make 10 more like it, save it as a template."
 - **Deeper skills exist for each workflow** — see the table below.
 
 Don't list everything. Pick the 1–2 things most relevant to what they just did.
 
-## Deeper skills — hand-off targets
+## Deeper included workflows
 
-| Skill                    | When to use                                                                                            |
-| ------------------------ | ------------------------------------------------------------------------------------------------------ |
-| `/creative-claw-onboard` | First-time orientation — you are here                                                                  |
-| `/create-image`          | Deeper image generation & editing — model selection, prompt craft, comparison                          |
-| `/create-video`          | Deeper video generation — model choice, reference images, multi-segment planning                       |
-| `/create-brand-theme`    | Create, extract, update, and apply brand themes — the full lifecycle for keeping visuals on-brand      |
-| `/create-video-remotion` | Programmatic video with Remotion + Creative Claw — requires a coding environment (Claude Code, Cursor) |
+| Reference                         | When to use                                                                               |
+| --------------------------------- | ----------------------------------------------------------------------------------------- |
+| `image-gen.md`                    | Deeper image generation and editing — model selection, prompt craft, comparison           |
+| `video-gen.md`                    | Deeper video generation — model choice, reference images, multi-segment planning          |
+| `brand-theme.md`                  | Create, extract, update, and apply brand themes                                            |
+| `code-video-hyperframes.md`       | Capability-gated local composition; requires `../platform-client.md` approval              |
 
-If the user's goal matches one of these clearly, **hand them off** rather than duplicating the deeper skill's workflow inside this onboarding.
+If the user's goal matches one of these clearly, read that included reference rather than inventing or invoking a separate skill command.
 
 ## MCP tools — grouped reference
 
 Don't recite this list to the user. Use it yourself to know what's available.
 
-**Generation** — `generate_image`, `generate_video`, `generate_speech`, `render_html_image`, `render_html_video`, `render_template`, `compare_models`
+**Generation** — `generate_image`, `generate_video`, `generate_speech`, `render_html_image`, `render_template`, `compare_models`
 
 **Editing / processing** — `remove_background`, `upscale_media`, `trim_video`, `scale_video`, `add_subtitles`, `extract_frames`, `merge_media`
 
@@ -176,13 +175,13 @@ Don't recite this list to the user. Use it yourself to know what's available.
 
 **Jobs** — `check_job` (for async generations)
 
-**Assets** — `search_assets`, `update_asset`, `delete_asset`, `load_image`, `upload_asset`, `import_media`, `get_upload_url`, `confirm_upload`
+**Assets** — `search_assets`, `update_asset`, `delete_asset`, `load_image`, `upload_asset`, `import_chatgpt_media` (when exposed), `import_media`, `get_upload_url`, `confirm_upload`. Route imports with `../platform-upload.md`.
 
 **Themes** — `get_theme`, `list_themes`, `update_theme`, `delete_theme`
 
 **Templates** — `create_template`, `update_template`, `list_templates`, `render_template`
 
-**Credits** — `get_credits_balance`, `get_credits_link`
+**Credits (when exposed)** — `get_credits_balance`, `get_credits_link`
 
 ## Pricing — the short version
 
@@ -194,7 +193,7 @@ Rough anchors so users get a feel for it (full pricing and up-to-date numbers at
 - **Failed generations are refunded automatically** — you only pay for successful work.
 - There are **credit packs** (one-time top-ups) and **monthly subscriptions**. Point users at the pricing page to compare.
 
-**Tell users to check their balance** with `get_credits_balance` early, and give them `get_credits_link` if they need to buy more — you cannot complete checkout on their behalf, always hand them the URL.
+When `get_credits_balance` and `get_credits_link` are exposed, use them for balance and checkout. Otherwise direct the user to the Creative Claw dashboard or pricing page.
 
 ## Expectations to set up front
 
@@ -207,6 +206,6 @@ Rough anchors so users get a feel for it (full pricing and up-to-date numbers at
 
 - **Don't dump the full tool list** on the first message. Lead with "what do you want to make?"
 - **Don't skip the theme step** if the user said "I want this to look like our brand." A one-off render without a theme is technical debt.
-- **Don't start generating** if the user's balance is very low — check first, hand them the purchase link if needed.
-- **Don't reproduce a deeper skill's workflow** inside this onboarding. If `/create-brand-theme` fits their goal, hand off.
+- **Don't invent missing credit tools.** Check balance only when the current client exposes a balance tool; otherwise direct the user to the dashboard before an expensive multi-clip plan.
+- **Don't reproduce a deeper workflow** inside this onboarding. Read the matching included reference and continue from it.
 - **Don't quote exact pricing from memory.** Use the rough anchors above and link to the pricing page for specifics.

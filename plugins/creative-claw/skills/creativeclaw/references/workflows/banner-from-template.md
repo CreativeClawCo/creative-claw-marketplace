@@ -8,7 +8,7 @@ You are building reusable, parameterized branded graphics — social posts, OG i
 - The user wants a **content team or another agent** to produce on-brand graphics without writing HTML
 - The user wants **deterministic, repeatable output** with no AI randomness
 
-If it's a **one-off** graphic, use `/create-html-image` directly — no template needed. If the visual is **photoreal** (a person, a product in a scene), use `/create-image`.
+If it's a **one-off** graphic, follow `html-image.md` directly — no template needed. If the visual is **photoreal** (a person, a product in a scene), follow `image-gen.md`.
 
 ## The two-step model
 

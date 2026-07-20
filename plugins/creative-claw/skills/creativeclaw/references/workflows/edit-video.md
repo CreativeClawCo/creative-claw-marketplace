@@ -1,16 +1,12 @@
 # Editing existing video footage
 
-For end-to-end editing of existing footage — transcription, cut on word boundaries, color grading, burned-in subtitles, smart 9:16 reframing, multi-clip assembly — **use the `/video-use` skill**. It's the source of truth for that workflow.
+For end-to-end editing of existing footage — transcription, cut on word boundaries, color grading, burned-in subtitles, smart 9:16 reframing, multi-clip assembly — first read `../platform-client.md`.
 
-```
-/plugin install video-use
-```
-
-Then invoke `/video-use` and describe what you want done with the footage.
+If the current client explicitly exposes a dedicated video-editing workflow, use it as the orchestrator. Do not install, search for, or invoke one when it is absent. In that case, perform the edit with the Creative Claw MCP tools below.
 
 ## When to stay in Creative Claw instead
 
-`/video-use` orchestrates the pipeline, but the actual operations call Creative Claw MCP tools. Use these directly for one-shot edits without invoking the whole skill:
+Use these tools directly for one-shot edits and for any client without a dedicated local editing workflow:
 
 - `transcribe` — audio/video → text with word-level timestamps
 - `trim_video` — cut a clip to a time range
