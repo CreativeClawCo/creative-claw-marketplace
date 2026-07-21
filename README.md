@@ -91,7 +91,7 @@ The canonical cross-client skill remains in the standard repository layout, so s
 npx skills add CreativeClawCo/creative-claw-marketplace
 ```
 
-The ChatGPT Store installs its plugin and skill bundle separately; Store users do not need this command.
+The OpenAI Store installs the shared ChatGPT/Codex plugin and skill bundle separately; Store users do not need this command.
 
 ### Claude Code
 
@@ -187,11 +187,11 @@ plugins/
         references/        # shared workflows and cross-client upload routing
 skill-variants/
   chatgpt/
-    platform-upload.md     # ChatGPT-only attachment/picker routing overlay
+    platform-upload.md     # OpenAI Store routing for ChatGPT attachments and Codex local files
 scripts/
   build-skill-zips.sh      # builds both upload-ready skill archives
 creativeclaw-skill.zip             # cross-client archive
-creativeclaw-chatgpt-skill.zip     # ChatGPT Store archive
+creativeclaw-chatgpt-skill.zip     # OpenAI Store archive for ChatGPT and Codex
 ```
 
 ### Maintaining the two distributions
@@ -202,7 +202,7 @@ Edit the canonical skill once under `plugins/creative-claw/skills/creativeclaw`.
 ./scripts/build-skill-zips.sh
 ```
 
-The ChatGPT archive contains only `SKILL.md`, `references/`, and `assets/`, matching the Store upload shape. The general archive and the repository skill retain the cross-client instructions used by `npx skills`, Codex, and Claude Code.
+The OpenAI Store archive contains only `SKILL.md`, `references/`, and `assets/`, matching the Store upload shape for both ChatGPT and Codex. The general archive and repository skill retain the cross-client instructions used by `npx skills`, Claude Code, and other skill-directory clients.
 
 ---
 
@@ -217,7 +217,7 @@ Usage-based — pay only for what you generate. No subscriptions, no commitments
 - **Claude Code** — via `.claude-plugin/plugin.json`
 - **Claude Desktop** — via MCP server config
 - **Codex and other skill-directory clients** — via the canonical `creativeclaw` skill
-- **ChatGPT Store** — via `creativeclaw-chatgpt-skill.zip`
+- **OpenAI Store (ChatGPT + Codex)** — via `creativeclaw-chatgpt-skill.zip`
 - **OpenClaw** — via `openclaw.plugin.json`
 
 All use the same skills and connect to the same MCP server.
