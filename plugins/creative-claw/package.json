@@ -1,12 +1,36 @@
 {
   "name": "@creativeclaw/plugin",
   "version": "0.5.5",
-  "description": "Creative Claw plugin for Claude Code and OpenClaw",
+  "description": "Creative Claw plugin for Grok, Claude, Codex, Hermes, OpenClaw, and compatible agents",
   "type": "module",
   "main": "index.mjs",
   "scripts": {
     "version-sync": "../../scripts/version-sync.sh"
   },
   "license": "Apache-2.0",
+  "homepage": "https://creativeclaw.co",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CreativeClawCo/creative-claw-marketplace.git",
+    "directory": "plugins/creative-claw"
+  },
+  "keywords": [
+    "openclaw",
+    "hermes-agent",
+    "grok",
+    "mcp",
+    "ai-media"
+  ],
+  "openclaw": {
+    "extensions": [
+      "./index.mjs"
+    ],
+    "compat": {
+      "pluginApi": ">=2026.7.1-2"
+    },
+    "build": {
+      "openclawVersion": "2026.7.1-2"
+    }
+  },
   "dependencies": {}
 }

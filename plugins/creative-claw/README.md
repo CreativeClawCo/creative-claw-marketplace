@@ -1,6 +1,6 @@
 # Creative Claw plugin
 
-Creative Claw is an AI media studio for Grok Bot, Cursor, and other compatible agents. It combines a hosted MCP server with an agent skill for producing consistent, on-brand media from natural-language requests.
+Creative Claw is an AI media studio for Grok Bot, Hermes, OpenClaw, Cursor, and other compatible agents. It combines a hosted MCP server with an agent skill for producing consistent, on-brand media from natural-language requests.
 
 ## Capabilities
 
@@ -24,6 +24,24 @@ For local review in Cursor, place or symlink this directory at:
 ```
 
 Then restart Cursor or run **Developer: Reload Window** and inspect the plugin under **Customize**.
+
+### Hermes Agent
+
+```bash
+hermes mcp add creative-claw --url https://app.creativeclaw.co/mcp --auth oauth
+hermes mcp login creative-claw
+```
+
+### OpenClaw
+
+After the package is available on ClawHub:
+
+```bash
+openclaw plugins install clawhub:@creativeclaw/plugin
+openclaw plugins enable creative-claw
+openclaw mcp login creative-claw
+openclaw gateway restart
+```
 
 ## Authentication and billing
 

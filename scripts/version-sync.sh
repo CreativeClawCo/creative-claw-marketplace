@@ -57,6 +57,16 @@ node -e "
 "
 echo "  openclaw.plugin.json → $VERSION"
 
+# 3a. Portable Agent Plugins manifest (Hermes and other compatible clients)
+node -e "
+  const fs = require('fs');
+  const f = '$PLUGIN_DIR/plugin.json';
+  const d = JSON.parse(fs.readFileSync(f, 'utf-8'));
+  d.version = '$VERSION';
+  fs.writeFileSync(f, JSON.stringify(d, null, 2) + '\n');
+"
+echo "  portable plugin.json → $VERSION"
+
 # 3b. Codex plugin manifest (.codex-plugin/plugin.json)
 node -e "
   const fs = require('fs');

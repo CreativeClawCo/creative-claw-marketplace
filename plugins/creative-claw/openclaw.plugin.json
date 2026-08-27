@@ -10,15 +10,12 @@
   },
   "mcpServers": {
     "creative-claw": {
-      "type": "http",
-      "url": "https://app.creativeclaw.co/mcp"
+      "transport": "streamable-http",
+      "url": "https://app.creativeclaw.co/mcp",
+      "auth": "oauth"
     }
   },
   "skills": [
-    "skills/creative-claw-onboard",
-    "skills/image-generation",
-    "skills/video-generation",
-    "skills/create-html-image",
-    "skills/create-brand-theme"
+    "skills/creativeclaw"
   ]
 }

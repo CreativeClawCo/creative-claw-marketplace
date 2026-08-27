@@ -1,0 +1,21 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "creative-claw",
+  "version": "0.5.5",
+  "description": "Generate and edit on-brand images, videos, speech, and branded graphics with Creative Claw.",
+  "author": {
+    "name": "Creative Claw Co.",
+    "email": "support@creativeclaw.co",
+    "url": "https://creativeclaw.co"
+  },
+  "homepage": "https://creativeclaw.co",
+  "repository": "https://github.com/CreativeClawCo/creative-claw-marketplace",
+  "license": "Apache-2.0",
+  "keywords": [
+    "ai-media",
+    "image-generation",
+    "video-generation",
+    "branding",
+    "mcp"
+  ]
+}

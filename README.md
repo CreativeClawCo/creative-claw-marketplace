@@ -1,8 +1,8 @@
 # Creative Claw
 
-**Generate on-brand media inside Grok Bot, Cursor, Claude, and Codex.**
+**Generate on-brand media inside Grok Bot, Hermes, OpenClaw, Cursor, Claude, and Codex.**
 
-Creative Claw is an MCP plugin that brings a full AI media studio into Grok Bot, Cursor, Claude Code, Claude Desktop, and Codex. Generate on-brand images, videos, speech, and HTML-rendered branded graphics — all from natural language, all through one account. Save your brand once and every future visual stays on-brand automatically. No API keys. No platform switching. Just describe what you need.
+Creative Claw is an MCP plugin that brings a full AI media studio into Grok Bot, Hermes Agent, OpenClaw, Cursor, Claude Code, Claude Desktop, and Codex. Generate on-brand images, videos, speech, and HTML-rendered branded graphics — all from natural language, all through one account. Save your brand once and every future visual stays on-brand automatically. No API keys. No platform switching. Just describe what you need.
 
 > [creativeclaw.co](https://creativeclaw.co) | [Join the Beta](https://creativeclaw.co)
 
@@ -85,13 +85,37 @@ These are our top picks. Use `list_models` to browse 100+ more across all catego
 
 ### Grok Bot and Cursor
 
-Creative Claw is packaged for the Cursor Marketplace used by Grok Bot's plugin system. After marketplace approval, search for **Creative Claw** under **Plugins** in Grok Bot or **Customize** in Cursor, install it, and complete browser authentication on the first tool call.
+Creative Claw is packaged for the Cursor Marketplace used by Grok Bot's plugin system. After marketplace approval, open **Settings → Plugins → Marketplace** in Grok Bot or **Customize → Plugins** in Cursor, search for **Creative Claw**, install it, and complete browser authentication on the first tool call.
 
 For local Cursor testing before publication, symlink the plugin directory and reload Cursor:
 
 ```bash
 ln -s /path/to/creative-claw-marketplace/plugins/creative-claw ~/.cursor/plugins/local/creative-claw
 ```
+
+### Hermes Agent
+
+Hermes supports the Creative Claw hosted MCP directly. Run:
+
+```bash
+hermes mcp add creative-claw --url https://app.creativeclaw.co/mcp --auth oauth
+hermes mcp login creative-claw
+```
+
+Or use the one-click [Add to Hermes](hermes://mcp/install?name=creative-claw&config=eyJ1cmwiOiJodHRwczovL2FwcC5jcmVhdGl2ZWNsYXcuY28vbWNwIiwiYXV0aCI6Im9hdXRoIn0) link on a machine with Hermes installed. The portable `plugin.json` and `mcp.json` in the plugin root also make the package compatible with Agent Plugins v1 clients. Until Hermes supports OAuth login for plugin-supplied MCP entries, the two `hermes mcp` commands above are the reliable installation path.
+
+### OpenClaw
+
+Creative Claw includes a native OpenClaw manifest, the consolidated skill, and ClawHub package metadata. Once the package is published to ClawHub, install it with:
+
+```bash
+openclaw plugins install clawhub:@creativeclaw/plugin
+openclaw plugins enable creative-claw
+openclaw mcp login creative-claw
+openclaw gateway restart
+```
+
+The first login opens Creative Claw's OAuth flow; no API key needs to be copied into a config file.
 
 ### Agent skills (`npx skills`)
 
@@ -195,8 +219,9 @@ plugins/
     .claude-plugin/
       plugin.json          # Plugin manifest (MCP server config)
     .mcp.json              # Grok Build/Codex MCP server config
-    mcp.json               # Cursor/Grok Bot MCP server config
-    openclaw.plugin.json   # OpenClaw compatibility
+    plugin.json            # Portable Agent Plugins v1 manifest (Hermes-compatible)
+    mcp.json               # Portable Agent Plugins v1 MCP config
+    openclaw.plugin.json   # Native OpenClaw manifest
     skills/
       creativeclaw/
         SKILL.md           # canonical cross-client skill; discoverable by npx skills
@@ -236,7 +261,8 @@ Usage-based — pay only for what you generate. No subscriptions, no commitments
 - **Claude Desktop** — via MCP server config
 - **Codex and other skill-directory clients** — via the canonical `creativeclaw` skill
 - **OpenAI Store (ChatGPT + Codex)** — via `creativeclaw-chatgpt-skill.zip`
-- **OpenClaw** — via `openclaw.plugin.json`
+- **Hermes Agent** — via OAuth MCP setup and portable Agent Plugins v1 manifests
+- **OpenClaw** — via `openclaw.plugin.json` and ClawHub-ready package metadata
 
 All use the same skills and connect to the same MCP server.
 
