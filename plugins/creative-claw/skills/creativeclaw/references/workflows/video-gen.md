@@ -23,7 +23,7 @@ Before generating, decide whether an AI video model is the right tool:
 1. **Understand the request** — What kind of video? How long? What's the subject? What's it for? Does the user have reference images? Is this branded content?
 2. **Generate a reference image (always)** — Even for text-to-video requests, **always generate a reference image first** using `generate_image`. This gives the user control over the starting frame and dramatically improves video quality and consistency. **For branded videos, this step is critical** — pull the theme first (`get_theme`), bake theme colors and photography style into the image prompt, and pass the theme's reference image via `image_url` so the starting frame is on-brand. Only skip this if the user explicitly provides their own image.
 3. **Generate an outro image when needed** — Gemini Omni does not support first/last-frame interpolation. Recommend a second image only when the user specifically needs a controlled ending, then use a model with first/last-frame support such as Veo 3.1.
-4. **Recommend a model** — Default to Gemini Omni Flash. Choose another model only when the request specifically needs a capability Omni does not support, such as first/last-frame interpolation or clips longer than 10 seconds.
+4. **Recommend a model** — Default to Gemini Omni 1.1 Flash. Choose another model only when the request specifically needs a capability Creative Claw does not yet expose for Omni, such as first/last-frame interpolation or clips longer than 10 seconds.
 5. **Craft the prompt** — Write a detailed video prompt with camera movements, timing, and action descriptions. For branded work, always include theme colors, mood, and photography style.
 6. **Set parameters** — Use `get_model_params` to check available parameters. Set aspect ratio, duration, and other options.
 7. **Generate** — Call `generate_video`. Let the inline widget monitor completion; call `check_job` only when a follow-up step requires the final URL.
@@ -32,11 +32,13 @@ Before generating, decide whether an AI video model is the right tool:
 
 ## Recommended Text-to-Video Models
 
-**Default to Google Gemini Omni Flash — it is Creative Claw's top pick for general video generation and editing. Choose a specialty model only when the request requires a capability Omni does not support.**
+**Default to Google Gemini Omni 1.1 Flash — it is Creative Claw's top pick for general video generation and editing. Choose a specialty model only when the request requires a capability the current Omni tool surface does not expose.**
 
 | Model ID                  | Name                     | Audio                   | Max Duration | Best For                                                                                                                                            | Cost |
 | ------------------------- | ------------------------ | ----------------------- | ------------ | --------------------------------------------------------------------------------------------------------------------------------------------------- | ---- |
-| `video/gemini-omni-flash` | Gemini Omni Flash        | Native audio            | 3–10s        | ⭐ Default and top pick — coherent 720p text/image video plus source-video editing                                                                  | $$   |
+| `video/gemini-omni-flash` | Gemini Omni 1.1 Flash    | Native audio            | 3–10s        | ⭐ Default and top pick — coherent 720p text/image video plus source-video editing                                                                  | $$   |
+| `video/minimax-h3-max`    | MiniMax H3 Max (fal)     | Native audio            | 5–15s        | Very fast, inexpensive 480p/768p text/image video with strong prompt adherence and optional first/last frames                                       | $    |
+| `video/minimax-h3`        | MiniMax H3               | Native audio            | 5–15s        | 768p/2K generation plus multimodal image/video/audio references and editing; use when H3 Max's launch endpoints are insufficient                    | $$   |
 | `video/veo-3.1`           | Veo 3.1                  | Native audio + dialogue | ~8s          | Specialty option for true 4K and first/last-frame control                                                                                           | $$$  |
 | `video/veo-3.1-fast`      | Veo 3.1 Fast             | Native audio + dialogue | ~8s          | Same Veo quality, ~50% cheaper                                                                                                                      | $$   |
 | `video/seedance-2.0`      | Seedance 2.0             | Native audio            | ~10s         | Second-best — ByteDance's flagship: cinematic, real-world physics, director-level camera                                                            | $$   |
@@ -104,9 +106,11 @@ pipeline: `storyboard-to-video.md`.
 
 ### By Priority
 
-**Lead with Google Gemini Omni Flash.**
+**Lead with Google Gemini Omni 1.1 Flash.**
 
 - **No specific requirement / general use** → `video/gemini-omni-flash` (default and top pick)
+- **Very fast, low-cost 480p/768p text or image video** → `video/minimax-h3-max` (fal-only)
+- **2K or multimodal image/video/audio references** → `video/minimax-h3`
 - **"Best possible quality"** → `video/veo-3.1` (text) or `video/veo-3.1` with `image_url` (image)
 - **"Good quality, lower cost"** → `video/gemini-omni-flash`; check the current estimate before submitting
 - **"Cinematic with great physics"** → `video/veo-3.1`, then `video/seedance-2.0` (second-best) or `video/hailuo-02-pro`
