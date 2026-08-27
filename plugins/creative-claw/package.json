@@ -1,6 +1,6 @@
 {
   "name": "@creativeclaw/plugin",
-  "version": "0.5.3",
+  "version": "0.5.4",
   "description": "Creative Claw plugin for Claude Code and OpenClaw",
   "type": "module",
   "main": "index.mjs",

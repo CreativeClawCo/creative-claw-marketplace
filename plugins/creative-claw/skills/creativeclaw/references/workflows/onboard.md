@@ -35,7 +35,7 @@ Pick **one** of these depending on vibe, and just start:
 
 1. **"Let's make a weird image."** → Use `generate_image` with `image/nano-banana-2` (fast, cheap, high-fidelity default). Pick a playful, unexpected prompt together — an elephant in a library, a cyberpunk octopus, a cat running a coffee shop. Generate, show the result, then say: "That's the image primitive. Want to see what happens when we edit it, or try a video next?"
 
-2. **"Let's make a 4-second video."** → Use `generate_video` with a lightweight model like `video/veo-3.1-lite` (fast, affordable). Pick a small kinetic scene — "a paper plane flying through a sunlit office", "coffee being poured in slow motion". Returns a job ID, poll with `check_job`, show the result. Videos take 30 s–2 min; tell them so they know it's normal.
+2. **"Let's make a 4-second video."** → Use `generate_video` with the default `video/gemini-omni-flash`. Pick a small kinetic scene — "a paper plane flying through a sunlit office", "coffee being poured in slow motion". Gemini Omni usually completes inline; if a job ID is returned, poll with `check_job`, then show the result. Videos can take a few minutes; tell them so they know it's normal.
 
 3. **"Let's make a branded quote card right now."** → Write a quick HTML snippet and render with `render_html_image` — dark background, big quote, small attribution, one accent color. Takes about 1 second and costs almost nothing. This is the "wait, it's just HTML?" moment for developers.
 
