@@ -18,8 +18,25 @@
     "fal-ai",
     "mcp"
   ],
-  "skills": [
-    "skills/creativeclaw"
-  ],
-  "mcpServers": "./.codex-plugin/mcp.json"
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json",
+  "interface": {
+    "displayName": "Creative Claw",
+    "shortDescription": "Generate on-brand images, video, and speech",
+    "longDescription": "Create and edit on-brand images, videos, speech, templates, and branded graphics with Creative Claw's hosted media studio.",
+    "developerName": "Creative Claw Co.",
+    "category": "Creativity",
+    "capabilities": [
+      "Interactive",
+      "Write"
+    ],
+    "websiteURL": "https://creativeclaw.co",
+    "privacyPolicyURL": "https://creativeclaw.co/privacy",
+    "termsOfServiceURL": "https://creativeclaw.co/terms",
+    "defaultPrompt": [
+      "Generate an on-brand social image.",
+      "Turn this product image into a short video.",
+      "Create a reusable brand theme from my website."
+    ]
+  }
 }

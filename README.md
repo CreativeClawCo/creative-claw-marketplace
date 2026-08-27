@@ -1,8 +1,8 @@
 # Creative Claw
 
-**Generate on-brand media, inside Claude.**
+**Generate on-brand media inside Grok Bot, Cursor, Claude, and Codex.**
 
-Creative Claw is an MCP plugin that brings a full AI media studio into Claude Code and Claude Desktop. Generate on-brand images, videos, speech, and HTML-rendered branded graphics — all from natural language, all through one account. Save your brand once and every future visual stays on-brand automatically. No API keys. No platform switching. Just describe what you need.
+Creative Claw is an MCP plugin that brings a full AI media studio into Grok Bot, Cursor, Claude Code, Claude Desktop, and Codex. Generate on-brand images, videos, speech, and HTML-rendered branded graphics — all from natural language, all through one account. Save your brand once and every future visual stays on-brand automatically. No API keys. No platform switching. Just describe what you need.
 
 > [creativeclaw.co](https://creativeclaw.co) | [Join the Beta](https://creativeclaw.co)
 
@@ -82,6 +82,16 @@ These are our top picks. Use `list_models` to browse 100+ more across all catego
 ---
 
 ## Install
+
+### Grok Bot and Cursor
+
+Creative Claw is packaged for the Cursor Marketplace used by Grok Bot's plugin system. After marketplace approval, search for **Creative Claw** under **Plugins** in Grok Bot or **Customize** in Cursor, install it, and complete browser authentication on the first tool call.
+
+For local Cursor testing before publication, symlink the plugin directory and reload Cursor:
+
+```bash
+ln -s /path/to/creative-claw-marketplace/plugins/creative-claw ~/.cursor/plugins/local/creative-claw
+```
 
 ### Agent skills (`npx skills`)
 
@@ -176,10 +186,16 @@ This repo is a **marketplace** — it contains one or more installable plugins.
 .claude-plugin/
   marketplace.json         # Marketplace manifest (required for Claude Code marketplace sync)
   plugin.json              # Root plugin metadata
+.cursor-plugin/
+  marketplace.json         # Cursor/Grok Bot marketplace manifest
 plugins/
   creative-claw/
+    .cursor-plugin/
+      plugin.json          # Cursor/Grok Bot plugin manifest
     .claude-plugin/
       plugin.json          # Plugin manifest (MCP server config)
+    .mcp.json              # Grok Build/Codex MCP server config
+    mcp.json               # Cursor/Grok Bot MCP server config
     openclaw.plugin.json   # OpenClaw compatibility
     skills/
       creativeclaw/
@@ -214,6 +230,8 @@ Usage-based — pay only for what you generate. No subscriptions, no commitments
 
 ## Compatibility
 
+- **Grok Bot** — via the Cursor marketplace plugin and hosted MCP server
+- **Cursor** — via `.cursor-plugin/plugin.json`
 - **Claude Code** — via `.claude-plugin/plugin.json`
 - **Claude Desktop** — via MCP server config
 - **Codex and other skill-directory clients** — via the canonical `creativeclaw` skill

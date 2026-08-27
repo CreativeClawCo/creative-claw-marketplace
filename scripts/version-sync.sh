@@ -77,6 +77,16 @@ node -e "
 "
 echo "  .agents/plugins/marketplace.json → $VERSION"
 
+# 3d. Cursor plugin manifest (.cursor-plugin/plugin.json)
+node -e "
+  const fs = require('fs');
+  const f = '$PLUGIN_DIR/.cursor-plugin/plugin.json';
+  const d = JSON.parse(fs.readFileSync(f, 'utf-8'));
+  d.version = '$VERSION';
+  fs.writeFileSync(f, JSON.stringify(d, null, 2) + '\n');
+"
+echo "  .cursor-plugin/plugin.json → $VERSION"
+
 # 4. Stamp version into all SKILL.md descriptions
 # Replaces existing (vX.Y.Z) or appends it after the description text
 for skill_file in "$PLUGIN_DIR"/skills/*/SKILL.md; do

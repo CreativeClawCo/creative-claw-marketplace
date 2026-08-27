@@ -1,0 +1,31 @@
+{
+  "name": "creative-claw",
+  "displayName": "Creative Claw",
+  "version": "0.5.5",
+  "description": "Generate and edit on-brand images, videos, speech, and branded graphics.",
+  "author": {
+    "name": "Creative Claw Co.",
+    "email": "support@creativeclaw.co"
+  },
+  "homepage": "https://creativeclaw.co",
+  "repository": "https://github.com/CreativeClawCo/creative-claw-marketplace",
+  "license": "Apache-2.0",
+  "keywords": [
+    "creative-claw",
+    "creativeclaw",
+    "ai-media",
+    "image-generation",
+    "video-generation",
+    "brand-design",
+    "mcp"
+  ],
+  "category": "productivity",
+  "tags": [
+    "creative-media",
+    "images",
+    "video",
+    "branding",
+    "mcp"
+  ],
+  "mcpServers": "./mcp.json"
+}

@@ -1,0 +1,17 @@
+{
+  "name": "creative-claw-marketplace",
+  "owner": {
+    "name": "Creative Claw Co.",
+    "email": "support@creativeclaw.co"
+  },
+  "metadata": {
+    "description": "Creative Claw plugins for Grok Bot and Cursor"
+  },
+  "plugins": [
+    {
+      "name": "creative-claw",
+      "source": "plugins/creative-claw",
+      "description": "Generate and edit on-brand images, videos, speech, and branded graphics."
+    }
+  ]
+}
