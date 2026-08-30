@@ -1,93 +1,84 @@
-# MCP Tool Catalog
+# Tool catalog
 
-Creative Claw MCP tools grouped by purpose. Use this as a reference, not a recital list — never dump it on the user.
+Use this as routing guidance. Tool availability varies by client; never recite the catalog to the user or invent a missing tool.
 
-## Generation
+## Models and generation
 
-| Tool                | Purpose                                | Notes                                                                                         |
-| ------------------- | -------------------------------------- | --------------------------------------------------------------------------------------------- |
-| `generate_image`    | AI image gen / edit                    | Pass `image_url` for editing. Async on some models — poll `check_job`.                        |
-| `generate_video`    | AI video gen                           | **Always async.** Returns `jobId`. Poll `check_job`. Always generate a reference image first. |
-| `generate_speech`   | Text-to-speech, voice cloning          | Returns permanent audio URL. Some models accept a reference audio for voice cloning.          |
-| `generate_3d_model` | Image → 3D model                       | Async.                                                                                        |
-| `render_html_image` | HTML → PNG via headless Chromium       | Use `inline_images` for external assets. Loads Google Fonts via `fonts` param.                |
-| `render_html`       | Bare interactive HTML display endpoint | For live previews; use `render_html_image` for PNG output.                                    |
-| `render_template`   | Render a saved template with params    | Single or `batch`. Returns PNGs (or one PDF if `output: "pdf"`).                              |
-| `compare_models`    | Same prompt against multiple models    | Side-by-side comparison.                                                                      |
+| Tool               | Use                                                                                                                       |
+| ------------------ | ------------------------------------------------------------------------------------------------------------------------- |
+| `list_models`      | Discover current image, video, and speech models. Filter by category.                                                     |
+| `get_model_params` | Read the chosen model's actual schema, defaults, enums, and extra fields.                                                 |
+| `generate_image`   | Generate an image or edit a source supplied as `image_url`. Additional model-specific references normally go in `extras`. |
+| `compare_models`   | Run one image prompt through two to four generation-capable image models.                                                 |
+| `generate_video`   | Generate, animate, extend, retake, reframe, edit, or drive video according to model capability and `operation`.           |
+| `generate_speech`  | Generate speech. Supports model-specific voices, delivery controls, reference audio, and Characters.                      |
 
-## Templates (banner authoring)
+Use `list_models` before relying on a remembered model ID. Use `get_model_params` before sending `extras`, reference arrays, resolution, duration, or operation-specific fields.
 
-| Tool              | Purpose                                             |
-| ----------------- | --------------------------------------------------- |
-| `create_template` | Save HTML + parameter spec for repeatable rendering |
-| `update_template` | Shallow-merge edits to an existing template         |
-| `list_templates`  | Discover templates by name / tag                    |
-| `render_template` | Render a template (see above)                       |
+## Themes
 
-## Themes (brand)
+| Tool           | Use                                                                                                   |
+| -------------- | ----------------------------------------------------------------------------------------------------- |
+| `list_themes`  | Discover theme names and the default theme.                                                           |
+| `get_theme`    | Fetch the default or named theme, including structured data and reference images.                     |
+| `update_theme` | Open the visual editor with `interactive: true`, or directly create/update data and reference images. |
+| `delete_theme` | Remove a theme only when explicitly requested.                                                        |
 
-| Tool           | Purpose                                                                   |
-| -------------- | ------------------------------------------------------------------------- |
-| `get_theme`    | Pull the active brand theme — call at the start of every branded workflow |
-| `list_themes`  | List all themes for the user                                              |
-| `update_theme` | Shallow-merge edits                                                       |
-| `delete_theme` | Remove a theme                                                            |
+For conversational setup or edits, prefer `update_theme({ interactive: true })`. For exact programmatic changes, fetch first and send the smallest direct update. Theme `data` shallow-merges; `images` replaces the full reference-image array.
 
-## Assets
+## Assets and imports
 
-| Tool             | Purpose                                                                                                          |
-| ---------------- | ---------------------------------------------------------------------------------------------------------------- |
-| `search_assets`  | Filter by type / query / tags / name. Newest-first.                                                              |
-| `update_asset`   | Rename, retag, add description — call after generation                                                           |
-| `delete_asset`   | Soft-delete                                                                                                      |
-| `load_image`     | Display an image inline in the conversation                                                                      |
-| `upload_asset`   | Import a publicly reachable file URL into the asset library                                                      |
-| `import_chatgpt_media` | When exposed: copy one native conversation attachment and return a durable URL                                 |
-| `import_media`   | Open the interactive picker when the user still needs to choose/upload files from their device                  |
-| `get_upload_url` | Pre-signed PUT URL for callers that hold file bytes and can make the PUT request                                 |
-| `confirm_upload` | Finalize an upload started via `get_upload_url`                                                                  |
+| Tool                                | Use                                                                                                    |
+| ----------------------------------- | ------------------------------------------------------------------------------------------------------ |
+| `search_assets`                     | Find recent or matching media by type, query, tags, exact name, or source.                             |
+| `update_asset`                      | Set a unique name, replace tags, or update a description.                                              |
+| `delete_asset`                      | Soft-delete an asset only when explicitly requested.                                                   |
+| `load_image`                        | Display an image URL inline when exposed.                                                              |
+| `import_chatgpt_media`              | Convert one native ChatGPT attachment into a durable Creative Claw asset when exposed.                 |
+| `import_media`                      | Open the picker when the user still needs to choose a file.                                            |
+| `get_upload_url` + `confirm_upload` | Upload local bytes from clients that can perform an HTTP PUT.                                          |
+| `upload_asset`                      | Copy a public, directly downloadable URL into the library. Requires `url`, `content_type`, and `type`. |
 
-Read `platform-upload.md` before selecting an import tool. The correct route depends on the client and where the file bytes are available.
+Read `platform-upload.md` before choosing an import route.
 
-## Editing / processing
+## Characters and films
 
-| Tool                | Purpose                                                                                                                                                                                                                                                                                  |
-| ------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `remove_background` | Cheaper than a full model call for product cutouts                                                                                                                                                                                                                                       |
-| `upscale_media`     | Image and video upscaling                                                                                                                                                                                                                                                                |
-| `trim_video`        | Cut a range out of a video                                                                                                                                                                                                                                                               |
-| `scale_video`       | Resize / re-encode                                                                                                                                                                                                                                                                       |
-| `add_subtitles`     | Burn captions into a video                                                                                                                                                                                                                                                               |
-| `extract_frames`    | Pull stills from a video at specific timestamps                                                                                                                                                                                                                                          |
-| `merge_media`       | Concatenate clips, overlay audio, combine media                                                                                                                                                                                                                                          |
-| `transcribe`        | Audio → word-level transcript JSON (Scribe). Used by `edit-video` workflow.                                                                                                                                                                                                              |
-| `isolate_audio`     | Strip background noise, music, and reverb from a voice track via ElevenLabs Voice Isolator. Takes `audio_url` (must be a public URL — upload local files first). **Async.** Returns `jobId`; poll `check_job` for the cleaned audio URL. Used as the final audio polish in `edit-video`. |
+| Tool                                      | Use                                                                                               |
+| ----------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| `manage_character`                        | Create/update a persona with a description, reference image, and optional consented cloned voice. |
+| `clone_voice`                             | Attach or replace a consented voice clone on an existing Character.                               |
+| `list_characters`                         | Find reusable Characters and IDs.                                                                 |
+| `delete_character`                        | Remove a Character only when explicitly requested.                                                |
+| `create_film_project`                     | Create a multi-shot Film project.                                                                 |
+| `update_film_project`                     | Save script, shots, storyboards, clips, audio, and approval state.                                |
+| `get_film_project` / `list_film_projects` | Inspect Film projects.                                                                            |
+| `assemble_film`                           | Merge approved clips and audio into the final Film.                                               |
 
-## Models
+## Media processing
 
-| Tool                 | Purpose                                              |
-| -------------------- | ---------------------------------------------------- |
-| `list_models`        | Discover available image/video/speech/3D models      |
-| `get_model_params`   | Get model-specific parameters for `generate_*` calls |
-| `plan_video_request` | (Helper) Plan a video generation request structure   |
+| Tool                | Use                                                                                       |
+| ------------------- | ----------------------------------------------------------------------------------------- |
+| `remove_background` | Remove an image or video background.                                                      |
+| `upscale_media`     | Upscale image or video.                                                                   |
+| `trim_video`        | Cut a time range.                                                                         |
+| `scale_video`       | Resize, crop, or pad video.                                                               |
+| `add_subtitles`     | Burn captions into video.                                                                 |
+| `extract_frames`    | Extract one or more still frames from video.                                              |
+| `merge_media`       | Concatenate videos or audio, or combine an audio track with video.                        |
+| `transcribe`        | Produce a transcript with timing data from audio or video.                                |
+| `isolate_audio`     | Remove noise, music, and reverb from a voice recording. Queued; resolve with `check_job`. |
 
-## Jobs
+## Jobs and credits
 
-| Tool        | Purpose                                                                                         |
-| ----------- | ----------------------------------------------------------------------------------------------- |
-| `check_job` | Poll an async generation job by ID. Returns `{ status, result?, error? }`. See `async-jobs.md`. |
+| Tool                  | Use                                                                  |
+| --------------------- | -------------------------------------------------------------------- |
+| `check_job`           | Resolve queued work by `job_id` when a completed result is required. |
+| `get_credits_balance` | Check balance and usage when exposed.                                |
+| `get_credits_link`    | Return a user-operated top-up link when exposed.                     |
 
-## Credits / billing
+## Metadata conventions
 
-Use these tools only when they are present on the current client; otherwise direct the user to the Creative Claw dashboard.
-
-| Tool                  | Purpose                                                                                                                   |
-| --------------------- | ------------------------------------------------------------------------------------------------------------------------- |
-| `get_credits_balance` | Current credit balance + usage. Check early if user is generating a lot.                                                  |
-| `get_credits_link`    | Returns a hosted checkout URL for the user to top up. **You cannot complete checkout** — always hand the URL to the user. |
-
-## Naming conventions
-
-- All async generation tools return `{ jobId, status: "queued" }`. Sync tools return the result directly.
-- All `generate_*` and `render_*` accept optional `name` and `tags`. Always set them.
-- Asset URLs are permanent (R2-hosted) — safe to reference in HTML, store in code, share with users.
+- Use concise unique names such as `acme-launch-hero-v2`.
+- Use lowercase stable tags such as `acme`, `launch-2026`, `approved`, `reference`, `character-mira`.
+- `update_asset.tags` replaces the current tag array; include every tag that should remain.
+- Search before generating a duplicate and before assigning a name that must be unique.

@@ -1,95 +1,74 @@
-# Image Generation Specialist
+# Image generation and editing
 
-You are an AI image generation specialist working with the Creative Claw MCP server. Your job is to help users generate and edit images by choosing the right model, crafting effective prompts, and using the correct MCP tools.
-
-> **When to use `html-image.md` instead:** If the user's goal is layout-driven — a quote card, OG image, social banner, feature announcement, stat card, hero with a headline and logo — HTML rendering is the right primitive, not AI generation. It's deterministic, cheaper, and pulls directly from the brand theme. Follow the included HTML-image workflow. Use this workflow for photoreal subjects, people, scenes, illustrations, and anything where an AI model is genuinely the right engine. You can also combine them: generate a photoreal background here, then composite brand chrome over it with an HTML render.
-
-## On-brand content — pick the right engine first
-
-Before generating, decide whether an AI model is even the right tool:
-
-- **Layout-driven branded content** (social cards, banners, OG images, quote posts, announcements, infographics, stat cards) → **Use HTML rendering** (`render_html_image` / `render_template`). It pulls colors, fonts, logos, and shapes directly from the theme — deterministic, cheap, and always on-brand. Follow `html-image.md`.
-- **Photo/illustration-driven content that must be on-brand** → Use `generate_image` BUT you **must** pass a reference image via `image_url` and bake theme tokens into the prompt. Without a visual anchor, AI models will drift off-brand. The theme should have a reference image for this — if it doesn't, suggest adding one.
-- **Combine both for the best results** → Generate a photoreal background here, then composite brand chrome (logo, headline, accent shapes) on top with an HTML render.
+Choose an image model by capability, anchor branded work with theme assets, and preserve approved elements across iterations.
 
 ## Workflow
 
-1. **Understand the request** — Ask clarifying questions if needed: What is the subject? What style? What will it be used for? Does the user have a reference image? Is this branded content?
-2. **Check for a brand theme** — Call `get_theme` to see if the user has a saved brand theme. If they do, incorporate their colors, fonts, logos, and style preferences into the prompt and parameters. **If the user wants on-brand output, check that the theme has a reference image** — a hero shot or style sample that captures the brand's visual identity. If it doesn't, suggest adding one before generating.
-3. **For branded generation, always use a reference image** — Pass the theme's reference image (or a user-provided one) via `image_url` so the model has a visual anchor. This is the difference between "kinda looks like our brand" and "nails it." Without a reference image, generative models will produce generic output regardless of how good the prompt is.
-4. **Choose generation vs editing** — If the user wants to create from scratch, use `generate_image`. If they have an existing image to modify, use `generate_image` with `image_url` (editing mode). Both use the same tool.
-5. **Recommend a model** — Based on the user's needs, recommend one of the models below. Explain your reasoning briefly.
-6. **Craft the prompt** — Help the user write an effective prompt. Different models respond to different prompting styles — see the reference files linked below. For branded work, always include theme colors, photography style, and mood.
-7. **Set parameters** — Use `get_model_params` to check available extras parameters. Set dimensions, format, and other options as needed. The MCP server enhances your prompt server-side using model-specific knowledge, so you don't need to memorize per-model prompting rules.
-8. **Generate** — Call `generate_image` and poll with `check_job` if it returns a job ID (async). Present the result.
-9. **Iterate** — Offer to refine the prompt, try a different model, compare models side-by-side with `compare_models`, or make edits.
+1. Define the subject, intended use, aspect ratio, style, required text, and what must remain exact.
+2. For branded work, call `get_theme`. Reuse its colors, notes, logos, and reference images. Do not invent missing brand details.
+3. Call `search_assets` for source images, product shots, Characters, and prior approved outputs. Import missing media through `../platform-upload.md`.
+4. Call `list_models({ category: "image" })`. Choose a generation- or edit-capable model, then call `get_model_params` for that exact ID.
+5. Generate with `generate_image`; provide `image_url` for edits. Use the preferred `size` field when supported.
+6. If the prompt contains exact quoted text, per-region instructions, or reference tokens, send it verbatim with `agentic_prompting: false`.
+7. Inspect the output. For revisions, describe both the delta and what must remain unchanged.
+8. Name, tag, and describe approved assets.
 
-## Recommended Image Generation Models
+## Model picker
 
-**Default to the Google Nano Banana models — they're the top pick for almost everything. Reach for GPT Image only as a second-best alternative.**
+Runtime discovery is authoritative. These are current routing defaults:
 
-| Model ID                | Name                             | Best For                                                                                          | Speed   | Cost |
-| ----------------------- | -------------------------------- | ------------------------------------------------------------------------------------------------- | ------- | ---- |
-| `image/nano-banana-2`   | Nano Banana 2 (Gemini 3.1 Flash) | ⭐ Default & top pick — fast, high-fidelity, text rendering, multilingual                         | Fast    | $    |
-| `image/nano-banana-pro` | Nano Banana Pro (Gemini 3 Pro)   | Max-quality Google model — complex conversational prompts, semantic understanding, text in images | Medium  | $$   |
-| `image/gpt-image-2`     | GPT Image 2.0                    | Second-best — best-in-class text rendering, 4K output, exceptional prompt adherence               | Medium  | $$   |
-| `image/flux-2-pro`      | FLUX.2 Pro                       | Zero-config professional quality, no parameter tuning needed                                      | Medium  | $$   |
-| `image/recraft-v3`      | Recraft V3                       | Design and illustration, #1 on benchmarks                                                         | Medium  | $$   |
-| `image/flux-schnell`    | FLUX Schnell                     | Quick drafts and testing (~0.5s), cheapest option                                                 | Fastest | ¢    |
+| Need                                                                           | Start with               | Why                                                                                  |
+| ------------------------------------------------------------------------------ | ------------------------ | ------------------------------------------------------------------------------------ |
+| General generation or edit                                                     | `image/nano-banana-2`    | Default; strong balance of quality, reasoning, speed, and cost.                      |
+| Complex professional asset, precise typography, demanding multi-reference edit | `image/nano-banana-pro`  | Higher reasoning and composition quality.                                            |
+| Cheap drafts or bulk variations                                                | `image/nano-banana-lite` | Fastest low-cost Nano Banana tier.                                                   |
+| Product or marketing imagery with many references                              | `image/seedream-5-lite`  | Strong product work, precise edits, up to 10 references, and high-resolution output. |
+| Premium Seedream product/marketing work                                        | `image/seedream-5-pro`   | Flagship 1K/2K generation and edit path.                                             |
+| Typography, 4K, or strict instruction adherence                                | `image/gpt-image-2`      | Strong text rendering and prompt adherence.                                          |
+| Direct OpenAI route when exposed                                               | `image/gpt-image-direct` | Same model family through the direct provider route.                                 |
+| Natural-language edit with up to three sources                                 | `image/grok-imagine-pro` | Strong detail, typography, and edit support.                                         |
+| Professional generation without tuning                                         | `image/flux-2-pro`       | Generation-only, polished default look.                                              |
+| Illustration and design                                                        | `image/recraft-v3`       | Generation-only specialist for graphic and illustrative work.                        |
+| Precise edit or consistency                                                    | `image/flux-kontext-max` | Edit-only.                                                                           |
+| Cheap edit test                                                                | `image/flux-dev`         | Edit-only low-cost option.                                                           |
 
-### Model Selection Guide
+Do not use retired or unlisted model IDs. In particular, discover a current draft model instead of assuming an old FLUX Schnell ID still exists.
 
-**Default recommendation:** When the user doesn't specify a particular need or preference, use `image/nano-banana-2` (Gemini 3.1 Flash). It offers the best cost/quality balance — fast, affordable, and high-fidelity output. This is also the tool default.
+## Reference handling
 
-- **No specific requirement / general use** → `image/nano-banana-2` (default — great quality at low cost)
-- **"I need the best quality, cost doesn't matter"** → `image/nano-banana-pro` (top quality), then `image/gpt-image-2`
-- **"I need text in the image"** → `image/nano-banana-pro` or `image/nano-banana-2` (Gemini models excel at text rendering)
-- **"I need it fast and cheap for testing"** → `image/flux-schnell`
-- **"I need a design or illustration"** → `image/recraft-v3`
-- **"I want professional quality with zero fuss"** → `image/flux-2-pro`
-- **"I need to generate many variants quickly"** → `image/nano-banana-2` (fast + affordable)
-- **"I want to compare options"** → Use `compare_models` with 2-4 model IDs to generate the same prompt on multiple models side-by-side
+- `image_url` is the primary source/edit image.
+- Additional references are model-specific. Inspect `get_model_params`; many supported image models accept `extras.image_urls`.
+- Theme reference images describe visual language. Tell the model which attributes to borrow—palette, lighting, composition, material, or typography—and which subject matter not to copy.
+- For a saved Character, pass `character_id` instead of manually repeating its image and description.
+- Use a durable Creative Claw URL. Never pass a local path or private attachment URL to a URL-only field.
 
-## Recommended Image Editing Models
+## Prompt structure
 
-Editing uses the same `generate_image` tool — pass an `image_url` to enter edit mode. The `strength` parameter (0-1, default 0.75) controls how much the image changes.
+Use compact art direction:
 
-**Default to the Google Nano Banana models for edits too.**
+```text
+Subject and action. Composition and camera. Environment and lighting.
+Visual medium and finish. Brand palette and mood. Exact text, if any.
+Preserve: [identity/product/logo/geometry]. Avoid: [specific failure modes].
+```
 
-| Model ID                 | Name             | Best For                                                          |
-| ------------------------ | ---------------- | ----------------------------------------------------------------- |
-| `image/nano-banana-2`    | Nano Banana 2    | ⭐ Default — fast, high-fidelity edits                            |
-| `image/nano-banana-pro`  | Nano Banana Pro  | Max quality — semantic understanding of complex edit instructions |
-| `image/gpt-image-2`      | GPT Image 2.0    | Second-best — best-in-class text rendering, 4K edits              |
-| `image/flux-kontext-max` | FLUX Kontext Max | Consistency, typography, and precise edits                        |
-| `image/flux-dev`         | FLUX Dev         | Cheap and reliable, good for testing                              |
+For editing, lead with the change:
 
-### Editing Tips
+```text
+Change [one concrete element]. Preserve [identity, pose, product geometry,
+lighting, crop, background, and every unmentioned detail].
+```
 
-- **No masking required** with Gemini models — describe what to change in plain English
-- State both what to change AND what to preserve
-- Make one change per prompt for complex edits
-- Use high-quality, clear source images
-- Gemini edit models accept up to 14 reference images for compositing
-- Use `strength` to control transformation intensity: low (0.2-0.4) for subtle tweaks, high (0.7-1.0) for major changes
+Use positive instructions for required content and a short negative list for recurring model failures. Do not overload a draft with conflicting styles.
 
-## MCP Tools Reference
+## Tool notes
 
-- `generate_image` — Generate an image from text, or edit an existing image by passing `image_url`. Key params: `model`, `prompt`, `image_url` (for edits), `strength` (edit intensity), `width`, `height`, `num_images` (1-4), `negative_prompt`, `seed`, `output_format` (jpeg/png), `remove_background` (auto BG removal), `extras` (model-specific params from `get_model_params`).
-- `compare_models` — Generate the same prompt on 2-4 models in parallel for side-by-side comparison. Pass `prompt` and `models` array.
-- `check_job` — Poll an async generation job for completion. Call with `job_id` until status is "completed".
-- `list_models` — Browse available models. Use `category: "image"` to filter.
-- `get_model_params` — Get all available parameters for a model ID (returns full schema). Use this to discover `extras` params.
-- `load_image` — Download and display an image from URL for inline viewing.
-- `search_assets` — Search previously generated assets by type, query, tags, or name.
-- `upload_asset` — Upload a file to the asset library via base64 or URL.
-- `update_asset` — Organize assets with names, tags, and descriptions.
-- `get_theme` — Fetch the user's brand theme (colors, fonts, logos) to incorporate into generation.
+- `generate_image` supports generation and edit mode, `size`, one to four outputs, seed, output format, optional background removal, Characters, prompt rewriting, and model-specific `extras`.
+- `compare_models` compares two to four generation-capable models. Use it when the user is choosing a visual direction, not for exact source-image edits.
+- The inline viewer may monitor completion. Use `check_job({ job_id })` only when a later step requires the final URL or no viewer is monitoring.
+- `remove_background` is preferable to regenerating when the only task is a cutout.
+- `upscale_media` is preferable to regenerating an approved image solely for resolution.
 
-## General Prompting Principles
+## Quality gate
 
-1. **Be specific** — Include subject, composition, action, location, and style
-2. **Match the model's prompting style** — Gemini models prefer natural language; FLUX models work well with descriptive comma-separated terms
-3. **Specify technical details** — Camera angle, lens type, lighting, color palette
-4. **Set the right aspect ratio** — Match the use case (16:9 for landscape, 9:16 for mobile, 1:1 for social)
-5. **Iterate** — Generate, evaluate, refine the prompt, regenerate
+Before approval, check subject identity, hands/faces, product geometry, readable text, logo integrity, crop, target ratio, color fidelity, and unwanted artifacts. When one element is wrong, edit the approved candidate instead of restarting unless the composition itself failed.

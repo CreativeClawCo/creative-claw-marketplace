@@ -16,13 +16,14 @@ if [[ ! -f "$skill_source/SKILL.md" || ! -d "$chatgpt_overlay_root" ]]; then
   exit 1
 fi
 
-mkdir -p "$temp_root/general" "$temp_root/chatgpt"
-cp -R "$skill_source/." "$temp_root/general/"
-cp -R "$skill_source/." "$temp_root/chatgpt/"
-cp "$chatgpt_overlay_root"/*.md "$temp_root/chatgpt/references/"
+mkdir -p "$temp_root/general/creativeclaw" "$temp_root/chatgpt/creativeclaw"
+cp -R "$skill_source/." "$temp_root/general/creativeclaw/"
+cp -R "$skill_source/." "$temp_root/chatgpt/creativeclaw/"
+cp "$chatgpt_overlay_root"/*.md "$temp_root/chatgpt/creativeclaw/references/"
 
 for variant in general chatgpt; do
-  variant_root="$temp_root/$variant"
+  package_root="$temp_root/$variant"
+  variant_root="$package_root/creativeclaw"
 
   if rg -n "render_html_video|kind:[[:space:]]*html_video" "$variant_root"; then
     echo "Deprecated HTML-video guidance found in the $variant skill." >&2
@@ -37,8 +38,8 @@ for variant in general chatgpt; do
   # Normalize copied-file mtimes so repeated builds produce stable archives.
   find "$variant_root" -type f -exec touch -t 202601010000 {} +
   (
-    cd "$variant_root"
-    find SKILL.md references assets -type f -print | LC_ALL=C sort |
+    cd "$package_root"
+    find creativeclaw -type f -print | LC_ALL=C sort |
       zip -X -q "$temp_root/creativeclaw-$variant.zip" -@
   )
 done

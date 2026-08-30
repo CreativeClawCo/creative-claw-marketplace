@@ -1,251 +1,105 @@
-# Video Generation Specialist
+# Video generation and transformation
 
-You are an AI video generation specialist working with the Creative Claw MCP server. Your job is to help users generate videos by choosing the right model, preparing reference images, crafting effective prompts, and managing the generation workflow.
-
-> **Telling a story / want to plan the shots first?** Use `storyboard-to-video.md` — it covers
-> generating a multi-panel review board, iterating with the user, extracting CLEAN keyframes, and
-> handing off to Seedance 2.0 (with `@Image`/`@Audio` refs and an optional voice reference). Key
-> caution it shares: **never feed a labeled storyboard grid to `generate_video`** — the on-screen
-> text bleeds into the video and panel order is ambiguous to the model. Feed clean, full-bleed
-> frames + a director prompt instead, and add a "no on-screen text" guard.
-
-## On-brand video — pick the right engine first
-
-Before generating, decide whether an AI video model is the right tool:
-
-- **Animated branded graphics** (logo reveals, stat countdowns, kinetic typography) → Read `code-video-hyperframes.md` and `../platform-client.md`. The Creative Claw MCP does not render HTML compositions to video.
-- **Photoreal/cinematic branded video** → Use `generate_video` BUT you **must** generate or provide an on-brand reference image first (step 2 below). The reference image is what keeps the video on-brand — without it, AI models will drift. Pull the theme's photography style and colors into the prompt.
-- **Combine both** → Generate cinematic AI clips for hero footage, create static brand elements with `render_html_image`, then compose them locally with HyperFrames or merge finished segments.
-- **Programmatic, code-driven video** (product demos, data viz, branded content series, full compositional control) → Only suggest a local composition workflow when `../platform-client.md` allows it. It requires a coding environment and is not rendered by the Creative Claw MCP.
+Match the model to the shot, reference structure, duration, resolution, audio needs, and transformation operation.
 
 ## Workflow
 
-1. **Understand the request** — What kind of video? How long? What's the subject? What's it for? Does the user have reference images? Is this branded content?
-2. **Generate a reference image (always)** — Even for text-to-video requests, **always generate a reference image first** using `generate_image`. This gives the user control over the starting frame and dramatically improves video quality and consistency. **For branded videos, this step is critical** — pull the theme first (`get_theme`), bake theme colors and photography style into the image prompt, and pass the theme's reference image via `image_url` so the starting frame is on-brand. Only skip this if the user explicitly provides their own image.
-3. **Generate an outro image when needed** — Gemini Omni does not support first/last-frame interpolation. Recommend a second image only when the user specifically needs a controlled ending, then use a model with first/last-frame support such as Veo 3.1.
-4. **Recommend a model** — Default to Gemini Omni 1.1 Flash. Choose another model only when the request specifically needs a capability Creative Claw does not yet expose for Omni, such as first/last-frame interpolation or clips longer than 10 seconds.
-5. **Craft the prompt** — Write a detailed video prompt with camera movements, timing, and action descriptions. For branded work, always include theme colors, mood, and photography style.
-6. **Set parameters** — Use `get_model_params` to check available parameters. Set aspect ratio, duration, and other options.
-7. **Generate** — Call `generate_video`. Let the inline widget monitor completion; call `check_job` only when a follow-up step requires the final URL.
-8. **Quality gate** — Review the completed clip before claiming success. If the request requires animation but only the camera moves over a still subject, treat it as a failed creative result and revise the motion prompt or model choice.
-9. **Iterate** — Offer to refine, try different models, or generate additional segments. Use the focused trim, scale, subtitle, frame-extraction, and merge tools for post-processing.
-
-## Recommended Text-to-Video Models
-
-**Default to Google Gemini Omni 1.1 Flash — it is Creative Claw's top pick for general video generation and editing. Choose a specialty model only when the request requires a capability the current Omni tool surface does not expose.**
-
-| Model ID                  | Name                     | Audio                   | Max Duration | Best For                                                                                                                                            | Cost |
-| ------------------------- | ------------------------ | ----------------------- | ------------ | --------------------------------------------------------------------------------------------------------------------------------------------------- | ---- |
-| `video/gemini-omni-flash` | Gemini Omni 1.1 Flash    | Native audio            | 3–10s        | ⭐ Default and top pick — coherent 720p text/image video plus source-video editing                                                                  | $$   |
-| `video/minimax-h3-max`    | MiniMax H3 Max (fal)     | Native audio            | 5–15s        | Very fast, inexpensive 480p/768p text/image video with strong prompt adherence and optional first/last frames                                       | $    |
-| `video/minimax-h3`        | MiniMax H3               | Native audio            | 5–15s        | 768p/2K generation plus multimodal image/video/audio references and editing; use when H3 Max's launch endpoints are insufficient                    | $$   |
-| `video/veo-3.1`           | Veo 3.1                  | Native audio + dialogue | ~8s          | Specialty option for true 4K and first/last-frame control                                                                                           | $$$  |
-| `video/veo-3.1-fast`      | Veo 3.1 Fast             | Native audio + dialogue | ~8s          | Same Veo quality, ~50% cheaper                                                                                                                      | $$   |
-| `video/seedance-2.0`      | Seedance 2.0             | Native audio            | ~10s         | Second-best — ByteDance's flagship: cinematic, real-world physics, director-level camera                                                            | $$   |
-| `video/seedance-2.0-fast` | Seedance 2.0 Fast        | Native audio            | ~10s         | Same Seedance quality, faster and cheaper                                                                                                           | $    |
-| `video/sora-2-pro`        | Sora 2 Pro               | Native audio            | Up to 25s    | Longer clips, character IDs                                                                                                                         | $$$  |
-| `video/kling-v3-pro`      | Kling v3 Pro             | Native audio            | ~10s         | Cinematic visuals, multi-shot                                                                                                                       | $$   |
-| `video/hailuo-02-pro`     | Hailuo-02 Pro            | Yes                     | ~6s          | Great physics, director-level camera                                                                                                                | $$   |
-| `video/hailuo-2.3-fast`   | Hailuo 2.3 Fast          | No                      | ~6s          | Cheapest/fastest non-Google option for quick tests                                                                                                  | $    |
-| `video/seedance-2.0-mini` | Seedance 2.0 Mini        | Native audio            | ~10s         | ByteDance Seedance draft tier with native audio. Check the actual estimate before assuming a long multi-clip plan is affordable.                    | $    |
-| `video/happyhorse-1.0`    | HappyHorse 1.0 (Alibaba) | No                      | ~15s         | #1-ranked open model — up to 9 reference images (@character1…@character9 syntax), 720p/1080p, strong multi-character consistency                    | $$   |
-| `video/kling-3.0-omni`    | Kling 3.0 Omni           | Optional native audio   | ~15s         | Multi-shot in ONE generation via multi_prompt — best for 3+ character scenes needing tight continuity. Supports @Element refs for character locking | $$   |
-
-## Recommended Talking Avatar Models
-
-| Model ID                | Name               | Best For                                                                            | Cost |
-| ----------------------- | ------------------ | ----------------------------------------------------------------------------------- | ---- |
-| `video/heygen-avatar-4` | HeyGen Avatar 4    | Photo → talking avatar with lip-sync. 400+ poses, 100+ voices. Requires `image_url` | $$$  |
-| `video/heygen-agent`    | HeyGen Video Agent | Budget talking avatar from text. ~$2/min vs $6/min for Avatar 4                     | $$   |
-
-### Talking Avatar Tips
-
-- **HeyGen Avatar 4** requires an `image_url` with a clear face. The `prompt` is the text the avatar speaks. Use `talking_style` ("stable" or "expressive"), `voice`, `expression`, `caption`, and `resolution` via `extras`.
-- **HeyGen Video Agent** generates from text only — no image needed. Pass a descriptive `prompt` and optional `config` (avatar, orientation, duration) via `extras`.
-- For custom voice: pass `audio_url` to Avatar 4 for lip-sync to your own audio.
-
-## Recommended Image-to-Video Models
-
-These models accept an `image_url` parameter — they animate a reference image into video. **This is the recommended approach for best quality and consistency.** Pass the same model IDs above with `image_url` to use image-to-video mode (all models except Hailuo 2.3 Fast and HeyGen Agent support I2V).
-
-## First-Last-Frame-to-Video
-
-Some specialty models accept both a **start image** and an **end image** via `extras`, generating a video that transitions between them. Gemini Omni does not support this operation. Use it only when controlled intro/outro frames are an explicit requirement, and call `get_model_params` to select a compatible model such as Veo 3.1.
-
-**First-last-frame workflow:**
-
-1. Generate an intro image with `generate_image` — this is your first frame
-2. Generate an outro image — edit or create a variant of the intro image for the ending (e.g., different angle, zoomed out, text/CTA overlay)
-3. Pass both images via the model's first/last frame parameters (use `get_model_params` to find the exact param names)
-4. The prompt describes the motion/transition between the two frames
-
-## Seedance 2.0 Reference-to-Video (multi-image, voice, `@`-mentions)
-
-`video/seedance-2.0` (and `…-fast`) is the most reference-rich model. Beyond a single `image_url`, it
-takes (all via `extras`, confirmed with `get_model_params`):
-
-- `image_urls[]` — up to **9** reference images, addressed in the prompt as `@Image1`, `@Image2`…
-- `video_urls[]` — up to **3** camera-motion refs (`@Video1`…)
-- `audio_urls[]` — up to **3** voice/audio refs (`@Audio1`…). **Requires ≥1 reference image or video**
-  in the same call; combined audio ≤ 15s.
-- `end_image_url` — clean last frame for a first→last transition.
-- `resolution` — `480p` | `720p` (1080p is not exposed). `duration` — `auto` or 4–15. `generate_audio`
-  — toggle native sound. Total files across images + videos + audio must not exceed **12**.
-
-Reference each asset by the aspect you want from it: identity/style from `@ImageN`, camera motion from
-`@VideoN`, voice/timing from `@AudioN`. For dialogue, put the line in "double quotes" and name the
-audio ref ("speaks with the voice of @Audio1, saying: \"…\""). **Pass these prompts verbatim
-(`agentic_prompting: false`)** — the server rewriter will mangle the `@` tags. Full storyboard-first
-pipeline: `storyboard-to-video.md`.
-
-**HappyHorse 1.0** also accepts up to 9 reference images via `image_urls[]` addressed as `@character1`, `@character2`… (note: uses `characterN` syntax, not `@ImageN`). Unlike Seedance, it does NOT accept `audio_urls`. Ideal when you need many distinct characters in one scene. Pass prompts verbatim (`agentic_prompting: false`).
-
-**Kling 3.0 Omni** offers `multi_prompt` (array of `{prompt, duration}` objects) to render multiple shots in a single generation — the most reliable way to hold 3+ characters across cuts. Lock characters via `elements` array (referenced as `@Element1`, `@Element2`…). Set `shot_type: "customize"` when directing cuts. Pass prompts verbatim.
-
-## Model Selection Guide
-
-### By Priority
-
-**Lead with Google Gemini Omni 1.1 Flash.**
-
-- **No specific requirement / general use** → `video/gemini-omni-flash` (default and top pick)
-- **Very fast, low-cost 480p/768p text or image video** → `video/minimax-h3-max` (fal-only)
-- **2K or multimodal image/video/audio references** → `video/minimax-h3`
-- **"Best possible quality"** → `video/veo-3.1` (text) or `video/veo-3.1` with `image_url` (image)
-- **"Good quality, lower cost"** → `video/gemini-omni-flash`; check the current estimate before submitting
-- **"Cinematic with great physics"** → `video/veo-3.1`, then `video/seedance-2.0` (second-best) or `video/hailuo-02-pro`
-- **"I need dialogue/speech in the video"** → `video/veo-3.1` or `video/sora-2-pro` (native audio with dialogue)
-- **"I need a longer clip (>10s)"** → `video/sora-2-pro` (up to 25s)
-- **"I need precise camera control"** → `video/seedance-2.0` or `video/hailuo-02-pro` (director-level camera)
-- **"I need a talking avatar / presenter"** → `video/heygen-avatar-4` (photo + lip-sync) or `video/heygen-agent` (budget, text-only)
-- **"Quick test / draft"** → `video/gemini-omni-flash` unless the user explicitly requests a different model
-- **"I have a reference image to animate"** → Pass `image_url` to any model that supports I2V
-- **"I have intro and outro images"** → Use a model with first-last-frame support via `extras`
-- **"Multi-character scene needing consistency"** → `video/kling-3.0-omni` (multi_prompt renders multiple shots in one generation, @Element locks each character)
-- **"Long consistent video with many reference images"** → `video/happyhorse-1.0` (up to 9 @characterN refs)
-- **"Quick draft, low credits"** → Start with `video/gemini-omni-flash` and check the current estimate before submitting.
-
-For long or multi-clip plans, warn the user that video can consume hundreds of credits. If the client exposes `get_credits_balance`, estimate before generating; otherwise ask the user to confirm their dashboard balance before committing to an expensive sequence.
-
-### Default Workflow: Always Generate Reference Images
-
-**Always generate a reference image first** — do not go straight to text-to-video. This gives you:
-
-- Better control over the starting frame
-- More consistent character/product appearance
-- Higher quality results overall
-
-Generate an outro image only when the user explicitly needs a controlled ending. That requires a specialty first/last-frame model; Gemini Omni does not support interpolation.
-
-**Recommended workflow:**
-
-1. Use `generate_image` to create the perfect intro/first frame
-2. Use Gemini Omni with the intro image for the default image-to-video workflow
-3. If a controlled end frame is a hard requirement, generate an outro and switch to a compatible first/last-frame model such as Veo 3.1
-4. The prompt describes the motion and timing; the image handles the starting visuals
-
-## Video Prompting Guide
-
-### Prompt Structure
-
-A good video prompt describes:
-
-1. **Scene setup** — environment, lighting, mood
-2. **Subject** — who/what is in the frame
-3. **Action** — what happens during the clip
-4. **Camera movement** — how the camera moves
-5. **Audio direction** (for models with native audio) — dialogue, sound effects, music mood
-
-### Camera Movement Terms
-
-Use these to direct the camera:
-
-- **Static/locked** — no camera movement, subject moves within frame
-- **Slow pan left/right** — horizontal sweep
-- **Tilt up/down** — vertical camera rotation
-- **Dolly in/out** — camera moves toward/away from subject
-- **Tracking shot** — camera follows a moving subject
-- **Crane shot** — camera rises or descends
-- **Orbital** — camera circles around the subject
-- **Handheld** — slight natural shake for documentary feel
-- **Zoom in/out** — lens zoom (different from dolly)
-
-### Timing and Pacing
-
-For multi-segment videos, use time annotations:
-
-> [0s-3s] Close-up of coffee cup, steam rising, soft morning light. [3s-6s] Camera slowly pulls back to reveal a cozy kitchen. [6s-8s] Person reaches for the cup, smiling.
-
-### Audio Direction (Gemini Omni, Veo 3.1, Sora 2, Kling v3)
-
-For models with native audio, include audio cues:
-
-> A woman walks through autumn leaves in a park. She says "It's beautiful today." Birds chirping in the background, leaves crunching underfoot, gentle wind.
-
-## Multi-Segment Video Production
-
-For videos longer than a single clip, plan multiple segments:
-
-### Strategy 1: Parallel Generation (Fast)
-
-Generate all clips independently, then the user assembles them. Best when continuity isn't critical (montage, music video).
-
-### Strategy 2: Serial Chain (Best Continuity)
-
-Generate each clip sequentially, using the last frame of the previous clip as the reference image for the next. Best for narrative content.
-
-**Serial chain workflow:**
-
-1. Generate first clip with text-to-video
-2. Take a screenshot/frame from the end of clip 1
-3. Use that as `image_url` for the image-to-video model for clip 2
-4. Repeat for each subsequent clip
-
-### Strategy 3: Visual Anchor (Balanced)
-
-Generate a single reference image (character sheet, product shot, or scene) and use it as the starting point for all clips. Good for product videos and character-driven content.
-
-**Visual anchor workflow:**
-
-1. Generate a strong reference image with `generate_image`
-2. Use that same image as `image_url` for multiple image-to-video clips with different prompts
-3. Each clip starts from the same visual, ensuring consistency
-
-### Intro/Outro Images (Specialty Workflow)
-
-Use dedicated intro and outro frames only when the user needs a controlled transition. This is not supported by Gemini Omni, so it intentionally selects a specialty model:
-
-- **Intro image:** The hero shot, establishing frame, or title card — generate with `generate_image`
-- **Outro image:** Edit or create a variant of the intro for the ending — a different angle, zoomed out, CTA overlay, end card, or closing composition
-- **Generate the video:** Pass both frames via a compatible model's first/last frame `extras` params, such as `video/veo-3.1`
-
-## MCP Tools Reference
-
-### Generation
-
-- `generate_video` — Generate a video. Pass `model`, `prompt`, and optionally `image_url` for I2V. Also supports `duration`, `aspect_ratio`, `seed`, `negative_prompt`, and `extras` (model-specific params from `get_model_params`).
-- `generate_image` — Generate reference images for I2V workflows. Pass `model` and `prompt`.
-- `generate_speech` — Generate voiceover/narration. Pass `text`, `model` (default: `speech/elevenlabs-v3`), and optionally `voice_id`, `speed`, `emotion`, and `extras`. **Default to `speech/elevenlabs-v3`** — most natural, and it supports inline `[audio tags]` (e.g. `[whispers]`, `[laughs]`, `[excited]`, `[sarcastically]`, `[pause]`) that shape delivery without being spoken; pass a curated `voice_id` (e.g. Hale `dXtC3XhB9GtPusIpNtQx`, Sia `qTRV75fy2dUja4REMifv`), tune `extras: { voice_settings: { stability, similarity_boost, speed } }` (stability 0.3 = expressive, 0.5 = natural, 0.8 = robust), and chain multi-speaker dialogue via one call per line with `extras: { previous_text }`. Full guide: read MCP resource `creative-claw://guides/speech/elevenlabs-v3`. Other models: `speech/minimax-hd` (300+ voices, emotion/speed/pitch control), `speech/dia-tts` (multi-speaker dialogue with [S1]/[S2] tags), `speech/chatterbox` (instant voice cloning from audio), `speech/orpheus` (emotive tags like <laugh>), `speech/kokoro` (cheapest/fastest).
-- `check_job` — Poll any async job for completion. Video generation is async — call this with the `job_id` until status is "completed".
-
-### Video Post-Processing
-
-- `edit_video` — Post-process videos with multiple operations:
-  - **trim** — Cut a clip: `start_time`, `end_time` or `duration`
-  - **scale** — Resize: `width`, `height`, `mode` (stretch/pad/crop)
-  - **remove_background** — AI background removal from video
-  - **add_subtitles** — Auto-generate subtitles with customizable font, size, color, language
-- `extract_frames` — Extract frames from video as images. `mode: "single"` for one frame (first/middle/last), `mode: "batch"` for every Nth frame.
-- `merge_media` — Combine media:
-  - **merge_videos** — Concatenate multiple video clips
-  - **merge_audio_video** — Add audio track to a video
-  - **merge_audios** — Concatenate audio files
-
-### Utility
-
-- `list_models` — Browse models. Use `category: "video"` or `category: "speech"` to filter.
-- `get_model_params` — Get full parameter schema for a model. Use this to discover `extras` params (e.g., first/last frame support).
-- `search_assets` — Search previously generated assets by type, query, tags, or name.
-- `get_theme` — Fetch brand theme for consistent styling across videos.
-
-The MCP server enhances prompts server-side using per-model knowledge — write a clear creative-direction prompt and let the server tailor it for the chosen model. Use `get_model_params` to discover extras (first/last frame, camera controls, etc.).
+1. Define the deliverable: single shot or sequence, duration, ratio, subject, action, camera, audio, and continuity requirements.
+2. Search for existing reference assets. For branded work, fetch the theme. For a reusable persona, use `character_id`.
+3. Use a first-frame image when visual control or identity matters. Do not force this step for a loose text-to-video experiment where exploration is the goal.
+4. Call `list_models({ category: "video" })`, choose by capability, and call `get_model_params` for that exact model.
+5. State the chosen model, duration, resolution, audio setting, reference count, and expected cost when exposed. Confirm expensive batches or long clips.
+6. Call `generate_video`. Preserve literal reference tokens and timecodes with `agentic_prompting: false`.
+7. Resolve the job only when needed, inspect the result, and reject false motion, identity drift, broken physics, unwanted cuts, text artifacts, or bad audio.
+8. Use focused processing tools for trim, scale, subtitles, frames, merging, isolation, or upscaling.
+
+## Model picker
+
+Runtime discovery is authoritative. Start here:
+
+| Need                                                      | Model                     | Current specialty                                                                                         |
+| --------------------------------------------------------- | ------------------------- | --------------------------------------------------------------------------------------------------------- |
+| General text/image/reference video or source-video edit   | `video/gemini-omni-flash` | Default; multimodal 3–10s 720p generation/edit with native audio.                                         |
+| Identity preservation and prompt adherence                | `video/grok-imagine-1.5`  | Native synchronized audio, 1–15s, 480p–1080p, up to 7 image references.                                   |
+| 5–20s keyframed video or source-video extension           | `video/flux-3`            | Native audio, 720p/1080p, up to 10 ordered/timestamped keyframes; `operation: "extend"` for continuation. |
+| Fast low-cost draft                                       | `video/minimax-h3-max`    | 5–15s at 480p/768p with native audio and optional boundary frames.                                        |
+| 2K or mixed image/video/audio references                  | `video/minimax-h3`        | 5–15s, native stereo audio, up to 12 mixed references.                                                    |
+| Long premium reference workflow                           | `video/seedance-2.5`      | 4–30s, 480p/720p, native audio, first/last frames, up to 50 mixed references.                             |
+| True 4K or controlled Veo interpolation                   | `video/veo-3.1`           | Premium 4K/native-audio option; direct Veo accepts 4/6/8s and first/last interpolation at 8s.             |
+| Faster Veo option                                         | `video/veo-3.1-fast`      | Lower-cost/faster Veo path.                                                                               |
+| Long OpenAI clip                                          | `video/sora-2-pro`        | Up to 25s with native audio and character support.                                                        |
+| Multi-shot cinematic generation                           | `video/kling-v3-pro`      | Cinematic visuals and native audio.                                                                       |
+| Multi-beat sequence with explicit cuts/elements           | `video/kling-3.0-omni`    | `multi_prompt`, `@ElementN` references, first/last frames, native audio.                                  |
+| Dialogue or talking scene with character references       | `video/happyhorse-1.0`    | Joint audio/video, lip-sync, up to nine character image references.                                       |
+| Physics and camera direction                              | `video/hailuo-02-pro`     | Strong movement and director-style camera control.                                                        |
+| Cheap reference-image animation                           | `video/hailuo-2.3-fast`   | Image-to-video only.                                                                                      |
+| Retake, reframe, audio-driven video, or generic extension | `video/ltx-2.3-fast`      | Use the matching `operation`; source media is required.                                                   |
+| Talking avatar                                            | `video/heygen-avatar-4`   | Photo plus speech/audio lip-sync.                                                                         |
+| Budget text-driven presenter                              | `video/heygen-agent`      | Text-to-video presenter.                                                                                  |
+| Performance transfer                                      | `video/dreamactor-v2`     | `operation: "animate_character"` with character image and driving video.                                  |
+
+Use `video/seedance-2.0`, Fast, or Mini only when the runtime catalog or cost target makes them preferable to 2.5.
+
+## Reference rules
+
+- `image_url` is the primary start/source image for image-to-video.
+- `last_frame_url` or the model's discovered boundary-frame field controls the end only on compatible models.
+- `image_urls`, `video_urls`, and `audio_urls` are top-level video-tool reference arrays when supported. Do not move them into `extras` unless `get_model_params` explicitly says so.
+- `character_id` supplies the saved Character anchor and description.
+- Use the exact token syntax required by the model. Examples include Seedance `@Image1`/`@Video1`/`@Audio1`, Kling `@Element1`, HappyHorse `@character1`, and Grok `<IMAGE_0>`. Verify the current schema and pass the prompt verbatim.
+- Do not feed a labeled storyboard grid to a video model. Use clean, full-bleed generation frames.
+
+## Model-specific guardrails
+
+### Seedance 2.5
+
+- Duration: whole seconds from 4 through 30, or `auto`.
+- References: up to 30 images, 10 videos, 10 audio clips, 50 total.
+- Audio references require at least one image or video reference.
+- Use the named `@` reference tokens and disable prompt rewriting.
+
+### MiniMax H3
+
+- Duration: 5–15s; prompt length is limited to 2000 characters on the current hosted route.
+- References: up to 9 images, 3 videos, 3 audio clips, 12 total.
+- Audio references require at least one image or video reference.
+
+### Grok Imagine 1.5
+
+- Duration: 1–15s.
+- Reference mode accepts up to 7 images, not reference video/audio.
+- Reference-to-video currently tops out at 720p; use another mode for 1080p.
+
+### FLUX 3
+
+- Duration: whole seconds from 5 through 20, or `auto`.
+- Accepts up to 10 keyframe images; describe desired sound in the prompt.
+- Source-video continuation requires `operation: "extend"` and exactly one `video_urls` item. Do not combine extension with image keyframes.
+
+### LTX and DreamActor
+
+- `retake`, `extend`, and `reframe` require one source in `video_urls`.
+- `audio_to_video` requires one 2–20s audio source; add `image_url` or a descriptive prompt.
+- `animate_character` requires `image_url` or `character_id`, plus one driving video in `video_urls`.
+
+## Prompt structure
+
+```text
+[0s–Xs] Subject, action, environment, and framing.
+Camera: one intentional movement.
+Look: lighting, lens/medium, palette, texture.
+Audio: dialogue in quotes, ambience, effects, music direction, or explicit silence.
+Continuity: identity, wardrobe, product geometry, and protected references.
+Constraints: single shot or named cuts; no unwanted text, captions, or watermark.
+```
+
+Give each short shot one main action and one camera idea. Use time blocks for multiple beats. If the output only pans across a still when subject motion was required, revise the action verbs or select a model better suited to physical motion.
+
+## Multi-clip strategies
+
+- **Parallel montage:** independent shots, generated together after approval.
+- **Serial continuity:** extract the last frame of clip N and use it as the start of clip N+1.
+- **Shared anchor:** reuse one approved Character/product/style image across shots.
+- **Single-call multi-shot:** use a model with a native multi-shot structure, such as Kling 3 Omni, when its schema fits the sequence.
+
+Use `merge_media` only after individual clips are approved. Use `extract_frames` to create continuity anchors and `generate_speech` before timing narration-driven shots.
