@@ -4,7 +4,7 @@
 
 Creative Claw is an MCP plugin that brings a full AI media studio into Grok Bot, Hermes Agent, OpenClaw, Cursor, Claude Code, Claude Desktop, and Codex. Generate on-brand images, videos, speech, and HTML-rendered branded graphics — all from natural language, all through one account. Save your brand once and every future visual stays on-brand automatically. No API keys. No platform switching. Just describe what you need.
 
-> [creativeclaw.co](https://creativeclaw.co) | [Join the Beta](https://creativeclaw.co)
+> [creativeclaw.co](https://creativeclaw.co) | [Join the Beta](https://creativeclaw.co) | [![Smithery](https://smithery.ai/badge/itay/creativeclaw)](https://smithery.ai/servers/itay/creativeclaw)
 
 ---
 
