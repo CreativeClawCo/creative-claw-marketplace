@@ -61,15 +61,13 @@ Inspect each frame before using it. For first/last interpolation, both frames mu
 
 Call `list_models({ category: "video" })` and `get_model_params`.
 
-- General approved first-frame animation → `video/gemini-omni-flash`.
-- 4–30s with many image/video/audio references → `video/seedance-2.5`.
-- Up to ten ordered/timestamped image keyframes → `video/flux-3`.
-- Mixed references up to 12 and optional 2K → `video/minimax-h3`.
-- Explicit multi-shot prompts and reusable elements → `video/kling-3.0-omni`.
-- Dialogue/character scene → `video/happyhorse-1.0` or another runtime-listed dialogue specialist.
-- True 4K or Veo first/last control → `video/veo-3.1`.
+- General approved first-frame animation or source editing → `video/gemini-omni-flash`.
+- Long, premium, reference-heavy production → `video/seedance-2.5`.
+- Fast cinematic production with optional first/last frames → `video/minimax-h3-max`.
+- Low-cost Seedance experiment → `video/seedance-2.0-mini`, presented to the user as Seedance Mini.
+- Lowest-latency H3 draft without reference-to-video → `video/minimax-h3-max-turbo`.
 
-Do not default every storyboard to one model. Match the approved board's structure to the model's actual input contract.
+Start with Gemini Omni. Match the approved board's structure to the chosen model's actual input contract when Seedance 2.5, Seedance Mini, or H3 Max is a better fit.
 
 ## 6. Compose the director prompt
 

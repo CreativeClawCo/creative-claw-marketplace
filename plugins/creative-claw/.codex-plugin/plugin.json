@@ -1,7 +1,7 @@
 {
   "name": "creative-claw",
   "version": "0.5.5",
-  "description": "AI media studio — generate on-brand images, videos, speech, and HTML-rendered branded graphics. Save brand themes, compose reusable templates, and manage every asset in one library.",
+  "description": "AI media studio — generate and edit images, video, and speech; create reusable Characters, product shoots, UGC ads, and multi-shot Films.",
   "author": {
     "name": "Creative Claw Co."
   },
@@ -11,7 +11,9 @@
   "keywords": [
     "image-generation",
     "video-generation",
-    "html-to-image",
+    "characters",
+    "ugc-ads",
+    "film-production",
     "brand-theme",
     "ai-media",
     "creative",
@@ -23,7 +25,7 @@
   "interface": {
     "displayName": "Creative Claw",
     "shortDescription": "Generate on-brand images, video, and speech",
-    "longDescription": "Create and edit on-brand images, videos, speech, templates, and branded graphics with Creative Claw's hosted media studio.",
+    "longDescription": "Create and edit on-brand images, videos, and speech; build reusable Characters, product campaigns, creator-style ads, and multi-shot Films with Creative Claw's hosted media studio.",
     "developerName": "Creative Claw Co.",
     "category": "Creativity",
     "capabilities": [
@@ -34,9 +36,9 @@
     "privacyPolicyURL": "https://creativeclaw.co/privacy",
     "termsOfServiceURL": "https://creativeclaw.co/terms",
     "defaultPrompt": [
-      "Generate an on-brand social image.",
-      "Turn this product image into a short video.",
-      "Create a reusable brand theme from my website."
+      "Create a consistent product photoshoot from these references.",
+      "Turn this idea into an approved storyboard and multi-shot film.",
+      "Create an expressive voiceover or a consented reusable voice."
     ]
   }
 }

@@ -1,13 +1,13 @@
 # Characters and Films
 
-Characters preserve identity across image, video, and speech. Films organize approved scripts, storyboards, clips, audio, and assembly.
+Characters preserve visual identity across images and video and can carry a consented ElevenLabs voice clone. Films organize approved scripts, storyboards, clips, audio, and assembly.
 
 ## Create a Character
 
 1. Collect the Character's name, role, appearance, wardrobe, personality, and constraints.
 2. Search for an existing approved reference image or generate one.
 3. Create the Character with `manage_character({ title, description, image_url })`.
-4. Optionally attach a cloned voice only after explicit consent.
+4. When the user wants a reusable custom voice, use the separate `creativeclaw-clone-voice` skill. Do not clone or replace a voice without explicit consent.
 
 ### Reference image
 
@@ -22,27 +22,15 @@ labels, borders, or extra people.
 
 Use `agentic_prompting: false` for this exact multi-view instruction. Inspect facial identity and wardrobe consistency before saving.
 
-### Voice
-
-Import 30 seconds to a few minutes of clean solo speech. Confirm the user owns the voice or has permission, then call:
-
-```text
-manage_character({ id, audio_url, consent: true })
-```
-
-or `clone_voice({ character_id, audio_url, consent: true })`.
-
-Use a quiet recording with no music or competing speaker. After cloning, `generate_speech({ character_id, text })` uses the Character voice.
-
 ## Use a Character
 
 | Tool              | Effect                                                                                                    |
 | ----------------- | --------------------------------------------------------------------------------------------------------- |
-| `generate_image`  | Uses the Character reference and adds its description to prompt context.                                  |
-| `generate_video`  | Uses the Character anchor unless a more specific compatible source is supplied; adds description context. |
-| `generate_speech` | Uses the saved cloned voice and stops if a requested Character has no voice.                              |
+| `generate_image`  | Adds Character description context and uses its image only when no primary `image_url` is supplied.        |
+| `generate_video`  | Adds Character description context and uses its image as the start frame only when `image_url` is absent.  |
+| `generate_speech` | Uses the Character's consented ElevenLabs voice clone when one is attached.                               |
 
-Pass `character_id` instead of manually repeating the Character's image, description, and voice. Add shot-specific references only when the selected model supports them.
+Pass `character_id` for saved identity context. When a storyboard or edit canvas already occupies `image_url`, add the Character image separately through a reference field supported by the selected model; it is not inserted automatically as a second reference.
 
 ## Film approval pipeline
 
@@ -66,14 +54,15 @@ Use three user approval gates. Do not spend on later stages before the prior gat
 
 ### Gate 3: clips, audio, and assembly
 
-1. Generate narration/dialogue first so shot timing follows actual speech.
+1. Generate narration/dialogue first with a curated or consented cloned ElevenLabs voice so shot timing follows actual speech.
 2. Call `list_models` and `get_model_params` for the chosen video model.
 3. Generate each clip from its approved storyboard and Character/reference inputs.
-4. For longer reference-heavy shots, consider `video/seedance-2.5`; for explicit multi-shot structure consider `video/kling-3.0-omni`; for general work start with `video/gemini-omni-flash`. Use the full picker in `video-gen.md`.
+4. Start with `video/gemini-omni-flash`; use `video/seedance-2.5` for longer reference-heavy shots or `video/minimax-h3-max` for fast cinematic work with optional boundary frames. Use the curated picker in `video-gen.md`.
 5. Resolve and inspect each clip before patching it into the project.
 6. Use `extract_frames` to carry the last frame into the next shot when serial continuity is needed.
-7. Call `assemble_film({ film_project_id })` only after clips and audio are approved.
-8. Show the assembled Film and wait for final approval before marking it final.
+7. Mux per-shot audio into its clip with `merge_media`, or save one approved full narration track as the project's `audio_url`.
+8. Call `assemble_film({ id })` only after every intended shot has an approved `clipUrl`.
+9. Treat the result as an assembled first cut. Show it and wait for final approval before marking it final; assembly does not add transitions, captions, per-shot audio, or a full sound mix.
 
 ## Shot rules
 
@@ -86,6 +75,6 @@ Use three user approval gates. Do not spend on later stages before the prior gat
 
 ## Tools
 
-- Characters: `manage_character`, `clone_voice`, `list_characters`, `delete_character`.
+- Characters: `manage_character`, `list_characters`, `delete_character`.
 - Films: `create_film_project`, `update_film_project`, `get_film_project`, `list_film_projects`, `assemble_film`.
-- Media: `generate_image`, `generate_video`, `generate_speech`, `extract_frames`, `merge_media`, `check_job`.
+- Media: `generate_image`, `generate_video`, `generate_speech`, `clone_voice`, `extract_frames`, `merge_media`, `check_job`.

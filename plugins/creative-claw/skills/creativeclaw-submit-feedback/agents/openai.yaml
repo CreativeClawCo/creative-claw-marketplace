@@ -1,0 +1,13 @@
+interface:
+  display_name: "Creative Claw — Submit Feedback"
+  short_description: "Report issues, requests, and generation feedback"
+  default_prompt: "Use $creativeclaw-submit-feedback to report this issue or request to the Creative Claw team."
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "creative-claw"
+      description: "Creative Claw media, asset, Character, Film, and feedback tools"
+      transport: "streamable_http"
+      url: "https://app.creativeclaw.co/mcp/chatgpt"
+policy:
+  allow_implicit_invocation: true

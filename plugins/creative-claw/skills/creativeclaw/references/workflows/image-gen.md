@@ -17,22 +17,21 @@ Choose an image model by capability, anchor branded work with theme assets, and 
 
 Runtime discovery is authoritative. These are current routing defaults:
 
-| Need                                                                           | Start with               | Why                                                                                  |
-| ------------------------------------------------------------------------------ | ------------------------ | ------------------------------------------------------------------------------------ |
-| General generation or edit                                                     | `image/nano-banana-2`    | Default; strong balance of quality, reasoning, speed, and cost.                      |
-| Complex professional asset, precise typography, demanding multi-reference edit | `image/nano-banana-pro`  | Higher reasoning and composition quality.                                            |
-| Cheap drafts or bulk variations                                                | `image/nano-banana-lite` | Fastest low-cost Nano Banana tier.                                                   |
-| Product or marketing imagery with many references                              | `image/seedream-5-lite`  | Strong product work, precise edits, up to 10 references, and high-resolution output. |
-| Premium Seedream product/marketing work                                        | `image/seedream-5-pro`   | Flagship 1K/2K generation and edit path.                                             |
-| Typography, 4K, or strict instruction adherence                                | `image/gpt-image-2`      | Strong text rendering and prompt adherence.                                          |
-| Direct OpenAI route when exposed                                               | `image/gpt-image-direct` | Same model family through the direct provider route.                                 |
-| Natural-language edit with up to three sources                                 | `image/grok-imagine-pro` | Strong detail, typography, and edit support.                                         |
-| Professional generation without tuning                                         | `image/flux-2-pro`       | Generation-only, polished default look.                                              |
-| Illustration and design                                                        | `image/recraft-v3`       | Generation-only specialist for graphic and illustrative work.                        |
-| Precise edit or consistency                                                    | `image/flux-kontext-max` | Edit-only.                                                                           |
-| Cheap edit test                                                                | `image/flux-dev`         | Edit-only low-cost option.                                                           |
+| Need                                                                           | Start with              | Why                                                             |
+| ------------------------------------------------------------------------------ | ----------------------- | --------------------------------------------------------------- |
+| General generation or edit                                                     | `image/nano-banana-2`   | Most cost-efficient default: the best quality, speed, and cost balance. |
+| Complex professional asset, precise typography, demanding multi-reference edit | `image/nano-banana-pro` | Higher reasoning and composition quality.                       |
+| Typography, 4K, or strict instruction adherence                                | `image/gpt-image-2`     | Strong text rendering and prompt adherence.                     |
+| Premium product or marketing imagery                                           | `image/seedream-5-pro`  | Flagship generation and precise multi-reference editing.        |
 
-Do not use retired or unlisted model IDs. In particular, discover a current draft model instead of assuming an old FLUX Schnell ID still exists.
+Recommend Nano Banana 2 first for most image work. Surface the other three only when their specialty materially improves the requested result enough to justify moving beyond the cost-efficient default. Use another runtime-listed model only when the user explicitly requests it or the four recommended models cannot perform the required operation.
+
+After choosing, use the corresponding focused skill for exact prompting and reference behavior:
+
+- `creativeclaw-nano-banana-2` — default generation, conversational editing, up to 14 role-mapped references, extreme ratios, and optional search grounding.
+- `creativeclaw-nano-banana-pro` — complex professional layouts, demanding multi-reference composition, and precise multilingual typography.
+- `creativeclaw-gpt-image-2` — strong instruction following, transparent output, masks when honored by the live route, and up to 16 ordered edit inputs.
+- `creativeclaw-seedream-5-pro` — premium product/editorial work, spatial edits, and up to 10 ordered references.
 
 ## Reference handling
 
@@ -64,7 +63,7 @@ Use positive instructions for required content and a short negative list for rec
 ## Tool notes
 
 - `generate_image` supports generation and edit mode, `size`, one to four outputs, seed, output format, optional background removal, Characters, prompt rewriting, and model-specific `extras`.
-- `compare_models` compares two to four generation-capable models. Use it when the user is choosing a visual direction, not for exact source-image edits.
+- For a model comparison, call `generate_image` once per selected model with the same prompt and settings, then present the results together. Use comparisons when the user is choosing a visual direction, not for exact source-image edits.
 - The inline viewer may monitor completion. Use `check_job({ job_id })` only when a later step requires the final URL or no viewer is monitoring.
 - `remove_background` is preferable to regenerating when the only task is a cutout.
 - `upscale_media` is preferable to regenerating an approved image solely for resolution.

@@ -1,0 +1,13 @@
+interface:
+  display_name: "Creative Claw — Product Photoshoot"
+  short_description: "Create a consistent campaign-ready product shoot"
+  default_prompt: "Use $creativeclaw-product-photoshoot to create a polished set of product images from my references."
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "creative-claw"
+      description: "Creative Claw media, asset, Character, Film, and feedback tools"
+      transport: "streamable_http"
+      url: "https://app.creativeclaw.co/mcp/chatgpt"
+policy:
+  allow_implicit_invocation: true

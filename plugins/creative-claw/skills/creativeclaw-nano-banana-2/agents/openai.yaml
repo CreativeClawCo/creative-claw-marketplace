@@ -1,0 +1,13 @@
+interface:
+  display_name: "Creative Claw — Nano Banana 2"
+  short_description: "Generate and edit with Nano Banana 2"
+  default_prompt: "Use $creativeclaw-nano-banana-2 to create or edit this image with my references."
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "creative-claw"
+      description: "Creative Claw media, asset, Character, Film, and feedback tools"
+      transport: "streamable_http"
+      url: "https://app.creativeclaw.co/mcp/chatgpt"
+policy:
+  allow_implicit_invocation: true

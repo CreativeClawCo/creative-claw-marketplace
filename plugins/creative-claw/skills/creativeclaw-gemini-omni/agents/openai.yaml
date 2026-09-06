@@ -1,0 +1,13 @@
+interface:
+  display_name: "Creative Claw — Gemini Omni"
+  short_description: "Generate and edit video with Gemini Omni"
+  default_prompt: "Use $creativeclaw-gemini-omni to turn my brief and references into a polished video."
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "creative-claw"
+      description: "Creative Claw media, asset, Character, Film, and feedback tools"
+      transport: "streamable_http"
+      url: "https://app.creativeclaw.co/mcp/chatgpt"
+policy:
+  allow_implicit_invocation: true

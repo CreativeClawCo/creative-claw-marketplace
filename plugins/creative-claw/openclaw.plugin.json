@@ -1,7 +1,7 @@
 {
   "id": "creative-claw",
   "name": "Creative Claw",
-  "description": "AI media studio — generate on-brand images, videos, speech, and HTML-rendered branded graphics. Save brand themes, compose reusable templates, and manage every asset in one library.",
+  "description": "AI media studio — generate and edit images, video, and speech; create reusable Characters, product shoots, UGC ads, and multi-shot Films.",
   "version": "0.5.5",
   "configSchema": {
     "type": "object",
@@ -16,6 +16,24 @@
     }
   },
   "skills": [
-    "skills/creativeclaw"
+    "skills/creativeclaw",
+    "skills/creativeclaw-generate-image",
+    "skills/creativeclaw-generate-video",
+    "skills/creativeclaw-generate-voiceover",
+    "skills/creativeclaw-create-character",
+    "skills/creativeclaw-plan-video",
+    "skills/creativeclaw-build-film",
+    "skills/creativeclaw-product-photoshoot",
+    "skills/creativeclaw-create-ugc-ad",
+    "skills/creativeclaw-submit-feedback",
+    "skills/creativeclaw-nano-banana-2",
+    "skills/creativeclaw-nano-banana-pro",
+    "skills/creativeclaw-gpt-image-2",
+    "skills/creativeclaw-seedream-5-pro",
+    "skills/creativeclaw-gemini-omni",
+    "skills/creativeclaw-seedance-2-5",
+    "skills/creativeclaw-minimax-h3-max",
+    "skills/creativeclaw-elevenlabs-v3",
+    "skills/creativeclaw-clone-voice"
   ]
 }

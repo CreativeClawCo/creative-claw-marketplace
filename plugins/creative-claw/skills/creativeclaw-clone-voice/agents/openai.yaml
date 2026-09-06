@@ -1,0 +1,13 @@
+interface:
+  display_name: "Creative Claw — Voice Cloning"
+  short_description: "Clone a consented voice with ElevenLabs"
+  default_prompt: "Use $creativeclaw-clone-voice to create and audition my consented voice clone."
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "creative-claw"
+      description: "Creative Claw media, asset, Character, Film, and feedback tools"
+      transport: "streamable_http"
+      url: "https://app.creativeclaw.co/mcp/chatgpt"
+policy:
+  allow_implicit_invocation: true

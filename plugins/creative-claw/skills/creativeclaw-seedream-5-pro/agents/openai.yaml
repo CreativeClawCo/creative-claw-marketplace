@@ -1,0 +1,13 @@
+interface:
+  display_name: "Creative Claw — Seedream 5 Pro"
+  short_description: "Create premium Seedream product imagery"
+  default_prompt: "Use $creativeclaw-seedream-5-pro to create this premium campaign image from my references."
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "creative-claw"
+      description: "Creative Claw media, asset, Character, Film, and feedback tools"
+      transport: "streamable_http"
+      url: "https://app.creativeclaw.co/mcp/chatgpt"
+policy:
+  allow_implicit_invocation: true

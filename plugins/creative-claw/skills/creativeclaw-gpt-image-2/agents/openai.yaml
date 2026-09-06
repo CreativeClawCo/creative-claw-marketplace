@@ -1,0 +1,13 @@
+interface:
+  display_name: "Creative Claw — GPT Image 2"
+  short_description: "Create precise GPT Image 2 visuals"
+  default_prompt: "Use $creativeclaw-gpt-image-2 to create or precisely edit this visual."
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "creative-claw"
+      description: "Creative Claw media, asset, Character, Film, and feedback tools"
+      transport: "streamable_http"
+      url: "https://app.creativeclaw.co/mcp/chatgpt"
+policy:
+  allow_implicit_invocation: true

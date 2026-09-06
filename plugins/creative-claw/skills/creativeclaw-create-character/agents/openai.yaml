@@ -1,0 +1,13 @@
+interface:
+  display_name: "Creative Claw — Create Character"
+  short_description: "Create a reusable visual character and voice"
+  default_prompt: "Use $creativeclaw-create-character to create and save a consistent character from my brief and references."
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "creative-claw"
+      description: "Creative Claw media, asset, Character, Film, and feedback tools"
+      transport: "streamable_http"
+      url: "https://app.creativeclaw.co/mcp/chatgpt"
+policy:
+  allow_implicit_invocation: true

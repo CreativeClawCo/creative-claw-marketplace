@@ -1,0 +1,13 @@
+interface:
+  display_name: "Creative Claw — Plan Video"
+  short_description: "Plan scripts, shots, and clean storyboard frames"
+  default_prompt: "Use $creativeclaw-plan-video to turn this idea into an approved script, shot list, and storyboard."
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "creative-claw"
+      description: "Creative Claw media, asset, Character, Film, and feedback tools"
+      transport: "streamable_http"
+      url: "https://app.creativeclaw.co/mcp/chatgpt"
+policy:
+  allow_implicit_invocation: true

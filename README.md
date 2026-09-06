@@ -1,8 +1,8 @@
 # Creative Claw
 
-**Generate on-brand media inside Grok Bot, Hermes, OpenClaw, Cursor, Claude, and Codex.**
+**Generate on-brand media inside ChatGPT, Codex, Claude, Cursor, Grok Bot, Hermes, and OpenClaw.**
 
-Creative Claw is an MCP plugin that brings a full AI media studio into Grok Bot, Hermes Agent, OpenClaw, Cursor, Claude Code, Claude Desktop, and Codex. Generate on-brand images, videos, speech, and HTML-rendered branded graphics — all from natural language, all through one account. Save your brand once and every future visual stays on-brand automatically. No API keys. No platform switching. Just describe what you need.
+Creative Claw is an MCP plugin that brings a full AI media studio into Grok Bot, Hermes Agent, OpenClaw, Cursor, Claude Code, Claude Desktop, ChatGPT, and Codex. Generate images, video, and expressive speech; reuse Characters and brand assets; and produce product campaigns, UGC ads, and multi-shot Films through one account. No API keys and no platform switching.
 
 > [creativeclaw.co](https://creativeclaw.co) | [Join the Beta](https://creativeclaw.co) | [![Smithery](https://smithery.ai/badge/itay/creativeclaw)](https://smithery.ai/servers/itay/creativeclaw)
 
@@ -10,74 +10,62 @@ Creative Claw is an MCP plugin that brings a full AI media studio into Grok Bot,
 
 ## What You Get
 
-### MCP Server (auto-connected)
+### MCP Server
 
-One connection to Creative Claw's MCP server gives you 30+ tools for media generation, editing, layout rendering, branding, and asset management:
+One connection to Creative Claw's MCP server gives the skills live model discovery plus media generation, editing, brand, asset, Character, Film, and feedback tools:
 
 | Category          | Tools                                                                                                               |
 | ----------------- | ------------------------------------------------------------------------------------------------------------------- |
-| **Image**         | `generate_image` (generate + edit), `compare_models`, `load_image`                                                  |
+| **Image**         | `generate_image` (generate, edit, or repeat across models for comparison), `load_image`                             |
 | **Video**         | `generate_video`, `check_job`                                                                                       |
 | **Speech**        | `generate_speech`                                                                                                   |
-| **HTML → media**  | `render_html_image`, `render_template`                                                                              |
 | **Media editing** | `remove_background`, `upscale_media`, `trim_video`, `scale_video`, `add_subtitles`, `extract_frames`, `merge_media` |
 | **Models**        | `list_models`, `get_model_params`                                                                                   |
 | **Assets**        | `search_assets`, `update_asset`, `delete_asset`, `upload_asset`, `import_media`, `get_upload_url`, `confirm_upload` |
 | **Brand themes**  | `get_theme`, `list_themes`, `update_theme`, `delete_theme`                                                          |
-| **Templates**     | `create_template`, `update_template`, `list_templates`, `render_template`                                           |
+| **Characters**    | `manage_character`, `list_characters`, `clone_voice`, `delete_character`                                            |
+| **Films**         | `create_film_project`, `update_film_project`, `get_film_project`, `list_film_projects`, `assemble_film`             |
+| **Feedback**      | `submit_feedback`                                                                                                   |
 | **Credits**       | `get_credits_balance`, `get_credits_link`                                                                           |
 
 Access 1,000+ production-ready AI models — FLUX, Gemini, Veo, Sora, Kling, Seedance, Hailuo, HeyGen, Recraft, ElevenLabs, and more — through a single unified account with usage-based pricing.
 
-### Skill (Creative Workflows)
+### Skills (Creative Workflows)
 
-The consolidated **creativeclaw** skill teaches an agent how to use the tools effectively: onboarding, model selection, prompt engineering, media import, brand themes, image/video/speech generation, templates, editing, characters, films, and asset management. It routes internally to focused reference files instead of assuming separate slash-command skills are installed.
+The **creativeclaw** root skill routes mixed or unclear requests. Focused outcome skills own general image, video, and voice work plus Characters, planning, Films, product photoshoots, UGC ads, and feedback. Model specialists add exact prompting and reference guidance only after an outcome chooses Nano Banana 2, Nano Banana Pro, GPT Image 2, Seedream 5 Pro, Gemini Omni, Seedance 2.5, H3 Max, or ElevenLabs v3.
+
+Every OpenAI skill declares the ChatGPT MCP dependency at `https://app.creativeclaw.co/mcp/chatgpt`, matching the endpoint configured in the plugin draft. A focused skill can therefore activate directly without losing access to Creative Claw's tools.
 
 ---
 
 ## Supported Models
 
-### Image Generation
+### Recommended image models
 
-| Model            | ID                                | Highlights                                                  |
-| ---------------- | --------------------------------- | ----------------------------------------------------------- |
-| GPT Image 1.5    | `fal-ai/gpt-image-1.5`            | Production-quality, strong prompt adherence, fine detail    |
-| Gemini 3 Pro     | `fal-ai/nano-banana-pro`          | Complex reasoning, semantic understanding, text in images   |
-| Gemini 3.1 Flash | `fal-ai/nano-banana-2`            | Fast, high-fidelity, excellent text rendering, multilingual |
-| FLUX.2 Pro       | `fal-ai/flux-2-pro`               | Zero-config professional quality, HEX color precision       |
-| Recraft V3       | `fal-ai/recraft/v3/text-to-image` | #1 on benchmarks, design and illustration                   |
-| FLUX Schnell     | `fal-ai/flux/schnell`             | Fastest (~0.5s), cheapest, great for drafts                 |
+Default to **Gemini 3.1 Flash (Nano Banana 2)** for most image generation and editing. It is the most cost-efficient recommendation overall, balancing quality, speed, and cost; use a specialist model only when its specific strength matters.
 
-### Image Editing
+| Model | Creative Claw ID | Best use |
+| --- | --- | --- |
+| Nano Banana 2 | `image/nano-banana-2` | Default and cost-efficient choice for most generation and editing |
+| Nano Banana Pro | `image/nano-banana-pro` | Complex professional layouts, typography, and demanding composites |
+| GPT Image 2 | `image/gpt-image-2` | Instruction-heavy generation, transparency, and precise edits |
+| Seedream 5 Pro | `image/seedream-5-pro` | Premium product, fashion, and commercial imagery |
 
-| Model            | ID                            | Highlights                                      |
-| ---------------- | ----------------------------- | ----------------------------------------------- |
-| GPT Image 1.5    | `fal-ai/gpt-image-1.5/edit`   | Strong prompt adherence, identity preservation  |
-| Gemini 3 Pro     | `fal-ai/nano-banana-pro/edit` | Semantic edit instructions, 14 reference images |
-| FLUX Kontext Max | `fal-ai/flux-pro/kontext/max` | Typography, consistency, precise edits          |
-| Gemini 3.1 Flash | `fal-ai/nano-banana-2/edit`   | Fast, no masking required                       |
+### Recommended video models
 
-### Video Generation
+| Model | Creative Claw ID | Best use |
+| --- | --- | --- |
+| Gemini Omni | `video/gemini-omni-flash` | Default general video, native audio, references, and source-video work |
+| Seedance 2.5 | `video/seedance-2.5` | Premium, longer, reference-rich cinematic work |
+| Seedance Mini | Discover with `list_models` | Economical drafts and iteration |
+| MiniMax H3 Max | `video/minimax-h3-max` | Fast cinematic native-audio clips and multimodal references |
+| H3 Max Fast | `video/minimax-h3-max-turbo` | Faster, lighter H3 Max iteration |
 
-| Model             | ID                                                       | Audio                   | Image Input                  |
-| ----------------- | -------------------------------------------------------- | ----------------------- | ---------------------------- |
-| Veo 3.1           | `fal-ai/veo3.1`                                          | Native dialogue + SFX   | Yes (`/image-to-video`)      |
-| Veo 3.1 Fast      | `fal-ai/veo3.1/fast`                                     | Native dialogue + SFX   | Yes (`/fast/image-to-video`) |
-| Sora 2 Pro        | `fal-ai/sora-2/text-to-video/pro`                        | Native audio            | Yes (`/image-to-video/pro`)  |
-| Kling v3 Pro      | `fal-ai/kling-video/v3/pro/text-to-video`                | Native audio + lip-sync | Yes (`/image-to-video`)      |
-| Seedance 2.0      | `fal-ai/bytedance/seedance-2.0/text-to-video`            | Native audio            | Yes (`/image-to-video`)      |
-| Seedance 2.0 Fast | `fal-ai/bytedance/seedance-2.0/fast/text-to-video`       | Native audio            | Yes (`/image-to-video`)      |
-| Hailuo-02 Pro     | `fal-ai/minimax/hailuo-02/pro/text-to-video`             | Yes                     | Yes (`/image-to-video`)      |
-| Hailuo 2.3 Fast   | `fal-ai/minimax/hailuo-2.3-fast/standard/image-to-video` | No                      | Yes (I2V only)               |
+### Recommended speech
 
-### Talking Avatars
+Use `speech/elevenlabs-v3` for narration, dialogue, emotional delivery, and multilingual speech. Creative Claw also supports consent-gated ElevenLabs Instant Voice Cloning as a separate Character workflow.
 
-| Model              | ID                                     | Highlights                                                    |
-| ------------------ | -------------------------------------- | ------------------------------------------------------------- |
-| HeyGen Avatar 4    | `fal-ai/heygen/avatar4/image-to-video` | Photo → talking avatar with lip-sync, 400+ poses, 100+ voices |
-| HeyGen Video Agent | `fal-ai/heygen/v2/video-agent`         | Budget talking avatar from text (~$2/min)                     |
-
-These are our top picks. Use `list_models` to browse 100+ more across all categories.
+Use `list_models` and `get_model_params` at runtime rather than assuming a fixed catalog or reference limit.
 
 ---
 
@@ -162,7 +150,7 @@ No API keys needed — auth is handled via Clerk OAuth on first connection.
 
 ## Quick Start
 
-Just talk to Claude naturally:
+Talk to the host naturally:
 
 ```
 "Generate a product photo of my headphones on a marble surface, golden hour lighting"
@@ -174,14 +162,17 @@ Just talk to Claude naturally:
 "Edit this image — change the background to a beach sunset, keep the person unchanged"
   -> creativeclaw routes to an edit model, preserves identity, swaps background
 
-"Make me a LinkedIn quote card with our brand colors"
-  -> creativeclaw writes the HTML, pulls the saved theme, and renders via headless Chromium
-
 "Set up our brand — here's our website"
   -> creativeclaw extracts colors/fonts/logos, uploads the assets, and saves a reusable theme
 
 "I need a TikTok-style product video for this shoe" [attach image]
-  -> creativeclaw imports the attachment, generates reference frames, picks an I2V model, and produces the clip
+  -> the UGC workflow plans the ad, creates reference frames, selects video and voice models, and assembles a first cut
+
+"Create a reusable presenter from this portrait and clone my voice; I confirm it is mine"
+  -> the Character and consent-gated ElevenLabs voice-cloning workflows create and audition the reusable identity
+
+"The video tool ignored my end frame—please report it"
+  -> the feedback workflow submits one actionable bug report with the attempted task and tool
 ```
 
 ---
@@ -189,11 +180,13 @@ Just talk to Claude naturally:
 ## Architecture
 
 ```
-You -> Claude + Skills (model selection, prompt engineering, creative direction, brand-aware rendering)
+You -> Host + outcome skill (goal, approvals, creative direction)
               |
-         MCP Tools (generate_image, generate_video, render_html_image, update_theme, ...)
+      Model specialist (prompt and reference details when selected)
               |
-       Creative Claw Server (fal.ai + headless Chromium + R2 storage + Clerk auth)
+         MCP Tools (generation, assets, Characters, Films, feedback)
+              |
+       Creative Claw Server (model providers + R2 storage + Clerk auth)
               |
        Permanent media URLs (never expire)
 ```
@@ -224,15 +217,18 @@ plugins/
     openclaw.plugin.json   # Native OpenClaw manifest
     skills/
       creativeclaw/
-        SKILL.md           # canonical cross-client skill; discoverable by npx skills
-        references/        # shared workflows and cross-client upload routing
+        SKILL.md           # thin router for mixed and workspace requests
+        references/        # shared asset, theme, upload, and editing workflows
+      creativeclaw-*/      # outcome and recommended-model specialist skills
 skill-variants/
   chatgpt/
     platform-upload.md     # OpenAI Store routing for ChatGPT attachments and Codex local files
 scripts/
   build-skill-zips.sh      # builds both upload-ready skill archives
 creativeclaw-skill.zip             # cross-client archive
-creativeclaw-chatgpt-skill.zip     # OpenAI Store archive for ChatGPT and Codex
+creativeclaw-chatgpt-skill.zip     # OpenAI Store root-skill archive
+creativeclaw-*-chatgpt-skill.zip   # focused OpenAI skill archives
+evals/skill-routing-scenarios.md   # activation and workflow regression suite
 ```
 
 ### Maintaining the two distributions
@@ -243,7 +239,7 @@ Edit the canonical skill once under `plugins/creative-claw/skills/creativeclaw`.
 ./scripts/build-skill-zips.sh
 ```
 
-The OpenAI Store archive contains only `SKILL.md`, `references/`, and `assets/`, matching the Store upload shape for both ChatGPT and Codex. The general archive and repository skill retain the cross-client instructions used by `npx skills`, Claude Code, and other skill-directory clients.
+The build validates every skill's metadata and MCP dependency, checks routing coverage and the regression suite, and creates deterministic upload archives. Nothing in the build publishes or submits a plugin draft.
 
 ---
 

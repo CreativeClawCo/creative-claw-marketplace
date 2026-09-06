@@ -1,0 +1,13 @@
+interface:
+  display_name: "Creative Claw — MiniMax H3 Max"
+  short_description: "Create fast cinematic H3 Max videos"
+  default_prompt: "Use $creativeclaw-minimax-h3-max to storyboard and generate this cinematic clip."
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "creative-claw"
+      description: "Creative Claw media, asset, Character, Film, and feedback tools"
+      transport: "streamable_http"
+      url: "https://app.creativeclaw.co/mcp/chatgpt"
+policy:
+  allow_implicit_invocation: true

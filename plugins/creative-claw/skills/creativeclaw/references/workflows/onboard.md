@@ -8,7 +8,7 @@ Explain Creative Claw as a shared media workspace, then help the user complete o
 - Stores brand themes with colors, fonts, logos, notes, and visual references.
 - Generates and edits images across specialized models.
 - Generates, transforms, and assembles video with text, image, video, audio, and Character references.
-- Generates speech, clones consented voices, transcribes media, and cleans recordings.
+- Generates speech, creates consented ElevenLabs voice clones on Characters, transcribes media, and cleans recordings.
 - Saves reusable Characters and multi-shot Film projects.
 - Processes media with background removal, upscaling, trimming, scaling, subtitles, frames, and merging.
 
@@ -36,12 +36,13 @@ Do not overwhelm the user with the entire catalog. Offer one recommended model a
 For example:
 
 ```text
-I recommend Nano Banana 2 for this image because it is the current all-around
-default. If exact typography is the priority, GPT Image 2 is the stronger
+I recommend Nano Banana 2 for this image because it is the most cost-efficient
+default for most cases, with the best overall quality, speed, and cost balance.
+If exact typography is the priority, GPT Image 2 is the stronger
 alternative. I can generate one candidate or compare both.
 ```
 
-For video, state duration, ratio, resolution, audio behavior, and references before submission. For voice cloning, confirm consent before any mutation.
+For video, state duration, ratio, resolution, audio behavior, and references before submission. For speech, state the ElevenLabs voice, language, and delivery style. For voice cloning, explain the ElevenLabs workflow and obtain explicit consent before any mutation.
 
 ## Asset habit
 

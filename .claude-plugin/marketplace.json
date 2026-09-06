@@ -1,6 +1,6 @@
 {
   "name": "creative-claw-marketplace",
-  "description": "AI media studio plugins for Claude Code — generate on-brand images, videos, speech, and HTML-rendered branded graphics via Creative Claw",
+  "description": "AI media studio plugins for Claude Code — images, video, speech, Characters, UGC ads, product shoots, and Films via Creative Claw",
   "version": "1.0.0",
   "owner": {
     "name": "Creative Claw Co."
@@ -9,7 +9,7 @@
     {
       "name": "creative-claw",
       "source": "./plugins/creative-claw",
-      "description": "AI media studio — generate on-brand images, videos, speech, and HTML-rendered branded graphics. Save brand themes, compose reusable templates, and manage every asset in one library.",
+      "description": "AI media studio — generate and edit images, video, and speech; create reusable Characters, product shoots, UGC ads, and multi-shot Films.",
       "version": "0.5.5",
       "author": {
         "name": "Creative Claw Co."
@@ -20,7 +20,9 @@
       "keywords": [
         "image-generation",
         "video-generation",
-        "html-to-image",
+        "characters",
+        "ugc-ads",
+        "film-production",
         "brand-theme",
         "ai-media",
         "creative",

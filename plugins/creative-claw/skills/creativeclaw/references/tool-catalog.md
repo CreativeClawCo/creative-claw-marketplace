@@ -9,11 +9,12 @@ Use this as routing guidance. Tool availability varies by client; never recite t
 | `list_models`      | Discover current image, video, and speech models. Filter by category.                                                     |
 | `get_model_params` | Read the chosen model's actual schema, defaults, enums, and extra fields.                                                 |
 | `generate_image`   | Generate an image or edit a source supplied as `image_url`. Additional model-specific references normally go in `extras`. |
-| `compare_models`   | Run one image prompt through two to four generation-capable image models.                                                 |
 | `generate_video`   | Generate, animate, extend, retake, reframe, edit, or drive video according to model capability and `operation`.           |
 | `generate_speech`  | Generate speech. Supports model-specific voices, delivery controls, reference audio, and Characters.                      |
 
 Use `list_models` before relying on a remembered model ID. Use `get_model_params` before sending `extras`, reference arrays, resolution, duration, or operation-specific fields.
+
+For a model comparison, call `generate_image` once per selected model with the same prompt and settings, then present the results together.
 
 ## Themes
 
@@ -45,14 +46,14 @@ Read `platform-upload.md` before choosing an import route.
 
 | Tool                                      | Use                                                                                               |
 | ----------------------------------------- | ------------------------------------------------------------------------------------------------- |
-| `manage_character`                        | Create/update a persona with a description, reference image, and optional consented cloned voice. |
-| `clone_voice`                             | Attach or replace a consented voice clone on an existing Character.                               |
+| `manage_character`                        | Create or update a visual persona with a description and reference image.                         |
+| `clone_voice`                             | Create or replace a consented ElevenLabs voice clone attached to an existing Character.           |
 | `list_characters`                         | Find reusable Characters and IDs.                                                                 |
 | `delete_character`                        | Remove a Character only when explicitly requested.                                                |
 | `create_film_project`                     | Create a multi-shot Film project.                                                                 |
 | `update_film_project`                     | Save script, shots, storyboards, clips, audio, and approval state.                                |
 | `get_film_project` / `list_film_projects` | Inspect Film projects.                                                                            |
-| `assemble_film`                           | Merge approved clips and audio into the final Film.                                               |
+| `assemble_film`                           | Concatenate every approved shot clip into a first cut and optionally overlay one project narration track. |
 
 ## Media processing
 
@@ -75,6 +76,14 @@ Read `platform-upload.md` before choosing an import route.
 | `check_job`           | Resolve queued work by `job_id` when a completed result is required. |
 | `get_credits_balance` | Check balance and usage when exposed.                                |
 | `get_credits_link`    | Return a user-operated top-up link when exposed.                     |
+
+## Product feedback
+
+| Tool              | Use                                                                                                          |
+| ----------------- | ------------------------------------------------------------------------------------------------------------ |
+| `submit_feedback` | Report a bug, missing feature or model, confusing flow, generation-quality issue, or explicit user praise. |
+
+Use `source: "agent"` for friction observed during a task and `source: "user"` when relaying the user's own feedback. Send one concise, specific report without blocking the current task.
 
 ## Metadata conventions
 

@@ -35,7 +35,7 @@ For generative edits, call `list_models({ category: "video" })` and `get_model_p
 
 ## Audio polish
 
-Use `isolate_audio` before transcription, voice cloning, or final assembly when the recording contains material noise, music, or reverb. Keep the untouched source. Resolve the queued result before passing it downstream.
+Use `isolate_audio` before transcription or final assembly when the recording contains material noise, music, or reverb. Keep the untouched source. Resolve the queued result before passing it downstream.
 
 ## Quality gate
 

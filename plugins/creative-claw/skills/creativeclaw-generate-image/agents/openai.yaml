@@ -1,0 +1,13 @@
+interface:
+  display_name: "Creative Claw — Generate Image"
+  short_description: "Generate or edit images with smart model routing"
+  default_prompt: "Use $creativeclaw-generate-image to create or edit this image with the best Creative Claw model."
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "creative-claw"
+      description: "Creative Claw media, asset, Character, Film, and feedback tools"
+      transport: "streamable_http"
+      url: "https://app.creativeclaw.co/mcp/chatgpt"
+policy:
+  allow_implicit_invocation: true
