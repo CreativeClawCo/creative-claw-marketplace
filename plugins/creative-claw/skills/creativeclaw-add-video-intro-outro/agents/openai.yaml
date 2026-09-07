@@ -1,0 +1,13 @@
+interface:
+  display_name: "Creative Claw — Add Intro and Outro"
+  short_description: "Add branded intros and outros to existing video"
+  default_prompt: "Use $creativeclaw-add-video-intro-outro to add opening or closing segments to my video and assemble the final cut."
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "creative-claw"
+      description: "Creative Claw media, asset, Character, Film, and feedback tools"
+      transport: "streamable_http"
+      url: "https://app.creativeclaw.co/mcp/chatgpt"
+policy:
+  allow_implicit_invocation: true

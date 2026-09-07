@@ -11,12 +11,13 @@ Turn a script into performance-ready speech, normally with ElevenLabs v3. This s
 
 1. Confirm language, audience, speaker count, pronunciation, pace, mood, and target runtime.
 2. Preserve the user's words. Ask before materially rewriting an approved script.
-3. Call `list_models({ modality: "speech" })`, select `speech/elevenlabs-v3` by default, then call `get_model_params`.
-4. Choose a stock `voice_id`, or pass a saved `character_id` whose consented ElevenLabs clone should speak.
-5. Add ElevenLabs v3 performance tags and punctuation deliberately. Keep `agentic_prompting: false` when exact script wording or control tags must survive unchanged.
-6. Call `generate_speech`. Generate each speaker separately so casting, pacing, and revisions stay controllable.
-7. Audition the result for pronunciation, emotional arc, pacing, clipping, and consistency. Regenerate only the weak section when practical.
-8. Use `merge_media` when approved segments must become a single audio track or be muxed with video.
+3. When the user asks for voice or audio examples, performance ideas, or a close starting point, use `creativeclaw-find-examples` with `output_type: "audio"`; load only the selected result. Do not search when the direction and script are already clear.
+4. Call `list_models({ modality: "speech" })`, select `speech/elevenlabs-v3` by default, then call `get_model_params`.
+5. Choose a stock `voice_id`, or pass a saved `character_id` whose consented ElevenLabs clone should speak.
+6. Add ElevenLabs v3 performance tags and punctuation deliberately. Keep `agentic_prompting: false` when exact script wording or control tags must survive unchanged.
+7. Call `generate_speech`. Generate each speaker separately so casting, pacing, and revisions stay controllable.
+8. Audition the result for pronunciation, emotional arc, pacing, clipping, and consistency. Regenerate only the weak section when practical.
+9. Use `merge_media` when approved segments must become a single audio track or be muxed with video.
 
 Conduct casting and review in the user's language. Preserve the supplied script and its writing system, and verify model or voice language support instead of translating unless the user asks.
 

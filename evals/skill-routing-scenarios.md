@@ -39,6 +39,14 @@ Use these scenarios as regression checks for skill activation and tool behavior.
 | 33 | Make a seamless thirty-second spaceship engine-room ambience with no music or voices. | `creativeclaw-generate-audio` | Uses the ElevenLabs sound-effect model with looping enabled and does not call `generate_speech`. |
 | 34 | Compose a fifteen-second restrained synth score for this product clip, with no vocals. | `creativeclaw-generate-audio` | Uses the ElevenLabs music model, sets an explicit duration and instrumental output, and keeps the result as a separate audio asset until approved. |
 | 35 | Read this alien diplomat line, then add a quiet sci-fi room tone behind it. | `creativeclaw` | Routes the line to voiceover and the room tone to audio generation; it does not claim that audio concatenation layers the tracks. |
+| 36 | Show me six curated editorial image examples for a perfume launch. | `creativeclaw-find-examples` | Filters to image examples, presents a shortlist, and loads only the selected example. |
+| 37 | Find more examples like this, but only for my selected video model. | `creativeclaw-find-examples` | Uses the exact model ID and cursor while preserving the original search filters. |
+| 38 | Render this supplied HTML and CSS as a 1200×630 PNG. | `creativeclaw-render-html-image` | Renders the deterministic layout and does not call an image model. |
+| 39 | Make a 1200×630 launch poster for me. | `creativeclaw-generate-image` | Does not infer HTML rendering from the deliverable type alone. |
+| 40 | Use HyperFrames HTML to put this exact headline over my video. | `creativeclaw-render-html-video` | Uses a deterministic HTML overlay, preserves exact copy, and resolves the queued render. |
+| 41 | Add this headline over my video. | `creativeclaw-generate-video` | Does not infer HTML rendering merely because text is requested. |
+| 42 | Add a two-second intro and a closing CTA to this clip. | `creativeclaw-add-video-intro-outro` | Offers an HTML title-card route but waits for explicit acceptance before rendering HTML. |
+| 43 | Use HTML title cards for the intro and outro, then merge them around this video. | `creativeclaw-add-video-intro-outro` | Renders both bookends with the HTML-video skill, resolves them, and concatenates intro → main → outro. |
 
 ## Pass criteria
 

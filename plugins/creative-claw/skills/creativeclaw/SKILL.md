@@ -19,6 +19,8 @@ Use the Creative Claw MCP server as a media workspace: source durable assets, ap
 8. **Do not invent tools or parameters.** If a tool is absent on the current client, follow `references/platform-client.md`. If a field is not in `get_model_params`, do not send it.
 9. **Capture actionable feedback.** Use `submit_feedback` for bugs, missing features or models, confusing flows, generation-quality problems, and explicit praise. Read `references/workflows/feedback.md` before reporting.
 10. **Match the user's language.** Conduct the workflow in the user's language, preserve supplied scripts and visible copy exactly, and verify the selected model supports the requested spoken or rendered language.
+11. **Use examples deliberately.** Route requests for examples, inspiration, styles, or a close starting point to `creativeclaw-find-examples`. Do not search the catalog before every generation.
+12. **Keep HTML rendering explicit.** Use `creativeclaw-render-html-image` or `creativeclaw-render-html-video` only when the user explicitly requests HTML/CSS, HyperFrames, code-driven rendering, or accepts that proposed method. Ordinary image or video requests stay with the generative skills.
 
 ## Route the request
 
@@ -33,6 +35,10 @@ Use the Creative Claw MCP server as a media workspace: source durable assets, ap
 | Generate narration, dialogue, or speech | `creativeclaw-generate-voiceover` |
 | Generate sound effects, ambience, Foley, or music | `creativeclaw-generate-audio` |
 | Clone a consented voice | `creativeclaw-clone-voice` |
+| Browse, filter, load, or adapt curated examples | `creativeclaw-find-examples` |
+| Explicitly render HTML/CSS as a PNG | `creativeclaw-render-html-image` |
+| Explicitly render HTML/HyperFrames motion as video | `creativeclaw-render-html-video` |
+| Add or create an intro/outro around existing video | `creativeclaw-add-video-intro-outro` |
 | Create or update a reusable Character | `creativeclaw-create-character` |
 | Report a bug, request, quality issue, or praise | `creativeclaw-submit-feedback` |
 | Find, import, name, tag, reuse, or delete media | `references/workflows/asset-library.md` |
@@ -56,7 +62,7 @@ For detailed image prompting, use `creativeclaw-nano-banana-2`, `creativeclaw-na
 ## Shared production pattern
 
 1. Clarify the deliverable, audience, duration or dimensions, and required references.
-2. Search the asset library and import only what is missing.
+2. Search the asset library and import only what is missing. When the user wants inspiration or a starting point, search curated examples and load only the selected example.
 3. Fetch the selected theme for branded work.
 4. Inspect available models and the chosen model's parameters.
 5. State the model and consequential settings; obtain confirmation for costly batches or long generations.

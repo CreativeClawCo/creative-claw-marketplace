@@ -31,8 +31,9 @@ When per-shot narration or dialogue is required, use `merge_media({ operation: "
 
 1. Verify that every intended shot has an approved `clipUrl` in order.
 2. Call `assemble_film`. Treat its result as an assembled first cut: ordered clips plus an optional single project-level narration track.
-3. Do not imply that assembly adds transitions, captions, sound design, or per-shot audio mixing. If those are required, create the needed processed clips with exposed tools before assembly.
-4. Set `preview_ok` when the first cut exists. Set `final` only after the user has reviewed and approved it.
+3. When the user requests opening or closing bookends, use `creativeclaw-add-video-intro-outro` after the first cut exists. That workflow may offer HTML-rendered cards, but it must not call `render_html_video` unless the user explicitly chooses HTML/HyperFrames/code-driven rendering.
+4. Do not imply that assembly adds transitions, captions, sound design, or per-shot audio mixing. If those are required, create the needed processed clips with exposed tools before assembly.
+5. Set `preview_ok` when the first cut exists. Set `final` only after the user has reviewed and approved it.
 
 ## Recovery
 

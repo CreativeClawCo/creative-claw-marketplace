@@ -1,0 +1,13 @@
+interface:
+  display_name: "Creative Claw — Find Examples"
+  short_description: "Browse and adapt curated Creative Claw examples"
+  default_prompt: "Use $creativeclaw-find-examples to find and adapt a Creative Claw example for my idea."
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "creative-claw"
+      description: "Creative Claw media, asset, Character, Film, and feedback tools"
+      transport: "streamable_http"
+      url: "https://app.creativeclaw.co/mcp/chatgpt"
+policy:
+  allow_implicit_invocation: true

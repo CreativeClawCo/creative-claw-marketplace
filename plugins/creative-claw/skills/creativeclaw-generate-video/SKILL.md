@@ -5,17 +5,18 @@ description: "Generate, animate, extend, reframe, or transform one video clip wi
 
 # Generate Video
 
-Create one controlled video clip from text, a start frame, an optional end frame, or other model-supported references. Use the planning, UGC, or film skills when the deliverable is a larger production.
+Create one controlled video clip from text, a start frame, an optional end frame, or other model-supported references. Use the planning, UGC, or film skills when the deliverable is a larger production. Use `creativeclaw-render-html-video` only when the user explicitly requests HTML/HyperFrames/code-driven rendering; use `creativeclaw-add-video-intro-outro` for video bookends.
 
 ## Workflow
 
 1. Define the clip's purpose, aspect ratio, duration, subject, one primary action, camera move, visual continuity, dialogue or sound, and required end state.
 2. Search existing assets before importing new references. A still is a start frame only when it should define the opening composition.
-3. Call `list_models({ modality: "video" })`, choose by capability, then call `get_model_params` for supported durations, resolutions, operations, and references.
-4. State the selected model and consequential settings. Confirm before an expensive or long generation.
-5. Write one chronological prompt: opening frame, subject action, camera behavior, environmental motion, audio or dialogue, ending frame, and exclusions.
-6. Call `generate_video`; use `check_job` only when another tool needs the completed URL or no inline viewer is monitoring the job.
-7. Inspect identity, anatomy, product fidelity, timing, camera motion, dialogue sync, and ending continuity. Revise one variable at a time.
+3. When the user asks for examples, references, styles, or similar concepts—or an open brief would materially benefit from choosing among concrete directions—use `creativeclaw-find-examples`. Filter by `output_type: "video"`, then load only the selected result. Do not search before every clip.
+4. Call `list_models({ modality: "video" })`, choose by capability, then call `get_model_params` for supported durations, resolutions, operations, and references.
+5. State the selected model and consequential settings. Confirm before an expensive or long generation.
+6. Write one chronological prompt: opening frame, subject action, camera behavior, environmental motion, audio or dialogue, ending frame, and exclusions.
+7. Call `generate_video`; use `check_job` only when another tool needs the completed URL or no inline viewer is monitoring the job.
+8. Inspect identity, anatomy, product fidelity, timing, camera motion, dialogue sync, and ending continuity. Revise one variable at a time.
 
 ## Model routing
 

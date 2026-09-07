@@ -23,6 +23,10 @@ focused_skill_names=(
   creativeclaw-minimax-h3-max
   creativeclaw-elevenlabs-v3
   creativeclaw-clone-voice
+  creativeclaw-find-examples
+  creativeclaw-render-html-image
+  creativeclaw-render-html-video
+  creativeclaw-add-video-intro-outro
 )
 chatgpt_overlay_root="$repo_root/skill-variants/chatgpt"
 temp_root="$(mktemp -d "${TMPDIR:-/tmp}/creativeclaw-skills.XXXXXX")"
@@ -47,11 +51,6 @@ cp "$chatgpt_overlay_root"/*.md "$temp_root/chatgpt/creativeclaw/references/"
 for variant in general chatgpt; do
   package_root="$temp_root/$variant"
   variant_root="$package_root/creativeclaw"
-
-  if rg -n "render_html_video|kind:[[:space:]]*html_video" "$variant_root"; then
-    echo "Deprecated HTML-video guidance found in the $variant skill." >&2
-    exit 1
-  fi
 
   if [[ ! -f "$variant_root/references/platform-upload.md" || ! -f "$variant_root/references/platform-client.md" ]]; then
     echo "The $variant skill is missing platform guidance." >&2

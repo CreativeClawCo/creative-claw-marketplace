@@ -17,6 +17,27 @@ Use `list_models` before relying on a remembered model ID. Use `get_model_params
 
 For a model comparison, call `generate_image` once per selected model with the same prompt and settings, then present the results together.
 
+## Curated examples
+
+| Tool              | Use                                                                                                      |
+| ----------------- | -------------------------------------------------------------------------------------------------------- |
+| `search_examples` | Browse lean summaries and previews. Filter by query, output type, exact model ID, tags, and page cursor. |
+| `get_example`     | Load one selected example's complete agent-ready prompt and generation hints by ID or slug.             |
+
+Use `creativeclaw-find-examples` when the user asks for examples, inspiration, style directions, alternatives, or a close starting point. Do not search automatically before every generation. Tags are conjunctive: every supplied tag must match. After selection, load one example, adapt its generation prompt to the user's subject, and keep the owning generation workflow in control.
+
+## Deterministic HTML rendering
+
+| Tool                | Use                                                                                                            |
+| ------------------- | -------------------------------------------------------------------------------------------------------------- |
+| `render_html`       | Show a live sandboxed HTML preview; does not create a media asset.                                             |
+| `render_html_image` | Render a deterministic HTML/CSS layout to a PNG via Chromium.                                                  |
+| `render_html_video` | Queue a HyperFrames-backed HTML/CSS/JS motion render; resolve the final video URL with `check_job`.            |
+| `create_template`   | Save a reusable parameterized HTML or generative layout.                                                       |
+| `render_template`   | Render a saved template with provided values.                                                                 |
+
+The image and video renderers are explicit-only choices. Use them only when the user asks for HTML/CSS, HyperFrames, code-driven rendering, supplies HTML, or explicitly accepts the method. A generic poster, social card, overlay, intro, or outro request is not sufficient by itself.
+
 ## Themes
 
 | Tool           | Use                                                                                                   |

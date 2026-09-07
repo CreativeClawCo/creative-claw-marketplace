@@ -26,6 +26,10 @@ skill_names=(
   creativeclaw-minimax-h3-max
   creativeclaw-elevenlabs-v3
   creativeclaw-clone-voice
+  creativeclaw-find-examples
+  creativeclaw-render-html-image
+  creativeclaw-render-html-video
+  creativeclaw-add-video-intro-outro
 )
 
 for skill_name in "${skill_names[@]}"; do
@@ -78,10 +82,22 @@ routes=(
   creativeclaw-product-photoshoot
   creativeclaw-create-ugc-ad
   creativeclaw-submit-feedback
+  creativeclaw-find-examples
+  creativeclaw-render-html-image
+  creativeclaw-render-html-video
+  creativeclaw-add-video-intro-outro
 )
 for route in "${routes[@]}"; do
   if ! rg -q "$route" "$root_skill"; then
     echo "Root skill does not route to $route." >&2
+    exit 1
+  fi
+done
+
+for explicit_route_skill in creativeclaw-render-html-image creativeclaw-render-html-video; do
+  explicit_skill_file="$skills_root/$explicit_route_skill/SKILL.md"
+  if ! rg -q 'Use only when the user explicitly' "$explicit_skill_file"; then
+    echo "$explicit_route_skill must preserve the explicit-request routing boundary." >&2
     exit 1
   fi
 done

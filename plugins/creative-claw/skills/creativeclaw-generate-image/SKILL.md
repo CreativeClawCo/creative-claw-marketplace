@@ -5,17 +5,18 @@ description: "Generate or edit a single image with Creative Claw and route it to
 
 # Generate Image
 
-Turn a brief and optional references into a finished image. This is the primary skill for a clear, general image-generation or image-editing request; model-specific skills supply deeper prompting advice after routing.
+Turn a brief and optional references into a finished image. This is the primary skill for a clear, general image-generation or image-editing request; model-specific skills supply deeper prompting advice after routing. If the user explicitly requests HTML/CSS rendering or a deterministic code-based PNG, use `creativeclaw-render-html-image` instead.
 
 ## Workflow
 
 1. Establish the subject, intended use, aspect ratio, style, text requirements, and which details must remain exact.
 2. Use `search_assets` for likely reusable references. Import attachments or local files with the platform upload flow before generation.
-3. For branded work, call `get_theme` and carry the relevant colors, typography, logo treatment, and visual rules into the prompt.
-4. Call `list_models({ modality: "image" })`, select a model, then call `get_model_params` before sending model-specific fields.
-5. Explain the model choice before a costly batch. Generate one direction first unless the user explicitly wants several.
-6. Call `generate_image`. If a downstream tool needs a queued result URL, use `check_job`; otherwise let the inline viewer monitor it.
-7. Inspect the result against the non-negotiables, revise the smallest failing element, and tag the approved asset.
+3. When the user asks for examples, inspiration, styles, or a close starting point—or an open brief would materially benefit from concrete choices—use `creativeclaw-find-examples`. Search a small filtered set, then load only the chosen example with `get_example`. Do not search automatically for an already precise brief.
+4. For branded work, call `get_theme` and carry the relevant colors, typography, logo treatment, and visual rules into the prompt.
+5. Call `list_models({ modality: "image" })`, select a model, then call `get_model_params` before sending model-specific fields.
+6. Explain the model choice before a costly batch. Generate one direction first unless the user explicitly wants several.
+7. Call `generate_image`. If a downstream tool needs a queued result URL, use `check_job`; otherwise let the inline viewer monitor it.
+8. Inspect the result against the non-negotiables, revise the smallest failing element, and tag the approved asset.
 
 ## Model routing
 

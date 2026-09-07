@@ -1,0 +1,13 @@
+interface:
+  display_name: "Creative Claw — Render HTML Image"
+  short_description: "Render exact HTML and CSS layouts to PNG"
+  default_prompt: "Use $creativeclaw-render-html-image to render my explicit HTML or code-based layout as a PNG."
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "creative-claw"
+      description: "Creative Claw media, asset, Character, Film, and feedback tools"
+      transport: "streamable_http"
+      url: "https://app.creativeclaw.co/mcp/chatgpt"
+policy:
+  allow_implicit_invocation: true
