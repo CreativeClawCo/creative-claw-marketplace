@@ -1,0 +1,8 @@
+*.zip
+chatgpt-draft
+skill-variants
+.git
+node_modules
+.agents
+evals
+*.png

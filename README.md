@@ -146,6 +146,25 @@ Add to your MCP config (`claude_desktop_config.json`):
 
 No API keys needed — auth is handled via Clerk OAuth on first connection.
 
+### Glama / Directory Introspection
+
+The `glama-mcp/` directory provides a lightweight stdio MCP wrapper for Glama.ai directory compatibility. This wrapper exposes 9 core tool descriptions for discovery (`how_to_connect`, `generate_image`, `generate_video`, `generate_speech`, `list_models`, `get_model_params`, `check_job`, `list_characters`, `get_credits_balance`) that guide users to connect to the full production MCP server at `https://app.creativeclaw.co/mcp`.
+
+The Glama wrapper does not perform actual generation—it serves as a directory entry point. To use Creative Claw's full generation capabilities, connect to the production HTTP MCP server as described above.
+
+**Run locally:**
+
+```bash
+cd glama-mcp && npm install && npm start
+```
+
+**Build Docker image:**
+
+```bash
+docker build -t creative-claw-glama .
+docker run -i creative-claw-glama
+```
+
 ---
 
 ## Quick Start
