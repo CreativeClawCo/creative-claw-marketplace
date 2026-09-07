@@ -10,7 +10,7 @@
       "name": "creative-claw",
       "source": "./plugins/creative-claw",
       "description": "AI media studio — generate and edit images, video, and speech; create reusable Characters, product shoots, UGC ads, and multi-shot Films.",
-      "version": "0.5.5",
+      "version": "0.5.6",
       "author": {
         "name": "Creative Claw Co."
       },

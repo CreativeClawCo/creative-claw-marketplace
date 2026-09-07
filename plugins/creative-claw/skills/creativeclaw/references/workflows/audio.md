@@ -1,14 +1,18 @@
 # Speech and audio workflow
 
-Creative Claw generates speech, creates consented ElevenLabs voice clones, transcribes media, isolates voice recordings, and combines audio with video. The current generation tool is speech-focused; do not invent a separate music or sound-effect generator when one is not exposed.
+Creative Claw generates speech, sound effects, ambience, Foley, and music; creates consented ElevenLabs voice clones; transcribes media; isolates voice recordings; and combines one finished audio track with video.
 
 ## Route the request
 
 - New narration, dialogue, or character voice → `generate_speech`.
+- Sound effect, Foley, transition, impact, ambience, or loop → use `creativeclaw-generate-audio` with `sfx/elevenlabs-sound-v2`.
+- Music, score, bed, sting, jingle, or song → use `creativeclaw-generate-audio` with `music/elevenlabs-music-v1`.
 - Reusable custom voice from a recording → use the separate `creativeclaw-clone-voice` skill.
 - Transcript and timings → `transcribe`.
 - Remove noise, music, or reverb from speech → `isolate_audio`.
 - Add an existing voice/music track to video or concatenate audio → `merge_media`.
+
+`generate_speech` cannot produce music or sound effects by changing its model ID; those outputs use the separate `generate_audio` contract. `merge_audios` concatenates clips and does not layer them into a mix.
 
 Import source audio through `../platform-upload.md` first.
 

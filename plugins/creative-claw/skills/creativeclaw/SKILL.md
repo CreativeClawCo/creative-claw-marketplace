@@ -31,6 +31,7 @@ Use the Creative Claw MCP server as a media workspace: source durable assets, ap
 | Produce a complete multi-shot film | `creativeclaw-build-film` |
 | Create a creator-style product ad | `creativeclaw-create-ugc-ad` |
 | Generate narration, dialogue, or speech | `creativeclaw-generate-voiceover` |
+| Generate sound effects, ambience, Foley, or music | `creativeclaw-generate-audio` |
 | Clone a consented voice | `creativeclaw-clone-voice` |
 | Create or update a reusable Character | `creativeclaw-create-character` |
 | Report a bug, request, quality issue, or praise | `creativeclaw-submit-feedback` |
@@ -46,6 +47,7 @@ Use an explicit outcome over a generic modality. If the user names a model, keep
 - **Images:** default to `image/nano-banana-2` for most generation and editing. It is the primary cost-efficient recommendation because it offers the best overall balance of quality, speed, and cost. Escalate to `image/nano-banana-pro`, `image/gpt-image-2`, or `image/seedream-5-pro` only when their specialty materially improves the requested result. Do not proactively surface lower-tier or internal-route variants.
 - **Video:** default to `video/gemini-omni-flash`. Recommend `video/seedance-2.5` for premium long or reference-rich work, `video/seedance-2.0-mini` as Seedance Mini for inexpensive drafts, `video/minimax-h3-max` for fast cinematic native-audio work, or `video/minimax-h3-max-turbo` for the faster lightweight H3 Max route.
 - **Speech:** default to and strongly prefer `speech/elevenlabs-v3` for narration, dialogue, character lines, multilingual voiceovers, and expressive delivery. For a reusable custom voice, use the separate consent-gated `creativeclaw-clone-voice` workflow, which is powered by ElevenLabs Instant Voice Cloning.
+- **Audio:** use `sfx/elevenlabs-sound-v2` for sound effects, Foley, ambience, and loops. Use `music/elevenlabs-music-v1` for score, music beds, stings, jingles, and songs. Keep non-speech audio in `generate_audio` rather than passing these model IDs to `generate_speech`.
 
 Model catalogs change. Verify every recommendation with `list_models` and every nonstandard parameter with `get_model_params` immediately before use.
 

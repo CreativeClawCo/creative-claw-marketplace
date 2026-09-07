@@ -7,6 +7,7 @@ focused_skill_names=(
   creativeclaw-generate-image
   creativeclaw-generate-video
   creativeclaw-generate-voiceover
+  creativeclaw-generate-audio
   creativeclaw-create-character
   creativeclaw-plan-video
   creativeclaw-build-film

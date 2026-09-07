@@ -36,6 +36,9 @@ Use these scenarios as regression checks for skill activation and tool behavior.
 | 30 | Crée seulement le storyboard; ne génère aucune vidéo payante. | `creativeclaw-plan-video` | Plans in French and performs no paid video generation. |
 | 31 | 이 캐릭터와 제품으로 여러 장면의 영상을 완성해 줘. | `creativeclaw-build-film` | Runs a Korean multi-shot Film workflow with approval gates. |
 | 32 | Generate one image, one voiceover, and a short clip for this launch. | `creativeclaw` | Root skill coordinates all three focused workflows without duplicating generation. |
+| 33 | Make a seamless thirty-second spaceship engine-room ambience with no music or voices. | `creativeclaw-generate-audio` | Uses the ElevenLabs sound-effect model with looping enabled and does not call `generate_speech`. |
+| 34 | Compose a fifteen-second restrained synth score for this product clip, with no vocals. | `creativeclaw-generate-audio` | Uses the ElevenLabs music model, sets an explicit duration and instrumental output, and keeps the result as a separate audio asset until approved. |
+| 35 | Read this alien diplomat line, then add a quiet sci-fi room tone behind it. | `creativeclaw` | Routes the line to voiceover and the room tone to audio generation; it does not claim that audio concatenation layers the tracks. |
 
 ## Pass criteria
 
