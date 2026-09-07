@@ -9,7 +9,7 @@ Preserve the original and create clearly named derivatives.
 | Cut a time range                                   | `trim_video`                                       |
 | Resize, crop, or pad                               | `scale_video`                                      |
 | Burn captions                                      | `add_subtitles`                                    |
-| Extract first, middle, last, or timestamped frames | `extract_frames`                                   |
+| Extract first, middle, last, or regularly spaced frames | `extract_frames`                             |
 | Concatenate clips or audio; add audio to video     | `merge_media`                                      |
 | Remove a background                                | `remove_background`                                |
 | Upscale                                            | `upscale_media`                                    |
