@@ -32,7 +32,7 @@ Access 1,000+ production-ready AI models — FLUX, Gemini, Veo, Sora, Kling, See
 
 ### Skills (Creative Workflows)
 
-The **creativeclaw** root skill routes mixed or unclear requests. Focused outcome skills own general image, video, and voice work plus Characters, planning, Films, product photoshoots, UGC ads, and feedback. Model specialists add exact prompting and reference guidance only after an outcome chooses Nano Banana 2, Nano Banana Pro, GPT Image 2, Seedream 5 Pro, Gemini Omni, Seedance 2.5, H3 Max, or ElevenLabs v3.
+The **creativeclaw** root skill routes mixed or unclear requests. Focused outcome skills own general image, video, and voice work plus Characters, planning, Films, product photoshoots, UGC ads, and feedback. Model specialists add exact prompting and reference guidance only after an outcome chooses Nano Banana 2, Nano Banana Pro, GPT Image 2.5 Flare or Sunburst, Seedream 5 Pro, Gemini Omni, Seedance 2.5, H3 Max, or ElevenLabs v3.
 
 Every OpenAI skill declares the ChatGPT MCP dependency at `https://app.creativeclaw.co/mcp/chatgpt`, matching the endpoint configured in the plugin draft. A focused skill can therefore activate directly without losing access to Creative Claw's tools.
 
@@ -48,7 +48,8 @@ Default to **Gemini 3.1 Flash (Nano Banana 2)** for most image generation and ed
 | --- | --- | --- |
 | Nano Banana 2 | `image/nano-banana-2` | Default and cost-efficient choice for most generation and editing |
 | Nano Banana Pro | `image/nano-banana-pro` | Complex professional layouts, typography, and demanding composites |
-| GPT Image 2 | `image/gpt-image-2` | Instruction-heavy generation, transparency, and precise edits |
+| GPT Image 2.5 Flare | `image/gpt-image-2.5-flare` | Fast, high-quality everyday OpenAI image generation and editing |
+| GPT Image 2.5 Sunburst | `image/gpt-image-2.5-sunburst` | Precision-focused generation, transparency, and tightly controlled edits |
 | Seedream 5 Pro | `image/seedream-5-pro` | Premium product, fashion, and commercial imagery |
 
 ### Recommended video models

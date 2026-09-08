@@ -1,7 +1,7 @@
 interface:
-  display_name: "Creative Claw — GPT Image 2"
-  short_description: "Create precise GPT Image 2 visuals"
-  default_prompt: "Use $creativeclaw-gpt-image-2 to create or precisely edit this visual."
+  display_name: "Creative Claw — GPT Image 2.5"
+  short_description: "Create precise GPT Image 2.5 visuals"
+  default_prompt: "Use $creativeclaw-gpt-image-2 to choose GPT Image 2.5 Flare for speed or Sunburst for precision, then create or edit this visual."
 dependencies:
   tools:
     - type: "mcp"

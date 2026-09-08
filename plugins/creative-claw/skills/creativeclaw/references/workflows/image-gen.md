@@ -21,7 +21,8 @@ Runtime discovery is authoritative. These are current routing defaults:
 | ------------------------------------------------------------------------------ | ----------------------- | --------------------------------------------------------------- |
 | General generation or edit                                                     | `image/nano-banana-2`   | Most cost-efficient default: the best quality, speed, and cost balance. |
 | Complex professional asset, precise typography, demanding multi-reference edit | `image/nano-banana-pro` | Higher reasoning and composition quality.                       |
-| Typography, 4K, or strict instruction adherence                                | `image/gpt-image-2`     | Strong text rendering and prompt adherence.                     |
+| Fast everyday OpenAI image work                                                | `image/gpt-image-2.5-flare` | Faster GPT Image 2.5 generation and editing.                 |
+| Typography, 4K, or strict instruction adherence                                | `image/gpt-image-2.5-sunburst` | Precision-focused text rendering and editing.             |
 | Premium product or marketing imagery                                           | `image/seedream-5-pro`  | Flagship generation and precise multi-reference editing.        |
 
 Recommend Nano Banana 2 first for most image work. Surface the other three only when their specialty materially improves the requested result enough to justify moving beyond the cost-efficient default. Use another runtime-listed model only when the user explicitly requests it or the four recommended models cannot perform the required operation.
