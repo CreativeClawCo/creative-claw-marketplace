@@ -5,7 +5,7 @@ description: "Apply MiniMax H3 Max prompting, storyboard, and reference techniqu
 
 # Creative Claw — MiniMax H3 Max
 
-Use `video/minimax-h3-max` for fast, aesthetically strong 480P or 768P video with native synchronized audio, optional first/last frames, and multimodal references. Use `video/minimax-h3-max-turbo` only when the user prioritizes lower latency and cost and does not need reference video or reference audio.
+Use `video/minimax-h3-max` for fast, aesthetically strong 480P, 768P, or Full HD (1080P) video with native synchronized audio, optional first/last frames, and multimodal references. Use `video/minimax-h3-max-turbo` only when the user prioritizes lower latency and cost and does not need reference video or reference audio.
 
 Do not invent an `h3-max-lite` model ID. The current faster lightweight route is `video/minimax-h3-max-turbo`.
 
@@ -18,7 +18,7 @@ Do not invent an `h3-max-lite` model ID. The current faster lightweight route is
 5. Choose text, first-frame, first-to-last, or reference mode deliberately.
 6. Assign every reference a role using H3 Max's one-based `Image 1`, `Video 1`, and `Audio 1` language.
 7. Set `agentic_prompting: false` for exact reference labels, dialogue, timecodes, or locked prompt structure.
-8. Generate at 480P for cheap motion tests or 768P for the preferred final H3 Max result.
+8. Generate at 480P for cheap motion tests, 768P (default) for balanced results, or 1080P (Full HD) for the highest-quality final H3 Max output.
 9. Inspect visible motion and synchronized audio before reuse.
 
 ## Choose the route
@@ -44,7 +44,7 @@ H3 Max reference video conditions a new result. It is not a precise source-video
 | `image_urls` | Up to 9 references, cited as `Image 1` through `Image 9`. |
 | `video_urls` | Up to 3 clips, cited as `Video 1` onward. |
 | `audio_urls` | Up to 3 clips, cited as `Audio 1` onward; requires an image or video reference. |
-| `resolution` | `480P` or `768P`; pass it through the top-level Creative Claw field. |
+| `resolution` | `480P`, `768P` (default), or `1080P` for Full HD; pass it through the top-level Creative Claw field. |
 | `extras.prompt_expansion_mode` | `disabled`, `balanced`, or `quality`. |
 
 Current limits are model-specific: up to 12 total reference files; reference video and audio clips are commonly 2–15 seconds with no more than 15 seconds combined per modality. Recheck the runtime schema rather than applying these limits to another model.
