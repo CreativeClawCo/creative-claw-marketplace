@@ -13,7 +13,7 @@ Use `video/seedance-2.5` for long, premium, reference-rich generation with nativ
 2. Search for existing assets and import every external image, video, or audio file into Creative Claw.
 3. Build and approve a storyboard before a polished generation. Create separate full-frame start images for each shot with `image/nano-banana-2`; use Nano Banana Pro only when the visual brief is unusually complex.
 4. Create an end frame when the clip needs a precise landing pose, transition, loop, reveal, or match cut.
-5. Call `get_model_params({ model: "video/seedance-2.5" })`. Runtime values override remembered limits.
+5. Call `get_model_params({ model: "video/seedance-2.5" })`. Runtime values override remembered limits. For reference-to-video, choose `extras.omni_reference_task_type` deliberately rather than relying on prompt inference for edits or extensions.
 6. Assign every reference a written role and cite it with the exact `@ImageN`, `@VideoN`, or `@AudioN` token.
 7. Set `agentic_prompting: false` for authored tokens, exact dialogue, timecodes, or precise shot plans.
 8. Generate a 480p or 720p proof first when iteration is expected. Use 1080p after the shot is approved.
@@ -32,8 +32,22 @@ Use `video/seedance-2.5` for long, premium, reference-rich generation with nativ
 | `audio_urls` | Up to 10 audio references, cited as `@Audio1`, `@Audio2`, and so on. |
 | `resolution` | `480p`, `720p`, or `1080p`; pass it through the top-level Creative Claw field. |
 | `extras.generate_audio` | Enable synchronized dialogue, ambience, music, and effects. |
+| `extras.omni_reference_task_type` | `auto`, `reference`, `edit`, or `extend`; forwarded only to Pika and used by Creative Claw to normalize both provider routes. |
 
 Reference limits belong to this model, not to `generate_video` globally. Current video and audio references may each be 2–30 seconds, with no more than 30 seconds combined per modality. Audio references require at least one image or video reference. Verify this at runtime.
+
+## Reference task modes
+
+Choose the mode from the intended relationship to the source video:
+
+| Mode | Use when | Ratio and duration |
+| --- | --- | --- |
+| `reference` | Creating a new video guided by reference images, video, or audio. | A fixed ratio and explicit duration are allowed. |
+| `edit` | Modifying content inside a source video while retaining its timeline. | Pass `aspect_ratio: "auto"` and `duration: "auto"`; both are locked to the source. |
+| `extend` | Continuing before or after a source video boundary. | Pass `aspect_ratio: "auto"` and a numeric continuation duration from 4–30 seconds. |
+| `auto` | Letting Seedance infer the task from the prompt. | Use only with `aspect_ratio: "auto"`; an inferred edit or extension cannot accept a fixed ratio. |
+
+For `edit` and `extend`, include at least one `video_urls` entry and state the operation explicitly in the prompt, for example `Edit @Video1...` or `Extend @Video1 forward...`. The mode does not replace prompt direction. Creative Claw forwards `omni_reference_task_type` to Pika; on fal it normalizes locked fields, removes the Pika-only parameter, and lets fal infer the task from the prompt.
 
 ## Storyboard-first production
 
