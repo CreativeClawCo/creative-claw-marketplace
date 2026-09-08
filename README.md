@@ -26,7 +26,7 @@ One connection to Creative Claw's MCP server gives the skills live model discove
 | **Characters**    | `manage_character`, `list_characters`, `clone_voice`, `delete_character`                                            |
 | **Films**         | `create_film_project`, `update_film_project`, `get_film_project`, `list_film_projects`, `assemble_film`             |
 | **Feedback**      | `submit_feedback`                                                                                                   |
-| **Credits**       | `get_credits_balance`, `get_credits_link`                                                                           |
+| **Cost and account** | `estimate_generation`; `get_credits_balance` and `get_credits_link` where the client exposes them                |
 
 Access 1,000+ production-ready AI models — FLUX, Gemini, Veo, Sora, Kling, Seedance, Hailuo, HeyGen, Recraft, ElevenLabs, and more — through a single unified account with usage-based pricing.
 

@@ -13,10 +13,11 @@ Create one controlled video clip from text, a start frame, an optional end frame
 2. Search existing assets before importing new references. A still is a start frame only when it should define the opening composition.
 3. When the user asks for examples, references, styles, or similar concepts—or an open brief would materially benefit from choosing among concrete directions—use `creativeclaw-find-examples`. Filter by `output_type: "video"`, then load only the selected result. Do not search before every clip.
 4. Call `list_models({ modality: "video" })`, choose by capability, then call `get_model_params` for supported durations, resolutions, operations, and references.
-5. State the selected model and consequential settings. Confirm before an expensive or long generation.
-6. Write one chronological prompt: opening frame, subject action, camera behavior, environmental motion, audio or dialogue, ending frame, and exclusions.
-7. Call `generate_video`; use `check_job` only when another tool needs the completed URL or no inline viewer is monitoring the job.
-8. Inspect identity, anatomy, product fidelity, timing, camera motion, dialogue sync, and ending continuity. Revise one variable at a time.
+5. When the user asks about cost, balance, affordability, or a budget, call `estimate_generation` with the exact planned model and video parameters. Explain that the result is an estimate and that the final cost is confirmed after generation finishes. If it does not fit the balance, prefer the returned `video/minimax-h3-max-turbo` or `video/minimax-h3-max` alternative when it still supports the required references and operation. Do not run this preflight for every generation.
+6. State the selected model and consequential settings. Confirm before an expensive or long generation.
+7. Write one chronological prompt: opening frame, subject action, camera behavior, environmental motion, audio or dialogue, ending frame, and exclusions.
+8. Call `generate_video`; use `check_job` only when another tool needs the completed URL or no inline viewer is monitoring the job.
+9. Inspect identity, anatomy, product fidelity, timing, camera motion, dialogue sync, and ending continuity. Revise one variable at a time.
 
 ## Model routing
 

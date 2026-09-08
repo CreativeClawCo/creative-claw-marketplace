@@ -96,6 +96,7 @@ Read `platform-upload.md` before choosing an import route.
 | Tool                  | Use                                                                  |
 | --------------------- | -------------------------------------------------------------------- |
 | `check_job`           | Resolve queued work by `job_id` when a completed result is required. |
+| `estimate_generation` | Estimate one planned generation, check the current balance, and return affordable H3 alternatives when needed. The final cost is confirmed after generation finishes. |
 | `get_credits_balance` | Check balance and usage when exposed.                                |
 | `get_credits_link`    | Return a user-operated top-up link when exposed.                     |
 
