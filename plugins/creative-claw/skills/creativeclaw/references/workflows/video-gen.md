@@ -22,7 +22,7 @@ Runtime discovery is authoritative. Start here:
 | General generation, references, or source edit  | `video/gemini-omni-flash`    | Default; fast multimodal 3–10s generation/edit with native audio.                                |
 | Premium long or reference-rich video            | `video/seedance-2.5`         | 4–30s, native audio, optional first/last frames, and large mixed-reference sets.                  |
 | Inexpensive Seedance draft                      | `video/seedance-2.0-mini`    | Present as Seedance Mini; lowest-cost Seedance path for quick native-audio reference experiments. |
-| Fast cinematic generation with strong adherence | `video/minimax-h3-max`       | 5–15s, 480p/768p, native audio, optional first/last frames, and multimodal references.            |
+| Fast cinematic generation with strong adherence | `video/minimax-h3-max`       | 5–15s, 480p/768p/1080p, native audio, optional first/last frames, and multimodal references.      |
 | Faster lightweight H3 Max route                 | `video/minimax-h3-max-turbo` | Use when latency and cost matter more than reference-to-video capability.                         |
 
 Recommend these models first. Use another runtime-listed model only when the user explicitly requests it or the five recommended choices cannot perform the operation.
