@@ -13,7 +13,7 @@ Use `video/gemini-omni-flash` as Creative Claw's default video model. It is the 
 2. Search for reusable assets and import any ChatGPT attachments into Creative Claw before passing them to URL fields.
 3. Prefer a storyboard-first workflow when appearance or continuity matters. Generate and approve a clean full-frame start image with `image/nano-banana-2`; generate an end frame when the shot needs a precise destination and the current Omni schema exposes end-frame control.
 4. Call `get_model_params({ model: "video/gemini-omni-flash" })` immediately before generation. Treat its current schema as authoritative.
-5. Explain the selected duration, ratio, references, and audio plan. Confirm only when the request is materially expensive or involves a batch.
+5. Choose `resolution` from the current schema when output size matters. The direct Google route supports `360p`, `720p` (default), `1080p`, and `4k`; 1080p and 4K are upscaled outputs. Explain the selected duration, ratio, resolution, references, and audio plan. Confirm only when the request is materially expensive or involves a batch.
 6. Call `generate_video` with `model: "video/gemini-omni-flash"`.
 7. Let the inline viewer monitor the job. Call `check_job` only when a later tool needs the completed URL or no viewer is monitoring.
 8. Inspect motion, identity, physics, framing, audio, dialogue, and text artifacts before describing the clip as complete.
@@ -115,7 +115,7 @@ For reusable B-roll, use one subject, one action, and one camera idea. Say “si
 
 ## Timing and audio
 
-Use the current runtime range discovered by `get_model_params`; the established Creative Claw route commonly supports 3–10 seconds and `16:9` or `9:16`.
+Use the current runtime range discovered by `get_model_params`; the established Creative Claw route commonly supports 3–10 seconds, `16:9` or `9:16`, and `360p`, `720p`, `1080p`, or `4k` output resolution.
 
 Natural beats work well:
 
