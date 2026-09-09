@@ -1,11 +1,11 @@
 ---
 name: creativeclaw-elevenlabs-v3
-description: "Apply ElevenLabs v3 voice casting, prompting, emotion, and performance techniques after Creative Claw selects that speech model. Use when the user explicitly requests ElevenLabs or a named ElevenLabs voice, or when another Creative Claw workflow routes narration or dialogue to speech/elevenlabs-v3."
+description: "Apply ElevenLabs v3 voice casting, prompting, emotion, and performance techniques after Creative Claw selects that speech model. Use when the user explicitly requests v3 or expressive ElevenLabs audio tags, or when another Creative Claw workflow routes narration or dialogue to speech/elevenlabs-v3."
 ---
 
 # Creative Claw — ElevenLabs v3
 
-Use `speech/elevenlabs-v3` as Creative Claw's primary and strongly recommended speech model. Choose a voice that already resembles the requested age, energy, accent, and performance; inline tags shape delivery but cannot completely transform an incompatible voice.
+Use `speech/elevenlabs-v3` for expressive acting, audio tags, and languages outside Multilingual v2. Prefer `speech/elevenlabs-v2` for steady professional narration and identity-focused clone auditions in supported languages. Choose a voice that already resembles the requested age, energy, accent, and performance; inline tags shape delivery but cannot completely transform an incompatible voice.
 
 ## Core workflow
 
@@ -94,27 +94,25 @@ Pass delivery settings through `extras.voice_settings` when supported:
 
 | Setting | Guidance |
 | --- | --- |
-| `stability` | About `0.3` for Creative/emotive, `0.5` for Natural/balanced, `0.8` for Robust/consistent. High values may weaken tags. |
-| `similarity_boost` | Start near `0.75`; raise carefully when timbre consistency matters. |
+| `stability` | Use `0` for Creative/emotive, `0.5` for Natural/balanced, `1` for Robust/consistent. High values may weaken tags. |
 | `speed` | Start at `1.0`; use about `0.95` for intimate narration or `1.05` for energetic ads. |
-| `use_speaker_boost` | Leave enabled when exposed. |
 
 Useful presets:
 
 ```json
-{ "voice_settings": { "stability": 0.5, "similarity_boost": 0.75, "speed": 0.95 } }
+{ "voice_settings": { "stability": 0.5, "speed": 0.95 } }
 ```
 
 Calm documentary or premium narration.
 
 ```json
-{ "voice_settings": { "stability": 0.3, "similarity_boost": 0.7, "speed": 1.05 } }
+{ "voice_settings": { "stability": 0.5, "speed": 1.05 } }
 ```
 
 Expressive advertisement or launch read.
 
 ```json
-{ "voice_settings": { "stability": 0.4, "similarity_boost": 0.85, "speed": 0.95 } }
+{ "voice_settings": { "stability": 0.5, "speed": 0.95 } }
 ```
 
 Intimate UGC or close-mic delivery.
@@ -149,7 +147,7 @@ Energetic launch:
   "voice_id": "qTRV75fy2dUja4REMifv",
   "text": "[curious] What if one idea could become an image, a film, and a voice? [pause] [excited] Meet Creative Claw — your AI media studio inside ChatGPT.",
   "extras": {
-    "voice_settings": { "stability": 0.3, "similarity_boost": 0.7, "speed": 1.05 },
+    "voice_settings": { "stability": 0.5, "speed": 1.05 },
     "language_code": "en",
     "output_format": "mp3_44100_128"
   }
@@ -164,7 +162,7 @@ Cinematic narration:
   "voice_id": "5MzdXfNI3TSWsCPwZFrB",
   "text": "[slowly] Every object carries the mark of the hands that shaped it. [pause] And every mark tells a story.",
   "extras": {
-    "voice_settings": { "stability": 0.5, "similarity_boost": 0.8, "speed": 0.94 }
+    "voice_settings": { "stability": 0.5, "speed": 0.94 }
   }
 }
 ```
@@ -178,7 +176,7 @@ Hebrew commercial:
   "text": "[curious] מה אם הרעיון הבא שלכם כבר מוכן להפוך לסרט? [pause] [excited] מתחילים עכשיו.",
   "extras": {
     "language_code": "he",
-    "voice_settings": { "stability": 0.4, "similarity_boost": 0.75, "speed": 1.0 }
+    "voice_settings": { "stability": 0.5, "speed": 1.0 }
   }
 }
 ```
@@ -188,3 +186,9 @@ Hebrew commercial:
 Listen for names, acronyms, numbers, language, accent, tag leakage, emotional fit, abrupt starts or endings, clipped words, volume jumps, and pace. Revise punctuation or one local tag before changing the voice. Keep a seed when comparing small prompt changes if the runtime supports it.
 
 Use `submit_feedback` for repeated pronunciation failures, quality degradation, unavailable voices, missing language support, confusing parameters, or explicit voice requests. Include the voice name/ID, language, settings, and concrete issue without sharing private recordings.
+
+## Model-specific compatibility
+
+V3 supports `extras.voice_settings.stability` (0 Creative, 0.5 Natural, 1 Robust) and speed (0.7–1.2). Old continuous stability values map to the closest mode. `similarity_boost`, `style`, and `use_speaker_boost` are accepted for legacy compatibility but ignored; do not recommend them for v3. Flat legacy extras still work for supported settings; nested fields win and top-level speed takes precedence.
+
+Square-bracket audio tags apply to v3, not Multilingual v2. V3 does not support SSML breaks or phoneme tags. V2 supports sparse SSML breaks up to 3 seconds and provides similarity/style controls for steady narration. Use the same Character to compare models without re-cloning; selecting v2 is not Professional Voice Cloning.

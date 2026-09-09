@@ -5,7 +5,7 @@ description: Create, replace, audition, and reuse a consented ElevenLabs Instant
 
 # Creative Claw — ElevenLabs Voice Cloning
 
-Create a reusable voice with ElevenLabs Instant Voice Cloning, attach it to a Creative Claw Character, and use that Character with `speech/elevenlabs-v3`. Keep this workflow separate from `creativeclaw-elevenlabs-v3`, which handles curated voices, performance direction, emotions, and final speech generation.
+Create a reusable voice with ElevenLabs Instant Voice Cloning, attach it to a Creative Claw Character, and use that Character with `speech/elevenlabs-v2`. Keep this workflow separate from `creativeclaw-elevenlabs-v2`, which handles steady professional narration and settings. Use creativeclaw-elevenlabs-v3 for expressive audio tags or languages outside v2. Changing the TTS model does not require a new clone and does not upgrade IVC to PVC.
 
 ## Core workflow
 
@@ -15,9 +15,9 @@ Create a reusable voice with ElevenLabs Instant Voice Cloning, attach it to a Cr
 4. Collect a clean 1–2 minute solo recording. Import it into Creative Claw and obtain a durable public `audio_url`.
 5. If the Character already has a voice, explain that cloning again replaces it and obtain confirmation before continuing.
 6. Call `clone_voice({ character_id, audio_url, consent: true })` only after the explicit confirmation.
-7. Generate a short audition with `generate_speech({ model: "speech/elevenlabs-v3", character_id, text })`.
+7. Generate a short audition with `generate_speech({ model: "speech/elevenlabs-v2", character_id, text })`.
 8. Listen for identity, accent, tone, pacing, noise, pronunciation, and emotional range. Approve the clone before using it for a long script or Film.
-9. Use `character_id` for future speech in that voice. Use `creativeclaw-elevenlabs-v3` for detailed script performance, inline emotions, and delivery settings.
+9. Use `character_id` for future speech in that voice. Use `creativeclaw-elevenlabs-v2` for detailed script performance, supported pauses, and delivery settings.
 
 ## Consent and misuse boundary
 
@@ -37,7 +37,7 @@ The clone reproduces what it hears: timbre, accent, cadence, breath, energy, roo
 
 Recommended source:
 
-- 1–2 minutes of continuous, clear speech; avoid exceeding 3 minutes.
+- Sweet spot: 1–2 minutes of continuous clear speech; recommended minimum 1 minute and recommended maximum 3 minutes. These are quality guidelines, not enforced duration limits. Shorter samples can work, but audition them carefully.
 - One speaker, one microphone position, one acoustic environment.
 - MP3 at 192 kbps or better when possible; a clean WAV is also accepted by Creative Claw.
 - No music, other speakers, echo, reverb, fan noise, traffic, clipping, mouth clicks, or heavy processing.
@@ -101,9 +101,9 @@ Use a short script that covers neutral speech, energy, pauses, names, and any ta
 
 ```json
 {
-  "model": "speech/elevenlabs-v3",
+  "model": "speech/elevenlabs-v2",
   "character_id": "<character UUID>",
-  "text": "Here is a quick voice check. [pause] This is the neutral delivery. [excited] And this is how the voice sounds with more energy.",
+  "text": "Here is a quick voice check. This is the neutral delivery. I look forward to welcoming you to our annual conference.",
   "extras": {
     "voice_settings": {
       "stability": 0.5,
@@ -116,7 +116,7 @@ Use a short script that covers neutral speech, energy, pauses, names, and any ta
 
 For multilingual use, include names, numbers, and a short sentence in each important language. The source accent normally carries into generated languages, so listen before promising native pronunciation.
 
-Do not pass both `character_id` and an unrelated curated `voice_id`. Do not pass the source `audio_url` to `speech/elevenlabs-v3`; the reusable Character is the voice selector.
+Do not pass both `character_id` and an unrelated curated `voice_id`. Do not pass the source `audio_url` to `speech/elevenlabs-v2`; the reusable Character is the voice selector.
 
 ## Diagnose a weak clone
 
@@ -133,6 +133,8 @@ If direct ElevenLabs service is unavailable for a private cloned voice, fail clo
 
 ## Reuse and feedback
 
-For future requests, call `generate_speech` with the saved `character_id`, then apply the prompting techniques from `creativeclaw-elevenlabs-v3`. Use the same Character in Film narration when continuity matters.
+For future requests, call `generate_speech` with the saved `character_id`, then apply the prompting techniques from `creativeclaw-elevenlabs-v2`. Use the same Character in Film narration when continuity matters.
 
 Use `submit_feedback` when cloning fails despite a compliant sample, the result repeatedly misses a specific accent or identity trait, replacement behavior is unclear, or the user requests a stronger cloning model or control. Include the Character ID and concrete quality issue, but do not paste private transcripts or expose the source recording.
+
+Before replacing a good source, audition the existing clone with an appropriate TTS model and settings. V2 does not support v3 square-bracket audio tags; use plain text. Switching to v3 for expression reuses the same Character. Cloning again currently deletes the old voice, so retain the source and do not replace merely to compare v2 and v3.
