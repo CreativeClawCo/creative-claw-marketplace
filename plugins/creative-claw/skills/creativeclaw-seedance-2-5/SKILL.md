@@ -23,7 +23,7 @@ Use `video/seedance-2.5` for long, premium, reference-rich generation with nativ
 
 | Field | Current use |
 | --- | --- |
-| `duration` | `auto` or a whole second from 4 through 30. |
+| `duration` | Reference/image-to-video/normal generation: `auto` or a whole second from 4 through 30. Edit: omit or use `auto` to preserve the source timeline; Creative Claw maps this to Pika's required transport value `-1`. Extend: a whole-number continuation duration from 4 through 30. |
 | `aspect_ratio` | `auto`, `21:9`, `16:9`, `4:3`, `1:1`, `3:4`, or `9:16`. |
 | `image_url` | Literal first frame. Image-to-video follows its framing. |
 | `last_frame_url` | Optional final frame; the model creates the transition. |
@@ -43,11 +43,22 @@ Choose the mode from the intended relationship to the source video:
 | Mode | Use when | Ratio and duration |
 | --- | --- | --- |
 | `reference` | Creating a new video guided by reference images, video, or audio. | A fixed ratio and explicit duration are allowed. |
-| `edit` | Modifying content inside a source video while retaining its timeline. | Pass `aspect_ratio: "auto"` and `duration: "auto"`; both are locked to the source. |
+| `edit` | Modifying content inside a source video while retaining its timeline. | Pass `aspect_ratio: "auto"` and omit duration or use `duration: "auto"`. The Pika adapter sends `duration: -1`; do not expose or pass `-1` as the public value. |
 | `extend` | Continuing before or after a source video boundary. | Pass `aspect_ratio: "auto"` and a numeric continuation duration from 4–30 seconds. |
-| `auto` | Letting Seedance infer the task from the prompt. | Use only with `aspect_ratio: "auto"`; an inferred edit or extension cannot accept a fixed ratio. |
+| `auto` | Letting Seedance infer the task from the prompt. | Use only with `aspect_ratio: "auto"`. For edit-style prompts with a source video, set `edit` explicitly so Creative Claw can validate the locked-duration contract before charging. |
 
-For `edit` and `extend`, include at least one `video_urls` entry and state the operation explicitly in the prompt, for example `Edit @Video1...` or `Extend @Video1 forward...`. The mode does not replace prompt direction. Creative Claw forwards `omni_reference_task_type` to Pika; on fal it normalizes locked fields, removes the Pika-only parameter, and lets fal infer the task from the prompt.
+For `edit` and `extend`, include at least one `video_urls` entry and state the operation explicitly in the prompt, for example `Edit @Video1...` or `Extend @Video1 forward...`. The mode does not replace prompt direction. Creative Claw forwards `omni_reference_task_type` to Pika; on fal it normalizes locked fields, removes the Pika-only parameter, and lets fal infer the task from the prompt. If the prompt looks like an edit but the mode is omitted/`auto`, validation rejects the request before charging with instructions to choose `edit` or `reference`.
+
+### Seedance 2.5 request matrix
+
+| Intent | Required inputs | Duration | Aspect ratio | Audio/references |
+| --- | --- | --- | --- | --- |
+| New text/image video | `prompt`, optional `image_url` | `auto` or 4–30s | Explicit ratio or `auto` | `generate_audio` is enabled by default; `end_image_url` is supported for image-to-video |
+| Reference-guided video | `video_urls`/`image_urls`/`audio_urls`, `@` tokens, and `omni_reference_task_type: "reference"` | `auto` or 4–30s | Explicit ratio or `auto` | Up to 30 images, 10 videos, 10 audio files, 50 total; audio needs an image/video |
+| Edit source video | `video_urls`, explicit `omni_reference_task_type: "edit"` | Omit or `auto` → Pika `-1` | `auto` | Source must be 4–30s; timeline and framing are preserved |
+| Extend source video | `video_urls`, explicit `omni_reference_task_type: "extend"` | Numeric 4–30s continuation | `auto` | Source/reference duration limits still apply |
+
+The public `generate_video` contract uses `auto`/omission for source-locked edits. `-1` is only an internal Pika adapter value. Invalid combinations are rejected before submission and before credit charge with a corrective message.
 
 ## Storyboard-first production
 
