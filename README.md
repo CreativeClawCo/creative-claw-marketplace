@@ -32,7 +32,7 @@ Access 1,000+ production-ready AI models — FLUX, Gemini, Veo, Sora, Kling, See
 
 ### Skills (Creative Workflows)
 
-The **creativeclaw** root skill routes mixed or unclear requests. Focused outcome skills own general image, video, and voice work plus Characters, planning, Films, product photoshoots, UGC ads, and feedback. Model specialists add exact prompting and reference guidance only after an outcome chooses Nano Banana 2, Nano Banana Pro, GPT Image 2.5 Flare or Sunburst, Seedream 5 Pro, Gemini Omni, Seedance 2.5, H3 Max, or ElevenLabs v3.
+The **creativeclaw** root skill routes mixed or unclear requests. Focused outcome skills own general image, video, and voice work plus Characters, planning, Films, product photoshoots, UGC ads, and feedback. Model specialists add exact prompting and reference guidance only after an outcome chooses Nano Banana 2, Nano Banana Pro, GPT Image 2.5 Flare or Sunburst, Seedream 5 Pro, Gemini Omni, Seedance 2.5, H3 Max, ElevenLabs v3, or xAI TTS.
 
 Every OpenAI skill declares the ChatGPT MCP dependency at `https://app.creativeclaw.co/mcp/chatgpt`, matching the endpoint configured in the plugin draft. A focused skill can therefore activate directly without losing access to Creative Claw's tools.
 
@@ -64,7 +64,7 @@ Default to **Gemini 3.1 Flash (Nano Banana 2)** for most image generation and ed
 
 ### Recommended speech
 
-Use `speech/elevenlabs-v3` for narration, dialogue, emotional delivery, and multilingual speech. Creative Claw also supports consent-gated ElevenLabs Instant Voice Cloning as a separate Character workflow.
+Use `speech/elevenlabs-v3` by default for narration, dialogue, emotional delivery, and multilingual speech. Use `speech/xai-tts` when its 28 built-in voices, exact inline/wrapping performance tags, or G.711 telephony output are the better fit. Creative Claw also supports consent-gated ElevenLabs Instant Voice Cloning as a separate Character workflow.
 
 Use `list_models` and `get_model_params` at runtime rather than assuming a fixed catalog or reference limit.
 

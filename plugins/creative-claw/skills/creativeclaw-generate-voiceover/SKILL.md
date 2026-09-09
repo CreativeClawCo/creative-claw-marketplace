@@ -5,7 +5,7 @@ description: "Create narration, dialogue, or expressive speech with Creative Cla
 
 # Generate Voiceover
 
-Turn a script into performance-ready speech, normally with ElevenLabs v3. This skill owns casting, direction, generation, review, and delivery; the ElevenLabs specialist contains deeper voice and emotion guidance.
+Turn a script into performance-ready speech, normally with ElevenLabs v3. This skill owns casting, direction, generation, review, and delivery; model specialists contain deeper voice and performance guidance.
 
 ## Workflow
 
@@ -26,12 +26,12 @@ Conduct casting and review in the user's language. Preserve the supplied script 
 - `text` is required and is limited by the current tool schema; split long scripts on scene or paragraph boundaries.
 - `voice_id` selects a stock voice. `character_id` selects a saved Character's cloned ElevenLabs voice.
 - `audio_url` is not a general reference for ElevenLabs speech; it is exposed only for models that support audio prompting.
-- `emotion` is model-specific and is not the primary ElevenLabs v3 control. Use natural script structure and supported audio tags instead.
+- `emotion` is model-specific. ElevenLabs v3 and xAI TTS use their own documented in-text performance controls instead of a generic emotion value.
 - Inspect runtime support before setting `speed`, `format`, `sample_rate`, `language_boost`, or other advanced options.
 
 ## Casting and direction
 
-Use `creativeclaw-elevenlabs-v3` after routing to ElevenLabs for recommended voices, multilingual guidance, emotional tags, multi-speaker handling, and pronunciation strategy. Keep a stable voice ID across a project. For a new custom voice, use `creativeclaw-clone-voice`; cloning requires explicit consent and a valid sample.
+Use `creativeclaw-elevenlabs-v3` after routing to ElevenLabs for recommended voices, multilingual guidance, emotional tags, multi-speaker handling, and pronunciation strategy. Use `creativeclaw-xai-tts` after routing to xAI TTS for its 28 built-in voices, exact square-bracket events, wrapping delivery tags, language codes, and telephony formats. Keep a stable voice ID across a project. For a new custom voice, use `creativeclaw-clone-voice`; cloning requires explicit consent and a valid sample.
 
 ## Completion standard
 

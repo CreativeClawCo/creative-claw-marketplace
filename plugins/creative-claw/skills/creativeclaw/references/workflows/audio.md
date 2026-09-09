@@ -26,7 +26,7 @@ Call `list_models({ category: "speech" })` and `get_model_params` before generat
 | Broad voice and language selection with global emotion controls | `speech/minimax-hd`    | 300+ voices and 30+ languages.                                                                |
 | Two-speaker dialogue in one call                                | `speech/dia-tts`       | Use `[S1]` and `[S2]` plus supported nonverbal cues.                                          |
 | Emotive performance tags                                        | `speech/orpheus`       | Supports cues such as `<laugh>`, `<sigh>`, and `<gasp>`.                                      |
-| Expressive or telephony-ready output                            | `speech/xai-tts`       | Five voices, inline/wrapping tags, multilingual and G.711 formats.                            |
+| Expressive or telephony-ready output                            | `speech/xai-tts`       | 28 voices, inline/wrapping tags, multilingual and G.711 formats. Use `creativeclaw-xai-tts`.  |
 | Cheap clean draft                                               | `speech/kokoro`        | Fast low-cost testing.                                                                        |
 
 ## ElevenLabs v3
@@ -41,6 +41,11 @@ Call `list_models({ category: "speech" })` and `get_model_params` before generat
 Use `creativeclaw-clone-voice` for the complete consent, recording, import, replacement, cloning, and audition workflow. Creative Claw uses ElevenLabs Instant Voice Cloning through `clone_voice`, attaches the resulting voice to a Character, and reuses it with `generate_speech({ character_id, model: "speech/elevenlabs-v3", text })`.
 
 Never set `consent: true` unless the user explicitly confirms that the voice is their own or the speaker authorized cloning and use. Do not silently replace an existing Character voice.
+
+## xAI TTS
+
+Use `creativeclaw-xai-tts` for its complete voice catalog and exact tag grammar. Square-bracket tags such as `[pause]`, `[laugh]`, and `[sigh]` insert an event; angle-bracket tags such as `<whisper>…</whisper>` and `<build-intensity>…</build-intensity>` style a span. Do not reuse ElevenLabs forms such as `[laughs]`, `[whispers]`, or `[excited]` with xAI.
+
 ## Transcription and cleanup
 
 1. Import the source audio/video.

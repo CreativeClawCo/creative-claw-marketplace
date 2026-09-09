@@ -57,7 +57,7 @@ Use an explicit outcome over a generic modality. If the user names a model, keep
 
 Model catalogs change. Verify every recommendation with `list_models` and every nonstandard parameter with `get_model_params` immediately before use.
 
-For detailed image prompting, use `creativeclaw-nano-banana-2`, `creativeclaw-nano-banana-pro`, `creativeclaw-gpt-image-2`, or `creativeclaw-seedream-5-pro` when that model is selected. For detailed video and speech prompting, use `creativeclaw-gemini-omni`, `creativeclaw-seedance-2-5`, `creativeclaw-minimax-h3-max`, or `creativeclaw-elevenlabs-v3`. Model specialists support a workflow; they do not replace its outcome and approval rules.
+For detailed image prompting, use `creativeclaw-nano-banana-2`, `creativeclaw-nano-banana-pro`, `creativeclaw-gpt-image-2`, or `creativeclaw-seedream-5-pro` when that model is selected. For detailed video and speech prompting, use `creativeclaw-gemini-omni`, `creativeclaw-seedance-2-5`, `creativeclaw-minimax-h3-max`, `creativeclaw-elevenlabs-v3`, or `creativeclaw-xai-tts`. Model specialists support a workflow; they do not replace its outcome and approval rules.
 
 ## Shared production pattern
 

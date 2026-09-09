@@ -25,6 +25,7 @@ skill_names=(
   creativeclaw-seedance-2-5
   creativeclaw-minimax-h3-max
   creativeclaw-elevenlabs-v3
+  creativeclaw-xai-tts
   creativeclaw-clone-voice
   creativeclaw-find-examples
   creativeclaw-render-html-image
