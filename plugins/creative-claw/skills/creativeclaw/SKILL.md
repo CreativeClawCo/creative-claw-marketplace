@@ -19,7 +19,7 @@ Use the Creative Claw MCP server as a media workspace: source durable assets, ap
 8. **Do not invent tools or parameters.** If a tool is absent on the current client, follow `references/platform-client.md`. If a field is not in `get_model_params`, do not send it.
 9. **Capture actionable feedback.** Use `submit_feedback` for bugs, missing features or models, confusing flows, generation-quality problems, and explicit praise. Read `references/workflows/feedback.md` before reporting.
 10. **Match the user's language.** Conduct the workflow in the user's language, preserve supplied scripts and visible copy exactly, and verify the selected model supports the requested spoken or rendered language.
-11. **Use examples deliberately.** Route requests for examples, inspiration, styles, or a close starting point to `creativeclaw-find-examples`. Do not search the catalog before every generation.
+11. **Use examples deliberately.** For speech voice selection, use `get_model_params` and the voiceover workflow. For other media, route requests for examples, inspiration, styles, or a close starting point to `creativeclaw-find-examples`. Do not search the catalog before every generation.
 12. **Keep HTML rendering explicit.** Use `creativeclaw-render-html-image` or `creativeclaw-render-html-video` only when the user explicitly requests HTML/CSS, HyperFrames, code-driven rendering, or accepts that proposed method. Ordinary image or video requests stay with the generative skills.
 
 ## Route the request
@@ -57,7 +57,7 @@ Use an explicit outcome over a generic modality. If the user names a model, keep
 
 Model catalogs change. Verify every recommendation with `list_models` and every nonstandard parameter with `get_model_params` immediately before use.
 
-For detailed image prompting, use `creativeclaw-nano-banana-2`, `creativeclaw-nano-banana-pro`, `creativeclaw-gpt-image-2`, or `creativeclaw-seedream-5-pro` when that model is selected. For detailed video and speech prompting, use `creativeclaw-gemini-omni`, `creativeclaw-seedance-2-5`, `creativeclaw-minimax-h3-max`, `creativeclaw-elevenlabs-v3`, or `creativeclaw-xai-tts`. Model specialists support a workflow; they do not replace its outcome and approval rules.
+For detailed image prompting, use `creativeclaw-nano-banana-2`, `creativeclaw-nano-banana-pro`, `creativeclaw-gpt-image-2`, or `creativeclaw-seedream-5-pro` when that model is selected. For detailed video and speech prompting, use `creativeclaw-gemini-omni`, `creativeclaw-seedance-2-5`, `creativeclaw-minimax-h3-max`, `creativeclaw-elevenlabs-v3`, `creativeclaw-minimax-speech`, `creativeclaw-xai-tts`, or `creativeclaw-chatterbox`. Model specialists support a workflow; they do not replace its outcome and approval rules.
 
 ## Shared production pattern
 

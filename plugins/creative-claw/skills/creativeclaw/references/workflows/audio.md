@@ -23,11 +23,13 @@ Call `list_models({ category: "speech" })` and `get_model_params` before generat
 | Need                                                            | Model                  | Use                                                                                           |
 | --------------------------------------------------------------- | ---------------------- | --------------------------------------------------------------------------------------------- |
 | General narration, multilingual speech, expressive delivery     | `speech/elevenlabs-v3` | Default; natural speech, curated voices, inline audio tags, and timestamps.                   |
-| Broad voice and language selection with global emotion controls | `speech/minimax-hd`    | 300+ voices and 30+ languages.                                                                |
+| Broad voice and language selection with global emotion controls | `speech/minimax-hd`    | 300+ voices and 30+ languages. Use `creativeclaw-minimax-speech`.                              |
 | Two-speaker dialogue in one call                                | `speech/dia-tts`       | Use `[S1]` and `[S2]` plus supported nonverbal cues.                                          |
 | Emotive performance tags                                        | `speech/orpheus`       | Supports cues such as `<laugh>`, `<sigh>`, and `<gasp>`.                                      |
 | Expressive or telephony-ready output                            | `speech/xai-tts`       | 28 voices, inline/wrapping tags, multilingual and G.711 formats. Use `creativeclaw-xai-tts`.  |
 | Cheap clean draft                                               | `speech/kokoro`        | Fast low-cost testing.                                                                        |
+
+For one-off matching from an authorized reference recording, use `speech/chatterbox` with `creativeclaw-chatterbox`. Keep reusable Character voices in the consent-gated ElevenLabs clone workflow.
 
 ## ElevenLabs v3
 

@@ -10,7 +10,7 @@ Use `speech/elevenlabs-v3` as Creative Claw's primary and strongly recommended s
 ## Core workflow
 
 1. Identify language, audience, format, speaker profile, energy, pronunciation risks, and target duration.
-2. Recommend two or three curated voices that fit. Use Hale when the brief gives no useful preference.
+2. Reuse the requested voice or select a fitting default (Hale only for an unspecified English brief). Present choices only when the user wants to choose or the casting decision is material.
 3. Rewrite written copy into natural spoken language only when the user permits copy edits. Preserve exact approved wording otherwise.
 4. Add sparse inline `[audio tags]` at performance changes.
 5. Call `get_model_params({ model: "speech/elevenlabs-v3" })` and use current voice IDs and fields.
@@ -18,29 +18,11 @@ Use `speech/elevenlabs-v3` as Creative Claw's primary and strongly recommended s
 7. Listen for pronunciation, emotion, pacing, clipped words, tag leakage, and unwanted accent shifts. Regenerate only the affected segment when possible.
 8. Use returned timestamps for subtitles, captions, or lip-sync alignment.
 
-## Curated voices
+## Voice selection
 
-Use only current runtime-listed voice IDs. These eight voices are presently supported directly:
+Call `get_model_params({ model: "speech/elevenlabs-v3" })` for current curated IDs and language/accent labels. Match the script language and regional accent first, then tone and speaker profile. Offer at most two fitting choices unless the user asks to browse. A voice speaking another language may retain its original accent; setting `extras.language_code` does not change its native accent.
 
-| Voice | ID | Profile | Strong uses |
-| --- | --- | --- | --- |
-| Hale | `dXtC3XhB9GtPusIpNtQx` | Smooth, confident American male | Default, polished commercials, brand films, persuasive explainers. |
-| Sia | `qTRV75fy2dUja4REMifv` | Energetic American female | Lifestyle, beauty, DTC, social ads, optimistic launches. |
-| Christopher | `SSfU0eLfP3qeuR4j2bwD` | Deep promotional American male | Product explainers, technology, authoritative advertising. |
-| Rex Thunder | `mtrellq69YZsNwzUSyXh` | Intense cinematic American male | Sports, action, horror, dramatic trailers, high-impact hype. |
-| Foley | `YkHbp3e8G9cEwq8igiKg` | Mature documentary American male | Documentary, storytelling, grounded editorial narration. |
-| Silas | `5MzdXfNI3TSWsCPwZFrB` | Premium cinematic American male | Luxury, emotional brand films, slow dramatic narration. |
-| Marv | `3HVqMrtg7gWyWkIQWUAC` | Older trustworthy American male | Testimonials, heritage brands, finance, insurance, wise narrator. |
-| John | `lXyLz3Gu0YqdG8RfvIyZ` | High-energy American male | Launches, live-event promos, trailers, upbeat commercial reads. |
-
-Suggested pairs for dialogue:
-
-- Hale + Sia: warm, polished commercial conversation.
-- Christopher + Sia: authoritative explainer with energetic response.
-- Silas + Marv: cinematic narrator and experienced interviewee.
-- John + Foley: hype voice contrasted with grounded documentary delivery.
-
-Do not invent a voice ID. If the requested accent or profile is absent, explain the closest available curated option and suggest a short audition before producing the full script. If the user wants a reusable custom voice from a recording, use `creativeclaw-clone-voice`; after cloning, return here and generate speech with its `character_id`.
+Use only catalog IDs or the user's saved Character. For Hebrew, the catalog includes Noam, a workspace-designed Israeli Hebrew voice; do not describe an English or MiniMax voice as a second native Hebrew option without evidence. For a reusable custom voice from a recording, use `creativeclaw-clone-voice`, then generate with its `character_id`.
 
 ## Write for speech
 
@@ -192,7 +174,7 @@ Hebrew commercial:
 ```json
 {
   "model": "speech/elevenlabs-v3",
-  "voice_id": "dXtC3XhB9GtPusIpNtQx",
+  "voice_id": "qSpyK5dRmXMRXTjrQTQA",
   "text": "[curious] מה אם הרעיון הבא שלכם כבר מוכן להפוך לסרט? [pause] [excited] מתחילים עכשיו.",
   "extras": {
     "language_code": "he",

@@ -5,8 +5,6 @@ description: "Apply xAI TTS voice casting, expressive speech-tag prompting, mult
 
 # Creative Claw — xAI TTS
 
-Read [shared execution guidance](references/workflow-basics.md) once per task before using tools. It covers existing authorization, model discovery, optional cost checks, imports, and recovery.
-
 Use this model specialist inside `creativeclaw-generate-voiceover`. It supplies casting and performance direction for `speech/xai-tts`; the outcome skill still owns the script, generation, review, and delivery.
 
 xAI TTS is a strong fit for expressive narration, assistants, podcasts, long copy, and phone/IVR audio. Its distinctive control surface is markup inside `text`: square-bracket inline events create a sound or pause at one point, while angle-bracket wrapping tags change the delivery of a complete phrase.
@@ -15,7 +13,7 @@ xAI TTS is a strong fit for expressive narration, assistants, podcasts, long cop
 
 1. Identify the language, audience, use case, speaker character, emotional arc, pronunciation risks, output destination, and target duration.
 2. Select `speech/xai-tts`, then call `get_model_params({ model: "speech/xai-tts" })` so runtime fields and voice availability remain authoritative.
-3. Recommend two or three voices from the catalog below. Use Eve only when the brief gives no useful casting preference.
+3. Offer two fitting voices from the runtime catalog when the user wants to choose. Use Eve only when the brief gives no useful casting preference.
 4. Preserve approved wording. Add supported speech tags only when they fit the requested performance.
 5. Call `generate_speech` with `model`, `text`, and `voice_id`. Add language or output settings only when needed.
 6. Audition pronunciation, pace, emotional fit, cue execution, tag leakage, clipping, and consistency. Revise punctuation or the smallest affected tagged span before recasting.
@@ -42,42 +40,9 @@ xAI TTS is a strong fit for expressive narration, assistants, podcasts, long cop
 - Do not send a generic `emotion` value for xAI TTS. Through Creative Claw, shape emotion with casting, writing, punctuation, inline events, and wrapping styles.
 - Use the runtime schema instead of copying parameters from xAI's direct API. Provider features are not necessarily exposed by the Creative Claw wrapper.
 
-## Built-in voices
+## Voice selection
 
-Voice IDs are lowercase and case-insensitive at the provider. Treat `get_model_params` as authoritative if the catalog changes.
-
-| Voice ID  | Character                               | Strong uses                                       |
-| --------- | --------------------------------------- | ------------------------------------------------- |
-| `carina`  | Soft, empathetic, soothing              | Wellness, sensitive support, intimate reassurance |
-| `zagan`   | Powerful, dramatic, unmistakable        | Character work, trailers, dramatic narration      |
-| `helix`   | Bold, dynamic, adrenaline-fueled        | Commentary, sports, energetic podcasts            |
-| `orion`   | Rich, cinematic, resonant               | Narration, audiobooks, premium storytelling       |
-| `luna`    | Gentle, patient, deeply nurturing       | Education, assistants, guided care                |
-| `iris`    | Friendly, upbeat, naturally charming    | Sales, support, approachable explainers           |
-| `altair`  | Elegant, refined, premium               | Advertising, luxury narration, brand films        |
-| `zenith`  | Sharp, focused, driven                  | Sales, advertising, direct calls to action        |
-| `perseus` | Strong, confident, trustworthy          | Advertising, narration, corporate authority       |
-| `helios`  | Upbeat, energetic, versatile            | Assistants, wellness, broad commercial work       |
-| `lux`     | Grounded, calm, quietly wise            | Wellness, reflective narration, guidance          |
-| `kepler`  | Inventive, forward-looking, charismatic | Advertising, technology, podcasts                 |
-| `rigel`   | Precise, professional, calmly confident | Assistants, support, business explainers          |
-| `cosmo`   | Bright, curious, easy to follow         | Education, podcasts, discovery content            |
-| `celeste` | Compassionate, confident, reassuring    | Support, assistants, sensitive guidance           |
-| `ursa`    | Friendly, warm, steadfast               | Assistants, podcasts, dependable narration        |
-| `sirius`  | Quick-witted, clever, playful           | Commentary, comedy, character reads               |
-| `lumen`   | Warm, articulate, engaging              | Education, advertising, clear explainers          |
-| `castor`  | Charismatic, down-to-earth, easygoing   | Sales, support, conversational ads                |
-| `naksh`   | Warm, thoughtful, wise                  | Assistants, support, considered narration         |
-| `atlas`   | Confident, commanding, reassuring       | Sales, assistants, authoritative guidance         |
-| `aurora`  | Serene, steady, radiant                 | Support, assistants, calm brand work              |
-| `liora`   | Calm, grounded, luminous                | Wellness, assistants, reflective reads            |
-| `ara`     | Warm, friendly                          | Welcomes, support, approachable narration         |
-| `eve`     | Energetic, upbeat; provider default     | Launches, social ads, lively explainers           |
-| `leo`     | Authoritative, strong                   | Announcements, leadership, serious narration      |
-| `rex`     | Confident, clear                        | IVR, explainers, product narration                |
-| `sal`     | Smooth, balanced                        | General narration, podcasts, neutral delivery     |
-
-Choose the base voice for the performance rather than trying to transform a mismatched voice with tags. For example, start with Carina, Luna, Celeste, Aurora, or Liora for reassurance; Zagan or Orion for drama; Eve, Helios, or Helix for high energy; Leo, Atlas, Perseus, or Rex for authority; and Sirius or Castor for playful conversation.
+Use `get_model_params({ model: "speech/xai-tts" })` for the complete voice catalog, tone labels, and exact language codes. Choose timbre by use case, set `extras.language`, and audition pronunciation when requested. The voices are cross-language characters; a name does not establish a native regional accent. Keep one ID per speaker across a project.
 
 ## Speech-tag grammar
 

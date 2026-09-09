@@ -31,6 +31,10 @@ All filters are optional. Start with the smallest useful set:
 
 If a narrow search returns nothing, relax tags first, then broaden the query or omit the model filter. Do not silently change an explicit output type.
 
+## Voice selection
+
+For speech voices, use `get_model_params` for the selected model and follow `creativeclaw-generate-voiceover`. Do not use this catalog to select or audition voices.
+
 ## Selection and use
 
 1. Call `search_examples` and present a concise shortlist with each example's title, media type, preview, model when present, and why it fits.

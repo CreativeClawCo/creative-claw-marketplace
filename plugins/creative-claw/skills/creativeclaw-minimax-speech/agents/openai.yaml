@@ -1,0 +1,13 @@
+interface:
+  display_name: "Creative Claw — MiniMax Speech"
+  short_description: "Cast multilingual MiniMax HD voiceovers"
+  default_prompt: "Use $creativeclaw-minimax-speech to cast and direct this multilingual voiceover."
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "creative-claw"
+      description: "Creative Claw media, asset, Character, Film, and feedback tools"
+      transport: "streamable_http"
+      url: "https://app.creativeclaw.co/mcp/chatgpt"
+policy:
+  allow_implicit_invocation: true

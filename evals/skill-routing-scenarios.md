@@ -56,3 +56,5 @@ Use these scenarios as regression checks for skill activation and tool behavior.
 - Negative scenarios make no forbidden mutation.
 - Multilingual prompts preserve the user's language and exact supplied copy.
 - Queued work is never described as complete before a finished media URL exists.
+| 60 | Read this Spanish narration with MiniMax using a calm native system voice. | `creativeclaw-generate-voiceover` | Uses the MiniMax speech specialist, a Spanish system voice, `language_boost: "Spanish"`, and no ElevenLabs or xAI tags. |
+| 61 | Match my authorized reference recording for this one-off English line; do not save a reusable clone. | `creativeclaw-generate-voiceover` | Uses the Chatterbox specialist with `audio_url`, preserves the one-off boundary, and confirms voice-use authorization without creating a Character. |
