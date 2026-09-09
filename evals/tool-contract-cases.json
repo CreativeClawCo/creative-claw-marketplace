@@ -1,0 +1,16 @@
+[
+  { "tool": "list_models", "input": { "category": "image" } },
+  { "tool": "list_models", "input": { "category": "video" } },
+  { "tool": "list_models", "input": { "category": "speech" } },
+  { "tool": "list_models", "input": { "category": "audio" } },
+  { "tool": "generate_speech", "input": { "model": "speech/elevenlabs-v3", "text": "The exact supplied line." } },
+  { "tool": "estimate_generation", "input": { "operation": "image", "model": "image/nano-banana-2", "params": { "num_images": 1 } } },
+  { "tool": "estimate_generation", "input": { "operation": "speech", "model": "speech/elevenlabs-v3", "params": { "text": "The exact supplied line." } } },
+  { "tool": "estimate_generation", "input": { "operation": "audio", "model": "music/elevenlabs-music-v1", "params": { "music_length_ms": 30000 } } },
+  { "tool": "estimate_generation", "input": { "operation": "html_video", "params": { "duration": 8, "fps": 30, "width": 1080, "height": 1920 } } },
+  { "tool": "trim_video", "input": { "video_url": "https://example.com/source.mp4", "start_time": 0, "end_time": 12 } },
+  { "tool": "scale_video", "input": { "video_url": "https://example.com/trimmed.mp4", "width": 1080, "height": 1920, "mode": "pad" } },
+  { "tool": "add_subtitles", "input": { "video_url": "https://example.com/vertical.mp4", "language": "he", "position": "bottom" } },
+  { "tool": "transcribe", "input": { "video_url": "https://example.com/source.mp4", "language_code": "he" } },
+  { "tool": "merge_media", "input": { "operation": "merge_audios", "audio_urls": ["https://example.com/merged-1-5.mp3", "https://example.com/6.mp3", "https://example.com/7.mp3", "https://example.com/8.mp3"] } }
+]

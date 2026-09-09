@@ -5,6 +5,8 @@ description: "Add an intro, outro, or both to an existing video with Creative Cl
 
 # Add Video Intro and Outro
 
+Read [shared execution guidance](references/workflow-basics.md) once per task before using tools. It covers existing authorization, model discovery, optional cost checks, imports, and recovery.
+
 Create or reuse opening and closing segments, then concatenate them around the main video. This skill owns the bookend workflow and final merge; it does not assume the intro or outro must be HTML-rendered.
 
 ## Choose the segment source
@@ -19,7 +21,7 @@ This boundary matters: an intro/outro request alone does not authorize the HTML 
 ## Workflow
 
 1. Identify the main video's durable URL, dimensions, aspect ratio, frame rate, audio, and intended platform. Import local or attached files before editing.
-2. Confirm which segments are needed, their exact copy, logo, duration, audio, transition intent, and whether they should end or begin on a specific color or frame.
+2. Use the requested segments, copy, logo, duration, audio, and transition choices. Infer minor styling defaults; ask only about missing copy or a material unresolved choice, and do not repeat earlier approvals.
 3. Create or load the intro and outro. Match the main video's width, height, frame rate, and preferably codec. Use `scale_video` or `trim_video` before assembly when necessary.
 4. Resolve every queued segment job with `check_job` and inspect each clip before merging.
 5. Call `merge_media({ operation: "merge_videos", video_urls: [...] })` in exact playback order: intro when present, main video, then outro when present.

@@ -5,6 +5,8 @@ description: "Apply Nano Banana Pro prompting and reference techniques after Cre
 
 # Creative Claw — Nano Banana Pro
 
+Read [shared execution guidance](references/workflow-basics.md) once per task before using tools. It covers existing authorization, model discovery, optional cost checks, imports, and recovery.
+
 Use `image/nano-banana-pro` when a brief is too complex or high-stakes for the default image route: many independently defined references, demanding spatial relationships, professional campaign layouts, or precise multilingual typography. Use Nano Banana 2 for ordinary work and faster iteration.
 
 ## Core workflow
@@ -12,9 +14,9 @@ Use `image/nano-banana-pro` when a brief is too complex or high-stakes for the d
 1. Define the output, audience, ratio, hierarchy, exact copy, and the details that must survive generation unchanged.
 2. Search existing assets and import every reference into Creative Claw.
 3. Build a reference manifest before prompting. Give each image one principal role and identify the attributes to preserve.
-4. Call `get_model_params({ model: "image/nano-banana-pro" })` immediately before use.
+4. Call `get_model_params({ model: "image/nano-banana-pro" })` when not already fetched for this task.
 5. Use `agentic_prompting: false` for exact text, hex colors, legal copy, reference-number mappings, annotated layouts, or a finished professional prompt.
-6. Generate at 1K or 2K while resolving composition. Use 4K only for an approved final that benefits from the added detail.
+6. Honor requested resolution directly. Use 1K or 2K when the user wants to explore composition; do not require an extra draft before a requested 4K result.
 7. Inspect reference fidelity, faces, product geometry, text, layout, materials, lighting logic, and localization.
 8. Revise with a targeted edit. Do not re-roll a nearly approved asset from scratch.
 

@@ -5,6 +5,8 @@ description: "Send actionable feedback to the Creative Claw team. Use when the u
 
 # Submit Feedback
 
+Read [shared execution guidance](references/workflow-basics.md) once per task before using tools. It covers existing authorization, model discovery, optional cost checks, imports, and recovery.
+
 Turn the user's report into one concise, useful `submit_feedback` call. Feedback is a support channel; it is not a generation tool and does not guarantee a reply or roadmap commitment.
 
 ## When to use

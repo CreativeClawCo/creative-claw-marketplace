@@ -5,6 +5,8 @@ description: "Apply MiniMax H3 Max prompting, storyboard, and reference techniqu
 
 # Creative Claw — MiniMax H3 Max
 
+Read [shared execution guidance](references/workflow-basics.md) once per task before using tools. It covers existing authorization, model discovery, optional cost checks, imports, and recovery.
+
 Use `video/minimax-h3-max` for fast, aesthetically strong 480P, 768P, or Full HD (1080P) video with native synchronized audio, optional first/last frames, and multimodal references. Use `video/minimax-h3-max-turbo` only when the user prioritizes lower latency and cost and does not need reference video or reference audio.
 
 Do not invent an `h3-max-lite` model ID. The current faster lightweight route is `video/minimax-h3-max-turbo`.
@@ -13,8 +15,8 @@ Do not invent an `h3-max-lite` model ID. The current faster lightweight route is
 
 1. Define one shot: duration, ratio, subject, action, camera, audio, and continuity anchors.
 2. Search or import source assets.
-3. Generate and approve a clean storyboard frame with `image/nano-banana-2`. For a controlled transition, create both opening and ending frames before video generation.
-4. Call `get_model_params({ model: "video/minimax-h3-max" })` immediately before generation.
+3. Reuse a supplied opening image. Generate a storyboard only when requested or unresolved appearance/continuity needs it; a clear text-to-video request can proceed directly. Create missing boundary frames only when the requested transition needs them.
+4. Fetch missing settings with `get_model_params` for the exact selected H3 Max or Turbo model; reuse its schema for unchanged shots.
 5. Choose text, first-frame, first-to-last, or reference mode deliberately.
 6. Assign every reference a role using H3 Max's one-based `Image 1`, `Video 1`, and `Audio 1` language.
 7. Set `agentic_prompting: false` for exact reference labels, dialogue, timecodes, or locked prompt structure.

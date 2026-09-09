@@ -5,18 +5,20 @@ description: "Apply Seedance 2.5 prompting, storyboard, and reference techniques
 
 # Creative Claw — Seedance 2.5
 
+Read [shared execution guidance](references/workflow-basics.md) once per task before using tools. It covers existing authorization, model discovery, optional cost checks, imports, and recovery.
+
 Use `video/seedance-2.5` for long, premium, reference-rich generation with native synchronized audio. Prefer it when the clip needs more references, more duration, a controlled destination frame, or richer scene direction than the default video route.
 
 ## Core workflow
 
 1. Define the deliverable, duration, ratio, shot count, subjects, continuity, audio, and reference roles.
 2. Search for existing assets and import every external image, video, or audio file into Creative Claw.
-3. Build and approve a storyboard before a polished generation. Create separate full-frame start images for each shot with `image/nano-banana-2`; use Nano Banana Pro only when the visual brief is unusually complex.
+3. Reuse supplied/approved references. Create storyboards only for requested planning or unresolved visual continuity; do not add a storyboard gate to a clear single-clip request.
 4. Create an end frame when the clip needs a precise landing pose, transition, loop, reveal, or match cut.
 5. Call `get_model_params({ model: "video/seedance-2.5" })`. Runtime values override remembered limits. For reference-to-video, choose `extras.omni_reference_task_type` deliberately rather than relying on prompt inference for edits or extensions.
 6. Assign every reference a written role and cite it with the exact `@ImageN`, `@VideoN`, or `@AudioN` token.
 7. Set `agentic_prompting: false` for authored tokens, exact dialogue, timecodes, or precise shot plans.
-8. Generate a 480p or 720p proof first when iteration is expected. Use 1080p after the shot is approved.
+8. Honor requested resolution directly. Use a lower-resolution proof only when the user wants drafts or has authorized that iteration workflow.
 9. Inspect the output before merging it into a sequence.
 
 ## Current model contract
@@ -51,7 +53,7 @@ For `edit` and `extend`, include at least one `video_urls` entry and state the o
 
 ## Storyboard-first production
 
-Use storyboards aggressively:
+When storyboarding is needed:
 
 1. Write the shot's dramatic purpose and one visible action.
 2. Generate a clean start frame with the exact target ratio. Keep it full bleed and free of labels, panels, captions, arrows, or UI.

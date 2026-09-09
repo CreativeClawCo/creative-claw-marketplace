@@ -1,9 +1,11 @@
 ---
 name: creativeclaw-generate-audio
-description: "Generate sound effects, ambience, Foley, or music with Creative Claw. Use for non-speech audio; use the voiceover skill for narration, dialogue, or a speaking character. (v0.5.6)"
+description: "Generate sound effects, ambience, Foley, or music with Creative Claw. Use for non-speech audio; use the voiceover skill for narration, dialogue, or a speaking character."
 ---
 
 # Generate Audio
+
+Read [shared execution guidance](references/workflow-basics.md) once per task before using tools. It covers existing authorization, model discovery, optional cost checks, imports, and recovery.
 
 Create a finished sound effect, ambience bed, Foley cue, or music track with ElevenLabs through Creative Claw. Keep speech in `creativeclaw-generate-voiceover`; `generate_speech` and `generate_audio` use different provider endpoints and parameter contracts.
 
@@ -22,13 +24,13 @@ Do not send a sound-effect or music model to `generate_speech`. Do not describe 
 ## Workflow
 
 1. Identify the result as speech, sound effect, ambience, or music. Clarify duration and whether the audio must loop, end cleanly, contain vocals, or match picture.
-2. Call `list_models({ category: "audio" })`, choose the exact model, and call `get_model_params` before using model-specific fields.
-3. Write a production prompt. Read [references/prompting.md](references/prompting.md) for the relevant sound-effect or music pattern.
-4. State the model, duration, and consequential settings before a long music track or batch.
+2. Choose the SFX or music model from the requested outcome and fetch missing settings with `get_model_params`. Use `list_models({ category: "audio" })` when discovery is needed.
+3. When the user wants inspiration or a starting point, use `creativeclaw-find-examples` with `output_type: "audio"` and load the chosen example. Otherwise write the production prompt directly. Read [references/prompting.md](references/prompting.md) for the relevant pattern.
+4. Use `estimate_generation` with `operation: "audio"` only when the user asks about cost/balance or gives a budget constraint. State consequential settings without a routine approval question.
 5. Call `generate_audio`. Keep each requested variation as a separate generation so the user can audition it independently.
 6. Listen for timing, unwanted voices, clipping, noise, loop seams, weak endings, and whether the sound matches the described space and intensity. Revise the prompt based on the audible defect.
 7. Preserve the approved permanent audio URL. Name and tag the asset when useful for a larger project.
-8. If the audio must accompany video, first make one final audio track, then use `merge_media({ operation: "merge_audio_video", video_url, audio_url })`. Resolve queued merge work with `check_job`.
+8. Read [media-assembly.md](references/media-assembly.md) before combining segments or adding audio to video. Check durations, follow merge continuations, and distinguish concatenation from layering. Resolve required merges with `check_job`.
 
 ## Sound-effect contract
 

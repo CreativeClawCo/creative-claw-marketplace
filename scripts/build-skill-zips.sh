@@ -8,6 +8,7 @@ focused_skill_names=(
   creativeclaw-generate-video
   creativeclaw-generate-voiceover
   creativeclaw-generate-audio
+  creativeclaw-edit-media
   creativeclaw-create-character
   creativeclaw-plan-video
   creativeclaw-build-film
@@ -45,6 +46,7 @@ if [[ ! -f "$skill_source/SKILL.md" || ! -d "$chatgpt_overlay_root" ]]; then
   exit 1
 fi
 
+node "$repo_root/scripts/sync-skill-references.mjs"
 bash "$repo_root/scripts/validate-skill-architecture.sh"
 
 mkdir -p "$temp_root/general/creativeclaw" "$temp_root/chatgpt/creativeclaw"
@@ -107,3 +109,20 @@ for focused_skill_name in "${focused_skill_names[@]}"; do
   archive_paths+=("$repo_root/$focused_skill_name-chatgpt-skill.zip")
 done
 shasum -a 256 "${archive_paths[@]}"
+
+node "$repo_root/scripts/validate-skill-packages.mjs"
+
+# Convenience download containing individual skill ZIPs; not itself a skill.
+mkdir -p "$temp_root/upload-kit"
+cp "$repo_root/submission/OPENAI-UPLOADS.txt" "$temp_root/upload-kit/OPENAI-UPLOADS.txt"
+cp "$repo_root/creativeclaw-chatgpt-skill.zip" "$temp_root/upload-kit/"
+for focused_skill_name in "${focused_skill_names[@]}"; do
+  cp "$repo_root/$focused_skill_name-chatgpt-skill.zip" "$temp_root/upload-kit/"
+done
+find "$temp_root/upload-kit" -type f -exec touch -t 202601010000 {} +
+(
+  cd "$temp_root/upload-kit"
+  find . -type f -print | LC_ALL=C sort | zip -X -q "$temp_root/creativeclaw-openai-upload-kit.zip" -@
+)
+mv -f "$temp_root/creativeclaw-openai-upload-kit.zip" "$repo_root/creativeclaw-openai-upload-kit.zip"
+shasum -a 256 "$repo_root/creativeclaw-openai-upload-kit.zip"

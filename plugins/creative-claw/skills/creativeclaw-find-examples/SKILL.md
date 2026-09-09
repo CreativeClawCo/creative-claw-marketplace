@@ -5,6 +5,8 @@ description: "Search, filter, load, and adapt Creative Claw's curated image, vid
 
 # Find Creative Claw Examples
 
+Read [shared execution guidance](references/workflow-basics.md) once per task before using tools. It covers existing authorization, model discovery, optional cost checks, imports, and recovery.
+
 Use the curated catalog to help the user choose a direction before generation. Searching and loading examples are read-only: neither tool spends generation credits or creates media.
 
 ## When to use it

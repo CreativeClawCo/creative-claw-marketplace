@@ -5,6 +5,8 @@ description: "Apply xAI TTS voice casting, expressive speech-tag prompting, mult
 
 # Creative Claw — xAI TTS
 
+Read [shared execution guidance](references/workflow-basics.md) once per task before using tools. It covers existing authorization, model discovery, optional cost checks, imports, and recovery.
+
 Use this model specialist inside `creativeclaw-generate-voiceover`. It supplies casting and performance direction for `speech/xai-tts`; the outcome skill still owns the script, generation, review, and delivery.
 
 xAI TTS is a strong fit for expressive narration, assistants, podcasts, long copy, and phone/IVR audio. Its distinctive control surface is markup inside `text`: square-bracket inline events create a sound or pause at one point, while angle-bracket wrapping tags change the delivery of a complete phrase.

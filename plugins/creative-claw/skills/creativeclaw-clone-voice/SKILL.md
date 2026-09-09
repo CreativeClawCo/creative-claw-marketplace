@@ -5,6 +5,8 @@ description: Create, replace, audition, and reuse a consented ElevenLabs Instant
 
 # Creative Claw — ElevenLabs Voice Cloning
 
+Read [shared execution guidance](references/workflow-basics.md) once per task before using tools. It covers existing authorization, model discovery, optional cost checks, imports, and recovery.
+
 Create a reusable voice with ElevenLabs Instant Voice Cloning, attach it to a Creative Claw Character, and use that Character with `speech/elevenlabs-v2`. Keep this workflow separate from `creativeclaw-elevenlabs-v2`, which handles steady professional narration and settings. Use creativeclaw-elevenlabs-v3 for expressive audio tags or languages outside v2. Changing the TTS model does not require a new clone and does not upgrade IVC to PVC.
 
 ## Core workflow

@@ -5,6 +5,8 @@ description: "Create a coherent set of campaign-ready product images with Creati
 
 # Product Photoshoot
 
+Read [shared execution guidance](references/workflow-basics.md) once per task before using tools. It covers existing authorization, model discovery, optional cost checks, imports, and recovery.
+
 Produce a consistent image set, not a collection of unrelated prompts. The product's geometry, label, color, materials, and brand treatment are the locked anchors.
 
 ## Prepare
@@ -19,9 +21,9 @@ Conduct the workflow in the user's language and preserve all approved product an
 ## Generate
 
 1. Default to `image/nano-banana-2` because it is the cost-efficient recommendation for most product work.
-2. Escalate to `image/nano-banana-pro`, `image/gpt-image-2`, or `image/seedream-5-pro` only when exact typography, difficult editing, or premium commercial styling materially benefits.
-3. Call `list_models({ modality: "image" })` and `get_model_params` before model-specific references or settings.
-4. Generate the hero direction first. After approval, derive the rest of the set while repeating the locked product facts and using the approved image as a reference where supported.
+2. Escalate to `image/nano-banana-pro`, `image/gpt-image-2.5-sunburst`, or `image/seedream-5-pro` only when exact typography, difficult editing, or premium commercial styling materially benefits.
+3. Discover with `list_models({ category: "image" })` only when selecting a model; fetch missing settings with `get_model_params` and reuse them across the set. Estimate planned images only when the user asks about cost or sets a budget.
+4. Establish a hero direction, reusing an approved reference when supplied. Follow requested review stages; if the user authorizes the complete set, continue without asking for each shot. Repeat locked product facts and use the selected hero as a reference where supported.
 5. Use `agentic_prompting: false` for exact label copy, reference tokens, strict placement, or locked campaign instructions.
 
 ## Quality control

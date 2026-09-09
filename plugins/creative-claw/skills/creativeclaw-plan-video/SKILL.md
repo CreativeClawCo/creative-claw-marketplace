@@ -5,6 +5,8 @@ description: "Plan a video as an approved script, shot list, and storyboard with
 
 # Plan Video
 
+Read [shared execution guidance](references/workflow-basics.md) once per task before using tools. It covers existing authorization, model discovery, optional cost checks, imports, and recovery.
+
 Convert a concept into an execution-ready video plan before spending on clips. This skill stops at an approved plan or storyboard unless the user also asks for production.
 
 ## Plan the story
@@ -18,7 +20,7 @@ Write the plan in the user's language and preserve approved dialogue or on-scree
 
 ## Build the storyboard
 
-Create two artifacts with `creativeclaw-generate-image`:
+For a visual storyboard request, create the needed artifacts with `creativeclaw-generate-image`. A text-only plan does not require images; reuse approved frames and skip duplicate review boards when unnecessary:
 
 - A review board or contact sheet for fast approval of composition, pacing, and continuity.
 - One clean, text-free image per approved shot for use as a video start frame. Do not feed a labeled grid or multi-panel board to a video model as the shot reference.
@@ -31,4 +33,4 @@ If the user intends to continue into production, call `create_film_project` and 
 
 ## Approval gate
 
-Present the script, shot order, estimated duration, model plan, and storyboard for approval before generating paid video clips. When the user approves and wants production, hand off to `creativeclaw-build-film`.
+Present the requested plan/storyboard and honor review stages and existing approval. Planning alone does not authorize video generation. When production is also requested and its applicable stage is approved, continue with `creativeclaw-build-film` without asking the same question again.

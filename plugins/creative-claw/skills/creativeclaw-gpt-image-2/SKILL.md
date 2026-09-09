@@ -5,6 +5,8 @@ description: "Apply GPT Image 2.5 Sunburst and Flare prompting and editing techn
 
 # Creative Claw — GPT Image 2.5
 
+Read [shared execution guidance](references/workflow-basics.md) once per task before using tools. It covers existing authorization, model discovery, optional cost checks, imports, and recovery.
+
 Choose the explicit variant that matches the job:
 
 - `image/gpt-image-2.5-flare` for fast, high-quality everyday generation and editing.

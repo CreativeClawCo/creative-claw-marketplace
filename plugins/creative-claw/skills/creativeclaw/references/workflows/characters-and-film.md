@@ -34,7 +34,7 @@ Pass `character_id` for saved identity context. When a storyboard or edit canvas
 
 ## Film approval pipeline
 
-Use three user approval gates. Do not spend on later stages before the prior gate is approved.
+Honor the requested script, storyboard, and final review stages. Reuse approval already given, including explicit instructions to continue through stages; do not ask the same question again. Follow [shared execution guidance](../workflow-basics.md).
 
 ### Gate 1: script
 
@@ -42,7 +42,7 @@ Use three user approval gates. Do not spend on later stages before the prior gat
 2. Draft a logline and shot list with narration/dialogue.
 3. Keep each shot within the selected model's duration cap; do not assume every model caps at 15s.
 4. Save with `update_film_project` and show the project.
-5. Wait for explicit script approval.
+5. Obtain script approval if it has not already been given and the user has not authorized continuing through this stage.
 
 ### Gate 2: storyboards
 
@@ -50,7 +50,7 @@ Use three user approval gates. Do not spend on later stages before the prior gat
 2. Generate one clean storyboard/keyframe per shot using an edit-capable image model that preserves the intended identity and style.
 3. For real-person likeness, compare a leading edit model when uncertain instead of relying on a stale universal rule.
 4. Use `size` for the target frame ratio.
-5. Patch each shot with its `storyboardUrl`, show the project, and wait for look approval.
+5. Patch each shot with its `storyboardUrl`, show the project, and honor the applicable look-review stage without repeating existing approval.
 
 ### Gate 3: clips, audio, and assembly
 
@@ -62,7 +62,7 @@ Use three user approval gates. Do not spend on later stages before the prior gat
 6. Use `extract_frames` to carry the last frame into the next shot when serial continuity is needed.
 7. Mux per-shot audio into its clip with `merge_media`, or save one approved full narration track as the project's `audio_url`.
 8. Call `assemble_film({ id })` only after every intended shot has an approved `clipUrl`.
-9. Treat the result as an assembled first cut. Show it and wait for final approval before marking it final; assembly does not add transitions, captions, per-shot audio, or a full sound mix.
+9. Resolve the assembly job with `check_job` before delivering the first cut. Read [media-assembly.md](../media-assembly.md) for duration matching, merge continuations, and track handling. Honor the applicable final review before marking it final; assembly does not add transitions, captions, per-shot audio, or a full sound mix.
 
 ## Shot rules
 
@@ -71,7 +71,7 @@ Use three user approval gates. Do not spend on later stages before the prior gat
 - Avoid impossible duplication of one Character within the same generated shot unless the selected model and reference method explicitly support it.
 - Use exact dialogue in quotes and direct audio behavior explicitly.
 - Preserve approved storyboards and clips as named assets; do not overwrite the anchors during revision.
-- Explain cost before a multi-shot batch and do not silently swap models after failure.
+- Discuss estimates when the user asks about cost or supplies a budget; do not silently swap models after failure.
 
 ## Tools
 

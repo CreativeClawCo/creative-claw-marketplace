@@ -5,6 +5,8 @@ description: "Apply Nano Banana 2 prompting and reference techniques after Creat
 
 # Creative Claw — Nano Banana 2
 
+Read [shared execution guidance](references/workflow-basics.md) once per task before using tools. It covers existing authorization, model discovery, optional cost checks, imports, and recovery.
+
 Use `image/nano-banana-2` as Creative Claw's default for most image generation and editing. It is the primary cost-efficient recommendation, offering the best general balance of visual quality, instruction understanding, speed, output resolution, and iteration cost.
 
 ## Core workflow
@@ -12,9 +14,9 @@ Use `image/nano-banana-2` as Creative Claw's default for most image generation a
 1. Define the deliverable, intended placement, aspect ratio, subject, composition, required text, style, and protected brand details.
 2. Search the Creative Claw asset library before creating replacements. Import any ChatGPT attachments or external references into durable Creative Claw URLs.
 3. If references are supplied, assign one explicit role to each: base scene, identity, product, wardrobe, logo, palette, layout, or style.
-4. Call `get_model_params({ model: "image/nano-banana-2" })` immediately before generation. Its current schema overrides remembered limits.
+4. Call `get_model_params({ model: "image/nano-banana-2" })` before generation when not already fetched for this task. Its current schema overrides remembered limits.
 5. Use `agentic_prompting: false` when the prompt contains exact quoted copy, hex colors, reference-number mappings, or a carefully authored edit instruction.
-6. Generate one image for a specific direction or up to four for genuine visual exploration. Start at 1K; move to 2K or 4K after approving the direction.
+6. Honor requested resolution and output count. Otherwise generate one image at 1K for a specific direction, or the requested variations for exploration. Add a draft-to-final pass only when that workflow is requested or already authorized.
 7. Inspect text, identity, hands, product geometry, logos, reference roles, composition, and localized copy before calling the result finished.
 8. Prefer a focused edit of the selected result over restarting from text when only one element is wrong.
 

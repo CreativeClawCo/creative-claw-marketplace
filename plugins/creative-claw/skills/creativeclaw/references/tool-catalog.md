@@ -30,7 +30,6 @@ Use `creativeclaw-find-examples` when the user asks for examples, inspiration, s
 
 | Tool                | Use                                                                                                            |
 | ------------------- | -------------------------------------------------------------------------------------------------------------- |
-| `render_html`       | Show a live sandboxed HTML preview; does not create a media asset.                                             |
 | `render_html_image` | Render a deterministic HTML/CSS layout to a PNG via Chromium.                                                  |
 | `render_html_video` | Queue a HyperFrames-backed HTML/CSS/JS motion render; resolve the final video URL with `check_job`.            |
 | `create_template`   | Save a reusable parameterized HTML or generative layout.                                                       |
@@ -88,7 +87,7 @@ Read `platform-upload.md` before choosing an import route.
 | `add_subtitles`     | Burn captions into video.                                                                 |
 | `extract_frames`    | Extract one or more still frames from video.                                              |
 | `merge_media`       | Concatenate videos or audio, or combine an audio track with video.                        |
-| `transcribe`        | Produce a transcript with timing data from audio or video.                                |
+| `transcribe`        | Produce a timed transcript from audio, video, or a public YouTube URL.                    |
 | `isolate_audio`     | Remove noise, music, and reverb from a voice recording. Queued; resolve with `check_job`. |
 
 ## Jobs and credits

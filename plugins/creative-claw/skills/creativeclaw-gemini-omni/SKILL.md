@@ -5,6 +5,8 @@ description: "Apply Gemini Omni prompting, reference, and editing techniques aft
 
 # Creative Claw — Gemini Omni
 
+Read [shared execution guidance](references/workflow-basics.md) once per task before using tools. It covers existing authorization, model discovery, optional cost checks, imports, and recovery.
+
 Use `video/gemini-omni-flash` as Creative Claw's default video model. It is the primary recommendation for fast multimodal video generation and source-video editing with native audio.
 
 ## Core workflow
@@ -12,8 +14,8 @@ Use `video/gemini-omni-flash` as Creative Claw's default video model. It is the 
 1. Define one clip: purpose, duration, aspect ratio, subject, action, camera, audio, and protected visual details.
 2. Search for reusable assets and import any ChatGPT attachments into Creative Claw before passing them to URL fields.
 3. Prefer a storyboard-first workflow when appearance or continuity matters. Generate and approve a clean full-frame start image with `image/nano-banana-2`; generate an end frame when the shot needs a precise destination and the current Omni schema exposes end-frame control.
-4. Call `get_model_params({ model: "video/gemini-omni-flash" })` immediately before generation. Treat its current schema as authoritative.
-5. Choose `resolution` from the current schema when output size matters. The direct Google route supports `360p`, `720p` (default), `1080p`, and `4k`; 1080p and 4K are upscaled outputs. Explain the selected duration, ratio, resolution, references, and audio plan. Confirm only when the request is materially expensive or involves a batch.
+4. Call `get_model_params({ model: "video/gemini-omni-flash" })` before generation when not already fetched for this task. Treat its current schema as authoritative.
+5. Choose `resolution` from the current schema when output size matters. The direct Google route supports `360p`, `720p` (default), `1080p`, and `4k`; 1080p and 4K are upscaled outputs. Explain the selected duration, ratio, resolution, references, and audio plan when useful. Reuse existing authorization, including an explicitly requested batch; ask only when a material choice is unresolved or the proposed work expands the requested scope.
 6. Call `generate_video` with `model: "video/gemini-omni-flash"`.
 7. Let the inline viewer monitor the job. Call `check_job` only when a later tool needs the completed URL or no viewer is monitoring.
 8. Inspect motion, identity, physics, framing, audio, dialogue, and text artifacts before describing the clip as complete.

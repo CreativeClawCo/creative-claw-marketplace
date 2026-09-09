@@ -5,6 +5,8 @@ description: "Create or update a reusable Creative Claw Character with a visual 
 
 # Create Character
 
+Read [shared execution guidance](references/workflow-basics.md) once per task before using tools. It covers existing authorization, model discovery, optional cost checks, imports, and recovery.
+
 Create a durable identity record that can be reused across Creative Claw generation. A Character stores a description, one canonical image, and optionally a consented ElevenLabs cloned voice; it is not a newly trained visual model.
 
 ## Workflow
@@ -14,7 +16,7 @@ Create a durable identity record that can be reused across Creative Claw generat
 3. Obtain a clean canonical portrait. Use a supplied reference, or generate and approve one with `creativeclaw-generate-image` before saving it.
 4. Call `manage_character({ title, description, image_url })`. Omit `id` to create; keep the description visual and stable rather than scene-specific.
 5. If the user wants a reusable custom voice, route to `creativeclaw-clone-voice`. Require explicit consent and a suitable voice sample before calling `clone_voice`.
-6. Run a low-cost image or voice audition if the Character will anchor a larger production. Update the record only with approved changes.
+6. Run an audition only when requested or included in the approved production plan. Reuse an already approved identity sample; update the record only with authorized changes.
 
 ## Visual consistency
 

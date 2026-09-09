@@ -1,5 +1,7 @@
 # Queued jobs and `check_job`
 
+For interrupted work, normalized failures, uncertain submissions, refunds, and retry boundaries, read [job-recovery.md](job-recovery.md). For multi-stage audio merging and film assembly, read [media-assembly.md](media-assembly.md).
+
 Creative Claw may return a completed result immediately or a queued job. Trust the response shape instead of assuming a model is synchronous.
 
 ## When to poll

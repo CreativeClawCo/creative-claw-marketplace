@@ -7,8 +7,8 @@ Match the model to the shot, reference structure, duration, resolution, audio ne
 1. Define the deliverable: single shot or sequence, duration, ratio, subject, action, camera, audio, and continuity requirements.
 2. Search for existing reference assets. For branded work, fetch the theme. For a reusable persona, use `character_id`.
 3. Use a first-frame image when visual control or identity matters. Do not force this step for a loose text-to-video experiment where exploration is the goal.
-4. Call `list_models({ category: "video" })`, choose by capability, and call `get_model_params` for that exact model.
-5. State the chosen model, duration, resolution, audio setting, supplied references, and expected cost when exposed. Confirm expensive batches or long clips.
+4. Use `list_models({ category: "video" })` when discovery is needed and `get_model_params` for missing settings on the selected model; reuse schemas already fetched in this task.
+5. State consequential settings briefly and proceed within existing authorization. Estimate with `operation: "video"` only for user-requested cost/budget help; do not add a routine approval question.
 6. Call `generate_video`. Preserve literal reference tokens and timecodes with `agentic_prompting: false`.
 7. Resolve the job only when needed, inspect the result, and reject false motion, identity drift, broken physics, unwanted cuts, text artifacts, or bad audio.
 8. Use focused processing tools for trim, scale, subtitles, frames, merging, isolation, or upscaling.

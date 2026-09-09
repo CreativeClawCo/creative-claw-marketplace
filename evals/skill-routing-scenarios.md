@@ -41,12 +41,30 @@ Use these scenarios as regression checks for skill activation and tool behavior.
 | 35 | Read this alien diplomat line, then add a quiet sci-fi room tone behind it. | `creativeclaw` | Routes the line to voiceover and the room tone to audio generation; it does not claim that audio concatenation layers the tracks. |
 | 36 | Show me six curated editorial image examples for a perfume launch. | `creativeclaw-find-examples` | Filters to image examples, presents a shortlist, and loads only the selected example. |
 | 37 | Find more examples like this, but only for my selected video model. | `creativeclaw-find-examples` | Uses the exact model ID and cursor while preserving the original search filters. |
-| 38 | Render this supplied HTML and CSS as a 1200×630 PNG. | `creativeclaw-render-html-image` | Renders the deterministic layout and does not call an image model. |
+| 38 | Render this supplied HTML and CSS as a 1200×630 PNG. | `creativeclaw-render-html-image` | Calls `render_html_image` directly, renders the deterministic layout, and does not call the retired `render_html` tool or an image model. |
 | 39 | Make a 1200×630 launch poster for me. | `creativeclaw-generate-image` | Does not infer HTML rendering from the deliverable type alone. |
 | 40 | Use HyperFrames HTML to put this exact headline over my video. | `creativeclaw-render-html-video` | Uses a deterministic HTML overlay, preserves exact copy, and resolves the queued render. |
 | 41 | Add this headline over my video. | `creativeclaw-generate-video` | Does not infer HTML rendering merely because text is requested. |
 | 42 | Add a two-second intro and a closing CTA to this clip. | `creativeclaw-add-video-intro-outro` | Offers an HTML title-card route but waits for explicit acceptance before rendering HTML. |
 | 43 | Use HTML title cards for the intro and outro, then merge them around this video. | `creativeclaw-add-video-intro-outro` | Renders both bookends with the HTML-video skill, resolves them, and concatenates intro → main → outro. |
+
+| 44 | Animate this supplied photo for five seconds in H3 Max. | `creativeclaw-generate-video` | Reuses the photo, resolves missing model settings, and generates without a new storyboard or routine permission question. |
+| 45 | Generate this exact image prompt at 4K; I do not want drafts. | `creativeclaw-generate-image` | Honors the requested supported resolution without a lower-resolution proof or repeated cost confirmation. |
+| 46 | How much would this thirty-second music track cost? Do not generate it. | `creativeclaw-generate-audio` | Calls `estimate_generation` with `operation: "audio"` and the actual music settings; makes no generation call. |
+| 47 | Make this voiceover if it fits within 100 credits. | `creativeclaw-generate-voiceover` | Estimates the exact speech request and proceeds without asking again if it fits; does not invent or pass `agentic_prompting`. |
+| 48 | Make one image of this product using our agreed settings. | `creativeclaw-generate-image` | Reuses known references/settings; no automatic estimation, catalog search, or redundant schema lookup. |
+| 49 | Join these eight narration clips in order. | `creativeclaw-edit-media` | Resolves the first merge, uses returned `nextAudioUrls` for continuation, and verifies all eight clips before delivery. |
+| 50 | Add this eight-second narration to my twelve-second video; preserve the whole video. | `creativeclaw-edit-media` | Identifies the duration mismatch before muxing; does not silently produce an eight-second video or invent a padding parameter. |
+| 51 | Resume the pending job from the previous turn and add captions when it finishes. | `creativeclaw-edit-media` | Checks the existing job and continues with its completed URL; no replacement generation. |
+| 52 | The generation timed out, but I still have its job ID. | `creativeclaw` | Checks known job state before retrying; does not infer failure or refund from the timeout. |
+| 53 | Make this uploaded clip vertical and add Hebrew captions. | `creativeclaw-edit-media` | Uses the correct attachment import, explicit non-distorting resize mode, then automatic captions with Hebrew; no redundant transcription or generative model. |
+| 54 | Use these approved storyboards and script; complete all shots without asking me between stages. | `creativeclaw-build-film` | Reuses approvals, prepares narration-led timing when appropriate, completes the authorized sequence, and does not repeat stage questions. |
+| 55 | Find atmospheric music examples for this product campaign. | `creativeclaw-find-examples` | Searches audio examples, loads the selected example, and routes requested generation to the audio skill. |
+| 56 | Render this supplied HTML video only if it fits my stated budget. | `creativeclaw-render-html-video` | Estimates `html_video` using actual duration/dimensions/FPS and proceeds within the constraint without another approval gate. |
+| 57 | Just draft a text shot list; do not generate media. | `creativeclaw-plan-video` | Produces text only, with no paid storyboard image or video calls. |
+| 58 | Transcribe this YouTube URL, then crop its footage vertically. | `creativeclaw-edit-media` | Uses the page URL for transcription but requests/resolves actual media for cropping; never passes the YouTube page as a video-file URL. |
+| 60 | Read this Spanish narration with MiniMax using a calm native system voice. | `creativeclaw-generate-voiceover` | Uses the MiniMax speech specialist, a Spanish system voice, `language_boost: "Spanish"`, and no ElevenLabs or xAI tags. |
+| 61 | Match my authorized reference recording for this one-off English line; do not save a reusable clone. | `creativeclaw-generate-voiceover` | Uses the Chatterbox specialist with `audio_url`, preserves the one-off boundary, and confirms voice-use authorization without creating a Character. |
 
 ## Pass criteria
 
@@ -56,5 +74,8 @@ Use these scenarios as regression checks for skill activation and tool behavior.
 - Negative scenarios make no forbidden mutation.
 - Multilingual prompts preserve the user's language and exact supplied copy.
 - Queued work is never described as complete before a finished media URL exists.
-| 60 | Read this Spanish narration with MiniMax using a calm native system voice. | `creativeclaw-generate-voiceover` | Uses the MiniMax speech specialist, a Spanish system voice, `language_boost: "Spanish"`, and no ElevenLabs or xAI tags. |
-| 61 | Match my authorized reference recording for this one-off English line; do not save a reusable clone. | `creativeclaw-generate-voiceover` | Uses the Chatterbox specialist with `audio_url`, preserves the one-off boundary, and confirms voice-use authorization without creating a Character. |
+- Record completion, invalid tool calls, redundant discovery, unnecessary questions, repeated paid submissions, and time to first useful result. Written expectations are not executed results.
+
+## Offline contract verification
+
+`tool-contract-cases.json` covers the changed tool calls. With the MCP repository adjacent, run `pnpm exec vitest run src/skill-contracts.test.ts` from that repository (or set `CREATIVE_CLAW_SKILLS_REPO` to this repository). It validates those fixtures and JSON generation examples from the actual skill files against registered tool input schemas, without executing tool handlers. This checks payload contracts, not agent routing, provider behavior, or rendered media quality.

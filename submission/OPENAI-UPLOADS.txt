@@ -1,0 +1,22 @@
+Creative Claw OpenAI skill upload kit
+
+This collection contains individual ChatGPT/Codex skill ZIPs.
+Extract this collection first. Use the individual *-chatgpt-skill.zip archives
+when attaching skills to the OpenAI plugin draft. The collection itself is
+not a single skill archive.
+
+creativeclaw-chatgpt-skill.zip is the root/router skill. Include the focused
+skills alongside it; it routes to those skills for specific media workflows.
+Each focused archive includes its own shared execution, import, recovery,
+and assembly references, plus any specialist resources.
+
+All skills declare the Creative Claw MCP dependency:
+https://app.creativeclaw.co/mcp/chatgpt
+
+The general-client creativeclaw-skill.zip is built separately and is not
+included in this OpenAI upload kit.
+
+Build locally: bash scripts/build-skill-zips.sh
+Verify archives: node scripts/validate-skill-packages.mjs
+Validation checks package contents, local references, and source freshness.
+Documented routing scenarios still require behavioral evaluation in a client.

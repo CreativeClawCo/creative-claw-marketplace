@@ -5,6 +5,8 @@ description: "Apply ElevenLabs v3 voice casting, prompting, emotion, and perform
 
 # Creative Claw — ElevenLabs v3
 
+Read [shared execution guidance](references/workflow-basics.md) once per task before using tools. It covers existing authorization, model discovery, optional cost checks, imports, and recovery.
+
 Use `speech/elevenlabs-v3` for expressive acting, audio tags, and languages outside Multilingual v2. Prefer `speech/elevenlabs-v2` for steady professional narration and identity-focused clone auditions in supported languages. Choose a voice that already resembles the requested age, energy, accent, and performance; inline tags shape delivery but cannot completely transform an incompatible voice.
 
 ## Core workflow

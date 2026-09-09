@@ -5,6 +5,8 @@ description: "Create narration, dialogue, or expressive speech with Creative Cla
 
 # Generate Voiceover
 
+Read [shared execution guidance](references/workflow-basics.md) once per task before using tools. It covers existing authorization, model discovery, optional cost checks, imports, and recovery.
+
 Turn a script into performance-ready speech, with Multilingual v2 for steady professional narration or v3 for expressive performance. This skill owns casting, direction, generation, review, and delivery; model specialists contain deeper voice and performance guidance.
 
 ## Workflow
@@ -17,7 +19,7 @@ Turn a script into performance-ready speech, with Multilingual v2 for steady pro
 6. Preserve exact wording in `text`; add performance tags only when consistent with the requested delivery. `generate_speech` does not expose `agentic_prompting`; do not send it.
 7. Call `generate_speech`. Generate each speaker separately so casting, pacing, and revisions stay controllable.
 8. Audition the result for pronunciation, emotional arc, pacing, clipping, and consistency. Regenerate only the weak section when practical.
-9. Use `merge_media` when approved segments must become a single audio track or be muxed with video.
+9. Before using `merge_media`, read [media-assembly.md](references/media-assembly.md). Follow every continuation for more than five segments and check audio/video durations before muxing.
 
 Conduct casting and review in the user's language. Preserve the supplied script and its writing system, and verify model or voice language support instead of translating unless the user asks.
 

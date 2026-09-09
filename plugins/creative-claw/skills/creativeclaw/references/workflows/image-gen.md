@@ -7,7 +7,7 @@ Choose an image model by capability, anchor branded work with theme assets, and 
 1. Define the subject, intended use, aspect ratio, style, required text, and what must remain exact.
 2. For branded work, call `get_theme`. Reuse its colors, notes, logos, and reference images. Do not invent missing brand details.
 3. Call `search_assets` for source images, product shots, Characters, and prior approved outputs. Import missing media through `../platform-upload.md`.
-4. Call `list_models({ category: "image" })`. Choose a generation- or edit-capable model, then call `get_model_params` for that exact ID.
+4. Use `list_models({ category: "image" })` when discovery is needed and `get_model_params` for missing settings on the chosen model; reuse current-task schemas. Estimate with `operation: "image"` only for user-requested cost/budget help.
 5. Generate with `generate_image`; provide `image_url` for edits. Use the preferred `size` field when supported.
 6. If the prompt contains exact quoted text, per-region instructions, or reference tokens, send it verbatim with `agentic_prompting: false`.
 7. Inspect the output. For revisions, describe both the delta and what must remain unchanged.

@@ -5,6 +5,8 @@ description: "Apply Seedream 5 Pro prompting and reference techniques after Crea
 
 # Creative Claw — Seedream 5 Pro
 
+Read [shared execution guidance](references/workflow-basics.md) once per task before using tools. It covers existing authorization, model discovery, optional cost checks, imports, and recovery.
+
 Use `image/seedream-5-pro` for premium product, fashion, portrait, editorial, and campaign work—especially when several references must become one coherent finished image. It is a focused flagship option after Nano Banana 2, not the default for every image.
 
 ## Core workflow
@@ -13,9 +15,9 @@ Use `image/seedream-5-pro` for premium product, fashion, portrait, editorial, an
 2. Search existing assets and import every source into Creative Claw.
 3. Choose the primary canvas or most important source as `image_url`. Place remaining ordered references in `extras.image_urls`.
 4. Write a numbered reference manifest describing exactly what each image contributes.
-5. Call `get_model_params({ model: "image/seedream-5-pro" })` immediately before generation.
+5. Call `get_model_params({ model: "image/seedream-5-pro" })` before generation when not already fetched for this task.
 6. Set `agentic_prompting: false` for exact reference mappings, copy, colors, annotations, or a carefully structured edit.
-7. Use 1K for iteration and 2K for approved campaign work. Generate multiple images only when alternatives are useful.
+7. Honor requested resolution directly. Use 1K for requested iteration and 2K for campaign output; do not require a draft pass. Generate multiple images only when the user wants alternatives.
 8. Inspect product geometry, faces, reference roles, materials, lighting, typography, hands, and the untouched parts of edited images.
 
 ## Current Creative Claw contract

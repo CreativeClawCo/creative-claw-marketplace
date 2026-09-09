@@ -5,6 +5,8 @@ description: "Render a deterministic HTML/CSS layout to a PNG with Creative Claw
 
 # Render HTML Image
 
+Read [shared execution guidance](references/workflow-basics.md) once per task before using tools. It covers existing authorization, model discovery, optional cost checks, imports, and recovery.
+
 Use `render_html_image` for a pixel-controlled PNG assembled with browser HTML and CSS. This is an explicit-only route. A request for a poster, banner, social card, or branded image by itself is not permission to choose HTML rendering; use `creativeclaw-generate-image` unless the user asks for HTML/CSS or a deterministic code-based layout.
 
 ## Good uses
@@ -14,7 +16,7 @@ Use `render_html_image` for a pixel-controlled PNG assembled with browser HTML a
 - A reusable layout whose text and image slots need exact placement.
 - A code-rendered reference image that the user wants to approve before using it as `image_url` for later image or video generation.
 
-For a live preview rather than a PNG asset, use `render_html`. For a reusable parameterized layout, use `create_template` and `render_template`.
+For a reusable parameterized layout, use `create_template` and `render_template`.
 
 ## Workflow
 
@@ -22,7 +24,7 @@ For a live preview rather than a PNG asset, use `render_html`. For a reusable pa
 2. For branded work, call `get_theme`; use `search_assets` for approved logos and images. Import local or attached media before referencing it.
 3. Write a complete, fixed-size layout. Set `html, body` margins to zero, hide overflow, and declare fonts explicitly. Tailwind utilities work without adding a CDN, and ordinary `<style>` blocks work as in Chromium.
 4. Pass public images or fonts through `inline_images` and reference each token as `{{token}}`. URLs must be publicly reachable at render time.
-5. Optionally show the layout with `render_html`, then call `render_html_image` with `html`, `width`, `height`, a useful `name`, and stable `tags`.
+5. Call `render_html_image` with `html`, `width`, `height`, a useful `name`, and stable `tags`.
 6. Inspect the returned PNG for font loading, text fit, crop, contrast, and logo fidelity. The image render completes synchronously; do not call `check_job` for it.
 
 ## Example: theme reference board

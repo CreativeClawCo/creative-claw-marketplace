@@ -11,6 +11,7 @@ skill_names=(
   creativeclaw-generate-video
   creativeclaw-generate-voiceover
   creativeclaw-generate-audio
+  creativeclaw-edit-media
   creativeclaw-create-character
   creativeclaw-plan-video
   creativeclaw-build-film
@@ -80,6 +81,7 @@ routes=(
   creativeclaw-generate-video
   creativeclaw-generate-voiceover
   creativeclaw-generate-audio
+  creativeclaw-edit-media
   creativeclaw-create-character
   creativeclaw-plan-video
   creativeclaw-build-film
@@ -117,4 +119,12 @@ if (( scenario_count < 24 )); then
   exit 1
 fi
 
-echo "Validated ${#skill_names[@]} Creative Claw skills and $scenario_count routing scenarios."
+node "$repo_root/scripts/sync-skill-references.mjs" --check
+
+actual_skill_count="$(find "$skills_root" -mindepth 2 -maxdepth 2 -name SKILL.md | wc -l | tr -d ' ')"
+if (( actual_skill_count != ${#skill_names[@]} )); then
+  echo "The skill inventory and validator list disagree." >&2
+  exit 1
+fi
+
+echo "Validated structure for ${#skill_names[@]} Creative Claw skills; $scenario_count behavioral scenarios are documented, not executed."

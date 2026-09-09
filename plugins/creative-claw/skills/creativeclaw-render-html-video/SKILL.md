@@ -5,6 +5,8 @@ description: "Render a HyperFrames-backed HTML/CSS/JS composition to video with 
 
 # Render HTML Video
 
+Read [shared execution guidance](references/workflow-basics.md) once per task before using tools. It covers existing authorization, model discovery, optional cost checks, imports, and recovery.
+
 `render_html_video` sends an HTML composition to a HyperFrames renderer and returns a queued video job. This is an explicit-only route. Do not select it for ordinary AI video generation, or merely because a video needs text; use `creativeclaw-generate-video` unless the user asks for HTML/HyperFrames/code-driven rendering or explicitly accepts that method.
 
 ## Good uses
@@ -89,4 +91,6 @@ Keep the source video full-frame, use a `section` covering the full duration, an
 - Keep one paused timeline per composition and register it only after it is built. Root `data-duration` controls the rendered length; animation after that point is cut off.
 - Avoid clocks, unseeded randomness, infinite animation repeats, and network-dependent runtime logic. Every frame must be seekable and deterministic.
 - Do not set an initial CSS `transform` on an element and tween that same transform with GSAP. Put both the start and end states in `fromTo`.
-- The job is unfinished until `check_job` returns a completed video URL. Longer, larger, and higher-FPS renders cost more; confirm consequential renders first.
+- The job is unfinished until `check_job` returns a completed video URL. Longer, larger, and higher-FPS renders cost more. Respect existing authorization without a routine approval gate.
+
+Use `estimate_generation` with `operation: "html_video"` only for user-requested cost/budget help, supplying actual duration, dimensions, and FPS in `params`. Respect existing authorization without a routine approval gate.
