@@ -12,7 +12,7 @@ skill_names=(
   creativeclaw-generate-voiceover
   creativeclaw-generate-audio
   creativeclaw-edit-media
-  creativeclaw-render-video-edl
+  creativeclaw-cut-and-reframe-video
   creativeclaw-create-reels
   creativeclaw-create-character
   creativeclaw-plan-video
@@ -79,7 +79,7 @@ for skill_name in "${skill_names[@]}"; do
 done
 
 routes=(
-  creativeclaw-render-video-edl
+  creativeclaw-cut-and-reframe-video
   creativeclaw-create-reels
   creativeclaw-generate-image
   creativeclaw-generate-video

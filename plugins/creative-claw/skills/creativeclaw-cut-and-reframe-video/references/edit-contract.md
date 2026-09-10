@@ -1,4 +1,4 @@
-# EDL v1 contract
+# Cut-and-reframe input contract
 
 The tool executes your selections; it neither finds highlights nor transcribes. Outputs: one H.264/AAC MP4 (no audio stream if the source is silent), a JSON technical report and a contact sheet. Poll `check_job` for their durable URLs.
 
@@ -39,4 +39,4 @@ Those coordinates are examples, not a face detector. Set keyframes from actual o
 
 Captions are omitted unless the `captions` object is supplied. When present, captions accept 1–10,000 source-timed words in source order, `plain` or `karaoke`, `words_per_caption` 1–7 (default 3), and installed Noto Sans, Hebrew, Arabic, CJK SC/JP/KR fonts. The renderer remaps words even when source ranges are reordered. Caption text cannot inject ASS formatting. It does not accept SRT/ASS files, preserve selectable subtitle streams, or accept arbitrary styles; captions already burned into the source remain visible as pixels.
 
-Pilot billing is stated in the runtime tool description, separate from transcription or later subtitling. `estimate_generation` does not estimate EDL processing. Never treat example timings, pricing or schemas as a substitute for current tool output.
+Pilot billing is stated in the runtime tool description, separate from transcription or later subtitling. `estimate_generation` does not estimate this edit operation. Never treat example timings, pricing or schemas as a substitute for current tool output.

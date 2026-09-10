@@ -24,7 +24,7 @@ Turn supplied footage or audio into a finished derivative. Use the user's reques
 
 Use `creativeclaw-generate-video` for invented footage or a generative source-video transformation. Use `creativeclaw-add-video-intro-outro` for bookends. HTML rendering requires the user's explicit choice; a captions request alone does not select that route.
 
-Use `creativeclaw-create-reels` when selecting highlights from long footage, or `creativeclaw-render-video-edl` for explicit multi-cut edits, moving crop paths and source-timed word captions. Both require the new EDL pilot tool to be available and configured.
+Use `creativeclaw-create-reels` when selecting highlights from long footage, or `creativeclaw-cut-and-reframe-video` for explicit multi-cut edits, moving crop paths and source-timed word captions. Both require `cut_and_reframe_video` to be available and configured.
 
 ## Workflow
 
@@ -41,5 +41,5 @@ For “make this a captioned vertical clip,” reuse the supplied footage, trim 
 
 - A public YouTube URL can go directly to `transcribe`, yielding caption segments. It is not a directly downloadable source for trimming, resizing, or subtitle rendering; obtain the actual video asset for those steps.
 - Automatic subtitles already transcribe. Do not add a separate transcription job unless the user also needs a transcript or it guides clip selection.
-- Mixing narration with music, ducking, crossfades, or exact caption-file rendering require additional capabilities. Explicit moving crops and source-timed word captions are supported by the EDL pilot when available; automatic face tracking is not. State the specific missing operation before creating assets that cannot be assembled as requested.
+- Mixing narration with music, ducking, crossfades, or exact caption-file rendering require additional capabilities. Explicit moving crops and source-timed word captions are supported by `cut_and_reframe_video` when available; automatic face tracking is not. State the specific missing operation before creating assets that cannot be assembled as requested.
 - `estimate_generation` does not estimate these processing operations. Only discuss cost when relevant to the user's request, and do not label a partial generation estimate as the total edit cost.
