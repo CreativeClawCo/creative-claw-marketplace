@@ -2,11 +2,21 @@
 
 ## Subtitle
 
-Create images, video & audio
+AI videos, ads & voiceovers
 
 ## Description
 
-Create and edit images, videos, and voiceovers in ChatGPT. Start with Nano Banana 2 for fast, cost-efficient image generation; use Gemini Omni, Seedance 2.5, or H3 Max for video; and ElevenLabs for natural speech and consented voice clones. Turn product photos into campaign assets, plan storyboards, keep Characters consistent across scenes, assemble multi-shot first cuts, add captions, resize media, and save every result to a reusable asset library. Use Submit Feedback to report issues, request features or models, and flag generation-quality problems.
+Turn scripts and product photos into AI videos, multi-scene films, and captioned ads directly in ChatGPT. Animate still images, plan storyboards, reuse character references across scenes, assemble rendered clips, and add narration and vertical formatting. Create images and voiceovers alongside your videos with models including Gemini Omni, Seedance, MiniMax, Nano Banana, and ElevenLabs. Check current model availability and credit estimates before generation, then save and reuse your assets across projects. Generation and editing use credits; results and character consistency vary by model and settings.
+
+## Suggested prompts
+
+1. Turn this product photo into a 15-second vertical ad with narration and captions. Show me the script, shot plan, and estimated credits before generating.
+2. Turn my script into a four-scene cinematic first cut using the same character references. Let me approve the character and storyboard before rendering.
+3. Animate this still image into a short video with camera movement and ambient audio. Check model support and estimate the cost first.
+
+## Submission status
+
+English discovery copy revised September 11, 2026; not submitted or published. Recheck field limits in the current editor and update localized descriptions before resubmission. Existing release notes below describe the earlier skill release, not this copy-only revision. Complete the production review checks in `creative-claw-mcp/AGENTS.md` before an actual submission; this draft does not certify compliance.
 
 ## Release notes
 
@@ -14,4 +24,4 @@ Added 19 focused skills for image, video, voice, Characters, storyboards, Films,
 
 ## Localization status
 
-All 64 locales currently offered by the plugin editor are present. The locale picker reports no remaining locales to add.
+The prior listing had all 64 locales offered by the plugin editor. This English revision has not been propagated to those translations.
