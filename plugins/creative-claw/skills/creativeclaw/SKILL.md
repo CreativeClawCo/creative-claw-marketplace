@@ -46,6 +46,8 @@ Use the Creative Claw MCP server as a media workspace: source durable assets, ap
 | Find, import, name, tag, reuse, or delete media | `references/workflows/asset-library.md` |
 | Create, inspect, edit, or apply a brand theme | `references/workflows/brand-theme.md` |
 | Trim, resize, caption, transcribe, clean, or combine existing media | `creativeclaw-edit-media` |
+| Select highlights from long footage and create vertical Reels | `creativeclaw-create-reels` |
+| Execute explicit cuts, crop paths and source-timed captions | `creativeclaw-render-video-edl` |
 | Learn what Creative Claw can do | `references/workflows/onboard.md` |
 
 Use an explicit outcome over a generic modality. If the user names a model, keep the outcome skill in control and use the matching model specialist for prompt and reference details. Use this root skill for requests that span outcomes or do not have one clear owner. Read the matching workflow before calling a mutating or paid tool.

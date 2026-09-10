@@ -1,0 +1,13 @@
+interface:
+  display_name: "Creative Claw — Long Video to Reels"
+  short_description: "Turn long videos into configurable social clips"
+  default_prompt: "Use $creativeclaw-create-reels to find strong standalone moments in my video and make social clips in my requested format, with captions when appropriate."
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "creative-claw"
+      description: "Creative Claw transcription, media editing, and assets"
+      transport: "streamable_http"
+      url: "https://app.creativeclaw.co/mcp/chatgpt"
+policy:
+  allow_implicit_invocation: true
