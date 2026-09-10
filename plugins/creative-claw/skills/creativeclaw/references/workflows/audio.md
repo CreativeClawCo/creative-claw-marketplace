@@ -58,7 +58,7 @@ Use `creativeclaw-xai-tts` for its complete voice catalog and exact tag grammar.
 1. For a public YouTube video, pass its watch or short URL directly to `transcribe({ video_url })`. For other media, import the source audio/video first.
 2. Use `isolate_audio` first only when noise, music, or reverb will materially hurt transcription.
 3. Resolve its queued job with `check_job({ job_id })` when the cleaned URL is required.
-4. Use `transcribe` for text and timing. YouTube captions provide segment-level timestamps; uploaded/direct media provides word-level timing and speaker diarization.
+4. Use `transcribe` for text and timing. Public YouTube URLs are sent directly to ElevenLabs Scribe, like other supported direct media, and provide word-level timing and speaker diarization.
 5. Preserve the original asset and save the cleaned/transcribed derivative with clear metadata.
 
 ## Quality gate
