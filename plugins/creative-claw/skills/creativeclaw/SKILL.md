@@ -24,6 +24,10 @@ Use the Creative Claw MCP server as a media workspace: source durable assets, ap
 11. **Use examples deliberately.** For speech voice selection, use `get_model_params` and the voiceover workflow. For other media, route requests for examples, inspiration, styles, or a close starting point to `creativeclaw-find-examples`. Do not search the catalog before every generation.
 12. **Keep HTML rendering explicit.** Use `creativeclaw-render-html-image` or `creativeclaw-render-html-video` only when the user explicitly requests HTML/CSS, HyperFrames, code-driven rendering, or accepts that proposed method. Ordinary image or video requests stay with the generative skills.
 
+## HTML-video example discovery
+
+For explicit HTML-video/HyperFrames work, look for relevant `search_examples` matches (use `render_type: "html_video"` when exposed) and load selected results with `get_example`. Returned `sourceType` distinguishes a complete HTML document from a downloadable ZIP project plus description. Inspect the source and decide what to adapt. Use single HTML for basic short videos; use ZIP only when adapting a selected full-project example or the user already has a full HyperFrames project. The `creativeclaw-render-html-video` skill covers both; shared timing, shader and design references apply to both. This does not route ordinary generative video requests into HTML rendering.
+
 ## Route the request
 
 | User wants | Primary route |
