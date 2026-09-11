@@ -32,8 +32,8 @@ Create one controlled video clip from text, a start frame, an optional end frame
 
 ## Reference rules
 
-- `image_url` is the start frame. `last_frame_url` is the desired end frame when the selected model exposes it.
-- `image_urls`, `video_urls`, and `audio_urls` are model-specific reference arrays. There is no universal three-reference requirement.
+- `image_url` is only the literal start frame. It selects image-to-video and makes the supplied image frame zero. `last_frame_url` is the desired end frame when the selected model exposes it.
+- `image_urls`, `video_urls`, and `audio_urls` are model-specific reference arrays. If a supplied image should guide identity, style, character, product, or composition instead of becoming frame zero, use `image_urls`, even for exactly one image. There is no universal three-reference requirement.
 - A saved `character_id` supplies the Character image as the start frame only when no explicit `image_url` is provided. If a storyboard is the start frame and identity must also be referenced, add the Character image through a supported reference field.
 - Preserve literal reference tokens such as Seedance `@Image1`, exact dialogue, or timecodes by setting `agentic_prompting: false`.
 - Use `operation` only for the exposed modes: `retake`, `extend`, `reframe`, `audio_to_video`, or `animate_character`.

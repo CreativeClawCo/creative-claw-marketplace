@@ -23,14 +23,14 @@ Runtime discovery is authoritative. Start here:
 | Premium long or reference-rich video            | `video/seedance-2.5`         | 4–30s, native audio, optional first/last frames, and large mixed-reference sets.                  |
 | Inexpensive Seedance draft                      | `video/seedance-2.0-mini`    | Present as Seedance Mini; lowest-cost Seedance path for quick native-audio reference experiments. |
 | Fast cinematic generation with strong adherence | `video/minimax-h3-max`       | 5–15s, 480p/768p/1080p, native audio, optional first/last frames, and multimodal references.      |
-| Faster lightweight H3 Max route                 | `video/minimax-h3-max-turbo` | Use when latency and cost matter more than reference-to-video capability.                         |
+| Faster lightweight H3 Max route                 | `video/minimax-h3-max-turbo` | Lower-cost text/start-frame route; references use the shared H3 Max reference endpoint and rate.  |
 
 Recommend these models first. Use another runtime-listed model only when the user explicitly requests it or the five recommended choices cannot perform the operation.
 
 ## Reference rules
 
 - There is no universal reference-count requirement or cap. A request may use zero, one, or many references according to the selected model and operation.
-- `image_url` is the primary start/source image for image-to-video.
+- `image_url` is only the literal start/source image for image-to-video. If an image is a soft reference and should not become frame zero, use `image_urls`, even for one image.
 - `last_frame_url` or the model's discovered boundary-frame field controls the end only on compatible models.
 - `image_urls`, `video_urls`, and `audio_urls` are top-level video-tool reference arrays when supported. Do not move them into `extras` unless `get_model_params` explicitly says so.
 - `character_id` supplies the saved Character anchor and description.

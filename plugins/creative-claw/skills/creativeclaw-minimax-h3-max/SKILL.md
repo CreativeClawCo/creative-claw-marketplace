@@ -7,7 +7,7 @@ description: "Apply MiniMax H3 Max prompting, storyboard, and reference techniqu
 
 Read [shared execution guidance](references/workflow-basics.md) once per task before using tools. It covers existing authorization, model discovery, optional cost checks, imports, and recovery.
 
-Use `video/minimax-h3-max` for fast, aesthetically strong 480P, 768P, or Full HD (1080P) video with native synchronized audio, optional first/last frames, and multimodal references. Use `video/minimax-h3-max-turbo` only when the user prioritizes lower latency and cost and does not need reference video or reference audio.
+Use `video/minimax-h3-max` for fast, aesthetically strong 480P, 768P, or Full HD (1080P) video with native synchronized audio, optional first/last frames, and multimodal references. Use `video/minimax-h3-max-turbo` when the user prioritizes lower latency and lower-cost text or first-frame generation. Turbo reference requests are supported and route through fal's shared H3 Max reference-to-video endpoint, so they use reference-mode pricing rather than Turbo text/image pricing.
 
 Do not invent an `h3-max-lite` model ID. The current faster lightweight route is `video/minimax-h3-max-turbo`.
 
@@ -30,8 +30,8 @@ Do not invent an `h3-max-lite` model ID. The current faster lightweight route is
 | Fast text-to-video | H3 Max with `prompt`. |
 | Animate an approved opening | H3 Max with `image_url`. |
 | Controlled first-to-last motion | H3 Max with `image_url` and `last_frame_url`. |
-| Identity, style, motion, or audio references | H3 Max with `image_urls`, `video_urls`, and/or `audio_urls`. |
-| Fastest lower-cost text/image draft | H3 Max Turbo; verify its current schema first. |
+| Identity, style, motion, or audio references | H3 Max or Turbo with `image_urls`, `video_urls`, and/or `audio_urls`. |
+| Fastest lower-cost text/image draft | H3 Max Turbo; its reference mode uses the shared H3 Max route. |
 
 H3 Max reference video conditions a new result. It is not a precise source-video editor.
 
@@ -41,7 +41,7 @@ H3 Max reference video conditions a new result. It is not a precise source-video
 | --- | --- |
 | `duration` | Whole seconds from 5 through 15; default 5. |
 | `aspect_ratio` | `21:9`, `16:9`, `4:3`, `1:1`, `3:4`, `9:16`; `adaptive` for reference mode. |
-| `image_url` | Literal first frame. |
+| `image_url` | Literal first frame only. |
 | `last_frame_url` | Optional literal destination frame. |
 | `image_urls` | Up to 9 references, cited as `Image 1` through `Image 9`. |
 | `video_urls` | Up to 3 clips, cited as `Video 1` onward. |
@@ -50,6 +50,8 @@ H3 Max reference video conditions a new result. It is not a precise source-video
 | `extras.prompt_expansion_mode` | `disabled`, `balanced`, or `quality`. |
 
 Current limits are model-specific: up to 12 total reference files; reference video and audio clips are commonly 2–15 seconds with no more than 15 seconds combined per modality. Recheck the runtime schema rather than applying these limits to another model.
+If a supplied image should guide identity, style, character, product, or composition instead of becoming frame zero, put it in `image_urls`, even when there is exactly one image. Use singular `image_url` only when the requested result must begin on that exact image.
+
 
 ## Storyboard-first direction
 
