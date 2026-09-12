@@ -2,9 +2,9 @@
 
 Use this method only to adapt a full-project ZIP selected from the examples catalog, or render a full HyperFrames project the user already has. Use single HTML for basic short videos and other newly authored self-contained work.
 
-## Availability and asset contract
+## Source contract
 
-The intended contract accepts any workspace-owned ZIP asset through `project_asset_id`, including ordinary `zip` assets and dedicated `project` assets. The backend validates archive contents and renderer compatibility; a ZIP extension alone does not make a project renderable.
+The renderer accepts a publicly downloadable HTTPS ZIP through `project_url`, or any workspace-owned ZIP asset through `project_asset_id`, including ordinary `zip` assets and dedicated `project` assets. The backend validates archive contents and renderer compatibility; a ZIP extension alone does not make a project renderable.
 
 Prefer the dedicated `project` type for a new render-project upload because it communicates intent and uses the project-specific upload path. It is guidance, not a requirement. Existing ordinary ZIP assets do not need to be uploaded again.
 
@@ -12,7 +12,7 @@ Prefer the dedicated `project` type for a new render-project upload because it c
 
 - Already in the workspace: reuse its asset ID. No re-upload or dedicated `project` type is required by the intended contract.
 - Attached or generated in ChatGPT: use `import_chatgpt_media` with the supplied file metadata and use the returned asset ID.
-- Public direct ZIP URL: use `upload_asset` with `type:"zip"` and `content_type:"application/zip"`, plus the URL. A catalog URL is not itself an asset ID.
+- Public direct ZIP URL: pass it directly as `project_url` when no project edits are needed. This is the preferred path for an unchanged catalog ZIP.
 - Local ZIP or edited project: preferably use `get_upload_url({type:"project",content_type:"application/zip",filename:"project.zip"})`, PUT the bytes to the signed URL, then `confirm_upload({asset_id})`. Type `zip` is also accepted. If this client cannot upload local bytes, use an available supported upload path rather than inventing an asset ID.
 
 Ordinary ZIP imports may use public asset storage. Workspace ownership checks do not make those source URLs private. Do not move sensitive source code into public storage merely to render it; use an available private upload path or explain the storage limitation. Never package credentials.
@@ -26,7 +26,7 @@ Ordinary ZIP imports may use public asset storage. Workspace ownership checks do
 
 ## Render
 
-Call `render_html_video({project_asset_id:asset_id,duration,width,height,fps,format:"mp4"})`. Omit `html`. Match settings to the root composition; settings do not automatically rewrite project timing or geometry. Resolve through `check_job` and inspect the completed video, including intended audio or silence.
+Call `render_html_video({project_url:zip_url,duration,width,height,fps,format:"mp4"})` for a public unchanged ZIP, or `render_html_video({project_asset_id:asset_id,...})` for a workspace upload. Omit `html`. Match settings to the root composition; settings do not automatically rewrite project timing or geometry. Resolve through `check_job` and inspect the completed video, including intended audio or silence.
 
 If validation rejects the archive, distinguish missing entry points, unsupported dependencies, size limits, and service availability. Fix a concrete source issue only within the user's request, then upload the changed archive. Do not blindly retry the same rejected ZIP or promise every ZIP can render.
 
