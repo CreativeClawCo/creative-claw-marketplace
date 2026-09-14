@@ -1,6 +1,6 @@
 # Speech and audio workflow
 
-Creative Claw generates speech, sound effects, ambience, Foley, and music; creates consented ElevenLabs voice clones; transcribes media; isolates voice recordings; and combines one finished audio track with video.
+Creative Claw generates speech, sound effects, ambience, Foley, and music; creates consented reusable voice clones; transcribes media; isolates voice recordings; and combines one finished audio track with video.
 
 ## Route the request
 
@@ -24,13 +24,18 @@ Call `list_models({ category: "speech" })` and `get_model_params` before generat
 | --------------------------------------------------------------- | ---------------------- | --------------------------------------------------------------------------------------------- |
 | Steady professional narration and existing voice clones | `speech/elevenlabs-v2` | 29 languages; punctuation and sparse SSML breaks, no square-bracket performance tags. |
 | Expressive acting, audio tags, broader language coverage | `speech/elevenlabs-v3` | Emotional delivery and reactions; no SSML breaks. |
+| Fast natural stock or Character speech | `speech/cartesia-sonic` | Public Voice Library IDs or private Character voices, with direct emotion, speed, and volume controls. Use `creativeclaw-cartesia-sonic`. |
 | Broad voice and language selection with global emotion controls | `speech/minimax-hd`    | 300+ voices and 30+ languages. Use `creativeclaw-minimax-speech`.                              |
 | Two-speaker dialogue in one call                                | `speech/dia-tts`       | Use `[S1]` and `[S2]` plus supported nonverbal cues.                                          |
 | Emotive performance tags                                        | `speech/orpheus`       | Supports cues such as `<laugh>`, `<sigh>`, and `<gasp>`.                                      |
 | Expressive or telephony-ready output                            | `speech/xai-tts`       | 28 voices, inline/wrapping tags, multilingual and G.711 formats. Use `creativeclaw-xai-tts`.  |
 | Cheap clean draft                                               | `speech/kokoro`        | Fast low-cost testing.                                                                        |
 
-For one-off matching from an authorized reference recording, use `speech/chatterbox` with `creativeclaw-chatterbox`. Keep reusable Character voices in the consent-gated ElevenLabs clone workflow.
+For one-off matching from an authorized reference recording, use `speech/chatterbox` with `creativeclaw-chatterbox`. Keep reusable Character voices in the consent-gated clone workflow.
+
+## Cartesia Sonic
+
+Use `creativeclaw-cartesia-sonic` for the full stock and Character voice workflow. Call `get_model_params({ model: "speech/cartesia-sonic" })` for the curated Featured shortlist and exact IDs. Any other exact public Cartesia Voice Library ID is also supported. Pass `voice_id` for stock speech or `character_id` for a private clone, never both.
 
 ## ElevenLabs Multilingual v2
 

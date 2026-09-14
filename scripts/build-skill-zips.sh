@@ -26,6 +26,7 @@ focused_skill_names=(
   creativeclaw-minimax-h3-max
   creativeclaw-elevenlabs-v3
   creativeclaw-elevenlabs-v2
+  creativeclaw-cartesia-sonic
   creativeclaw-minimax-speech
   creativeclaw-xai-tts
   creativeclaw-chatterbox

@@ -1,0 +1,13 @@
+interface:
+  display_name: "Creative Claw Cartesia Sonic"
+  short_description: "Generate fast stock or cloned Cartesia speech"
+  default_prompt: "Use $creativeclaw-cartesia-sonic to generate natural speech with a suitable public or cloned Cartesia voice."
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "creative-claw"
+      description: "Creative Claw speech, assets and Character tools"
+      transport: "streamable_http"
+      url: "https://app.creativeclaw.co/mcp/chatgpt"
+policy:
+  allow_implicit_invocation: true
