@@ -28,7 +28,7 @@ Write and review the ad in the user's language. Preserve approved product wordin
 1. Use `creativeclaw-plan-video` to approve the script, shot list, and clean storyboard frames before costly generation.
 2. Use `create_film_project` for a multi-shot ad, persist shots with `update_film_project`, and honor the script and storyboard approval gates.
 3. For separately voiced ads, prepare narration with `creativeclaw-generate-voiceover` first and use its timing to set durations. Then use `creativeclaw-generate-video` for each clip. Default to Gemini Omni; route to Seedance 2.5, Seedance Mini, H3 Max, or H3 Max Fast when their strengths better match the shot.
-4. Reuse the prepared narration; use `creativeclaw-generate-audio` for requested music/SFX. Read [media-assembly.md](references/media-assembly.md) for timing, continuations, and mixing limits.
+4. Reuse the prepared narration; use `creativeclaw-generate-music` for requested music and `creativeclaw-generate-sound-effects` for requested SFX. Read [media-assembly.md](references/media-assembly.md) for timing, continuations, and mixing limits.
 5. Mux per-shot voice with `merge_media` before assembly when needed. `assemble_film` creates an ordered first cut and can add one project narration track; it does not add captions, transitions, or a full sound mix.
 
 ## Review

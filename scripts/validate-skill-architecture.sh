@@ -10,7 +10,8 @@ skill_names=(
   creativeclaw-generate-image
   creativeclaw-generate-video
   creativeclaw-generate-voiceover
-  creativeclaw-generate-audio
+  creativeclaw-generate-music
+  creativeclaw-generate-sound-effects
   creativeclaw-edit-media
   creativeclaw-cut-and-reframe-video
   creativeclaw-create-reels
@@ -85,7 +86,8 @@ routes=(
   creativeclaw-generate-image
   creativeclaw-generate-video
   creativeclaw-generate-voiceover
-  creativeclaw-generate-audio
+  creativeclaw-generate-music
+  creativeclaw-generate-sound-effects
   creativeclaw-edit-media
   creativeclaw-create-character
   creativeclaw-plan-video

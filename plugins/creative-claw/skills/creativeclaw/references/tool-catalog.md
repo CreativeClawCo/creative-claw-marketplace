@@ -11,9 +11,10 @@ Use this as routing guidance. Tool availability varies by client; never recite t
 | `generate_image`   | Generate an image or edit a source supplied as `image_url`. Additional model-specific references normally go in `extras`. |
 | `generate_video`   | Generate, animate, extend, retake, reframe, edit, or drive video according to model capability and `operation`.           |
 | `generate_speech`  | Generate speech. Supports model-specific voices, delivery controls, reference audio, and Characters.                      |
-| `generate_audio`   | Generate sound effects, ambience, Foley, or music with a supported ElevenLabs audio model.                                |
+| `generate_music`   | Generate scores, beds, stings, jingles, themes, or songs with ElevenLabs Music v2.5.                                      |
+| `generate_sound_effect` | Generate sound effects, ambience, Foley, loops, impacts, transitions, and UI cues with ElevenLabs Sound Effects v2. |
 
-Use `list_models` before relying on a remembered model ID. Use `get_model_params` before sending `extras`, reference arrays, resolution, duration, or operation-specific fields. Route speech to `generate_speech`; route sound effects and music to `generate_audio`.
+Use `list_models` before relying on a remembered model ID. Use `get_model_params` before sending `extras`, reference arrays, resolution, duration, or operation-specific fields. Route speech to `generate_speech`, music to `generate_music`, and sound effects to `generate_sound_effect`.
 
 For a model comparison, call `generate_image` once per selected model with the same prompt and settings, then present the results together.
 

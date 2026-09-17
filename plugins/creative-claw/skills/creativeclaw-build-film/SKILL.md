@@ -18,7 +18,7 @@ Run a stateful, multi-shot production with explicit approvals. Use `creativeclaw
 
 ## 2. Establish timing and audio
 
-For narration-driven production, generate or reuse speech with `creativeclaw-generate-voiceover` before locking shot durations. Use returned alignment/timestamps or inspected duration. Do not add separate narration to native-dialogue clips unless requested. For requested music, ambience, or effects, use `creativeclaw-generate-audio` and establish a supported assembly method before creating tracks that need layering.
+For narration-driven production, generate or reuse speech with `creativeclaw-generate-voiceover` before locking shot durations. Use returned alignment/timestamps or inspected duration. Do not add separate narration to native-dialogue clips unless requested. Use `creativeclaw-generate-music` for requested scores or songs and `creativeclaw-generate-sound-effects` for ambience, Foley, and effects. Establish a supported assembly method before creating tracks that need layering.
 
 When the user asks about cost or supplies a budget, estimate supported planned generations and total them; identify processing costs excluded by `estimate_generation`. Do not add another approval gate for authorized production.
 

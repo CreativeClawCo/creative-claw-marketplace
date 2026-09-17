@@ -36,8 +36,8 @@ Use these scenarios as regression checks for skill activation and tool behavior.
 | 30 | Crée seulement le storyboard; ne génère aucune vidéo payante. | `creativeclaw-plan-video` | Plans in French and performs no paid video generation. |
 | 31 | 이 캐릭터와 제품으로 여러 장면의 영상을 완성해 줘. | `creativeclaw-build-film` | Runs a Korean multi-shot Film workflow with approval gates. |
 | 32 | Generate one image, one voiceover, and a short clip for this launch. | `creativeclaw` | Root skill coordinates all three focused workflows without duplicating generation. |
-| 33 | Make a seamless thirty-second spaceship engine-room ambience with no music or voices. | `creativeclaw-generate-audio` | Uses the ElevenLabs sound-effect model with looping enabled and does not call `generate_speech`. |
-| 34 | Compose a fifteen-second restrained synth score for this product clip, with no vocals. | `creativeclaw-generate-audio` | Uses the ElevenLabs music model, sets an explicit duration and instrumental output, and keeps the result as a separate audio asset until approved. |
+| 33 | Make a seamless thirty-second spaceship engine-room ambience with no music or voices. | `creativeclaw-generate-sound-effects` | Uses the ElevenLabs sound-effect model with looping enabled and does not call `generate_speech`. |
+| 34 | Compose a fifteen-second restrained synth score for this product clip, with no vocals. | `creativeclaw-generate-music` | Uses ElevenLabs Music v2.5, sets an explicit duration and instrumental output, and keeps the result as a separate audio asset until approved. |
 | 35 | Read this alien diplomat line, then add a quiet sci-fi room tone behind it. | `creativeclaw` | Routes the line to voiceover and the room tone to audio generation; it does not claim that audio concatenation layers the tracks. |
 | 36 | Show me six curated editorial image examples for a perfume launch. | `creativeclaw-find-examples` | Filters to image examples, presents a shortlist, and loads only the selected example. |
 | 37 | Find more examples like this, but only for my selected video model. | `creativeclaw-find-examples` | Uses the exact model ID and cursor while preserving the original search filters. |
@@ -50,7 +50,7 @@ Use these scenarios as regression checks for skill activation and tool behavior.
 
 | 44 | Animate this supplied photo for five seconds in H3 Max. | `creativeclaw-generate-video` | Reuses the photo, resolves missing model settings, and generates without a new storyboard or routine permission question. |
 | 45 | Generate this exact image prompt at 4K; I do not want drafts. | `creativeclaw-generate-image` | Honors the requested supported resolution without a lower-resolution proof or repeated cost confirmation. |
-| 46 | How much would this thirty-second music track cost? Do not generate it. | `creativeclaw-generate-audio` | Calls `estimate_generation` with `operation: "audio"` and the actual music settings; makes no generation call. |
+| 46 | How much would this thirty-second music track cost? Do not generate it. | `creativeclaw-generate-music` | Calls `estimate_generation` with `operation: "audio"` and the actual music settings; makes no generation call. |
 | 47 | Make this voiceover if it fits within 100 credits. | `creativeclaw-generate-voiceover` | Estimates the exact speech request and proceeds without asking again if it fits; does not invent or pass `agentic_prompting`. |
 | 48 | Make one image of this product using our agreed settings. | `creativeclaw-generate-image` | Reuses known references/settings; no automatic estimation, catalog search, or redundant schema lookup. |
 | 49 | Join these eight narration clips in order. | `creativeclaw-edit-media` | Resolves the first merge, uses returned `nextAudioUrls` for continuation, and verifies all eight clips before delivery. |
@@ -59,12 +59,16 @@ Use these scenarios as regression checks for skill activation and tool behavior.
 | 52 | The generation timed out, but I still have its job ID. | `creativeclaw` | Checks known job state before retrying; does not infer failure or refund from the timeout. |
 | 53 | Make this uploaded clip vertical and add Hebrew captions. | `creativeclaw-edit-media` | Uses the correct attachment import, explicit non-distorting resize mode, then automatic captions with Hebrew; no redundant transcription or generative model. |
 | 54 | Use these approved storyboards and script; complete all shots without asking me between stages. | `creativeclaw-build-film` | Reuses approvals, prepares narration-led timing when appropriate, completes the authorized sequence, and does not repeat stage questions. |
-| 55 | Find atmospheric music examples for this product campaign. | `creativeclaw-find-examples` | Searches audio examples, loads the selected example, and routes requested generation to the audio skill. |
+| 55 | Find atmospheric music examples for this product campaign. | `creativeclaw-find-examples` | Searches audio examples, loads the selected example, and routes requested generation to `creativeclaw-generate-music`. |
 | 56 | Render this supplied HTML video only if it fits my stated budget. | `creativeclaw-render-html-video` | Estimates `html_video` using actual duration/dimensions/FPS and proceeds within the constraint without another approval gate. |
 | 57 | Just draft a text shot list; do not generate media. | `creativeclaw-plan-video` | Produces text only, with no paid storyboard image or video calls. |
 | 58 | Transcribe this YouTube URL, then crop its footage vertically. | `creativeclaw-edit-media` | Uses the page URL for transcription but requests/resolves actual media for cropping; never passes the YouTube page as a video-file URL. |
 | 60 | Read this Spanish narration with MiniMax using a calm native system voice. | `creativeclaw-generate-voiceover` | Uses the MiniMax speech specialist, a Spanish system voice, `language_boost: "Spanish"`, and no ElevenLabs or xAI tags. |
 | 61 | Match my authorized reference recording for this one-off English line; do not save a reusable clone. | `creativeclaw-generate-voiceover` | Uses the Chatterbox specialist with `audio_url`, preserves the one-off boundary, and confirms voice-use authorization without creating a Character. |
+| 71 | Make a two-second premium UI confirmation sound, no voice or musical bed. | `creativeclaw-generate-sound-effects` | Uses `generate_sound_effect` with a two-second duration and an audible source, transient, perspective, tail, and exclusions; it sends no music fields. |
+| 72 | Compose a forty-five-second Spanish soul song with intimate vocals and a resolved ending. | `creativeclaw-generate-music` | Uses Music v2.5, sets `force_instrumental: false`, preserves the requested language and duration, and describes vocal delivery, arrangement, production, and ending. |
+| 73 | Make a track exactly like this famous artist's hit. | `creativeclaw-generate-music` | Preserves the requested musical intent while replacing artist and song imitation with concrete genre, tempo, instrumentation, arrangement, and production traits. |
+| 74 | Create separate frame-accurate footsteps, door, and alarm cues for this scene. | `creativeclaw-generate-sound-effects` | Generates distinct cues with explicit durations rather than overloading one prompt, then keeps them separate for downstream placement. |
 
 ## Pass criteria
 

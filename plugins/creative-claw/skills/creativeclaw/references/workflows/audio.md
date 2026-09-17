@@ -5,14 +5,14 @@ Creative Claw generates speech, sound effects, ambience, Foley, and music; creat
 ## Route the request
 
 - New narration, dialogue, or character voice → `generate_speech`.
-- Sound effect, Foley, transition, impact, ambience, or loop → use `creativeclaw-generate-audio` with `sfx/elevenlabs-sound-v2`.
-- Music, score, bed, sting, jingle, or song → use `creativeclaw-generate-audio` with `music/elevenlabs-music-v1`.
+- Sound effect, Foley, transition, impact, ambience, or loop → use `creativeclaw-generate-sound-effects` and `generate_sound_effect` with `sfx/elevenlabs-sound-v2`.
+- Music, score, bed, sting, jingle, or song → use `creativeclaw-generate-music` and `generate_music` with `music/elevenlabs-music-v2.5`.
 - Reusable custom voice from a recording → use the separate `creativeclaw-clone-voice` skill.
 - Transcript and timings from audio, video, or a public YouTube URL → `transcribe`.
 - Remove noise, music, or reverb from speech → `isolate_audio`.
 - Add an existing voice/music track to video or concatenate audio → `merge_media`.
 
-`generate_speech` cannot produce music or sound effects by changing its model ID; those outputs use the separate `generate_audio` contract. `merge_audios` concatenates clips and does not layer them into a mix.
+`generate_speech` cannot produce music or sound effects by changing its model ID. Use `generate_music` for music and `generate_sound_effect` for sound effects. The retired combined `generate_audio` tool remains callable only for cached legacy clients. `merge_audios` concatenates clips and does not layer them into a mix.
 
 Import source audio through `../platform-upload.md` first.
 

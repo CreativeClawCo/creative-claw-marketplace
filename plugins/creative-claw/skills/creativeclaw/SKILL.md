@@ -39,7 +39,8 @@ For explicit HTML-video/HyperFrames work, look for relevant `search_examples` ma
 | Produce a complete multi-shot film | `creativeclaw-build-film` |
 | Create a creator-style product ad | `creativeclaw-create-ugc-ad` |
 | Generate narration, dialogue, or speech | `creativeclaw-generate-voiceover` |
-| Generate sound effects, ambience, Foley, or music | `creativeclaw-generate-audio` |
+| Generate a score, music bed, sting, jingle, theme, or song | `creativeclaw-generate-music` |
+| Generate sound effects, ambience, Foley, loops, impacts, or UI cues | `creativeclaw-generate-sound-effects` |
 | Clone a consented voice | `creativeclaw-clone-voice` |
 | Browse, filter, load, or adapt curated examples | `creativeclaw-find-examples` |
 | Explicitly render HTML/CSS as a PNG | `creativeclaw-render-html-image` |
@@ -61,7 +62,7 @@ Use an explicit outcome over a generic modality. If the user names a model, keep
 - **Images:** default to `image/nano-banana-2` for most generation and editing. It is the primary cost-efficient recommendation because it offers the best overall balance of quality, speed, and cost. Use `image/gpt-image-2.5-flare` for fast OpenAI image work, and escalate to `image/nano-banana-pro`, `image/gpt-image-2.5-sunburst`, or `image/seedream-5-pro` when their specialty materially improves the requested result. Do not proactively surface lower-tier or internal-route variants.
 - **Video:** default to `video/gemini-omni-flash`. Recommend `video/seedance-2.5` for premium long or reference-rich work, `video/seedance-2.0-mini` as Seedance Mini for inexpensive drafts, `video/minimax-h3-max` for fast cinematic native-audio work, or `video/minimax-h3-max-turbo` for the faster lightweight H3 Max route.
 - **Speech:** prefer `speech/elevenlabs-v2` for steady professional narration and existing clones in supported languages; prefer `speech/elevenlabs-v3` for expressive acting, audio tags and broader language coverage. Use `speech/cartesia-sonic` for fast natural stock or Character speech with direct emotion, speed, and volume controls. Cartesia accepts a curated or other public `voice_id`, or a private cloned `character_id`. For a reusable custom voice, use the separate consent-gated `creativeclaw-clone-voice` workflow.
-- **Audio:** use `sfx/elevenlabs-sound-v2` for sound effects, Foley, ambience, and loops. Use `music/elevenlabs-music-v1` for score, music beds, stings, jingles, and songs. Keep non-speech audio in `generate_audio` rather than passing these model IDs to `generate_speech`.
+- **Audio:** use `generate_sound_effect` with `sfx/elevenlabs-sound-v2` for sound effects, Foley, ambience, and loops. Use `generate_music` with `music/elevenlabs-music-v2.5` for scores, music beds, stings, jingles, and songs. Do not pass non-speech model IDs to `generate_speech`.
 
 Verify missing capabilities with runtime discovery, then reuse the selected schema for unchanged operations within the task.
 
