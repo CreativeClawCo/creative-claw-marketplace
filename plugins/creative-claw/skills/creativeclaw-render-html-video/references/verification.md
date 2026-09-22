@@ -4,6 +4,8 @@
 
 Inspect the exact final HTML or ZIP project: fixed root dimensions/duration match output options, IDs are unique, timeline registration follows setup, assets resolve through public URLs (single HTML) or bundled relative files (ZIP), and every visible state is seekable. Review the first frame, entrance/exit boundaries, midpoint, reading holds, and last encoded frame (roughly `duration - 1/fps`). Test repeated/backward seeks such as `0, 2, 1, 2`; matching timestamps should reproduce the same state.
 
+For intentionally silent footage, confirm `muted` is present on each `<video>` opening tag in the submitted HTML. A later `video.muted = true` assignment alone does not prevent the renderer from expecting an audio stream in that video asset.
+
 Use local HyperFrames checks **when the CLI, browser, and needed dependencies are available**. Inspect the installed version/help before selecting flags. Typical commands from a local project directory are `npx hyperframes check --snapshots` and `npx hyperframes snapshot`; `check` already includes lint. Do not silently install/upgrade a toolchain solely because an upstream skill does so. A local project can hold the exact submitted document as `index.html`, but local assets or sidecar files are not transmitted with the HTML string. ZIP projects transmit bundled files; check their paths and Git LFS hydration before uploading.
 
 Without local tooling, perform source review and use exposed preview/inspection tools if available. State which checks were unavailable. Do not claim that the remote service always performs `check`, offers a preflight endpoint, or shares the local CLI version. Browser inspection and local checks do not prove remote compatibility.
@@ -21,6 +23,7 @@ Poll the returned job ID through `check_job` using its actual schema. A queued/i
 | Blank WebGL or black capture | Context creation, shader/link logs, viewport and canvas size, camera/material visibility, drawing-buffer lifetime, texture access. |
 | Content collapsed or clipped | Explicit root/ancestor sizes, actual fonts, inline transforms, text wrapping, peak overshoot, z-index. |
 | Missing or unsynchronized media | Worker-accessible direct `src`, audio ID, nested timing, source range, separate audio track, actual encoded sound. |
+| Render expects audio in a video-only asset | Check for a `<video>` tag missing `muted`, even when JavaScript sets `.muted = true` later. |
 | Local success but remote failure | Exact submitted HTML, external requests, library versions, worker version/deployment if exposed, GPU/browser capabilities, workload. |
 | DOM motion audit says static but shader moves | Pixel samples at distinct times; DOM bounding boxes do not describe canvas contents. Do not add meaningless DOM motion to appease an audit. |
 

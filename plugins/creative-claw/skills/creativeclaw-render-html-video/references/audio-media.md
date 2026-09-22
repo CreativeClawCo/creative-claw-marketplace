@@ -42,7 +42,7 @@ render_html_video({
 })
 ```
 
-If the source should be silent, omit the `<audio>` element. If the audio source differs from the video, use its own durable HTTP(S) URL.
+If the source should be silent, omit the `<audio>` element and keep `muted` directly on the `<video>` opening tag. If the audio source differs from the video, use its own durable HTTP(S) URL. HyperFrames inspects authored tags before JavaScript runs: `video.muted = true` alone can make a video-only MP4 look like an expected audio source and fail compilation. The tag attribute is required even when the script also sets the property.
 
 For single HTML, import local/attached media through available Creative Claw asset tools, inspecting their schemas first. ZIP projects may instead bundle media and reference it by project-relative paths. Use permanent, worker-accessible HTTP(S) URLs; when one source supplies picture and sound, use its imported permanent asset URL for both. Authoring a filename or browser blob URL does not upload bytes. Inline composition code is supported; this does not imply inline audio support.
 
