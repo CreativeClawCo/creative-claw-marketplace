@@ -244,10 +244,8 @@ skill-variants/
   chatgpt/
     platform-upload.md     # OpenAI Store routing for ChatGPT attachments and Codex local files
 scripts/
-  build-skill-zips.sh      # builds both upload-ready skill archives
-creativeclaw-skill.zip             # cross-client archive
-creativeclaw-chatgpt-skill.zip     # OpenAI Store root-skill archive
-creativeclaw-*-chatgpt-skill.zip   # focused OpenAI skill archives
+  build-skill-zips.sh      # builds local archives into the ignored output folder
+output/chatgpt-skills/     # local generated ZIPs, ignored by Git
 evals/skill-routing-scenarios.md   # activation and workflow regression suite
 ```
 
@@ -259,7 +257,7 @@ Edit the canonical skill once under `plugins/creative-claw/skills/creativeclaw`.
 ./scripts/build-skill-zips.sh
 ```
 
-The build validates every skill's metadata and MCP dependency, checks routing coverage and the regression suite, and creates deterministic upload archives. Nothing in the build publishes or submits a plugin draft.
+The build validates every skill's metadata and MCP dependency, checks routing coverage and the regression suite, and creates deterministic archives under the Git-ignored `output/chatgpt-skills/` folder. The marketplace source stays focused on direct installs, and generated ZIPs stay local. Nothing in the build publishes or submits a plugin draft.
 
 ---
 
@@ -276,7 +274,7 @@ Usage-based — pay only for what you generate. No subscriptions, no commitments
 - **Claude Code** — via `.claude-plugin/plugin.json`
 - **Claude Desktop** — via MCP server config
 - **Codex and other skill-directory clients** — via the canonical `creativeclaw` skill
-- **OpenAI Store (ChatGPT + Codex)** — via `creativeclaw-chatgpt-skill.zip`
+- **OpenAI Store (ChatGPT + Codex)** — build local ZIPs with `./scripts/build-skill-zips.sh`, then use `output/chatgpt-skills/creativeclaw-chatgpt-skill.zip` and the focused skill ZIPs
 - **Hermes Agent** — via OAuth MCP setup and portable Agent Plugins v1 manifests
 - **OpenClaw** — via `openclaw.plugin.json` and ClawHub-ready package metadata
 
