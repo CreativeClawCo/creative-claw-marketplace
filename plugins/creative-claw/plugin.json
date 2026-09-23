@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "creative-claw",
-  "version": "0.5.8",
+  "version": "0.5.9",
   "description": "Generate and edit on-brand images, videos, speech, and branded graphics with Creative Claw.",
   "author": {
     "name": "Creative Claw Co.",
