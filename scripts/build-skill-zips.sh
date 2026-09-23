@@ -38,6 +38,7 @@ focused_skill_names=(
   creativeclaw-add-video-intro-outro
 )
 chatgpt_overlay_root="$repo_root/skill-variants/chatgpt"
+output_dir="$repo_root/output/chatgpt-skills"
 temp_root="$(mktemp -d "${TMPDIR:-/tmp}/creativeclaw-skills.XXXXXX")"
 
 cleanup() {
@@ -95,38 +96,24 @@ for focused_skill_name in "${focused_skill_names[@]}"; do
   )
 done
 
-mv -f "$temp_root/creativeclaw-general.zip" "$repo_root/creativeclaw-skill.zip"
-mv -f "$temp_root/creativeclaw-chatgpt.zip" "$repo_root/creativeclaw-chatgpt-skill.zip"
+mkdir -p "$output_dir"
+mv -f "$temp_root/creativeclaw-general.zip" "$output_dir/creativeclaw-skill.zip"
+mv -f "$temp_root/creativeclaw-chatgpt.zip" "$output_dir/creativeclaw-chatgpt-skill.zip"
 
 for focused_skill_name in "${focused_skill_names[@]}"; do
   mv -f \
     "$temp_root/$focused_skill_name-chatgpt.zip" \
-    "$repo_root/$focused_skill_name-chatgpt-skill.zip"
+    "$output_dir/$focused_skill_name-chatgpt-skill.zip"
 done
 
-echo "Built:"
+echo "Built local skill archives in $output_dir:"
 archive_paths=(
-  "$repo_root/creativeclaw-skill.zip"
-  "$repo_root/creativeclaw-chatgpt-skill.zip"
+  "$output_dir/creativeclaw-skill.zip"
+  "$output_dir/creativeclaw-chatgpt-skill.zip"
 )
 for focused_skill_name in "${focused_skill_names[@]}"; do
-  archive_paths+=("$repo_root/$focused_skill_name-chatgpt-skill.zip")
+  archive_paths+=("$output_dir/$focused_skill_name-chatgpt-skill.zip")
 done
 shasum -a 256 "${archive_paths[@]}"
 
 node "$repo_root/scripts/validate-skill-packages.mjs"
-
-# Convenience download containing individual skill ZIPs; not itself a skill.
-mkdir -p "$temp_root/upload-kit"
-cp "$repo_root/submission/OPENAI-UPLOADS.txt" "$temp_root/upload-kit/OPENAI-UPLOADS.txt"
-cp "$repo_root/creativeclaw-chatgpt-skill.zip" "$temp_root/upload-kit/"
-for focused_skill_name in "${focused_skill_names[@]}"; do
-  cp "$repo_root/$focused_skill_name-chatgpt-skill.zip" "$temp_root/upload-kit/"
-done
-find "$temp_root/upload-kit" -type f -exec touch -t 202601010000 {} +
-(
-  cd "$temp_root/upload-kit"
-  find . -type f -print | LC_ALL=C sort | zip -X -q "$temp_root/creativeclaw-openai-upload-kit.zip" -@
-)
-mv -f "$temp_root/creativeclaw-openai-upload-kit.zip" "$repo_root/creativeclaw-openai-upload-kit.zip"
-shasum -a 256 "$repo_root/creativeclaw-openai-upload-kit.zip"

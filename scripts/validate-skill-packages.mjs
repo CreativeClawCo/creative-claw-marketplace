@@ -27,7 +27,7 @@ for (const name of skillNames()) {
       }
     }
   }
-  const archive = path.join(repoRoot, `${name}-chatgpt-skill.zip`);
+  const archive = path.join(repoRoot, "output/chatgpt-skills", `${name}-chatgpt-skill.zip`);
   const actual = execFileSync('unzip', ['-Z1', archive], { encoding: 'utf8' }).trim().split('\n').sort();
   const expected = entries.map(entry => `${name}/${entry}`).sort();
   if (JSON.stringify(actual) !== JSON.stringify(expected)) throw new Error(`Archive entry mismatch: ${archive}`);

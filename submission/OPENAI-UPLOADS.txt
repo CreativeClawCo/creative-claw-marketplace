@@ -17,6 +17,7 @@ The general-client creativeclaw-skill.zip is built separately and is not
 included in this OpenAI upload kit.
 
 Build locally: bash scripts/build-skill-zips.sh
+Archives are written to the Git-ignored output/chatgpt-skills/ directory.
 Verify archives: node scripts/validate-skill-packages.mjs
 Validation checks package contents, local references, and source freshness.
 Documented routing scenarios still require behavioral evaluation in a client.
