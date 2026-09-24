@@ -1,0 +1,21 @@
+name: Validate plugin
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: sudo apt-get install -y ripgrep
+      # Fails when a skill's embedded reference copy drifts from skills/creativeclaw/references/.
+      - run: node scripts/sync-skill-references.mjs --check
+      - run: bash scripts/validate-skill-architecture.sh
+      - run: npx -y @anthropic-ai/claude-code plugin validate .
+      - run: npx -y @anthropic-ai/claude-code plugin validate plugins/creative-claw

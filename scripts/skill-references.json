@@ -1,0 +1,10 @@
+{
+  "_comment": "Canonical references live in plugins/creative-claw/skills/creativeclaw/references/. sync-skill-references.mjs copies them into each skill so every skill folder is self-contained. Edit the canonical copy, then run the sync.",
+  "shared": ["workflow-basics.md", "platform-upload.md", "job-recovery.md", "media-assembly.md"],
+  "groups": {
+    "images": ["creativeclaw-generate-image", "creativeclaw-product-photoshoot", "creativeclaw-create-avatar", "creativeclaw-create-character", "creativeclaw-plan-video", "creativeclaw-build-film", "creativeclaw-create-ugc-ad", "creativeclaw-generate-video"],
+    "voices": ["creativeclaw-clone-voice", "creativeclaw-generate-voiceover", "creativeclaw-create-avatar"],
+    "video": ["creativeclaw-generate-video", "creativeclaw-build-film", "creativeclaw-create-ugc-ad", "creativeclaw-plan-video"],
+    "avatars/identity.md": ["creativeclaw-create-avatar", "creativeclaw-create-character"]
+  }
+}

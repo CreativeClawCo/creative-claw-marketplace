@@ -4,7 +4,8 @@ import { fileURLToPath } from 'node:url';
 
 export const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 export const skillsRoot = path.join(repoRoot, 'plugins/creative-claw/skills');
-export const sharedReferences = ['workflow-basics.md', 'platform-upload.md', 'job-recovery.md', 'media-assembly.md'];
+const config = JSON.parse(fs.readFileSync(path.join(repoRoot, 'scripts/skill-references.json'), 'utf8'));
+export const sharedReferences = config.shared;
 export function skillNames() {
   return fs.readdirSync(skillsRoot, { withFileTypes: true })
     .filter(entry => entry.isDirectory() && fs.existsSync(path.join(skillsRoot, entry.name, 'SKILL.md')))
@@ -14,18 +15,11 @@ export function skillNames() {
 export function syncReferences(checkOnly = false) {
   const stale = [];
   for (const name of skillNames().filter(name => name !== 'creativeclaw')) {
-    const imageReferences = ['creativeclaw-generate-image', 'creativeclaw-product-photoshoot', 'creativeclaw-create-avatar', 'creativeclaw-create-character', 'creativeclaw-plan-video', 'creativeclaw-build-film', 'creativeclaw-create-ugc-ad', 'creativeclaw-generate-video'].includes(name)
-      ? fs.readdirSync(path.join(skillsRoot, 'creativeclaw/references/images')).filter(file => file.endsWith('.md')).map(file => `images/${file}`)
-      : [];
-    const voiceReferences = ['creativeclaw-clone-voice', 'creativeclaw-generate-voiceover', 'creativeclaw-create-avatar'].includes(name)
-      ? fs.readdirSync(path.join(skillsRoot, 'creativeclaw/references/voices')).filter(file => file.endsWith('.md')).map(file => `voices/${file}`)
-      : [];
-    const videoReferences = ['creativeclaw-generate-video', 'creativeclaw-build-film', 'creativeclaw-create-ugc-ad', 'creativeclaw-plan-video'].includes(name)
-      ? fs.readdirSync(path.join(skillsRoot, 'creativeclaw/references/video')).filter(file => file.endsWith('.md')).map(file => `video/${file}`)
-      : [];
-    const avatarReferences = ['creativeclaw-create-avatar', 'creativeclaw-create-character'].includes(name)
-      ? ['avatars/identity.md'] : [];
-    for (const reference of [...sharedReferences, ...imageReferences, ...voiceReferences, ...videoReferences, ...avatarReferences]) {
+    const groupReferences = Object.entries(config.groups)
+      .filter(([, skills]) => skills.includes(name))
+      .flatMap(([group]) => group.endsWith('.md') ? [group]
+        : fs.readdirSync(path.join(skillsRoot, 'creativeclaw/references', group)).filter(file => file.endsWith('.md')).map(file => `${group}/${file}`));
+    for (const reference of [...sharedReferences, ...groupReferences]) {
       const source = fs.readFileSync(path.join(skillsRoot, 'creativeclaw/references', reference));
       const destination = path.join(skillsRoot, name, 'references', reference);
       if (fs.existsSync(destination) && fs.readFileSync(destination).equals(source)) continue;
