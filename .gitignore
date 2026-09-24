@@ -17,3 +17,6 @@ skills-lock.json
 /output/chatgpt-skills/
 CLAUDE.md
 AGENTS.md
+
+# Local-only working files (notes, drafts, builds). Never committed.
+/local/
