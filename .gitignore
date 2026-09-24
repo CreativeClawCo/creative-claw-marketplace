@@ -12,6 +12,7 @@ _refs/
 .claude/
 .factory/
 skills-lock.json
+
 # Built skill packages and submission archives are local artifacts.
 *.zip
 /output/chatgpt-skills/
