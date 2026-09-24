@@ -25,7 +25,7 @@ Use `video/wan-3.0` for cost-efficient native-audio clips, 2 to 30 second single
 | `image_url` | Literal first frame. |
 | `last_frame_url` | Optional literal last frame used with `image_url`. |
 | `image_urls` | Up to 10 ordered reference images. |
-| `video_urls` | Up to 5 ordered reference videos. |
+| `video_urls` | Up to 5 ordered reference videos, each at most 15 seconds. This input limit is separate from the 2 to 30 second output duration. |
 | `audio_urls` | Up to 5 ordered reference audio clips. |
 | `extras.generate_audio` | Generate synchronized dialogue, effects, ambience, and music. Defaults to `true`. |
 | `extras.seed` | Optional integer from 0 through 2147483647. |
@@ -33,6 +33,8 @@ Use `video/wan-3.0` for cost-efficient native-audio clips, 2 to 30 second single
 | `extras.web_url` | One public HTTPS webpage brief that does not require authentication. |
 
 Wan accepts at most 20 ordered references total. A document or webpage is an alternative input mode and must not be mixed with literal frames or reference arrays.
+
+If a source video is longer than 15 seconds, use `trim_video` for the exact excerpt needed, wait for the completed URL with `check_job`, then use that trimmed video as the reference. Do not retry the original long URL.
 
 ## Choose the input mode
 

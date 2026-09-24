@@ -18,11 +18,11 @@ Resolve the edited interval and concatenate it between untouched spans. Inspect 
 
 Example request: "Keep this video exactly as it is and add five seconds after the end."
 
-Keep the original unchanged. Take the smallest supported boundary segment as context and use a supported continuation model, such as Seedance 2.5 when available. Example:
+When the source is 1.625–60 seconds and continuity of its characters, setting, motion, and look matters, use `video/minimax-h3-max-extend` with the source in `video_urls`. It returns the full extended video by default. Set `extras.output` to `continuation` when only the new footage is needed. Example:
 
-"Extend @Video1 forward from its ending. Over five seconds, the cyclist continues along the same road and slows beside the lake. Preserve rider identity, bicycle, wardrobe, direction of travel, camera height and ambient sound perspective. Show only the new continuation, not a replay of the original."
+"The cyclist continues along the same road and slows beside the lake. Preserve rider identity, bicycle, wardrobe, direction of travel, camera height and ambient sound perspective. One continuous camera move with no cut."
 
-Use the model's explicit extend mode and numeric continuation duration. Check returned content to avoid concatenating duplicate source footage. Merge the new extension with the original, leaving the original pixels/audio untouched.
+Use a whole-number `duration` of 5–15 seconds for the new footage. Leave `aspect_ratio` on `auto` unless a crop was requested. With `extras.output: "extended"`, inspect the returned stitched video directly and do not merge the source again. With `"continuation"`, merge the new segment with the original when a full result is needed. If the source exceeds the limit or another model fits the task better, use a supported continuation route and inspect its returned content before merging.
 
 ## Follow-ups and approval
 
