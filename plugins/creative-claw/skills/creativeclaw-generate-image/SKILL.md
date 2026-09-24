@@ -1,13 +1,13 @@
 ---
 name: creativeclaw-generate-image
-description: "Generate or edit a single image with Creative Claw and route it to the best image model. Use for broad image requests when the user has not chosen a model or a more specific outcome such as a product photoshoot."
+description: "Generate or edit a single image with Creative Claw and route it to the best image model. Use for image creation and edits, including requests naming a supported model. Use product-photoshoot for a coordinated campaign or create-avatar for a reusable identity."
 ---
 
 # Generate Image
 
 Read [shared execution guidance](references/workflow-basics.md) once per task before using tools. It covers existing authorization, model discovery, optional cost checks, imports, and recovery.
 
-Turn a brief and optional references into a finished image. This is the primary skill for a clear, general image-generation or image-editing request; model-specific skills supply deeper prompting advice after routing. If the user explicitly requests HTML/CSS rendering or a deterministic code-based PNG, use `creativeclaw-render-html-image` instead.
+Turn a brief and optional references into a finished image. This is the primary skill for a clear, general image-generation or image-editing request; the selected packaged model reference supplies deeper prompting advice. If the user explicitly requests HTML/CSS rendering or a deterministic code-based PNG, use `creativeclaw-render-html-image` instead.
 
 ## Workflow
 
@@ -27,7 +27,7 @@ Turn a brief and optional references into a finished image. This is the primary 
 - Use `image/gpt-image-2.5-flare` for fast, high-quality everyday OpenAI image generation and editing.
 - Use `image/gpt-image-2.5-sunburst` for instruction-heavy editing, precise transformations, typography, or strong world knowledge.
 - Use `image/seedream-5-pro` for polished commercial imagery and premium product or fashion aesthetics.
-- Honor an explicit model choice. Use the corresponding model specialist skill for exact prompting and reference syntax.
+- Honor an explicit model choice. Read [the selected image model guide](references/images/index.md) for exact prompting and reference syntax.
 
 Do not proactively recommend lower-tier or internal-route variants.
 
@@ -39,7 +39,7 @@ Work in the user's language. Keep supplied visible copy verbatim, including spel
 
 - `image_url` is the primary reference. Additional reference support is model-specific, so inspect `get_model_params` instead of assuming a fixed count.
 - Use a `character_id` for a saved Character. If both an explicit `image_url` and the Character's visual identity must influence the result, do not assume the Character image is automatically added as another reference; supply supported references deliberately.
-- Set `agentic_prompting: false` for a complete prompt containing exact reference labels, quoted copy, strict layout, or other literal control syntax.
+- Preserve exact quoted copy, reference labels, dialogue, timecodes, colors, and approved layout or edit constraints in the prompt.
 - Never invent unsupported parameters. Use only fields returned by the tool schema and selected model.
 
 ## Completion standard

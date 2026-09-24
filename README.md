@@ -32,7 +32,7 @@ Access 1,000+ production-ready AI models — FLUX, Gemini, Veo, Sora, Kling, See
 
 ### Skills (Creative Workflows)
 
-The **creativeclaw** root skill routes mixed or unclear requests. Focused outcome skills own general image, video, and voice work plus Characters, planning, Films, product photoshoots, UGC ads, and feedback. Model specialists add exact prompting and reference guidance only after an outcome chooses Nano Banana 2, Nano Banana Pro, GPT Image 2.5 Flare or Sunburst, Seedream 5 Pro, Gemini Omni, Seedance 2.5, H3 Max, ElevenLabs v3, or xAI TTS.
+The **creativeclaw** root skill routes mixed or unclear requests. Focused outcome skills own general image, video, and voice work plus Characters, planning, Films, product photoshoots, UGC ads, and feedback. Video-model guidance is packaged as shared references inside Generate Video, Build Film, Create UGC Ad and Plan Video; load only the selected model's guide. Standalone video-model skills are no longer published. Image and speech specialists remain available pending their separate consolidation.
 
 Every OpenAI skill declares the ChatGPT MCP dependency at `https://app.creativeclaw.co/mcp/chatgpt`, matching the endpoint configured in the plugin draft. A focused skill can therefore activate directly without losing access to Creative Claw's tools.
 
@@ -239,7 +239,7 @@ plugins/
       creativeclaw/
         SKILL.md           # thin router for mixed and workspace requests
         references/        # shared asset, theme, upload, and editing workflows
-      creativeclaw-*/      # outcome and recommended-model specialist skills
+      creativeclaw-*/      # outcome skills with packaged model references
 skill-variants/
   chatgpt/
     platform-upload.md     # OpenAI Store routing for ChatGPT attachments and Codex local files

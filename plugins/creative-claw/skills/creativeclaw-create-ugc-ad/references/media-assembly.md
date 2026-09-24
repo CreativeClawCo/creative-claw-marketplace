@@ -20,7 +20,9 @@ For eight segments, the first job combines 1–5; the second combines that resul
 
 ## Films and bookends
 
-Match clip dimensions and aspect ratios before concatenation. Avoid stretching subjects; use an appropriate crop or padding choice. Normalize codec/frame rate only with tools that actually expose those controls.
+Use the current merge controls to fit clips without extra scale jobs solely for mismatched dimensions. For `merge_media` with `operation:"merge_videos"`, `canvas_video_index` is zero-based and chooses the output canvas. Select the main video's index, usually 1 for intro/main/outro or 0 for main/outro. Choose `video_fit:"pad"` to preserve all source content when framing differs, `"crop"` for an authorized fill-frame crop, or `"strict"` to reject mismatches. The `"auto"` default can crop, so do not rely on it when preserving the frame matters. `pad_color` accepts `black`, `white`, or `gray`. Normalize codec/frame rate only with tools that actually expose those controls.
+
+For `assemble_film`, the first shot supplies the canvas; there is no `canvas_video_index`. Use `video_fit:"pad"` when content preservation matters, `"crop"` for authorized cropping, or `"strict"` for matching frames. Use `mode:"connect"` to preserve complete clips. Use `"cut_end"` only when truncating clips to planned shot durations is intended and authorized.
 
 Store per-shot narration in `audioUrl`, then mux it into each appropriate clip and save the resulting `clipUrl` with `update_film_project({ id, patch_shots: [...] })`. If using one project-wide narration track instead, set the tool's top-level `audio_url`; the returned project represents it as `audioUrl`.
 

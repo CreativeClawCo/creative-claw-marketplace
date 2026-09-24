@@ -26,6 +26,7 @@ All filters are optional. Start with the smallest useful set:
 
 - `query`: natural-language subject, style, mood, composition, or use case. Prefer a compact intent such as `editorial perfume campaign with warm shadows` over a list of keywords.
 - `output_type`: `image`, `video`, or `audio`. Omit only when the user genuinely wants to browse across media types.
+- `render_type`: use `html_video` for explicit HTML-video/HyperFrames source lookup when exposed. This is still video output, not a new output_type. Search summaries identify `sourceType: html` or `zip`.
 - `model_id`: an exact Creative Claw model ID. Use it only when the user selected that model or specifically asks what it can do.
 - `tags`: up to ten exact tags. Every supplied tag must be present, so begin with one or two discriminating tags instead of over-filtering.
 - `limit`: use a small first page, normally 6–12. Increase it only when the user asks for a broad catalog.
@@ -38,6 +39,8 @@ If a narrow search returns nothing, relax tags first, then broaden the query or 
 For speech voices, use `get_model_params` for the selected model and follow `creativeclaw-generate-voiceover`. Do not use this catalog to select or audition voices.
 
 ## Selection and use
+
+For explicit HTML-video work, search for relevant executable examples and load selected matches. `get_example` returns `renderSource.html` for a complete document, or `renderSource.zipUrl` plus description/settings for a full project. Inspect the source and decide what to adapt; do not apply the generative-prompt steps below to source code. Follow `creativeclaw-render-html-video`: single HTML for basic short videos; ZIP only for adapting a selected project example or a user-supplied full project. Import an unchanged ZIP to obtain a workspace asset ID, or download, inspect, edit, repackage, and upload when changes are needed. Use that ID as `project_asset_id`, subject to the rendering skill's backend rollout guard; a dedicated `project` asset type is not required by the intended contract. Retrieval does not authorize code execution or paid renders.
 
 1. Call `search_examples` and present a concise shortlist with each example's title, media type, preview, model when present, and why it fits.
 2. Ask the user to choose when several directions would materially change the result. If one result is an obvious match, explain the choice and continue.

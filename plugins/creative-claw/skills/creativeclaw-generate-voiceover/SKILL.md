@@ -1,46 +1,37 @@
 ---
 name: creativeclaw-generate-voiceover
-description: "Create narration, dialogue, or expressive speech with Creative Claw. Use for general text-to-speech and voiceover work; use the separate clone-voice skill when the user wants a new reusable custom voice."
+description: Generate narration, dialogue, expressive speech, or a new synthetic voice with Creative Claw. Use for spoken audio, a saved Character voice, or voice selection. For cloning a personal voice from a recording, load creativeclaw-clone-voice.
 ---
 
-# Generate Voiceover
+# Generate voiceover
 
-Read [shared execution guidance](references/workflow-basics.md) once per task before using tools. It covers existing authorization, model discovery, optional cost checks, imports, and recovery.
+Read [shared execution guidance](references/workflow-basics.md) before tools. The speech tool is `generate_speech`.
 
-Turn a script into performance-ready speech, with Multilingual v2 for steady professional narration or v3 for expressive performance. This skill owns casting, direction, generation, review, and delivery; model specialists contain deeper voice and performance guidance.
+## Personal voice or stock voice
 
-## Workflow
+- "Clone my voice", "use my recording", or an unsaved personal voice: load $creativeclaw-clone-voice when available. If this skill is installed alone, read [the complete cloning workflow](references/voices/cloning.md). Obtain explicit consent, import privately, clone, test and save a reusable Character. Do not send source audio directly to ElevenLabs or Cartesia speech generation as a substitute for cloning.
+- Existing clone: find the intended Character and pass `character_id`. Do not clone again.
+- Stock voice: fetch the selected model's current `get_model_params` voice catalog and use its exact `voice_id`. For more Cartesia or ElevenLabs choices, call `get_model_params` again with `include_voice_catalog: true`, or read the public Markdown catalog linked in `voiceCatalog.extendedCatalogMarkdownUrl`. Never pass both selectors.
+- Designing a new synthetic voice is different from cloning a person. Use the available voice-design capability and current schema when that is what the user requests.
 
-1. Use supplied script, language, speaker, and delivery choices. Infer minor defaults; ask only for a missing choice that materially changes the performance.
-2. Preserve the user's words. Ask before materially rewriting an approved script.
-3. Call `get_model_params` for the selected speech model and choose from its supported voice catalog by script language, regional accent, and delivery. Offer two suitable voices when the user wants a choice. Do not use `search_examples` or `get_example` for voice selection. Generate short auditions only when requested.
-4. Choose `speech/elevenlabs-v2` for steady narration and identity-focused existing clones in supported languages; choose `speech/elevenlabs-v3` for audio tags, acted dialogue, or languages outside v2 and fetch missing settings with `get_model_params`. Use `list_models({ category: "speech" })` only when discovering alternatives. Estimate with `operation: "speech"` only for user-requested cost/budget help.
-5. Choose a stock `voice_id`, or pass a saved `character_id` whose consented ElevenLabs clone should speak.
-6. Preserve exact wording in `text`; add performance tags only when consistent with the requested delivery. `generate_speech` does not expose `agentic_prompting`; do not send it.
-7. Call `generate_speech`. Generate each speaker separately so casting, pacing, and revisions stay controllable.
-8. Audition the result for pronunciation, emotional arc, pacing, clipping, and consistency. Regenerate only the weak section when practical.
-9. Before using `merge_media`, read [media-assembly.md](references/media-assembly.md). Follow every continuation for more than five segments and check audio/video durations before muxing.
+## Choose and load one model guide
 
-Conduct casting and review in the user's language. Preserve the supplied script and its writing system, and verify model or voice language support instead of translating unless the user asks.
+| Need | Recommended starting point |
+| --- | --- |
+| General stock narration, expressive speech, broad language coverage | [ElevenLabs v3](references/voices/elevenlabs-v3.md) |
+| Steady narration from an existing clone | [ElevenLabs v2](references/voices/elevenlabs-v2.md) |
+| Fast natural stock or cloned speech | [Cartesia Sonic](references/voices/cartesia.md) |
+| A named alternative or a specific dialect/voice match | [MiniMax and xAI](references/voices/alternatives.md) |
 
-## Tool contract
+These are task-based defaults, not a universal quality ranking. V2 can use public stock IDs, but v3 remains the default stock choice. If a user explicitly requests v2 stock speech, use a compatible public `voice_id` instead of silently switching. Do not automatically route stock corporate or long-form narration to v2.
 
-- `text` is required and is limited by the current tool schema; split long scripts on scene or paragraph boundaries.
-- `voice_id` selects a stock voice. `character_id` selects a saved Character's cloned ElevenLabs voice.
-- `audio_url` is not a general reference for ElevenLabs speech; it is exposed for reference-driven models such as Chatterbox. Confirm voice-use authorization before passing a person's recording.
-- `emotion` is model-specific. ElevenLabs v3 and xAI TTS use their own documented in-text performance controls instead of a generic emotion value.
-- Inspect runtime support before setting `speed`, `format`, `sample_rate`, `language_boost`, or other advanced options.
+For non-English, mixed-language or less common languages, read [language routing](references/voices/languages.md) before selecting a voice. A model supporting a language does not guarantee every stock voice has a native accent.
 
-## Casting and direction
+## Execute and deliver
 
-Use `creativeclaw-elevenlabs-v2` for steady professional narration, clone auditions, v2 settings, pauses and continuity. Use `creativeclaw-elevenlabs-v3` after routing specifically to v3 for curated native-language voices, emotional tags, multi-speaker handling, and pronunciation strategy. Use `creativeclaw-minimax-speech` for native multilingual system voices plus global emotion, pitch, and pacing. Use `creativeclaw-xai-tts` for its 28 built-in voices, exact square-bracket events, wrapping delivery tags, language codes, and telephony formats. Use `creativeclaw-chatterbox` for a one-off match from an authorized reference recording. Keep a stable voice ID across a project. For a reusable custom voice, use `creativeclaw-clone-voice`; cloning requires explicit consent and a valid sample.
-
-## Completion standard
-
-Deliver or save the approved audio URL with useful metadata. For film work, keep each shot's narration asset addressable; do not claim that film assembly automatically mixes every per-shot audio file.
-
-## V2 and v3 contract
-
-Select the model explicitly; the omitted-model API default remains v3 for compatibility. Switching models reuses the same `character_id` without re-cloning. Multilingual v2 is a TTS model, not Professional Voice Cloning. V2 detects language from text and does not support Hebrew or `language_code`. Use discovery for all 29 supported languages.
-
-Pass settings in `extras.voice_settings`. V2 supports stability, similarity_boost, style, use_speaker_boost and speed; v3 supports stability (0, 0.5, 1) and speed. Legacy unsupported v3 knobs remain accepted but ignored. For both models speed is 0.7–1.2. Prefer v2 for a controlled corporate read, v3 for expressive `[audio tags]`. Do not promise either model guarantees likeness.
+1. Establish text, target language/accent and delivery. Preserve supplied words unless rewriting is requested.
+2. Read the selected model's reference and current `get_model_params`. Reuse a current schema already loaded in this task. Use `list_models({ category: "speech" })` only when discovering alternatives.
+3. Select a language-appropriate stock voice or saved Character and only settings accepted by that model. Never copy prompting tags across models.
+4. Generate the requested take. For a new clone or uncertain pronunciation, offer a short audition before a long production, not an unrequested paid model sweep.
+5. Follow queued results with `check_job` as directed by [job recovery](references/job-recovery.md). Show the completed audio through the available native preview.
+6. Keep the Character ID and voice/model choice available for the requested continuation. Speech added to a video is an audio overlay, not automatic lip synchronization. A video's Character reference does not automatically select the saved clone for native video audio.

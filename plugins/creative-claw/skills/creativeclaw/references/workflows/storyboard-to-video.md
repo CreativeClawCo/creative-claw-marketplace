@@ -26,7 +26,7 @@ Use one main action and one camera idea per short beat. For a multi-shot Film pr
 
 Use `image/nano-banana-pro` for a complex labeled contact sheet. Consider `image/gpt-image-2.5-sunburst` when exact text is the dominant risk. Verify both at runtime.
 
-Pass exact panel instructions with `agentic_prompting: false`:
+Pass exact panel instructions:
 
 ```text
 [N]-panel production storyboard in a clean [rows × columns] grid.

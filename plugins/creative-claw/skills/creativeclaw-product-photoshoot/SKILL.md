@@ -24,7 +24,7 @@ Conduct the workflow in the user's language and preserve all approved product an
 2. Escalate to `image/nano-banana-pro`, `image/gpt-image-2.5-sunburst`, or `image/seedream-5-pro` only when exact typography, difficult editing, or premium commercial styling materially benefits.
 3. Discover with `list_models({ category: "image" })` only when selecting a model; fetch missing settings with `get_model_params` and reuse them across the set. Estimate planned images only when the user asks about cost or sets a budget.
 4. Establish a hero direction, reusing an approved reference when supplied. Follow requested review stages; if the user authorizes the complete set, continue without asking for each shot. Repeat locked product facts and use the selected hero as a reference where supported.
-5. Use `agentic_prompting: false` for exact label copy, reference tokens, strict placement, or locked campaign instructions.
+5. Preserve exact quoted copy, reference labels, dialogue, timecodes, colors, and approved layout or edit constraints in the prompt.
 
 ## Quality control
 

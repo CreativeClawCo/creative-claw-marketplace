@@ -11,9 +11,10 @@ Use this as routing guidance. Tool availability varies by client; never recite t
 | `generate_image`   | Generate an image or edit a source supplied as `image_url`. Additional model-specific references normally go in `extras`. |
 | `generate_video`   | Generate, animate, extend, retake, reframe, edit, or drive video according to model capability and `operation`.           |
 | `generate_speech`  | Generate speech. Supports model-specific voices, delivery controls, reference audio, and Characters.                      |
-| `generate_audio`   | Generate sound effects, ambience, Foley, or music with a supported ElevenLabs audio model.                                |
+| `generate_music`   | Generate scores, music beds, stings, jingles, themes, or songs with ElevenLabs Music.                                     |
+| `generate_sound_effect` | Generate sound effects, ambience, Foley, transitions, impacts, or textures with ElevenLabs.                         |
 
-Use `list_models` before relying on a remembered model ID. Use `get_model_params` before sending `extras`, reference arrays, resolution, duration, or operation-specific fields. Route speech to `generate_speech`; route sound effects and music to `generate_audio`.
+Use `list_models` before relying on a remembered model ID. Use `get_model_params` before sending `extras`, reference arrays, resolution, duration, or operation-specific fields. Route speech to `generate_speech`, music to `generate_music`, and sound effects to `generate_sound_effect`.
 
 For a model comparison, call `generate_image` once per selected model with the same prompt and settings, then present the results together.
 
@@ -90,6 +91,12 @@ Read `platform-upload.md` before choosing an import route.
 | `transcribe`        | Produce a timed transcript from audio, video, or a public YouTube URL.                    |
 | `isolate_audio`     | Remove noise, music, and reverb from a voice recording. Queued; resolve with `check_job`. |
 
+## Account and billing
+
+Use `manage_account` to view the connected account, balances, recent generations and credit activity, including charges and refunds. Open `overview` for the balance, `activity` for a specific generation's recorded cost, or `settings` for generation preferences. Its account-page link provides user-operated purchase and subscription management; calling this read-only tool does not change billing.
+
+Read [account guidance](workflows/account.md) to match jobs to charges, distinguish gross charges/refunds/net cost, and handle missing or older records. Use `estimate_generation` for future quotes, not proof of what a past generation cost. A balance question alone is not a feedback submission request.
+
 ## Jobs and credits
 
 | Tool                  | Use                                                                  |
@@ -105,7 +112,7 @@ Read `platform-upload.md` before choosing an import route.
 | ----------------- | ------------------------------------------------------------------------------------------------------------ |
 | `submit_feedback` | Report a bug, missing feature or model, confusing flow, generation-quality issue, or explicit user praise. |
 
-Use `source: "agent"` for friction observed during a task and `source: "user"` when relaying the user's own feedback. Send one concise, specific report without blocking the current task.
+Use `source: "agent"` for friction observed during a task and `source: "user"` when relaying the user's own feedback. Send one concise, specific report only when the user asks or approves; a complaint or account question alone is not authorization. Completed playable video generations are charged even if the user is disappointed. Feedback helps improve future generations and does not itself trigger a refund. For critical issues, users can also contact support@creativeclaw.co. Read [feedback guidance](workflows/feedback.md) before reporting.
 
 ## Metadata conventions
 

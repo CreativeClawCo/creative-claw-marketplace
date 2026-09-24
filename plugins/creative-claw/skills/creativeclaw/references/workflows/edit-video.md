@@ -1,6 +1,6 @@
 # Edit existing footage
 
-Preserve the original and create clearly named derivatives.
+Preserve the original and create clearly named derivatives. Distinguish deterministic editing, generative source-video editing, and continuation before choosing a model. Do not regenerate untouched footage merely because a generative model is involved.
 
 ## Route the operation
 
@@ -15,14 +15,38 @@ Preserve the original and create clearly named derivatives.
 | Upscale                                            | `upscale_media`                                    |
 | Transcribe with timings                            | `transcribe`                                       |
 | Clean a voice track                                | `isolate_audio`                                    |
-| Generative source-video edit                       | `generate_video` with a compatible model/operation |
+| Generative source-video edit                       | `generate_video` with a compatible source-edit mode |
+| Add new action before or after existing footage    | Generate only the continuation, then `merge_media`  |
 
-For generative edits, call `list_models({ category: "video" })` and `get_model_params` first. Current choices include:
+## Generative edit routing
 
-- `video/gemini-omni-flash` for general source-video editing/reference transformation.
-- `video/flux-3` with `operation: "extend"` and one source in `video_urls`.
-- `video/ltx-2.3-fast` for `retake`, `extend`, `reframe`, or `audio_to_video`.
-- `video/dreamactor-v2` with `operation: "animate_character"` for performance transfer.
+Call `list_models({ category: "video" })` and `get_model_params` before choosing or submitting a generative edit. Runtime capability and limits are authoritative.
+
+- For a source clip up to 10 seconds, default to `video/gemini-omni-flash`. It is the best-value Creative Claw route for one targeted natural-language change while retaining the source timeline. Use one clear change followed by an explicit preservation sentence.
+- For a 4–30 second source edit, a long continuation, or a reference-rich transformation, use `video/seedance-2.5`. Set `extras.omni_reference_task_type` explicitly to `edit` or `extend`; use `aspect_ratio: "auto"` and the duration contract returned by `get_model_params`.
+- Use `video/seedance-2.0-mini`, presented as **Seedance Mini**, only for an explicitly cost-sensitive draft whose source and output fit its current limits. It reconstructs from references rather than guaranteeing a surgical edit, so do not use it when exact frame, logo, uniform, text, or identity preservation is critical.
+- Use `video/flux-3` only for continuation when its current schema explicitly exposes source-video extension. Do not describe it as a source editor unless `get_model_params` exposes an edit mode.
+
+Never recommend or proactively route to an LTX or DreamActor model. If the user explicitly requests one, preserve their choice but do not present it as a recommended route.
+
+## Preservation-first continuation
+
+When the user says to leave the original video unchanged and add something before or after it:
+
+1. Keep the complete original video untouched.
+2. Trim only the smallest useful head or tail context accepted by the continuation model.
+3. Generate one continuation from that context.
+4. Concatenate the untouched original and the approved continuation with `merge_media`.
+5. Preserve the original audio on the original span. Add or mix audio only for the new span unless the user requested a broader audio change.
+
+This is a continuation job, not a full-source edit. Do not spend credits regenerating the original timeline. For an original clip longer than the model's source limit, trimming context is expected and does not require splitting the untouched portion into generative segments.
+
+## Long edits and exact details
+
+- If only one interval needs a generative change, trim that interval, edit it, and merge it back between untouched source spans. Do not process the entire source through the model.
+- If multiple separated intervals need changes, propose the exact intervals and number of paid generations before submitting them.
+- A model rejection, duration-limit failure, insufficient balance, or estimate does not authorize switching models or creating another take. Report the constraint and the best compatible route.
+- Treat exact logos, jersey numbers, readable text, scoreboards, and brand marks as deterministic compositing or VFX requirements when they must remain exact. Generative preservation language reduces drift but cannot guarantee pixel-accurate details.
 
 ## Transcript-driven cut
 

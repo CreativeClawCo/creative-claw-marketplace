@@ -9,8 +9,8 @@ Match the model to the shot, reference structure, duration, resolution, audio ne
 3. Use a first-frame image when visual control or identity matters. Do not force this step for a loose text-to-video experiment where exploration is the goal.
 4. Use `list_models({ category: "video" })` when discovery is needed and `get_model_params` for missing settings on the selected model; reuse schemas already fetched in this task.
 5. State consequential settings briefly and proceed within existing authorization. Estimate with `operation: "video"` only for user-requested cost/budget help; do not add a routine approval question.
-6. Call `generate_video`. Preserve literal reference tokens and timecodes with `agentic_prompting: false`.
-7. Resolve the job only when needed, inspect the result, and reject false motion, identity drift, broken physics, unwanted cuts, text artifacts, or bad audio.
+6. Call `generate_video`. Preserve literal reference tokens and timecodes.
+7. Resolve the job only when needed, inspect the result, and report false motion, identity drift, broken physics, unwanted cuts, text artifacts, or bad audio. Deliver the result; inspection does not authorize another generation. Ask before another take unless the user explicitly requested that additional attempt.
 8. Use focused processing tools for trim, scale, subtitles, frames, merging, isolation, or upscaling.
 
 ## Model picker
@@ -26,6 +26,8 @@ Runtime discovery is authoritative. Start here:
 | Faster lightweight H3 Max route                 | `video/minimax-h3-max-turbo` | Lower-cost text/start-frame route; references use the shared H3 Max reference endpoint and rate.  |
 
 Recommend these models first. Use another runtime-listed model only when the user explicitly requests it or the five recommended choices cannot perform the operation.
+
+For source-video work, use the edit-specific ranking instead of the table above: Gemini Omni for targeted edits up to 10 seconds, Seedance 2.5 for 4–30 second edits and continuations, and Seedance Mini only for an explicitly cost-sensitive draft. Preserve untouched source spans and generate only the interval or continuation that needs new pixels. Never recommend or proactively route to an LTX or DreamActor model.
 
 ## Reference rules
 
@@ -63,7 +65,7 @@ Continuity: identity, wardrobe, product geometry, and protected references.
 Constraints: single shot or named cuts; no unwanted text, captions, or watermark.
 ```
 
-Give each short shot one main action and one camera idea. Use time blocks for multiple beats. If the output only pans across a still when subject motion was required, revise the action verbs or select a model better suited to physical motion.
+Give each short shot one main action and one camera idea. Use time blocks for multiple beats. If the output only pans across a still when subject motion was required, propose revised action verbs or a model better suited to physical motion. Obtain explicit authorization for another generation before executing the proposal.
 
 ## Multi-clip strategies
 

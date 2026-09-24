@@ -22,9 +22,9 @@ This boundary matters: an intro/outro request alone does not authorize the HTML 
 
 1. Identify the main video's durable URL, dimensions, aspect ratio, frame rate, audio, and intended platform. Import local or attached files before editing.
 2. Use the requested segments, copy, logo, duration, audio, and transition choices. Infer minor styling defaults; ask only about missing copy or a material unresolved choice, and do not repeat earlier approvals.
-3. Create or load the intro and outro. Match the main video's width, height, frame rate, and preferably codec. Use `scale_video` or `trim_video` before assembly when necessary.
+3. Create or load the intro and outro. Prefer the main video's dimensions and frame rate. For existing mismatched frames, use merge fit controls rather than extra scale jobs. Trim only when requested.
 4. Resolve every queued segment job with `check_job` and inspect each clip before merging.
-5. Call `merge_media({ operation: "merge_videos", video_urls: [...] })` in exact playback order: intro when present, main video, then outro when present.
+5. Call `merge_media` with `operation:"merge_videos"` in exact playback order: intro when present, main video, then outro when present. Set `canvas_video_index` to the main video's zero-based index and `video_fit:"pad"` to preserve mismatched frames, unless cropping is authorized. Read [assembly guidance](references/media-assembly.md) for fit and audio limitations.
 6. Resolve the merge job with `check_job`, inspect the cut points, audio, dimensions, and total duration, then give the final asset a useful name and tags when supported.
 
 ## Example: explicit HTML bookends
@@ -39,7 +39,10 @@ For “Use HTML to add a 2-second logo intro and a 3-second CTA outro to this vi
 ```text
 merge_media({
   operation: "merge_videos",
-  video_urls: ["<intro-url>", "<main-video-url>", "<outro-url>"]
+  video_urls: ["<intro-url>", "<main-video-url>", "<outro-url>"],
+  canvas_video_index: 1,
+  video_fit: "pad",
+  pad_color: "black"
 })
 ```
 
@@ -50,7 +53,7 @@ If only one bookend is requested, omit the other URL. If finished intro/outro cl
 ## Gotchas
 
 - `merge_videos` is a hard concatenation; it does not create dissolves, crossfades, or audio transitions. Design the last frames of the intro and first frames of the outro to meet the main clip cleanly, or explain when the requested transition needs a different editing path.
-- Mismatched resolution or codec can produce poor joins. Normalize segments before merging.
+- Preserve the main canvas with explicit fit controls. Normalize incompatible codecs only through an available tool exposing that control.
 - Preserve exact visible copy and logo treatment. Keep bookends short unless the user specifies otherwise; do not invent a slogan or call to action.
 - HTML-rendered segments and the merge are asynchronous. A job ID is not a finished clip.
 - If the main video's audio must continue under a bookend or fade across a cut, simple concatenation is insufficient. Surface that limitation before rendering segments.

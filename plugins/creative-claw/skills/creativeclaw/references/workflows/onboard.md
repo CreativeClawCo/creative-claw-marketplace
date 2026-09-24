@@ -38,7 +38,7 @@ For example:
 ```text
 I recommend Nano Banana 2 for this image because it is the most cost-efficient
 default for most cases, with the best overall quality, speed, and cost balance.
-If exact typography is the priority, GPT Image 2 is the stronger
+If exact typography is the priority, GPT Image 2.5 Sunburst is the stronger
 alternative. I can generate one candidate or compare both.
 ```
 

@@ -12,6 +12,8 @@ Trust the returned status. A job ID means submitted work, not a completed asset.
 
 ## Failed work
 
+For video generation, the original request does not authorize another attempt after an accepted job fails. Ask before retrying unless the user explicitly requested that retry or a finite number of attempts. `retryable: true`, no charge, or a refund does not grant permission. Only a confirmed input rejection before any job was accepted or started, with no charge, can be corrected and resubmitted under the original request. Resolve uncertain submissions through status and asset checks, not speculative replacement calls.
+
 Read `isError`, status, and `structuredContent` when present. Prefer normalized `errorCode` and `errorCategory` over interpreting provider prose. Older responses may omit structured recovery fields; do not invent them.
 
 | Result | Next action |

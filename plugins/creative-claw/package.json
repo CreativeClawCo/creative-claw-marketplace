@@ -1,6 +1,6 @@
 {
   "name": "@creativeclaw/plugin",
-  "version": "0.5.7",
+  "version": "0.5.9",
   "description": "Creative Claw plugin for Grok, Claude, Codex, Hermes, OpenClaw, and compatible agents",
   "type": "module",
   "main": "index.mjs",

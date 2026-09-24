@@ -9,7 +9,7 @@ Choose an image model by capability, anchor branded work with theme assets, and 
 3. Call `search_assets` for source images, product shots, Characters, and prior approved outputs. Import missing media through `../platform-upload.md`.
 4. Use `list_models({ category: "image" })` when discovery is needed and `get_model_params` for missing settings on the chosen model; reuse current-task schemas. Estimate with `operation: "image"` only for user-requested cost/budget help.
 5. Generate with `generate_image`; provide `image_url` for edits. Use the preferred `size` field when supported.
-6. If the prompt contains exact quoted text, per-region instructions, or reference tokens, send it verbatim with `agentic_prompting: false`.
+6. Send approved quoted text, per-region instructions, and reference tokens verbatim.
 7. Inspect the output. For revisions, describe both the delta and what must remain unchanged.
 8. Name, tag, and describe approved assets.
 
@@ -29,10 +29,10 @@ Recommend Nano Banana 2 first for most image work. Surface the other three only 
 
 After choosing, use the corresponding focused skill for exact prompting and reference behavior:
 
-- `creativeclaw-nano-banana-2` — default generation, conversational editing, up to 14 role-mapped references, extreme ratios, and optional search grounding.
-- `creativeclaw-nano-banana-pro` — complex professional layouts, demanding multi-reference composition, and precise multilingual typography.
-- `creativeclaw-gpt-image-2` — strong instruction following, transparent output, masks when honored by the live route, and up to 16 ordered edit inputs.
-- `creativeclaw-seedream-5-pro` — premium product/editorial work, spatial edits, and up to 10 ordered references.
+- nano-banana-2 model reference — default generation, conversational editing, up to 14 role-mapped references, extreme ratios, and optional search grounding.
+- nano-banana-pro model reference — complex professional layouts, demanding multi-reference composition, and precise multilingual typography.
+- gpt-image-2 model reference — strong instruction following, transparent output, masks when honored by the live route, and up to 16 ordered edit inputs.
+- seedream-5-pro model reference — premium product/editorial work, spatial edits, and up to 10 ordered references.
 
 ## Reference handling
 

@@ -14,7 +14,18 @@ export function skillNames() {
 export function syncReferences(checkOnly = false) {
   const stale = [];
   for (const name of skillNames().filter(name => name !== 'creativeclaw')) {
-    for (const reference of sharedReferences) {
+    const imageReferences = ['creativeclaw-generate-image', 'creativeclaw-product-photoshoot', 'creativeclaw-create-avatar', 'creativeclaw-create-character', 'creativeclaw-plan-video', 'creativeclaw-build-film', 'creativeclaw-create-ugc-ad', 'creativeclaw-generate-video'].includes(name)
+      ? fs.readdirSync(path.join(skillsRoot, 'creativeclaw/references/images')).filter(file => file.endsWith('.md')).map(file => `images/${file}`)
+      : [];
+    const voiceReferences = ['creativeclaw-clone-voice', 'creativeclaw-generate-voiceover', 'creativeclaw-create-avatar'].includes(name)
+      ? fs.readdirSync(path.join(skillsRoot, 'creativeclaw/references/voices')).filter(file => file.endsWith('.md')).map(file => `voices/${file}`)
+      : [];
+    const videoReferences = ['creativeclaw-generate-video', 'creativeclaw-build-film', 'creativeclaw-create-ugc-ad', 'creativeclaw-plan-video'].includes(name)
+      ? fs.readdirSync(path.join(skillsRoot, 'creativeclaw/references/video')).filter(file => file.endsWith('.md')).map(file => `video/${file}`)
+      : [];
+    const avatarReferences = ['creativeclaw-create-avatar', 'creativeclaw-create-character'].includes(name)
+      ? ['avatars/identity.md'] : [];
+    for (const reference of [...sharedReferences, ...imageReferences, ...voiceReferences, ...videoReferences, ...avatarReferences]) {
       const source = fs.readFileSync(path.join(skillsRoot, 'creativeclaw/references', reference));
       const destination = path.join(skillsRoot, name, 'references', reference);
       if (fs.existsSync(destination) && fs.readFileSync(destination).equals(source)) continue;

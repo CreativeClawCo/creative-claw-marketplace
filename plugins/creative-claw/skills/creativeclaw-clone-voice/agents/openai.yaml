@@ -1,6 +1,6 @@
 interface:
   display_name: "Creative Claw — Voice Cloning"
-  short_description: "Clone a consented voice with ElevenLabs"
+  short_description: "Record, clone and reuse your own voice"
   default_prompt: "Use $creativeclaw-clone-voice to create and audition my consented voice clone."
 dependencies:
   tools:

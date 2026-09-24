@@ -7,28 +7,18 @@ focused_skill_names=(
   creativeclaw-generate-image
   creativeclaw-generate-video
   creativeclaw-generate-voiceover
-  creativeclaw-generate-audio
+  creativeclaw-generate-music
+  creativeclaw-generate-sound-effects
   creativeclaw-edit-media
   creativeclaw-cut-and-reframe-video
   creativeclaw-create-reels
   creativeclaw-create-character
+  creativeclaw-create-avatar
   creativeclaw-plan-video
   creativeclaw-build-film
   creativeclaw-product-photoshoot
   creativeclaw-create-ugc-ad
   creativeclaw-submit-feedback
-  creativeclaw-nano-banana-2
-  creativeclaw-nano-banana-pro
-  creativeclaw-gpt-image-2
-  creativeclaw-seedream-5-pro
-  creativeclaw-gemini-omni
-  creativeclaw-seedance-2-5
-  creativeclaw-minimax-h3-max
-  creativeclaw-elevenlabs-v3
-  creativeclaw-elevenlabs-v2
-  creativeclaw-minimax-speech
-  creativeclaw-xai-tts
-  creativeclaw-chatterbox
   creativeclaw-clone-voice
   creativeclaw-find-examples
   creativeclaw-render-html-image
@@ -69,8 +59,8 @@ for variant in general chatgpt; do
   # Normalize copied-file mtimes so repeated builds produce stable archives.
   find "$variant_root" -type f -exec touch -t 202601010000 {} +
   (
-    cd "$package_root"
-    find creativeclaw -type f -print | LC_ALL=C sort |
+    cd "$variant_root"
+    find . -type f -print | sed 's|^./||' | LC_ALL=C sort |
       zip -X -q "$temp_root/creativeclaw-$variant.zip" -@
   )
 done
@@ -88,8 +78,8 @@ for focused_skill_name in "${focused_skill_names[@]}"; do
   cp -R "$focused_skill_source/." "$focused_package_root/$focused_skill_name/"
   find "$focused_package_root/$focused_skill_name" -type f -exec touch -t 202601010000 {} +
   (
-    cd "$focused_package_root"
-    find "$focused_skill_name" -type f -print | LC_ALL=C sort |
+    cd "$focused_package_root/$focused_skill_name"
+    find . -type f -print | sed 's|^./||' | LC_ALL=C sort |
       zip -X -q "$temp_root/$focused_skill_name-chatgpt.zip" -@
   )
 done

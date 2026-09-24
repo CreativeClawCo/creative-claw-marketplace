@@ -20,7 +20,7 @@ lighting in every view. Full body, neutral studio background. No text,
 labels, borders, or extra people.
 ```
 
-Use `agentic_prompting: false` for this exact multi-view instruction. Inspect facial identity and wardrobe consistency before saving.
+Preserve this exact multi-view instruction. Inspect facial identity and wardrobe consistency before saving.
 
 ## Use a Character
 

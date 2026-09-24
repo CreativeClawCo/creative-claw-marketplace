@@ -26,7 +26,7 @@ Example: two chosen passages, captions supplied only for the actual words retain
 }
 ```
 
-For a verified 1920×1080 source, a 606×1080 crop is approximately 9:16. A two-second segment can use:
+Crop dimensions are normalized to the nearest lower even source-pixel values before validation and rendering. This allows natural calculations such as 405×720 to become 404×720 without failing the edit. For a verified 1920×1080 source, a 606×1080 crop is approximately 9:16. A two-second segment can use:
 
 ```json
 {"mode":"crop","width":606,"height":1080,"keyframes":[

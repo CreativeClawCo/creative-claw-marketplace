@@ -10,28 +10,18 @@ skill_names=(
   creativeclaw-generate-image
   creativeclaw-generate-video
   creativeclaw-generate-voiceover
-  creativeclaw-generate-audio
+  creativeclaw-generate-music
+  creativeclaw-generate-sound-effects
   creativeclaw-edit-media
   creativeclaw-cut-and-reframe-video
   creativeclaw-create-reels
   creativeclaw-create-character
+  creativeclaw-create-avatar
   creativeclaw-plan-video
   creativeclaw-build-film
   creativeclaw-product-photoshoot
   creativeclaw-create-ugc-ad
   creativeclaw-submit-feedback
-  creativeclaw-nano-banana-2
-  creativeclaw-nano-banana-pro
-  creativeclaw-gpt-image-2
-  creativeclaw-seedream-5-pro
-  creativeclaw-gemini-omni
-  creativeclaw-seedance-2-5
-  creativeclaw-minimax-h3-max
-  creativeclaw-elevenlabs-v3
-  creativeclaw-elevenlabs-v2
-  creativeclaw-minimax-speech
-  creativeclaw-xai-tts
-  creativeclaw-chatterbox
   creativeclaw-clone-voice
   creativeclaw-find-examples
   creativeclaw-render-html-image
@@ -84,7 +74,8 @@ routes=(
   creativeclaw-generate-image
   creativeclaw-generate-video
   creativeclaw-generate-voiceover
-  creativeclaw-generate-audio
+  creativeclaw-generate-music
+  creativeclaw-generate-sound-effects
   creativeclaw-edit-media
   creativeclaw-create-character
   creativeclaw-plan-video
@@ -123,6 +114,11 @@ if (( scenario_count < 24 )); then
   exit 1
 fi
 
+if rg -n 'agentic_prompting|prompt_expansion_mode' "$skills_root" --glob '*.md'; then
+  echo "Skill copy must leave internal prompt-rewriting controls to the backend." >&2
+  exit 1
+fi
+
 clone_voice_skill="$skills_root/creativeclaw-clone-voice/SKILL.md"
 if ! rg -q 'audio_asset_id' "$clone_voice_skill"; then
   echo "Voice cloning must use the private audio_asset_id contract." >&2
@@ -134,6 +130,16 @@ if rg -n 'durable public `audio_url`|audio_url: "<durable Creative Claw audio UR
 fi
 
 node "$repo_root/scripts/sync-skill-references.mjs" --check
+
+# Video-model guidance must stay in outcome references, not discovery entries.
+for retired in creativeclaw-nano-banana-2 creativeclaw-nano-banana-pro creativeclaw-gpt-image-2 creativeclaw-seedream-5-pro creativeclaw-elevenlabs-v2 creativeclaw-elevenlabs-v3 creativeclaw-cartesia-sonic creativeclaw-minimax-speech creativeclaw-xai-tts creativeclaw-chatterbox creativeclaw-gemini-omni creativeclaw-seedance-2-5 creativeclaw-minimax-h3-max creativeclaw-wan-3; do
+  if [[ -f "$skills_root/$retired/SKILL.md" ]] ||
+    rg -l -F "$retired" "$skills_root" --glob '*.md' --glob '*.yaml' ||
+    rg -l -F "skills/$retired" "$repo_root/plugins/creative-claw/openclaw.plugin.json"; then
+    echo "Retired video-model skill or stale route found: $retired" >&2
+    exit 1
+  fi
+done
 
 actual_skill_count="$(find "$skills_root" -mindepth 2 -maxdepth 2 -name SKILL.md | wc -l | tr -d ' ')"
 if (( actual_skill_count != ${#skill_names[@]} )); then
