@@ -11,6 +11,7 @@ Creative Claw generates speech, sound effects, ambience, Foley, and music; creat
 - Transcript and timings from audio, video, or a public YouTube URL → `transcribe`.
 - Remove noise, music, or reverb from speech → `isolate_audio`.
 - Add an existing voice/music track to video or concatenate audio → `merge_media`.
+- Build a video from timed images or clips with optional soundtrack → `merge_media` with `operation:"compose_video"`; see [assembly guidance](../media-assembly.md).
 
 `generate_speech` cannot produce music or sound effects by changing its model ID. Use `generate_music` for music and `generate_sound_effect` for sound effects. The retired combined `generate_audio` tool remains callable only for cached legacy clients. `merge_audios` concatenates clips and does not layer them into a mix.
 

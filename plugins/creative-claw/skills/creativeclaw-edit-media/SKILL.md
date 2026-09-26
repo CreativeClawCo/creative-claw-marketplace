@@ -1,6 +1,6 @@
 ---
 name: creativeclaw-edit-media
-description: "Edit existing video or audio with Creative Claw: trim clips, resize for social formats, add automatic captions, transcribe, clean speech, extract frames, or combine finished media. Use when the source footage or recording should be preserved; route invented scenes and generative transformations to generation skills."
+description: "Edit existing video or audio with Creative Claw: trim, resize, caption, transcribe, clean speech, extract frames, burn logo or copyright watermarks onto finished video, or compose a video from timed images, video clips, and optional audio. Use when source media should be preserved; route invented scenes and generative transformations to generation skills."
 ---
 
 # Edit Existing Media
@@ -20,9 +20,11 @@ Turn supplied footage or audio into a finished derivative. Use the user's reques
 | Clean a noisy recording | `isolate_audio`: preserve and compare the original; cleanup can alter speech. |
 | Get still frames | `extract_frames`: discover the current tool schema for first/last/sampling controls. |
 | Combine clips or add one finished audio track | `merge_media`: read [assembly guidance](references/media-assembly.md). |
+| Burn a permanent logo or copyright image onto a finished video | `merge_media` with `operation:"overlay_images"`. Use a transparent image; `remove_background` can prepare a logo. Read [assembly guidance](references/media-assembly.md). |
+| Build a video from timed images, full video clips, and optional audio | `merge_media` with `operation:"compose_video"`. Read [assembly guidance](references/media-assembly.md). |
 | Enhance resolution or remove a background | `upscale_media` or `remove_background`, only for the requested media type and supported parameters. |
 
-Use `creativeclaw-generate-video` for invented footage or a generative source-video transformation. Use `creativeclaw-add-video-intro-outro` for bookends. HTML rendering requires the user's explicit choice; a captions request alone does not select that route.
+Use `creativeclaw-generate-video` for invented footage or a generative source-video transformation. Use `creativeclaw-add-video-intro-outro` for bookends. HTML video rendering requires the user's explicit choice; a captions request alone does not select that route. For exact text watermarks, `render_html_image` can create the transparent image used by `overlay_images`.
 
 Use `creativeclaw-create-reels` when selecting highlights from long footage, or `creativeclaw-cut-and-reframe-video` for explicit multi-cut edits, moving crop paths and source-timed word captions. Both require `cut_and_reframe_video` to be available and configured.
 

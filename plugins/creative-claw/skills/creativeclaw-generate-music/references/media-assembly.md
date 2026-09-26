@@ -1,5 +1,43 @@
 # Complete audio and video assembly
 
+## Choose a merge operation
+
+`merge_media` accepts an `operation` string. The server supports `merge_audio_video`, `merge_videos`, `merge_audios`, `overlay_images`, and `compose_video`. Use direct Creative Claw asset URLs or other publicly downloadable media URLs. Resolve queued jobs with `check_job` before using their outputs. If a client still shows an older cached schema without a new operation or its fields, refresh the Creative Claw connection.
+
+| Need | Operation | Main inputs |
+| --- | --- | --- |
+| Add or replace an audio track on a video | `merge_audio_video` | `video_url`, `audio_url`; optional `start_offset` |
+| Concatenate full videos | `merge_videos` | Ordered `video_urls`; optional `video_fit`, `canvas_video_index`, `pad_color` |
+| Concatenate audio sequentially | `merge_audios` | Ordered `audio_urls`; optional `audio_format` |
+| Burn one or more fixed image watermarks onto a finished video | `overlay_images` | `video_url`, `overlays` |
+| Make a video from ordered still images and video clips, with optional audio | `compose_video` | `clips`; optional `audio`, `content_fit` |
+
+## Watermark a finished video
+
+For a permanent logo or copyright mark on an existing video, use `merge_media` with `operation:"overlay_images"`. This creates a new MP4 with the marks burned into every frame and the source audio copied. Keep the original video as the unchanged master; do not regenerate it.
+
+1. Prepare each overlay as a tightly cropped image with a transparent background. For a logo on a solid background, use `remove_background` with `type:"image"` first. For exact copyright text, use `render_html_image` with `transparent_background:true` to create a tightly cropped PNG.
+2. Supply one to eight overlays as `{image_url,position,width_percent,margin_px?}`. The nine positions are `top_left`, `top_center`, `top_right`, `center_left`, `center`, `center_right`, `bottom_left`, `bottom_center`, and `bottom_right`. `width_percent` is the displayed image width as a percentage of the video width. `margin_px` is the edge inset and defaults to 48. Later images appear above earlier ones. Choose a width that also fits the overlay's height inside the frame.
+3. Resolve the job with `check_job`, then inspect placement, duration, and audio.
+
+```json
+{"operation":"overlay_images","video_url":"https://example.com/master.mp4","overlays":[{"image_url":"https://example.com/logo.png","position":"bottom_right","width_percent":12,"margin_px":48}]}
+```
+
+## Make a video from images or clips with sound
+
+For a slideshow or simple montage from existing images and optional video clips, use `merge_media` with `operation:"compose_video"`. It accepts one to 25 `clips` in playback order.
+
+1. Each image needs `{type:"image",url,duration_seconds}`. Each video needs `{type:"video",url}` and plays for its full duration. Video source audio is included by default; set `include_audio:false` on a clip to omit it.
+2. An optional soundtrack is `audio:{url,start_delay_seconds?}`. The delay defaults to zero. The soundtrack mixes with enabled clip audio. `content_fit:"contain"` preserves the full image or frame with padding; `"cover"` fills the canvas by cropping.
+3. The first video defines output width and height. If there are only images, the first image defines the canvas, capped near 1080p. The result lasts through the longer of the visual sequence and delayed soundtrack, holding the final frame if needed. Resolve with `check_job` and verify order, framing, audio, and duration.
+
+```json
+{"operation":"compose_video","clips":[{"type":"image","url":"https://example.com/title.png","duration_seconds":3},{"type":"video","url":"https://example.com/scene.mp4","include_audio":false},{"type":"image","url":"https://example.com/end.png","duration_seconds":4}],"audio":{"url":"https://example.com/music.mp3","start_delay_seconds":0},"content_fit":"contain"}
+```
+
+Use `merge_videos` for only full video clips with their original audio. Use `compose_video` when still images, per-clip audio control, or a final-frame hold are needed. The service checks source URLs before starting the render and reports a bad input URL by field.
+
 ## Timing before merging
 
 For narration-driven work, generate or reuse the final speech before locking clip durations. Use returned speech timestamps/alignment or inspected media duration, not word-count guesses. Native-dialogue video and edits of existing footage may use different timing anchors; do not generate redundant voiceover.

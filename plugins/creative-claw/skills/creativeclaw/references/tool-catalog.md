@@ -36,7 +36,7 @@ Use `creativeclaw-find-examples` when the user asks for examples, inspiration, s
 | `create_template`   | Save a reusable parameterized HTML or generative layout.                                                       |
 | `render_template`   | Render a saved template with provided values.                                                                 |
 
-The image and video renderers are explicit-only choices. Use them only when the user asks for HTML/CSS, HyperFrames, code-driven rendering, supplies HTML, or explicitly accepts the method. A generic poster, social card, overlay, intro, or outro request is not sufficient by itself.
+The image and video renderers are explicit-only choices. Use them when the user asks for HTML/CSS, HyperFrames, code-driven rendering, supplies HTML, or explicitly accepts the method. `render_html_image` can also make an exact text watermark graphic with a transparent background for `merge_media` `overlay_images`. A generic poster, social card, overlay, intro, or outro request is not sufficient by itself.
 
 ## Themes
 
@@ -87,7 +87,7 @@ Read `platform-upload.md` before choosing an import route.
 | `scale_video`       | Resize, crop, or pad video.                                                               |
 | `add_subtitles`     | Burn captions into video.                                                                 |
 | `extract_frames`    | Extract one or more still frames from video.                                              |
-| `merge_media`       | Concatenate videos or audio, or combine an audio track with video.                        |
+| `merge_media`       | Concatenate media, add audio, burn transparent image watermarks onto finished video (`overlay_images`), or compose timed images and clips with optional audio (`compose_video`). See [assembly guidance](media-assembly.md). |
 | `transcribe`        | Produce a timed transcript from audio, video, or a public YouTube URL.                    |
 | `isolate_audio`     | Remove noise, music, and reverb from a voice recording. Queued; resolve with `check_job`. |
 

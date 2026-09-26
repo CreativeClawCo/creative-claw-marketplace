@@ -11,6 +11,8 @@ Read [shared execution guidance](references/workflow-basics.md) once per task be
 
 Create one controlled video clip from text, a start frame, an optional end frame, or other model-supported references. Use the planning, UGC, or film skills when the deliverable is a larger production. Use `creativeclaw-render-html-video` only when the user explicitly requests HTML/HyperFrames/code-driven rendering; use `creativeclaw-add-video-intro-outro` for video bookends.
 
+For a permanent watermark on a finished video or a sequence assembled from existing images, video clips, and optional audio, use `merge_media` through `creativeclaw-edit-media`. Read [assembly guidance](references/media-assembly.md) for `overlay_images` and `compose_video`. Preserve the existing media instead of generating replacement footage.
+
 For worked production flows, read only the relevant recipe: [product ad](references/video/recipe-product-ad.md), [consistent Character scene](references/video/recipe-character-scene.md), or [source edit and extension](references/video/recipe-source-edit.md). These explain asset preparation, shot prompting, assembly and output checks, without authorizing extra paid drafts.
 
 ## Reference-first production

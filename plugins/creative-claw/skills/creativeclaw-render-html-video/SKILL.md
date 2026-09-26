@@ -9,6 +9,8 @@ Read [shared execution guidance](references/workflow-basics.md) once per task be
 
 `render_html_video` sends an HTML composition to a HyperFrames renderer and returns a queued video job. This is an explicit-only route. Do not select it for ordinary AI video generation, or merely because a video needs text; use `creativeclaw-generate-video` unless the user asks for HTML/HyperFrames/code-driven rendering or explicitly accepts that method.
 
+For a fixed watermark on an already finished video, use `merge_media` with `operation:"overlay_images"` through `creativeclaw-edit-media`. Prepare a transparent image first, then follow [assembly guidance](references/media-assembly.md). For a simple video from timed images, full clips, and optional audio, use `operation:"compose_video"` in the same tool.
+
 ## Good uses
 
 - Put precise, animated text, captions, lower thirds, labels, or calls to action over an existing video.

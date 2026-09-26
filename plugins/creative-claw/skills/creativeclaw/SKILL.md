@@ -1,6 +1,6 @@
 ---
 name: creativeclaw
-description: "Route mixed, ambiguous, cross-modal, or workspace-management requests through Creative Claw. Use when the user asks to use Creative Claw generally, needs several media types, or needs account balances, generation charges, purchases/subscriptions, assets, themes, onboarding, or existing-media editing; prefer a focused skill for one clear outcome."
+description: "Route mixed, ambiguous, cross-modal, or workspace-management requests through Creative Claw. Use when the user asks to use Creative Claw generally, needs several media types, or needs account balances, generation charges, purchases/subscriptions, assets, themes, onboarding, or existing-media editing such as watermarks and image-to-video assembly; prefer a focused skill for one clear outcome."
 ---
 
 # Creative Claw
@@ -26,7 +26,7 @@ Use `manage_account` for current balance, recent generations and their recorded 
 9. **Capture actionable feedback.** Use `submit_feedback` for bugs, missing features or models, confusing flows, generation-quality problems and praise only when the user asks or approves sending it. A complaint alone is not permission to contact the team. Read `references/workflows/feedback.md` before reporting.
 10. **Match the user's language.** Conduct the workflow in the user's language, preserve supplied scripts and visible copy exactly, and verify the selected model supports the requested spoken or rendered language.
 11. **Use examples deliberately.** For speech voice selection, use `get_model_params` and the voiceover workflow. For other media, route requests for examples, inspiration, styles, or a close starting point to `creativeclaw-find-examples`. Do not search the catalog before every generation.
-12. **Keep HTML rendering explicit.** Use `creativeclaw-render-html-image` or `creativeclaw-render-html-video` only when the user explicitly requests HTML/CSS, HyperFrames, code-driven rendering, or accepts that proposed method. Ordinary image or video requests stay with the generative skills.
+12. **Keep HTML rendering explicit.** Use `creativeclaw-render-html-image` or `creativeclaw-render-html-video` when the user explicitly requests HTML/CSS, HyperFrames, code-driven rendering, or accepts that proposed method. An exact text watermark graphic for `merge_media` `overlay_images` may use `render_html_image` with a transparent background. Ordinary image or video requests stay with the generative skills.
 
 ## HTML-video example discovery
 
@@ -57,6 +57,8 @@ For explicit HTML-video/HyperFrames work, look for relevant `search_examples` ma
 | Find, import, name, tag, reuse, or delete media | `references/workflows/asset-library.md` |
 | Create, inspect, edit, or apply a brand theme | `references/workflows/brand-theme.md` |
 | Trim, resize, caption, transcribe, clean, or combine existing media | `creativeclaw-edit-media` |
+| Burn a transparent logo or copyright image onto a finished video | `creativeclaw-edit-media`, using `merge_media` with `operation:"overlay_images"`; read [assembly guidance](references/media-assembly.md) |
+| Make a video from timed images, optional video clips, and optional audio | `creativeclaw-edit-media`, using `merge_media` with `operation:"compose_video"`; read [assembly guidance](references/media-assembly.md) |
 | Select highlights from long footage and create vertical Reels | `creativeclaw-create-reels` |
 | Cut, reorder, and reframe chosen video moments | `creativeclaw-cut-and-reframe-video` |
 | Learn what Creative Claw can do | `references/workflows/onboard.md` |
