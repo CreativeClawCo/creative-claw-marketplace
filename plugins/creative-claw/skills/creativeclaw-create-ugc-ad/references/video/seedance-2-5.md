@@ -75,7 +75,7 @@ When storyboarding is needed:
 4. Generate a compatible end frame if the motion must arrive somewhere specific.
 5. Collect separate reference images for identity, wardrobe, product details, location, and visual style.
 6. Use motion video references only for movement, camera cadence, blocking, or choreography.
-7. Use audio references only for cadence, atmosphere, dialogue timing, or sound character.
+7. For specified speech, prepare the recording first using creativeclaw-generate-voiceover or reuse supplied audio. Use audio references for the requested dialogue, language, voice and timing, while recognizing that the model may generate a different recording. Inspect the finished speech and attach the prepared track during final assembly when exact words or voice are required.
 
 Do not make one image do every job. A start frame controls the opening composition; reference images control identity or style; an end frame controls the destination.
 
@@ -115,7 +115,7 @@ Seedance tokens are one-based and include `@`:
 @Image2 = exact wardrobe.
 @Image3 = product geometry and packaging.
 @Video1 = body movement and camera cadence only.
-@Audio1 = dialogue timing and vocal energy.
+@Audio1 = prepared dialogue in the requested language, including words, voice and timing.
 ```
 
 State what to copy and what not to copy:
@@ -124,8 +124,9 @@ State what to copy and what not to copy:
 Preserve the identity from @Image1 and wardrobe from @Image2. Preserve the
 product geometry, materials, colors, and logo placement from @Image3. Follow
 only the motion rhythm and low tracking camera from @Video1; do not copy its
-actor, clothing, or location. Use @Audio1 for timing and delivery. The actor
-crosses the neon station in one continuous shot and sets the product on the
+actor, clothing, or location. Use @Audio1 as the dialogue reference and follow
+its language, exact words, voice, pauses and timing. Do not translate, rephrase
+or add dialogue. The actor crosses the neon station in one continuous shot and sets the product on the
 bench as the final word lands.
 ```
 
@@ -155,11 +156,13 @@ Reference-rich character scene:
 ```text
 @Image1 is the exact protagonist identity. @Image2 is her exact silver coat.
 @Video1 supplies only the measured walking cadence and sideways tracking camera.
-@Audio1 supplies the spoken line and timing. Fifteen-second continuous shot in
-a rain-soaked metro station. She walks beside the train, looks toward camera,
+@Audio1 is the prepared spoken line. Use its voice, exact words and timing in a
+fifteen-second continuous shot in a rain-soaked metro station. She walks beside
+the train, looks toward camera,
 and says exactly, “The future arrives quietly.” Cyan platform light reflects in
 the wet floor. Preserve face, body proportions, coat, and lip timing. No cuts,
-extra people near camera, subtitles, on-screen text, or wardrobe drift.
+extra people near camera, subtitles, on-screen text, translated or additional
+dialogue, or wardrobe drift.
 ```
 
 First-to-last product transformation:
@@ -176,9 +179,11 @@ subtle bass swell. One seamless shot; no cuts or extra components.
 Audio-led scene:
 
 ```text
-@Image1 is the exact performer identity and wardrobe. @Audio1 controls dialogue
-timing, pauses, and emotional rise. The performer stands in a dark rehearsal
-room as a single spotlight brightens. Medium close-up, gentle handheld drift.
+@Image1 is the exact performer identity and wardrobe. @Audio1 is the prepared
+Swedish dialogue recording. The performer says exactly, “Det här känns helt
+rätt.” Use @Audio1 as the speech source for those Swedish words, voice, pauses,
+and timing. Do not translate, rephrase, or add speech. She stands in a dark
+rehearsal room as a single spotlight brightens. Medium close-up, gentle handheld drift.
 Match mouth movement to @Audio1 and let the light peak on the final phrase.
 Preserve identity and room layout. No music, captions, extra speakers, or cuts.
 ```

@@ -21,6 +21,14 @@ Strongly recommend image preparation before video: reuse the user's media, devel
 
 Use the video's Review card as the single approval of its exact references and settings, without a duplicate chat approval. Honor separately requested earlier checkpoints and consent requirements. Review does not gate earlier image/audio charges. For connected clips, reuse stable visual/audio anchors and request dialogue, ambience and effects without independently generated music per shot.
 
+## Exact spoken audio
+
+When the user specifies spoken words, a voice, pronunciation, or language, especially a language other than English, prefer to prepare the speech before generating the video. Reuse supplied audio or follow [Generate voiceover](../creativeclaw-generate-voiceover/SKILL.md) to create it in the requested language with a suitable voice. Preserve the exact script, check the recording and its duration, and include any paid speech generation in the authorized scope.
+
+Check the selected video model's current operation and audio-reference fields. If it accepts the recording, pass its URL as an audio reference and cite the model's exact audio token in the prompt. Quote the same spoken text and explicitly instruct the video model to use the supplied audio for the dialogue, language, voice, pauses, and timing, without translating, rephrasing, or inventing speech. An audio reference may guide a new soundtrack rather than preserve the original recording. When the delivered words or voice must be exact, retain the prepared audio as the final track through supported assembly.
+
+If the chosen operation cannot accept an audio reference, use a compatible audio-driven route or generate a video without spoken audio and attach the prepared recording with `merge_media` after checking durations. An audio overlay does not automatically synchronize visible lips. See [audio-first control](references/video/reference-production.md#audio-first-control-and-continuity) and [assembly guidance](references/media-assembly.md).
+
 ## Workflow
 
 1. Define the clip's purpose, aspect ratio, duration, subject, one primary action, camera move, visual continuity, dialogue or sound, and required end state.
