@@ -46,7 +46,7 @@ For a saved clone, replace `voice_id` with `character_id`. The value must be an 
 
 V4's dialogue path produces several voices in one request. Use `extras.dialogue`, an ordered list of turns. Every turn needs `speaker`, `text`, and exactly one of a public `voice_id` or saved `character_id`. Reuse the same selector for the same speaker. A saved cloned voice can speak one turn while a stock voice speaks another. Omit top-level `voice_id` and `character_id`.
 
-Use 2 to 40 turns, at most 10 distinct voices, and no more than 2,000 total turn characters. Give at least two distinct speaker names. The result is one audio file with speaker timing segments. Check the finished job before attempting to merge or edit it. The dialogue endpoint focuses on performance across turns; single-speaker voice settings do not apply to this path.
+Use 2 to 40 turns and at most 10 distinct voices. Give at least two distinct speaker names. ElevenLabs recommends no more than 2,000 total turn characters for reliable dialogue. Creative Claw permits longer v4 requests up to the model's 10,000-character request limit, but ElevenLabs may end them early or reject them. Split long scripts at natural breaks and join the finished audio when reliability matters. The result is one audio file with speaker timing segments. Check the finished job before attempting to merge or edit it. The dialogue endpoint focuses on performance across turns; single-speaker voice settings do not apply to this path.
 
 The `text` field is optional in the current Creative Claw tool. If an OpenAI client still has a cached schema that requires it, pass `text: ""`; the server derives the spoken transcript from the turns. Do not duplicate the dialogue into top-level `text`.
 
