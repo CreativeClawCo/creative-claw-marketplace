@@ -1,13 +1,14 @@
 {
   "name": "creative-claw",
   "description": "AI media studio — generate and edit images, video, and speech; create reusable Characters, product shoots, UGC ads, and multi-shot Films.",
-  "version": "0.6.4",
+  "version": "0.6.5",
   "author": {
     "name": "Creative Claw Co.",
     "email": "support@creativeclaw.co",
     "url": "https://creativeclaw.co"
   },
   "homepage": "https://creativeclaw.co",
+  "privacyPolicyUrl": "https://creativeclaw.co/privacy",
   "repository": "https://github.com/CreativeClawCo/creative-claw-marketplace",
   "license": "Apache-2.0"
 }
