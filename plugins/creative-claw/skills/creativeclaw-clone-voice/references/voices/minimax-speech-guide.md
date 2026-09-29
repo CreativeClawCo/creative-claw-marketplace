@@ -2,7 +2,7 @@
 
 Read [shared execution guidance](../workflow-basics.md) once per task before using tools. It covers existing authorization, model discovery, optional cost checks, imports, and recovery.
 
-Use this model reference inside `creativeclaw-generate-voiceover`. MiniMax is the strongest alternative when a native system voice, broad multilingual catalog, or global emotion/pitch controls matter more than ElevenLabs v3's line-level delivery tags.
+Use this model reference inside `creativeclaw-generate-voiceover`. MiniMax is the strongest alternative when a native system voice, broad multilingual catalog, or global emotion/pitch controls matter more than ElevenLabs v4's inline delivery tags.
 
 ## Workflow
 

@@ -21,7 +21,7 @@ Use this for a reusable identity, not an ordinary one-off portrait. Read [shared
 
 If the user also wants their voice, load $creativeclaw-clone-voice when available or use the packaged [complete cloning workflow](references/voices/cloning.md). Guide at least one minute of clean recording, private upload, explicit speaker consent, cloning and a short audition. Attach it to the SAME character_id.
 
-Recommend ElevenLabs v2 only for cloned speech in its supported languages, or Cartesia for fast natural cloned speech. Use v3 for stock voices and for an existing ElevenLabs clone needing expression or broader language support. Read the selected [v2](references/voices/elevenlabs-v2.md), [v3](references/voices/elevenlabs-v3.md), or [Cartesia](references/voices/cartesia.md) guide and [language routing](references/voices/languages.md).
+Recommend ElevenLabs v4 for stock voices and expressive cloned speech, ElevenLabs v2 for a steadier existing clone, or Cartesia for fast natural cloned speech. V4 also supports dialogue with multiple stock or saved Character voices in one run. Read the selected [v4](references/voices/elevenlabs-v4.md), [v2](references/voices/elevenlabs-v2.md), or [Cartesia](references/voices/cartesia.md) guide and [language routing](references/voices/languages.md).
 
 Cloning saves the voice automatically. Replacing a source invalidates existing provider copies and requires explicit replacement direction. Never infer voice-cloning permission from photos, uploads or avatar creation.
 

@@ -35,11 +35,11 @@ Cloning requires the applicable paid-workspace entitlement and available clone c
 
 ## Test and reuse
 
-Read [language routing](languages.md) and either [v2](elevenlabs-v2.md), [v3](elevenlabs-v3.md), or [Cartesia](cartesia.md). Generate a short audition using the returned character_id, never both character_id and voice_id. Include the user's names, numbers and target-language sentence.
+Read [language routing](languages.md) and either [v4](elevenlabs-v4.md), [v2](elevenlabs-v2.md), or [Cartesia](cartesia.md). Generate a short audition using the returned character_id, never both character_id and voice_id. Include the user's names, numbers and target-language sentence.
 
 Ask the user to assess identity, accent, clarity and pacing. Do not claim to have listened unless audio inspection was actually available. Adjust text/pronunciation/settings before replacing a good source. Noise or a consistently wrong identity usually merits a cleaner recording, not repeated paid synthesis.
 
-Reuse character_id for future generate_speech calls. ElevenLabs v2 and v3 reuse the same provider clone. When the user selects Cartesia, a missing Cartesia clone can be created from the retained consented source. Do not re-clone simply to switch models. Never silently substitute providers or stock voices after a failure.
+Reuse character_id for future generate_speech calls. ElevenLabs v4, v3, and v2 reuse the same provider clone. When the user selects Cartesia, a missing Cartesia clone can be created from the retained consented source. Do not re-clone simply to switch models. Never silently substitute providers or stock voices after a failure.
 
 A Character may contain both images and a voice. Its visual use in generated images/videos does not guarantee use of its voice in native video audio. Generate separate speech when needed; overlaying it is not lip-sync. Submit feedback only when the user requests it, without exposing private samples.
 

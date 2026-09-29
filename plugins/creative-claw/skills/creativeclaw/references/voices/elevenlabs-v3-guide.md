@@ -2,7 +2,7 @@
 
 Read [shared execution guidance](../workflow-basics.md) once per task before using tools. It covers existing authorization, model discovery, optional cost checks, imports, and recovery.
 
-Use `speech/elevenlabs-v3` for expressive acting, audio tags, and languages outside Multilingual v2. Use v2 only for existing clones in supported languages, and recommend Cartesia for cloned speech too. V3 is the default for stock voices. Choose a voice that already resembles the requested age, energy, accent, and performance; inline tags shape delivery but cannot completely transform an incompatible voice.
+Use `speech/elevenlabs-v3` for expressive acting, audio tags, and languages outside Multilingual v2. Use v2 only for existing clones in supported languages, and recommend Cartesia for cloned speech too. V4 is the recommended default for new stock and cloned speech; use v3 when explicitly requested. Choose a voice that already resembles the requested age, energy, accent, and performance; inline tags shape delivery but cannot completely transform an incompatible voice.
 
 ## Core workflow
 

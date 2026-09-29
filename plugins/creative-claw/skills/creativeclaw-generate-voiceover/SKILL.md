@@ -18,12 +18,16 @@ Read [shared execution guidance](references/workflow-basics.md) before tools. Th
 
 | Need | Recommended starting point |
 | --- | --- |
-| General stock narration, expressive speech, broad language coverage | [ElevenLabs v3](references/voices/elevenlabs-v3.md) |
+| General stock narration, expressive speech, broad language coverage, or dialogue with cloned voices | [ElevenLabs v4](references/voices/elevenlabs-v4.md) |
 | Steady narration from an existing clone | [ElevenLabs v2](references/voices/elevenlabs-v2.md) |
 | Fast natural stock or cloned speech | [Cartesia Sonic](references/voices/cartesia.md) |
 | A named alternative or a specific dialect/voice match | [MiniMax and xAI](references/voices/alternatives.md) |
 
-These are task-based defaults, not a universal quality ranking. V2 can use public stock IDs, but v3 remains the default stock choice. If a user explicitly requests v2 stock speech, use a compatible public `voice_id` instead of silently switching. Do not automatically route stock corporate or long-form narration to v2.
+V4 is the most recommended ElevenLabs model and the default when `model` is omitted. V3 remains available for explicit legacy requests. V2 can use public stock IDs, but v4 is the stock choice. If a user explicitly requests v2 stock speech, use a compatible public `voice_id` instead of silently switching. Do not automatically route stock corporate or long-form narration to v2.
+
+## Multiple speakers in one run
+
+ElevenLabs v4 supports up to 10 voices in one `generate_speech` request through `extras.dialogue`. Pass ordered turns with `speaker`, `text`, and either `voice_id` or a saved cloned `character_id` for each turn. Google Flash and Flash-Lite TTS also support two-speaker dialogue. Read the selected model's current schema and [v4 dialogue examples](references/voices/elevenlabs-v4-guide.md) before submission. Omit top-level voice selectors and `text` for dialogue. If a cached OpenAI tool schema still requires `text`, pass `text: ""`.
 
 For non-English, mixed-language or less common languages, read [language routing](references/voices/languages.md) before selecting a voice. A model supporting a language does not guarantee every stock voice has a native accent.
 

@@ -4,7 +4,7 @@ Choose by what the user wants on screen. These are references within Create UGC 
 
 ## Product-only with off-camera narration
 
-Use when no visible speaker is needed. Start with approved product images, then follow [product-ad recipe](recipe-product-ad.md). Generate speech first when it determines pacing: v3 for stock voices, v2 only for a saved clone, or Cartesia as a recommended clone option. Match product visibility and demonstrations to the words. Add captions through editing, not generated label text. There is no lip-sync requirement.
+Use when no visible speaker is needed. Start with approved product images, then follow [product-ad recipe](recipe-product-ad.md). Generate speech first when it determines pacing: v4 for stock voices, v2 only for a saved clone, or Cartesia as a recommended clone option. Match product visibility and demonstrations to the words. Add captions through editing, not generated label text. There is no lip-sync requirement.
 
 ## Visible speaking presenter
 

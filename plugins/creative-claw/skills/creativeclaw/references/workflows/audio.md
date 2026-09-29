@@ -24,10 +24,10 @@ Call `list_models({ category: "speech" })` and `get_model_params` before generat
 | Need                                                            | Model                  | Use                                                                                           |
 | --------------------------------------------------------------- | ---------------------- | --------------------------------------------------------------------------------------------- |
 | Steady narration from existing voice clones only | `speech/elevenlabs-v2` | 29 languages; punctuation and sparse SSML breaks, no square-bracket performance tags. |
-| Expressive acting, audio tags, broader language coverage | `speech/elevenlabs-v3` | Emotional delivery and reactions; no SSML breaks. |
+| Recommended stock speech, expressive clones, audio tags, broad language coverage, or multi-speaker dialogue | `speech/elevenlabs-v4` | Contextual delivery and reactions; up to 10 voices through `extras.dialogue`. |
 | Fast natural stock or Character speech | `speech/cartesia-sonic` | Public Voice Library IDs or private Character voices, with direct emotion, speed, and volume controls. Use cartesia-sonic model reference. |
 | Broad voice and language selection with global emotion controls | `speech/minimax-hd`    | 300+ voices and 30+ languages. Use minimax-speech model reference.                              |
-| Two-speaker dialogue in one call                                | `speech/dia-tts`       | Use `[S1]` and `[S2]` plus supported nonverbal cues.                                          |
+| Alternative two-speaker dialogue in one call | Google Flash or Flash-Lite TTS | Read `get_model_params` for that model's dialogue schema and stock voices. |
 | Emotive performance tags                                        | `speech/orpheus`       | Supports cues such as `<laugh>`, `<sigh>`, and `<gasp>`.                                      |
 | Expressive or telephony-ready output                            | `speech/xai-tts`       | 28 voices, inline/wrapping tags, multilingual and G.711 formats. Use xai-tts model reference.  |
 | Cheap clean draft                                               | `speech/kokoro`        | Fast low-cost testing.                                                                        |
@@ -40,18 +40,19 @@ Use cartesia-sonic model reference for the full stock and Character voice workfl
 
 ## ElevenLabs Multilingual v2
 
-Use elevenlabs-v2 model reference only for existing cloned Character speech. Use v3 for stock voices and general professional narration. Cartesia is also recommended for clones. Language is detected from text; no `language_code`. Pass `extras.voice_settings` with stability, similarity_boost, style, use_speaker_boost and speed. V2 supports `extras.previous_text`/`next_text` for continuity. It is a TTS model, not PVC. Recommend 1–2 minute recordings when creating IVC: 1 minute minimum recommended, 3 minutes maximum recommended; these are quality guidelines.
+Use elevenlabs-v2 model reference for a steadier existing cloned Character speech. Use v4 for stock voices and general professional narration. Cartesia is also recommended for fast cloned speech. V2 detects language from text and has no `language_code`. Pass `extras.voice_settings` with stability, similarity_boost, style, use_speaker_boost and speed. V2 supports `extras.previous_text` and `next_text` for continuity. It is a TTS model, not PVC. Recommend 1 to 2 minute recordings when creating IVC: 1 minute minimum recommended, 3 minutes maximum recommended; these are quality guidelines.
 
-## ElevenLabs v3
+## ElevenLabs v4
 
-- Use a suitable `voice_id`; omitting it uses the server default.
-- Add sparse supported tags such as `[whispers]`, `[excited]`, `[laughs]`, `[sighs]`, or `[pause]`. Do not stack tags or invent them.
-- Use `extras.voice_settings` to adjust stability (0, 0.5, 1) and speed (0.7–1.2); legacy similarity/style/speaker boost are ignored for v3. Lower stability is more expressive; higher stability is more consistent but may flatten tags.
-- For long copy, split at natural paragraph boundaries and use discovered continuity fields such as `previous_text`/`next_text` only when supported by the schema.
+- Read [the v4 guide](../voices/elevenlabs-v4-guide.md) and choose a suitable public `voice_id` or saved `character_id`. Omitting both uses the server's stock default.
+- Use sparse audible tags such as `[whispers]`, `[excited]`, `[laughs]`, or `[long pause]`. Test sound effects and pronunciation.
+- V4 supports Stability and Similarity in `extras.voice_settings`; it does not support speed, style, speaker boost, or SSML in this route.
+- For one request with several speakers, pass `extras.dialogue` as ordered turns, each with a voice selector. Omit top-level `text`, or pass `text: ""` if a cached client schema requires it.
+- V3 remains callable when explicitly requested; use its [legacy guide](../voices/elevenlabs-v3.md) for its distinct settings.
 
 ## ElevenLabs voice cloning
 
-Use `creativeclaw-clone-voice` for the complete consent, recording, import, replacement, cloning, and audition workflow. Creative Claw uses ElevenLabs Instant Voice Cloning through `clone_voice`, attaches the resulting voice to a Character, and reuses it with `generate_speech({ character_id, model: "speech/elevenlabs-v2", text })`.
+Use `creativeclaw-clone-voice` for the complete consent, recording, import, replacement, cloning, and audition workflow. Creative Claw uses ElevenLabs Instant Voice Cloning through `clone_voice`, attaches the resulting voice to a Character, and reuses it with `generate_speech({ character_id, model: "speech/elevenlabs-v4", text })`.
 
 Never set `consent: true` unless the user explicitly confirms that the voice is their own or the speaker authorized cloning and use. Do not silently replace an existing Character voice.
 

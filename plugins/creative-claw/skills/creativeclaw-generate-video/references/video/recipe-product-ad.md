@@ -14,7 +14,7 @@ Import the supplied product photo once. Treat it as the canonical packaging/geom
 
 Use current image-model reference fields. After creative approval, derive a use frame and closing packshot from the SAME product anchor and approved look. Do not derive every image solely from the previous generated image. Reuse suitable uploaded frames instead of generating extras. Inspect label accuracy and whether the cap/mechanism actually match the product.
 
-For separate narration, generate the approved script first with v3 for stock speech, or v2/Cartesia for a saved clone. Use actual audio duration to adjust the plan. Do not squeeze excessive copy into 15 seconds.
+For separate narration, generate the approved script first with v4 for stock speech, or v2/Cartesia for a saved clone. Use actual audio duration to adjust the plan. Do not squeeze excessive copy into 15 seconds.
 
 ## Video request
 

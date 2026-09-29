@@ -20,7 +20,7 @@ Help the user record at least one minute of clean solo speech, upload it private
 
 - [ElevenLabs v2](references/voices/elevenlabs-v2.md): steady cloned narration in its supported languages.
 - [Cartesia Sonic](references/voices/cartesia.md): fast, natural cloned speech and supported delivery controls.
-- [ElevenLabs v3](references/voices/elevenlabs-v3.md): expressive performance or languages outside v2, reusing the ElevenLabs clone.
+- [ElevenLabs v4](references/voices/elevenlabs-v4.md): the recommended expressive option with more faithful cloned voice identity and broader language support, reusing the same Character.
 - [Language routing](references/voices/languages.md): read for non-English speech, dialect requests, or mixed-language scripts.
 
 Only change provider when the user chooses it. A missing Cartesia clone can be created from the retained consented sample when Cartesia is selected. Replacing the source invalidates both providers' clones, so explain and confirm replacement first. Do not silently substitute a stock voice after a clone fails.

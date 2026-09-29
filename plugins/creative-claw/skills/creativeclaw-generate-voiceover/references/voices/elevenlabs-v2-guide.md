@@ -1,24 +1,24 @@
 # Creative Claw , ElevenLabs Multilingual v2
 
-Use `speech/elevenlabs-v2` for controlled, natural narration. Use an existing cloned Character voice, not a stock catalog voice. V3 is the default for stock speech; Cartesia is also recommended for clones. Selecting v2 does not create or upgrade a Professional Voice Clone (PVC); Instant Voice Cloning and PVC are separate voice-creation methods.
+Use `speech/elevenlabs-v2` for controlled, natural narration. Use an existing cloned Character voice, not a stock catalog voice. V4 is the default for stock speech; Cartesia is also recommended for clones. Selecting v2 does not create or upgrade a Professional Voice Clone (PVC); Instant Voice Cloning and PVC are separate voice-creation methods.
 
 ## Choose deliberately
 
 | Need | Model |
 | --- | --- |
-| Stock corporate narration, explainer, e-learning or audiobook | v3 |
+| Stock corporate narration, explainer, e-learning or audiobook | v4 |
 | Steady narration with an existing consented clone | v2 or Cartesia |
 | Assess how well an existing clone preserves a speaker in ordinary narration | Start with v2; compare the same clone and script if another audition is requested |
-| Acting, laughter, whispers, emotional performance tags | v3 |
-| Hebrew or another language outside v2's supported set | v3 or another explicitly compatible model |
+| Acting, laughter, whispers, emotional performance tags | v4 |
+| Hebrew or another language outside v2's supported set | v4 or another explicitly compatible model |
 
-V2 is recommended only for cloned speech, not a provider guarantee of better similarity. If v2 is requested without a clone, explain the routing policy and offer v3 stock speech or consented cloning; do not silently change the request. Do not recreate a clone to change TTS models. Creating another clone can alter its sound even from identical source audio.
+V2 is recommended only for cloned speech, not a provider guarantee of better similarity. If v2 is requested without a clone, explain the routing policy and offer v4 stock speech or consented cloning; do not silently change the request. Do not recreate a clone to change TTS models. Creating another clone can alter its sound even from identical source audio.
 
 ## Execute
 
 1. Reuse the supplied script, speaker, language and delivery. Infer minor defaults without restarting the brief.
 2. Call `get_model_params({ model: "speech/elevenlabs-v2" })` once for current settings, supported languages, a runnable example and the curated voice catalog. Use `list_models({ category: "speech" })` when selecting alternatives.
-3. Reuse the requested `character_id` for an existing consented clone. For stock speech, use v3 instead. If cloning is needed, use `creativeclaw-clone-voice` with the speaker's permission. Do not silently substitute a stock voice.
+3. Reuse the requested `character_id` for an existing consented clone. For stock speech, use v4 instead. If cloning is needed, use `creativeclaw-clone-voice` with the speaker's permission. Do not silently substitute a stock voice.
 4. Preserve approved words. Add only supported punctuation or permitted pronunciation edits. For a straightforward approved script, generate directly; do not require an extra audition. Audition first when evaluating clone identity or resolving material uncertainty.
 5. Call `generate_speech` with the explicit model. Preserve the output URL and job ID. Listen with available tools; never claim listening from file metadata alone.
 6. For another attempt, change one variable. Reuse the same voice, script and output format to make comparisons meaningful.
@@ -65,7 +65,7 @@ Legacy flat fields such as `extras.stability` still work. Prefer nested `extras.
 }
 ```
 
-For a stock catalog voice, use v3 instead. Do not pass source `audio_url` to ElevenLabs TTS.
+For a stock catalog voice, use v4 instead. Do not pass source `audio_url` to ElevenLabs TTS.
 
 ## Languages and pronunciation
 
@@ -88,7 +88,7 @@ Character alignment is requested by default. Use returned timings rather than gu
 - Wavering identity: keep style at zero, keep the same clone, compare a small similarity change.
 - Hiss, room sound or unnatural artifacts: inspect the source before increasing similarity.
 - Good recording but poor resemblance: IVC has limitations; do not promise v2 fixes every voice.
-- Needs laughter or acted emotional direction: offer v3 with the same Character and a suitable script.
+- Needs laughter or acted emotional direction: offer v4 with the same Character and a suitable script.
 - Provider failure: report the failure; do not silently switch models or voices.
 
 For cloning guidance, recommend 1,2 minutes of consistent solo speech: recommended minimum 1 minute, recommended maximum 3 minutes. These are quality recommendations, not hard API duration limits. Preserve the source and the useful clone; replacement currently deletes the old voice.

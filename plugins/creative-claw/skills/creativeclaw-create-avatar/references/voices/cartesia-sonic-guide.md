@@ -6,7 +6,7 @@ Use `speech/cartesia-sonic` for fast, natural speech from a public stock voice o
 
 ## Choose deliberately
 
-Cartesia is a strong first choice for low latency, direct primary emotion control, and simple speed or volume adjustments. ElevenLabs v2 is reserved for existing cloned voices. ElevenLabs v3 is the default for stock voices and general narration. Cartesia is also recommended for voice clones.
+Cartesia is a strong first choice for low latency, direct primary emotion control, and simple speed or volume adjustments. ElevenLabs v2 is reserved for existing cloned voices. ElevenLabs v4 is the default for stock voices and general narration. Cartesia is also recommended for voice clones.
 
 Honor an explicit model choice. Never switch providers silently. When the first result misses the intended voice or performance, offer a controlled comparison using the same text, language, pacing, and output format.
 
@@ -63,7 +63,7 @@ Optional fields inside `extras`:
 - `volume`: `0.5` to `2.0`, starting at `1.0`
 - `language_code`: use a value returned by `get_model_params`, especially for short, ambiguous, or multilingual text
 
-Do not pass ElevenLabs `voice_settings`, v3 square-bracket audio tags, `audio_url`, or `language_boost` to Cartesia.
+Do not pass ElevenLabs `voice_settings`, ElevenLabs square-bracket audio tags, `audio_url`, or `language_boost` to Cartesia.
 
 ## Starting points
 

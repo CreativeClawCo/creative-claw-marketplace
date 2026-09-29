@@ -4,7 +4,7 @@ Model: `speech/cartesia-sonic`. Use for fast natural speech from stock voices or
 
 Get model params first. Match the returned voice catalog's language, accent and delivery labels; use the exact voice_id. Verified public IDs from [Cartesia's voice library](https://play.cartesia.ai/voices) can also be used. Do not apply an ElevenLabs voice ID to Cartesia. A personal clone uses character_id instead of voice_id.
 
-Set extras.language_code to a code accepted by the current schema. Use native-script text, natural punctuation and the current schema's delivery controls. Read its Usage and emotion/speed options before adding settings; do not transplant ElevenLabs stability knobs, SSML or v3 performance tags. Start with neutral settings and adjust one delivery dimension after auditioning.
+Set extras.language_code to a code accepted by the current schema. Use native-script text, natural punctuation and the current schema's delivery controls. Read its Usage and emotion/speed options before adding settings; do not transplant ElevenLabs stability knobs, SSML or square-bracket performance tags. Start with neutral settings and adjust one delivery dimension after auditioning.
 
 Current controls: top-level emotion is neutral, angry, excited, content, sad or scared. Top-level speed is 0.6 to 1.5. Start with emotion "neutral" and speed 1.0; try "excited" with 1.05 for an energetic ad, or "content" with 0.96 for a warm read. extras.volume accepts 0.5 to 2.0 and defaults to 1.8; omit it unless a volume override is wanted. Recheck the schema before use.
 

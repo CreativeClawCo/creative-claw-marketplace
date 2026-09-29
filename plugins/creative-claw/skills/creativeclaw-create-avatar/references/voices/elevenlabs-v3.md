@@ -1,6 +1,6 @@
 # ElevenLabs v3
 
-Model: `speech/elevenlabs-v3`. Default for general stock narration, expressive speech and many less common languages.
+Model: `speech/elevenlabs-v3`. Legacy option for explicitly requested v3 speech. Use v4 for new stock narration, expressive speech, clones, and dialogue.
 
 Find voices with get_model_params for this model, matching native language/accent and delivery labels before selecting the exact voice_id. The default English voice is not a universal language recommendation. Public [ElevenLabs Voice Library](https://elevenlabs.io/app/voice-library) IDs are another option when verified. Saved ElevenLabs clones use character_id and do not need cloning again.
 
