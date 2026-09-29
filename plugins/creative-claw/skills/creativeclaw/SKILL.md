@@ -88,6 +88,10 @@ For image prompting, load [the selected image model reference](references/images
 8. Inspect the result, revise deliberately, and preserve approved anchors.
 9. Name, tag, and describe the final assets.
 
+## Default visual preparation for video
+
+For new generative video requests, follow the selected video outcome skill's image-first workflow: prepare a clean shot image with `generate_image`, reuse approved canonical identity/product/location references, and send the actual images to the video model where supported. Honor direct-generation requests, suitable approved shot images, and budget constraints. Keep this as workflow guidance, not a blocking tool preflight.
+
 ## References
 
 - `references/tool-catalog.md` — current tool routing by purpose.
