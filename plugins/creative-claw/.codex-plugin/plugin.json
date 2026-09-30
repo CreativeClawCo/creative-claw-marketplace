@@ -24,7 +24,7 @@
   "mcpServers": "./.mcp.json",
   "interface": {
     "displayName": "Creative Claw",
-    "shortDescription": "Generate on-brand images, video, and speech",
+    "shortDescription": "Create images, video and voice",
     "longDescription": "Create and edit on-brand images, videos, and speech; build reusable Characters, product campaigns, creator-style ads, and multi-shot Films with Creative Claw's hosted media studio.",
     "developerName": "Creative Claw Co.",
     "category": "Creativity",
@@ -37,8 +37,8 @@
     "termsOfServiceURL": "https://creativeclaw.co/terms",
     "defaultPrompt": [
       "Create a consistent product photoshoot from these references.",
-      "Turn this idea into an approved storyboard and multi-shot film.",
-      "Create an expressive voiceover or a consented reusable voice."
+      "Animate this product photo into a five-second clip.",
+      "Read this script with a warm, natural voice."
     ]
   }
 }

@@ -15,7 +15,7 @@ Use `manage_account` for current balance, recent generations and their recorded 
 
 ## Operating rules
 
-1. **Inspect before generating.** Use `search_assets` for likely reusable media and `get_theme` for branded work.
+1. **Reuse assets when relevant.** Use `search_assets` when the request refers to saved media, an existing project, or identity/product continuity. Skip asset searches for standalone generation with no reuse requirement. Use `get_theme` for branded work.
 2. **Discover only what is missing.** Use `list_models({ category })` when choosing or checking availability; use `get_model_params` for a known selected model. Reuse current-task schemas until a model/operation changes or an error indicates they need refreshing.
 3. **Use durable references.** Read `references/platform-upload.md` before importing attached or local media. Pass Creative Claw URLs to generation and processing tools.
 4. **Keep exact control syntax intact.** Preserve approved references, dialogue, timecodes, and layout instructions. Speech receives the exact performed script in `text`.
@@ -69,7 +69,7 @@ Use an explicit outcome over a generic modality. If the user names a model, keep
 
 - **Images:** default to `image/nano-banana-2` for most generation and editing. It is the primary cost-efficient recommendation because it offers the best overall balance of quality, speed, and cost. Use `image/gpt-image-2.5-flare` for fast OpenAI image work, and escalate to `image/nano-banana-pro`, `image/gpt-image-2.5-sunburst`, or `image/seedream-5-pro` when their specialty materially improves the requested result. Do not proactively surface lower-tier or internal-route variants.
 - **Video:** default to `video/gemini-omni-flash`. Recommend `video/seedance-2.5` for premium long or reference-rich work, `video/seedance-2.0-mini` as Seedance Mini for inexpensive drafts, `video/minimax-h3-max` for fast cinematic native-audio work, or `video/minimax-h3-max-turbo` for the faster lightweight H3 Max route. For existing footage, route through `references/workflows/edit-video.md` instead of applying this generation ranking. Never recommend or proactively route to an LTX or DreamActor model.
-- **Speech:** use `speech/elevenlabs-v4` for stock voices, general speech, expressive clones, and multi-speaker dialogue. Use `speech/elevenlabs-v2` with an existing cloned Character voice when a steadier read is preferred. Recommend `speech/cartesia-sonic` for fast cloned speech too; it also supports explicitly selected stock voices. V3 remains available when requested. Never clone without consent or silently switch providers. Load `creativeclaw-generate-voiceover` for the selected model's reference and current settings.
+- **Speech:** default to `speech/elevenlabs-v4` for all non-cloned speech, including stock voices, expressive delivery, and dialogue. For cloned voices, recommend `speech/cartesia-sonic` or `speech/elevenlabs-v2`, respecting the saved clone provider and explicit user choice. Do not recommend v3 or v4 for clones by default. Never clone without consent or silently switch providers. Honor explicitly requested supported models. Load `creativeclaw-generate-voiceover` for the selected model's reference and current settings.
 - **Audio:** use `generate_sound_effect` with `sfx/elevenlabs-sound-v2` for sound effects, Foley, ambience, and loops. Use `generate_music` with `music/elevenlabs-music-v2.5` for scores, music beds, stings, jingles, and songs. Do not pass non-speech model IDs to `generate_speech`.
 
 Verify missing capabilities with runtime discovery, then reuse the selected schema for unchanged operations within the task.
@@ -79,7 +79,7 @@ For image prompting, load [the selected image model reference](references/images
 ## Shared production pattern
 
 1. Clarify the deliverable, audience, duration or dimensions, and required references.
-2. Search the asset library and import only what is missing. When the user wants inspiration or a starting point, search curated examples and load only the selected example.
+2. Search the asset library when saved media, project reuse, or continuity matters; skip the search for standalone generation. Import supplied references only when needed. When the user wants inspiration or a starting point, search curated examples and load only the selected example.
 3. Fetch the selected theme for branded work.
 4. Inspect available models and the chosen model's parameters.
 5. State consequential settings briefly; honor existing authorization and user-requested review stages without asking again.

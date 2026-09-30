@@ -18,12 +18,12 @@ Read [shared execution guidance](references/workflow-basics.md) before tools. Th
 
 | Need | Recommended starting point |
 | --- | --- |
-| General stock narration, expressive speech, broad language coverage, or dialogue with cloned voices | [ElevenLabs v4](references/voices/elevenlabs-v4.md) |
-| Steady narration from an existing clone | [ElevenLabs v2](references/voices/elevenlabs-v2.md) |
-| Fast natural stock or cloned speech | [Cartesia Sonic](references/voices/cartesia.md) |
+| All non-cloned speech: stock narration, expressive speech, broad language coverage, and dialogue | [ElevenLabs v4](references/voices/elevenlabs-v4.md) |
+| Speech from an existing ElevenLabs clone | [ElevenLabs v2](references/voices/elevenlabs-v2.md) |
+| Speech from an existing Cartesia clone | [Cartesia Sonic](references/voices/cartesia.md) |
 | A named alternative or a specific dialect/voice match | [MiniMax and xAI](references/voices/alternatives.md) |
 
-V4 is the most recommended ElevenLabs model and the default when `model` is omitted. V3 remains available for explicit legacy requests. V2 can use public stock IDs, but v4 is the stock choice. If a user explicitly requests v2 stock speech, use a compatible public `voice_id` instead of silently switching. Do not automatically route stock corporate or long-form narration to v2.
+Default to ElevenLabs v4 for all non-cloned speech. For cloned voices, recommend Cartesia Sonic or ElevenLabs v2 according to the saved provider; explicitly pass the selected model rather than relying on the omitted-model v4 default. Do not recommend v3 or v4 for clones by default. V3 remains available for explicit legacy requests. V2 can use public stock IDs, but v4 is the stock choice. If a user explicitly requests v2 stock speech, use a compatible public `voice_id` instead of silently switching. Do not automatically route stock corporate or long-form narration to v2.
 
 ## Multiple speakers in one run
 

@@ -35,7 +35,7 @@ Cloning requires the applicable paid-workspace entitlement and available clone c
 
 ## Test and reuse
 
-Read [language routing](languages.md) and either [v4](elevenlabs-v4.md), [v2](elevenlabs-v2.md), or [Cartesia](cartesia.md). Generate a short audition using the returned character_id, never both character_id and voice_id. Include the user's names, numbers and target-language sentence.
+Recommend Cartesia Sonic for a Cartesia clone or ElevenLabs v2 for an ElevenLabs clone. Read [language routing](languages.md) and the selected [v2](elevenlabs-v2.md) or [Cartesia](cartesia.md) guide. Use v4 or v3 only when explicitly requested and supported. Generate a short audition using the returned character_id, never both character_id and voice_id. Include the user's names, numbers and target-language sentence.
 
 Ask the user to assess identity, accent, clarity and pacing. Do not claim to have listened unless audio inspection was actually available. Adjust text/pronunciation/settings before replacing a good source. Noise or a consistently wrong identity usually merits a cleaner recording, not repeated paid synthesis.
 

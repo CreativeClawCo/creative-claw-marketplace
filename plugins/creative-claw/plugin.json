@@ -17,5 +17,28 @@
     "video-generation",
     "branding",
     "mcp"
-  ]
+  ],
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "Creative Claw",
+        "shortDescription": "Create images, video and voice",
+        "longDescription": "Create and edit on-brand images, videos, and speech; build reusable Characters, product campaigns, creator-style ads, and multi-shot Films with Creative Claw's hosted media studio.",
+        "developerName": "Creative Claw Co.",
+        "category": "Creativity",
+        "capabilities": [
+          "Interactive",
+          "Write"
+        ],
+        "websiteURL": "https://creativeclaw.co",
+        "privacyPolicyURL": "https://creativeclaw.co/privacy",
+        "termsOfServiceURL": "https://creativeclaw.co/terms",
+        "defaultPrompt": [
+          "Create a consistent product photoshoot from these references.",
+          "Animate this product photo into a five-second clip.",
+          "Read this script with a warm, natural voice."
+        ]
+      }
+    }
+  }
 }

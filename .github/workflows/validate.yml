@@ -17,5 +17,6 @@ jobs:
       # Fails when a skill's embedded reference copy drifts from skills/creativeclaw/references/.
       - run: node scripts/sync-skill-references.mjs --check
       - run: bash scripts/validate-skill-architecture.sh
+      - run: node scripts/sync-openai-interface.mjs --check
       - run: npx -y @anthropic-ai/claude-code plugin validate .
       - run: npx -y @anthropic-ai/claude-code plugin validate plugins/creative-claw
