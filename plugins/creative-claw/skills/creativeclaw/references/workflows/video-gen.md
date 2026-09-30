@@ -17,17 +17,17 @@ Match the model to the shot, reference structure, duration, resolution, audio ne
 
 Runtime discovery is authoritative. Start here:
 
-| Need                                            | Model                        | Current specialty                                                                                |
-| ----------------------------------------------- | ---------------------------- | ------------------------------------------------------------------------------------------------ |
-| General generation, references, or source edit  | `video/gemini-omni-flash`    | Default; fast multimodal 3–10s generation/edit with native audio.                                |
-| Premium long or reference-rich video            | `video/seedance-2.5`         | 4–30s, native audio, optional first/last frames, and large mixed-reference sets.                  |
-| Inexpensive Seedance draft                      | `video/seedance-2.0-mini`    | Present as Seedance Mini; lowest-cost Seedance path for quick native-audio reference experiments. |
-| Fast cinematic generation with strong adherence | `video/minimax-h3-max`       | 5–15s, 480p/768p/1080p, native audio, optional first/last frames, and multimodal references.      |
-| Faster lightweight H3 Max route                 | `video/minimax-h3-max-turbo` | Lower-cost text/start-frame route; references use the shared H3 Max reference endpoint and rate.  |
+| Need | Model | Current specialty |
+| --- | --- | --- |
+| General generation, references, or source edit | `video/gemini-omni-flash` | Default; fast multimodal 3–10s generation/edit with native audio. |
+| Premium cinematic, reference-rich or long video | `video/seedance-2.5` | 4–30s, native audio, optional first/last frames, and large mixed-reference sets. Draft at `resolution: "480p"`, then render the approved version at 720p or 1080p. |
+| Fast cinematic generation with strong adherence | `video/minimax-h3-max` | 5–15s, 480p/768p/1080p, native audio, optional first/last frames, and multimodal references. |
+| Cheap, fast drafts | `video/minimax-h3-max-turbo` | Present as H3 Max Fast; text or start-frame drafts. Reference requests use the shared H3 Max reference route. |
+| Native-audio single pass, or a document or webpage brief | `video/wan-3.0` | 2–30s, native audio, first/last frames, mixed references, or one public document or webpage as the brief. |
 
-Recommend these models first. Use another runtime-listed model only when the user explicitly requests it or the five recommended choices cannot perform the operation.
+Recommend these models first. Use another runtime-listed model, including Seedance Mini, only when the user explicitly requests it or the five recommended choices cannot perform the operation.
 
-For source-video work, use the edit-specific ranking instead of the table above: Gemini Omni for targeted edits up to 10 seconds, Seedance 2.5 for 4–30 second edits and continuations, and Seedance Mini only for an explicitly cost-sensitive draft. Preserve untouched source spans and generate only the interval or continuation that needs new pixels. Never recommend or proactively route to an LTX or DreamActor model.
+For source-video work, use the edit-specific ranking in `edit-video.md` instead of the table above: `video/minimax-h3-max-extend` to extend a clip (Seedance 2.5 `extend` only for heavy references or a long continuation), `video/minimax-h3-max-insert` to replace an interval with new footage, Gemini Omni for targeted edits up to 10 seconds, and Seedance 2.5 for 4–30 second edits. Preserve untouched source spans and generate only the interval or continuation that needs new pixels. Never recommend or proactively route to an LTX or DreamActor model.
 
 ## Reference rules
 

@@ -62,12 +62,12 @@ Inspect each frame before using it. For first/last interpolation, both frames mu
 Call `list_models({ category: "video" })` and `get_model_params`.
 
 - General approved first-frame animation or source editing → `video/gemini-omni-flash`.
-- Long, premium, reference-heavy production → `video/seedance-2.5`.
+- Premium cinematic, long or reference-heavy production → `video/seedance-2.5`. For a cheaper preview, draft at `resolution: "480p"`, then render the approved version at 720p or 1080p.
 - Fast cinematic production with optional first/last frames → `video/minimax-h3-max`.
-- Low-cost Seedance experiment → `video/seedance-2.0-mini`, presented to the user as Seedance Mini.
-- Lowest-latency H3 text/start-frame draft, with shared-route references when needed → `video/minimax-h3-max-turbo`.
+- Cheap, fast text/start-frame draft, with shared-route references when needed → `video/minimax-h3-max-turbo`.
+- Native-audio single pass of 2–30 s, or a document or webpage brief → `video/wan-3.0`.
 
-Start with Gemini Omni. Match the approved board's structure to the chosen model's actual input contract when Seedance 2.5, Seedance Mini, or H3 Max is a better fit.
+Start with Gemini Omni. Match the approved board's structure to the chosen model's actual input contract when Seedance 2.5, H3 Max, or Wan is a better fit.
 
 ## 6. Compose the director prompt
 

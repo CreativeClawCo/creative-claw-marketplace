@@ -5,10 +5,10 @@ Package access does not mean loading every guide. Honor an explicit model choice
 | Model or family | Read when selected |
 | --- | --- |
 | Gemini Omni, video/gemini-omni-flash | [Gemini Omni](gemini-omni.md), the existing general default |
-| Seedance 2.5 | [Seedance 2.5](seedance-2-5.md), reference-rich scenes and supported edits/extensions |
-| Seedance Mini | [Seedance Mini](seedance-mini.md), economical drafts when requested |
-| H3 Max, H3 Max Extend, and H3 Max Fast/Turbo | [MiniMax H3 Max](minimax-h3-max.md), cinematic motion, source continuation, and native audio |
-| Wan 3.0 | [Wan](wan-3.md), supported long shots, references and source transformations |
+| Seedance 2.5 | [Seedance 2.5](seedance-2-5.md), premium cinematic, reference-rich and long (up to 30 s) scenes, 480p drafts, and supported edits/extensions |
+| Seedance Mini | [Seedance Mini](seedance-mini.md), only when the user asks for it |
+| H3 Max, H3 Max Extend, H3 Max Insert, and H3 Max Fast/Turbo | [MiniMax H3 Max](minimax-h3-max.md), cinematic motion, cheap fast drafts, extending a clip, inserting new footage into an interval, and native audio |
+| Wan 3.0 | [Wan](wan-3.md), native-audio 2–30 s single-pass clips, references, source transformations, and document or webpage briefs |
 | Veo, Grok, FLUX, Sora, Kling, H3, Hailuo, HappyHorse, HeyGen or another explicitly requested route | [Additional models](other-models.md), model-specific distinctions and live-schema lookup |
 | Lip-sync a finished clip to prepared speech | [video/sync-3](other-models.md) |
 

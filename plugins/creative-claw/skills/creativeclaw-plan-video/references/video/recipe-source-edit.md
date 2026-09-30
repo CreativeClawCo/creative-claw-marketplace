@@ -12,6 +12,8 @@ Inspect source duration and identify the exact interval. Preserve the original. 
 
 Use video_urls for the source with the selected model's exact input contract. For Seedance 2.5, use its explicit edit task mode, auto aspect ratio and source-locked duration as documented. Do not apply those fields to Omni.
 
+To replace the interval with a new scene instead of changing it, use `video/minimax-h3-max-insert` on the full source: `extras.start_time` where the new scene begins, `extras.resume_time` where the original resumes, and `duration` for the new scene. It returns the source with the new scene in place.
+
 Resolve the edited interval and concatenate it between untouched spans. Inspect boundary cuts, total duration, identity and color continuity. Preserve original audio unless replacement was requested; if generation altered it, put the original track back with `merge_audio_video` (default replace mode). Generative edits cannot guarantee pixel-perfect logos, numbers or faces; use deterministic edits where exact preservation is essential.
 
 ## New ending
@@ -22,7 +24,7 @@ When the source is 1.625–60 seconds and continuity of its characters, setting,
 
 "The cyclist continues along the same road and slows beside the lake. Preserve rider identity, bicycle, wardrobe, direction of travel, camera height and ambient sound perspective. One continuous camera move with no cut."
 
-Use a whole-number `duration` of 5–15 seconds for the new footage. Leave `aspect_ratio` on `auto` unless a crop was requested. With `extras.output: "extended"`, inspect the returned stitched video directly and do not merge the source again. With `"continuation"`, merge the new segment with the original when a full result is needed. If the source exceeds the limit or another model fits the task better, use a supported continuation route and inspect its returned content before merging.
+Use a whole-number `duration` of 5–15 seconds for the new footage. Leave `aspect_ratio` on `auto` unless a crop was requested. With `extras.output: "extended"`, inspect the returned stitched video directly and do not merge the source again. With `"continuation"`, merge the new segment with the original when a full result is needed. For a source over 60 seconds, extend a short tail excerpt and merge the continuation with the original. Use Seedance 2.5 `extend` only for heavy references or a long continuation; inspect its returned content before merging.
 
 ## Follow-ups and approval
 

@@ -21,7 +21,7 @@ Default for every new generative clip. A video request authorizes one keyframe p
 
 Use 2–4 strong references; more is not better. Existing assets count, so don't pay for extra images to reach a number or exceed a model's limit. For image prompting, read the [image model index](../images/index.md) and only the selected guide. Pass the actual image URLs in the video request; naming them in prose does not condition the model. Keep iteration bounded: planning-only, advice-only and estimate-only requests do not authorize paid images.
 
-A Character sheet is identity guidance, never a literal opening frame. Reuse an approved sheet, or create one with creativeclaw-create-avatar when identity recurs.
+A Character sheet is identity guidance, never a literal opening frame. Reuse an approved sheet, or create one with creativeclaw-create-avatar when identity recurs. A sheet made with another image model is still a valid anchor; keyframes stay on the project's one image model.
 
 ## Review the references once
 

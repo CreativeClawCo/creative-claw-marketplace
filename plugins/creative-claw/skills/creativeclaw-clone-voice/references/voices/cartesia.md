@@ -1,6 +1,6 @@
 # Cartesia Sonic
 
-Model: `speech/cartesia-sonic`. Use for fast natural speech from stock voices or a saved Character clone.
+Model: `speech/cartesia-sonic`. Use for a Cartesia clone (the default clone provider) and for fast natural speech from stock voices.
 
 Get model params first. Match the returned voice catalog's language, accent and delivery labels; use the exact voice_id. Verified public IDs from [Cartesia's voice library](https://play.cartesia.ai/voices) can also be used. Do not apply an ElevenLabs voice ID to Cartesia. A personal clone uses character_id instead of voice_id.
 

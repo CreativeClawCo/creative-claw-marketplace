@@ -14,7 +14,7 @@ Use this for a reusable identity, not an ordinary one-off portrait. Read [shared
 3. Import attached/local photos using the appropriate client route. Choose the strongest face anchor and assign other photos explicit identity, proportions or wardrobe roles.
 4. Use generate_image and current model parameters to create one consistent character-sheet direction. The identity reference explains layout and prompting. Preserve approved likeness rather than beautifying or redesigning the person.
 5. Show the completed sheet and ask for likeness/canonical-state approval before saving it as the Character visual. Honor approval already given for that exact result.
-6. Save using manage_character({ title, description, image_url }) or id plus changed fields for an existing Character. The description records stable appearance, not a temporary scene. Save the approved sheet as the canonical image and retain a clean face portrait and other views as named assets for downstream use. For a real person, keep their best original photo as an extra identity reference beside the sheet; generated sheets drift. Reuse the sheet's image model for later keyframes.
+6. Save using manage_character({ title, description, image_url }) or id plus changed fields for an existing Character. The description records stable appearance, not a temporary scene. Save the approved sheet as the canonical image and retain a clean face portrait and other views as named assets for downstream use. For a real person, keep their best original photo as an extra identity reference beside the sheet; generated sheets drift. Later video keyframes use one image model for the whole project (default `image/nano-banana-2`); the sheet stays a valid anchor whichever model made it.
 7. Return the saved Character ID/name and explain that future requests can name it. State what was saved and any likeness limitations. Do not claim a trained visual identity model or guaranteed consistency.
 
 ## Optional voice
@@ -25,7 +25,7 @@ When the Character will speak and the voice is unknown, ask one question: design
 - **Own voice:** use creativeclaw-clone-voice when available, or the packaged [cloning workflow](references/voices/cloning.md): at least one minute of clean recording, private upload, explicit speaker consent, cloning and a short audition. Never infer cloning permission from photos, uploads or avatar creation. Replacing a source invalidates existing provider copies and needs explicit direction.
 - **Stock:** `manage_character({ id, voice_model, voice_id })` with an exact voice ID from `get_model_params`.
 
-Each saved voice speaks with its own model: designed ElevenLabs → `speech/elevenlabs-v4`; Google-designed → `speech/gemini-3.8-flash-tts`; clone → v2, v4 or Cartesia; stock → its saved model. Read the selected [v4](references/voices/elevenlabs-v4.md), [v2](references/voices/elevenlabs-v2.md), or [Cartesia](references/voices/cartesia.md) guide and [language routing](references/voices/languages.md).
+Each saved voice speaks with its own model: designed ElevenLabs → `speech/elevenlabs-v4`; Google-designed → `speech/gemini-3.8-flash-tts`; Cartesia clone → `speech/cartesia-sonic`; ElevenLabs clone → v2 (steady) or v4 (expressive, dialogue); stock → its saved model. Read the selected [v4](references/voices/elevenlabs-v4.md), [v2](references/voices/elevenlabs-v2.md), or [Cartesia](references/voices/cartesia.md) guide and [language routing](references/voices/languages.md).
 
 ## Reuse
 

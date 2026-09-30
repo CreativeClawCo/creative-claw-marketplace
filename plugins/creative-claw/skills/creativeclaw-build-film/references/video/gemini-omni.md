@@ -145,7 +145,7 @@ motion, buildings, and every other detail unchanged.
 
 Avoid redescribing the source. A long prompt increases unintended changes. Omni editing is best for one clear transformation per pass.
 
-Verify the source duration before submission. The current Creative Claw Omni edit route accepts at most 10 seconds of uploaded source video. If the source is longer, do not submit it unchanged and do not regenerate the whole timeline in segments by default. Trim and edit only the interval that must change, then merge it between untouched source spans. For a request to keep the original and add a new ending, route to Seedance 2.5 continuation and merge the result with the untouched original.
+Verify the source duration before submission. The current Creative Claw Omni edit route accepts at most 10 seconds of uploaded source video. If the source is longer, do not submit it unchanged and do not regenerate the whole timeline in segments by default. Trim and edit only the interval that must change, then merge it between untouched source spans. For a request to keep the original and add a new ending, use `video/minimax-h3-max-extend` and keep the original untouched. Use Seedance 2.5 `extend` only for heavy references or a long continuation.
 
 ## Prompt examples
 

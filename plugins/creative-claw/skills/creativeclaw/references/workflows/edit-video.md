@@ -18,26 +18,28 @@ Preserve the original and create clearly named derivatives. Distinguish determin
 | Transcribe with timings                            | `transcribe`                                       |
 | Clean a voice track                                | `isolate_audio`                                    |
 | Generative source-video edit                       | `generate_video` with a compatible source-edit mode |
-| Add new action before or after existing footage    | Generate only the continuation, then `merge_media`  |
+| Add new footage after a clip                       | `generate_video` with `video/minimax-h3-max-extend` |
+| Replace an interval of a clip with new footage     | `generate_video` with `video/minimax-h3-max-insert` |
+| Add new footage before a clip                      | Generate only the new footage, then `merge_media`   |
 
 ## Generative edit routing
 
 Call `list_models({ category: "video" })` and `get_model_params` before choosing or submitting a generative edit. Runtime capability and limits are authoritative.
 
 - For a source clip up to 10 seconds, default to `video/gemini-omni-flash`. It is the best-value Creative Claw route for one targeted natural-language change while retaining the source timeline. Use one clear change followed by an explicit preservation sentence.
-- For a 4–30 second source edit, a long continuation, or a reference-rich transformation, use `video/seedance-2.5`. Set `extras.omni_reference_task_type` explicitly to `edit` or `extend`; use `aspect_ratio: "auto"` and the duration contract returned by `get_model_params`.
-- Use `video/seedance-2.0-mini`, presented as **Seedance Mini**, only for an explicitly cost-sensitive draft whose source and output fit its current limits. It reconstructs from references rather than guaranteeing a surgical edit, so do not use it when exact frame, logo, uniform, text, or identity preservation is critical.
-- Use `video/flux-3` only for continuation when its current schema explicitly exposes source-video extension. Do not describe it as a source editor unless `get_model_params` exposes an edit mode.
+- To extend a clip, default to `video/minimax-h3-max-extend`. Pass one source of 1.625–60 seconds in `video_urls`, a `duration` of 5–15 seconds for the new footage, and `aspect_ratio: "auto"`. Describe only what happens next. `extras.output: "extended"` (the default) returns the source plus the new footage; `"continuation"` returns only the new segment.
+- To replace an interval inside a clip with new footage, use `video/minimax-h3-max-insert`. Pass one source in `video_urls`, `extras.start_time` where the new scene begins and `extras.resume_time` where the original resumes (both on the source timeline), and `duration` for the new scene's length. Describe the entry and return transitions. Optional identity or product images go in `image_urls`.
+- For a 4–30 second source edit or a reference-rich transformation, use `video/seedance-2.5` with `extras.omni_reference_task_type: "edit"`. Use its `extend` mode only for heavy references or a long continuation. Use `aspect_ratio: "auto"` and the duration contract returned by `get_model_params`.
 
-Never recommend or proactively route to an LTX or DreamActor model. If the user explicitly requests one, preserve their choice but do not present it as a recommended route.
+Use other models, such as FLUX 3 or Seedance Mini, only when the user asks for them. Never recommend or proactively route to an LTX or DreamActor model. If the user explicitly requests one, preserve their choice but do not present it as a recommended route.
 
 ## Preservation-first continuation
 
 When the user says to leave the original video unchanged and add something before or after it:
 
 1. Keep the complete original video untouched.
-2. Trim only the smallest useful head or tail context accepted by the continuation model.
-3. Generate one continuation from that context.
+2. For a new ending, pass the source to `video/minimax-h3-max-extend` with `extras.output: "continuation"`. If the source exceeds the model's limit, or for a new beginning, trim only the smallest useful head or tail context.
+3. Generate one continuation.
 4. Concatenate the untouched original and the approved continuation with `merge_media`.
 5. Preserve the original audio on the original span. Add or mix audio only for the new span unless the user requested a broader audio change.
 

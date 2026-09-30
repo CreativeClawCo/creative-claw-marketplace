@@ -26,7 +26,7 @@
   {
     "tool": "generate_speech",
     "input": {
-      "model": "speech/elevenlabs-v3",
+      "model": "speech/elevenlabs-v4",
       "text": "The exact supplied line."
     }
   },
@@ -44,7 +44,7 @@
     "tool": "estimate_generation",
     "input": {
       "operation": "speech",
-      "model": "speech/elevenlabs-v3",
+      "model": "speech/elevenlabs-v4",
       "params": {
         "text": "The exact supplied line."
       }

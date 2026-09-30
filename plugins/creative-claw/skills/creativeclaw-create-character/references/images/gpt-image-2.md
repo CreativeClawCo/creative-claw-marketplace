@@ -5,7 +5,9 @@ Read [shared execution guidance](../workflow-basics.md) once per task before usi
 Choose the explicit variant that matches the job:
 
 - `image/gpt-image-2.5-flare` for fast, high-quality everyday generation and editing.
-- `image/gpt-image-2.5-sunburst` for maximum editing precision, typography, transparency, intricate detail, and controlled production work.
+- `image/gpt-image-2.5-sunburst` for maximum editing precision, typography, intricate detail, and controlled production work.
+
+Both variants accept `extras.background: "transparent"` for a transparent background.
 
 Default to Flare within this family when the user has not specified a variant or a precision-critical requirement. Choose Sunburst for tightly constrained edits or production detail. Never silently override an explicitly selected model, and do not generate an unsolicited Flare draft before a requested Sunburst final. For an explicitly requested older model, use the general image workflow and its live schema instead of applying the 2.5 contract.
 
@@ -113,7 +115,7 @@ For dense text, finalize the words first. Then create the visual around the appr
 
 ## Transparent assets
 
-Use transparent PNG for isolated products, characters, icons, stickers, and foreground elements:
+Use transparent PNG for isolated products, characters, icons, stickers, and foreground elements. Flare and Sunburst both support it; the example uses Sunburst:
 
 ```json
 {

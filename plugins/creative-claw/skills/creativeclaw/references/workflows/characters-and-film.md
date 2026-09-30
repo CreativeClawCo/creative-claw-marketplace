@@ -1,6 +1,6 @@
 # Characters and Films
 
-Characters preserve visual identity across images and video and can carry voices: an ElevenLabs or Cartesia clone (with consent), a designed voice, or a saved stock voice. Cloning or designing without a Character creates a voice-only one. Films organize approved scripts, storyboards, clips, audio, and assembly.
+Characters preserve visual identity across images and video and can carry voices: a Cartesia or ElevenLabs clone (with consent), a designed voice, or a saved stock voice. Cloning or designing without a Character creates a voice-only one. Films organize approved scripts, storyboards, clips, audio, and assembly.
 
 ## Create a Character
 
@@ -28,7 +28,7 @@ Preserve this exact multi-view instruction. Inspect facial identity and wardrobe
 | ----------------- | --------------------------------------------------------------------------------------------------------- |
 | `generate_image`  | Adds Character description context and uses its image only when no primary `image_url` is supplied.        |
 | `generate_video`  | Appends the saved image to `image_urls` as a reference, never a start frame. Use it in reference mode; omit it with `image_url`/`last_frame_url` (the server rejects that mix). |
-| `generate_speech` | Uses the Character's saved voice for the chosen model: designed ElevenLabs → v4; Google-designed → `speech/gemini-3.8-flash-tts`; clone → v2, v4 or Cartesia; stock → its saved model. |
+| `generate_speech` | Uses the Character's saved voice for the chosen model: designed ElevenLabs → v4; Google-designed → `speech/gemini-3.8-flash-tts`; Cartesia clone → `speech/cartesia-sonic`; ElevenLabs clone → v2 (steady) or v4 (expressive, dialogue); stock → its saved model. |
 
 Pass `character_id` for saved identity context. For `generate_image`, when a keyframe or edit canvas already occupies `image_url`, add the Character image yourself in `extras.image_urls`; it is not inserted automatically.
 

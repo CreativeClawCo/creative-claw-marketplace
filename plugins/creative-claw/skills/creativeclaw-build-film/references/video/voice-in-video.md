@@ -12,7 +12,8 @@ If the voice doesn't matter, pick a stock voice and name it. In ChatGPT the Voic
 Save the voice on the Character. Every line reuses `character_id` + `voice_option_id` + the same speech model and settings:
 - Designed ElevenLabs voice → `speech/elevenlabs-v4`
 - Google-designed voice → `speech/gemini-3.8-flash-tts`
-- Clone → `speech/elevenlabs-v2`, `speech/elevenlabs-v4` or `speech/cartesia-sonic`
+- Cartesia clone → `speech/cartesia-sonic`
+- ElevenLabs clone → `speech/elevenlabs-v2` for a steady read, or `speech/elevenlabs-v4` for expressive delivery or dialogue
 - Stock voice → its saved model
 
 ## Pacing
@@ -24,7 +25,7 @@ At most 2.5 spoken words per clip second, with about 0.5 s of air at each end (5
 **A. Native dialogue** (any native-audio model, including the default Gemini Omni): quote the line and name the speaker. The model invents the voice, and it changes every clip. Fine for a one-off, not for a recurring Character.
 
 **B. Exact voice with visible lips:** make the speech first, then one of:
-- Seedance 2.5 or Mini, H3 Max, or Wan with `audio_urls` plus an image or video reference (line ≥ 2 s; cite `@Audio1` or `Audio 1`).
+- Seedance 2.5, H3 Max, or Wan with `audio_urls` plus an image or video reference (line ≥ 2 s; cite `@Audio1` or `Audio 1`).
 - Any finished speaking clip → `video/sync-3`: `video_urls` = [clip], `audio_urls` = [line], equal lengths.
 - A single talking head → `video/heygen-avatar-4`: `image_url` = face, `extras.audio_url` = line.
 

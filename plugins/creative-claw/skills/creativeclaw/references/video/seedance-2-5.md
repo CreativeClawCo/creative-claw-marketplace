@@ -4,7 +4,7 @@ Read [input modes and reference production](reference-production.md) before prep
 
 Use the outcome skill's execution guidance for authorization, imports and job recovery.
 
-Use `video/seedance-2.5` for long, premium, reference-rich generation with native synchronized audio. Prefer it when the clip needs more references, more duration, a controlled destination frame, or richer scene direction than the default video route.
+Use `video/seedance-2.5`, the premium cinematic model, for high-end, long (up to 30 s), reference-rich generation with native synchronized audio. Prefer it when the clip needs more references, more duration, a controlled destination frame, or richer scene direction than the default video route. For a cheaper preview, draft at `resolution: "480p"`, then render the approved version at 720p or 1080p. To extend an existing clip, `video/minimax-h3-max-extend` is the default; use Seedance 2.5 `extend` for heavy references or a long continuation.
 
 ## Core workflow
 
@@ -15,7 +15,7 @@ Use `video/seedance-2.5` for long, premium, reference-rich generation with nativ
 5. Call `get_model_params({ model: "video/seedance-2.5" })`. Runtime values override remembered limits. For reference-to-video, choose `extras.omni_reference_task_type` deliberately rather than relying on prompt inference for edits or extensions.
 6. Assign every reference a written role and cite it with the exact `@ImageN`, `@VideoN`, or `@AudioN` token.
 7. Preserve exact quoted copy, reference labels, dialogue, timecodes, colors, and approved layout or edit constraints in the prompt.
-8. Honor requested resolution directly. Use a lower-resolution proof only when the user wants drafts or has authorized that iteration workflow.
+8. Honor requested resolution directly. Use a 480p draft only when the user wants drafts or has authorized that iteration workflow; render the approved version at 720p or 1080p.
 9. Inspect the output before merging it into a sequence.
 
 ## Current model contract

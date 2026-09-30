@@ -1,6 +1,6 @@
 ---
 name: creativeclaw-clone-voice
-description: Guide recording, private upload, cloning, testing, and reuse of a consented personal voice with ElevenLabs or Cartesia. Use when someone asks to clone their voice, save it on a Character, or replace or audition a clone. Not for inventing a new voice from a description; use creativeclaw-generate-voiceover.
+description: Guide recording, private upload, cloning, testing, and reuse of a consented personal voice with Cartesia or ElevenLabs. Use when someone asks to clone their voice, save it on a Character, or replace or audition a clone. Not for inventing a new voice from a description; use creativeclaw-generate-voiceover.
 ---
 
 # Clone your voice
@@ -14,17 +14,17 @@ Without a consented recording, offer design_voice instead ([voice design](refere
 1. Identify the intended language, delivery and an existing Character, if any. Reuse an avatar's Character instead of creating a duplicate.
 2. Explain the selected provider and confirm ownership or speaker permission before sending the sample for cloning. Possessing a recording is not consent.
 3. Import with purpose `voice_clone` to obtain a private `audio_asset_id`. Follow the reference for the current client's upload route.
-4. Call `clone_voice` with that asset, `consent: true`, and provider `elevenlabs` or `cartesia`. Use `character_id` for an existing Character or `character_name` for a new voice-only Character. The tool saves the clone automatically.
+4. Call `clone_voice` with that asset, `consent: true`, and `provider: "cartesia"` (the default), or `provider: "elevenlabs"` when the user chooses ElevenLabs. Use `character_id` for an existing Character or `character_name` for a new voice-only Character. The tool saves the clone automatically.
 5. Audition using `generate_speech` and the returned `character_id`. Read the selected model reference below. Include a name, number and natural sentence in the intended language. Present the audio for approval before a longer production.
 6. Reuse `character_id`, not the private source recording, for future speech. Never replace a saved voice merely to change speech models.
 
 ## Choose the synthesis model
 
-A clone works with ElevenLabs v2, v4 or Cartesia; pass the model explicitly.
+Speak a clone with its provider's model, and pass the model explicitly.
 
-- [ElevenLabs v2](references/voices/elevenlabs-v2.md): steady cloned narration in its supported languages.
-- [Cartesia Sonic](references/voices/cartesia.md): fast, natural cloned speech and supported delivery controls.
-- [ElevenLabs v4](references/voices/elevenlabs-v4.md): the recommended expressive option with more faithful cloned voice identity and broader language support, reusing the same Character.
+- [Cartesia Sonic](references/voices/cartesia.md): a Cartesia clone.
+- [ElevenLabs v2](references/voices/elevenlabs-v2.md): an ElevenLabs clone, steady read in its supported languages.
+- [ElevenLabs v4](references/voices/elevenlabs-v4.md): an ElevenLabs clone, expressive delivery or dialogue, and languages v2 lacks.
 - [Language routing](references/voices/languages.md): read for non-English speech, dialect requests, or mixed-language scripts.
 
 Only change provider when the user chooses it. A missing Cartesia clone can be created from the retained consented sample when Cartesia is selected. Replacing the source invalidates both providers' clones, so explain and confirm replacement first. Do not silently substitute a stock voice after a clone fails.

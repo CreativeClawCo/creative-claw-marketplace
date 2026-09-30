@@ -30,7 +30,7 @@ The current Character API stores one canonical image URL, not a list of every re
 
 ## Production continuity
 
-Derive new poses/scenes from canonical anchors, not only from the last generated result. Keep identity facts stable; version material wardrobe/age/state changes as separate assets. For a real person, keep their best original photo as an extra identity reference beside the sheet; generated sheets drift. Make later keyframes with the same image model as the sheet.
+Derive new poses/scenes from canonical anchors, not only from the last generated result. Keep identity facts stable; version material wardrobe/age/state changes as separate assets. For a real person, keep their best original photo as an extra identity reference beside the sheet; generated sheets drift. Make every keyframe in a project with one image model (default `image/nano-banana-2`). A sheet made with another model, such as `image/nano-banana-pro`, is still a valid anchor.
 
 In video, `character_id` appends the saved image to `image_urls` as a reference, never a start frame. Use it in reference mode; omit it with `image_url`/`last_frame_url` (the server rejects that mix).
 

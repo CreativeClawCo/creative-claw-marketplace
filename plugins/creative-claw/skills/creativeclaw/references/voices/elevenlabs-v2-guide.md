@@ -1,18 +1,19 @@
 # Creative Claw , ElevenLabs Multilingual v2
 
-Use `speech/elevenlabs-v2` for controlled, natural narration. Use an existing cloned Character voice, not a stock catalog voice. V4 is the default for stock speech; Cartesia is also recommended for clones. Selecting v2 does not create or upgrade a Professional Voice Clone (PVC); Instant Voice Cloning and PVC are separate voice-creation methods.
+Use `speech/elevenlabs-v2` for controlled, natural narration. Use it with an existing ElevenLabs clone, not a stock catalog voice. V4 is the default for stock speech and for expressive delivery or dialogue from an ElevenLabs clone. A Cartesia clone speaks with Cartesia Sonic. Selecting v2 does not create or upgrade a Professional Voice Clone (PVC); Instant Voice Cloning and PVC are separate voice-creation methods.
 
 ## Choose deliberately
 
 | Need | Model |
 | --- | --- |
 | Stock corporate narration, explainer, e-learning or audiobook | v4 |
-| Steady narration with an existing consented clone | v2 or Cartesia |
-| Assess how well an existing clone preserves a speaker in ordinary narration | Start with v2; compare the same clone and script if another audition is requested |
+| Steady narration with an existing ElevenLabs clone | v2 |
+| A Cartesia clone | Cartesia Sonic |
+| Assess how well an existing ElevenLabs clone preserves a speaker in ordinary narration | Start with v2; compare the same clone and script if another audition is requested |
 | Acting, laughter, whispers, emotional performance tags | v4 |
 | Hebrew or another language outside v2's supported set | v4 or another explicitly compatible model |
 
-V2 is recommended only for cloned speech, not a provider guarantee of better similarity. If v2 is requested without a clone, explain the routing policy and offer v4 stock speech or consented cloning; do not silently change the request. Do not recreate a clone to change TTS models. Creating another clone can alter its sound even from identical source audio.
+V2 is recommended only for ElevenLabs clones, not a provider guarantee of better similarity. If v2 is requested without a clone, explain the routing policy and offer v4 stock speech or consented cloning; do not silently change the request. Do not recreate a clone to change TTS models. Creating another clone can alter its sound even from identical source audio.
 
 ## Execute
 

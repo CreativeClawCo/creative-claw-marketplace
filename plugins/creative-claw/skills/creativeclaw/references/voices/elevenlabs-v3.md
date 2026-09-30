@@ -1,6 +1,6 @@
 # ElevenLabs v3
 
-Model: `speech/elevenlabs-v3`. Legacy option for explicitly requested v3 speech. Use v4 for new stock narration, expressive speech, clones, and dialogue.
+Model: `speech/elevenlabs-v3`. Legacy: use it only when the user asks for v3. Use v4 for stock narration, expressive speech and dialogue. Speak a clone with its provider's model: Cartesia Sonic for a Cartesia clone; ElevenLabs v2 or v4 for an ElevenLabs clone.
 
 Find voices with get_model_params for this model, matching native language/accent and delivery labels before selecting the exact voice_id. The default English voice is not a universal language recommendation. Public [ElevenLabs Voice Library](https://elevenlabs.io/app/voice-library) IDs are another option when verified. Saved ElevenLabs clones use character_id and do not need cloning again.
 

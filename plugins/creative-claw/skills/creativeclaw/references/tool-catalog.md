@@ -72,7 +72,7 @@ Read `platform-upload.md` before choosing an import route.
 | `manage_character`                        | Create or update a Character (description, reference image, stock voice). `delete: true` with `id` permanently deletes it and its saved voices, only on explicit request. |
 | `list_characters`                         | Find reusable Characters, their IDs, and saved voice options.                                     |
 | `design_voice`                            | Create a new synthetic voice from a description, no recording needed. ElevenLabs by default; `provider: "google"` for Google. Returns three auditions. Save the pick with `design_voice({ action: "save", preview_id, character_id \| character_name })`. At the saved-voice limit, pass `replace_voice_option_id` to replace an existing designed voice. |
-| `clone_voice`                             | Clone a consenting speaker's recording with ElevenLabs (default) or Cartesia. Attaches to `character_id`, or creates a voice-only Character when none is given. |
+| `clone_voice`                             | Clone a consenting speaker's recording with Cartesia (default) or ElevenLabs (`provider: "elevenlabs"`). Attaches to `character_id`, or creates a voice-only Character when none is given. |
 | `create_film_project`                     | Create a multi-shot Film project.                                                                 |
 | `update_film_project`                     | Save script, shots, storyboards, clips, audio, and approval state.                                |
 | `get_film_project` / `list_film_projects` | Inspect Film projects.                                                                            |

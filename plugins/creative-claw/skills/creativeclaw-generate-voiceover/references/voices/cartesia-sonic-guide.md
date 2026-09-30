@@ -6,7 +6,7 @@ Use `speech/cartesia-sonic` for fast, natural speech from a public stock voice o
 
 ## Choose deliberately
 
-Cartesia is a strong first choice for low latency, direct primary emotion control, and simple speed or volume adjustments. ElevenLabs v2 is reserved for existing cloned voices. ElevenLabs v4 is the default for stock voices and general narration. Cartesia is also recommended for voice clones.
+Cartesia Sonic speaks Cartesia clones, and Cartesia is the default clone provider. It is also a strong choice for low latency, direct primary emotion control, and simple speed or volume adjustments. ElevenLabs v4 is the default for stock voices and general narration. An ElevenLabs clone speaks with v2 (steady) or v4 (expressive, dialogue).
 
 Honor an explicit model choice. Never switch providers silently. When the first result misses the intended voice or performance, offer a controlled comparison using the same text, language, pacing, and output format.
 

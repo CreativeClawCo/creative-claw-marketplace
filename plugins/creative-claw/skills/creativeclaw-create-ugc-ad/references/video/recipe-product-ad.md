@@ -14,7 +14,7 @@ Import the supplied product photo once. Treat it as the canonical packaging/geom
 
 Use current image-model reference fields. After creative approval, derive a use frame and closing packshot from the SAME product anchor and approved look. Do not derive every image solely from the previous generated image. Reuse suitable uploaded frames instead of generating extras. Inspect label accuracy and whether the cap/mechanism actually match the product.
 
-For separate narration, generate the approved script first with the model that matches the voice: stock → its saved model (v4 by default), designed ElevenLabs → v4, Google-designed → `speech/gemini-3.8-flash-tts`, clone → v2, v4 or Cartesia. Set shot lengths from the result's `wordTimings`; at most 2.5 words per second, so about 35 words for 15 seconds.
+For separate narration, generate the approved script first with the model that matches the voice: stock → its saved model (v4 by default), designed ElevenLabs → v4, Google-designed → `speech/gemini-3.8-flash-tts`, Cartesia clone → `speech/cartesia-sonic`, ElevenLabs clone → v2 (steady) or v4 (expressive, dialogue). Set shot lengths from the result's `wordTimings`; at most 2.5 words per second, so about 35 words for 15 seconds.
 
 ## Video request
 

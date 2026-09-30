@@ -1,6 +1,6 @@
 ---
 name: creativeclaw-generate-image
-description: "Generate or edit a single image with Creative Claw and route it to the best image model. Use for image creation and edits, including requests naming a supported model. Use product-photoshoot for a coordinated campaign or create-avatar for a reusable identity."
+description: "Generate or edit a single image with Creative Claw and route it to the right image model. Use for image creation and edits, including requests naming a supported model. Use product-photoshoot for a coordinated campaign or create-avatar for a reusable identity."
 ---
 
 # Generate Image
@@ -27,9 +27,10 @@ Turn a brief and optional references into a finished image. This is the primary 
 - Use `image/gpt-image-2.5-flare` for fast, high-quality everyday OpenAI image generation and editing.
 - Use `image/gpt-image-2.5-sunburst` for instruction-heavy editing, precise transformations, typography, or strong world knowledge.
 - Use `image/seedream-5-pro` for polished commercial imagery and premium product or fashion aesthetics.
+- For a transparent background, use GPT Image 2.5 (Flare or Sunburst) with `extras.background: "transparent"`, or `remove_background` for an existing image.
 - Honor an explicit model choice. Read [the selected image model guide](references/images/index.md) for exact prompting and reference syntax.
 
-Do not proactively recommend lower-tier or internal-route variants.
+Use other image models only when the user asks for them.
 
 ## Prompt and reference contract
 

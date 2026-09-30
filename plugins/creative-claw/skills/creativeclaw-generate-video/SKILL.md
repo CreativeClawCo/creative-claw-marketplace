@@ -60,20 +60,20 @@ Continue status checks, retrieval, inspection, and drafting revised prompts with
 ## Model routing
 
 - Default to `video/gemini-omni-flash` for the best general balance of speed, quality, native audio, and reference-aware generation.
-- Use `video/seedance-2.5` for premium cinematic or reference-rich clips and longer shots where supported.
-- Use `video/seedance-2.0-mini`, presented to users as **Seedance Mini**, for economical drafts.
+- Use `video/seedance-2.5`, the premium cinematic model, for high-end, reference-rich or long clips (up to 30 s). For a cheaper preview, draft at `resolution: "480p"`, then render the approved version at 720p or 1080p.
 - Use `video/minimax-h3-max` for fast cinematic motion and native-audio work.
-- Use `video/minimax-h3-max-extend` when adding footage to an existing clip and preserving its characters, setting, motion, and visual characteristics matters. It accepts one source video of 1.625–60 seconds and adds 5–15 seconds of new footage.
-- Use `video/minimax-h3-max-turbo`, presented as **H3 Max Fast**, when speed and iteration cost matter most.
+- Use `video/minimax-h3-max-turbo`, presented as **H3 Max Fast**, for cheap, fast drafts and iteration.
+- Use `video/wan-3.0` for native-audio clips of 2–30 s in one pass, or when a document or webpage drives the video.
+- Use Seedance Mini only when the user asks for it.
 - Honor an explicit model request, and load its local guide from the model-selection index for exact prompt and reference syntax.
 
 For existing footage, do not apply the general generation ranking blindly:
 
-- For a new continuation that should retain the source video's characters, environment, camera motion, and visual style, prefer `video/minimax-h3-max-extend`. Use one source in `video_urls`, keep `aspect_ratio: "auto"` unless cropping was requested, and describe what happens next. Its default `extras.output: "extended"` returns the source plus new footage; `"continuation"` returns only the new segment.
+- To extend a clip, default to `video/minimax-h3-max-extend`; it keeps the source's characters, setting, motion, and look. Use one source of 1.625–60 seconds in `video_urls`, a `duration` of 5–15 seconds for the new footage, keep `aspect_ratio: "auto"` unless cropping was requested, and describe what happens next. Its default `extras.output: "extended"` returns the source plus new footage; `"continuation"` returns only the new segment. Use `video/seedance-2.5` `extend` only for heavy references or a long continuation.
+- To replace an interval inside a clip with new footage, use `video/minimax-h3-max-insert`: one source in `video_urls`, `extras.start_time` where the new scene begins and `extras.resume_time` where the original resumes, both on the source timeline. `duration` sets the new scene's length.
 - Up to 10 seconds, prefer `video/gemini-omni-flash` for a targeted source edit.
-- From 4–30 seconds, prefer `video/seedance-2.5` for a full source edit or continuation.
-- When the user wants the original left unchanged with new footage added, generate only the new continuation from a short boundary segment and merge it with the untouched original.
-- Use Seedance Mini only for an explicitly cost-sensitive draft, not for exact source preservation.
+- From 4–30 seconds, prefer `video/seedance-2.5` for a full source edit.
+- When the user wants the original left unchanged with new footage added, generate only the new continuation (with H3 Max Extend, `extras.output: "continuation"`) and merge it with the untouched original.
 - Never recommend or proactively route to an LTX or DreamActor model.
 
 ## Reference rules

@@ -4,7 +4,7 @@ Choose by what the user wants on screen. These are references within Create UGC 
 
 ## Product-only with off-camera narration
 
-Use when no visible speaker is needed. Start with approved product images, then follow [product-ad recipe](recipe-product-ad.md). Generate speech first when it determines pacing, with the model that matches the voice: stock → its saved model (v4 by default), designed ElevenLabs → v4, Google-designed → `speech/gemini-3.8-flash-tts`, clone → v2, v4 or Cartesia. Match product visibility and demonstrations to the words. Add captions through editing, not generated label text. There is no lip-sync requirement.
+Use when no visible speaker is needed. Start with approved product images, then follow [product-ad recipe](recipe-product-ad.md). Generate speech first when it determines pacing, with the model that matches the voice: stock → its saved model (v4 by default), designed ElevenLabs → v4, Google-designed → `speech/gemini-3.8-flash-tts`, Cartesia clone → `speech/cartesia-sonic`, ElevenLabs clone → v2 (steady) or v4 (expressive, dialogue). Match product visibility and demonstrations to the words. Add captions through editing, not generated label text. There is no lip-sync requirement.
 
 ## Visible speaking presenter
 

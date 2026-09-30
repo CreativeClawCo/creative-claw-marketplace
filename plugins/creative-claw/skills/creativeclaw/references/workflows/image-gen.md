@@ -24,8 +24,9 @@ Runtime discovery is authoritative. These are current routing defaults:
 | Fast everyday OpenAI image work                                                | `image/gpt-image-2.5-flare` | Faster GPT Image 2.5 generation and editing.                 |
 | Typography, 4K, or strict instruction adherence                                | `image/gpt-image-2.5-sunburst` | Precision-focused text rendering and editing.             |
 | Premium product or marketing imagery                                           | `image/seedream-5-pro`  | Flagship generation and precise multi-reference editing.        |
+| Transparent background | `image/gpt-image-2.5-flare` or `image/gpt-image-2.5-sunburst` | Set `extras.background: "transparent"` with PNG or WebP output. For an existing image, use `remove_background`. |
 
-Recommend Nano Banana 2 first for most image work. Surface the other three only when their specialty materially improves the requested result enough to justify moving beyond the cost-efficient default. Use another runtime-listed model only when the user explicitly requests it or the four recommended models cannot perform the required operation.
+Recommend Nano Banana 2 first for most image work. Surface the other four only when their specialty materially improves the requested result enough to justify moving beyond the cost-efficient default. Use another runtime-listed model only when the user explicitly requests it or the five recommended models cannot perform the required operation.
 
 After choosing, use the corresponding focused skill for exact prompting and reference behavior:
 
@@ -40,7 +41,7 @@ After choosing, use the corresponding focused skill for exact prompting and refe
 - Additional references are model-specific. Inspect `get_model_params`; many supported image models accept `extras.image_urls`.
 - Theme reference images describe visual language. Tell the model which attributes to borrow—palette, lighting, composition, material, or typography—and which subject matter not to copy.
 - For a saved Character, pass `character_id` instead of manually repeating its image and description. With an explicit `image_url`, the Character image is not added; put it in `extras.image_urls` yourself.
-- Video keyframes: same image model as the project, `aspect_ratio` = the video's ratio, anchors in `image_url` + `extras.image_urls`, one full-bleed frame with no text.
+- Video keyframes: one image model for every keyframe in the project (default `image/nano-banana-2`); a Character sheet made with another model is still a valid anchor. Use `aspect_ratio` = the video's ratio, anchors in `image_url` + `extras.image_urls`, one full-bleed frame with no text.
 - Use a durable Creative Claw URL. Never pass a local path or private attachment URL to a URL-only field.
 
 ## Prompt structure

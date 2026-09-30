@@ -6,7 +6,7 @@ Choose language capability first, then a native-accent voice, then delivery. A m
 
 | Request | Starting choice and configuration |
 | --- | --- |
-| Hebrew | Cartesia with extras.language_code "he" and a Hebrew voice, or v4 with "he". Not v2. |
+| Hebrew | Stock speech: v4 with extras.language_code "he" and a native Hebrew voice. A Cartesia clone: Cartesia Sonic with "he". An ElevenLabs clone: v4 with "he". Not v2. |
 | Urdu | v4 with extras.language_code "ur" and a native Urdu voice. For requested Roman Urdu, preserve romanization and audition. Haseeb is a useful energetic candidate if returned by the current catalog. Not v2 or current Cartesia. |
 | Persian | v4 with "fa"; MiniMax can use top-level language_boost "Persian". Not v2 or current Cartesia. |
 | Bengali, Gujarati, Kannada, Malayalam, Marathi, Punjabi, Telugu | Check v4 or Cartesia with the exact returned language code and native voice. Do not choose v2 simply because it supports Hindi. |

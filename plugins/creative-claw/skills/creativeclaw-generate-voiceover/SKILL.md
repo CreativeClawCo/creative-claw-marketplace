@@ -12,6 +12,7 @@ Read [shared execution guidance](references/workflow-basics.md) before tools. Th
 - "Clone my voice", "use my recording", or an unsaved personal voice: load creativeclaw-clone-voice when available. If this skill is installed alone, read [the complete cloning workflow](references/voices/cloning.md). Obtain explicit consent, import privately, clone, test and save a reusable Character. Do not send source audio directly to ElevenLabs or Cartesia speech generation as a substitute for cloning.
 - Existing Character voice (cloned, designed or stock): find the Character with `list_characters` and pass `character_id`. Do not clone or design again.
 - Stock voice: fetch the selected model's current `get_model_params` voice catalog and use its exact `voice_id`. For more Cartesia or ElevenLabs choices, call `get_model_params` again with `include_voice_catalog: true`, or read the public Markdown catalog linked in `voiceCatalog.extendedCatalogMarkdownUrl`. Never pass both selectors.
+- Change who is speaking in an existing speech recording while keeping the performance: call `generate_speech` with `model: "speech/cartesia-voice-changer"`, `audio_url` = the workspace speech audio, and a Cartesia `voice_id` or a Character's `character_id`. Pass no `text`.
 - New voice from a description (no recording): call `design_voice({ prompt })` with age, accent, timbre, pace and attitude, never a real person's identity. It returns three auditions; after the user picks, `design_voice({ action: "save", preview_id, character_id | character_name })`. Speak with `generate_speech({ character_id })` using `speech/elevenlabs-v4`, or `speech/gemini-3.8-flash-tts` for `provider: "google"`. If the save hits the limit, offer `replace_voice_option_id`; never quote plan prices. For a stock voice use `manage_character({ id, voice_model, voice_id })`. Details: [voice design](references/voices/voice-design.md).
 
 ## Choose and load one model guide
@@ -20,12 +21,13 @@ Read [shared execution guidance](references/workflow-basics.md) before tools. Th
 | --- | --- |
 | Stock narration, designed ElevenLabs voices, expressive speech, broad language coverage, and dialogue | [ElevenLabs v4](references/voices/elevenlabs-v4.md) |
 | Google-designed voice | `speech/gemini-3.8-flash-tts` (read its `get_model_params`) |
-| A clone, steady read | [ElevenLabs v2](references/voices/elevenlabs-v2.md) |
-| A clone, fast natural speech | [Cartesia Sonic](references/voices/cartesia.md) |
+| A Cartesia clone | [Cartesia Sonic](references/voices/cartesia.md) |
+| An ElevenLabs clone, steady read | [ElevenLabs v2](references/voices/elevenlabs-v2.md) |
+| An ElevenLabs clone, expressive delivery or dialogue | [ElevenLabs v4](references/voices/elevenlabs-v4.md) |
 | An explicitly requested v3 workflow | [ElevenLabs v3](references/voices/elevenlabs-v3.md) |
 | A named alternative or a specific dialect/voice match | [MiniMax and xAI](references/voices/alternatives.md) |
 
-Default to ElevenLabs v4 for stock and designed ElevenLabs voices. A clone works with v2, v4 or Cartesia: pass the selected model explicitly rather than relying on the omitted-model v4 default, and keep it for the whole project. V3 remains available for explicit legacy requests. V2 can use public stock IDs, but v4 is the stock choice. If a user explicitly requests v2 stock speech, use a compatible public `voice_id` instead of silently switching. Do not automatically route stock corporate or long-form narration to v2.
+Default to ElevenLabs v4 for stock and designed ElevenLabs voices. Speak a clone with its provider's model: Cartesia Sonic for a Cartesia clone; v2 for a steady read or v4 for expressive delivery or dialogue from an ElevenLabs clone. Pass the model explicitly rather than relying on the omitted-model v4 default, and keep it for the whole project. V3 is legacy; use it only when the user asks for it. V2 can use public stock IDs, but v4 is the stock choice. If a user explicitly requests v2 stock speech, use a compatible public `voice_id` instead of silently switching. Do not automatically route stock corporate or long-form narration to v2.
 
 ## Multiple speakers in one run
 

@@ -57,14 +57,13 @@ Default to **Gemini 3.1 Flash (Nano Banana 2)** for most image generation and ed
 | Model | Creative Claw ID | Best use |
 | --- | --- | --- |
 | Gemini Omni | `video/gemini-omni-flash` | Default general video, native audio, references, and source-video work |
-| Seedance 2.5 | `video/seedance-2.5` | Premium, longer, reference-rich cinematic work |
-| Seedance Mini | Discover with `list_models` | Economical drafts and iteration |
+| Seedance 2.5 | `video/seedance-2.5` | Premium cinematic, longer, reference-rich work; 480p for cheaper previews |
 | MiniMax H3 Max | `video/minimax-h3-max` | Fast cinematic native-audio clips and multimodal references |
-| H3 Max Fast | `video/minimax-h3-max-turbo` | Faster, lighter H3 Max iteration |
+| H3 Max Fast | `video/minimax-h3-max-turbo` | Cheap, fast drafts and iteration |
 
 ### Recommended speech
 
-Use `speech/elevenlabs-v4` by default for narration, dialogue, emotional delivery, and multilingual speech. Use `speech/xai-tts` when its 28 built-in voices, exact inline/wrapping performance tags, or G.711 telephony output are the better fit. Creative Claw can also design a new synthetic voice from a description, or clone a consenting speaker's voice (ElevenLabs or Cartesia) onto a Character.
+Use `speech/elevenlabs-v4` by default for narration, dialogue, emotional delivery, and multilingual speech. Use `speech/xai-tts` when its 28 built-in voices, exact inline/wrapping performance tags, or G.711 telephony output are the better fit. Creative Claw can also design a new synthetic voice from a description, or clone a consenting speaker's voice onto a Character (Cartesia by default, ElevenLabs on request). Change the voice in an existing recording with `speech/cartesia-voice-changer`.
 
 Use `list_models` and `get_model_params` at runtime rather than assuming a fixed catalog or reference limit.
 

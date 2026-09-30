@@ -1,6 +1,6 @@
 # ElevenLabs v4 production guide
 
-Use `speech/elevenlabs-v4` first for ElevenLabs narration, acting, multilingual speech, cloned Characters, and scenes with more than one speaker. Call `get_model_params({ model: "speech/elevenlabs-v4" })` for current voices, languages, settings, pricing, and supported dialogue fields. Use the [short model reference](elevenlabs-v4.md) when a brief reminder is enough.
+Use `speech/elevenlabs-v4` first for ElevenLabs stock narration, acting, multilingual speech, designed voices, and scenes with more than one speaker. For an ElevenLabs clone, use v4 for expressive delivery or dialogue and v2 for a steady read. A Cartesia clone speaks with Cartesia Sonic. Call `get_model_params({ model: "speech/elevenlabs-v4" })` for current voices, languages, settings, pricing, and supported dialogue fields. Use the [short model reference](elevenlabs-v4.md) when a brief reminder is enough.
 
 ## Cast the voice before writing directions
 

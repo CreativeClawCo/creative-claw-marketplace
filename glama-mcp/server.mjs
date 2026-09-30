@@ -117,7 +117,7 @@ function createGuidanceResponse(toolName, args) {
       ],
     },
     generate_speech: {
-      recommended_model: "elevenlabs-v3",
+      recommended_model: "elevenlabs-v4",
       features: [
         "Multilingual narration and dialogue",
         "Emotional and expressive delivery",
@@ -237,7 +237,7 @@ server.tool(
     model_id: z
       .string()
       .describe(
-        "Model ID (e.g., 'image/nano-banana-2', 'video/gemini-omni-flash', 'speech/elevenlabs-v3')"
+        "Model ID (e.g., 'image/nano-banana-2', 'video/gemini-omni-flash', 'speech/elevenlabs-v4')"
       ),
   },
   async (args) => createGuidanceResponse("get_model_params", args)
