@@ -4,7 +4,7 @@ Read [input modes and reference production](reference-production.md) before prep
 
 Use the outcome skill's execution guidance for authorization, imports and job recovery.
 
-Use `video/seedance-2.5`, the premium cinematic model, for high-end, long (up to 30 s), reference-rich generation with native synchronized audio. Prefer it when the clip needs more references, more duration, a controlled destination frame, or richer scene direction than the default video route. For a cheaper preview, draft at `resolution: "480p"`, then render the approved version at 720p or 1080p. To extend an existing clip, `video/minimax-h3-max-extend` is the default; use Seedance 2.5 `extend` for heavy references or a long continuation.
+Use `video/seedance-2.5`, the premium cinematic model, for high-end, long (up to 30 s), reference-rich generation with native synchronized audio. Prefer it when the clip needs more references, more duration, a controlled destination frame, or richer scene direction than the default video route. A 480p request creates a native, usable Pika draft. A completed draft can be finalized at 1080p as the same take within 7 days. To extend an existing clip, `video/minimax-h3-max-extend` is the default; use Seedance 2.5 `extend` for heavy references or a long continuation.
 
 ## Core workflow
 
@@ -15,14 +15,14 @@ Use `video/seedance-2.5`, the premium cinematic model, for high-end, long (up to
 5. Call `get_model_params({ model: "video/seedance-2.5" })`. Runtime values override remembered limits. For reference-to-video, choose `extras.omni_reference_task_type` deliberately rather than relying on prompt inference for edits or extensions.
 6. Assign every reference a written role and cite it with the exact `@ImageN`, `@VideoN`, or `@AudioN` token.
 7. Preserve exact quoted copy, reference labels, dialogue, timecodes, colors, and approved layout or edit constraints in the prompt.
-8. Honor requested resolution directly. Use a 480p draft only when the user wants drafts or has authorized that iteration workflow; render the approved version at 720p or 1080p.
+8. Follow the persisted render mode. Review stages an initial 1080p request as a 480p draft approval; Auto renders the requested 1080p directly. Explicit 480p always creates a draft. A 720p request is a new generation.
 9. Inspect the output before merging it into a sequence.
 
 ## Current model contract
 
 | Field | Current use |
 | --- | --- |
-| `duration` | Reference/image-to-video/normal generation: `auto` or a whole second from 4 through 30. Edit: omit or use `auto` to preserve the source timeline; Creative Claw maps this to Pika's required transport value `-1`. Extend: a whole-number continuation duration from 4 through 30. |
+| `duration` | Reference/image-to-video/normal generation: `auto` or a whole second from 4 through 30. Edit: omit or use `auto` to preserve the source timeline; Creative Claw sends Pika the required `auto` value. Extend: a whole-number continuation duration from 4 through 30. |
 | `aspect_ratio` | `auto`, `21:9`, `16:9`, `4:3`, `1:1`, `3:4`, or `9:16`. |
 | `image_url` | Literal first frame. Image-to-video follows its framing. |
 | `last_frame_url` | Optional final frame; the model creates the transition. |
@@ -30,10 +30,19 @@ Use `video/seedance-2.5`, the premium cinematic model, for high-end, long (up to
 | `video_urls` | Up to 10 reference clips, cited as `@Video1`, `@Video2`, and so on. |
 | `audio_urls` | Up to 10 audio references, cited as `@Audio1`, `@Audio2`, and so on. |
 | `resolution` | `480p`, `720p`, or `1080p`; pass it through the top-level Creative Claw field. |
+| `extras.draft_job_id` | Completed Creative Claw 480p draft `jobId`; finalizes that same take at 1080p within 7 days. |
 | `extras.generate_audio` | Enable synchronized dialogue, ambience, music, and effects. |
 | `extras.omni_reference_task_type` | `auto`, `reference`, `edit`, or `extend`; forwarded only to Pika and used by Creative Claw to normalize both provider routes. |
 
 Reference limits belong to this model, not to `generate_video` globally. Current video and audio references may each be 2-30 seconds, with no more than 30 seconds combined per modality. Audio references require at least one image or video reference. Verify this at runtime.
+
+## Native draft workflow
+
+The Review approval for an initial 1080p request charges only for the 480p draft. It does not automatically submit or pay for a final. The draft has native audio and can be downloaded and used as-is. Auto mode submits an initial 1080p request directly, while an explicit 480p request is a draft in either mode.
+
+When the user wants the same approved take at 1080p, call `generate_video` again with `model: "video/seedance-2.5"`, a meaningful required `prompt`, and `extras: { "draft_job_id": "<completed Creative Claw draft jobId>" }`. The server uses the saved draft prompt and Pika inherits its references, duration, ratio, and audio. Do not supply new creative inputs for finalization. This is a separate paid job. Review mode gives that final its own approval; Auto mode submits an explicitly requested finalization directly. A draft can be finalized more than once within 7 days; use `force_new: true` for an intentional duplicate within the reuse window.
+
+Pika cannot finalize a draft at 720p. To make 720p, start a new generation from the saved inputs and tell the user the shot may differ. A request for changes is another paid 480p draft and requires the user's instruction for that additional generation.
 
 ## Reference task modes
 
@@ -42,7 +51,7 @@ Choose the mode from the intended relationship to the source video:
 | Mode | Use when | Ratio and duration |
 | --- | --- | --- |
 | `reference` | Creating a new video guided by reference images, video, or audio. | A fixed ratio and explicit duration are allowed. |
-| `edit` | Modifying content inside a source video while retaining its timeline. | Pass `aspect_ratio: "auto"` and omit duration or use `duration: "auto"`. The Pika adapter sends `duration: -1`; do not expose or pass `-1` as the public value. |
+| `edit` | Modifying content inside a source video while retaining its timeline. | Pass `aspect_ratio: "auto"` and omit duration or use `duration: "auto"`. The Pika adapter sends `duration: "auto"`. |
 | `extend` | Continuing before or after a source video boundary. | Pass `aspect_ratio: "auto"` and a numeric continuation duration from 4-30 seconds. |
 | `auto` | Letting Seedance infer the task from the prompt. | Use only with `aspect_ratio: "auto"`. For edit-style prompts with a source video, set `edit` explicitly so Creative Claw can validate the locked-duration contract before charging. |
 
@@ -54,10 +63,10 @@ For `edit` and `extend`, include at least one `video_urls` entry and state the o
 | --- | --- | --- | --- | --- |
 | New text/image video | `prompt`, optional `image_url` | `auto` or 4-30s | Explicit ratio or `auto` | `generate_audio` is enabled by default; `end_image_url` is supported for image-to-video |
 | Reference-guided video | `video_urls`/`image_urls`/`audio_urls`, `@` tokens, and `omni_reference_task_type: "reference"` | `auto` or 4-30s | Explicit ratio or `auto` | Up to 30 images, 10 videos, 10 audio files, 50 total; audio needs an image/video |
-| Edit source video | `video_urls`, explicit `omni_reference_task_type: "edit"` | Omit or `auto` → Pika `-1` | `auto` | Source must be 4-30s; timeline and framing are preserved |
+| Edit source video | `video_urls`, explicit `omni_reference_task_type: "edit"` | Omit or `auto` | `auto` | Source must be 4-30s; timeline and framing are preserved |
 | Extend source video | `video_urls`, explicit `omni_reference_task_type: "extend"` | Numeric 4-30s continuation | `auto` | Source/reference duration limits still apply |
 
-The public `generate_video` contract uses `auto`/omission for source-locked edits. `-1` is only an internal Pika adapter value. Invalid combinations are rejected before submission and before credit charge with a corrective message.
+The public `generate_video` contract uses `auto`/omission for source-locked edits. Invalid combinations are rejected before submission and before credit charge with a corrective message.
 
 ## Preservation-first editing and extension
 

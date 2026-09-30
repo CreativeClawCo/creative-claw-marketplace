@@ -62,7 +62,7 @@ Inspect each frame before using it. For first/last interpolation, both frames mu
 Call `list_models({ category: "video" })` and `get_model_params`.
 
 - General approved first-frame animation or source editing → `video/gemini-omni-flash`.
-- Premium cinematic, long or reference-heavy production → `video/seedance-2.5`. For a cheaper preview, draft at `resolution: "480p"`, then render the approved version at 720p or 1080p.
+- Premium cinematic, long or reference-heavy production → `video/seedance-2.5`. For a cheaper preview, a 480p request is a usable draft, and `extras.draft_job_id` finalizes that same take at 1080p within 7 days (720p starts a new take).
 - Fast cinematic production with optional first/last frames → `video/minimax-h3-max`.
 - Cheap, fast text/start-frame draft, with shared-route references when needed → `video/minimax-h3-max-turbo`.
 - Native-audio single pass of 2–30 s, or a document or webpage brief → `video/wan-3.0`.

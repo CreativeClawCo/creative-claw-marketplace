@@ -129,7 +129,7 @@
         "commerce_description": "Creative Claw does not sell anything in ChatGPT. When a feature needs a different plan or more credits, the plugin explains why and links to an informational page about plans."
       },
       "publication": {
-        "release_notes": "Voice design: create a new synthetic voice from a description and save it on a Character. Videos start from consistent reference keyframes by default, with clearer guidance on voices, lip sync and mixing music under dialogue. Skills are consolidated from 21 to 17, and music now uses Lyria 3.5 by default. Transcription accepts public TikTok, Instagram, X, Facebook and Vimeo links again. More reliable film assembly, cutting and cost estimates, and clearer plan-limit messages."
+        "release_notes": "Voice design: create a new synthetic voice from a description and save it on a Character. Videos start from consistent reference keyframes by default, with clearer guidance on voices, lip sync and mixing music under dialogue. Seedance 2.5 480p drafts can be finalized at 1080p as the same take. Skills are consolidated from 21 to 17, and music now uses Lyria 3.5 by default. Transcription accepts public TikTok, Instagram, X, Facebook and Vimeo links again. More reliable film assembly, cutting and cost estimates, and clearer plan-limit messages."
       }
     }
   }

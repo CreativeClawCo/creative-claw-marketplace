@@ -28,15 +28,18 @@ for (const name of skillNames()) {
     }
   }
   const archive = path.join(repoRoot, 'output/chatgpt-skills', `${name}-chatgpt-skill.zip`);
-  const actual = execFileSync('unzip', ['-Z1', archive], { encoding: 'utf8' }).trim().split('\n').sort();
+  const listed = execFileSync('unzip', ['-Z1', archive], { encoding: 'utf8' }).trim().split('\n');
+  // One named skill folder at the archive root, as skill uploaders require.
+  if (listed.some(entry => !entry.startsWith(`${name}/`))) throw new Error(`Entries outside the ${name}/ folder: ${archive}`);
+  const actual = listed.filter(entry => !entry.endsWith('/')).map(entry => entry.slice(name.length + 1)).sort();
   const expected = entries;
-  if (!actual.includes('SKILL.md')) throw new Error(`Missing archive-root SKILL.md: ${archive}`);
+  if (!actual.includes('SKILL.md')) throw new Error(`Missing ${name}/SKILL.md: ${archive}`);
   if (JSON.stringify(actual) !== JSON.stringify(expected)) throw new Error(`Archive entry mismatch: ${archive}`);
   for (const entry of entries) {
     let expectedSource = path.join(source, entry);
     const overlay = path.join(repoRoot, 'skill-variants/chatgpt', path.basename(entry));
     if (name === 'creativeclaw' && entry.startsWith('references/') && fs.existsSync(overlay)) expectedSource = overlay;
-    const archived = execFileSync('unzip', ['-p', archive, entry], { maxBuffer: 8 * 1024 * 1024 });
+    const archived = execFileSync('unzip', ['-p', archive, `${name}/${entry}`], { maxBuffer: 8 * 1024 * 1024 });
     if (!archived.equals(fs.readFileSync(expectedSource))) throw new Error(`Stale archive content: ${name}/${entry}`);
     filesChecked++;
   }

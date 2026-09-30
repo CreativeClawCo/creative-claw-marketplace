@@ -35,6 +35,12 @@ if [[ ! -f "$skill_source/SKILL.md" || ! -d "$chatgpt_overlay_root" ]]; then
   exit 1
 fi
 
+# Package only committed skills: another session's uncommitted edits must not ship.
+if [[ -z "${ALLOW_DIRTY:-}" && -n "$(git -C "$repo_root" status --porcelain -- plugins/creative-claw/skills skill-variants 2>/dev/null)" ]]; then
+  echo "Uncommitted skill changes; commit them first, or set ALLOW_DIRTY=1 to package the working tree." >&2
+  exit 1
+fi
+
 node "$repo_root/scripts/sync-skill-references.mjs"
 bash "$repo_root/scripts/validate-skill-architecture.sh"
 
@@ -53,10 +59,11 @@ for variant in general chatgpt; do
   fi
 
   # Normalize copied-file mtimes so repeated builds produce stable archives.
-  find "$variant_root" -type f -exec touch -t 202601010000 {} +
+  find "$variant_root" -exec touch -t 202601010000 {} +
+  # Uploaders expect one named skill folder at the archive root.
   (
-    cd "$variant_root"
-    find . -type f -print | sed 's|^./||' | LC_ALL=C sort |
+    cd "$package_root"
+    find creativeclaw -print | LC_ALL=C sort |
       zip -X -q "$temp_root/creativeclaw-$variant.zip" -@
   )
 done
@@ -72,15 +79,30 @@ for focused_skill_name in "${focused_skill_names[@]}"; do
 
   mkdir -p "$focused_package_root/$focused_skill_name"
   cp -R "$focused_skill_source/." "$focused_package_root/$focused_skill_name/"
-  find "$focused_package_root/$focused_skill_name" -type f -exec touch -t 202601010000 {} +
+  find "$focused_package_root/$focused_skill_name" -exec touch -t 202601010000 {} +
   (
-    cd "$focused_package_root/$focused_skill_name"
-    find . -type f -print | sed 's|^./||' | LC_ALL=C sort |
+    cd "$focused_package_root"
+    find "$focused_skill_name" -print | LC_ALL=C sort |
       zip -X -q "$temp_root/$focused_skill_name-chatgpt.zip" -@
   )
 done
 
+# One archive with every ChatGPT skill, for uploaders that take a directory of skill roots.
+bundle_root="$temp_root/bundle/creativeclaw-skills"
+mkdir -p "$bundle_root"
+cp -R "$temp_root/chatgpt/creativeclaw" "$bundle_root/"
+for focused_skill_name in "${focused_skill_names[@]}"; do
+  cp -R "$temp_root/focused/$focused_skill_name/$focused_skill_name" "$bundle_root/"
+done
+find "$bundle_root" -exec touch -t 202601010000 {} +
+(
+  cd "$temp_root/bundle"
+  find creativeclaw-skills -print | LC_ALL=C sort |
+    zip -X -q "$temp_root/creativeclaw-all-chatgpt-skills.zip" -@
+)
+
 mkdir -p "$output_dir"
+mv -f "$temp_root/creativeclaw-all-chatgpt-skills.zip" "$output_dir/creativeclaw-all-chatgpt-skills.zip"
 mv -f "$temp_root/creativeclaw-general.zip" "$output_dir/creativeclaw-skill.zip"
 mv -f "$temp_root/creativeclaw-chatgpt.zip" "$output_dir/creativeclaw-chatgpt-skill.zip"
 

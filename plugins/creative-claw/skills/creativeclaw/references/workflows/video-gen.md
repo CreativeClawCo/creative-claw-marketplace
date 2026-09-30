@@ -20,7 +20,7 @@ Runtime discovery is authoritative. Start here:
 | Need | Model | Current specialty |
 | --- | --- | --- |
 | General generation, references, or source edit | `video/gemini-omni-flash` | Default; fast multimodal 3–10s generation/edit with native audio. |
-| Premium cinematic, reference-rich or long video | `video/seedance-2.5` | 4–30s, native audio, optional first/last frames, and large mixed-reference sets. Draft at `resolution: "480p"`, then render the approved version at 720p or 1080p. |
+| Premium cinematic, reference-rich or long video | `video/seedance-2.5` | 4–30s, native audio, optional first/last frames, and large mixed-reference sets. A 480p request is a usable draft; `extras.draft_job_id` finalizes the same take at 1080p (720p starts a new take). |
 | Fast cinematic generation with strong adherence | `video/minimax-h3-max` | 5–15s, 480p/768p/1080p, native audio, optional first/last frames, and multimodal references. |
 | Cheap, fast drafts | `video/minimax-h3-max-turbo` | Present as H3 Max Fast; text or start-frame drafts. Reference requests use the shared H3 Max reference route. |
 | Native-audio single pass, or a document or webpage brief | `video/wan-3.0` | 2–30s, native audio, first/last frames, mixed references, or one public document or webpage as the brief. |

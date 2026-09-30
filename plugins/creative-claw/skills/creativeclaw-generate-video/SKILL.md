@@ -60,7 +60,7 @@ Continue status checks, retrieval, inspection, and drafting revised prompts with
 ## Model routing
 
 - Default to `video/gemini-omni-flash` for the best general balance of speed, quality, native audio, and reference-aware generation.
-- Use `video/seedance-2.5`, the premium cinematic model, for high-end, reference-rich or long clips (up to 30 s). For a cheaper preview, draft at `resolution: "480p"`, then render the approved version at 720p or 1080p.
+- Use `video/seedance-2.5`, the premium cinematic model, for high-end, reference-rich or long clips (up to 30 s). Review mode stages an initial 1080p request as a 480p draft; Auto renders 1080p directly. Explicit 480p creates a draft in either mode. Only 1080p can finalize the same draft through `extras.draft_job_id`; 720p starts a new take.
 - Use `video/minimax-h3-max` for fast cinematic motion and native-audio work.
 - Use `video/minimax-h3-max-turbo`, presented as **H3 Max Fast**, for cheap, fast drafts and iteration.
 - Use `video/wan-3.0` for native-audio clips of 2–30 s in one pass, or when a document or webpage drives the video.
