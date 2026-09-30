@@ -4,7 +4,28 @@
 
 Creative Claw is an MCP plugin that brings a full AI media studio into Grok Bot, Hermes Agent, OpenClaw, Cursor, Claude Code, Claude Desktop, ChatGPT, and Codex. Generate images, video, and expressive speech; reuse Characters and brand assets; and produce product campaigns, UGC ads, and multi-shot Films through one account. No API keys and no platform switching.
 
-> [creativeclaw.co](https://creativeclaw.co) | [Join the Beta](https://creativeclaw.co) | [![Smithery](https://smithery.ai/badge/itay/creativeclaw)](https://smithery.ai/servers/itay/creativeclaw)
+> [creativeclaw.co](https://creativeclaw.co) | [Install in ChatGPT](https://chatgpt.com/plugins/creativeclaw) | [ChatGPT guides](https://creativeclaw.co/chatgpt/) | [Pricing](https://creativeclaw.co/pricing/) | [![Smithery](https://smithery.ai/badge/itay/creativeclaw)](https://smithery.ai/servers/itay/creativeclaw)
+
+---
+
+## Use it in ChatGPT
+
+ChatGPT has no built-in video generation since OpenAI discontinued Sora. Creative Claw adds it back as a plugin: install it from the [ChatGPT plugin directory](https://chatgpt.com/plugins/creativeclaw), sign in, and ask for what you need in plain language. It renders video with **Seedance 2.5, Gemini Omni, and MiniMax H3 Max**, images with **Nano Banana 2**, and voiceovers with **ElevenLabs or Cartesia**, including a clone of your own voice.
+
+What people make with it, with real costs from our published examples:
+
+| What | Cost | Guide |
+| --- | --- | --- |
+| Animate a still image into a 5-second 1080p clip | 146 credits ($1.46) | [Animate an image](https://creativeclaw.co/chatgpt/animate-an-image/) |
+| 15-second vertical product ad with 3 shots, voiceover, and captions | 461 credits ($4.61) | [Product video ads](https://creativeclaw.co/chatgpt/product-video-ads/) |
+| UGC-style ad with a talking presenter holding your product | 294 credits ($2.94) | [UGC video ads](https://creativeclaw.co/chatgpt/ugc-video-ads/) |
+| Four-scene short film with the same character in every scene | 569 credits ($5.69) | [Multi-scene films](https://creativeclaw.co/chatgpt/multi-scene-films/) |
+| On-brand Instagram posts, Story, and an 8-second Reel | 288 credits ($2.88) | [Social media content](https://creativeclaw.co/chatgpt/social-media-content/) |
+| Product photo set plus a product video from one image | 288 credits ($2.88) | [Product photos](https://creativeclaw.co/chatgpt/product-photos/) |
+| Clone your voice and narrate in 40+ languages | Clone is free; a 15-second voiceover is a few credits | [Clone your voice](https://creativeclaw.co/chatgpt/clone-your-voice/) |
+| Weekly posts and a Reel from a ChatGPT dot | 256 credits ($2.56) a week | [ChatGPT dots](https://creativeclaw.co/chatgpt/dots/) |
+
+Short video walkthroughs of each are on [YouTube](https://www.youtube.com/@CreativeClawCo).
 
 ---
 
@@ -28,7 +49,7 @@ One connection to Creative Claw's MCP server gives the skills live model discove
 | **Feedback**      | `submit_feedback`                                                                                                   |
 | **Cost and account** | `estimate_generation`, `manage_account`; `get_credits_balance` where the client exposes it                        |
 
-Access 1,000+ production-ready AI models — FLUX, Gemini, Veo, Sora, Kling, Seedance, Hailuo, HeyGen, Recraft, ElevenLabs, and more — through a single unified account with usage-based pricing.
+Current image, video, speech, music, and sound-effect models (Nano Banana 2, GPT Image 2.5, Seedream 5 Pro, Seedance 2.5, Gemini Omni, MiniMax H3 Max, ElevenLabs, Cartesia, and more) through one account with pay-as-you-go pricing. The live catalog comes from `list_models`.
 
 ### Skills (Creative Workflows)
 
@@ -262,7 +283,40 @@ The build validates every skill's metadata and MCP dependency, checks routing co
 
 ## Pricing
 
-Usage-based — pay only for what you generate. No subscriptions, no commitments. Check [creativeclaw.co](https://creativeclaw.co) for current rates.
+Pay as you go, no subscription: **$10 buys 1,000 credits**, and new accounts get **100 free credits**. You can ask for an estimate before generating.
+
+| Generation | Credits |
+| --- | --- |
+| Image, Nano Banana 2 | 16 ($0.16) |
+| 5-second clip, MiniMax H3 Max Fast (768p) | 40 ($0.40) |
+| 5-second clip, Gemini Omni Flash (720p or 1080p) | 130 ($1.30) |
+| 5-second clip, Seedance 2.5 (720p) | 267 ($2.67) |
+| 15-second multi-scene clip, MiniMax H3 Max (768p) | 240 ($2.40) |
+| 10–15 second voiceover, ElevenLabs v3 | 4 ($0.04) |
+
+Current rates: [creativeclaw.co/pricing](https://creativeclaw.co/pricing/). Model-by-model prices inside ChatGPT: [creativeclaw.co/chatgpt/pricing](https://creativeclaw.co/chatgpt/pricing/).
+
+---
+
+## FAQ
+
+**Can ChatGPT make videos?**
+Not on its own since Sora was discontinued. With the Creative Claw plugin, ChatGPT can generate video with Seedance 2.5, Gemini Omni, and MiniMax H3 Max. A 5-second clip starts at 40 credits ($0.40).
+
+**How much does Creative Claw cost?**
+There is no subscription. $10 buys 1,000 credits, new accounts get 100 free credits, an image costs 16 credits, and a 15-second product ad with voiceover and captions cost 461 credits ($4.61) in our example.
+
+**Can Creative Claw clone my voice?**
+Yes. Record or upload a short sample of your own voice (or one you have permission to use), and Creative Claw saves it as a reusable Character with Cartesia or ElevenLabs. Use it to narrate videos in 40+ languages.
+
+**How is it different from Runway or HeyGen in ChatGPT?**
+Creative Claw is one pay-as-you-go account for several providers' models (Seedance, Gemini Omni, MiniMax, Nano Banana, ElevenLabs, Cartesia) rather than one vendor's models, and it includes brand themes, reusable Characters, voice cloning, and multi-shot assembly. There is no monthly plan to buy first.
+
+**Does it work with ChatGPT dots?**
+Dots use the plugins you connect in their Customize → Plugins settings. If Creative Claw is listed for your account, connect it there and give your dot recurring jobs such as weekly posts and a Reel. See the [dots guide](https://creativeclaw.co/chatgpt/dots/).
+
+**Which clients does it support?**
+ChatGPT, Codex, Claude (Code, Desktop, and web), Cursor, Grok Bot, Hermes Agent, and OpenClaw, all through the same account and MCP server at `https://app.creativeclaw.co/mcp`.
 
 ---
 
