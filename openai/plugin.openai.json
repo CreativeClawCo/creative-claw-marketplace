@@ -1,0 +1,139 @@
+{
+  "version": "6.0.0",
+  "keywords": [
+    "ai video generator",
+    "video generation",
+    "text to video",
+    "image to video",
+    "animate photo",
+    "ai image generator",
+    "image editing",
+    "product photography",
+    "ugc ads",
+    "video ads",
+    "ai avatar",
+    "consistent characters",
+    "storyboard",
+    "short film",
+    "voiceover",
+    "text to speech",
+    "voice design",
+    "voice cloning",
+    "lip sync",
+    "music generation",
+    "sound effects",
+    "captions",
+    "subtitles",
+    "transcription",
+    "reels",
+    "youtube shorts",
+    "tiktok videos",
+    "social media content",
+    "marketing content",
+    "brand kit"
+  ],
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "Creative Claw",
+        "shortDescription": "Create videos & voiceovers",
+        "longDescription": "Create videos, product ads, images and voiceovers in ChatGPT. Animate a photo, turn a script into a multi-scene film, or make a creator-style product ad with narration and captions. Built for marketers, creators and small teams who need on-brand media without leaving the conversation.\n\nPlan shots and storyboards, prepare consistent reference images, generate clips and assemble a first cut. Turn interviews and longer videos into social clips, cut and reorder selected moments, reframe for vertical formats, and add captions. Transcribe audio, video files and public video links.\n\nCreate a reusable avatar from your photos or a fictional character brief. Review its character sheet, save it as a Character, and reuse its visual references in images and videos. Give a Character a voice: design a new synthetic voice from a description, clone your own voice (or a speaker's voice with their explicit permission) from a clean recording, or choose a stock voice for multilingual narration. Sync speech to on-screen lips, and add music and sound effects to the same project.\n\nGenerate and edit supporting images, product photos and campaign visuals. Use reference images to guide product appearance, character identity, composition and style. Supported models include Seedance, Gemini Omni, MiniMax, Nano Banana, GPT Image, ElevenLabs and Cartesia; availability and settings vary.\n\nVideo Review mode shows the proposed prompt, references, settings and estimated credits before you press Generate. It reviews the request, not a rendered video preview. Auto mode submits the requested generation immediately.\n\nGeneration and editing use Creative Claw credits. Request an estimate before generating. Results, character consistency and voice similarity vary. Successfully generated playable videos are charged even when the result does not fully match your expectations. You can check your balance and recent generation costs, or send feedback. For help, contact support@creativeclaw.co.",
+        "developerName": "Creative Claw Co.",
+        "category": "Creativity",
+        "capabilities": [
+          "Generate videos from text or images",
+          "Animate photos",
+          "Edit and extend video clips",
+          "Generate and edit images",
+          "Product photoshoots",
+          "Reusable characters and avatars",
+          "Storyboards and multi-shot films",
+          "UGC-style video ads",
+          "Voiceovers and text to speech",
+          "Design custom voices",
+          "Voice cloning with consent",
+          "Lip sync",
+          "Music generation",
+          "Sound effects",
+          "Transcription",
+          "Captions and subtitles",
+          "Cut, trim and reframe video",
+          "Social clips from long videos",
+          "Brand themes"
+        ],
+        "websiteURL": "https://creativeclaw.co",
+        "supportURL": "https://creativeclaw.co/help",
+        "privacyPolicyURL": "https://creativeclaw.co/privacy",
+        "termsOfServiceURL": "https://creativeclaw.co/terms",
+        "defaultPrompt": [
+          "Turn this product photo into a 10-second vertical video ad with a voiceover and captions.",
+          "Create a consistent character and use it in a three-shot video with dialogue.",
+          "Design a warm narrator voice and read this script."
+        ],
+        "brandColor": "#EE6B4D",
+        "brandColorDark": "#EE6B4D",
+        "composerIcon": "./assets/icon.png",
+        "logo": "./assets/icon.png"
+      },
+      "onboardingSkill": "./skills/creativeclaw/SKILL.md",
+      "review": {
+        "test_cases": {
+          "positive": [
+            {
+              "description": "Text-to-video with the account's Review/Auto preference. Needs a demo account with generation credits.",
+              "prompt": "Create a 5-second vertical video of a paper airplane flying through a bright creative studio.",
+              "tools_triggered": "get_model_params, generate_video; check_job only when needed for completion or a later step",
+              "expected_behavior": "In Review mode, show the request card without submitting or charging until Generate is pressed. In Auto mode, submit the request. Deliver a playable vertical clip once complete; a pending job is not a finished video."
+            },
+            {
+              "description": "Image creation from a text brief. Needs image credits.",
+              "prompt": "Create one square product concept image of an unbranded cobalt glass perfume bottle on pale stone, softly lit from the left.",
+              "tools_triggered": "get_model_params, generate_image",
+              "expected_behavior": "One completed square image shown in the media viewer, keeping the unbranded bottle and the lighting direction, with no extra paid variations."
+            },
+            {
+              "description": "Stock narration, not cloning. Needs speech credits.",
+              "prompt": "Read these exact words in a warm stock voice: Welcome back. Let us get started.",
+              "tools_triggered": "get_model_params, generate_speech",
+              "expected_behavior": "Pick a suitable stock voice with the default speech model, keep the words exactly, and deliver the finished audio. Do not create a Character or clone a voice."
+            },
+            {
+              "description": "Fictional character creation and approved reuse. Needs image credits; the reviewer approves the sheet before it is saved.",
+              "prompt": "Create a reusable fictional adult host with short curly brown hair and a navy jacket. Show me a character sheet for approval, then save it for future videos.",
+              "tools_triggered": "list_characters, get_model_params, generate_image, then manage_character after approval",
+              "expected_behavior": "Show a readable, consistent character sheet before saving, save only the approved identity, and return the saved Character."
+            },
+            {
+              "description": "Multi-scene planning with no paid generation.",
+              "prompt": "Plan a 15-second, three-shot vertical ad for a reusable water bottle. Give me the script, shot list and reference-image plan in text only. Do not generate media.",
+              "tools_triggered": "None (planning guidance from the Creative Claw skills; no paid tool calls)",
+              "expected_behavior": "A text script with a coherent shot and reference plan. No image, speech, music, video or editing job is submitted, and no rendered storyboard is claimed."
+            }
+          ],
+          "negative": [
+            {
+              "description": "Advice only, not media production.",
+              "prompt": "Explain three ways to improve lighting in my home video recordings. Do not create or edit media.",
+              "expected_behavior": "Give advice without calling Creative Claw generation or editing tools."
+            },
+            {
+              "description": "Plain text translation, not speech.",
+              "prompt": "Translate Welcome back into Spanish as text. I do not need audio.",
+              "expected_behavior": "Return the text translation without speech synthesis, voice selection or cloning."
+            },
+            {
+              "description": "Arithmetic outside the plugin's scope.",
+              "prompt": "What is 18 multiplied by 7?",
+              "expected_behavior": "Answer 126 without calling Creative Claw tools."
+            }
+          ]
+        },
+        "commerce": false,
+        "commerce_description": "Creative Claw does not sell anything in ChatGPT. When a feature needs a different plan or more credits, the plugin explains why and links to an informational page about plans."
+      },
+      "publication": {
+        "release_notes": "Voice design: create a new synthetic voice from a description and save it on a Character. Transcription accepts public TikTok, Instagram, X, Facebook and Vimeo links again, and videos passed as audio. More reliable film assembly, cutting and cost estimates. Clearer plan-limit messages. Character deletion moved into manage_character and example loading into search_examples."
+      }
+    }
+  }
+}

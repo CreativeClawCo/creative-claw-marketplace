@@ -18,5 +18,7 @@ jobs:
       - run: node scripts/sync-skill-references.mjs --check
       - run: bash scripts/validate-skill-architecture.sh
       - run: node scripts/sync-openai-interface.mjs --check
+      # OpenAI directory package (ChatGPT + Codex): metadata limits, review cases, /mcp/chatgpt server.
+      - run: node scripts/build-openai-plugin.mjs --check
       - run: npx -y @anthropic-ai/claude-code plugin validate .
       - run: npx -y @anthropic-ai/claude-code plugin validate plugins/creative-claw
