@@ -2,7 +2,7 @@
 
 Read [shared execution guidance](../workflow-basics.md) once per task before using tools. It covers existing authorization, model discovery, optional cost checks, imports, and recovery.
 
-Use this reference inside `creativeclaw-generate-voiceover` for one-off reference-audio voice matching. Chatterbox is not a reusable Character voice: choose `creativeclaw-clone-voice` when the user wants to save and reuse a voice through ElevenLabs.
+Use this reference inside `creativeclaw-generate-voiceover` for one-off reference-audio voice matching. Chatterbox is not a reusable Character voice: choose `creativeclaw-clone-voice` when the user wants to save and reuse a voice through ElevenLabs or Cartesia, or [voice design](voice-design.md) for a new voice from a description.
 
 ## Consent boundary
 

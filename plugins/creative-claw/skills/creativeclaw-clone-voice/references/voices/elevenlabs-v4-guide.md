@@ -128,9 +128,9 @@ Keep each turn in the language its speaker should actually say. A language hint 
 
 - Audition a short passage when clone identity, accent, laughter, a sound effect, or pronunciation matters. Do not infer audio quality from metadata alone.
 - Review the plain transcript shown in the response. Square-bracket directions may appear there because they are sent as delivery instructions. They are not intended as spoken words. If a tag is heard aloud, simplify or remove it and regenerate only after the user requests another take.
-- For a long single-speaker script, divide at sentence or paragraph boundaries. A v4 single-speaker request allows up to 10,000 characters. Dialogue uses the smaller 2,000 character total.
-- Check the current cost before a paid run. Creative Claw charges the dialogue result from the provider's measured usage and reconciles the job after completion. Do not estimate its charge by counting a concatenated top-level `text` field.
-- When the user specifies v3, v2, Google, or Cartesia, keep that model and read its own guide. Google Flash and Flash-Lite also support two-speaker dialogue with their own schema. Do not copy v4 tags or settings into those models.
+- For a long script, divide at sentence or paragraph boundaries. A v4 request allows up to 10,000 characters. For dialogue, ElevenLabs recommends at most 2,000 total characters; that is a reliability recommendation, not the limit.
+- Estimate cost only when the user asks about cost or sets a budget. Dialogue is charged from the provider's measured usage after completion, so don't estimate it by counting a concatenated top-level `text` field.
+- When the user specifies v3, v2 or Cartesia, keep that model and read its guide ([v3](elevenlabs-v3-guide.md), [v2](elevenlabs-v2-guide.md), [Cartesia](cartesia-sonic-guide.md)). For Google Flash or Flash-Lite, which also support two-speaker dialogue, read `get_model_params` for that model. Do not copy v4 tags or settings into other models.
 
 ## Provider references
 

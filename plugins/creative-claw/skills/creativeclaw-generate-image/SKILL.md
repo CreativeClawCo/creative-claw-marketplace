@@ -7,13 +7,13 @@ description: "Generate or edit a single image with Creative Claw and route it to
 
 Read [shared execution guidance](references/workflow-basics.md) once per task before using tools. It covers existing authorization, model discovery, optional cost checks, imports, and recovery.
 
-Turn a brief and optional references into a finished image. This is the primary skill for a clear, general image-generation or image-editing request; the selected packaged model reference supplies deeper prompting advice. If the user explicitly requests HTML/CSS rendering or a deterministic code-based PNG, use `creativeclaw-render-html-image` instead.
+Turn a brief and optional references into a finished image. This is the primary skill for a clear, general image-generation or image-editing request; the selected packaged model reference supplies deeper prompting advice. If the user explicitly requests HTML/CSS rendering or a deterministic code-based PNG, use `creativeclaw-render-html` instead.
 
 ## Workflow
 
 1. Establish the subject, intended use, aspect ratio, style, text requirements, and which details must remain exact.
 2. Use `search_assets` for likely reusable references. Import attachments or local files with the platform upload flow before generation.
-3. When the user asks for examples, inspiration, styles, or a close starting point—or an open brief would materially benefit from concrete choices—use `creativeclaw-find-examples`. Search a small filtered set, then load only the chosen example with `get_example`. Do not search automatically for an already precise brief.
+3. When the user asks for examples, inspiration, styles, or a close starting point, or an open brief would benefit from concrete choices, call `search_examples` for a small filtered set, then load only the chosen example with `search_examples({ id })`. Do not search automatically for an already precise brief.
 4. For branded work, call `get_theme` and carry the relevant colors, typography, logo treatment, and visual rules into the prompt.
 5. Use `list_models({ category: "image" })` when selection is unresolved; for a known choice, use `get_model_params` directly and reuse its current-task schema.
 6. Generate one direction unless several were requested. Estimate with `operation: "image"` only for user-requested cost/budget help; this does not require another confirmation for authorized work.
@@ -38,7 +38,9 @@ Build prompts in this order: deliverable and subject; composition; must-preserve
 Work in the user's language. Keep supplied visible copy verbatim, including spelling, punctuation, and script direction; verify the selected model's typography and language support when text accuracy matters.
 
 - `image_url` is the primary reference. Additional reference support is model-specific, so inspect `get_model_params` instead of assuming a fixed count.
-- Use a `character_id` for a saved Character. If both an explicit `image_url` and the Character's visual identity must influence the result, do not assume the Character image is automatically added as another reference; supply supported references deliberately.
+- Set the output shape with `aspect_ratio`; `size` is legacy.
+- Use a `character_id` for a saved Character. With an explicit `image_url`, the Character image is not added automatically; put it in `extras.image_urls` yourself.
+- Video keyframes: use the same image model as the rest of the project, `aspect_ratio` = the video's ratio, anchors in `image_url` + `extras.image_urls` with roles named, one full-bleed frame with no text, grid or labels.
 - Preserve exact quoted copy, reference labels, dialogue, timecodes, colors, and approved layout or edit constraints in the prompt.
 - Never invent unsupported parameters. Use only fields returned by the tool schema and selected model.
 

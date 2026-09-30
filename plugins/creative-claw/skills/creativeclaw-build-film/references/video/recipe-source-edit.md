@@ -12,7 +12,7 @@ Inspect source duration and identify the exact interval. Preserve the original. 
 
 Use video_urls for the source with the selected model's exact input contract. For Seedance 2.5, use its explicit edit task mode, auto aspect ratio and source-locked duration as documented. Do not apply those fields to Omni.
 
-Resolve the edited interval and concatenate it between untouched spans. Inspect boundary cuts, total duration, identity and color continuity. Preserve original audio unless replacement was requested and use supported muxing if generation altered it. Generative edits cannot guarantee pixel-perfect logos, numbers or faces; use deterministic edits where exact preservation is essential.
+Resolve the edited interval and concatenate it between untouched spans. Inspect boundary cuts, total duration, identity and color continuity. Preserve original audio unless replacement was requested; if generation altered it, put the original track back with `merge_audio_video` (default replace mode). Generative edits cannot guarantee pixel-perfect logos, numbers or faces; use deterministic edits where exact preservation is essential.
 
 ## New ending
 

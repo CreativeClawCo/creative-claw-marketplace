@@ -18,7 +18,7 @@ After approval, derive the seated and cup-lift views from the SAME canonical ref
 
 For a literal opening, bake identity into each approved frame; pass only image_url and any supported last_frame_url. Do not append identity reference arrays.
 
-For a reference-only Seedance 2.5 shot, keep array order stable. Example mapping: @Image1 identity, @Image2 wardrobe, @Image3 cafe composition. Omit character_id and literal frame fields. Example prompt:
+For a reference-only Seedance 2.5 shot, keep array order stable. Example mapping: @Image1 identity, @Image2 wardrobe, @Image3 cafe composition. Omit literal frame fields; character_id is optional here because its image is appended last. Example prompt:
 
 "@Image1 is the exact face and body identity. @Image2 supplies only the jacket and clothing. @Image3 supplies the cafe layout and daylight direction. Five-second continuous medium shot: the same person settles into the chair, reaches for the existing cup and lifts it slightly. Gentle push-in. Preserve face, hair, jacket, cup and background layout. Quiet cafe ambience, no speech. End with the cup held steadily. No cuts, extra people near camera or wardrobe changes."
 
@@ -28,4 +28,4 @@ A composition reference does not guarantee the first frame. For another model, r
 
 Check every shot against canonical anchors, not only against the preceding clip. Watch screen direction and hand/object contact. Separate wardrobe changes into named states rather than overwriting identity.
 
-A Character's voice is not automatically used by native video generation. If speaking is required, choose a supported talking-avatar or audio-reference route; otherwise use the saved clone for separate narration. An audio overlay alone does not synchronize lips. Follow [Review/Auto](review.md), retain per-shot recovery IDs, and revise only the authorized failed portion.
+A Character's voice is not used by native video generation. If the Character speaks, pick a path from [voice in video](voice-in-video.md). An audio overlay alone does not synchronize lips. Follow [Review/Auto](review.md), retain per-shot recovery IDs, and revise only the authorized failed portion.

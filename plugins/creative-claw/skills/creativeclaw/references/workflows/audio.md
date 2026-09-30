@@ -1,16 +1,16 @@
 # Speech and audio workflow
 
-Creative Claw generates speech, sound effects, ambience, Foley, and music; creates consented reusable voice clones; transcribes media; isolates voice recordings; and combines one finished audio track with video.
+Creative Claw generates speech, sound effects, ambience, Foley, and music; designs new synthetic voices; creates consented reusable voice clones; transcribes media; isolates voice recordings; and combines one finished audio track with video.
 
 ## Route the request
 
 - New narration, dialogue, or character voice → `generate_speech`.
 - Sound effect, Foley, transition, impact, ambience, or loop → use `creativeclaw-generate-sound-effects` and `generate_sound_effect` with `sfx/elevenlabs-sound-v2`.
-- Music, score, bed, sting, jingle, or song → use `creativeclaw-generate-music` and `generate_music` with `music/elevenlabs-music-v2.5`.
-- Reusable custom voice from a recording → use the separate `creativeclaw-clone-voice` skill.
+- Music, score, bed, sting, jingle, or song → use `creativeclaw-generate-music` and `generate_music`: `music/lyria-3.5` by default, `music/elevenlabs-music-v2.5` for exact length or stings under 30 s, `music/minimax-music-3` for lyrics-led songs.
+- New reusable voice: consenting speaker's recording → `creativeclaw-clone-voice`; description → `design_voice` (`creativeclaw-generate-voiceover`); stock → `manage_character` with `voice_model`/`voice_id`.
 - Transcript and timings from audio, video, or a public YouTube URL → `transcribe`.
 - Remove noise, music, or reverb from speech → `isolate_audio`.
-- Add an existing voice/music track to video or concatenate audio → `merge_media`.
+- Add an existing voice/music track to video or concatenate audio → `merge_media`. `merge_audio_video` replaces the clip's audio by default; `audio_mode: "mix"` keeps it and layers the new track.
 - Build a video from timed images or clips with optional soundtrack → `merge_media` with `operation:"compose_video"`; see [assembly guidance](../media-assembly.md).
 
 `generate_speech` cannot produce music or sound effects by changing its model ID. Use `generate_music` for music and `generate_sound_effect` for sound effects. The retired combined `generate_audio` tool remains callable only for cached legacy clients. `merge_audios` concatenates clips and does not layer them into a mix.
@@ -50,9 +50,11 @@ Use elevenlabs-v2 model reference for a steadier existing cloned Character speec
 - For one request with several speakers, pass `extras.dialogue` as ordered turns, each with a voice selector. Omit top-level `text`, or pass `text: ""` if a cached client schema requires it.
 - V3 remains callable when explicitly requested; use its [legacy guide](../voices/elevenlabs-v3.md) for its distinct settings.
 
-## ElevenLabs voice cloning
+## Voice cloning and design
 
-Use `creativeclaw-clone-voice` for the complete consent, recording, import, replacement, cloning, and audition workflow. Creative Claw uses ElevenLabs Instant Voice Cloning through `clone_voice`, attaches the resulting voice to a Character, and reuses it with `generate_speech({ character_id, model: "speech/elevenlabs-v4", text })`.
+Use `creativeclaw-clone-voice` for the complete consent, recording, import, replacement, cloning, and audition workflow. `clone_voice` makes an ElevenLabs or Cartesia clone and saves it on a Character; without `character_id` it creates a voice-only Character. Reuse it with `generate_speech({ character_id, model, text })` on v2, v4 or Cartesia.
+
+For a new voice from a description, use `design_voice` (see `creativeclaw-generate-voiceover`): three auditions, then save the pick to a Character. Designed ElevenLabs voices speak with v4; Google-designed voices with `speech/gemini-3.8-flash-tts`.
 
 Never set `consent: true` unless the user explicitly confirms that the voice is their own or the speaker authorized cloning and use. Do not silently replace an existing Character voice.
 

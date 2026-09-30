@@ -1,7 +1,7 @@
 interface:
   display_name: "Creative Claw — Edit Existing Media"
-  short_description: "Trim, resize, caption, and clean existing media"
-  default_prompt: "Use $creativeclaw-edit-media to edit my existing footage or recording and deliver the finished result."
+  short_description: "Trim, cut, reframe, caption, and add intros to media"
+  default_prompt: "Use $creativeclaw-edit-media to edit my existing footage or recording (cuts, framing, captions, audio, or an intro/outro) and deliver the finished result."
 dependencies:
   tools:
     - type: "mcp"

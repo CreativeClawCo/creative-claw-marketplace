@@ -1,6 +1,6 @@
 # ElevenLabs v4
 
-Model: `speech/elevenlabs-v4`. This is the recommended default for ElevenLabs stock narration, expressive speech, existing cloned Characters, and dialogue with more than one speaker. Read the [v4 production guide](elevenlabs-v4-guide.md) for scripts and runnable examples.
+Model: `speech/elevenlabs-v4`. This is the recommended default for ElevenLabs stock narration, expressive speech, designed voices, existing cloned Characters, and dialogue with more than one speaker. Read the [v4 production guide](elevenlabs-v4-guide.md) for scripts and runnable examples.
 
 Call `get_model_params({ model: "speech/elevenlabs-v4" })` for the current voice catalog, language list, settings, and pricing before generation. The same public ElevenLabs voice IDs and consented saved Character voices work with v4. Choose a voice that already suits the language and delivery. V4 can preserve cloned voice identity more faithfully, including flaws in the source recording, so audition important output. A model switch does not create or retrain a clone.
 

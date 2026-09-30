@@ -1,13 +1,13 @@
 # Creative Claw: Wan 3.0
 
-Read [input modes and reference production](reference-production.md) before preparing media and [Review/Auto handling](review.md) before submission. These shared contracts take precedence over a storyboard recipe below. Never combine literal frames with reference arrays on standard routes. Load only this selected model guide, not every guide in the package.
+Read [input modes and reference production](reference-production.md) before preparing media and [Review/Auto handling](review.md) before submission. These shared contracts take precedence over any recipe below. Never combine literal frames with reference arrays on standard routes. Load only this selected model guide, not every guide in the package.
 
 Use `video/wan-3.0` for cost-efficient native-audio clips, 2 to 30 second single-pass storytelling, first-to-last-frame animation, mixed references, source-video transformations, or a public document or webpage used as the creative brief.
 
 ## Core workflow
 
 1. Define the clip purpose, duration, ratio, shot structure, subject, action, camera, look, audio, and final state.
-2. Search for existing Creative Claw assets before importing new references.
+2. Follow the reference-first pipeline in [reference production](reference-production.md); skip keyframes only on explicit direct-generation, document or webpage requests. Search existing assets before importing new references.
 3. Call `get_model_params({ model: "video/wan-3.0" })` immediately before generation. Treat the runtime schema as authoritative.
 4. Choose exactly one input mode: text only, literal first/last frames, ordered image/video/audio references, one public document, or one public webpage.
 5. For references, preserve their order and assign each a precise role with `Image 1`, `Video 1`, or `Audio 1`.

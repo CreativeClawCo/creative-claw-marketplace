@@ -2,7 +2,7 @@
   "id": "creative-claw",
   "name": "Creative Claw",
   "description": "AI media studio — generate and edit images, video, and speech; create reusable Characters, product shoots, UGC ads, and multi-shot Films.",
-  "version": "0.6.6",
+  "version": "0.7.0",
   "configSchema": {
     "type": "object",
     "additionalProperties": false,
@@ -23,7 +23,6 @@
     "skills/creativeclaw-generate-music",
     "skills/creativeclaw-generate-sound-effects",
     "skills/creativeclaw-edit-media",
-    "skills/creativeclaw-cut-and-reframe-video",
     "skills/creativeclaw-create-reels",
     "skills/creativeclaw-create-character",
     "skills/creativeclaw-create-avatar",
@@ -33,9 +32,6 @@
     "skills/creativeclaw-create-ugc-ad",
     "skills/creativeclaw-submit-feedback",
     "skills/creativeclaw-clone-voice",
-    "skills/creativeclaw-find-examples",
-    "skills/creativeclaw-render-html-image",
-    "skills/creativeclaw-render-html-video",
-    "skills/creativeclaw-add-video-intro-outro"
+    "skills/creativeclaw-render-html"
   ]
 }

@@ -1,6 +1,6 @@
-# Music v2.5 prompting
+# Music prompting
 
-Use this reference when translating a music brief into a `generate_music` prompt or diagnosing a weak result.
+Use this reference when translating a music brief into a `generate_music` prompt or diagnosing a weak result. It applies to all three models; model-specific notes are at the end.
 
 ## Build the brief
 
@@ -26,7 +26,7 @@ Do not turn the template into a checklist of contradictory adjectives. Decide wh
 
 ### Tempo, key, and meter
 
-Music v2.5 can follow stated BPM and often follows key well enough for practical layering, but verify by listening before syncing other musical material. Use a range only when flexibility is acceptable. State unusual meter explicitly.
+The models can follow stated BPM and often follow key well enough for practical layering, but verify by listening before syncing other musical material. Use a range only when flexibility is acceptable. State unusual meter explicitly.
 
 ### Arrangement over time
 
@@ -53,7 +53,7 @@ When technical vocabulary is unnecessary, describe the physical impression, such
 
 ## Instrumental music
 
-Set `force_instrumental: true` and also make the prompt unambiguous. Exclude sung lyrics, spoken words, chants, and wordless vocal pads when those would be unwanted. For a dialogue bed, state which frequency and arrangement space should remain open.
+Set `force_instrumental: true` (Lyria, ElevenLabs) and also make the prompt unambiguous. Exclude sung lyrics, spoken words, chants, and wordless vocal pads when those would be unwanted. For a dialogue bed, state which frequency and arrangement space should remain open.
 
 Example:
 
@@ -61,9 +61,9 @@ Example:
 
 ## Vocal songs
 
-Set `force_instrumental: false`. Describe the voice as a performance, not as a famous singer: range, timbre, intimacy, intensity, articulation, language, harmony, and placement. If the user supplied lyrics, preserve them exactly inside the prompt and make their role clear. If the user supplied only a theme, state whether the model may write lyrics.
+Set `force_instrumental: false` (Lyria, ElevenLabs; MiniMax always sings its `lyrics`). Describe the voice as a performance, not as a famous singer: range, timbre, intimacy, intensity, articulation, language, harmony, and placement. If the user supplied lyrics, preserve them exactly inside the prompt and make their role clear. If the user supplied only a theme, state whether the model may write lyrics.
 
-Use timing cues for vocal placement, for example “vocals enter after the eight-second intro” or “instrumental only after 1:45.” Dense lyrics, fast rap, stacked harmonies, and multilingual vocals are model strengths, but exact words and timing still require review.
+Use timing cues for vocal placement, for example “vocals enter after the eight-second intro” or “instrumental only after 1:45.” Exact words and timing still require review.
 
 Example:
 
@@ -71,7 +71,7 @@ Example:
 
 ## Short-form music
 
-Short pieces need fewer ideas and a deliberate ending.
+Short pieces need fewer ideas and a deliberate ending. Use `music/elevenlabs-music-v2.5` for anything under 30 seconds.
 
 **Logo sting:**
 
@@ -87,11 +87,11 @@ Do not overload a three-second sting with verse, build, drop, and outro instruct
 
 Translate editorial needs into musical events before prompting:
 
-- Set `music_length_ms` to the required asset duration.
+- Set `music_length_ms` to the required asset duration. Only ElevenLabs Music makes that length exactly; Lyria treats it as guidance and MiniMax as an upper bound.
 - Record important cue points, then describe the musical change at each time.
 - Decide whether the ending should resolve before the picture cuts or ring through it.
 - Keep generated music as a separate asset until approved. `generate_music` does not inspect the video or synchronize itself to visible events.
-- There is no true music-mixing or ducking control in generation. Ask for a dialogue-safe arrangement, then use an appropriate assembly workflow.
+- There is no ducking control in generation. Ask for a dialogue-safe arrangement, then layer it with `merge_media` `merge_audio_video` and `audio_mode: "mix"` (`added_volume` about 0.3 under speech).
 
 ## Loop-like beds
 
@@ -111,9 +111,13 @@ Translate editorial needs into musical events before prompting:
 | Timing drift | Use exact `music_length_ms`, fewer sections, and clear chronological cues. |
 | Style rejection | Remove artist, band, song, and copyrighted-lyric references; describe the musical traits instead. |
 
-## Current Creative Claw boundary
+## Model notes
 
-ElevenLabs Music v2.5 also supports composition plans, audio references, section editing, and inpainting in its broader product. The current Creative Claw `generate_music` tool exposes prompt-based generation only. Do not promise or emulate unsupported controls by inventing parameters.
+- **Lyria 3.5 (default):** accepts long prompts with section labels and timestamps. Up to 10 `image_urls` can set the mood; say what to take from them. Length is approximate within about 30–180 s.
+- **ElevenLabs Music v2.5:** prompt up to 4,100 characters; exact length from 3 s to 10 min, so use it for stings, idents and picture-locked cues. Strong on vocal-led material, acoustic genres, rock, orchestral and cinematic scores.
+- **MiniMax Music 3:** the `prompt` is the production brief (genre, BPM, key, vocals, instrumentation, mix); the words go in `lyrics`, one section tag per line. Reuse the returned `seed` with the same prompt and lyrics to reproduce or refine a take.
+
+Upstream features that are not `generate_music` fields (composition plans, audio references, section editing, inpainting) are unavailable. Do not promise or emulate them by inventing parameters.
 
 ## Source basis
 

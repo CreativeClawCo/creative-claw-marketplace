@@ -10,7 +10,6 @@ focused_skill_names=(
   creativeclaw-generate-music
   creativeclaw-generate-sound-effects
   creativeclaw-edit-media
-  creativeclaw-cut-and-reframe-video
   creativeclaw-create-reels
   creativeclaw-create-character
   creativeclaw-create-avatar
@@ -20,10 +19,7 @@ focused_skill_names=(
   creativeclaw-create-ugc-ad
   creativeclaw-submit-feedback
   creativeclaw-clone-voice
-  creativeclaw-find-examples
-  creativeclaw-render-html-image
-  creativeclaw-render-html-video
-  creativeclaw-add-video-intro-outro
+  creativeclaw-render-html
 )
 chatgpt_overlay_root="$repo_root/skill-variants/chatgpt"
 output_dir="$repo_root/output/chatgpt-skills"

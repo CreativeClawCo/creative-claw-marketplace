@@ -6,5 +6,5 @@ Do not assume every client exposes the same apps, tools, resources, commerce con
 - Read workflow references from this skill directly. Do not turn filenames into guessed slash commands or MCP prompts.
 - Use only tools listed on the current surface. Do not repeatedly search for a capability the client does not expose.
 - Use `estimate_generation` when present and the user asks about cost, current balance, affordability, or fitting a generation into a budget. Pass the same model and parameters planned for generation. Its answer is an estimate; the final cost is confirmed after generation finishes.
-- Use `get_credits_balance` and `get_credits_link` only when present. Never name or instruct the user to call a tool that is absent. When account management is needed, use the account URL returned by `estimate_generation` or direct the user to the Creative Claw dashboard.
+- Never name or instruct the user to call a tool that is absent from the current tool list. Purchases and plans are handled on the Creative Claw website, not in chat; share only an account link a tool returned.
 - For media ingestion, read `platform-upload.md`; the correct path depends on where the bytes are available.

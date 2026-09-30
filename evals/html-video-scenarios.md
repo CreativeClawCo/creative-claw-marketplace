@@ -1,6 +1,6 @@
 # HTML-to-video skill evaluation
 
-Use the packaged `creativeclaw-render-html-video` skill in a clean client. These are behavioral checks; do not submit paid renders unless the test run authorizes them.
+Use the packaged `creativeclaw-render-html` skill in a clean client. These are behavioral checks; do not submit paid renders unless the test run authorizes them.
 
 | Request / available context | Expected behavior |
 | --- | --- |

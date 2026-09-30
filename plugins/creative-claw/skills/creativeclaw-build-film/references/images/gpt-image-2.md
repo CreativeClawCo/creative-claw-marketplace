@@ -27,7 +27,7 @@ Default to Flare within this family when the user has not specified a variant or
 | `model` | `image/gpt-image-2.5-flare` or `image/gpt-image-2.5-sunburst`. |
 | `image_url` | Primary source image; becomes Image 1. |
 | `extras.image_urls` | Additional ordered inputs; become Image 2 onward. |
-| `size` | Preferred Creative Claw ratios: `1:1`, `4:5`, `5:4`, `9:16`, or `16:9`; the wrapper normalizes these for GPT Image 2.5. |
+| `aspect_ratio` | Output ratio, such as `1:1`, `4:5`, `5:4`, `9:16`, or `16:9`; `get_model_params` lists the supported set. The legacy `size` field still works but is not for new calls. |
 | `extras.image_size` | Use a current native preset, `auto`, or valid custom dimensions when direct control is preferable. |
 | `extras.quality` | `auto`, `low`, `medium`, `high`, `xhigh`, or `max`; default `high`. |
 | `extras.background` | `auto`, `transparent`, or `opaque`. Use PNG or WebP for transparency. |
@@ -36,7 +36,7 @@ Default to Flare within this family when the user has not specified a variant or
 | `num_images` | 1,4. |
 | `output_format` | Prefer `png` for transparency/text and `jpeg` for ordinary photographic delivery. |
 
-Current native size presets are `square_hd`, `square`, `portrait_4_3`, `portrait_16_9`, `landscape_4_3`, `landscape_16_9`, and `auto`. Custom `extras.image_size` is an object with `width` and `height`, both multiples of 16, with 655,360 to 8,294,400 total pixels and no more than a 3:1 aspect ratio. Choose either wrapper `size` or native `extras.image_size`, not conflicting values.
+Current native size presets are `square_hd`, `square`, `portrait_4_3`, `portrait_16_9`, `landscape_4_3`, `landscape_16_9`, and `auto`. Custom `extras.image_size` is an object with `width` and `height`, both multiples of 16, with 655,360 to 8,294,400 total pixels and no more than a 3:1 aspect ratio. Choose either `aspect_ratio` or native `extras.image_size`, not conflicting values.
 
 Do not invent an `ultra` quality value or unsupported output size. Do not copy direct OpenAI API parameter names into this wrapper. Leave synchronous/base64 delivery disabled so jobs produce durable assets. Runtime discovery is authoritative, including route-specific optional fields and current cost estimates.
 
@@ -46,7 +46,7 @@ Do not invent an `ultra` quality value or unsupported output size. Do not copy d
 {
   "model": "image/gpt-image-2.5-flare",
   "prompt": "Create a 4:5 editorial product photograph of a matte terracotta ceramic mug on pale limestone. The mug occupies the lower-right half. Leave the upper-left third empty for later copy. Soft morning window light from the left, visible ceramic grain, realistic contact shadow. No text, logo, hands, or extra objects.",
-  "size": "4:5",
+  "aspect_ratio": "4:5",
   "num_images": 1,
   "output_format": "png",
   "extras": { "quality": "high", "background": "opaque" }
@@ -119,7 +119,7 @@ Use transparent PNG for isolated products, characters, icons, stickers, and fore
 {
   "model": "image/gpt-image-2.5-sunburst",
   "prompt": "A single translucent cobalt glass perfume bottle, front three-quarter view, accurate refraction and clean studio rim light, centered with complete object visible and clean antialiased edges. No floor, shadow, text, border, or additional objects.",
-  "size": "1:1",
+  "aspect_ratio": "1:1",
   "output_format": "png",
   "extras": {
     "background": "transparent",
@@ -157,7 +157,7 @@ Identity-preserving campaign edit:
   "model": "image/gpt-image-2.5-sunburst",
   "image_url": "<layout-url>",
   "prompt": "Image 1 is the approved layout. Image 2 is the exact person identity. Image 3 is the exact headset. Image 4 is style only. Render the final 16:9 campaign image following Image 1's framing. Preserve the person's exact face, skin tone, hair, body proportions, and pose from Image 2. Preserve the headset shape, materials, buttons, and logo from Image 3. Apply only the dramatic red rim light and deep black finish from Image 4. No additional text or objects.",
-  "size": "16:9",
+  "aspect_ratio": "16:9",
   "extras": {
     "image_urls": ["<person-url>", "<headset-url>", "<style-url>"],
     "quality": "high"

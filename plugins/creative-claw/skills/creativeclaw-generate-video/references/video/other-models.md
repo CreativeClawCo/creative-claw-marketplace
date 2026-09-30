@@ -14,6 +14,7 @@ Use this guide for an explicitly selected model outside the primary guides. Alwa
 | video/hailuo-2.3-fast | Requires an opening image. Describe what moves after that image; do not promise text-only or end-frame support. |
 | video/happyhorse-1.0 | Literal first frame or ordered image references, not both. Current reference syntax is character1 through character9, matching array order. Check spoken-language support and do not treat visual references as voice cloning. |
 | video/heygen-avatar-4 | Talking photo: a clear face in image_url. Model-specific audio_url overrides prompt/voice; otherwise select a HeyGen voice from its own catalog. Do not pass an ElevenLabs voice ID as a HeyGen voice name. Fetch exact field placement and use consented finished speech, not a private cloning source. |
+| video/sync-3 | Lip-syncs one finished clip to prepared speech: one clip in `video_urls`, one speech file in `audio_urls`. `prompt` is required but unused. Match the clip and speech lengths first (trim or extend). For several faces, set `extras.options.active_speaker_detection` (auto-detect is the default; pass `frame_number` and `coordinates` to pick a face). Charged per second of output. |
 | video/heygen-agent | Prompt-led presenter workflow with model-specific config. Read current config structure, voice/avatar options and output behavior before submission; do not apply Avatar 4 fields by analogy. |
 
 ## Explicit-request-only routes

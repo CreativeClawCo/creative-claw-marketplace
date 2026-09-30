@@ -8,7 +8,7 @@ Choose an image model by capability, anchor branded work with theme assets, and 
 2. For branded work, call `get_theme`. Reuse its colors, notes, logos, and reference images. Do not invent missing brand details.
 3. Call `search_assets` for source images, product shots, Characters, and prior approved outputs. Import missing media through `../platform-upload.md`.
 4. Use `list_models({ category: "image" })` when discovery is needed and `get_model_params` for missing settings on the chosen model; reuse current-task schemas. Estimate with `operation: "image"` only for user-requested cost/budget help.
-5. Generate with `generate_image`; provide `image_url` for edits. Use the preferred `size` field when supported.
+5. Generate with `generate_image`; provide `image_url` for edits. Set the output shape with `aspect_ratio` (`size` is legacy).
 6. Send approved quoted text, per-region instructions, and reference tokens verbatim.
 7. Inspect the output. For revisions, describe both the delta and what must remain unchanged.
 8. Name, tag, and describe approved assets.
@@ -39,7 +39,8 @@ After choosing, use the corresponding focused skill for exact prompting and refe
 - `image_url` is the primary source/edit image.
 - Additional references are model-specific. Inspect `get_model_params`; many supported image models accept `extras.image_urls`.
 - Theme reference images describe visual language. Tell the model which attributes to borrow—palette, lighting, composition, material, or typography—and which subject matter not to copy.
-- For a saved Character, pass `character_id` instead of manually repeating its image and description.
+- For a saved Character, pass `character_id` instead of manually repeating its image and description. With an explicit `image_url`, the Character image is not added; put it in `extras.image_urls` yourself.
+- Video keyframes: same image model as the project, `aspect_ratio` = the video's ratio, anchors in `image_url` + `extras.image_urls`, one full-bleed frame with no text.
 - Use a durable Creative Claw URL. Never pass a local path or private attachment URL to a URL-only field.
 
 ## Prompt structure
@@ -63,7 +64,7 @@ Use positive instructions for required content and a short negative list for rec
 
 ## Tool notes
 
-- `generate_image` supports generation and edit mode, `size`, one to four outputs, seed, output format, optional background removal, Characters, prompt rewriting, and model-specific `extras`.
+- `generate_image` supports generation and edit mode, `aspect_ratio`, one to four outputs, seed, output format, optional background removal, Characters, prompt rewriting, and model-specific `extras`.
 - For a model comparison, call `generate_image` once per selected model with the same prompt and settings, then present the results together. Use comparisons when the user is choosing a visual direction, not for exact source-image edits.
 - The inline viewer may monitor completion. Use `check_job({ job_id })` only when a later step requires the final URL or no viewer is monitoring.
 - `remove_background` is preferable to regenerating when the only task is a cutout.

@@ -5,7 +5,7 @@ description: "Turn existing long-form video into coherent social clips in the re
 
 # Long video to Reels
 
-Read [shared execution guidance](references/workflow-basics.md) once per task. This skill owns editorial judgment; `creativeclaw-cut-and-reframe-video` owns deterministic execution. The AI can select clips when the user delegates selection. The user can instead specify moments or require approval; the editing tool never decides what matters.
+Read [shared execution guidance](references/workflow-basics.md) once per task. This skill owns editorial judgment: which moments to keep. `cut_and_reframe_video` executes the chosen cuts; it never decides what matters. The AI selects clips when the user delegates selection. The user can instead specify moments or require approval.
 
 ## Establish the brief without a questionnaire
 
@@ -26,7 +26,7 @@ Keep small context-dependent head/tail padding, usually tens to a few hundred mi
 
 ## Frame, render and review
 
-Use `creativeclaw-cut-and-reframe-video` for the precise contract, source-to-output caption remapping and job handling. It must read its own contract before execution; do not duplicate a second transcript or render when handing off.
+Read [the cut-and-reframe contract](references/edit-contract.md) before building the `cut_and_reframe_video` input. It covers ranges, framing, caption remapping, and audio fades. Reuse the transcript you already have; do not transcribe or render twice.
 
 - Honor the requested output aspect and dimensions. Default to 1080×1920 (9:16); common alternatives are 1920×1080 (16:9), 1080×1080 (1:1), and 1080×1350 (4:5). Custom output width and height must be even integers from 128–1920. Landscape, portrait and square sources are all valid. Never stretch footage: choose per-segment padding, a verified center crop, or an explicit fixed/moving crop that matches the output aspect. Use padding for slides, multiple people, fast movement or uncertain framing. Automatic face/speaker tracking is not supported.
 - Keep native speech/audio. Captions are optional and default on only when the source lacks usable burned-in captions. Respect an explicit caption on/off choice. Before adding default captions, inspect subtitle streams and representative frames for text already baked into the pixels. A transcript, sidecar file or selectable subtitle stream is not evidence of burned-in captions; selectable streams are not preserved by the renderer. If burned-in captions are consistently legible and remain inside the chosen crop, omit new captions to avoid duplication. If they are sporadic, unreadable, cropped out, or the user requests replacement styling, add one verified caption layer and ensure the old text does not create a double overlay. When adding captions, use source-timed words if verified; otherwise use `add_subtitles` after the completed edit. Burn captions after all cuts and final framing.

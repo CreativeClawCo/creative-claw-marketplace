@@ -1,6 +1,6 @@
 ---
 name: creativeclaw-create-avatar
-description: Create a reusable personal avatar or fictional Character from photos or a brief, generate and approve a consistent character sheet, save it in Characters, and optionally attach a consented cloned voice.
+description: Create a reusable personal avatar or fictional Character from photos or a brief, generate and approve a consistent character sheet, save it in Characters, and optionally give it a voice (designed, cloned with consent, or stock).
 ---
 
 # Create your avatar
@@ -14,19 +14,21 @@ Use this for a reusable identity, not an ordinary one-off portrait. Read [shared
 3. Import attached/local photos using the appropriate client route. Choose the strongest face anchor and assign other photos explicit identity, proportions or wardrobe roles.
 4. Use generate_image and current model parameters to create one consistent character-sheet direction. The identity reference explains layout and prompting. Preserve approved likeness rather than beautifying or redesigning the person.
 5. Show the completed sheet and ask for likeness/canonical-state approval before saving it as the Character visual. Honor approval already given for that exact result.
-6. Save using manage_character({ title, description, image_url }) or id plus changed fields for an existing Character. The description records stable appearance, not a temporary scene. Save the approved sheet as the canonical image and retain a clean face portrait and other views as named assets for downstream use.
+6. Save using manage_character({ title, description, image_url }) or id plus changed fields for an existing Character. The description records stable appearance, not a temporary scene. Save the approved sheet as the canonical image and retain a clean face portrait and other views as named assets for downstream use. For a real person, keep their best original photo as an extra identity reference beside the sheet; generated sheets drift. Reuse the sheet's image model for later keyframes.
 7. Return the saved Character ID/name and explain that future requests can name it. State what was saved and any likeness limitations. Do not claim a trained visual identity model or guaranteed consistency.
 
 ## Optional voice
 
-If the user also wants their voice, load $creativeclaw-clone-voice when available or use the packaged [complete cloning workflow](references/voices/cloning.md). Guide at least one minute of clean recording, private upload, explicit speaker consent, cloning and a short audition. Attach it to the SAME character_id.
+When the Character will speak and the voice is unknown, ask one question: design a new voice from a description (three auditions), use your own voice (recording plus consent), or pick a stock voice. If the voice doesn't matter, pick a stock voice and name it. Save every choice to the SAME character_id.
 
-Recommend ElevenLabs v4 for stock voices and expressive cloned speech, ElevenLabs v2 for a steadier existing clone, or Cartesia for fast natural cloned speech. V4 also supports dialogue with multiple stock or saved Character voices in one run. Read the selected [v4](references/voices/elevenlabs-v4.md), [v2](references/voices/elevenlabs-v2.md), or [Cartesia](references/voices/cartesia.md) guide and [language routing](references/voices/languages.md).
+- **Design** (fictional Character, or a voice that isn't the user's own): use `design_voice` and save the chosen preview to the SAME character_id; no recording or cloning consent is needed. Auditions use the Character's real lines. In ChatGPT the Voice Studio card saves the choice; read it back from `list_characters` rather than saving again. See [voice design](references/voices/voice-design.md).
+- **Own voice:** use creativeclaw-clone-voice when available, or the packaged [cloning workflow](references/voices/cloning.md): at least one minute of clean recording, private upload, explicit speaker consent, cloning and a short audition. Never infer cloning permission from photos, uploads or avatar creation. Replacing a source invalidates existing provider copies and needs explicit direction.
+- **Stock:** `manage_character({ id, voice_model, voice_id })` with an exact voice ID from `get_model_params`.
 
-Cloning saves the voice automatically. Replacing a source invalidates existing provider copies and requires explicit replacement direction. Never infer voice-cloning permission from photos, uploads or avatar creation.
+Each saved voice speaks with its own model: designed ElevenLabs → `speech/elevenlabs-v4`; Google-designed → `speech/gemini-3.8-flash-tts`; clone → v2, v4 or Cartesia; stock → its saved model. Read the selected [v4](references/voices/elevenlabs-v4.md), [v2](references/voices/elevenlabs-v2.md), or [Cartesia](references/voices/cartesia.md) guide and [language routing](references/voices/languages.md).
 
 ## Reuse
 
-For identity-guided images, resolve the sheet/portrait into the selected model's supported reference fields. For video, build approved identity into clean shot frames, or use a supported reference-only route. A sheet grid must not accidentally become literal frame zero. character_id may supply an implicit start image, so omit it when using reference arrays on incompatible routes.
+For identity-guided images, resolve the sheet/portrait into the selected model's supported reference fields. For video, make a clean keyframe per shot from the sheet and portrait; a sheet grid is never a literal opening frame. `character_id` appends the saved image to `image_urls` as a reference, never a start frame. Use it in reference mode; omit it with `image_url`/`last_frame_url` (the server rejects that mix).
 
-Visual and voice reuse are separate: a Character ID does not guarantee native video dialogue in the saved voice. Use a supported audio-driven presenter route or separate narration when required.
+Visual and voice reuse are separate: a Character ID does not put its saved voice into native video dialogue. For speech in video, pick a path from [voice in video](references/video/voice-in-video.md).

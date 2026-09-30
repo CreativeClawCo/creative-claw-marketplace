@@ -18,21 +18,21 @@ One connection to Creative Claw's MCP server gives the skills live model discove
 | ----------------- | ------------------------------------------------------------------------------------------------------------------- |
 | **Image**         | `generate_image` (generate, edit, or repeat across models for comparison), `load_image`                             |
 | **Video**         | `generate_video`, `check_job`                                                                                       |
-| **Speech**        | `generate_speech`                                                                                                   |
-| **Media editing** | `remove_background`, `upscale_media`, `trim_video`, `scale_video`, `add_subtitles`, `extract_frames`, `merge_media` |
-| **Models**        | `list_models`, `get_model_params`                                                                                   |
+| **Speech**        | `generate_speech`, `design_voice`, `clone_voice`, `transcribe`, `isolate_audio`                                     |
+| **Media editing** | `remove_background`, `upscale_media`, `trim_video`, `cut_and_reframe_video`, `scale_video`, `add_subtitles`, `extract_frames`, `merge_media` |
+| **Models**        | `list_models`, `get_model_params`, `search_examples`                                                                |
 | **Assets**        | `search_assets`, `update_asset`, `delete_asset`, `upload_asset`, `import_media`, `get_upload_url`, `confirm_upload` |
-| **Brand themes**  | `get_theme`, `list_themes`, `update_theme`, `delete_theme`                                                          |
-| **Characters**    | `manage_character`, `list_characters`, `clone_voice`, `delete_character`                                            |
+| **Brand themes**  | `get_theme`, `list_themes`, `update_theme`                                                                          |
+| **Characters**    | `manage_character`, `list_characters`                                                                               |
 | **Films**         | `create_film_project`, `update_film_project`, `get_film_project`, `list_film_projects`, `assemble_film`             |
 | **Feedback**      | `submit_feedback`                                                                                                   |
-| **Cost and account** | `estimate_generation`; `get_credits_balance` and `get_credits_link` where the client exposes them                |
+| **Cost and account** | `estimate_generation`, `manage_account`; `get_credits_balance` where the client exposes it                        |
 
 Access 1,000+ production-ready AI models — FLUX, Gemini, Veo, Sora, Kling, Seedance, Hailuo, HeyGen, Recraft, ElevenLabs, and more — through a single unified account with usage-based pricing.
 
 ### Skills (Creative Workflows)
 
-The **creativeclaw** root skill routes mixed or unclear requests. Focused outcome skills own general image, video, and voice work plus Characters, planning, Films, product photoshoots, UGC ads, and feedback. Video-model guidance is packaged as shared references inside Generate Video, Build Film, Create UGC Ad and Plan Video; load only the selected model's guide. Standalone video-model skills are no longer published. Image and speech specialists remain available pending their separate consolidation.
+The **creativeclaw** root skill routes mixed or unclear requests, account questions, and the curated examples catalog. Sixteen focused outcome skills own image, video, voice, music, and sound-effect generation; Characters and avatars; planning, Films, product photoshoots, and UGC ads; editing existing media (cuts, reframing, captions, audio, intros and outros); long-video Reels; explicit HTML rendering; and feedback. Model guides are packaged as references inside the outcome skills that use them; there are no per-model skills.
 
 Every OpenAI skill declares the ChatGPT MCP dependency at `https://app.creativeclaw.co/mcp/chatgpt`, matching the endpoint configured in the plugin draft. A focused skill can therefore activate directly without losing access to Creative Claw's tools.
 
@@ -64,7 +64,7 @@ Default to **Gemini 3.1 Flash (Nano Banana 2)** for most image generation and ed
 
 ### Recommended speech
 
-Use `speech/elevenlabs-v3` by default for narration, dialogue, emotional delivery, and multilingual speech. Use `speech/xai-tts` when its 28 built-in voices, exact inline/wrapping performance tags, or G.711 telephony output are the better fit. Creative Claw also supports consent-gated ElevenLabs Instant Voice Cloning as a separate Character workflow.
+Use `speech/elevenlabs-v4` by default for narration, dialogue, emotional delivery, and multilingual speech. Use `speech/xai-tts` when its 28 built-in voices, exact inline/wrapping performance tags, or G.711 telephony output are the better fit. Creative Claw can also design a new synthetic voice from a description, or clone a consenting speaker's voice (ElevenLabs or Cartesia) onto a Character.
 
 Use `list_models` and `get_model_params` at runtime rather than assuming a fixed catalog or reference limit.
 

@@ -13,7 +13,6 @@ skill_names=(
   creativeclaw-generate-music
   creativeclaw-generate-sound-effects
   creativeclaw-edit-media
-  creativeclaw-cut-and-reframe-video
   creativeclaw-create-reels
   creativeclaw-create-character
   creativeclaw-create-avatar
@@ -23,10 +22,7 @@ skill_names=(
   creativeclaw-create-ugc-ad
   creativeclaw-submit-feedback
   creativeclaw-clone-voice
-  creativeclaw-find-examples
-  creativeclaw-render-html-image
-  creativeclaw-render-html-video
-  creativeclaw-add-video-intro-outro
+  creativeclaw-render-html
 )
 
 for skill_name in "${skill_names[@]}"; do
@@ -68,34 +64,15 @@ for skill_name in "${skill_names[@]}"; do
   fi
 done
 
-routes=(
-  creativeclaw-cut-and-reframe-video
-  creativeclaw-create-reels
-  creativeclaw-generate-image
-  creativeclaw-generate-video
-  creativeclaw-generate-voiceover
-  creativeclaw-generate-music
-  creativeclaw-generate-sound-effects
-  creativeclaw-edit-media
-  creativeclaw-create-character
-  creativeclaw-plan-video
-  creativeclaw-build-film
-  creativeclaw-product-photoshoot
-  creativeclaw-create-ugc-ad
-  creativeclaw-submit-feedback
-  creativeclaw-find-examples
-  creativeclaw-render-html-image
-  creativeclaw-render-html-video
-  creativeclaw-add-video-intro-outro
-)
-for route in "${routes[@]}"; do
-  if ! rg -q "$route" "$root_skill"; then
+# The router must name every focused skill.
+for route in "${skill_names[@]:1}"; do
+  if ! rg -q -F "\`$route\`" "$root_skill"; then
     echo "Root skill does not route to $route." >&2
     exit 1
   fi
 done
 
-for explicit_route_skill in creativeclaw-render-html-image creativeclaw-render-html-video; do
+for explicit_route_skill in creativeclaw-render-html; do
   explicit_skill_file="$skills_root/$explicit_route_skill/SKILL.md"
   if ! rg -q 'Use only when the user explicitly' "$explicit_skill_file"; then
     echo "$explicit_route_skill must preserve the explicit-request routing boundary." >&2
@@ -137,6 +114,16 @@ for retired in creativeclaw-nano-banana-2 creativeclaw-nano-banana-pro creativec
     rg -l -F "$retired" "$skills_root" --glob '*.md' --glob '*.yaml' ||
     rg -l -F "skills/$retired" "$repo_root/plugins/creative-claw/openclaw.plugin.json"; then
     echo "Retired video-model skill or stale route found: $retired" >&2
+    exit 1
+  fi
+done
+
+# Skills merged or removed in 6.0.0 must not come back as folders, routes, or manifest entries.
+for removed in creativeclaw-cut-and-reframe-video creativeclaw-add-video-intro-outro creativeclaw-render-html-image creativeclaw-render-html-video creativeclaw-find-examples; do
+  if [[ -e "$skills_root/$removed" ]] ||
+    rg -l -F "$removed" "$skills_root" --glob '*.md' --glob '*.yaml' ||
+    rg -l -F "skills/$removed" "$repo_root/plugins/creative-claw/openclaw.plugin.json"; then
+    echo "Removed skill still present or referenced: $removed" >&2
     exit 1
   fi
 done

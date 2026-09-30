@@ -5,13 +5,13 @@ description: Save, inspect or update an existing reusable Creative Claw Characte
 
 # Manage a reusable Character
 
-For guided avatar creation from photos, use $creativeclaw-create-avatar when available. For an existing approved visual or a direct Character update, use this workflow. Read [identity guidance](references/avatars/identity.md) when preparing a new sheet.
+For guided avatar creation from photos, use creativeclaw-create-avatar when available. For an existing approved visual or a direct Character update, use this workflow. Read [identity guidance](references/avatars/identity.md) when preparing a new sheet.
 
 1. Find the intended Character with list_characters. Reuse its ID rather than creating a duplicate.
 2. Save an approved image with manage_character({ title, description, image_url }); use id plus only changed fields when updating.
 3. Keep stable identity in description and temporary scene actions in generation prompts. The record stores one canonical image; retain auxiliary face/body/wardrobe views as named assets.
-4. A sheet grid is an identity reference, not a literal video opening. Generate a clean scene frame from approved anchors first, or use ordered model-supported references without conflicting frame fields/character_id.
-5. For an optional real voice, use creativeclaw-clone-voice with explicit consent. ElevenLabs and Cartesia clones are supported. Use ElevenLabs v4 for stock or expressive cloned speech, v2 for a steadier existing clone, and consider Cartesia for fast cloned speech. Visual identity does not automatically control native video audio.
-6. Replace an existing visual/voice only as requested. Delete a Character only on explicit direction, after identifying the exact record. Verify a requested update with list_characters when useful.
+4. A sheet grid is an identity reference, not a literal video opening. Generate a clean keyframe from approved anchors first. In video, `character_id` appends the saved image to `image_urls` as a reference, never a start frame. Use it in reference mode; omit it with `image_url`/`last_frame_url` (the server rejects that mix).
+5. For a voice: consenting speaker's recording → creativeclaw-clone-voice (ElevenLabs or Cartesia); description → `design_voice` (three auditions, saved to the same Character); stock → `manage_character({ id, voice_model, voice_id })`. Designed ElevenLabs voices speak with v4, Google-designed with `speech/gemini-3.8-flash-tts`, clones with v2, v4 or Cartesia, stock with their saved model. Visual identity does not control native video audio; for speech in video, see [voice in video](references/video/voice-in-video.md).
+6. Replace an existing visual/voice only as requested. Delete a Character (`manage_character({ id, delete: true })`, permanent) only on explicit direction, after identifying the exact record. Verify a requested update with list_characters when useful.
 
 An approved Character is reusable reference data, not a newly trained visual model or guaranteed identity lock.

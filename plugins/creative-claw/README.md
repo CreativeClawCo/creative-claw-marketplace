@@ -11,7 +11,7 @@ Creative Claw is an AI media studio for Grok Bot, Hermes, OpenClaw, Cursor, and 
 - Import, search, tag, edit, and organize media assets.
 - Guide multi-step character, storyboard, and film workflows.
 
-The plugin contains one skill, `creativeclaw`, and one remote MCP server connection.
+The plugin contains 17 skills (the `creativeclaw` router plus 16 focused workflows such as `creativeclaw-generate-video`, `creativeclaw-edit-media`, and `creativeclaw-render-html`) and one remote MCP server connection.
 
 ## Install
 
@@ -47,7 +47,7 @@ openclaw gateway restart
 
 Creative Claw uses browser-based OAuth through Clerk. The plugin does not contain or require an API key. Authentication is scoped to the signed-in Creative Claw account.
 
-Media generation consumes Creative Claw credits and may incur usage-based charges. Balance and pricing tools are available through the MCP server before generation.
+Media generation uses Creative Claw credits. The MCP server can show the balance, past charges, and estimates for planned generations. Purchases and plans are handled on the Creative Claw website.
 
 ## Network and data disclosure
 

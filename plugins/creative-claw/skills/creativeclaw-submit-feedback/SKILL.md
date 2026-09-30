@@ -1,6 +1,6 @@
 ---
 name: creativeclaw-submit-feedback
-description: "Send actionable feedback to the Creative Claw team. Use when the user reports a bug, generation-quality problem, confusing workflow, missing feature or model, request, or explicit praise."
+description: "Send user-approved feedback to the Creative Claw team. Use when the user asks to send feedback or approves an offer to report; not for refunds or fixing media."
 ---
 
 # Submit Feedback
@@ -9,9 +9,9 @@ Read [shared execution guidance](references/workflow-basics.md) once per task be
 
 Turn the user's report into one concise, useful `submit_feedback` call. Feedback is a product-feedback channel, not a refund request form, a generation tool, or a promise of compensation, reply, or roadmap commitment.
 
-For video generation, the Creative Claw UI has a Review/Auto toggle. If the user wants more control or is worried about accidental costs, tell them to switch from Auto to Review in the top-right of the UI. Review shows each suggested video generation and its estimate before the user approves it.
+## What can be reported
 
-## When to use
+Send a report only when the user asks or approves. Topics:
 
 - A tool failed, returned the wrong state, or behaved inconsistently.
 - An image, video, or voice result had a repeatable quality problem.

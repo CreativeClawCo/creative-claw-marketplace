@@ -8,7 +8,7 @@ Explain Creative Claw as a shared media workspace, then help the user complete o
 - Stores brand themes with colors, fonts, logos, notes, and visual references.
 - Generates and edits images across specialized models.
 - Generates, transforms, and assembles video with text, image, video, audio, and Character references.
-- Generates speech, creates consented ElevenLabs voice clones on Characters, transcribes media, and cleans recordings.
+- Generates speech, designs new synthetic voices from a description, clones a consenting speaker's voice (ElevenLabs or Cartesia) onto a Character or a new voice-only Character, transcribes media, and cleans recordings.
 - Saves reusable Characters and multi-shot Film projects.
 - Processes media with background removal, upscaling, trimming, scaling, subtitles, frames, and merging.
 
@@ -22,6 +22,7 @@ Explain Creative Claw as a shared media workspace, then help the user complete o
 
 ## Good first tasks
 
+- “Give my Character a voice (three designed auditions).”
 - “Find and organize my existing brand assets.”
 - “Create a brand theme from these files.”
 - “Generate an on-brand product image.”
@@ -42,7 +43,7 @@ If exact typography is the priority, GPT Image 2.5 Sunburst is the stronger
 alternative. I can generate one candidate or compare both.
 ```
 
-For video, state duration, ratio, resolution, audio behavior, and references before submission. For speech, state the ElevenLabs voice, language, and delivery style. For voice cloning, explain the ElevenLabs workflow and obtain explicit consent before any mutation.
+For video, state duration, ratio, resolution, audio behavior, and references before submission. For speech, state the voice, language, and delivery style. For a new voice without a recording, offer `design_voice` (three auditions to choose from). For voice cloning (ElevenLabs or Cartesia), explain the workflow and obtain explicit consent before any mutation.
 
 ## Asset habit
 

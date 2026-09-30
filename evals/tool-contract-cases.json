@@ -128,5 +128,61 @@
       "video_fit": "pad",
       "pad_color": "black"
     }
+  },
+  {
+    "tool": "search_examples",
+    "input": {
+      "id": "editorial-perfume-campaign"
+    }
+  },
+  {
+    "tool": "merge_media",
+    "input": {
+      "operation": "merge_audio_video",
+      "video_url": "https://example.com/talking.mp4",
+      "audio_url": "https://example.com/music.mp3",
+      "audio_mode": "mix",
+      "original_volume": 1,
+      "added_volume": 0.3
+    }
+  },
+  {
+    "tool": "cut_and_reframe_video",
+    "input": {
+      "video_url": "https://example.com/interview.mp4",
+      "segments": [
+        {
+          "start": 40.2,
+          "end": 44.8,
+          "framing": {
+            "mode": "pad"
+          }
+        },
+        {
+          "start": 12.1,
+          "end": 15.9,
+          "framing": {
+            "mode": "center_crop"
+          }
+        }
+      ],
+      "width": 1080,
+      "height": 1920
+    }
+  },
+  {
+    "tool": "design_voice",
+    "input": {
+      "action": "preview",
+      "prompt": "A warm, gravelly adult narrator with a calm pace and a slight smile in the voice."
+    }
+  },
+  {
+    "tool": "design_voice",
+    "input": {
+      "action": "save",
+      "preview_id": "00000000-0000-4000-8000-000000000001",
+      "character_name": "Narrator"
+    }
   }
 ]

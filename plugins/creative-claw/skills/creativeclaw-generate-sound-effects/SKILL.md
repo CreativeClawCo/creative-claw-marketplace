@@ -19,11 +19,11 @@ Use the Music model for a complete musical track even though Sound Effects v2 ca
 
 1. Identify the audible event or environment, its use, required duration, whether it must loop, and whether it must match picture. Ask only for missing choices that materially change the result.
 2. Use `get_model_params({ model: "sfx/elevenlabs-sound-v2" })` when the live schema is not already known. Use `list_models({ category: "audio" })` only when discovery is needed.
-3. Read [sound-effect prompting](references/sound-effect-prompting.md). Describe the source, action, material, timing, acoustic space, perspective, texture, intensity, decay, and focused exclusions that matter.
+3. Write the prompt as described under Prompting below.
 4. Use `estimate_generation` with `operation: "audio"` only when the user asks about cost, balance, affordability, or sets a budget. An estimate-only request does not authorize generation.
 5. State consequential settings briefly, then call `generate_sound_effect`. Generate separate effects separately unless the requested output is genuinely one chronological sequence.
 6. Listen for source accuracy, timing, perspective, room character, transient shape, unwanted speech or music, clipping, noise, decay, and loop seams. Propose a focused revision when needed, but do not create an unrequested paid take.
-7. Return the permanent audio asset. Keep it separate until approved before adding it to video or another edit. Follow [media assembly](references/media-assembly.md) for supported combinations.
+7. Return the permanent audio asset. Keep it separate until approved before adding it to video or another edit. Follow [media assembly](references/media-assembly.md): `merge_media` `merge_audio_video` with `audio_mode: "mix"` keeps the clip's own sound; the default `replace` discards it.
 
 ## Tool contract
 
@@ -38,39 +38,13 @@ Call `generate_sound_effect` with:
 
 Do not send music fields such as `music_length_ms` or `force_instrumental`. Do not send the SFX model to `generate_music` or `generate_speech`.
 
-## Prompting principles
+## Prompting
 
-- Describe what should be heard, not what a camera sees. Convert visual events into sources, motion, materials, impacts, rhythm, distance, and room response.
-- Lead with the main source and action. Add only the details that distinguish the intended sound.
-- Control time with onset, sequence, pauses, repetitions, impact, sustain, decay, and ending.
-- Control space with close or distant perspective, interior or exterior, room size, reflections, occlusion, reverb, and stereo movement.
-- Control texture and intensity with terms such as brittle, heavy, soft, wet, metallic, clean, distorted, restrained, explosive, sub-heavy, or high-frequency.
-- State likely unwanted elements: no speech, no music, no crowd, no alarm, no hiss, or no tonal layer.
-- For complex scenes, generate clean components separately and assemble them later. One overloaded prompt often reduces control over timing and balance.
-
-## Looping
-
-For a seamless loop, set `loop: true` and describe a stable environment or texture. Avoid unique attacks, arrivals, one-time events, dramatic builds, and resolved endings. Ask for consistent density across the clip and no obvious beginning or endpoint. Generate up to 30 seconds and repeat the approved asset downstream.
-
-Do not set `loop: true` for a door slam, gunshot, notification click, logo hit, or another one-shot unless the user specifically wants that event repeated as a rhythmic texture.
-
-## Prompt influence
-
-Start with the default 0.3 unless the brief requires stricter control.
-
-- Raise it when a specific material, action, sequence, or exclusion keeps drifting.
-- Lower it when the result is too rigid, synthetic, repetitive, or narrow and the user welcomes variation.
-- Change prompt influence only after improving an ambiguous prompt. It cannot resolve contradictory instructions.
-
-## Revision strategy
-
-- Wrong source: name the object, material, action, and contact surface more precisely.
-- Wrong perspective: specify distance, microphone position, occlusion, and environment.
-- Timing mismatch: set `duration_seconds` and narrate onset, sequence, and decay.
-- Too reverberant: request close perspective, dry recording, short room, and restrained tail.
-- Too tonal or musical: exclude pitch, melody, harmony, music, and synth layers where appropriate.
-- Loop seam: remove unique events and ending cues; request constant density and no perceptible boundary.
-- Too many fused events: split the scene into individual generated assets.
+Read [sound-effect prompting](references/sound-effect-prompting.md) for prompt shape, one-shots, Foley, ambience, loops, prompt influence and troubleshooting. In short:
+- Describe what is heard, not what a camera sees: source, action, material, timing, perspective, space, texture, and a few focused exclusions ("no speech, no music").
+- Generate complex scenes as separate clean cues and assemble them later.
+- Set `loop: true` only for a steady texture with no unique events; never for a one-shot.
+- Improve an ambiguous prompt before changing `prompt_influence`.
 
 ## Completion standard
 

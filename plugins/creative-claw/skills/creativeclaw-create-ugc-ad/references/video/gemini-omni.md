@@ -1,6 +1,6 @@
 # Creative Claw : Gemini Omni
 
-Read [input modes and reference production](reference-production.md) before preparing media and [Review/Auto handling](review.md) before submission. These shared contracts take precedence over a storyboard recipe below. Never combine literal frames with reference arrays on standard routes. Load only this selected model guide, not every guide in the package.
+Read [input modes and reference production](reference-production.md) before preparing media and [Review/Auto handling](review.md) before submission. These shared contracts take precedence over any recipe below. Never combine literal frames with reference arrays on standard routes. Load only this selected model guide, not every guide in the package.
 
 Use the outcome skill's execution guidance for authorization, imports and job recovery.
 
@@ -10,7 +10,7 @@ Use `video/gemini-omni-flash` as Creative Claw's default video model. It is the 
 
 1. Define one clip: purpose, duration, aspect ratio, subject, action, camera, audio, and protected visual details.
 2. Search for reusable assets and import any ChatGPT attachments into Creative Claw before passing them to URL fields.
-3. Prefer a storyboard-first workflow when appearance or continuity matters. Generate and approve a clean full-frame start image with `image/nano-banana-2`; generate an end frame when the shot needs a precise destination and the current Omni schema exposes end-frame control.
+3. Follow the reference-first pipeline in [reference production](reference-production.md): one clean keyframe per shot, made at 16:9 or 9:16 (Omni's only ratios), then its per-shot mode rule. Skip keyframes only on an explicit direct-generation request, a ready shot image, or a source edit.
 4. Call `get_model_params({ model: "video/gemini-omni-flash" })` before generation when not already fetched for this task. Treat its current schema as authoritative.
 5. Choose `resolution` from the current schema when output size matters. The direct Google route supports `360p`, `720p` (default), `1080p`, and `4k`; 1080p and 4K are upscaled outputs. Explain the selected duration, ratio, resolution, references, and audio plan when useful. Reuse existing authorization, including an explicitly requested batch; ask only when a material choice is unresolved or the proposed work expands the requested scope.
 6. Call `generate_video` with `model: "video/gemini-omni-flash"`.
@@ -21,22 +21,21 @@ Use `video/gemini-omni-flash` as Creative Claw's default video model. It is the 
 
 | Intent | Inputs | Prompt emphasis |
 | --- | --- | --- |
-| Text-to-video | `prompt` only | Describe the complete visible scene and sound. |
+| Direct text-to-video (explicit request only) | `prompt` only | Describe the complete visible scene and sound. |
 | Animate a still | `image_url` | Describe what begins moving after the supplied first frame. |
 | Reference-guided video | `image_urls` | Bind every reference to a role with `<IMAGE_REF_N>`. |
 | Edit a source clip | one item in `video_urls` | Give one short change followed by “Keep everything else the same.” |
 
 Do not combine modes casually. Use `image_url` when an image must be the literal first frame. Use `image_urls` when images should guide identity, product appearance, wardrobe, environment, or style without becoming the opening frame.
 
-## Storyboard-first direction
+## Keyframes and continuity
 
 For ads, branded content, character work, and multi-clip sequences:
 
 1. Break the concept into short shots with one main action each.
-2. Generate each clean start frame separately with Nano Banana 2. Do not pass a labeled grid, contact sheet, panels, captions, or prompt text to the video model.
-3. Approve identity, wardrobe, product geometry, set design, lighting, composition, and ratio before animation.
-4. Use the approved image as `image_url`.
-5. When the next clip must continue the first, extract the last frame of clip N and use it as the start frame of clip N+1.
+2. Make each keyframe separately from the shared anchors (same image model, 16:9 or 9:16). Never pass a labeled grid, contact sheet, panels, captions, or prompt text to the video model.
+3. People, several subjects or big motion: pass `image_urls` = [keyframe, identity anchor, product anchor] and cite them with `<IMAGE_REF_N>`. An exact opening such as a product hero: pass the keyframe as `image_url` with no `image_urls` or `character_id`.
+4. For the next clip, return to the same anchors and look line. The last frame of clip N is only an extra composition cue for clip N+1, never a replacement for the anchors.
 
 This reduces visual drift and makes revisions local to one shot.
 
@@ -123,6 +122,8 @@ Natural beats work well:
 [3-6s] The cap lifts and cold vapor spills across the table.
 [6-8s] Hold on the clean hero angle.
 ```
+
+Omni accepts no audio input (`audio_urls`). Its dialogue is native: the model invents the voice, and the voice changes between clips. For an exact or recurring voice, route the shot as described in [voice in video](voice-in-video.md) instead of making speech first for Omni.
 
 Describe native audio explicitly:
 

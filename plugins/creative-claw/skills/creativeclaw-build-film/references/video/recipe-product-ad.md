@@ -8,13 +8,13 @@ Example request: "Make a 15-second vertical ad for this reusable bottle, with na
 
 ## Assets and reference generation
 
-Import the supplied product photo once. Treat it as the canonical packaging/geometry reference. If needed, use generate_image to produce one proposed hero frame at 9:16:
+Import the supplied product photo once. Treat it as the canonical packaging/geometry reference. Following the reference-first pipeline, use generate_image to make the hero keyframe at the video's 9:16 ratio:
 
 "Use the supplied bottle as the exact product reference: preserve its silhouette, cap, label, materials and proportions. Place it upright on a pale stone counter in soft morning side light. Medium product shot with room around the bottle for a later caption. No additional labels, invented markings or decorative text."
 
 Use current image-model reference fields. After creative approval, derive a use frame and closing packshot from the SAME product anchor and approved look. Do not derive every image solely from the previous generated image. Reuse suitable uploaded frames instead of generating extras. Inspect label accuracy and whether the cap/mechanism actually match the product.
 
-For separate narration, generate the approved script first with v4 for stock speech, or v2/Cartesia for a saved clone. Use actual audio duration to adjust the plan. Do not squeeze excessive copy into 15 seconds.
+For separate narration, generate the approved script first with the model that matches the voice: stock → its saved model (v4 by default), designed ElevenLabs → v4, Google-designed → `speech/gemini-3.8-flash-tts`, clone → v2, v4 or Cartesia. Set shot lengths from the result's `wordTimings`; at most 2.5 words per second, so about 35 words for 15 seconds.
 
 ## Video request
 

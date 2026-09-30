@@ -5,35 +5,41 @@ description: "Generate, animate, extend, reframe, or transform one video clip wi
 
 # Generate Video
 
-Read [video model selection](references/video/index.md), then only the selected model's guide. Model families are covered locally, with live-schema guidance for additional models; do not load every guide or require a sibling model skill. Read [reference production](references/video/reference-production.md) before preparing media and [Review/Auto handling](references/video/review.md) before submission.
+Read [video model selection](references/video/index.md), then only the selected model's guide. Model families are covered locally, with live-schema guidance for additional models; do not load every guide or require a sibling model skill. Read [Review/Auto handling](references/video/review.md) before submission.
 
 Read [shared execution guidance](references/workflow-basics.md) once per task before using tools. It covers existing authorization, model discovery, optional cost checks, imports, and recovery.
 
-Create one controlled video clip from text, a start frame, an optional end frame, or other model-supported references. Use the planning, UGC, or film skills when the deliverable is a larger production. Use `creativeclaw-render-html-video` only when the user explicitly requests HTML/HyperFrames/code-driven rendering; use `creativeclaw-add-video-intro-outro` for video bookends.
+Create one controlled video clip from text, a start frame, an optional end frame, or other model-supported references. Use the planning, UGC, or film skills when the deliverable is a larger production. Use `creativeclaw-render-html` only when the user explicitly requests HTML/HyperFrames/code-driven rendering; use `creativeclaw-edit-media` for video bookends.
 
 For a permanent watermark on a finished video or a sequence assembled from existing images, video clips, and optional audio, use `merge_media` through `creativeclaw-edit-media`. Read [assembly guidance](references/media-assembly.md) for `overlay_images` and `compose_video`. Preserve the existing media instead of generating replacement footage.
 
 For worked production flows, read only the relevant recipe: [product ad](references/video/recipe-product-ad.md), [consistent Character scene](references/video/recipe-character-scene.md), or [source edit and extension](references/video/recipe-source-edit.md). These explain asset preparation, shot prompting, assembly and output checks, without authorizing extra paid drafts.
 
-## Reference-first production
+## Reference-first pipeline
 
-Default to image preparation before new generative video: start with `generate_image` to establish a clean shot-specific reference, unless the user requests direct generation, declines supporting images, or already has an approved image suitable for the shot. Reuse approved identity, product and environment anchors when preparing that image, then include those anchors alongside the shot image wherever the selected video operation supports them. Prefer at least three complementary images when useful and supported; these can be existing assets, not three new paid generations. Read [image model selection](references/images/index.md) and only the chosen image guide, plus [the reference-first workflow](references/video/reference-production.md) for approval, Character sheets, audio-first control and cross-shot continuity. Existing references count; do not force extra paid assets, exceed model limits or ignore an explicit direct-generation request.
+Unless the user asked for direct text-to-video, supplied a ready shot image, or is editing footage, follow this before `generate_video`. A video request authorizes one keyframe per shot: say so, don't ask.
 
-Use the video's Review card as the single approval of its exact references and settings, without a duplicate chat approval. Honor separately requested earlier checkpoints and consent requirements. Review does not gate earlier image/audio charges. For connected clips, reuse stable visual/audio anchors and request dialogue, ambience and effects without independently generated music per shot.
+1. Anchors, reuse first: `search_assets`, `list_characters`, `get_theme`. Person: Character sheet + face portrait (real person: also their best original photo). Product: real photo or packshot, plus a label/logo close-up when text matters. A recurring person or product with no anchor: create it first (creativeclaw-create-avatar, creativeclaw-product-photoshoot).
+2. Look line: one sentence (palette, light, lens, medium), pasted into every keyframe and video prompt.
+3. Keyframe per shot: `generate_image` with the same image model all project (default `image/nano-banana-2`), `aspect_ratio` = the video's ratio, main anchor in `image_url`, others in `extras.image_urls`, roles named. One clean full-bleed frame; no text, grid or labels.
+4. Compare it to the anchors (face, label, logo, colors); fix with one targeted edit.
+5. Show keyframes and the plan (model, duration, ratio) in one message. Review mode: call `generate_video` now; the card is the approval. Auto: ask once unless the user said go.
+6. One mode per shot. People, several subjects or big motion: `image_urls` = [keyframe, identity anchor, product anchor], 2–4 total; `character_id` is fine here. Exact opening (product hero, logo reveal): `image_url` = keyframe, no `image_urls` or `character_id`.
+7. Next shot: same anchors and look line. A previous clip's last frame is only an extra composition cue.
 
-## Exact spoken audio
+Details: [reference production](references/video/reference-production.md). Image prompting: [image model index](references/images/index.md) and only the chosen guide.
 
-When the user specifies spoken words, a voice, pronunciation, or language, especially a language other than English, prefer to prepare the speech before generating the video. Reuse supplied audio or follow [Generate voiceover](../creativeclaw-generate-voiceover/SKILL.md) to create it in the requested language with a suitable voice. Preserve the exact script, check the recording and its duration, and include any paid speech generation in the authorized scope.
+## Voices
 
-Check the selected video model's current operation and audio-reference fields. If it accepts the recording, pass its URL as an audio reference and cite the model's exact audio token in the prompt. Quote the same spoken text and explicitly instruct the video model to use the supplied audio for the dialogue, language, voice, pauses, and timing, without translating, rephrasing, or inventing speech. An audio reference may guide a new soundtrack rather than preserve the original recording. When the delivered words or voice must be exact, retain the prepared audio as the final track through supported assembly.
+When a Character speaks and the voice is unknown, ask one question: design a new voice from a description (`design_voice`, three auditions), use your own voice (recording plus consent, creativeclaw-clone-voice), or pick a stock voice. If the voice doesn't matter, pick a stock voice and name it. Design auditions use the Character's real lines. In ChatGPT the Voice Studio card saves the choice; read it back from `list_characters` rather than saving again.
 
-If the chosen operation cannot accept an audio reference, use a compatible audio-driven route or generate a video without spoken audio and attach the prepared recording with `merge_media` after checking durations. An audio overlay does not automatically synchronize visible lips. See [audio-first control](references/video/reference-production.md#audio-first-control-and-continuity) and [assembly guidance](references/media-assembly.md).
+Then pick one path per speaking shot from [voice in video](references/video/voice-in-video.md): native dialogue for a one-off, or speech first for an exact or recurring voice (an audio-capable model, or `video/sync-3` on a finished clip). Gemini Omni, the default, accepts no audio: don't make speech first for an Omni shot. Keep lines to at most 2.5 words per clip second.
 
 ## Workflow
 
 1. Define the clip's purpose, aspect ratio, duration, subject, one primary action, camera move, visual continuity, dialogue or sound, and required end state.
-2. Search and inspect the media the user referenced. Recommend a bounded reference-image preparation stage, using those sources to generate appropriate shot references when needed. Prefer reference conditioning; a still is a start frame only when it should define the exact opening composition.
-3. When the user asks for examples, references, styles, or similar concepts—or an open brief would materially benefit from choosing among concrete directions—use `creativeclaw-find-examples`. Filter by `output_type: "video"`, then load only the selected result. Do not search before every clip.
+2. Unless the user asked for direct text-to-video, supplied a ready shot image, or is editing footage, follow the reference-first pipeline above before `generate_video`. Import media the user referred to first.
+3. When the user asks for examples, styles, or similar concepts, or an open brief would benefit from concrete directions, call `search_examples` with `output_type: "video"`, then load only the chosen result with `search_examples({ id })`. Do not search before every clip.
 4. Use `list_models({ category: "video" })` when choosing a model; for a known selection, use `get_model_params` directly. Reuse its current-task durations, resolutions, operations, and reference contract.
 5. Use `estimate_generation` with `operation: "video"` only when the user asks about cost, balance, affordability, or sets a budget. Treat returned alternatives as options; preserve explicitly chosen models, durations, and quality. Estimate-only requests do not authorize generation.
 6. State consequential settings briefly and proceed within the requested scope. Do not ask again when the user already requested the generation or approved that production stage.
@@ -73,13 +79,13 @@ For existing footage, do not apply the general generation ranking blindly:
 ## Reference rules
 
 - `image_url` is only the literal start frame. It selects image-to-video and makes the supplied image frame zero. `last_frame_url` is the desired end frame when the selected model exposes it.
-- `image_urls`, `video_urls`, and `audio_urls` are model-specific reference arrays. If a supplied image should guide identity, style, character, product, or composition instead of becoming frame zero, use `image_urls`, even for exactly one image. Prefer at least three complementary images when supported, reusing existing assets and respecting model limits; this is a quality recommendation, not a minimum enforced by every model.
-- A saved `character_id` supplies the Character image as the start frame only when no explicit `image_url` is provided. For literal-frame animation, build identity into the approved frame and omit reference arrays. For reference-guided composition, use ordered references and omit literal frames and `character_id`. Do not mix these modes unless the current model contract explicitly supports it.
+- `image_urls`, `video_urls`, and `audio_urls` are model-specific reference arrays. If a supplied image should guide identity, style, character, product, or composition instead of becoming frame zero, use `image_urls`, even for exactly one image. Use 2–4 strong references; more is not better.
+- `character_id` appends the saved image to `image_urls` as a reference, never a start frame. Use it in reference mode; omit it with `image_url`/`last_frame_url` (the server rejects that mix). For literal-frame animation, build identity into the approved frame and omit reference arrays.
 - Preserve exact quoted copy, reference labels, dialogue, timecodes, colors, and approved layout or edit constraints in the prompt.
 - Discover transformation support on the selected model and connected tool schema. Do not assume a generic top-level `operation` selector exists; use only currently exposed fields and model-supported `extras` controls. Never silently switch an explicitly chosen model to obtain a transformation.
 
 ## Prompt shape
 
-Prefer one subject action and one camera idea per clip. Describe what happens over time, not a pile of adjectives. Include exact spoken words only when needed, and specify what must not change. For multi-shot continuity, first create a storyboard and clean reference frames with `creativeclaw-plan-video`.
+Prefer one subject action and one camera idea per clip. Describe what happens over time, not a pile of adjectives. Include exact spoken words only when needed, and specify what must not change. For a multi-shot piece, plan it with `creativeclaw-plan-video`.
 
 Conduct the workflow in the user's language and preserve quoted dialogue exactly. Confirm the chosen model supports the requested spoken language before relying on native audio.

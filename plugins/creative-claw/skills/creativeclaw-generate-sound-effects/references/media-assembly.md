@@ -6,7 +6,7 @@
 
 | Need | Operation | Main inputs |
 | --- | --- | --- |
-| Add or replace an audio track on a video | `merge_audio_video` | `video_url`, `audio_url`; optional `start_offset` |
+| Replace a video's audio, or layer a track over it | `merge_audio_video` | `video_url`, `audio_url`; optional `audio_mode` (`replace` default, or `mix`), `original_volume`, `added_volume`, `start_offset` |
 | Concatenate full videos | `merge_videos` | Ordered `video_urls`; optional `video_fit`, `canvas_video_index`, `pad_color` |
 | Concatenate audio sequentially | `merge_audios` | Ordered `audio_urls`; optional `audio_format` |
 | Burn one or more fixed image watermarks onto a finished video | `overlay_images` | `video_url`, `overlays` |
@@ -29,7 +29,7 @@ For a permanent logo or copyright mark on an existing video, use `merge_media` w
 For a slideshow or simple montage from existing images and optional video clips, use `merge_media` with `operation:"compose_video"`. It accepts one to 25 `clips` in playback order.
 
 1. Each image needs `{type:"image",url,duration_seconds}`. Each video needs `{type:"video",url}` and plays for its full duration. Video source audio is included by default; set `include_audio:false` on a clip to omit it.
-2. An optional soundtrack is `audio:{url,start_delay_seconds?}`. The delay defaults to zero. The soundtrack mixes with enabled clip audio. `content_fit:"contain"` preserves the full image or frame with padding; `"cover"` fills the canvas by cropping.
+2. An optional soundtrack is `audio:{url,start_delay_seconds?}`. The delay defaults to zero. The soundtrack is layered at full level over enabled clip audio, with no volume control. `content_fit:"contain"` preserves the full image or frame with padding; `"cover"` fills the canvas by cropping.
 3. The first video defines output width and height. If there are only images, the first image defines the canvas, capped near 1080p. The result lasts through the longer of the visual sequence and delayed soundtrack, holding the final frame if needed. Resolve with `check_job` and verify order, framing, audio, and duration.
 
 ```json
@@ -40,9 +40,13 @@ Use `merge_videos` for only full video clips with their original audio. Use `com
 
 ## Timing before merging
 
-For narration-driven work, generate or reuse the final speech before locking clip durations. Use returned speech timestamps/alignment or inspected media duration, not word-count guesses. Native-dialogue video and edits of existing footage may use different timing anchors; do not generate redundant voiceover.
+For narration-driven work, generate or reuse the final speech before locking clip durations. Keep at most 2.5 spoken words per clip second, with about 0.5 s of air at each end, and lock durations from the audio's `wordTimings`, not word-count guesses. Native-dialogue video and edits of existing footage may use different timing anchors; do not generate redundant voiceover.
 
-`merge_audio_video` produces a result limited to the shorter input. Check both durations before submitting. To preserve a full video, provide an audio track covering its complete duration; trim excess only as needed. Do not silently shorten the video to fit a voiceover. If silence padding, looping, volume automation, or mixing is needed, use an available explicitly authorized editing method, or identify the missing capability before spending on a merge.
+`merge_audio_video` has two modes:
+- `audio_mode: "replace"` (default) discards the clip's audio, including dialogue and ambience, and ends at the shorter input. Check both durations; do not silently shorten the video to fit a voiceover.
+- `audio_mode: "mix"` keeps the clip's own sound, layers the new track over it, and keeps the video's full length. `original_volume` and `added_volume` (0–1, default 1) set each track's gain; use about 0.3 for music under speech. `start_offset` delays the new track.
+
+To let added audio run past the end of the clip, use `compose_video` with that one clip plus `audio:{url,start_delay_seconds}`; it layers at full level. There is no ducking or volume automation.
 
 ## More than five audio clips
 
@@ -62,7 +66,7 @@ Use the current merge controls to fit clips without extra scale jobs solely for 
 
 For `assemble_film`, the first shot supplies the canvas; there is no `canvas_video_index`. Use `video_fit:"pad"` when content preservation matters, `"crop"` for authorized cropping, or `"strict"` for matching frames. Use `mode:"connect"` to preserve complete clips. Use `"cut_end"` only when truncating clips to planned shot durations is intended and authorized.
 
-Store per-shot narration in `audioUrl`, then mux it into each appropriate clip and save the resulting `clipUrl` with `update_film_project({ id, patch_shots: [...] })`. If using one project-wide narration track instead, set the tool's top-level `audio_url`; the returned project represents it as `audioUrl`.
+Store per-shot narration in `audioUrl`, add it to its clip with `merge_audio_video` (`mix` keeps the shot's sound; `replace` discards it), and save the resulting `clipUrl` with `update_film_project({ id, patch_shots: [...] })`. A project-wide narration track goes in the tool's top-level `audio_url` (returned as `audioUrl`). `assemble_film` narration replaces every shot's audio; set `with_narration: false` when shots carry dialogue, then layer narration or music over the cut with `audio_mode: "mix"`.
 
 Call `assemble_film` only when every intended shot has its final `clipUrl`. Resolve the assembly job with `check_job`; completion saves `assembledUrl` and advances to `preview_ok`. Do not mark `final` before the applicable user review or prior completion instructions have been satisfied.
 

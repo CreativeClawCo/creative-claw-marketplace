@@ -1,6 +1,6 @@
 # Creative Claw : Seedance 2.5
 
-Read [input modes and reference production](reference-production.md) before preparing media and [Review/Auto handling](review.md) before submission. These shared contracts take precedence over a storyboard recipe below. Never combine literal frames with reference arrays on standard routes. Load only this selected model guide, not every guide in the package.
+Read [input modes and reference production](reference-production.md) before preparing media and [Review/Auto handling](review.md) before submission. These shared contracts take precedence over any recipe below. Never combine literal frames with reference arrays on standard routes. Load only this selected model guide, not every guide in the package.
 
 Use the outcome skill's execution guidance for authorization, imports and job recovery.
 
@@ -10,7 +10,7 @@ Use `video/seedance-2.5` for long, premium, reference-rich generation with nativ
 
 1. Define the deliverable, duration, ratio, shot count, subjects, continuity, audio, and reference roles.
 2. Search for existing assets and import every external image, video, or audio file into Creative Claw.
-3. Reuse supplied/approved references. Create storyboards only for requested planning or unresolved visual continuity; do not add a storyboard gate to a clear single-clip request.
+3. Follow the reference-first pipeline in [reference production](reference-production.md); skip keyframes only on explicit direct-generation requests. Reuse supplied and approved references.
 4. Create an end frame when the clip needs a precise landing pose, transition, loop, reveal, or match cut.
 5. Call `get_model_params({ model: "video/seedance-2.5" })`. Runtime values override remembered limits. For reference-to-video, choose `extras.omni_reference_task_type` deliberately rather than relying on prompt inference for edits or extensions.
 6. Assign every reference a written role and cite it with the exact `@ImageN`, `@VideoN`, or `@AudioN` token.
@@ -65,17 +65,17 @@ When the user wants existing footage left unchanged with a new beginning or endi
 
 For a long source that needs a change inside one interval, trim and edit only that interval, then merge it back between untouched spans. This lowers billed input duration and prevents avoidable changes elsewhere. If exact logos, text, numbers, uniforms, or faces are mandatory, state that generative editing cannot guarantee pixel-accurate preservation and prefer deterministic compositing for those details.
 
-## Storyboard-first production
+## Keyframe-first production
 
-When storyboarding is needed:
+For each shot:
 
 1. Write the shot's dramatic purpose and one visible action.
-2. Generate a clean start frame with the exact target ratio. Keep it full bleed and free of labels, panels, captions, arrows, or UI.
+2. Generate a clean keyframe at the exact target ratio from the shared anchors. Keep it full bleed and free of labels, panels, captions, arrows, or UI.
 3. Approve the character face, product geometry, wardrobe, environment, and lighting.
 4. Generate a compatible end frame if the motion must arrive somewhere specific.
 5. Collect separate reference images for identity, wardrobe, product details, location, and visual style.
 6. Use motion video references only for movement, camera cadence, blocking, or choreography.
-7. For specified speech, prepare the recording first using creativeclaw-generate-voiceover or reuse supplied audio. Use audio references for the requested dialogue, language, voice and timing, while recognizing that the model may generate a different recording. Inspect the finished speech and attach the prepared track during final assembly when exact words or voice are required.
+7. For specified speech, follow [voice in video](voice-in-video.md): prepare the recording first with creativeclaw-generate-voiceover, or reuse supplied audio. Use audio references for the requested dialogue, language, voice and timing, while recognizing that the model may generate a different recording. Inspect the finished speech and attach the prepared track during final assembly when exact words or voice are required.
 
 Do not make one image do every job. A start frame controls the opening composition; reference images control identity or style; an end frame controls the destination.
 

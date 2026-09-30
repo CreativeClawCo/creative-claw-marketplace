@@ -1,6 +1,6 @@
 interface:
   display_name: "Creative Claw: Generate Music"
-  short_description: "Compose polished music with ElevenLabs v2.5"
+  short_description: "Compose music, songs, beds, and stings"
   default_prompt: "Use $creativeclaw-generate-music to compose a polished music track for this request."
 dependencies:
   tools:

@@ -31,3 +31,5 @@ Conduct the workflow in the user's language and preserve all approved product an
 Compare every image against the source product for silhouette, proportions, cap or closure, logo, label text, materials, colors, and reflections. Also check shadows, contact with surfaces, crop safety, and consistency across the set. Reject attractive images that misrepresent the product.
 
 Tag approved assets consistently with product, campaign, shot type, aspect ratio, and status so video and UGC workflows can reuse them.
+
+For video, save a neutral packshot and a label/logo close-up as named anchors. Generate video keyframes at the video's ratio, not the campaign ratio.

@@ -22,8 +22,7 @@ Use `image/nano-banana-2` as Creative Claw's default for most image generation a
 | `model` | Always `image/nano-banana-2`. |
 | `image_url` | Primary edit source or most important reference; becomes Image 1. |
 | `extras.image_urls` | Additional ordered references; become Image 2 onward. |
-| `size` | Preferred common ratios: `1:1`, `4:5`, `5:4`, `9:16`, or `16:9`. |
-| `extras.aspect_ratio` | Use for model-specific ratios such as `21:9`, `3:2`, `4:3`, `5:4`, `3:4`, `2:3`, `4:1`, `1:4`, `8:1`, or `1:8`. |
+| `aspect_ratio` | Output ratio, such as `1:1`, `4:5`, `9:16`, `16:9`, `21:9`, `3:2`, `4:3`, `3:4`, `2:3`, `4:1`, `1:4`, `8:1`, or `1:8`; `get_model_params` lists the current set. Don't combine it with the legacy `size` or `extras.aspect_ratio`. |
 | `extras.resolution` | `0.5K`, `1K`, `2K`, or `4K`; default `1K`. |
 | `extras.thinking_level` | `minimal` or `high`; omit for ordinary work. |
 | `extras.enable_web_search` | Enable only when current real-world information is genuinely needed. |
@@ -100,7 +99,7 @@ General campaign image:
 ```json
 {
   "model": "image/nano-banana-2",
-  "size": "4:5",
+  "aspect_ratio": "4:5",
   "num_images": 2,
   "prompt": "Premium editorial photograph for a skincare launch. A translucent cobalt serum bottle stands on wet black stone, centered slightly below the upper third with clean negative space above. Soft white key light from the left and a narrow blue rim light reveal the glass thickness and condensation. Refined, quiet, tactile, realistic materials; pristine frame.",
   "extras": { "resolution": "1K" }

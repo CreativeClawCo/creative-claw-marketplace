@@ -1,6 +1,6 @@
 # Creative Claw : MiniMax H3 Max
 
-Read [input modes and reference production](reference-production.md) before preparing media and [Review/Auto handling](review.md) before submission. These shared contracts take precedence over a storyboard recipe below. Never combine literal frames with reference arrays on standard routes. Load only this selected model guide, not every guide in the package.
+Read [input modes and reference production](reference-production.md) before preparing media and [Review/Auto handling](review.md) before submission. These shared contracts take precedence over any recipe below. Never combine literal frames with reference arrays on standard routes. Load only this selected model guide, not every guide in the package.
 
 Use the outcome skill's execution guidance for authorization, imports and job recovery.
 
@@ -14,7 +14,7 @@ Do not invent an `h3-max-lite` model ID. The current faster lightweight route is
 
 1. Define one shot: duration, ratio, subject, action, camera, audio, and continuity anchors.
 2. Search or import source assets.
-3. Reuse a supplied opening image. Generate a storyboard only when requested or unresolved appearance/continuity needs it; a clear text-to-video request can proceed directly. Create missing boundary frames only when the requested transition needs them.
+3. Follow the reference-first pipeline in [reference production](reference-production.md); skip keyframes only on explicit direct-generation requests. Reuse a supplied opening image. Create an end frame only when the transition needs one.
 4. Fetch missing settings with `get_model_params` for the exact selected H3 Max or Turbo model; reuse its schema for unchanged shots.
 5. Choose text, first-frame, first-to-last, or reference mode deliberately.
 6. Assign every reference a role using H3 Max's one-based `Image 1`, `Video 1`, and `Audio 1` language.
@@ -26,7 +26,7 @@ Do not invent an `h3-max-lite` model ID. The current faster lightweight route is
 
 | Need | Model and inputs |
 | --- | --- |
-| Fast text-to-video | H3 Max with `prompt`. |
+| Direct text-to-video (explicit request) | H3 Max with `prompt`. |
 | Animate an approved opening | H3 Max with `image_url`. |
 | Controlled first-to-last motion | H3 Max with `image_url` and `last_frame_url`. |
 | Identity, style, motion, or audio references | H3 Max or Turbo with `image_urls`, `video_urls`, and/or `audio_urls`. |
@@ -54,13 +54,13 @@ Current limits are model-specific: up to 12 total reference files; reference vid
 
 If a supplied image should guide identity, style, character, product, or composition instead of becoming frame zero, put it in `image_urls`, even when there is exactly one image. Use singular `image_url` only when the requested result must begin on that exact image.
 
-## Storyboard-first direction
+## Keyframe-first direction
 
 H3 Max responds well when the opening composition is already solved:
 
 1. Turn the brief into two to four filmable beats.
-2. Generate an approved start frame at the final ratio.
-3. Use a separate character/product reference if the start frame does not show every protected detail clearly.
+2. Make a keyframe per shot at the final ratio from the shared anchors.
+3. People, several subjects or big motion: pass the keyframe and the identity/product anchors in `image_urls`. An exact opening: pass the keyframe as `image_url` with the protected details baked in, and no reference arrays.
 4. Generate a compatible end frame when pose, camera destination, product state, or continuity matters.
 5. Use motion video only to teach movement or camera rhythm; say which parts must not transfer.
 6. Use audio only to teach timing, speech, music, or sound texture.

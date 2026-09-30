@@ -1,6 +1,6 @@
 ---
 name: creativeclaw
-description: "Route mixed, ambiguous, cross-modal, or workspace-management requests through Creative Claw. Use when the user asks to use Creative Claw generally, needs several media types, or needs account balances, generation charges, purchases/subscriptions, assets, themes, onboarding, or existing-media editing such as watermarks and image-to-video assembly; prefer a focused skill for one clear outcome."
+description: "Route mixed, ambiguous, cross-modal, or workspace-management requests through Creative Claw. Use when the user asks to use Creative Claw generally, needs several media types, or asks about account balance and past charges, saved assets, brand themes, the curated examples catalog, or onboarding; prefer a focused skill for one clear outcome."
 ---
 
 # Creative Claw
@@ -11,7 +11,9 @@ Use the Creative Claw MCP server as a media workspace: source durable assets, ap
 
 ## Account and billing questions
 
-Use `manage_account` for current balance, recent generations and their recorded charges/refunds. For purchase and subscription management, open its account view and use the returned account-page controls; the tool itself is read-only. Read [account and cost guidance](references/workflows/account.md) before interpreting charges. Use `estimate_generation` for future quotes, not the cost of a past generation. Do not submit feedback automatically for an account question.
+Use `manage_account` for the current balance and for recent generations with their recorded charges and refunds. Read [account and cost guidance](references/workflows/account.md) before interpreting charges. Use `estimate_generation` for future quotes, not the cost of a past generation. Do not submit feedback automatically for an account question.
+
+Purchases and plans are handled on the Creative Claw website, not in chat. Do not start, price, or recommend a purchase; if asked, say so and share only an account link a tool returned.
 
 ## Operating rules
 
@@ -25,18 +27,14 @@ Use `manage_account` for current balance, recent generations and their recorded 
 8. **Do not invent tools or parameters.** If a tool is absent on the current client, follow `references/platform-client.md`. Use the exposed tool schema for top-level fields and `get_model_params` for model-specific settings.
 9. **Capture actionable feedback.** Use `submit_feedback` for bugs, missing features or models, confusing flows, generation-quality problems and praise only when the user asks or approves sending it. A complaint alone is not permission to contact the team. Read `references/workflows/feedback.md` before reporting.
 10. **Match the user's language.** Conduct the workflow in the user's language, preserve supplied scripts and visible copy exactly, and verify the selected model supports the requested spoken or rendered language.
-11. **Use examples deliberately.** For speech voice selection, use `get_model_params` and the voiceover workflow. For other media, route requests for examples, inspiration, styles, or a close starting point to `creativeclaw-find-examples`. Do not search the catalog before every generation.
-12. **Keep HTML rendering explicit.** Use `creativeclaw-render-html-image` or `creativeclaw-render-html-video` when the user explicitly requests HTML/CSS, HyperFrames, code-driven rendering, or accepts that proposed method. An exact text watermark graphic for `merge_media` `overlay_images` may use `render_html_image` with a transparent background. Ordinary image or video requests stay with the generative skills.
-
-## HTML-video example discovery
-
-For explicit HTML-video/HyperFrames work, look for relevant `search_examples` matches (use `render_type: "html_video"` when exposed) and load selected results with `get_example`. Returned `sourceType` distinguishes a complete HTML document from a downloadable ZIP project plus description. Inspect the source and decide what to adapt. Use single HTML for basic short videos; use ZIP only when adapting a selected full-project example or the user already has a full HyperFrames project. The `creativeclaw-render-html-video` skill covers both; shared timing, shader and design references apply to both. This does not route ordinary generative video requests into HTML rendering.
+11. **Use the examples catalog only on request.** When the user asks to browse examples or prompt ideas, follow [examples guidance](references/workflows/examples.md). Do not search the catalog before every generation, and leave variations and user-supplied style references to the generation skill. For speech voices, use `get_model_params` and the voiceover workflow.
+12. **Keep HTML rendering explicit.** Use `creativeclaw-render-html` when the user explicitly asks for HTML/CSS, HyperFrames, or code-driven rendering, supplies HTML, or accepts that method. It also finds HTML-video examples. An exact text watermark for `merge_media` `overlay_images` may use `render_html_image` with a transparent background. Ordinary image or video requests stay with the generative skills.
 
 ## Route the request
 
 | User wants | Primary route |
 | --- | --- |
-| Understand balance, past generation costs, charges/refunds, or manage purchases/subscriptions | `manage_account`, following [account guidance](references/workflows/account.md) |
+| Understand balance, past generation costs, or charges and refunds | `manage_account`, following [account guidance](references/workflows/account.md) |
 | Generate or edit one general image | `creativeclaw-generate-image` |
 | Create a consistent product image set | `creativeclaw-product-photoshoot` |
 | Generate, extend, reframe, or transform one video clip | `creativeclaw-generate-video` |
@@ -44,23 +42,23 @@ For explicit HTML-video/HyperFrames work, look for relevant `search_examples` ma
 | Produce a complete multi-shot film | `creativeclaw-build-film` |
 | Create a creator-style product ad | `creativeclaw-create-ugc-ad` |
 | Generate narration, dialogue, or speech | `creativeclaw-generate-voiceover` |
+| Design a new synthetic voice from a description | `creativeclaw-generate-voiceover` (`design_voice`) |
 | Generate a score, music bed, sting, jingle, theme, or song | `creativeclaw-generate-music` |
 | Generate sound effects, ambience, Foley, loops, impacts, or UI cues | `creativeclaw-generate-sound-effects` |
-| Clone a consented voice | `creativeclaw-clone-voice` |
-| Browse, filter, load, or adapt curated examples | `creativeclaw-find-examples` |
-| Explicitly render HTML/CSS as a PNG | `creativeclaw-render-html-image` |
-| Explicitly render HTML/HyperFrames motion as video | `creativeclaw-render-html-video` |
-| Add or create an intro/outro around existing video | `creativeclaw-add-video-intro-outro` |
+| Clone a consented voice from a recording | `creativeclaw-clone-voice` |
+| Browse or adapt curated examples when asked | [examples guidance](references/workflows/examples.md) |
+| Explicitly render HTML/CSS as a PNG, or HTML/HyperFrames motion as video | `creativeclaw-render-html` |
+| Add or create an intro/outro around existing video | `creativeclaw-edit-media` |
 | Create a personal avatar from photos or a reusable identity sheet | `creativeclaw-create-avatar` |
 | Create or update a reusable Character | `creativeclaw-create-character` |
-| Report a bug, request, quality issue, or praise | `creativeclaw-submit-feedback` |
+| Send feedback the user asked for or approved | `creativeclaw-submit-feedback` |
 | Find, import, name, tag, reuse, or delete media | `references/workflows/asset-library.md` |
 | Create, inspect, edit, or apply a brand theme | `references/workflows/brand-theme.md` |
 | Trim, resize, caption, transcribe, clean, or combine existing media | `creativeclaw-edit-media` |
 | Burn a transparent logo or copyright image onto a finished video | `creativeclaw-edit-media`, using `merge_media` with `operation:"overlay_images"`; read [assembly guidance](references/media-assembly.md) |
 | Make a video from timed images, optional video clips, and optional audio | `creativeclaw-edit-media`, using `merge_media` with `operation:"compose_video"`; read [assembly guidance](references/media-assembly.md) |
 | Select highlights from long footage and create vertical Reels | `creativeclaw-create-reels` |
-| Cut, reorder, and reframe chosen video moments | `creativeclaw-cut-and-reframe-video` |
+| Cut, reorder, and reframe chosen video moments | `creativeclaw-edit-media` (`cut_and_reframe_video`) |
 | Learn what Creative Claw can do | `references/workflows/onboard.md` |
 
 Use an explicit outcome over a generic modality. If the user names a model, keep the outcome skill in control and use the matching packaged model reference for prompt and reference details. Use this root skill for requests that span outcomes or do not have one clear owner. Read the matching workflow before calling a mutating or paid tool.
@@ -69,8 +67,8 @@ Use an explicit outcome over a generic modality. If the user names a model, keep
 
 - **Images:** default to `image/nano-banana-2` for most generation and editing. It is the primary cost-efficient recommendation because it offers the best overall balance of quality, speed, and cost. Use `image/gpt-image-2.5-flare` for fast OpenAI image work, and escalate to `image/nano-banana-pro`, `image/gpt-image-2.5-sunburst`, or `image/seedream-5-pro` when their specialty materially improves the requested result. Do not proactively surface lower-tier or internal-route variants.
 - **Video:** default to `video/gemini-omni-flash`. Recommend `video/seedance-2.5` for premium long or reference-rich work, `video/seedance-2.0-mini` as Seedance Mini for inexpensive drafts, `video/minimax-h3-max` for fast cinematic native-audio work, or `video/minimax-h3-max-turbo` for the faster lightweight H3 Max route. For existing footage, route through `references/workflows/edit-video.md` instead of applying this generation ranking. Never recommend or proactively route to an LTX or DreamActor model.
-- **Speech:** default to `speech/elevenlabs-v4` for all non-cloned speech, including stock voices, expressive delivery, and dialogue. For cloned voices, recommend `speech/cartesia-sonic` or `speech/elevenlabs-v2`, respecting the saved clone provider and explicit user choice. Do not recommend v3 or v4 for clones by default. Never clone without consent or silently switch providers. Honor explicitly requested supported models. Load `creativeclaw-generate-voiceover` for the selected model's reference and current settings.
-- **Audio:** use `generate_sound_effect` with `sfx/elevenlabs-sound-v2` for sound effects, Foley, ambience, and loops. Use `generate_music` with `music/elevenlabs-music-v2.5` for scores, music beds, stings, jingles, and songs. Do not pass non-speech model IDs to `generate_speech`.
+- **Speech:** default to `speech/elevenlabs-v4` for all non-cloned speech, including stock voices, expressive delivery, and dialogue. For cloned voices, recommend `speech/cartesia-sonic` or `speech/elevenlabs-v2`, respecting the saved clone provider and explicit user choice. Do not recommend v3 or v4 for clones by default. Designed voices speak with `speech/elevenlabs-v4` (ElevenLabs designs) or `speech/gemini-3.8-flash-tts` (Google designs). Never clone without consent or silently switch providers. Honor explicitly requested supported models. Load `creativeclaw-generate-voiceover` for the selected model's reference and current settings.
+- **Audio:** use `generate_sound_effect` with `sfx/elevenlabs-sound-v2` for sound effects, Foley, ambience, and loops. Use `generate_music` for scores, music beds, stings, jingles, and songs; `creativeclaw-generate-music` picks the music model. Do not pass non-speech model IDs to `generate_speech`.
 
 Verify missing capabilities with runtime discovery, then reuse the selected schema for unchanged operations within the task.
 
@@ -79,7 +77,7 @@ For image prompting, load [the selected image model reference](references/images
 ## Shared production pattern
 
 1. Clarify the deliverable, audience, duration or dimensions, and required references.
-2. Search the asset library when saved media, project reuse, or continuity matters; skip the search for standalone generation. Import supplied references only when needed. When the user wants inspiration or a starting point, search curated examples and load only the selected example.
+2. Search the asset library when saved media, project reuse, or continuity matters; skip the search for standalone generation. Import supplied references only when needed. Search curated examples only when the user asks for them, and load only the selected one.
 3. Fetch the selected theme for branded work.
 4. Inspect available models and the chosen model's parameters.
 5. State consequential settings briefly; honor existing authorization and user-requested review stages without asking again.
@@ -90,16 +88,13 @@ For image prompting, load [the selected image model reference](references/images
 
 ## Default visual preparation for video
 
-For new generative video requests, follow the selected video outcome skill's image-first workflow: prepare a clean shot image with `generate_image`, reuse approved canonical identity/product/location references, and send the actual images to the video model where supported. Honor direct-generation requests, suitable approved shot images, and budget constraints. Keep this as workflow guidance, not a blocking tool preflight.
+For new generative video, follow the selected video skill's reference-first workflow: one clean keyframe per shot with `generate_image` at the video's aspect ratio, built from approved identity, product, or location anchors, then pass it to the video model. A video request covers these keyframes; say so rather than asking. Skip them only when the user asks for direct text-to-video, supplies a ready shot image, or is editing footage.
 
 ## References
 
 - `references/tool-catalog.md` — current tool routing by purpose.
+- `references/workflows/examples.md` — the curated examples catalog.
 - `references/async-jobs.md` — queued-job handling.
 - `references/platform-upload.md` — attachment, local-file, picker, and URL ingestion.
 - `references/platform-client.md` — client capability and connection rules.
 - `references/platform-dimensions.md` — common image and video sizes.
-
-## ElevenLabs model routing
-
-Use `creativeclaw-generate-voiceover` for speech routing. V4 is the recommended default, v2 is for a steadier existing clone, and Cartesia is recommended for fast cloned speech too. Read the selected model reference; do not transfer tags or settings between providers.

@@ -10,8 +10,9 @@ Package access does not mean loading every guide. Honor an explicit model choice
 | H3 Max, H3 Max Extend, and H3 Max Fast/Turbo | [MiniMax H3 Max](minimax-h3-max.md), cinematic motion, source continuation, and native audio |
 | Wan 3.0 | [Wan](wan-3.md), supported long shots, references and source transformations |
 | Veo, Grok, FLUX, Sora, Kling, H3, Hailuo, HappyHorse, HeyGen or another explicitly requested route | [Additional models](other-models.md), model-specific distinctions and live-schema lookup |
+| Lip-sync a finished clip to prepared speech | [video/sync-3](other-models.md) |
 
-Read [reference production](reference-production.md) when preparing shot assets and [Review/Auto](review.md) before generation. Model guides do not authorize extra paid drafts, retries, feedback messages or changing providers.
+Read [reference production](reference-production.md) when preparing shot assets, [voice in video](voice-in-video.md) when a shot has speech, and [Review/Auto](review.md) before generation. Model guides do not authorize extra paid drafts, retries, feedback messages or changing providers.
 
 Planning-only requests can use this selection index without reading every model guide. Read a specific guide when committing model-specific timing, references or shot constraints. Do not render clips unless production was requested.
 

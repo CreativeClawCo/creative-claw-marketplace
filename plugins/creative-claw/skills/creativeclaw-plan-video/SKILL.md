@@ -13,17 +13,25 @@ Convert a concept into an execution-ready video plan before spending on clips. T
 
 For worked production flows, read only the relevant recipe: [product ad](references/video/recipe-product-ad.md), [consistent Character scene](references/video/recipe-character-scene.md), or [source edit and extension](references/video/recipe-source-edit.md). These explain asset preparation, shot prompting, assembly and output checks, without authorizing extra paid drafts.
 
-## Reference-first production
+## Reference-first pipeline
 
-Default to image preparation before new generative video: start with `generate_image` to establish a clean shot-specific reference, unless the user requests direct generation, declines supporting images, or already has an approved image suitable for the shot. Reuse approved identity, product and environment anchors when preparing that image, then include those anchors alongside the shot image wherever the selected video operation supports them. Prefer at least three complementary images when useful and supported; these can be existing assets, not three new paid generations. Read [image model selection](references/images/index.md) and only the chosen image guide, plus [the reference-first workflow](references/video/reference-production.md) for approval, Character sheets, audio-first control and cross-shot continuity. Existing references count; do not force extra paid assets, exceed model limits or ignore an explicit direct-generation request.
+Unless the user asked for direct text-to-video, supplied a ready shot image, or is editing footage, follow this before `generate_video`. Planning stops after step 5 unless production was requested. A video request authorizes one keyframe per shot: say so, don't ask.
 
-Use the video's Review card as the single approval of its exact references and settings, without a duplicate chat approval. Honor separately requested earlier checkpoints and consent requirements. Review does not gate earlier image/audio charges. For connected clips, reuse stable visual/audio anchors and request dialogue, ambience and effects without independently generated music per shot.
+1. Anchors, reuse first: `search_assets`, `list_characters`, `get_theme`. Person: Character sheet + face portrait (real person: also their best original photo). Product: real photo or packshot, plus a label/logo close-up when text matters. A recurring person or product with no anchor: create it first (creativeclaw-create-avatar, creativeclaw-product-photoshoot).
+2. Look line: one sentence (palette, light, lens, medium), pasted into every keyframe and video prompt.
+3. Keyframe per shot: `generate_image` with the same image model all project (default `image/nano-banana-2`), `aspect_ratio` = the video's ratio, main anchor in `image_url`, others in `extras.image_urls`, roles named. One clean full-bleed frame; no text, grid or labels.
+4. Compare it to the anchors (face, label, logo, colors); fix with one targeted edit.
+5. Show keyframes and the plan (model, duration, ratio) in one message. Review mode: call `generate_video` now; the card is the approval. Auto: ask once unless the user said go.
+6. One mode per shot. People, several subjects or big motion: `image_urls` = [keyframe, identity anchor, product anchor], 2–4 total; `character_id` is fine here. Exact opening (product hero, logo reveal): `image_url` = keyframe, no `image_urls` or `character_id`.
+7. Next shot: same anchors and look line. A previous clip's last frame is only an extra composition cue.
+
+Details: [reference production](references/video/reference-production.md). Image prompting: [image model index](references/images/index.md) and only the chosen guide.
 
 ## Plan the story
 
-1. Define objective, audience, channel, aspect ratio, target runtime, brand, required Characters or products, audio approach, and call to action.
+1. Define objective, audience, channel, aspect ratio, target runtime, brand, required Characters or products, audio approach, and call to action. Give each speaking shot a voice path (native dialogue, speech first, or voiceover) from [voice in video](references/video/voice-in-video.md), and note whose voice it is.
 2. Write a concise beat outline and script. Prefer a clear opening hook, progression, payoff, and ending.
-3. Break the piece into shots. Each shot gets one primary action, one camera idea, a start state, end state, dialogue or narration, and a model-supported duration.
+3. Break the piece into shots. Each shot gets one primary action, one camera idea, a start state, end state, dialogue or narration, and a model-supported duration. Keep speech to at most 2.5 spoken words per clip second, with about 0.5 s of air at each end; lock durations from the audio's `wordTimings`.
 4. Choose likely models with `list_models` and inspect them with `get_model_params`. Duration and reference limits are per model; never impose a universal clip length.
 
 Write the plan in the user's language and preserve approved dialogue or on-screen copy exactly.
@@ -32,10 +40,10 @@ Write the plan in the user's language and preserve approved dialogue or on-scree
 
 For a visual storyboard request, create the needed artifacts with `creativeclaw-generate-image`. A text-only plan does not require images; reuse approved frames and skip duplicate review boards when unnecessary:
 
-- A review board or contact sheet for fast approval of composition, pacing, and continuity.
-- Clean, text-free shot images for the selected input mode. A literal start frame and a composition reference are different. Follow [reference production](references/video/reference-production.md); do not feed a labeled grid as frame zero.
+- A review board or contact sheet for fast approval of composition, pacing, and continuity, only when useful.
+- One clean, text-free keyframe per shot, made as in the pipeline above. Never feed a labeled grid to a video model.
 
-Preserve Character identity, product geometry, wardrobe, palette, screen direction, time of day, and recurring locations across frames. Use Nano Banana 2 by default because it is the cost-efficient image model for most storyboard work.
+Preserve Character identity, product geometry, wardrobe, palette, screen direction, time of day, and recurring locations across frames. Use one image model for the whole project, Nano Banana 2 by default.
 
 ## Optional Film project
 

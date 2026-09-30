@@ -5,8 +5,8 @@ Match the model to the shot, reference structure, duration, resolution, audio ne
 ## Workflow
 
 1. Define the deliverable: single shot or sequence, duration, ratio, subject, action, camera, audio, and continuity requirements.
-2. Search for existing reference assets. For branded work, fetch the theme. For a reusable persona, use `character_id`.
-3. Use a first-frame image when visual control or identity matters. Do not force this step for a loose text-to-video experiment where exploration is the goal.
+2. Follow the reference-first pipeline in [reference production](../video/reference-production.md): reuse anchors (`search_assets`, `list_characters`, `get_theme`), write one look line, and make one keyframe per shot with `generate_image` at the video's aspect ratio. Skip keyframes only when the user asks for direct text-to-video, supplies a ready shot image, or is editing footage.
+3. Pick one input mode per shot: people, several subjects or big motion → `image_urls` (keyframe + 2–3 anchors); exact opening → `image_url` = keyframe, no `image_urls` or `character_id`. For speech, pick a path from [voice in video](../video/voice-in-video.md).
 4. Use `list_models({ category: "video" })` when discovery is needed and `get_model_params` for missing settings on the selected model; reuse schemas already fetched in this task.
 5. State consequential settings briefly and proceed within existing authorization. Estimate with `operation: "video"` only for user-requested cost/budget help; do not add a routine approval question.
 6. Call `generate_video`. Preserve literal reference tokens and timecodes.
@@ -35,7 +35,7 @@ For source-video work, use the edit-specific ranking instead of the table above:
 - `image_url` is only the literal start/source image for image-to-video. If an image is a soft reference and should not become frame zero, use `image_urls`, even for one image.
 - `last_frame_url` or the model's discovered boundary-frame field controls the end only on compatible models.
 - `image_urls`, `video_urls`, and `audio_urls` are top-level video-tool reference arrays when supported. Do not move them into `extras` unless `get_model_params` explicitly says so.
-- `character_id` supplies the saved Character anchor and description.
+- `character_id` appends the saved image to `image_urls` as a reference, never a start frame. Use it in reference mode; omit it with `image_url`/`last_frame_url` (the server rejects that mix).
 - Use the exact token syntax required by the model. Examples include Seedance `@Image1`/`@Video1`/`@Audio1`, Kling `@Element1`, HappyHorse `@character1`, and Grok `<IMAGE_0>`. Verify the current schema and pass the prompt verbatim.
 - Do not feed a labeled storyboard grid to a video model. Use clean, full-bleed generation frames.
 
@@ -70,8 +70,8 @@ Give each short shot one main action and one camera idea. Use time blocks for mu
 ## Multi-clip strategies
 
 - **Parallel montage:** independent shots, generated together after approval.
-- **Serial continuity:** extract the last frame of clip N and use it as the start of clip N+1.
-- **Shared anchor:** reuse one approved Character/product/style image across shots.
+- **Shared anchors (default):** every shot's keyframe and video request reuse the same Character/product/style anchors and look line.
+- **Serial continuity:** a previous clip's last frame (`extract_frames`) is only an extra composition cue, never a replacement for the anchors.
 - **Single-call multi-shot:** use a runtime model with native multi-shot structure only when its discovered schema fits the sequence.
 
-Use `merge_media` only after individual clips are approved. Use `extract_frames` to create continuity anchors and `generate_speech` before timing narration-driven shots.
+Use `merge_media` only after individual clips are approved. Use `generate_speech` before timing narration-driven shots.

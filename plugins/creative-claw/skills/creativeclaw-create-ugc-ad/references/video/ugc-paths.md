@@ -4,16 +4,16 @@ Choose by what the user wants on screen. These are references within Create UGC 
 
 ## Product-only with off-camera narration
 
-Use when no visible speaker is needed. Start with approved product images, then follow [product-ad recipe](recipe-product-ad.md). Generate speech first when it determines pacing: v4 for stock voices, v2 only for a saved clone, or Cartesia as a recommended clone option. Match product visibility and demonstrations to the words. Add captions through editing, not generated label text. There is no lip-sync requirement.
+Use when no visible speaker is needed. Start with approved product images, then follow [product-ad recipe](recipe-product-ad.md). Generate speech first when it determines pacing, with the model that matches the voice: stock → its saved model (v4 by default), designed ElevenLabs → v4, Google-designed → `speech/gemini-3.8-flash-tts`, clone → v2, v4 or Cartesia. Match product visibility and demonstrations to the words. Add captions through editing, not generated label text. There is no lip-sync requirement.
 
 ## Visible speaking presenter
 
-First establish or reuse an approved avatar. Use a clean face image, not a labeled character-sheet grid as literal frame zero. Separate three choices:
-- Native model dialogue: verify language and audio support; quote the exact short line and identify the speaker. A saved Character visual does not automatically activate its voice.
-- Finished cloned speech driving a talking avatar: generate approved audio with the saved character_id, then use a video model that explicitly accepts that audio. For HeyGen Avatar 4, consult current get_model_params for the model-specific audio_url placement; it overrides its prompt/voice synthesis. Do not pass a private cloning sample as final narration.
-- Speech used only as a background voiceover: suitable when the presenter is not visibly speaking. Muxing audio onto talking footage does not create lip-sync.
+First establish or reuse an approved avatar. Use a clean face image, not a labeled character-sheet grid as literal frame zero. Pick the voice path per speaking shot from [voice in video](voice-in-video.md):
+- Native dialogue (path A): quick one-offs. Quote the exact short line and name the speaker. The model invents the voice; a saved Character visual does not bring its voice.
+- Exact or recurring voice (path B): speech first from the saved Character voice, then an audio-capable model, `video/sync-3` on a finished clip, or HeyGen Avatar 4 for a single talking head. Never pass a private cloning sample as final narration.
+- Voiceover with no visible speech (path C): laying audio over talking footage does not create lip-sync.
 
-Read the selected model's guide for face/audio inputs and reference-mode exceptions. Keep speech short enough for natural timing. Inspect lip movement, pronunciation, expression and likeness. If the model cannot support the intended voice/language, explain and propose a supported path before spending.
+Read the selected model's guide for face/audio inputs and reference-mode exceptions. Keep speech to at most 2.5 words per clip second. Inspect lip movement, pronunciation, expression and likeness. If the model cannot support the intended voice/language, explain and propose a supported path before spending.
 
 ## Demonstration or unboxing
 

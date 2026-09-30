@@ -1,6 +1,6 @@
 ---
 name: creativeclaw-clone-voice
-description: Guide recording, private upload, cloning, testing, and reuse of a consented personal voice with ElevenLabs or Cartesia. Use when someone asks to clone their voice, save it on a Character, or replace or audition a clone.
+description: Guide recording, private upload, cloning, testing, and reuse of a consented personal voice with ElevenLabs or Cartesia. Use when someone asks to clone their voice, save it on a Character, or replace or audition a clone. Not for inventing a new voice from a description; use creativeclaw-generate-voiceover.
 ---
 
 # Clone your voice
@@ -8,6 +8,8 @@ description: Guide recording, private upload, cloning, testing, and reuse of a c
 Read [shared execution guidance](references/workflow-basics.md) before tools and [recording, upload, consent and reuse](references/voices/cloning.md) for this workflow.
 
 Help the user record at least one minute of clean solo speech, upload it privately, clone it, audition a short sample, and reuse the saved Character. One to two minutes is our onboarding recommendation, not a universal provider API minimum.
+
+Without a consented recording, offer design_voice instead ([voice design](references/voices/voice-design.md)).
 
 1. Identify the intended language, delivery and an existing Character, if any. Reuse an avatar's Character instead of creating a duplicate.
 2. Explain the selected provider and confirm ownership or speaker permission before sending the sample for cloning. Possessing a recording is not consent.
@@ -17,6 +19,8 @@ Help the user record at least one minute of clean solo speech, upload it private
 6. Reuse `character_id`, not the private source recording, for future speech. Never replace a saved voice merely to change speech models.
 
 ## Choose the synthesis model
+
+A clone works with ElevenLabs v2, v4 or Cartesia; pass the model explicitly.
 
 - [ElevenLabs v2](references/voices/elevenlabs-v2.md): steady cloned narration in its supported languages.
 - [Cartesia Sonic](references/voices/cartesia.md): fast, natural cloned speech and supported delivery controls.

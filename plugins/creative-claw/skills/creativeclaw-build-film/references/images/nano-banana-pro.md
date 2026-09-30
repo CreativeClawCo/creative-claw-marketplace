@@ -22,8 +22,7 @@ Use `image/nano-banana-pro` when a brief is too complex or high-stakes for the d
 | `model` | Always `image/nano-banana-pro`. |
 | `image_url` | Primary scene, canvas, or identity reference; becomes Image 1. |
 | `extras.image_urls` | Additional ordered references; become Image 2 onward. |
-| `size` | Preferred common ratios: `1:1`, `4:5`, `5:4`, `9:16`, or `16:9`. |
-| `extras.aspect_ratio` | `auto`, `21:9`, `16:9`, `3:2`, `4:3`, `5:4`, `1:1`, `4:5`, `3:4`, `2:3`, or `9:16`. |
+| `aspect_ratio` | Output ratio, such as `1:1`, `4:5`, `5:4`, `9:16`, `16:9`, `21:9`, `3:2`, `4:3`, `3:4`, or `2:3`; `get_model_params` lists the current set. Don't combine it with the legacy `size` or `extras.aspect_ratio`. |
 | `extras.resolution` | `1K`, `2K`, or `4K`; default `1K`. |
 | `extras.enable_web_search` | Use only when the image depends on current external information. |
 | `num_images` | 1,4; use one for a locked design and several for real concept exploration. |
@@ -102,7 +101,7 @@ Multi-reference campaign:
   "model": "image/nano-banana-pro",
   "image_url": "<approved-layout-url>",
   "prompt": "Image 1 is the exact composition blockout. Image 2 is the exact athlete identity. Image 3 is the exact shoe. Image 4 is lighting and color only. Render a finished 4:5 luxury sports campaign following Image 1's placement and negative space. Preserve the athlete's face, body proportions, and pose from Image 2. Preserve the shoe silhouette, sole geometry, materials, colorway, and logo from Image 3. Apply only the silver-blue rim light and wet asphalt palette from Image 4. Photorealistic materials, crisp subject, subtle rain, no annotations or additional text.",
-  "size": "4:5",
+  "aspect_ratio": "4:5",
   "extras": {
     "image_urls": ["<athlete-url>", "<shoe-url>", "<lighting-url>"],
     "resolution": "2K"
