@@ -43,6 +43,6 @@ Ask the user to assess identity, accent, clarity and pacing. Do not claim to hav
 
 Reuse character_id for future generate_speech calls. ElevenLabs v2 and v4 reuse the same ElevenLabs clone. When the user selects Cartesia, a missing Cartesia clone can be created from the retained consented source. Do not re-clone simply to switch models. Never silently substitute providers or stock voices after a failure.
 
-A Character may contain both images and a voice. Its visual use in generated images/videos does not bring its voice into native video audio. For visible speech, make the speech first and use an audio-driven route such as `video/sync-3`; overlaying speech is not lip-sync. Submit feedback only when the user requests it, without exposing private samples.
+A Character may contain both images and a voice. Its visual use in generated images/videos does not bring its voice into native video audio. For visible speech, make the speech first and use an audio-driven route such as `video/sync-3`; overlaying speech is not lip-sync. Report concrete product or quality issues without a separate confirmation, unless the user asks you not to report them. Do not expose private samples.
 
 Recording guidance: [ElevenLabs instant cloning](https://elevenlabs.io/docs/eleven-creative/voices/voice-cloning/instant-voice-cloning).

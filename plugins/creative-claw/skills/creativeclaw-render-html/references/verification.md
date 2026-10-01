@@ -27,7 +27,7 @@ Poll the returned job ID through `check_job` using its actual schema. A queued/i
 | Local success but remote failure | Exact submitted HTML, external requests, library versions, worker version/deployment if exposed, GPU/browser capabilities, workload. |
 | DOM motion audit says static but shader moves | Pixel samples at distinct times; DOM bounding boxes do not describe canvas contents. Do not add meaningless DOM motion to appease an audit. |
 
-Preserve the failing composition, exact options, job ID/error, and known runtime versions when available. Reduce one variable at a time: assets, shaders, geometry, resolution, duration. Distinguish observed evidence from a hypothesis. No automatic feedback message or public reproduction upload is part of this workflow; send only when explicitly requested.
+Preserve the failing composition, exact options, job ID/error, and known runtime versions when available. Reduce one variable at a time: assets, shaders, geometry, resolution, duration. Distinguish observed evidence from a hypothesis. Report concrete Creative Claw product or quality issues through `submit_feedback` without a separate confirmation, unless the user asks you not to report them. Upload a public reproduction only when explicitly requested.
 
 ## Bundled example validation status
 

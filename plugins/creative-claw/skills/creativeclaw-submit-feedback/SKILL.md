@@ -1,6 +1,6 @@
 ---
 name: creativeclaw-submit-feedback
-description: "Send user-approved feedback to the Creative Claw team. Use when the user asks to send feedback or approves an offer to report; not for refunds or fixing media."
+description: "Send actionable product and quality feedback to the Creative Claw team without a separate confirmation; not for refund requests or fixing media."
 ---
 
 # Submit Feedback
@@ -9,18 +9,20 @@ Read [shared execution guidance](references/workflow-basics.md) once per task be
 
 Turn the user's report into one concise, useful `submit_feedback` call. Feedback is a product-feedback channel, not a refund request form, a generation tool, or a promise of compensation, reply, or roadmap commitment.
 
+Proactively report meaningful quality problems so the team can improve future generations. One isolated quality issue is worth reporting; repeated failure is not required. Send useful feedback without asking for a separate confirmation, unless the user asks you not to report it.
+
 ## What can be reported
 
-Send a report only when the user asks or approves. Topics:
+Report meaningful issues you observe and feedback the user expresses without asking for a separate confirmation. Respect a request not to report feedback. Topics:
 
 - A tool failed, returned the wrong state, or behaved inconsistently.
-- An image, video, or voice result had a repeatable quality problem.
+- An image, video, or voice result had a concrete quality problem, even on a single attempt.
 - A workflow or instruction was confusing.
 - A completed image, video, or voice result missed creative expectations without a confirmed technical malfunction.
 - The user asks for a missing feature, integration, format, or model.
-- The user explicitly asks to send praise or product feedback.
+- The user expresses praise or product feedback.
 
-Do not treat subjective dissatisfaction as a technical bug, submit a refund request through this channel, silently report generation failures, or use this skill when the user only wants help revising media. If a completed, playable video is simply disappointing, it may be reported as `generation_quality`, but that does not imply refund eligibility. If you observed the issue rather than receiving an explicit request, offer to report it and wait for approval.
+Do not treat subjective dissatisfaction as a technical bug or submit a refund request through this channel. Reporting feedback should not interrupt helping the user revise their media. If a completed, playable video is simply disappointing, it may be reported as `generation_quality`, but that does not imply refund eligibility. Use source="agent" for issues you observed and source="user" for the user's own feedback.
 
 ## Charges, improvement and critical issues
 
@@ -34,6 +36,8 @@ For critical issues, users can also contact [support@creativeclaw.co](mailto:sup
 
 Include the user's intended outcome, what happened, expected behavior, useful reproduction details, model or tool involved, and practical impact. Exclude secrets, credentials, unnecessary personal information, and unsupported guesses.
 
+Describe the quality gap without turning it into a refund or compensation request. Do not infer refund intent or suggest asking for credits back. If the user explicitly wants a refund or compensation, direct them to [support@creativeclaw.co](mailto:support@creativeclaw.co) with the relevant job ID. Still report any concrete underlying quality issue as product feedback, without adding a refund request.
+
 Map the report to the exact schema:
 
 - `category`: `bug`, `generation_quality`, `missing_feature`, `confusing`, `praise`, or `other`
@@ -44,4 +48,4 @@ Map the report to the exact schema:
 
 ## Submit and continue
 
-After the user asks or approves, call `submit_feedback` once per distinct issue. Confirm what category was sent without promising a response. If the user still needs help, continue with a safe workaround or corrected workflow after submitting.
+Call `submit_feedback` once per distinct issue without asking for a separate confirmation, unless the user asks you not to report it. Confirm what category was sent without promising a response. If the user still needs help, continue with a safe workaround or corrected workflow after submitting.

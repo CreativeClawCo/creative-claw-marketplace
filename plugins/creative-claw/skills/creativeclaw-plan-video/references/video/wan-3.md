@@ -148,4 +148,4 @@ When the original must remain untouched with new footage added, generate only th
 
 Check the requested duration and ratio, reference-role adherence, character and product consistency, physical continuity, camera path, unintended cuts, dialogue accuracy, lip sync, sound perspective, ending state, duplicate limbs, warped hands, embedded text, and watermark behavior. Revise the smallest failed part rather than broadening the prompt indiscriminately.
 
-Send feedback only when the user requests it; include concrete model-specific failures without exposing private media.
+Report concrete quality issues without a separate confirmation, unless the user asks you not to report them; include concrete model-specific failures without exposing private media.

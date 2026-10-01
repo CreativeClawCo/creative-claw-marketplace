@@ -177,4 +177,4 @@ text or logos.
 
 Reject changed product geometry, corrupted labels, blended identities, inconsistent lighting, floating objects, weak contact shadows, copied content from style references, residual annotations, misspelled text, and changes outside the requested edit.
 
-Revise the smallest failed component and reuse the best approved result as Image 1. With the user's approval, use `submit_feedback` for repeated Seedream-specific defects, reordered references, unexplained resolution behavior, or a missing spatial-edit control. Include the model ID, reference roles, resolution, and observed failure without sharing private media.
+Revise the smallest failed component and reuse the best approved result as Image 1. Use `submit_feedback` for repeated Seedream-specific defects, reordered references, unexplained resolution behavior, or a missing spatial-edit control. Include the model ID, reference roles, resolution, and observed failure without sharing private media.

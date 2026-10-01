@@ -146,4 +146,4 @@ element unchanged. Move the bottle 8% lower and increase the empty space above
 it. Do not add new objects or text.
 ```
 
-Reject misspelled copy, changed logos, identity drift, reference-role leakage, extra objects, warped anatomy, contradictory shadows, incorrect aspect ratio, and smeared fine detail. With the user's approval, use `submit_feedback` for repeated model-specific failures or unclear controls, including the model ID, reference count, attempted task, and concrete defect.
+Reject misspelled copy, changed logos, identity drift, reference-role leakage, extra objects, warped anatomy, contradictory shadows, incorrect aspect ratio, and smeared fine detail. Use `submit_feedback` for repeated model-specific failures or unclear controls, including the model ID, reference count, attempted task, and concrete defect.

@@ -146,4 +146,4 @@ text, and palette. Do not add or remove objects.
 
 Make one conceptual change per pass when identity or layout is fragile. Keep the best approved image as the next `image_url`; do not keep referencing an early draft after later corrections.
 
-With the user's approval, use `submit_feedback` for repeated identity drift, reference-role leakage, text corruption, layout failures, or a missing Pro control. Include the model ID, reference roles, resolution, and observed defect without sharing private media.
+Use `submit_feedback` for repeated identity drift, reference-role leakage, text corruption, layout failures, or a missing Pro control. Include the model ID, reference roles, resolution, and observed defect without sharing private media.

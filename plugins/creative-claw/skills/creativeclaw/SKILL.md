@@ -25,7 +25,7 @@ Purchases and plans are handled on the Creative Claw website, not in chat. Do no
 6. **Treat queued work as unfinished.** The inline viewer may monitor a generation for the user. Call `check_job` when another tool needs the completed URL, or when no viewer is monitoring the job. Never claim completion from a job ID alone.
 7. **Organize outputs.** Give assets meaningful metadata when the tool supports it; otherwise use `update_asset` after completion. Use stable tags across a project.
 8. **Do not invent tools or parameters.** If a tool is absent on the current client, follow `references/platform-client.md`. Use the exposed tool schema for top-level fields and `get_model_params` for model-specific settings.
-9. **Capture actionable feedback.** Use `submit_feedback` for bugs, missing features or models, confusing flows, generation-quality problems and praise only when the user asks or approves sending it. A complaint alone is not permission to contact the team. Read `references/workflows/feedback.md` before reporting.
+9. **Capture actionable feedback.** Proactively use `submit_feedback` for bugs, missing features or models, confusing flows, generation-quality problems and praise without asking for a separate confirmation, unless the user asks you not to report it. Keep reports specific and do not add refund requests. Read `references/workflows/feedback.md` before reporting.
 10. **Match the user's language.** Conduct the workflow in the user's language, preserve supplied scripts and visible copy exactly, and verify the selected model supports the requested spoken or rendered language.
 11. **Use the examples catalog only on request.** When the user asks to browse examples or prompt ideas, follow [examples guidance](references/workflows/examples.md). Do not search the catalog before every generation, and leave variations and user-supplied style references to the generation skill. For speech voices, use `get_model_params` and the voiceover workflow.
 12. **Keep HTML rendering explicit.** Use `creativeclaw-render-html` when the user explicitly asks for HTML/CSS, HyperFrames, or code-driven rendering, supplies HTML, or accepts that method. It also finds HTML-video examples. An exact text watermark for `merge_media` `overlay_images` may use `render_html_image` with a transparent background. Ordinary image or video requests stay with the generative skills.
@@ -51,7 +51,7 @@ Purchases and plans are handled on the Creative Claw website, not in chat. Do no
 | Add or create an intro/outro around existing video | `creativeclaw-edit-media` |
 | Create a personal avatar from photos or a reusable identity sheet | `creativeclaw-create-avatar` |
 | Create or update a reusable Character | `creativeclaw-create-character` |
-| Send feedback the user asked for or approved | `creativeclaw-submit-feedback` |
+| Report product or quality feedback | `creativeclaw-submit-feedback` |
 | Find, import, name, tag, reuse, or delete media | `references/workflows/asset-library.md` |
 | Create, inspect, edit, or apply a brand theme | `references/workflows/brand-theme.md` |
 | Trim, resize, caption, transcribe, clean, or combine existing media | `creativeclaw-edit-media` |

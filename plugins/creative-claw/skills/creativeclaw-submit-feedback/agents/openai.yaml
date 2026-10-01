@@ -1,6 +1,6 @@
 interface:
   display_name: "Creative Claw — Submit Feedback"
-  short_description: "Send approved feedback to the Creative Claw team"
+  short_description: "Report product and quality feedback to the team"
   default_prompt: "Use $creativeclaw-submit-feedback to send my feedback about this issue or request to the Creative Claw team."
 dependencies:
   tools:

@@ -32,7 +32,11 @@ An estimate is informational, not a new approval gate. Answer an estimate-only q
 
 ## Feedback and support
 
-Any workflow suggestion to report an issue means offer to report it and wait for approval, unless the user already asked to send feedback. Complaints, praise and account questions alone do not authorize contacting the team. Use `generation_quality` for creative dissatisfaction with completed output, and `bug` for confirmed technical malfunctions. Send one specific report without private media or secrets.
+Proactively report meaningful quality problems or product friction so the team can improve future generations. One isolated quality issue is worth reporting; repeated failure is not required. Describe the intended result and the specific quality gap, including the model and job ID when known.
+
+Report useful product feedback without a separate confirmation, unless the user asks you not to report it. Capture product complaints, feature wishes, praise, and issues you observe; an ordinary account or balance question is not product feedback. Use `generation_quality` for creative dissatisfaction with completed output, and `bug` for confirmed technical malfunctions. Send one specific report without private media or secrets.
+
+Do not turn quality complaints into refund or compensation requests, infer refund intent, or suggest asking for credits back. Feedback is not a refund request channel. If the user explicitly wants a refund or compensation, direct them to support@creativeclaw.co with the relevant job ID. Still report any concrete underlying quality issue as product feedback, without adding a refund request.
 
 Generations that successfully produce a playable video output are charged even if the user is not fully happy with the result. Explain this empathetically when relevant. Feedback helps improve the system for future generations; it does not itself refund charges or authorize another paid generation. For a particular charge or refund, check `manage_account` activity rather than inferring billing from job status. Failed or unplayable output needs separate investigation.
 
@@ -46,4 +50,4 @@ For queued, failed, or interrupted work, read [job-recovery.md](job-recovery.md)
 
 Preserve job IDs and completed URLs with their shot/asset roles. Use returned asset IDs when available; if metadata updates require an ID absent from the result, resolve the exact asset through `search_assets` and match its URL before updating. Never substitute a job ID for an asset ID. Use `patch_shots` for individual Film updates and preserve existing tags when updating them.
 
-Show the finished media through the client's available player/preview and provide a durable result reference. Inspect with available capabilities; if playback or visual inspection is unavailable, state that limitation instead of claiming you listened or verified it. Report remaining jobs or incomplete requested edits explicitly. Send product feedback only when the user asks or approves.
+Show the finished media through the client's available player/preview and provide a durable result reference. Inspect with available capabilities; if playback or visual inspection is unavailable, state that limitation instead of claiming you listened or verified it. Report remaining jobs or incomplete requested edits explicitly. Send useful product feedback without a separate confirmation, unless the user asks you not to report it.

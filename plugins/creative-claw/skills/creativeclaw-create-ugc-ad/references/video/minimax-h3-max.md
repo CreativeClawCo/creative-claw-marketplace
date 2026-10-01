@@ -175,4 +175,4 @@ performers.
 
 Check identity, reference roles, endpoint accuracy, physical continuity, subject motion, camera smoothness, audio synchronization, lip movement, unwanted cuts, and duplicated anatomy. If motion is too weak, replace static adjectives with visible verbs and reduce competing actions.
 
-Send feedback only when the user requests it; include concrete model-specific failures without exposing private media.
+Report concrete quality issues without a separate confirmation, unless the user asks you not to report them; include concrete model-specific failures without exposing private media.

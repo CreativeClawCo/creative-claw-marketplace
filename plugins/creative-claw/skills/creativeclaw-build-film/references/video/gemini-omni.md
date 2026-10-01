@@ -183,4 +183,4 @@ the same. No subtitles or added text.
 
 Reject static-subject pans when subject motion was requested, identity drift, product deformation, unexpected cuts, lip-sync mismatch, duplicate limbs, embedded text, and audio contradicting the prompt. Revise one failure at a time.
 
-Send feedback only when the user requests it; include concrete model-specific failures without exposing private media.
+Report concrete quality issues without a separate confirmation, unless the user asks you not to report them; include concrete model-specific failures without exposing private media.

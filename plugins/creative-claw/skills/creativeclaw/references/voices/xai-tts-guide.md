@@ -189,4 +189,4 @@ Use `mulaw` for common North American and Japanese G.711 systems, `alaw` for man
 
 Listen to the result. Check names, acronyms, numbers, locale, tag execution, emotional arc, unnatural pauses, abrupt starts or endings, clipped words, noise, and loudness changes between chunks. If the base timbre is wrong, recast; if one moment is wrong, adjust that moment's punctuation or tag and regenerate only that section.
 
-With the user's approval, use `submit_feedback` for repeated provider failures, missing voices, schema mismatches, persistent tag leakage, or explicit user feedback. Include the model, voice ID, language, output format, exact failing tag pattern, and a concise description without exposing private script content unnecessarily.
+Use `submit_feedback` for repeated provider failures, missing voices, schema mismatches, persistent tag leakage, or explicit user feedback. Include the model, voice ID, language, output format, exact failing tag pattern, and a concise description without exposing private script content unnecessarily.

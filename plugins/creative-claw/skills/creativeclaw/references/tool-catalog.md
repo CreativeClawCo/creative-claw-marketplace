@@ -121,7 +121,7 @@ Read [account guidance](workflows/account.md) to match jobs to charges, distingu
 | ----------------- | ------------------------------------------------------------------------------------------------------------ |
 | `submit_feedback` | Report a bug, missing feature or model, confusing flow, generation-quality issue, or explicit user praise. |
 
-Use `source: "agent"` for friction observed during a task and `source: "user"` when relaying the user's own feedback. Send one concise, specific report only when the user asks or approves; a complaint or account question alone is not authorization. Completed playable video generations are charged even if the user is disappointed. Feedback helps improve future generations and does not itself trigger a refund. For critical issues, users can also contact support@creativeclaw.co. Read [feedback guidance](workflows/feedback.md) before reporting.
+Use `source: "agent"` for friction observed during a task and `source: "user"` when relaying the user's own feedback. Send one concise, specific product report without a separate confirmation, unless the user asks you not to report it. An ordinary account question is not product feedback. Do not add refund requests. Completed playable video generations are charged even if the user is disappointed. Feedback helps improve future generations and does not itself trigger a refund. For critical issues, users can also contact support@creativeclaw.co. Read [feedback guidance](workflows/feedback.md) before reporting.
 
 ## Metadata conventions
 

@@ -7,5 +7,5 @@ Use the outcome skill as the primary workflow, including when the user names a m
 - [gpt-image-2](gpt-image-2.md)
 - [seedream-5-pro](seedream-5-pro.md)
 
-These guides do not authorize extra paid drafts or feedback submissions.
+These guides do not authorize extra paid drafts. Report concrete product or quality issues through `submit_feedback` without a separate confirmation, unless the user asks you not to report them.
 
