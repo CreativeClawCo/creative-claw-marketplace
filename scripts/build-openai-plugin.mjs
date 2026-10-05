@@ -143,6 +143,12 @@ fs.cpSync(source, packageDir, {
     path.basename(src) !== ".DS_Store" &&
     !(path.dirname(src) === source && EXCLUDE.has(path.basename(src))),
 });
+// The package declares no MCP server (see below), and the portal accepts plugin-level
+// review cases only alongside exactly one. The cases and the demo recording stay in
+// openai/plugin.openai.json as the source for the portal's own MCP review form.
+delete openai.review.test_cases;
+delete openai.review.demo_recording_url;
+
 // The OpenAI package serves ChatGPT and Codex, so the router skill carries the ChatGPT
 // platform notes, exactly as build-skill-zips.sh packages it.
 fs.cpSync(path.join(repo, "skill-variants/chatgpt"), path.join(packageDir, "skills/creativeclaw/references"), { recursive: true });
