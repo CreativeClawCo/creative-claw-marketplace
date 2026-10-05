@@ -57,7 +57,7 @@ Use `creativeclaw-clone-voice` for the complete consent, recording, import, repl
 
 For a new voice from a description, use `design_voice` (see `creativeclaw-generate-voiceover`): three auditions, then save the pick to a Character. Designed ElevenLabs voices speak with v4; Google-designed voices with `speech/gemini-3.8-flash-tts`.
 
-Call `clone_voice` only after the user explicitly confirms that the voice is their own or the speaker authorized cloning and use; the `consent` input is ignored. Do not silently replace an existing Character voice.
+Never call `clone_voice` or set `consent: true` unless the user explicitly confirms that the voice is their own or the speaker authorized cloning and use. Do not silently replace an existing Character voice.
 
 ## xAI TTS
 

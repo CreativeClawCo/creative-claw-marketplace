@@ -6,7 +6,7 @@ Without a consented recording, offer a designed voice instead ([voice design](vo
 
 Ask for at least 60 seconds, preferably 1 to 2 minutes, of natural solo speech. This is Creative Claw's quality recommendation, not a hard minimum shared by all providers. Use a quiet room, a consistent microphone position and a normal speaking voice. Include varied sentences, names and numbers in the intended language. Avoid music, other speakers, echo, clipping, heavy filters and long silences. A clean phone recording is fine.
 
-Explain which provider will process the recording: Cartesia by default, or ElevenLabs when the user chooses it. Obtain explicit confirmation that this is the user's voice or that the speaker authorized cloning and use. Do not infer permission from an uploaded file. Existing explicit consent for the same scoped use need not be requested again. Do not call `clone_voice` before that confirmation; the tool's `consent` input is ignored.
+Explain which provider will process the recording: Cartesia by default, or ElevenLabs when the user chooses it. Obtain explicit confirmation that this is the user's voice or that the speaker authorized cloning and use. Do not infer permission from an uploaded file. Existing explicit consent for the same scoped use need not be requested again. Never call `clone_voice` or set `consent: true` before that confirmation.
 
 ## Private upload
 
@@ -26,6 +26,7 @@ Find an existing Character with `list_characters` when the user names one. Reuse
 {
   "character_name": "My narration voice",
   "audio_asset_id": "<private asset ID>",
+  "consent": true,
   "language": "<recording language code, for example he>",
   "provider": "cartesia"
 }
