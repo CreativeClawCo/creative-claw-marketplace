@@ -1,6 +1,6 @@
 # Music prompting
 
-Use this reference when translating a music brief into a `generate_music` prompt or diagnosing a weak result. It applies to all three models; model-specific notes are at the end.
+Use this reference when translating a music brief into a `generate_music` prompt or diagnosing a weak result. It applies across the supported music models; model-specific notes are at the end. For Mureka, also read [its model reference](mureka.md).
 
 ## Build the brief
 
@@ -53,7 +53,7 @@ When technical vocabulary is unnecessary, describe the physical impression, such
 
 ## Instrumental music
 
-Set `force_instrumental: true` (Lyria, ElevenLabs) and also make the prompt unambiguous. Exclude sung lyrics, spoken words, chants, and wordless vocal pads when those would be unwanted. For a dialogue bed, state which frequency and arrangement space should remain open.
+Set `force_instrumental: true` (Lyria, ElevenLabs, Mureka) and also make the prompt unambiguous. Exclude sung lyrics, spoken words, chants, and wordless vocal pads when those would be unwanted. For a dialogue bed, state which frequency and arrangement space should remain open.
 
 Example:
 
@@ -61,7 +61,7 @@ Example:
 
 ## Vocal songs
 
-Set `force_instrumental: false` (Lyria, ElevenLabs; MiniMax always sings its `lyrics`). Describe the voice as a performance, not as a famous singer: range, timbre, intimacy, intensity, articulation, language, harmony, and placement. If the user supplied lyrics, preserve them exactly inside the prompt and make their role clear. If the user supplied only a theme, state whether the model may write lyrics.
+Set `force_instrumental: false` (Lyria, ElevenLabs, Mureka; MiniMax always sings its `lyrics`). Describe the voice as a performance, not as a famous singer: range, timbre, intimacy, intensity, articulation, language, harmony, and placement. If the user supplied lyrics, preserve them exactly in the selected model's supported lyrics field (MiniMax, Mureka) or inside the prompt (Lyria, ElevenLabs), and make their role clear. If the user supplied only a theme, state whether the model may write lyrics.
 
 Use timing cues for vocal placement, for example “vocals enter after the eight-second intro” or “instrumental only after 1:45.” Exact words and timing still require review.
 
@@ -87,7 +87,7 @@ Do not overload a three-second sting with verse, build, drop, and outro instruct
 
 Translate editorial needs into musical events before prompting:
 
-- Set `music_length_ms` to the required asset duration. Only ElevenLabs Music makes that length exactly; Lyria treats it as guidance and MiniMax as an upper bound.
+- Set `music_length_ms` only when supported. ElevenLabs Music makes that length exactly; Lyria treats it as guidance and MiniMax as an upper bound. Mureka chooses length and does not accept this field.
 - Record important cue points, then describe the musical change at each time.
 - Decide whether the ending should resolve before the picture cuts or ring through it.
 - Keep generated music as a separate asset until approved. `generate_music` does not inspect the video or synchronize itself to visible events.
@@ -108,14 +108,15 @@ Translate editorial needs into musical events before prompting:
 | Unwanted vocals | Keep `force_instrumental: true`; exclude lyrics, speech, chants, and vocal pads. |
 | Weak vocal identity | Add range, timbre, delivery, language, articulation, and harmony direction. |
 | Abrupt or unusable ending | Reserve explicit time for a button, cadence, ring-out, or controlled fade. |
-| Timing drift | Use exact `music_length_ms`, fewer sections, and clear chronological cues. |
+| Timing drift | Use ElevenLabs Music for exact `music_length_ms`; otherwise simplify sections and clarify chronological cues without promising exact timing. |
 | Style rejection | Remove artist, band, song, and copyrighted-lyric references; describe the musical traits instead. |
 
 ## Model notes
 
-- **Lyria 3.5 (default):** accepts long prompts with section labels and timestamps. Up to 10 `image_urls` can set the mood; say what to take from them. Length is approximate within about 30–180 s.
+- **Lyria 3.5 (default):** accepts long prompts with section labels and timestamps. Up to 10 `image_urls` can set the mood; say what to take from them. Length is approximate within about 30 to 180 s.
 - **ElevenLabs Music v2.5:** prompt up to 4,100 characters; exact length from 3 s to 10 min, so use it for stings, idents and picture-locked cues. Strong on vocal-led material, acoustic genres, rock, orchestral and cinematic scores.
 - **MiniMax Music 3:** the `prompt` is the production brief (genre, BPM, key, vocals, instrumentation, mix); the words go in `lyrics`, one section tag per line. Reuse the returned `seed` with the same prompt and lyrics to reproduce or refine a take.
+- **Mureka V9.5 (when available):** read [Mureka guidance](mureka.md). One MP3 with model-chosen length; instrumental or supplied lyrics cost 30 credits, automatic lyrics and singing cost 100. No duration, seed, or reference controls.
 
 Upstream features that are not `generate_music` fields (composition plans, audio references, section editing, inpainting) are unavailable. Do not promise or emulate them by inventing parameters.
 
