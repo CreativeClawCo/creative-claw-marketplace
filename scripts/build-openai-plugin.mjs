@@ -58,6 +58,8 @@ const demoUrl =
 
 const manifest = {
   ...base,
+  // The portal only accepts an upload whose name is the published plugin's ID.
+  name: overlay.name ?? base.name,
   version: overlay.version,
   keywords: overlay.keywords ?? base.keywords,
   extensions: { ...base.extensions, "com.openai": structuredClone(overlay.extensions["com.openai"]) },

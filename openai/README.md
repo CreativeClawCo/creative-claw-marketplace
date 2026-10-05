@@ -5,7 +5,7 @@ The OpenAI directory gets the same plugin as every other marketplace, with these
 | File | Purpose |
 |---|---|
 | `mcp.json` | The ChatGPT surface, `https://app.creativeclaw.co/mcp/chatgpt`. It hides checkout tools. The marketplace plugin keeps the general `/mcp` endpoint for Claude, Cursor, OpenClaw and Codex-from-git installs. |
-| `plugin.openai.json` | Directory version (must be above the last published OpenAI version), discovery keywords, and the full `extensions.com.openai`: listing, onboarding skill, review test cases, commerce statement and release notes. |
+| `plugin.openai.json` | The plugin `name`, which must be the published plugin's ID (`app-6a25…`) or the portal rejects the upload. Directory version (must be above the last published OpenAI version), discovery keywords, and the full `extensions.com.openai`: listing, onboarding skill, review test cases, commerce statement and release notes. |
 | `assets/` | Icons referenced by the listing. |
 
 Build:
