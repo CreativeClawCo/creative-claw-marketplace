@@ -7,14 +7,14 @@ description: Guide recording, private upload, cloning, testing, and reuse of a c
 
 Read [shared execution guidance](references/workflow-basics.md) before tools and [recording, upload, consent and reuse](references/voices/cloning.md) for this workflow.
 
-Help the user record at least one minute of clean solo speech, upload it privately, clone it, audition a short sample, and reuse the saved Character. One to two minutes is our onboarding recommendation, not a universal provider API minimum.
+Ask the user for a recording of at least one minute of clean solo speech, upload it privately, clone it, audition a short sample, and reuse the saved Character. One to two minutes is our onboarding recommendation, not a universal provider API minimum.
 
 Without a consented recording, offer design_voice instead ([voice design](references/voices/voice-design.md)).
 
 1. Identify the intended language, delivery and an existing Character, if any. Reuse an avatar's Character instead of creating a duplicate.
 2. Explain the selected provider and confirm ownership or speaker permission before sending the sample for cloning. Possessing a recording is not consent.
 3. Import with purpose `voice_clone` to obtain a private `audio_asset_id`. Follow the reference for the current client's upload route.
-4. Call `clone_voice` with that asset, `consent: true`, and `provider: "cartesia"` (the default), or `provider: "elevenlabs"` when the user chooses ElevenLabs. Use `character_id` for an existing Character or `character_name` for a new voice-only Character. The tool saves the clone automatically.
+4. After the user confirms, call `clone_voice` with that asset, the recording's `language` code (for example `he`; it defaults to `en`), and `provider: "cartesia"` (the default), or `provider: "elevenlabs"` when the user chooses ElevenLabs. The `consent` input is ignored, so the confirmation in step 2 is what matters. Use `character_id` for an existing Character or `character_name` for a new voice-only Character. The tool saves the clone automatically.
 5. Audition using `generate_speech` and the returned `character_id`. Read the selected model reference below. Include a name, number and natural sentence in the intended language. Present the audio for approval before a longer production.
 6. Reuse `character_id`, not the private source recording, for future speech. Never replace a saved voice merely to change speech models.
 

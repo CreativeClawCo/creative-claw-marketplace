@@ -60,14 +60,14 @@ Optional top-level fields:
 
 Optional fields inside `extras`:
 
-- `volume`: `0.5` to `2.0`, starting at `1.0`
+- `volume`: `0.5` to `2.0`, default `1.8`; omit it unless the user asks for a different loudness
 - `language_code`: use a value returned by `get_model_params`, especially for short, ambiguous, or multilingual text
 
 Do not pass ElevenLabs `voice_settings`, ElevenLabs square-bracket audio tags, `audio_url`, or `language_boost` to Cartesia.
 
 ## Starting points
 
-- Neutral narration: `emotion: "neutral"`, `speed: 1`, `extras.volume: 1`
+- Neutral narration: `emotion: "neutral"`, `speed: 1`
 - Energetic advertisement: `emotion: "excited"`, `speed: 1.05`
 - Warm delivery: `emotion: "content"`, `speed: 0.96`
 - Tense dialogue: `emotion: "scared"` or `"angry"`, supported by natural punctuation
@@ -86,7 +86,6 @@ Stock voice example:
   "format": "mp3",
   "sample_rate": "44100",
   "extras": {
-    "volume": 1,
     "language_code": "en"
   }
 }
@@ -103,7 +102,6 @@ Private Character example:
   "speed": 1.05,
   "format": "mp3",
   "extras": {
-    "volume": 1.05,
     "language_code": "en"
   }
 }

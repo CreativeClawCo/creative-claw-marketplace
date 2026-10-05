@@ -141,6 +141,9 @@ fs.cpSync(source, packageDir, {
     path.basename(src) !== ".DS_Store" &&
     !(path.dirname(src) === source && EXCLUDE.has(path.basename(src))),
 });
+// The OpenAI package serves ChatGPT and Codex, so the router skill carries the ChatGPT
+// platform notes, exactly as build-skill-zips.sh packages it.
+fs.cpSync(path.join(repo, "skill-variants/chatgpt"), path.join(packageDir, "skills/creativeclaw/references"), { recursive: true });
 fs.writeFileSync(path.join(packageDir, "plugin.json"), JSON.stringify(manifest, null, 2) + "\n");
 fs.writeFileSync(path.join(packageDir, "mcp.json"), JSON.stringify(mcp, null, 2) + "\n");
 fs.cpSync(path.join(openaiDir, "assets"), path.join(packageDir, "assets"), { recursive: true });

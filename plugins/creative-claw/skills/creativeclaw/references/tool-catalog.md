@@ -33,7 +33,7 @@ Search only when the user asks for examples, prompt ideas, or the catalog; see [
 | Tool                | Use                                                                                                            |
 | ------------------- | -------------------------------------------------------------------------------------------------------------- |
 | `render_html_image` | Render a deterministic HTML/CSS layout to a PNG via Chromium.                                                  |
-| `render_html_video` | Queue a HyperFrames-backed HTML/CSS/JS motion render; resolve the final video URL with `check_job`.            |
+| `render_html_video` | `method: "generate"`: the video agent makes an HTML-based video from a prompt (`edit` and `status` continue it by `cloud_project_id`). Default `render`: queue a HyperFrames HTML/CSS/JS render you supply; resolve it with `check_job`. |
 | `list_templates`    | Find saved reusable layouts by name.                                                                           |
 | `create_template` / `update_template` | Save or change a reusable parameterized layout.                                              |
 | `render_template`   | Render a saved template with provided values.                                                                 |
@@ -76,7 +76,7 @@ Read `platform-upload.md` before choosing an import route.
 | `create_film_project`                     | Create a multi-shot Film project.                                                                 |
 | `update_film_project`                     | Save script, shots, storyboards, clips, audio, and approval state.                                |
 | `get_film_project` / `list_film_projects` | Inspect Film projects.                                                                            |
-| `assemble_film`                           | Concatenate every approved shot clip into a first cut and optionally overlay one project narration track. |
+| `assemble_film`                           | Concatenate every rendered shot clip into a first cut. By default the project's narration track replaces the shots' audio; pass `with_narration: false` to keep dialogue and sound from the shots. |
 
 ## Media processing
 
@@ -121,7 +121,7 @@ Read [account guidance](workflows/account.md) to match jobs to charges, distingu
 | ----------------- | ------------------------------------------------------------------------------------------------------------ |
 | `submit_feedback` | Report a bug, missing feature or model, confusing flow, generation-quality issue, or explicit user praise. |
 
-Use `source: "agent"` for friction observed during a task and `source: "user"` when relaying the user's own feedback. Send one concise, specific product report without a separate confirmation, unless the user asks you not to report it. An ordinary account question is not product feedback. Do not add refund requests. Completed playable video generations are charged even if the user is disappointed. Feedback helps improve future generations and does not itself trigger a refund. For critical issues, users can also contact support@creativeclaw.co. Read [feedback guidance](workflows/feedback.md) before reporting.
+Use `source: "agent"` for friction observed during a task and `source: "user"` when relaying the user's own feedback. Send one concise, specific product report and say briefly that you did; do not report when the user asks you not to. An ordinary account question is not product feedback. Do not add refund requests. Completed playable video generations are charged even if the user is disappointed. Feedback helps improve future generations and does not itself trigger a refund. For critical issues, users can also contact support@creativeclaw.co. Read [feedback guidance](workflows/feedback.md) before reporting.
 
 ## Metadata conventions
 

@@ -13,7 +13,7 @@ Create a believable social ad with a clear commercial story while keeping produc
 
 ## Reference-first pipeline
 
-Unless the user asked for direct text-to-video, supplied a ready shot image, or is editing footage, follow this before `generate_video`. A video request authorizes one keyframe per shot: say so, don't ask.
+Unless the user asked for direct text-to-video, supplied a ready shot image, or is editing footage, follow this before `generate_video`. New clips start from one keyframe image per shot: tell the user how many images that is before making them.
 
 1. Anchors, reuse first: `search_assets`, `list_characters`, `get_theme`. Person: Character sheet + face portrait (real person: also their best original photo). Product: real photo or packshot, plus a label/logo close-up when text matters. A recurring person or product with no anchor: create it first (creativeclaw-create-avatar, creativeclaw-product-photoshoot).
 2. Look line: one sentence (palette, light, lens, medium), pasted into every keyframe and video prompt.

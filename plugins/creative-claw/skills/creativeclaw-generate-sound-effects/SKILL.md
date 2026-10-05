@@ -34,7 +34,7 @@ Call `generate_sound_effect` with:
 - `duration_seconds`: optional, 0.5 to 30. Omit it when the natural event length matters more than exact timing. Set it for sync cues, UI sounds, loops, or a fixed editorial slot.
 - `loop`: optional. Set `true` only for a stable sound field intended to repeat without a perceptible beginning or end.
 - `prompt_influence`: optional, 0 to 1, default 0.3. Raise it for literal source and timing adherence with less variation. Lower it when a broader, more inventive interpretation is acceptable.
-- `output_format`: optional. Supported values are `mp3_44100_128`, `mp3_44100_192`, `mp3_48000_192`, `pcm_44100`, and `pcm_48000`. The normal sound-effect default is `mp3_44100_128`.
+- `output_format`: optional. Supported values are `mp3_44100_128`, `mp3_44100_192`, `pcm_44100`, and `pcm_48000`. The normal sound-effect default is `mp3_44100_128`.
 
 Do not send music fields such as `music_length_ms` or `force_instrumental`. Do not send the SFX model to `generate_music` or `generate_speech`.
 

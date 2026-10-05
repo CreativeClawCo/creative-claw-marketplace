@@ -2,7 +2,7 @@
 
 ## Reference-first video pipeline
 
-Default for every new generative clip. A video request authorizes one keyframe per planned shot: say so, don't ask. Skip only if the user asks for direct text-to-video, supplies a ready shot image, or is editing footage.
+Default for every new generative clip: one keyframe image per planned shot. Tell the user how many images that is before making them. Skip them if the user asks for direct text-to-video, supplies a ready shot image, or is editing footage.
 
 1. **Anchors (reuse first):** `search_assets`, `list_characters`, `get_theme`.
    - Person: Character sheet + clean face portrait; real person: also their best original photo.
@@ -25,7 +25,7 @@ A Character sheet is identity guidance, never a literal opening frame. Reuse an 
 
 ## Review the references once
 
-In Review mode, the video's request card approves the exact references, prompt and settings. Don't also ask for a chat approval of the same set, and don't call references approved before the user presses Generate. The card does not approve image or audio charges made before it.
+In Review mode, the video's request card is where the user approves the exact references, prompt and settings. Don't call references approved before the user presses Generate. The card does not approve image or audio charges made before it.
 
 Honor an earlier checkpoint the user asked for (for example "show me the first image first"). Character likeness approval and voice-cloning consent are separate decisions. Don't change the user's render mode.
 

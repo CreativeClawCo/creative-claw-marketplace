@@ -26,7 +26,7 @@ Use `image/seedream-5-pro` for premium product, fashion, portrait, editorial, an
 | `num_images` | 1,4. |
 | `seed` | Reuse for controlled comparisons; references remain the real consistency anchors. |
 
-The current route accepts no dedicated aspect-ratio field. For an edit, the primary source strongly anchors the canvas shape. For text-only generation, state the desired composition in the prompt and crop or scale afterward when exact dimensions matter. Do not claim that an unsupported `size` parameter will be honored.
+Set the shape with `aspect_ratio`: `1:1`, `4:3`, `3:4`, `16:9`, `9:16`, `3:2`, `2:3`, `21:9`, or `auto` to let the model choose from the prompt. There is no `4:5` or `5:4`; `get_model_params` lists the current set. For an edit, the primary source strongly anchors the canvas shape. Crop or scale afterward when exact dimensions matter. Do not claim that an unsupported `size` parameter will be honored.
 
 ## Reference order
 

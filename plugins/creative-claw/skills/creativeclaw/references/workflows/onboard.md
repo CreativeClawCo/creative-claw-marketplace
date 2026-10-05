@@ -14,11 +14,17 @@ Explain Creative Claw as a shared media workspace, then help the user complete o
 
 ## First conversation
 
+Do not generate anything or spend credits until the user chooses what to make.
+
 1. Ask what the user wants to make or organize.
 2. If they have existing media, search or import it.
 3. If they need branded output, fetch or create a theme.
 4. Show the recommended model and important settings for the requested modality.
 5. Generate one modest example or organize one real asset before proposing a larger batch.
+
+Before their first video, say how it starts: with Review on, a video request opens a card showing the prompt, settings and estimated credits, and rendering starts only when they press Generate; with Auto it starts when requested. Images and audio start when requested.
+
+Use `manage_account` only when they ask about their balance, charges or settings.
 
 ## Good first tasks
 

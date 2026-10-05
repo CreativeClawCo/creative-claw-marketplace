@@ -15,7 +15,7 @@ For worked production flows, read only the relevant recipe: [product ad](referen
 
 ## Reference-first pipeline
 
-Unless the user asked for direct text-to-video, supplied a ready shot image, or is editing footage, follow this before `generate_video`. Planning stops after step 5 unless production was requested. A video request authorizes one keyframe per shot: say so, don't ask.
+Unless the user asked for direct text-to-video, supplied a ready shot image, or is editing footage, follow this before `generate_video`. For a planning-only request, show the plan and stop: make keyframes only when the user asked for a visual storyboard, and do not call `generate_video`. New clips start from one keyframe image per shot: tell the user how many images that is before making them.
 
 1. Anchors, reuse first: `search_assets`, `list_characters`, `get_theme`. Person: Character sheet + face portrait (real person: also their best original photo). Product: real photo or packshot, plus a label/logo close-up when text matters. A recurring person or product with no anchor: create it first (creativeclaw-create-avatar, creativeclaw-product-photoshoot).
 2. Look line: one sentence (palette, light, lens, medium), pasted into every keyframe and video prompt.
@@ -51,4 +51,4 @@ If the user intends to continue into production, call `create_film_project` and 
 
 ## Approval gate
 
-Present the requested plan/storyboard and honor review stages and existing approval. Planning alone does not authorize video generation. When production is also requested and its applicable stage is approved, continue with `creativeclaw-build-film` without asking the same question again.
+Present the requested plan/storyboard and honor review stages and existing approval. Planning alone does not authorize video generation. When production is also requested and its applicable stage is approved, continue with `creativeclaw-build-film`.

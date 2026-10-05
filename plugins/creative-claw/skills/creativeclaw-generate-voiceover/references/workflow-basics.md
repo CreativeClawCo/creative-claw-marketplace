@@ -4,11 +4,11 @@ Read once when starting a Creative Claw workflow; reuse it across supporting ski
 
 ## Keep simple requests simple
 
-Use the request, supplied media, previous choices, and existing approvals. Do not turn the workflow's list of brief details into a questionnaire. Infer minor creative defaults and proceed; ask one concise question only when missing information would materially change the result or prevent execution. A request to generate already authorizes that requested generation. Do not add a routine “shall I proceed?” step.
+Use the request, supplied media, previous choices, and existing approvals. Do not turn the workflow's list of brief details into a questionnaire. Infer minor creative defaults and proceed; ask one concise question only when missing information would materially change the result or prevent execution. A request to generate covers that requested generation.
 
 For a precise single-output request, use the selected/default model and available references, fetch missing model parameters, and generate. Search assets only when reusable media is needed and its identity or URL is not already known. Browse examples only when the user wants inspiration or an open brief benefits from concrete choices. Do not add a storyboard, audition, extra variation, or lower-resolution draft unless requested or needed to resolve a material uncertainty. For new generative video, one keyframe per shot is part of the default workflow, not an extra draft. Honor a requested final resolution directly.
 
-Keep explicit review stages for collaborative productions, but recognize approvals already given and instructions to continue through stages. A model specialist supplies prompting advice; it must not restart the brief, duplicate a generation, or add its own approval stages. Clarify an actual expansion of scope, unresolved consent, or an explicit tool confirmation requirement before acting.
+Keep explicit review stages for collaborative productions, but recognize approvals already given and instructions to continue through stages. A model specialist supplies prompting advice; it must not restart the brief or duplicate a generation. Clarify an actual expansion of scope, unresolved consent, or an explicit tool confirmation requirement before acting.
 
 ## Video generation attempts
 
@@ -28,13 +28,13 @@ Preserve approved wording, quoted copy, dialogue, timecodes, and model-specific 
 
 Use `estimate_generation` only when the user asks about cost, balance, affordability, or gives a budget constraint. Pass `operation`, the selected `model`, and the exact planned generation fields inside `params`. Supported operations are `image`, `video`, `speech`, `audio`, and `html_video`; omit `model` for `html_video`. Do not invent estimates for editing, assembly, or cloning operations this tool does not cover.
 
-An estimate is informational, not a new approval gate. Answer an estimate-only question without generating; when generation is already requested and fits the user's constraints, proceed without asking again. State that final cost is confirmed after generation. For a batch, total the planned requests without treating each request's balance check as a separate budget allocation. Identify excluded processing costs and distinguish proposed costs from reported charges/refunds. An estimate does not reserve credits or guarantee a strict maximum charge; disclose that limitation when an exact ceiling is material. Never silently change an explicitly selected model, duration, or quality to fit a budget.
+An estimate is information for the user. Answer an estimate-only question without generating; when generation is already requested and fits the user's constraints, share the estimate and continue. State that final cost is confirmed after generation. For a batch, total the planned requests without treating each request's balance check as a separate budget allocation. Identify excluded processing costs and distinguish proposed costs from reported charges/refunds. An estimate does not reserve credits or guarantee a strict maximum charge; disclose that limitation when an exact ceiling is material. Never silently change an explicitly selected model, duration, or quality to fit a budget.
 
 ## Feedback and support
 
-Proactively report meaningful quality problems or product friction so the team can improve future generations. One isolated quality issue is worth reporting; repeated failure is not required. Describe the intended result and the specific quality gap, including the model and job ID when known.
+Report meaningful quality problems or product friction so the team can improve future generations. One isolated quality issue is worth reporting; repeated failure is not required. Describe the intended result and the specific quality gap, including the model and job ID when known.
 
-Report useful product feedback without a separate confirmation, unless the user asks you not to report it. Capture product complaints, feature wishes, praise, and issues you observe; an ordinary account or balance question is not product feedback. Use `generation_quality` for creative dissatisfaction with completed output, and `bug` for confirmed technical malfunctions. Send one specific report without private media or secrets.
+Say briefly when you report product feedback, and do not report when the user asks you not to. Capture product complaints, feature wishes, praise, and issues you observe; an ordinary account or balance question is not product feedback. Use `generation_quality` for creative dissatisfaction with completed output, and `bug` for confirmed technical malfunctions. Send one specific report without private media or secrets.
 
 Do not turn quality complaints into refund or compensation requests, infer refund intent, or suggest asking for credits back. Feedback is not a refund request channel. If the user explicitly wants a refund or compensation, direct them to support@creativeclaw.co with the relevant job ID. Still report any concrete underlying quality issue as product feedback, without adding a refund request.
 
@@ -50,4 +50,4 @@ For queued, failed, or interrupted work, read [job-recovery.md](job-recovery.md)
 
 Preserve job IDs and completed URLs with their shot/asset roles. Use returned asset IDs when available; if metadata updates require an ID absent from the result, resolve the exact asset through `search_assets` and match its URL before updating. Never substitute a job ID for an asset ID. Use `patch_shots` for individual Film updates and preserve existing tags when updating them.
 
-Show the finished media through the client's available player/preview and provide a durable result reference. Inspect with available capabilities; if playback or visual inspection is unavailable, state that limitation instead of claiming you listened or verified it. Report remaining jobs or incomplete requested edits explicitly. Send useful product feedback without a separate confirmation, unless the user asks you not to report it.
+Show the finished media through the client's available player/preview and provide a durable result reference. Inspect with available capabilities; if playback or visual inspection is unavailable, state that limitation instead of claiming you listened or verified it. Report remaining jobs or incomplete requested edits explicitly.

@@ -57,7 +57,7 @@ Use `creativeclaw-clone-voice` for the complete consent, recording, import, repl
 
 For a new voice from a description, use `design_voice` (see `creativeclaw-generate-voiceover`): three auditions, then save the pick to a Character. Designed ElevenLabs voices speak with v4; Google-designed voices with `speech/gemini-3.8-flash-tts`.
 
-Never set `consent: true` unless the user explicitly confirms that the voice is their own or the speaker authorized cloning and use. Do not silently replace an existing Character voice.
+Call `clone_voice` only after the user explicitly confirms that the voice is their own or the speaker authorized cloning and use; the `consent` input is ignored. Do not silently replace an existing Character voice.
 
 ## xAI TTS
 
@@ -65,10 +65,10 @@ Use xai-tts model reference for its complete voice catalog and exact tag grammar
 
 ## Transcription and cleanup
 
-1. For a public YouTube video, pass its watch or short URL directly to `transcribe({ video_url })`. For other media, import the source audio/video first.
+1. Pass a public video page (YouTube, TikTok, Instagram, X, Facebook, Vimeo), a public Google Drive share link, or a public media file URL directly to `transcribe({ video_url })`. Import the file first only when it is attached, local, or the page is private.
 2. Use `isolate_audio` first only when noise, music, or reverb will materially hurt transcription.
 3. Resolve its queued job with `check_job({ job_id })` when the cleaned URL is required.
-4. Use `transcribe` for text and timing. Public YouTube URLs are sent directly to ElevenLabs Scribe, like other supported direct media, and provide word-level timing and speaker diarization.
+4. Use `transcribe` for text and timing. YouTube links return the video's existing captions with segment timing only, with no word timing or speakers. Other sources use ElevenLabs Scribe with word-level timing and speaker diarization. For word-level timing on a YouTube video, or when it has no captions, import the file and transcribe that.
 5. Preserve the original asset and save the cleaned/transcribed derivative with clear metadata.
 
 ## Quality gate

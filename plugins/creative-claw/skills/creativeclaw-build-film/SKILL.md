@@ -15,7 +15,7 @@ For worked production flows, read only the relevant recipe: [product ad](referen
 
 ## Reference-first pipeline
 
-Unless the user asked for direct text-to-video, supplied a ready shot image, or is editing footage, follow this before `generate_video`. A video request authorizes one keyframe per shot: say so, don't ask.
+Unless the user asked for direct text-to-video, supplied a ready shot image, or is editing footage, follow this before `generate_video`. New clips start from one keyframe image per shot: tell the user how many images that is before making them.
 
 1. Anchors, reuse first: `search_assets`, `list_characters`, `get_theme`. Person: Character sheet + face portrait (real person: also their best original photo). Product: real photo or packshot, plus a label/logo close-up when text matters. A recurring person or product with no anchor: create it first (creativeclaw-create-avatar, creativeclaw-product-photoshoot).
 2. Look line: one sentence (palette, light, lens, medium), pasted into every keyframe and video prompt.
@@ -32,7 +32,7 @@ Details: [reference production](references/video/reference-production.md). Image
 1. Use `list_film_projects` and `get_film_project` to resume an existing project when appropriate; otherwise call `create_film_project` with the name, brief, Character IDs, theme, and target duration.
 2. Follow `creativeclaw-plan-video` to create the script, shot list, model plan, and storyboard.
 3. Save stable shot IDs and patch the project with `update_film_project`. Do not replace approved fields accidentally.
-4. Honor script and storyboard review stages, including approval already given or explicit instructions to proceed through them. Advance `drafting`, `script_ok`, and `storyboard_ok` truthfully; do not repeat approval questions.
+4. Honor script and storyboard review stages, including approval already given or explicit instructions to proceed through them. Advance `drafting`, `script_ok`, and `storyboard_ok` truthfully.
 
 ## 2. Establish timing and audio
 
@@ -42,7 +42,7 @@ Pick one voice path per speaking shot from [voice in video](references/video/voi
 
 Prompt shots for dialogue, ambience and effects only, with no music. Use `creativeclaw-generate-music` once for a requested project score or song and `creativeclaw-generate-sound-effects` for ambience, Foley, and effects.
 
-When the user asks about cost or supplies a budget, estimate supported planned generations and total them; identify processing costs excluded by `estimate_generation`. Do not add another approval gate for authorized production.
+When the user asks about cost or supplies a budget, estimate supported planned generations and total them; identify processing costs excluded by `estimate_generation`. Share the total, then continue with the production the user approved.
 
 ## 3. Generate shots
 

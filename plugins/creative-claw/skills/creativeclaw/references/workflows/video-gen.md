@@ -8,7 +8,7 @@ Match the model to the shot, reference structure, duration, resolution, audio ne
 2. Follow the reference-first pipeline in [reference production](../video/reference-production.md): reuse anchors (`search_assets`, `list_characters`, `get_theme`), write one look line, and make one keyframe per shot with `generate_image` at the video's aspect ratio. Skip keyframes only when the user asks for direct text-to-video, supplies a ready shot image, or is editing footage.
 3. Pick one input mode per shot: people, several subjects or big motion → `image_urls` (keyframe + 2–3 anchors); exact opening → `image_url` = keyframe, no `image_urls` or `character_id`. For speech, pick a path from [voice in video](../video/voice-in-video.md).
 4. Use `list_models({ category: "video" })` when discovery is needed and `get_model_params` for missing settings on the selected model; reuse schemas already fetched in this task.
-5. State consequential settings briefly and proceed within existing authorization. Estimate with `operation: "video"` only for user-requested cost/budget help; do not add a routine approval question.
+5. State consequential settings briefly and proceed within what the user asked for. Estimate with `operation: "video"` only for user-requested cost/budget help.
 6. Call `generate_video`. Preserve literal reference tokens and timecodes.
 7. Resolve the job only when needed, inspect the result, and report false motion, identity drift, broken physics, unwanted cuts, text artifacts, or bad audio. Deliver the result; inspection does not authorize another generation. Ask before another take unless the user explicitly requested that additional attempt.
 8. Use focused processing tools for trim, scale, subtitles, frames, merging, isolation, or upscaling.

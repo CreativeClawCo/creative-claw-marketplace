@@ -64,4 +64,4 @@ Keep originals and derivatives as separate assets. Use clear suffixes such as `-
 
 ## Deletion
 
-`delete_asset` is a soft delete. Call it only for an explicit deletion request after resolving the exact asset ID. Warn when the asset may be referenced by a theme, Character, Film, or another workflow.
+`delete_asset` permanently removes the stored file and cannot be undone. Call it only for an explicit deletion request after resolving the exact asset ID. Warn when the asset may be referenced by a theme, Character, Film, or another workflow.

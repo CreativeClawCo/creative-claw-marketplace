@@ -17,7 +17,7 @@ For worked production flows, read only the relevant recipe: [product ad](referen
 
 ## Reference-first pipeline
 
-Unless the user asked for direct text-to-video, supplied a ready shot image, or is editing footage, follow this before `generate_video`. A video request authorizes one keyframe per shot: say so, don't ask.
+Unless the user asked for direct text-to-video, supplied a ready shot image, or is editing footage, follow this before `generate_video`. New clips start from one keyframe image per shot: tell the user how many images that is before making them.
 
 1. Anchors, reuse first: `search_assets`, `list_characters`, `get_theme`. Person: Character sheet + face portrait (real person: also their best original photo). Product: real photo or packshot, plus a label/logo close-up when text matters. A recurring person or product with no anchor: create it first (creativeclaw-create-avatar, creativeclaw-product-photoshoot).
 2. Look line: one sentence (palette, light, lens, medium), pasted into every keyframe and video prompt.
@@ -42,7 +42,7 @@ Then pick one path per speaking shot from [voice in video](references/video/voic
 3. When the user asks for examples, styles, or similar concepts, or an open brief would benefit from concrete directions, call `search_examples` with `output_type: "video"`, then load only the chosen result with `search_examples({ id })`. Do not search before every clip.
 4. Use `list_models({ category: "video" })` when choosing a model; for a known selection, use `get_model_params` directly. Reuse its current-task durations, resolutions, operations, and reference contract.
 5. Use `estimate_generation` with `operation: "video"` only when the user asks about cost, balance, affordability, or sets a budget. Treat returned alternatives as options; preserve explicitly chosen models, durations, and quality. Estimate-only requests do not authorize generation.
-6. State consequential settings briefly and proceed within the requested scope. Do not ask again when the user already requested the generation or approved that production stage.
+6. State consequential settings briefly and proceed within the requested scope, honoring a generation the user already requested or a production stage they approved.
 7. Write one chronological prompt: opening frame, subject action, camera behavior, environmental motion, audio or dialogue, ending frame, and exclusions.
 8. Call `generate_video`; use `check_job` only when another tool needs the completed URL or no inline viewer is monitoring the job.
 9. Inspect identity, anatomy, product fidelity, timing, camera motion, dialogue sync, and ending continuity. Deliver the result and describe any shortcomings. Suggest a focused revision, but do not generate another take without an explicit user request for that additional generation.
@@ -53,7 +53,7 @@ A request for one video authorizes one generation attempt, not repeated attempts
 
 Before another take, replacement, model comparison, extension, or generative repair, require an explicit request for that additional video. A complaint, a request to inspect or diagnose a problem, or the agent noticing a defect does not authorize generation. If "fix it" could mean editing existing footage or generating again, explain the proposed repair and ask before generating again. An unused budget, a failed job, a refund, or `retryable: true` does not grant permission for another attempt.
 
-An explicit "generate another version" or "retry once" is sufficient authorization for that scope; do not ask redundantly. For "keep trying until perfect," agree on a finite attempt limit before starting further generations. Stop when the requested attempts finish and let the user decide what comes next.
+An explicit "generate another version" or "retry once" covers that one additional attempt. For "keep trying until perfect," agree on a finite attempt limit before starting further generations. Stop when the requested attempts finish and let the user decide what comes next.
 
 Continue status checks, retrieval, inspection, and drafting revised prompts without creating another video. Correct and resubmit a rejected input only when it is confirmed that no generation job was accepted or started and no credits were charged. For timeouts or uncertain submissions, follow [job recovery](references/job-recovery.md) before considering any replacement.
 

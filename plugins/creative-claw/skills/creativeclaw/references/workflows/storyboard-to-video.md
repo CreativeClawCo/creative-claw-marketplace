@@ -98,7 +98,7 @@ Use `@ImageN`, `@VideoN`, and `@AudioN` exactly as the current model guide/schem
 
 ## 7. Generate and inspect
 
-State consequential settings and generate within the existing production authorization. Estimate only for user-requested cost/budget help. Resolve the queued job when the completed URL is needed; do not repeat approvals already given.
+State consequential settings and generate within what the user approved for this production. Estimate only for user-requested cost/budget help. Resolve the queued job when the completed URL is needed.
 
 Reject and revise when:
 

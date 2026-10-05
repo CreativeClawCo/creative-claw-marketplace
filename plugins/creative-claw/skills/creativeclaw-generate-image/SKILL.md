@@ -16,7 +16,7 @@ Turn a brief and optional references into a finished image. This is the primary 
 3. When the user asks for examples, inspiration, styles, or a close starting point, or an open brief would benefit from concrete choices, call `search_examples` for a small filtered set, then load only the chosen example with `search_examples({ id })`. Do not search automatically for an already precise brief.
 4. For branded work, call `get_theme` and carry the relevant colors, typography, logo treatment, and visual rules into the prompt.
 5. Use `list_models({ category: "image" })` when selection is unresolved; for a known choice, use `get_model_params` directly and reuse its current-task schema.
-6. Generate one direction unless several were requested. Estimate with `operation: "image"` only for user-requested cost/budget help; this does not require another confirmation for authorized work.
+6. Generate one direction unless several were requested. Estimate with `operation: "image"` only for user-requested cost/budget help.
 7. Call `generate_image`. If a downstream tool needs a queued result URL, use `check_job`; otherwise let the inline viewer monitor it.
 8. Inspect the result against the non-negotiables, revise the smallest failing element, and tag the approved asset.
 

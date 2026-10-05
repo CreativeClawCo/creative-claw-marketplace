@@ -1,6 +1,6 @@
 ---
 name: creativeclaw-submit-feedback
-description: "Send actionable product and quality feedback to the Creative Claw team without a separate confirmation; not for refund requests or fixing media."
+description: "Send actionable product and quality feedback to the Creative Claw team when the user gives feedback or a concrete issue comes up; not for refund requests or fixing media."
 ---
 
 # Submit Feedback
@@ -9,11 +9,11 @@ Read [shared execution guidance](references/workflow-basics.md) once per task be
 
 Turn the user's report into one concise, useful `submit_feedback` call. Feedback is a product-feedback channel, not a refund request form, a generation tool, or a promise of compensation, reply, or roadmap commitment.
 
-Proactively report meaningful quality problems so the team can improve future generations. One isolated quality issue is worth reporting; repeated failure is not required. Send useful feedback without asking for a separate confirmation, unless the user asks you not to report it.
+Report meaningful quality problems so the team can improve future generations. One isolated quality issue is worth reporting; repeated failure is not required. Say briefly that you reported it, and do not report when the user asks you not to.
 
 ## What can be reported
 
-Report meaningful issues you observe and feedback the user expresses without asking for a separate confirmation. Respect a request not to report feedback. Topics:
+Report meaningful issues you observe and feedback the user expresses. Respect a request not to report feedback. Topics:
 
 - A tool failed, returned the wrong state, or behaved inconsistently.
 - An image, video, or voice result had a concrete quality problem, even on a single attempt.
@@ -48,4 +48,4 @@ Map the report to the exact schema:
 
 ## Submit and continue
 
-Call `submit_feedback` once per distinct issue without asking for a separate confirmation, unless the user asks you not to report it. Confirm what category was sent without promising a response. If the user still needs help, continue with a safe workaround or corrected workflow after submitting.
+Call `submit_feedback` once per distinct issue, unless the user asks you not to report it. Tell the user what category was sent without promising a response. If the user still needs help, continue with a safe workaround or corrected workflow after submitting.

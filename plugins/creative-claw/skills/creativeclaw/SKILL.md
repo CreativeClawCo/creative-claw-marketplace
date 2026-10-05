@@ -21,11 +21,11 @@ Purchases and plans are handled on the Creative Claw website, not in chat. Do no
 2. **Discover only what is missing.** Use `list_models({ category })` when choosing or checking availability; use `get_model_params` for a known selected model. Reuse current-task schemas until a model/operation changes or an error indicates they need refreshing.
 3. **Use durable references.** Read `references/platform-upload.md` before importing attached or local media. Pass Creative Claw URLs to generation and processing tools.
 4. **Keep exact control syntax intact.** Preserve approved references, dialogue, timecodes, and layout instructions. Speech receives the exact performed script in `text`.
-5. **Respect the user’s requested scope and budget.** Use `estimate_generation` only when the user asks about cost, balance, affordability, or supplies a budget constraint. An estimate does not add an approval gate: proceed with requested work that fits the constraints. Do not ask routine cost or permission questions. Clarify only material scope changes, missing essential choices, or explicit tool confirmation requirements.
+5. **Respect the user’s requested scope and budget.** Use `estimate_generation` only when the user asks about cost, balance, affordability, or supplies a budget constraint. An estimate is information for the user: share it, then continue with the requested work when it fits what they said. Ask about material scope changes, missing essential choices, and whenever a tool result asks for confirmation.
 6. **Treat queued work as unfinished.** The inline viewer may monitor a generation for the user. Call `check_job` when another tool needs the completed URL, or when no viewer is monitoring the job. Never claim completion from a job ID alone.
 7. **Organize outputs.** Give assets meaningful metadata when the tool supports it; otherwise use `update_asset` after completion. Use stable tags across a project.
 8. **Do not invent tools or parameters.** If a tool is absent on the current client, follow `references/platform-client.md`. Use the exposed tool schema for top-level fields and `get_model_params` for model-specific settings.
-9. **Capture actionable feedback.** Proactively use `submit_feedback` for bugs, missing features or models, confusing flows, generation-quality problems and praise without asking for a separate confirmation, unless the user asks you not to report it. Keep reports specific and do not add refund requests. Read `references/workflows/feedback.md` before reporting.
+9. **Capture actionable feedback.** Use `submit_feedback` for bugs, missing features or models, confusing flows, generation-quality problems and praise that the user expresses or you observe. Say briefly that you reported it, and do not report when the user asks you not to. Keep reports specific and do not add refund requests. Read `references/workflows/feedback.md` before reporting.
 10. **Match the user's language.** Conduct the workflow in the user's language, preserve supplied scripts and visible copy exactly, and verify the selected model supports the requested spoken or rendered language.
 11. **Use the examples catalog only on request.** When the user asks to browse examples or prompt ideas, follow [examples guidance](references/workflows/examples.md). Do not search the catalog before every generation, and leave variations and user-supplied style references to the generation skill. For speech voices, use `get_model_params` and the voiceover workflow.
 12. **Keep HTML rendering explicit.** Use `creativeclaw-render-html` when the user explicitly asks for HTML/CSS, HyperFrames, or code-driven rendering, supplies HTML, or accepts that method. It also finds HTML-video examples. An exact text watermark for `merge_media` `overlay_images` may use `render_html_image` with a transparent background. Ordinary image or video requests stay with the generative skills.
@@ -80,7 +80,7 @@ For image prompting, load [the selected image model reference](references/images
 2. Search the asset library when saved media, project reuse, or continuity matters; skip the search for standalone generation. Import supplied references only when needed. Search curated examples only when the user asks for them, and load only the selected one.
 3. Fetch the selected theme for branded work.
 4. Inspect available models and the chosen model's parameters.
-5. State consequential settings briefly; honor existing authorization and user-requested review stages without asking again.
+5. State consequential settings briefly; honor the approvals the user already gave and the review stages they asked for.
 6. Generate or process the media.
 7. Resolve any queued job needed by later steps.
 8. Inspect the result, revise deliberately, and preserve approved anchors.
@@ -88,7 +88,7 @@ For image prompting, load [the selected image model reference](references/images
 
 ## Default visual preparation for video
 
-For new generative video, follow the selected video skill's reference-first workflow: one clean keyframe per shot with `generate_image` at the video's aspect ratio, built from approved identity, product, or location anchors, then pass it to the video model. A video request covers these keyframes; say so rather than asking. Skip them only when the user asks for direct text-to-video, supplies a ready shot image, or is editing footage.
+For new generative video, follow the selected video skill's reference-first workflow: one clean keyframe per shot with `generate_image` at the video's aspect ratio, built from approved identity, product, or location anchors, then pass it to the video model. Tell the user the plan includes one keyframe image per shot before making them. Skip them when the user asks for direct text-to-video, supplies a ready shot image, or is editing footage.
 
 ## References
 

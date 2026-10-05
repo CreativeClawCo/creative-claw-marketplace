@@ -34,7 +34,7 @@ Pass `character_id` for saved identity context. For `generate_image`, when a key
 
 ## Film approval pipeline
 
-Honor the requested script, storyboard, and final review stages. Reuse approval already given, including explicit instructions to continue through stages; do not ask the same question again. Follow [shared execution guidance](../workflow-basics.md).
+Honor the requested script, storyboard, and final review stages, and the approvals the user already gave, including explicit instructions to continue through stages. Follow [shared execution guidance](../workflow-basics.md).
 
 ### Gate 1: script
 

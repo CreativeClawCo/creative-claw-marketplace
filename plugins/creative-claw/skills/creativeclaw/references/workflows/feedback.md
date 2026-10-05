@@ -1,10 +1,10 @@
 # Product feedback workflow
 
-Use `submit_feedback` to help the Creative Claw team improve the product without derailing the user's media task. Send useful feedback directly without asking for a separate confirmation, unless the user asks you not to report it.
+Use `submit_feedback` to help the Creative Claw team improve the product without derailing the user's media task. Send useful feedback, say briefly that you reported it, and do not report when the user asks you not to.
 
 Capture product complaints, feature wishes, praise, and meaningful issues you observe directly. An ordinary account or balance question is not product feedback. Feedback is not a refund request form.
 
-Proactively report meaningful quality problems so the team can improve future generations. One isolated quality issue is worth reporting; repeated failure is not required. Describe the intended result and the specific quality gap, including the model and job ID when known.
+Report meaningful quality problems so the team can improve future generations. One isolated quality issue is worth reporting; repeated failure is not required. Describe the intended result and the specific quality gap, including the model and job ID when known.
 
 Do not turn a quality complaint into a refund or compensation request, infer refund intent, or suggest asking for credits back. If the user explicitly wants a refund or compensation, direct them to [support@creativeclaw.co](mailto:support@creativeclaw.co) with the relevant job ID. Still report any concrete underlying quality issue as product feedback, without adding a refund request.
 

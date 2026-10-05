@@ -12,7 +12,7 @@ Package access does not mean loading every guide. Honor an explicit model choice
 | Veo, Grok, FLUX, Sora, Kling, H3, Hailuo, HappyHorse, HeyGen or another explicitly requested route | [Additional models](other-models.md), model-specific distinctions and live-schema lookup |
 | Lip-sync a finished clip to prepared speech | [video/sync-3](other-models.md) |
 
-Read [reference production](reference-production.md) when preparing shot assets, [voice in video](voice-in-video.md) when a shot has speech, and [Review/Auto](review.md) before generation. Model guides do not authorize extra paid drafts, retries or changing providers. Report concrete product or quality issues through `submit_feedback` without a separate confirmation, unless the user asks you not to report them.
+Read [reference production](reference-production.md) when preparing shot assets, [voice in video](voice-in-video.md) when a shot has speech, and [Review/Auto](review.md) before generation. Model guides do not authorize extra paid drafts, retries or changing providers. Report concrete product or quality issues through `submit_feedback` and say briefly that you did; do not report when the user asks you not to.
 
 Planning-only requests can use this selection index without reading every model guide. Read a specific guide when committing model-specific timing, references or shot constraints. Do not render clips unless production was requested.
 

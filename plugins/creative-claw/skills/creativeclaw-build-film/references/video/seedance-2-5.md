@@ -201,4 +201,4 @@ Preserve identity and room layout. No music, captions, extra speakers, or cuts.
 
 Check reference-role adherence, endpoint accuracy, identity, lip-sync, audio timing, unwanted subject copying from style references, implausible transitions, extra cuts, flicker, warped hands, and embedded text. Report defects and propose a focused correction. Regenerate a failed shot only when the user explicitly requests that additional attempt; do not regenerate the entire sequence.
 
-Report concrete quality issues without a separate confirmation, unless the user asks you not to report them; include concrete model-specific failures without exposing private media.
+When you report a quality issue with `submit_feedback`, include concrete model-specific failures without exposing private media.
