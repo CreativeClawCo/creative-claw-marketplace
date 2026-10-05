@@ -147,7 +147,9 @@ fs.cpSync(source, packageDir, {
 // platform notes, exactly as build-skill-zips.sh packages it.
 fs.cpSync(path.join(repo, "skill-variants/chatgpt"), path.join(packageDir, "skills/creativeclaw/references"), { recursive: true });
 fs.writeFileSync(path.join(packageDir, "plugin.json"), JSON.stringify(manifest, null, 2) + "\n");
-fs.writeFileSync(path.join(packageDir, "mcp.json"), JSON.stringify(mcp, null, 2) + "\n");
+// No mcp.json in the package. The published plugin's MCP server is bound to it in the
+// portal, and an upload that declares one is rejected as "adding an MCP server".
+// openai/mcp.json stays as the record of which surface that server is.
 fs.cpSync(path.join(openaiDir, "assets"), path.join(packageDir, "assets"), { recursive: true });
 
 for (const entry of fs.readdirSync(packageDir, { recursive: true })) {
