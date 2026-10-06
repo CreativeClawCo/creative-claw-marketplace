@@ -1,8 +1,8 @@
-# Creative Claw , Nano Banana 2
+# Creative Claw, Nano Banana 2.1
 
 Read [shared execution guidance](../workflow-basics.md) once per task before using tools. It covers existing authorization, model discovery, optional cost checks, imports, and recovery.
 
-Use `image/nano-banana-2` as Creative Claw's default for most image generation and editing. It is the primary cost-efficient recommendation, offering the best general balance of visual quality, instruction understanding, speed, output resolution, and iteration cost.
+The existing `image/nano-banana-2` ID automatically uses Nano Banana 2.1 (`gemini-nano-banana-2.1`). Use it as Creative Claw's default for most image generation and editing. It is the primary cost-efficient recommendation, offering the best general balance of visual quality, instruction understanding, speed, output resolution, and iteration cost.
 
 ## Core workflow
 
@@ -23,14 +23,13 @@ Use `image/nano-banana-2` as Creative Claw's default for most image generation a
 | `image_url` | Primary edit source or most important reference; becomes Image 1. |
 | `extras.image_urls` | Additional ordered references; become Image 2 onward. |
 | `aspect_ratio` | Output ratio, such as `1:1`, `4:5`, `9:16`, `16:9`, `21:9`, `3:2`, `4:3`, `3:4`, `2:3`, `4:1`, `1:4`, `8:1`, or `1:8`; `get_model_params` lists the current set. Don't combine it with the legacy `size` or `extras.aspect_ratio`. |
-| `extras.resolution` | `0.5K`, `1K`, `2K`, or `4K`; default `1K`. |
-| `extras.thinking_level` | `minimal` or `high`; omit for ordinary work. |
+| `extras.resolution` | `1K`, `2K`, or `4K`; default `1K`. The old `0.5K` tier is unavailable. |
+| `extras.thinking_level` | `minimal`, `medium`, or `high`; `medium` is the default. Use `minimal` for simple images when latency matters. |
 | `extras.enable_web_search` | Enable only when current real-world information is genuinely needed. |
 | `num_images` | 1,4. |
 | `output_format` | Use `png` for text/design and `jpeg` for ordinary photographic delivery. |
-| `seed` | Reuse only for controlled comparisons; a seed does not guarantee identity. |
 
-Keep `extras.limit_generations: true` unless there is a tested reason to expose intermediate outputs. Never loosen safety settings merely to bypass a refusal.
+Direct Google does not expose seed, safety_tolerance, sync_mode or limit_generations. Creative Claw prices 1K/2K/4K at 7/11/16 credits per image. Thinking cannot be disabled.
 
 ## Reference order and roles
 
@@ -147,3 +146,9 @@ it. Do not add new objects or text.
 ```
 
 Reject misspelled copy, changed logos, identity drift, reference-role leakage, extra objects, warped anatomy, contradictory shadows, incorrect aspect ratio, and smeared fine detail. Use `submit_feedback` for repeated model-specific failures or unclear controls, including the model ID, reference count, attempted task, and concrete defect.
+
+## Version 2.1 research
+
+Google's October 6, 2026 release retains the natural-language prompting workflow. Keep exact quoted visible text, explicit reference roles, and preservation clauses. Version 2.1 improves typography and multi-turn consistency and fixes tiling artifacts on 1:4, 4:1, 1:8 and 8:1 at 2K/4K. Keep inspecting those outputs.
+
+[Official model](https://ai.google.dev/gemini-api/docs/models/gemini-nano-banana-2.1), [prompting guide](https://ai.google.dev/gemini-api/docs/image-generation), [pricing](https://ai.google.dev/gemini-api/docs/pricing).
