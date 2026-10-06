@@ -4,7 +4,7 @@ Read once when starting a Creative Claw workflow; reuse it across supporting ski
 
 ## When the Creative Claw tools are missing
 
-Creative Claw tools such as `list_models` and `generate_image` appear only after the server is connected. If none are available, the plugin is installed but not connected yet. Say so, and tell the user to open the plugin's Connectors tab in their app (or the MCP server list in a terminal client), connect Creative Claw and sign in, then ask again. Do not substitute other tools or present a result that was not generated.
+Creative Claw tools such as `list_models` and `generate_image` appear only after the server is connected. If none are available, the plugin is installed but not connected yet. Say so, and tell the user to open the plugin's Connectors tab in their app (or the MCP server list in a terminal client), connect Creative Claw and sign in, then ask again. If the app opens an "Add custom connector" dialog, its detected options are already right: the user only presses Add and then signs in. Do not substitute other tools or present a result that was not generated.
 
 ## Keep simple requests simple
 

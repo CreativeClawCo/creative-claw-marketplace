@@ -18,7 +18,7 @@ The plugin contains 17 skills (the `creativeclaw` router plus 16 focused workflo
 ### Claude
 
 1. Add **Creative Claw** from the plugin directory: **Customize > Plugins** in Claude, or `/plugin directory` in Claude Code.
-2. Open the plugin's **Connectors** tab, connect Creative Claw, and sign in. In Claude Code, run `/mcp` and authenticate `creative-claw`.
+2. Open the plugin's **Connectors** tab and connect Creative Claw. Claude shows an **Add custom connector** dialog with the right options already selected: press **Add**, then sign in. In Claude Code, run `/mcp` and authenticate `creative-claw`.
 
 The skills load as soon as the plugin is added, but nothing can be generated until the server is connected. Then ask for what you want, for example:
 
