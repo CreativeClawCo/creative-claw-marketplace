@@ -29,7 +29,7 @@ The existing `image/nano-banana-2` ID automatically uses Nano Banana 2.1 (`gemin
 | `num_images` | 1,4. |
 | `output_format` | Use `png` for text/design and `jpeg` for ordinary photographic delivery. |
 
-Direct Google does not expose seed, safety_tolerance, sync_mode or limit_generations. Creative Claw prices 1K/2K/4K at 7/11/16 credits per image. Thinking cannot be disabled.
+Direct Google does not expose seed, safety_tolerance, sync_mode or limit_generations. Creative Claw charges a fixed 16 credits per image at 1K, 2K or 4K, with no separate input, thinking or search surcharge. Thinking cannot be disabled.
 
 ## Reference order and roles
 
