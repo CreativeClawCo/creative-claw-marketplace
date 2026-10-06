@@ -8,6 +8,8 @@ Use `video/seedance-2.5`, the premium cinematic model, for high-end, long (up to
 
 ## Core workflow
 
+Check spoken-language support in `get_model_params` before choosing native dialogue. Seedance 2.5 supports English, Chinese and other documented languages; unlisted languages remain unverified even with audio references. For those languages, use the dedicated single-shot or multi-shot route in [spoken languages](spoken-languages.md).
+
 1. Define the deliverable, duration, ratio, shot count, subjects, continuity, audio, and reference roles.
 2. Search for existing assets and import every external image, video, or audio file into Creative Claw.
 3. Follow the reference-first pipeline in [reference production](reference-production.md); skip keyframes only on explicit direct-generation requests. Reuse supplied and approved references.
@@ -84,7 +86,7 @@ For each shot:
 4. Generate a compatible end frame if the motion must arrive somewhere specific.
 5. Collect separate reference images for identity, wardrobe, product details, location, and visual style.
 6. Use motion video references only for movement, camera cadence, blocking, or choreography.
-7. For specified speech, follow [voice in video](voice-in-video.md): prepare the recording first with creativeclaw-generate-voiceover, or reuse supplied audio. Use audio references for the requested dialogue, language, voice and timing, while recognizing that the model may generate a different recording. Inspect the finished speech and attach the prepared track during final assembly when exact words or voice are required.
+7. For specified speech in a documented language, follow [voice in video](voice-in-video.md): prepare the recording first with creativeclaw-generate-voiceover, or reuse supplied audio. References can guide dialogue, voice and timing but may produce a different recording. Inspect the words and lip timing; an exact recording requires an audio-driven route or a requested lip-sync repair if the generated performance differs. A soundtrack replacement alone is suitable for off-camera narration, not a repair for mismatched visible lips.
 
 Do not make one image do every job. A start frame controls the opening composition; reference images control identity or style; an end frame controls the destination.
 
@@ -185,12 +187,12 @@ precise logo and packaging geometry. Synchronized folds, magnetic clicks, and a
 subtle bass swell. One seamless shot; no cuts or extra components.
 ```
 
-Audio-led scene:
+Audio-reference scene in a documented language (review the delivered words and lip sync):
 
 ```text
 @Image1 is the exact performer identity and wardrobe. @Audio1 is the prepared
-Swedish dialogue recording. The performer says exactly, “Det här känns helt
-rätt.” Use @Audio1 as the speech source for those Swedish words, voice, pauses,
+Spanish dialogue recording. The performer says exactly, “Esto se siente bien.”
+Use @Audio1 as the speech reference for those Spanish words, voice, pauses,
 and timing. Do not translate, rephrase, or add speech. She stands in a dark
 rehearsal room as a single spotlight brightens. Medium close-up, gentle handheld drift.
 Match mouth movement to @Audio1 and let the light peak on the final phrase.

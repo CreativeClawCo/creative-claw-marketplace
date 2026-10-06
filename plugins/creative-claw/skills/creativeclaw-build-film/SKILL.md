@@ -36,6 +36,8 @@ Details: [reference production](references/video/reference-production.md). Image
 
 ## 2. Establish timing and audio
 
+Read each selected model's spoken-language guidance in `get_model_params({ model })`. For unsupported or unverified dialogue languages, follow [spoken languages](references/video/spoken-languages.md): build each requested camera view from the same character references, lip-sync its image to its speech segment, then concatenate while keeping the clip audio. A single talking face remains one generation within duration limits. Documented languages keep the normal workflow.
+
 When a Character speaks and the voice is unknown, ask one question: design a new voice from a description (`design_voice`, three auditions), use your own voice (recording plus consent, creativeclaw-clone-voice), or pick a stock voice. If the voice doesn't matter, pick a stock voice and name it. Design auditions use the Character's real lines. In ChatGPT the Voice Studio card saves the choice; read it back from `list_characters` rather than saving again.
 
 Pick one voice path per speaking shot from [voice in video](references/video/voice-in-video.md). Gemini Omni, the default, accepts no audio: native dialogue there, or route exact-voice shots to an audio-capable model or `video/sync-3`. Generate or reuse speech with `creativeclaw-generate-voiceover` before locking shot durations: at most 2.5 words per clip second, about 0.5 s of air at each end, lengths from the audio's `wordTimings`. Do not add separate narration to native-dialogue clips unless requested.

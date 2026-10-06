@@ -123,7 +123,7 @@ Natural beats work well:
 [6-8s] Hold on the clean hero angle.
 ```
 
-Omni accepts no audio input (`audio_urls`). Its dialogue is native: the model invents the voice, and the voice changes between clips. For an exact or recurring voice, route the shot as described in [voice in video](voice-in-video.md) instead of making speech first for Omni.
+Omni accepts no audio input (`audio_urls`) on the current route. Its dialogue is native: the model invents the voice, which can change between clips. Google documents English language support; other spoken languages are unverified, not necessarily unsupported. Check `get_model_params` and use [spoken languages](spoken-languages.md) for those languages, keeping a single talking face as one audio-driven video or preparing consistent per-shot images and speech only for requested multiple shots. For an exact or recurring voice, follow [voice in video](voice-in-video.md).
 
 Describe native audio explicitly:
 

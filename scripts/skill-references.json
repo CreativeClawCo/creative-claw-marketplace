@@ -7,6 +7,7 @@
     "video": ["creativeclaw-generate-video", "creativeclaw-build-film", "creativeclaw-create-ugc-ad", "creativeclaw-plan-video"],
     "avatars/identity.md": ["creativeclaw-create-avatar", "creativeclaw-create-character"],
     "edit-contract.md": ["creativeclaw-edit-media", "creativeclaw-create-reels"],
-    "video/voice-in-video.md": ["creativeclaw-generate-voiceover", "creativeclaw-create-avatar", "creativeclaw-create-character"]
+    "video/voice-in-video.md": ["creativeclaw-generate-voiceover", "creativeclaw-create-avatar", "creativeclaw-create-character"],
+    "video/spoken-languages.md": ["creativeclaw-generate-voiceover", "creativeclaw-create-avatar", "creativeclaw-create-character"]
   }
 }

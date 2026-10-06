@@ -11,6 +11,7 @@ Package access does not mean loading every guide. Honor an explicit model choice
 | Wan 3.0 | [Wan](wan-3.md), native-audio 2–30 s single-pass clips, references, source transformations, and document or webpage briefs |
 | Veo, Grok, FLUX, Sora, Kling, H3, Hailuo, HappyHorse, HeyGen or another explicitly requested route | [Additional models](other-models.md), model-specific distinctions and live-schema lookup |
 | Lip-sync a finished clip to prepared speech | [video/sync-3](other-models.md) |
+| Talking photo in an unsupported or unverified native-dialogue language | [Spoken languages](spoken-languages.md), H3 Max Lip Sync or HeyGen Avatar 4 with prepared speech |
 
 Read [reference production](reference-production.md) when preparing shot assets, [voice in video](voice-in-video.md) when a shot has speech, and [Review/Auto](review.md) before generation. Model guides do not authorize extra paid drafts, retries or changing providers. Report concrete product or quality issues through `submit_feedback` and say briefly that you did; do not report when the user asks you not to.
 

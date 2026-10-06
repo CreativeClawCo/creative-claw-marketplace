@@ -22,14 +22,16 @@ At most 2.5 spoken words per clip second, with about 0.5 s of air at each end (5
 
 ## Choose the path
 
-**A. Native dialogue** (any native-audio model, including the default Gemini Omni): quote the line and name the speaker. The model invents the voice, and it changes every clip. Fine for a one-off, not for a recurring Character.
+First read the selected model's spoken-language guidance from `get_model_params({ model })`. For visible speech in an unsupported or unverified language, follow [spoken languages](spoken-languages.md): one image and one audio-driven generation for a single talking face; consistent images from the same references, per-shot speech and concatenation only when multiple shots are requested. Documented languages keep the normal paths below.
+
+**A. Native dialogue** (a native-audio model with documented support for the requested spoken language): quote the line and name the speaker. The model invents the voice, which can change between clips. Suitable for a one-off where that variation is acceptable.
 
 **B. Exact voice with visible lips:** make the speech first, then one of:
-- Seedance 2.5, H3 Max, or Wan with `audio_urls` plus an image or video reference (line ≥ 2 s; cite `@Audio1` or `Audio 1`).
+- Seedance 2.5, H3 Max, or Wan with `audio_urls` plus an image or video reference only when the requested language is documented for the selected model. References condition a new performance and do not guarantee an exact recording. Check the model's own tokens and limits.
 - Any finished speaking clip → `video/sync-3`: `video_urls` = [clip], `audio_urls` = [line], equal lengths.
-- A single talking head → `video/heygen-avatar-4`: `image_url` = face, `extras.audio_url` = line.
+- A single talking head → `video/minimax-h3-max-lip-sync` or `video/heygen-avatar-4`: `image_url` = face, `extras.audio_url` = finished line. Use one generation within the endpoint's limits.
 
-Gemini Omni accepts no audio input. Don't pay for speech first and then send the shot to Omni; use path A, or a model above. If the generated voice drifted from the prepared line, put the prepared line back with `merge_audio_video` (default replace mode).
+Gemini Omni accepts no audio input on the current route. Don't pay for speech first and then send the shot to Omni; use path A, or a model above. If a generated performance drifts from the prepared recording, replacing its soundtrack does not fix mouth timing. Use a requested lip-sync repair such as `video/sync-3`, or an authorized new audio-driven take. Add an audio overlay alone only for voiceover without visible speech or when matching lip timing has actually been verified.
 
 **C. Voiceover, no visible speaker:** prompt "no dialogue, no music", then add the speech afterwards.
 

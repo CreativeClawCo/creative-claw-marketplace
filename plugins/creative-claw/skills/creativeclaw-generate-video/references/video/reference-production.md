@@ -39,6 +39,8 @@ Honor an earlier checkpoint the user asked for (for example "show me the first i
 
 ## Voice, audio and continuity
 
+Check the requested spoken language in the selected model's `get_model_params` Usage. When native dialogue is unsupported or unverified, follow [spoken languages](spoken-languages.md). Its dedicated image-plus-audio route uses a clean literal shot image rather than the generic multi-reference video pattern above; the shared character references belong in image preparation. Keep one shot for one requested talking face and use multiple consistent images only for requested multiple shots.
+
 For dialogue, narration or an exact voice, pick one path per speaking shot: read [voice in video](voice-in-video.md). Check the speech's `wordTimings` against the planned clip length before paying for video. Cloning needs its own explicit consent.
 
 For connected clips, reuse the same Character, product and location anchors, with planned state changes named. Reuse the same voice and speech settings.
