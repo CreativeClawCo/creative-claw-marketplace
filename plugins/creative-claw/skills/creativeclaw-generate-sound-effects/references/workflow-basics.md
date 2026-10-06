@@ -2,6 +2,10 @@
 
 Read once when starting a Creative Claw workflow; reuse it across supporting skills in the same task. Focused copies are generated from the root skill by `scripts/sync-skill-references.mjs`.
 
+## When the Creative Claw tools are missing
+
+Creative Claw tools such as `list_models` and `generate_image` appear only after the server is connected. If none are available, the plugin is installed but not connected yet. Say so, and tell the user to open the plugin's Connectors tab in their app (or the MCP server list in a terminal client), connect Creative Claw and sign in, then ask again. Do not substitute other tools or present a result that was not generated.
+
 ## Keep simple requests simple
 
 Use the request, supplied media, previous choices, and existing approvals. Do not turn the workflow's list of brief details into a questionnaire. Infer minor creative defaults and proceed; ask one concise question only when missing information would materially change the result or prevent execution. A request to generate covers that requested generation.

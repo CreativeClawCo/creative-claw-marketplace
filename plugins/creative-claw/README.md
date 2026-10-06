@@ -1,6 +1,6 @@
 # Creative Claw plugin
 
-Creative Claw is an AI media studio for Grok Bot, Hermes, OpenClaw, Cursor, and other compatible agents. It combines a hosted MCP server with an agent skill for producing consistent, on-brand media from natural-language requests.
+Creative Claw is an AI media studio for Claude, Grok Bot, Hermes, OpenClaw, Cursor, and other compatible agents. It combines a hosted MCP server with an agent skill for producing consistent, on-brand media from natural-language requests.
 
 ## Capabilities
 
@@ -14,6 +14,19 @@ Creative Claw is an AI media studio for Grok Bot, Hermes, OpenClaw, Cursor, and 
 The plugin contains 17 skills (the `creativeclaw` router plus 16 focused workflows such as `creativeclaw-generate-video`, `creativeclaw-edit-media`, and `creativeclaw-render-html`) and one remote MCP server connection.
 
 ## Install
+
+### Claude
+
+1. Add **Creative Claw** from the plugin directory: **Customize > Plugins** in Claude, or `/plugin directory` in Claude Code.
+2. Open the plugin's **Connectors** tab, connect Creative Claw, and sign in. In Claude Code, run `/mcp` and authenticate `creative-claw`.
+
+The skills load as soon as the plugin is added, but nothing can be generated until the server is connected. Then ask for what you want, for example:
+
+- "Turn this product photo into a five-second video."
+- "Make a creator-style ad for my skincare brand."
+- "Read this script in a warm, natural voice."
+
+### Grok Bot and Cursor
 
 After marketplace approval, search for **Creative Claw** in Grok Bot or the Cursor Marketplace and choose **Install**. The first tool call opens Creative Claw authentication in your browser.
 
