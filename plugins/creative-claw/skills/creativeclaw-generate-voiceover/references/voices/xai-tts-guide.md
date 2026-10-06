@@ -24,10 +24,10 @@ xAI TTS is a strong fit for expressive narration, assistants, podcasts, long cop
   "voice_id": "eve",
   "text": "This is where everything changes. [pause] <emphasis>Ready?</emphasis>",
   "extras": {
-    "language": "en"
-  },
-  "format": "mp3",
-  "sample_rate": "24000"
+    "language": "en",
+    "format": "mp3",
+    "sample_rate": "24000"
+  }
 }
 ```
 
@@ -151,9 +151,7 @@ General voiceover:
   "model": "speech/xai-tts",
   "voice_id": "sal",
   "text": "<soft>Some ideas arrive quietly.</soft> [pause] The important ones stay with us.",
-  "extras": { "language": "en" },
-  "format": "mp3",
-  "sample_rate": "24000"
+  "extras": { "language": "en", "format": "mp3", "sample_rate": "24000" }
 }
 ```
 
@@ -164,9 +162,7 @@ High-quality editing master:
   "model": "speech/xai-tts",
   "voice_id": "orion",
   "text": "<build-intensity>What began as a signal became a movement.</build-intensity>",
-  "extras": { "language": "en" },
-  "format": "wav",
-  "sample_rate": "48000"
+  "extras": { "language": "en", "format": "wav", "sample_rate": "48000" }
 }
 ```
 
@@ -177,9 +173,7 @@ Phone or IVR audio:
   "model": "speech/xai-tts",
   "voice_id": "rex",
   "text": "Thanks for calling. [pause] Press one for sales, or two for support.",
-  "extras": { "language": "en" },
-  "format": "mulaw",
-  "sample_rate": "8000"
+  "extras": { "language": "en", "format": "mulaw", "sample_rate": "8000" }
 }
 ```
 

@@ -5,7 +5,7 @@ Creative Claw generates speech, sound effects, ambience, Foley, and music; desig
 ## Route the request
 
 - New narration, dialogue, or character voice → `generate_speech`.
-- Change who is speaking in an existing speech recording while keeping the performance → `generate_speech` with `model: "speech/cartesia-voice-changer"`, `audio_url` = the workspace speech audio, and a Cartesia `voice_id` or a Character's `character_id`. Pass no `text`.
+- Change who is speaking in an existing speech recording while keeping the performance → `generate_speech` with `model: "speech/cartesia-voice-changer"`, `extras.audio_url` = the workspace speech audio, and a Cartesia `voice_id` or a Character's `character_id`. Pass no `text`.
 - Sound effect, Foley, transition, impact, ambience, or loop → use `creativeclaw-generate-sound-effects` and `generate_sound_effect` with `sfx/elevenlabs-sound-v2`.
 - Music, score, bed, sting, jingle, or song → use `creativeclaw-generate-music` and `generate_music`: `music/lyria-3.5` by default, `music/elevenlabs-music-v2.5` for exact length or stings under 30 s, `music/minimax-music-3` for lyrics-led songs.
 - New reusable voice: consenting speaker's recording → `creativeclaw-clone-voice`; description → `design_voice` (`creativeclaw-generate-voiceover`); stock → `manage_character` with `voice_model`/`voice_id`.
@@ -27,7 +27,7 @@ Call `list_models({ category: "speech" })` and `get_model_params` before generat
 | Steady read from an ElevenLabs clone | `speech/elevenlabs-v2` | 29 languages; punctuation and sparse SSML breaks, no square-bracket performance tags. |
 | Default for stock speech, audio tags, broad language coverage, multi-speaker dialogue, or expressive delivery from an ElevenLabs clone | `speech/elevenlabs-v4` | Contextual delivery and reactions; up to 10 voices through `extras.dialogue`. |
 | Cartesia clones, or fast natural stock speech | `speech/cartesia-sonic` | Public Voice Library IDs or private Character voices, with direct emotion, speed, and volume controls. Use cartesia-sonic model reference. |
-| Change the voice in an existing speech recording | `speech/cartesia-voice-changer` | `audio_url` plus a Cartesia `voice_id` or a Character's `character_id`; no `text`. Keeps the original performance. |
+| Change the voice in an existing speech recording | `speech/cartesia-voice-changer` | `extras.audio_url` plus a Cartesia `voice_id` or a Character's `character_id`; no `text`. Keeps the original performance. |
 | Broad voice and language selection with global emotion controls | `speech/minimax-hd`    | 300+ voices and 30+ languages. Use minimax-speech model reference.                              |
 | Alternative two-speaker dialogue in one call | Google Flash or Flash-Lite TTS | Read `get_model_params` for that model's dialogue schema and stock voices. |
 | Emotive performance tags                                        | `speech/orpheus`       | Supports cues such as `<laugh>`, `<sigh>`, and `<gasp>`.                                      |

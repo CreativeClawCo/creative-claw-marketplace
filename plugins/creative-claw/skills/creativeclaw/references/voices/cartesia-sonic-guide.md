@@ -50,16 +50,14 @@ Required top-level fields:
 - `model: "speech/cartesia-sonic"`
 - `text`
 
-Optional top-level fields:
+Also top-level: `voice_id` or `character_id`.
 
-- `voice_id` or `character_id`
+Optional fields inside `extras`:
+
 - `emotion`: `neutral`, `angry`, `excited`, `content`, `sad`, or `scared`
 - `speed`: `0.6` to `1.5`, starting at `1.0`
 - `format`: `wav`, `mp3`, or `pcm`
 - `sample_rate`: use a value returned by `get_model_params`
-
-Optional fields inside `extras`:
-
 - `volume`: `0.5` to `2.0`, default `1.8`; omit it unless the user asks for a different loudness
 - `language_code`: use a value returned by `get_model_params`, especially for short, ambiguous, or multilingual text
 
@@ -81,11 +79,11 @@ Stock voice example:
   "model": "speech/cartesia-sonic",
   "voice_id": "<public Cartesia voice ID from get_model_params>",
   "text": "Welcome. Today we will show you how to get started.",
-  "emotion": "neutral",
-  "speed": 1,
-  "format": "mp3",
-  "sample_rate": "44100",
   "extras": {
+    "emotion": "neutral",
+    "speed": 1,
+    "format": "mp3",
+    "sample_rate": "44100",
     "language_code": "en"
   }
 }
@@ -98,10 +96,10 @@ Private Character example:
   "model": "speech/cartesia-sonic",
   "character_id": "<Character UUID>",
   "text": "Ready to turn one idea into your next campaign?",
-  "emotion": "excited",
-  "speed": 1.05,
-  "format": "mp3",
   "extras": {
+    "emotion": "excited",
+    "speed": 1.05,
+    "format": "mp3",
     "language_code": "en"
   }
 }

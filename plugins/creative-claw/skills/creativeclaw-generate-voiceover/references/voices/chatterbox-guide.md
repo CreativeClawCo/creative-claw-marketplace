@@ -12,9 +12,9 @@ Use a reference only when the user owns the voice or the speaker authorized this
 
 1. Preserve the user's script and confirm the supplied recording is authorized for voice matching.
 2. Prefer a clean 5,30 second sample with one speaker, natural speech, little room echo, and no music or effects. A sample close to the target emotion and pace usually transfers better.
-3. Import the sample through [platform upload guidance](../platform-upload.md) so `audio_url` is a permanent, publicly retrievable Creative Claw URL.
+3. Import the sample through [platform upload guidance](../platform-upload.md) so `extras.audio_url` is a permanent, publicly retrievable Creative Claw URL.
 4. Call `get_model_params({ model: "speech/chatterbox" })`; the current route is the original reference-audio TTS endpoint, not the separately documented multilingual or Turbo endpoints.
-5. Call `generate_speech` with `model: "speech/chatterbox"`, `text`, `audio_url`, and only runtime-supported settings.
+5. Call `generate_speech` with `model: "speech/chatterbox"`, `text`, `extras.audio_url`, and only runtime-supported settings.
 6. Audition speaker similarity, pronunciation, pace, emotion, artifacts, hallucinated sounds, and clipped boundaries. Regenerate the smallest weak section.
 
 ## Text and expressive tags
@@ -37,8 +37,8 @@ The supported cues are `<laugh>`, `<chuckle>`, `<sigh>`, `<cough>`, `<sniffle>`,
 {
   "model": "speech/chatterbox",
   "text": "I thought we had more time. <sigh> But the doors are already closing.",
-  "audio_url": "https://cdn.example.com/authorized-reference.wav",
   "extras": {
+    "audio_url": "https://cdn.example.com/authorized-reference.wav",
     "exaggeration": 0.35,
     "temperature": 0.7,
     "cfg": 0.45,

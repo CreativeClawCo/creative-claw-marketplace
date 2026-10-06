@@ -6,7 +6,7 @@ Get model params first. Match the returned voice catalog's language, accent and 
 
 Set extras.language_code to a code accepted by the current schema. Use native-script text, natural punctuation and the current schema's delivery controls. Read its Usage and emotion/speed options before adding settings; do not transplant ElevenLabs stability knobs, SSML or square-bracket performance tags. Start with neutral settings and adjust one delivery dimension after auditioning.
 
-Current controls: top-level emotion is neutral, angry, excited, content, sad or scared. Top-level speed is 0.6 to 1.5. Start with emotion "neutral" and speed 1.0; try "excited" with 1.05 for an energetic ad, or "content" with 0.96 for a warm read. extras.volume accepts 0.5 to 2.0 and defaults to 1.8; omit it unless a volume override is wanted. Recheck the schema before use.
+Current controls, all inside extras: emotion is neutral, angry, excited, content, sad or scared. speed is 0.6 to 1.5. Start with emotion "neutral" and speed 1.0; try "excited" with 1.05 for an energetic ad, or "content" with 0.96 for a warm read. extras.volume accepts 0.5 to 2.0 and defaults to 1.8; omit it unless a volume override is wanted. Recheck the schema before use.
 
 For Hebrew, the current catalog includes Ayala, Noam, Yarden and Gil; resolve their IDs at runtime and use he. Do not treat Cartesia as supporting Persian or Urdu unless the live schema adds them.
 

@@ -10,7 +10,7 @@ Use this model reference inside `creativeclaw-generate-voiceover`. MiniMax is th
 2. Choose a native system `voice_id` from `get_model_params`. Use `Wise_Woman` only for an unspecified English brief; do not carry that default into another language.
 3. Call `get_model_params({ model: "speech/minimax-hd" })` and treat its voice IDs, `language_boost` values, and parameter ranges as authoritative.
 4. Preserve approved wording. Use MiniMax pause and interjection syntax only; do not copy ElevenLabs or xAI tags.
-5. Call `generate_speech` with `model`, `text`, `voice_id`, and the exact `language_boost`. Add the top-level `emotion` or `speed` only when useful; put pitch, volume, format, and pronunciation controls in the current runtime-supported fields.
+5. Call `generate_speech` with `model`, `text`, `voice_id`, and the exact `extras.language_boost`. Add `extras.emotion` or `extras.speed` only when useful; pitch, volume, format, and pronunciation controls also go in `extras`, using the fields the runtime lists.
 6. Audition pronunciation, regional accent, emotion, pace, cue leakage, clipping, and loudness. Fix the smallest affected section before recasting the whole script.
 
 ## Voice selection
@@ -35,8 +35,10 @@ The curated catalog includes English, Mandarin, Spanish, Portuguese, French, Ger
   "model": "speech/minimax-hd",
   "voice_id": "Spanish_Narrator",
   "text": "Hoy empieza una nueva etapa.<#0.4#>(sighs) Y esta vez, vamos preparados.",
-  "language_boost": "Spanish",
-  "speed": 0.96
+  "extras": {
+    "language_boost": "Spanish",
+    "speed": 0.96
+  }
 }
 ```
 

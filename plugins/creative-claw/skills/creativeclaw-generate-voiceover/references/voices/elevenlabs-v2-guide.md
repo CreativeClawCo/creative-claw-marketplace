@@ -34,8 +34,8 @@ Keep production direction outside spoken text: “warm, confident founder” bel
 
 ## Settings that actually reach the model
 
-Top level for this clone-only workflow: `model`, `text`, `character_id`, optional `speed`.
-Inside `extras`: `voice_settings`, `output_format`, `seed`, `timestamps`, `apply_text_normalization`, `previous_text`, `next_text`.
+Top level for this clone-only workflow: `model`, `text`, `character_id`.
+Inside `extras`: `speed`, `voice_settings`, `output_format`, `seed`, `timestamps`, `apply_text_normalization`, `previous_text`, `next_text`.
 
 | Setting inside extras.voice_settings | Starting value | Practical adjustment |
 | --- | --- | --- |
@@ -45,7 +45,7 @@ Inside `extras`: `voice_settings`, `output_format`, `seed`, `timestamps`, `apply
 | use_speaker_boost | true | May help resemblance at additional latency. |
 | speed | 1 | Adjust gently within 0.7,1.2. Extreme values can hurt quality. |
 
-Legacy flat fields such as `extras.stability` still work. Prefer nested `extras.voice_settings`; nested values win over flat aliases, and explicit top-level `speed` wins over both. Do not duplicate fields unnecessarily. V3 only exposes stability and speed; legacy similarity, style and speaker boost fields are ignored there.
+Legacy flat fields such as `extras.stability` still work. Prefer nested `extras.voice_settings`; nested values win over flat aliases, and an explicit `extras.speed` wins over both. Do not duplicate fields unnecessarily. V3 only exposes stability and speed; legacy similarity, style and speaker boost fields are ignored there.
 
 ```json
 {

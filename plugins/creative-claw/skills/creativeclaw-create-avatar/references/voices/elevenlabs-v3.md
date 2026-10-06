@@ -8,7 +8,7 @@ Use readable spoken sentences and sparse supported audio tags, for example "[exc
 
 Set extras.language_code to a supported code for the intended language, especially short or ambiguous text. Prefer native script unless romanization is explicitly requested. See [language routing](languages.md).
 
-Use extras.voice_settings.stability: 0 for Creative, 0.5 for Natural, 1 for Robust. Start at 0.5; 0 can improve expressiveness with more variation. Top-level speed ranges 0.7 to 1.2, start at 1. Old v2 similarity/style/speaker-boost controls are not useful v3 controls.
+Use extras.voice_settings.stability: 0 for Creative, 0.5 for Natural, 1 for Robust. Start at 0.5; 0 can improve expressiveness with more variation. extras.speed ranges 0.7 to 1.2, start at 1. Old v2 similarity/style/speaker-boost controls are not useful v3 controls.
 
 Preserve supplied words and punctuation where possible. Get permission before rewriting pronunciation. Do not add tags to an exact-text request if the user forbids them.
 
