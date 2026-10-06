@@ -8,7 +8,7 @@ Example request: "Use my saved avatar in three shots entering a cafe, sitting do
 
 Find the intended Character with list_characters. Resolve its canonical visual and any approved face/body/wardrobe assets; ask which Character only when the match is ambiguous. If none exists, suggest creating a reusable avatar when worthwhile. Do not require a new character sheet for a one-off request with adequate references.
 
-Lock identity, wardrobe, cup design, cafe layout, time of day and screen direction. Create only missing frames. Example image direction:
+Lock identity, wardrobe, cup design, cafe layout, time of day and screen direction. Create only missing frames. Make the first shot's frame first, then pass it as an extra reference when making the others so wardrobe, set and light stay the same. Example image direction:
 
 "Use the approved face portrait as the exact identity and the body view as the exact wardrobe/proportions. Show the same person entering the supplied cafe from the left, wearing the approved jacket. Eye-level medium-wide framing, soft window light from the right. Keep facial asymmetry, hairline and cup design unchanged. One clean frame, no text or collage."
 

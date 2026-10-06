@@ -28,7 +28,7 @@ Purchases and plans are handled on the Creative Claw website, not in chat. Do no
 9. **Capture actionable feedback.** Use `submit_feedback` for bugs, missing features or models, confusing flows, generation-quality problems and praise that the user expresses or you observe. Say briefly that you reported it, and do not report when the user asks you not to. Keep reports specific and do not add refund requests. Read `references/workflows/feedback.md` before reporting.
 10. **Match the user's language.** Conduct the workflow in the user's language, preserve supplied scripts and visible copy exactly, and verify the selected model supports the requested spoken or rendered language.
 11. **Use the examples catalog only on request.** When the user asks to browse examples or prompt ideas, follow [examples guidance](references/workflows/examples.md). Do not search the catalog before every generation, and leave variations and user-supplied style references to the generation skill. For speech voices, use `get_model_params` and the voiceover workflow.
-12. **Keep HTML rendering explicit.** Use `creativeclaw-render-html` when the user explicitly asks for HTML/CSS, HyperFrames, or code-driven rendering, supplies HTML, or accepts that method. It also finds HTML-video examples. An exact text watermark for `merge_media` `overlay_images` may use `render_html_image` with a transparent background. Ordinary image or video requests stay with the generative skills.
+12. **Keep HTML and motion-graphics video explicit.** Use `creativeclaw-render-html` when the user explicitly asks for HTML/CSS, HyperFrames, or code-driven rendering, supplies HTML, accepts that method, or explicitly asks for a motion-graphics video: motion graphics, kinetic typography, animated text or titles, an animated infographic or explainer, or UI-style animation. A request for a video, an ad, or an explainer without those words stays with the video skills; when it is unclear whether the user wants filmed-looking footage or designed motion, ask one question. It also finds HTML-video examples. An exact text watermark for `merge_media` `overlay_images` may use `render_html_image` with a transparent background. Ordinary image or video requests stay with the generative skills.
 
 ## Route the request
 
@@ -48,6 +48,7 @@ Purchases and plans are handled on the Creative Claw website, not in chat. Do no
 | Clone a consented voice from a recording | `creativeclaw-clone-voice` |
 | Browse or adapt curated examples when asked | [examples guidance](references/workflows/examples.md) |
 | Explicitly render HTML/CSS as a PNG, or HTML/HyperFrames motion as video | `creativeclaw-render-html` |
+| Motion graphics, kinetic typography, animated titles, or an animated explainer the user explicitly asks for | `creativeclaw-render-html` (the video agent) |
 | Add or create an intro/outro around existing video | `creativeclaw-edit-media` |
 | Create a personal avatar from photos or a reusable identity sheet | `creativeclaw-create-avatar` |
 | Create or update a reusable Character | `creativeclaw-create-character` |
@@ -88,7 +89,7 @@ For image prompting, load [the selected image model reference](references/images
 
 ## Default visual preparation for video
 
-For new generative video, follow the selected video skill's reference-first workflow: one clean keyframe per shot with `generate_image` at the video's aspect ratio, built from approved identity, product, or location anchors, then pass it to the video model. Tell the user the plan includes one keyframe image per shot before making them. Skip them when the user asks for direct text-to-video, supplies a ready shot image, or is editing footage.
+For new generative video, follow the selected video skill's reference-first workflow: one clean keyframe per shot with `generate_image` at the video's aspect ratio, built from approved identity, product, or location anchors, then pass it to the video model. Later keyframes also take the first approved keyframe as a reference so the shots match. Tell the user the plan includes one keyframe image per shot before making them. Skip them when the user asks for direct text-to-video, supplies a ready shot image, or is editing footage.
 
 ## References
 

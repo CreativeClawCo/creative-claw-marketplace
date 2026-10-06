@@ -16,6 +16,25 @@ To replace the interval with a new scene instead of changing it, use `video/mini
 
 Resolve the edited interval and concatenate it between untouched spans. Inspect boundary cuts, total duration, identity and color continuity. Preserve original audio unless replacement was requested; if generation altered it, put the original track back with `merge_audio_video` (default replace mode). Generative edits cannot guarantee pixel-perfect logos, numbers or faces; use deterministic edits where exact preservation is essential.
 
+## Replace a person
+
+Example request: "Replace the actor in this clip with my Character."
+
+Choose the route by what has to stay.
+
+**Only the person changes** (motion, camera, cuts and the original audio stay): `generate_video` with `video/minimax-h3-max-recast`. Pass the one source clip in `video_urls` (5 to 30 seconds, no shot over 15; trim a longer source with `trim_video` first), one photo per new person in `image_urls` in left-to-right order (1 to 4, or a `character_id`), and `prompt: ""`. Add a prompt only to say who becomes whom.
+
+**The look changes too** (outfit, setting, style), or the clip is outside those limits: make the new look as images before any video.
+
+1. Find the shots with `extract_frames` in timeline mode and view the result with `load_image`. For each shot the person appears in, get one clean frame: `trim_video` to that shot, then `extract_frames` with `mode: "single"`.
+2. Edit that exact frame with `generate_image`: `image_url` = the extracted frame, `extras.image_urls` = the Character sheet and face portrait, roles named. Ask for one change, for example: "Replace only the person in Image 1 with the person in Image 2. Keep the pose, framing, lighting, background and every other detail unchanged."
+3. When editing the next frame, add the first edited frame as a reference so the person and outfit are identical in every shot.
+4. Show the edited frames and get the user's approval of the new look.
+5. Generate the video with a model that takes a source clip and reference images together. For Seedance 2.5, put the source in `video_urls` for motion, camera and timing, and the edited frames plus the Character sheet in `image_urls`, each cited with its token; read its guide for the task mode.
+6. Put the original audio back with `merge_audio_video` if the generation changed it.
+
+Use only photos of a person the user has the right to use.
+
 ## New ending
 
 Example request: "Keep this video exactly as it is and add five seconds after the end."

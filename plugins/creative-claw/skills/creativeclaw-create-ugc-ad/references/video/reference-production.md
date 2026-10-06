@@ -2,7 +2,7 @@
 
 ## Reference-first video pipeline
 
-Default for every new generative clip: one keyframe image per planned shot. Tell the user how many images that is before making them. Skip them if the user asks for direct text-to-video, supplies a ready shot image, or is editing footage.
+Default for every new generative clip: one keyframe image per planned shot, so the video model animates visuals the user has seen instead of inventing them. A face, product, outfit or location that matters must come from an image: reuse one, or make it first. Tell the user how many images that is before making them. Skip them if the user asks for direct text-to-video or supplies a ready shot image. For existing footage, take the frames from the source instead: see [source edit](recipe-source-edit.md).
 
 1. **Anchors (reuse first):** `search_assets`, `list_characters`, `get_theme`.
    - Person: Character sheet + clean face portrait; real person: also their best original photo.
@@ -10,13 +10,13 @@ Default for every new generative clip: one keyframe image per planned shot. Tell
    - Look: theme reference image or the first approved keyframe.
    - A recurring person or product with no anchor: create it first (creativeclaw-create-avatar, creativeclaw-product-photoshoot).
 2. **Look line:** one sentence (palette, light, lens, medium). Paste it verbatim into every keyframe and video prompt.
-3. **Keyframe per shot:** `generate_image` with the SAME image model all project (default `image/nano-banana-2`), `aspect_ratio` = the video's ratio, `image_url` = main anchor, `extras.image_urls` = other anchors, roles named ("Image 1 = exact face…"). One clean full-bleed frame: no text, grid or labels. Build from the anchors, never only from the previous keyframe.
+3. **Keyframe per shot:** `generate_image` with the SAME image model all project (default `image/nano-banana-2`), `aspect_ratio` = the video's ratio, `image_url` = main anchor, `extras.image_urls` = other anchors, roles named ("Image 1 = exact face…"). From the second shot on, add the first approved keyframe as a reference, and the previous keyframe too when the scene continues, and say what to take from each ("Image 3 = earlier shot: match its palette, lighting, outfit and location; new pose and framing"). Keep the identity anchors in every call; never build from an earlier keyframe alone. One clean full-bleed frame: no text, grid or labels.
 4. **Check:** `check_job` for the URL; compare to the anchors (face, label, logo, colors); fix with one targeted edit.
 5. **Show** keyframes plus the plan (model, duration, ratio) in one message. Review mode: call `generate_video` now; the card is the approval. Auto: ask once unless the user said go.
 6. **`generate_video`, one mode per shot:**
    - People, several subjects or big motion: `image_urls` = [keyframe, identity anchor, product anchor] (2–4 total), cited with the model's tokens. `character_id` is fine here (appended last).
    - Exact opening (product hero, logo reveal): `image_url` = keyframe (+ `last_frame_url` if supported); no `image_urls`, no `character_id`.
-7. **Next shot:** same anchors + look line. A previous clip's last frame is only an extra composition cue.
+7. **Next shot:** same anchors + look line + the earlier keyframes as references (step 3), so every shot matches the first. A previous clip's last frame is only an extra composition cue.
 8. **Keep a list** (shot → keyframe → anchor URLs, roles, tokens). Save it in the Film project when one exists.
 
 Use 2–4 strong references; more is not better. Existing assets count, so don't pay for extra images to reach a number or exceed a model's limit. For image prompting, read the [image model index](../images/index.md) and only the selected guide. Pass the actual image URLs in the video request; naming them in prose does not condition the model. Keep iteration bounded: planning-only, advice-only and estimate-only requests do not authorize paid images.

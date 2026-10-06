@@ -1,6 +1,6 @@
 ---
 name: creativeclaw-render-html
-description: "Render an exact HTML/CSS layout to a PNG, or a HyperFrames HTML/CSS/JS composition to video, with Creative Claw. Use only when the user explicitly asks for HTML, CSS, HyperFrames, or code-based rendering, supplies HTML, or accepts that method; not for ordinary images, posters, social cards, or AI video."
+description: "Render an exact HTML/CSS layout to a PNG, or make a motion-graphics video as a HyperFrames HTML/CSS/JS composition, with Creative Claw. Use only when the user explicitly asks for HTML, CSS, HyperFrames, or code-based rendering, supplies HTML, accepts that method, or explicitly asks for motion graphics, kinetic typography, animated titles, or an animated explainer; not for ordinary images, posters, social cards, or filmed-looking AI video."
 ---
 
 # Render HTML
@@ -10,11 +10,13 @@ Read [shared execution guidance](references/workflow-basics.md) once per task be
 Two tools:
 
 - `render_html_image`: a fixed-size HTML/CSS layout to a PNG. It completes synchronously; do not call `check_job` for it.
-- `render_html_video`: a HyperFrames HTML/CSS/JS composition to video. Two ways, chosen with `method`:
-  - `method: "generate"`: the Creative Claw video agent makes the whole video from a prompt. Use it for explainers, promos, kinetic typography, motion graphics and other designed, text-led videos when the user has not supplied HTML.
-  - `method: "render"` (default): render HTML or a project ZIP you supply. It returns a queued job; resolve it with `check_job` when the final URL is needed.
+- `render_html_video`: a motion-graphics video built as a HyperFrames HTML/CSS/JS composition. Two ways, chosen with `method`:
+  - `method: "generate"`: Creative Claw's own video agent writes the composition, makes the images, voiceover, music and sound it needs, checks the result, and renders it. You send a prompt, not HTML.
+  - `method: "render"` (default): renders HTML or a project ZIP you supply. It returns a queued job; resolve it with `check_job` when the final URL is needed.
 
-This is an explicit-only route. A poster, banner, social card, overlay, intro, outro, or video that needs text is not by itself a reason to use HTML. Use `creativeclaw-generate-image` or `creativeclaw-generate-video` unless the user asks for HTML, CSS, HyperFrames, or code-driven rendering, supplies HTML, or accepts the method when offered. If the user names an image or video model, that choice wins.
+Which one: use `generate` unless the user supplied the HTML or project, or you have HyperFrames authoring skills installed in this session (a `hyperframes` skill in your skill list) and can write and check the composition yourself; in that case author it and use `render`. If the user asks for one of the two, follow that.
+
+This is an explicit-only route. A poster, banner, social card, overlay, intro, outro, or video that needs text is not by itself a reason to use it. Use `creativeclaw-generate-image` or `creativeclaw-generate-video` unless the user asks for HTML, CSS, HyperFrames, or code-driven rendering, supplies HTML, accepts the method when offered, or explicitly asks for motion graphics, kinetic typography, animated titles, or an animated explainer. If the user names an image or video model, that choice wins.
 
 `creativeclaw-edit-media` owns work on finished videos: burning a watermark (`merge_media` with `operation:"overlay_images"`) and merging intros or outros. This skill can make the parts: a transparent PNG mark or a rendered title card.
 
@@ -51,7 +53,7 @@ render_html_image({
 
 ## Make a video with the video agent
 
-`render_html_video` with `method: "generate"` hands the brief to Creative Claw's own cloud agent. It writes the composition with the HyperFrames best practices built in (seekable timelines, text fit, safe zones, audio mixing, beat-synced motion), generates the images, voiceover, music and sound effects the brief calls for, checks the result, and renders the finished MP4 with audio. You write no HTML and read none of the composition references below. Use it for explainers, promos, kinetic typography, motion graphics, lyric videos, and captions or titles over supplied media.
+`render_html_video` with `method: "generate"` hands the brief to Creative Claw's own cloud agent. It writes the composition with the HyperFrames best practices built in (seekable timelines, text fit, safe zones, audio mixing, beat-synced motion), generates the images, voiceover, music and sound effects the brief calls for, checks the result, and renders the finished MP4 with audio. You write no HTML and read none of the composition references below. Use it when the user explicitly asks for that kind of video: motion graphics, kinetic typography, an animated explainer or promo, a lyric video, or animated captions and titles over supplied media.
 
 1. Write the brief as `prompt`: what the video is for, the exact on-screen copy and narration script when the user gave them, the visual style, the music, and the ending. Say what matters most. Pass `duration`, `width` and `height`.
 2. Pass the user's own images, footage, audio and logos as `reference_assets`, each with a `description` of its role. Import local or attached media first.

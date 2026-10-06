@@ -99,6 +99,9 @@ Use these scenarios as regression checks for skill activation and tool behavior.
 | 77 | Show me three alternative looks for this product photo. | `creativeclaw-generate-image` | Generates variations with the image workflow; does not browse the examples catalog. |
 | 78 | Can I buy more credits here? What does a plan cost? | `creativeclaw` | Says purchases and plans are handled on the Creative Claw website, not in chat. Names no prices, does not recommend a purchase, and shares only an account link a tool returned. |
 | 79 | Add this music bed under my talking clip without losing the dialogue. | `creativeclaw-edit-media` | Uses `merge_audio_video` with `audio_mode: "mix"` and a low `added_volume` (about 0.3), keeping the clip's length and sound; does not replace the clip's audio. |
+| 80 | Make a 20-second kinetic typography promo for my app launch. | `creativeclaw-render-html` | Explicit motion-graphics request: uses `render_html_video` with `method: "generate"` unless HyperFrames authoring skills are installed or HTML was supplied. |
+| 81 | Make a short explainer video about how our loyalty program works. | `creativeclaw-build-film` | No explicit motion-graphics wording: stays with the video skills, or asks one question about filmed-looking footage versus designed motion. |
+| 82 | Replace the actor in this 12-second clip with my saved Character. | `creativeclaw-generate-video` | Reads the source-edit recipe: Recast when only the person changes; otherwise extracts frames, edits them with the Character sheet, gets approval, then generates with the source and edited frames as references. |
 
 ## Next live evaluation batch, not yet run
 

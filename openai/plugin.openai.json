@@ -1,6 +1,6 @@
 {
   "name": "app-6a2528e2c49c8191a8015ba5475f177e",
-  "version": "5.4.0",
+  "version": "5.4.1",
   "keywords": [
     "ai video generator",
     "video generation",
@@ -29,8 +29,8 @@
     "reels",
     "youtube shorts",
     "tiktok videos",
-    "social media content",
-    "marketing content",
+    "explainer video",
+    "motion graphics",
     "brand kit"
   ],
   "extensions": {
@@ -38,13 +38,14 @@
       "interface": {
         "displayName": "Creative Claw",
         "shortDescription": "Create videos & voiceovers",
-        "longDescription": "Create videos, product ads, images and voiceovers in ChatGPT. Animate a photo, turn a script into a multi-scene film, or make a creator-style product ad with narration and captions. Built for marketers, creators and small teams who need on-brand media without leaving the conversation.\n\nPlan shots and storyboards, prepare consistent reference images, generate clips and assemble a first cut. Turn interviews and longer videos into social clips, cut and reorder selected moments, reframe for vertical formats, and add captions. Transcribe audio, video files and public video links.\n\nCreate a reusable avatar from your photos or a fictional character brief. Review its character sheet, save it as a Character, and reuse its visual references in images and videos. Give a Character a voice: design a new synthetic voice from a description, clone your own voice (or a speaker's voice with their explicit permission) from a clean recording, or choose a stock voice for multilingual narration. Sync speech to on-screen lips, and add music and sound effects to the same project.\n\nGenerate and edit supporting images, product photos and campaign visuals. Use reference images to guide product appearance, character identity, composition and style. Several image, video and voice models are available; availability and settings vary.\n\nVideo Review mode shows the proposed prompt, references and settings before you press Generate. It reviews the request, not a rendered video preview. Auto mode submits the requested generation immediately.\n\nResults, character consistency and voice similarity vary. You can send feedback from the conversation. For help, contact support@creativeclaw.co.",
+        "longDescription": "Create videos, product ads, images and voiceovers in ChatGPT. Animate a photo, turn a script into a multi-scene film, or make a creator-style product ad with narration and captions. Built for marketers, creators and small teams who need on-brand media without leaving the conversation.\n\nPlan shots and storyboards, prepare consistent reference images, generate clips and assemble a first cut. Turn interviews and longer videos into social clips, cut and reorder selected moments, reframe for vertical formats, and add captions. Transcribe audio, video files and public video links. Ask for motion graphics, kinetic typography or an animated explainer, and a video agent designs and renders it with voiceover, music and sound.\n\nCreate a reusable avatar from your photos or a fictional character brief. Review its character sheet, save it as a Character, and reuse its visual references in images and videos. Give a Character a voice: design a new synthetic voice from a description, clone your own voice (or a speaker's voice with their explicit permission) from a clean recording, or choose a stock voice for multilingual narration. Sync speech to on-screen lips, and add music and sound effects to the same project.\n\nGenerate and edit supporting images, product photos and campaign visuals. Use reference images to guide product appearance, character identity, composition and style. Several image, video and voice models are available; availability and settings vary.\n\nVideo Review mode shows the proposed prompt, references and settings before you press Generate. It reviews the request, not a rendered video preview. Auto mode submits the requested generation immediately.\n\nResults, character consistency and voice similarity vary. You can send feedback from the conversation. For help, contact support@creativeclaw.co.",
         "developerName": "Creative Claw",
         "category": "Creativity",
         "capabilities": [
           "Generate videos from text or images",
           "Animate photos",
           "Edit and extend video clips",
+          "Motion graphics and animated explainers",
           "Generate and edit images",
           "Product photoshoots",
           "Reusable characters and avatars",
