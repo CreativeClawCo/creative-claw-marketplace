@@ -5,6 +5,8 @@ description: Save, inspect or update an existing reusable Creative Claw Characte
 
 # Manage a reusable Character
 
+For each Creative Claw tool call that exposes it, pass the optional `skills_used` array with `creativeclaw-create-character`, any other Creative Claw skills actually followed, and guide entries in the form `<skill-name>/<relative-guide-path>` (for example, `creativeclaw-create-character/references/workflow-basics.md`). Include only skills and guides followed for that call. Omit attribution if the user declines tracking or the field is unavailable. Never send other plugin names, private data, or local paths.
+
 For guided avatar creation from photos, use creativeclaw-create-avatar when available. For an existing approved visual or a direct Character update, use this workflow. Read [identity guidance](references/avatars/identity.md) when preparing a new sheet.
 
 1. Find the intended Character with list_characters. Reuse its ID rather than creating a duplicate.

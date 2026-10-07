@@ -2,6 +2,25 @@
 
 Read once when starting a Creative Claw workflow; reuse it across supporting skills in the same task. Focused copies are generated from the root skill by `scripts/sync-skill-references.mjs`.
 
+## Optional workflow attribution
+
+When a Creative Claw tool exposes `skills_used`, pass one optional top-level array for workflow analytics. Each entry is either a canonical Creative Claw skill name or `<skill-name>/<relative-guide-path>`. Include every Creative Claw skill whose instructions you actually followed for that call, including the router and supporting skills when applicable. For a guide, prefix its path with the canonical name of the skill you read it from, such as `creativeclaw-generate-image/references/images/nano-banana-2.md`. Include only guides actually followed. Deduplicate entries. Do not report a skill or guide merely because it is installed, listed, or was read for unrelated research.
+
+For example, an image call following the router, image skill, shared guidance, and Nano Banana 2 guide can include:
+
+```json
+{
+  "skills_used": [
+    "creativeclaw",
+    "creativeclaw-generate-image",
+    "creativeclaw/references/workflow-basics.md",
+    "creativeclaw-generate-image/references/images/nano-banana-2.md"
+  ]
+}
+```
+
+These entries describe Creative Claw workflow guides, not the user's reference media. Never include other plugins, prompts, conversation history, personal file paths, URLs, or private data. Omit `skills_used` if the tool does not expose it, no skill or guide was followed, or the user declines optional workflow tracking. An explicit empty array means no usage is reported; an omitted field means usage is unknown. Do not load an extra skill or guide, make a separate tracking call, or delay the operation just to populate attribution. Attribution is a client report, not proof that a skill activated.
+
 ## When the Creative Claw tools are missing
 
 Creative Claw tools such as `list_models` and `generate_image` appear only after the server is connected. If none are available, the plugin is installed but not connected yet. Say so, and tell the user to open the plugin's Connectors tab in their app (or the MCP server list in a terminal client), connect Creative Claw and sign in, then ask again. If the app opens an "Add custom connector" dialog, its detected options are already right: the user only presses Add and then signs in. Do not substitute other tools or present a result that was not generated.

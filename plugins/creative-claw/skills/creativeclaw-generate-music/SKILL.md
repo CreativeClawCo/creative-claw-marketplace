@@ -5,6 +5,8 @@ description: "Compose scores, beds, jingles, stings, themes, instrumentals, or v
 
 # Generate Music
 
+For each Creative Claw tool call that exposes it, pass the optional `skills_used` array with `creativeclaw-generate-music`, any other Creative Claw skills actually followed, and guide entries in the form `<skill-name>/<relative-guide-path>` (for example, `creativeclaw-generate-music/references/workflow-basics.md`). Include only skills and guides followed for that call. Omit attribution if the user declines tracking or the field is unavailable. Never send other plugin names, private data, or local paths.
+
 Read [shared execution guidance](references/workflow-basics.md) once per task before using tools. It covers existing authorization, model discovery, optional cost checks, imports, and recovery.
 
 Create a finished music asset with `generate_music`. Route narration or dialogue to `creativeclaw-generate-voiceover`. Route Foley, ambience, impacts, transitions, UI cues, and other non-musical sounds to `creativeclaw-generate-sound-effects`.

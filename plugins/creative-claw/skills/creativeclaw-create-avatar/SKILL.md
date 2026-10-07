@@ -5,6 +5,8 @@ description: Create a reusable personal avatar or fictional Character from photo
 
 # Create your avatar
 
+For each Creative Claw tool call that exposes it, pass the optional `skills_used` array with `creativeclaw-create-avatar`, any other Creative Claw skills actually followed, and guide entries in the form `<skill-name>/<relative-guide-path>` (for example, `creativeclaw-create-avatar/references/workflow-basics.md`). Include only skills and guides followed for that call. Omit attribution if the user declines tracking or the field is unavailable. Never send other plugin names, private data, or local paths.
+
 Use this for a reusable identity, not an ordinary one-off portrait. Read [shared execution guidance](references/workflow-basics.md), [upload routing](references/platform-upload.md), and [avatar and character-sheet production](references/avatars/identity.md).
 
 ## Create and save

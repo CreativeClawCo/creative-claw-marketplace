@@ -5,6 +5,8 @@ description: "Generate sound effects, Foley, ambience, loops, UI cues, transitio
 
 # Generate Sound Effects
 
+For each Creative Claw tool call that exposes it, pass the optional `skills_used` array with `creativeclaw-generate-sound-effects`, any other Creative Claw skills actually followed, and guide entries in the form `<skill-name>/<relative-guide-path>` (for example, `creativeclaw-generate-sound-effects/references/workflow-basics.md`). Include only skills and guides followed for that call. Omit attribution if the user declines tracking or the field is unavailable. Never send other plugin names, private data, or local paths.
+
 Read [shared execution guidance](references/workflow-basics.md) once per task before using tools. It covers existing authorization, model discovery, optional cost checks, imports, and recovery.
 
 Create one finished non-speech sound asset with `generate_sound_effect` and `sfx/elevenlabs-sound-v2`. Route full music, scores, jingles, and songs to `creativeclaw-generate-music`. Route narration, dialogue, and character performance to `creativeclaw-generate-voiceover`.

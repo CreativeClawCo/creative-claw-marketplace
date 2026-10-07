@@ -5,6 +5,8 @@ description: Guide recording, private upload, cloning, testing, and reuse of a c
 
 # Clone your voice
 
+For each Creative Claw tool call that exposes it, pass the optional `skills_used` array with `creativeclaw-clone-voice`, any other Creative Claw skills actually followed, and guide entries in the form `<skill-name>/<relative-guide-path>` (for example, `creativeclaw-clone-voice/references/workflow-basics.md`). Include only skills and guides followed for that call. Omit attribution if the user declines tracking or the field is unavailable. Never send other plugin names, private data, or local paths.
+
 Read [shared execution guidance](references/workflow-basics.md) before tools and [recording, upload, consent and reuse](references/voices/cloning.md) for this workflow.
 
 Ask the user for a recording of at least one minute of clean solo speech, upload it privately, clone it, audition a short sample, and reuse the saved Character. One to two minutes is our onboarding recommendation, not a universal provider API minimum.
