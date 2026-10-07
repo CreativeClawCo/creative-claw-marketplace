@@ -1,8 +1,8 @@
-# Creative Claw, Nano Banana 2.1
+# Creative Claw, Nano Banana 2
 
 Read [shared execution guidance](../workflow-basics.md) once per task before using tools. It covers existing authorization, model discovery, optional cost checks, imports, and recovery.
 
-The existing `image/nano-banana-2` ID automatically uses Nano Banana 2.1 (`gemini-nano-banana-2.1`). Use it as Creative Claw's default for most image generation and editing. It is the primary cost-efficient recommendation, offering the best general balance of visual quality, instruction understanding, speed, output resolution, and iteration cost.
+Use `image/nano-banana-2`, publicly named Nano Banana 2, as Creative Claw's default for most generation and editing, including targeted corrections that should preserve the existing scene. For a localized edit, keep the source aspect ratio unless reframing is requested, identify the small region to change, and inspect protected details afterward. Exact preservation outside the edited region requires compositing that region back into the original; text instructions alone do not guarantee unchanged pixels.
 
 ## Core workflow
 

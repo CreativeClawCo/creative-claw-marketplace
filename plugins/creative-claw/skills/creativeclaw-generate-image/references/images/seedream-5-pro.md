@@ -2,7 +2,7 @@
 
 Read [shared execution guidance](../workflow-basics.md) once per task before using tools. It covers existing authorization, model discovery, optional cost checks, imports, and recovery.
 
-Use `image/seedream-5-pro` for premium product, fashion, portrait, editorial, and campaign work,especially when several references must become one coherent finished image. It is a focused flagship option after Nano Banana 2, not the default for every image.
+Use `image/seedream-5-pro` when the user explicitly requests Seedream for product, fashion, portrait, editorial, or campaign work. Default to `image/nano-banana-2` (Nano Banana 2) for most generation and editing, especially precise local corrections that should preserve the existing scene. Reference-guided editing does not guarantee preservation of untouched pixels. After a model moderation refusal, Seedream may also be offered as the tool's suggested alternative, with user confirmation before another paid generation; it applies its own safety checks and may still reject the request.
 
 ## Core workflow
 
@@ -26,7 +26,7 @@ Use `image/seedream-5-pro` for premium product, fashion, portrait, editorial, an
 | `num_images` | 1,4. |
 | `seed` | Reuse for controlled comparisons; references remain the real consistency anchors. |
 
-Set the shape with `aspect_ratio`: `1:1`, `4:3`, `3:4`, `16:9`, `9:16`, `3:2`, `2:3`, `21:9`, or `auto` to let the model choose from the prompt. There is no `4:5` or `5:4`; `get_model_params` lists the current set. For an edit, the primary source strongly anchors the canvas shape. Crop or scale afterward when exact dimensions matter. Do not claim that an unsupported `size` parameter will be honored.
+Set the shape with `aspect_ratio`: `1:1`, `4:3`, `3:4`, `16:9`, `9:16`, `3:2`, `2:3`, `21:9`, or `auto` to let the model choose from the prompt. There is no `4:5` or `5:4`; `get_model_params` lists the current set. For a local edit, preserve the source aspect ratio unless reframing is requested. Changing the output shape can change composition and other protected details. Crop or scale afterward when exact dimensions matter. Do not claim that an unsupported `size` parameter will be honored.
 
 ## Reference order
 

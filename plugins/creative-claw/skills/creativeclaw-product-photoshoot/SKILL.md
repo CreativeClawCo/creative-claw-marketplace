@@ -25,7 +25,7 @@ Conduct the workflow in the user's language and preserve all approved product an
 ## Generate
 
 1. Default to `image/nano-banana-2` because it is the cost-efficient recommendation for most product work.
-2. Escalate to `image/nano-banana-pro`, `image/gpt-image-2.5-sunburst`, or `image/seedream-5-pro` only when exact typography, difficult editing, or premium commercial styling materially benefits.
+2. Keep targeted product corrections on `image/nano-banana-2` (Nano Banana 2) first. Escalate to `image/nano-banana-pro` or `image/gpt-image-2.5-sunburst` only when complex composition or exact typography materially benefits. Use `image/seedream-5-pro` when the user explicitly requests Seedream. After a model moderation refusal, Seedream may also be offered as the tool's suggested alternative, with user confirmation before another paid generation; it applies its own safety checks and may still reject the request.
 3. Discover with `list_models({ category: "image" })` only when selecting a model; fetch missing settings with `get_model_params` and reuse them across the set. Estimate planned images only when the user asks about cost or sets a budget.
 4. Establish a hero direction, reusing an approved reference when supplied. Follow requested review stages; once the user approves the complete set, generate the remaining shots. Repeat locked product facts and use the selected hero as a reference where supported.
 5. Preserve exact quoted copy, reference labels, dialogue, timecodes, colors, and approved layout or edit constraints in the prompt.

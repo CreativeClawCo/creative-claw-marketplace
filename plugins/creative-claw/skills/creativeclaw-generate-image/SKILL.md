@@ -26,11 +26,11 @@ Turn a brief and optional references into a finished image. This is the primary 
 
 ## Model routing
 
-- Default to `image/nano-banana-2`. It is the cost-efficient recommendation for most generation and editing.
+- Default to `image/nano-banana-2` (Nano Banana 2) for most generation and editing, including targeted corrections that should preserve the existing scene. Keep the source aspect ratio unless reframing is requested and inspect the result for unintended changes. Exact preservation outside the edited region requires compositing that region back into the original.
 - Use `image/nano-banana-pro` when maximum fidelity, demanding typography, or a complex composite justifies the premium.
 - Use `image/gpt-image-2.5-flare` for fast, high-quality everyday OpenAI image generation and editing.
 - Use `image/gpt-image-2.5-sunburst` for instruction-heavy editing, precise transformations, typography, or strong world knowledge.
-- Use `image/seedream-5-pro` for polished commercial imagery and premium product or fashion aesthetics.
+- Use `image/seedream-5-pro` when the user explicitly requests Seedream. Do not proactively recommend it for precise local edits. After a model moderation refusal, Seedream may also be offered as the tool's suggested alternative, with user confirmation before another paid generation; it applies its own safety checks and may still reject the request.
 - For a transparent background, use GPT Image 2.5 (Flare or Sunburst) with `extras.background: "transparent"`, or `remove_background` for an existing image.
 - Honor an explicit model choice. Read [the selected image model guide](references/images/index.md) for exact prompting and reference syntax.
 
