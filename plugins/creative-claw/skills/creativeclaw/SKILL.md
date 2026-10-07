@@ -39,6 +39,7 @@ Purchases and plans are handled on the Creative Claw website, not in chat. Do no
 | Understand balance, past generation costs, or charges and refunds | `manage_account`, following [account guidance](references/workflows/account.md) |
 | Generate or edit one general image | `creativeclaw-generate-image` |
 | Create a consistent product image set | `creativeclaw-product-photoshoot` |
+| Swap people in existing footage, or make a character copy a recorded performance | `creativeclaw-generate-video`, preferring [Kling Motion Control Pro](references/video/kling-motion-control.md) with a prepared scene image and facial binding; [H3 Max Recast](references/video/h3-max-recast.md) is an explicitly selected recasting alternative |
 | Generate, extend, reframe, or transform one video clip | `creativeclaw-generate-video` |
 | Plan a script, shot list, or storyboard | `creativeclaw-plan-video` |
 | Produce a complete multi-shot film | `creativeclaw-build-film` |

@@ -22,7 +22,7 @@ Example request: "Replace the actor in this clip with my Character."
 
 Choose the route by what has to stay.
 
-**Only the person changes** (motion, camera, cuts and the original audio stay): `generate_video` with `video/minimax-h3-max-recast`. Pass the one source clip in `video_urls` (5 to 30 seconds, no shot over 15; trim a longer source with `trim_video` first), one photo per new person in `image_urls` in left-to-right order (1 to 4, or a `character_id`), and `prompt: ""`. Add a prompt only to say who becomes whom.
+**Face/person swap:** prefer `video/kling-3.0-motion-control-pro`. Follow [Kling Motion Control Pro](kling-motion-control.md): prepare a source-scene image with only the target face replaced, pass it in `image_urls` with one 3 to 30 second source in `video_urls`, use video orientation and one facial element with both image fields, and identify the intended target as `@Element1`. Inspect other people, clothing and output duration; exact preservation is not guaranteed. Use H3 Max Recast only when explicitly selected for multi-person or multi-shot recasting, following its [guide](h3-max-recast.md).
 
 **The look changes too** (outfit, setting, style), or the clip is outside those limits: make the new look as images before any video.
 
