@@ -264,20 +264,21 @@ skill-variants/
   chatgpt/
     platform-upload.md     # OpenAI Store routing for ChatGPT attachments and Codex local files
 scripts/
-  build-skill-zips.sh      # builds local archives into the ignored output folder
-output/chatgpt-skills/     # local generated ZIPs, ignored by Git
+  build-openai-plugin.mjs  # builds the OpenAI plugin ZIP into output/openai/
+  build-skill-zips.sh      # builds the Claude skill download and per-skill archives for local evals
+output/                    # local generated ZIPs, ignored by Git
 evals/skill-routing-scenarios.md   # activation and workflow regression suite
 ```
 
 ### Maintaining the two distributions
 
-Edit the canonical skill once under `plugins/creative-claw/skills/creativeclaw`. Put only ChatGPT-specific routing differences in `skill-variants/chatgpt/platform-upload.md`, then run:
+Edit the canonical skill once under `plugins/creative-claw/skills/creativeclaw`. Put only ChatGPT-specific routing differences in `skill-variants/chatgpt/`, then build the OpenAI package:
 
 ```bash
-./scripts/build-skill-zips.sh
+node scripts/build-openai-plugin.mjs
 ```
 
-The build validates every skill's metadata and MCP dependency, checks routing coverage and the regression suite, and creates deterministic archives under the Git-ignored `output/chatgpt-skills/` folder. The marketplace source stays focused on direct installs, and generated ZIPs stay local. Nothing in the build publishes or submits a plugin draft.
+That writes one plugin ZIP under the Git-ignored `output/openai/` folder, which is what the OpenAI portal takes. `./scripts/build-skill-zips.sh` still builds the Claude skill download (`creativeclaw-skill.zip`) and the per-skill archives used by local evals, under `output/chatgpt-skills/`. The marketplace source stays focused on direct installs, and generated ZIPs stay local. Nothing in the build publishes or submits a plugin draft.
 
 ---
 
@@ -327,7 +328,7 @@ ChatGPT, Codex, Claude (Code, Desktop, and web), Cursor, Grok Bot, Hermes Agent,
 - **Claude Code** — via `.claude-plugin/plugin.json`
 - **Claude Desktop** — via MCP server config
 - **Codex and other skill-directory clients** — via the canonical `creativeclaw` skill
-- **OpenAI Store (ChatGPT + Codex)** — build local ZIPs with `./scripts/build-skill-zips.sh`, then use `output/chatgpt-skills/creativeclaw-chatgpt-skill.zip` and the focused skill ZIPs
+- **OpenAI Store (ChatGPT + Codex)** — build one plugin ZIP with `node scripts/build-openai-plugin.mjs` and upload `output/openai/creative-claw-openai-<version>.zip`
 - **Hermes Agent** — via OAuth MCP setup and portable Agent Plugins v1 manifests
 - **OpenClaw** — via `openclaw.plugin.json` and ClawHub-ready package metadata
 
