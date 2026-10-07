@@ -86,8 +86,9 @@ For existing footage, do not apply the general generation ranking blindly:
 
 ## Reference rules
 
-- `image_url` is only the literal start frame. It selects image-to-video and makes the supplied image frame zero. `last_frame_url` is the desired end frame when the selected model exposes it.
-- `image_urls`, `video_urls`, and `audio_urls` are model-specific reference arrays. If a supplied image should guide identity, style, character, product, or composition instead of becoming frame zero, use `image_urls`, even for exactly one image. Use 2–4 strong references; more is not better.
+- For ordinary generation, `image_url` is the literal start frame. Kling Motion Control is an exception: its one image defines character appearance and scene; prefer `image_urls` for that reference.
+- For ordinary generation, `image_url` is only the literal start frame. It selects image-to-video and makes the supplied image frame zero. `last_frame_url` is the desired end frame when the selected model exposes it.
+- `image_urls`, `video_urls`, and `audio_urls` are model-specific reference arrays. If a supplied image should guide identity, style, character, product, or composition instead of becoming frame zero, use `image_urls`, even for exactly one image. Use 2 to 4 strong references when supported; respect specialist limits such as Kling Motion Control's single character image.
 - `character_id` appends the saved image to `image_urls` as a reference, never a start frame. Use it in reference mode; omit it with `image_url`/`last_frame_url` (the server rejects that mix). For literal-frame animation, build identity into the approved frame and omit reference arrays.
 - Preserve exact quoted copy, reference labels, dialogue, timecodes, colors, and approved layout or edit constraints in the prompt.
 - Discover transformation support on the selected model and connected tool schema. Do not assume a generic top-level `operation` selector exists; use only currently exposed fields and model-supported `extras` controls. Never silently switch an explicitly chosen model to obtain a transformation.
