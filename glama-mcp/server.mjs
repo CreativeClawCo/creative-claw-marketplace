@@ -105,7 +105,6 @@ function createGuidanceResponse(toolName, args) {
         "gemini-omni-flash": "Default general video with native audio",
         "seedance-2.5": "Premium cinematic work with references",
         "minimax-h3-max": "Fast cinematic clips with audio",
-        "veo-3.1": "Google's latest video model",
       },
       features: [
         "Text-to-video generation (2-30+ seconds)",
