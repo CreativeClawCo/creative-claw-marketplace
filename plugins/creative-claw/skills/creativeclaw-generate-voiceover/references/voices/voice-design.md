@@ -20,10 +20,14 @@ Every preview returns three auditions. Let the user pick one. In ChatGPT the Voi
 
 ## Save
 
-- Existing Character: `design_voice({ action: "save", preview_id, character_id })`. For an avatar, use the SAME `character_id` so its image and voice stay together.
-- New voice-only Character: `design_voice({ action: "save", preview_id, character_name })`.
+`design_voice` only creates the auditions. Save the pick with `manage_character`, passing the audition's `preview_id` as `voice_preview_id`:
+
+- Existing Character: `manage_character({ id, voice_preview_id })`. For an avatar, use the SAME Character `id` so its image and voice stay together.
+- New voice-only Character: `manage_character({ title, voice_preview_id })`.
 
 A save keeps the Character's other voices and makes this one preferred for its speech model. If the save hits the limit, relay the tool's message and link, and offer `replace_voice_option_id` to replace a saved designed voice from the same provider. Never quote plan prices.
+
+Older clients may not list `voice_preview_id` on `manage_character`. There the save is `design_voice({ action: "save", preview_id, character_id })`, or `character_name` for a new Character.
 
 ## Speak
 

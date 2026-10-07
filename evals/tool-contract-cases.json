@@ -173,16 +173,14 @@
   {
     "tool": "design_voice",
     "input": {
-      "action": "preview",
       "prompt": "A warm, gravelly adult narrator with a calm pace and a slight smile in the voice."
     }
   },
   {
-    "tool": "design_voice",
+    "tool": "manage_character",
     "input": {
-      "action": "save",
-      "preview_id": "00000000-0000-4000-8000-000000000001",
-      "character_name": "Narrator"
+      "title": "Narrator",
+      "voice_preview_id": "00000000-0000-4000-8000-000000000001"
     }
   }
 ]

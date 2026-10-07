@@ -33,7 +33,8 @@ Search only when the user asks for examples, prompt ideas, or the catalog; see [
 | Tool                | Use                                                                                                            |
 | ------------------- | -------------------------------------------------------------------------------------------------------------- |
 | `render_html_image` | Render a deterministic HTML/CSS layout to a PNG via Chromium.                                                  |
-| `render_html_video` | `method: "generate"`: the video agent makes an HTML-based video from a prompt (`edit` and `status` continue it by `cloud_project_id`). Default `render`: queue a HyperFrames HTML/CSS/JS render you supply; resolve it with `check_job`. |
+| `generate_html_video` | The video agent makes an HTML-based motion-graphics video from a prompt. Pass the returned `cloud_project_id` with a new prompt to change it; read the outcome with `check_job`, passing that ID as `job_id`. |
+| `render_html_video` | Queue a render of a HyperFrames HTML/CSS/JS composition or project ZIP you supply; resolve it with `check_job`. |
 | `list_templates`    | Find saved reusable layouts by name.                                                                           |
 | `create_template` / `update_template` | Save or change a reusable parameterized layout.                                              |
 | `render_template`   | Render a saved template with provided values.                                                                 |
@@ -69,9 +70,9 @@ Read `platform-upload.md` before choosing an import route.
 
 | Tool                                      | Use                                                                                               |
 | ----------------------------------------- | ------------------------------------------------------------------------------------------------- |
-| `manage_character`                        | Create or update a Character (description, reference image, stock voice). `delete: true` with `id` permanently deletes it and its saved voices, only on explicit request. |
+| `manage_character`                        | Create or update a Character (description, reference image, stock voice, or a designed voice with `voice_preview_id`). `delete: true` with `id` permanently deletes it and its saved voices, only on explicit request. |
 | `list_characters`                         | Find reusable Characters, their IDs, and saved voice options.                                     |
-| `design_voice`                            | Create a new synthetic voice from a description, no recording needed. ElevenLabs by default; `provider: "google"` for Google. Returns three auditions. Save the pick with `design_voice({ action: "save", preview_id, character_id \| character_name })`. At the saved-voice limit, pass `replace_voice_option_id` to replace an existing designed voice. |
+| `design_voice`                            | Create a new synthetic voice from a description, no recording needed. ElevenLabs by default; `provider: "google"` for Google. Returns three auditions. Save the pick with `manage_character({ id \| title, voice_preview_id })`. At the saved-voice limit, pass `replace_voice_option_id` there to replace an existing designed voice. |
 | `clone_voice`                             | Clone a consenting speaker's recording with Cartesia (default) or ElevenLabs (`provider: "elevenlabs"`). Attaches to `character_id`, or creates a voice-only Character when none is given. |
 | `create_film_project`                     | Create a multi-shot Film project.                                                                 |
 | `update_film_project`                     | Save script, shots, storyboards, clips, audio, and approval state.                                |

@@ -7,14 +7,15 @@ description: "Render an exact HTML/CSS layout to a PNG, or make a motion-graphic
 
 Read [shared execution guidance](references/workflow-basics.md) once per task before using tools. It covers existing authorization, model discovery, optional cost checks, imports, and recovery.
 
-Two tools:
+Three tools:
 
 - `render_html_image`: a fixed-size HTML/CSS layout to a PNG. It completes synchronously; do not call `check_job` for it.
-- `render_html_video`: a motion-graphics video built as a HyperFrames HTML/CSS/JS composition. Two ways, chosen with `method`:
-  - `method: "generate"`: Creative Claw's own video agent writes the composition, makes the images, voiceover, music and sound it needs, checks the result, and renders it. You send a prompt, not HTML.
-  - `method: "render"` (default): renders HTML or a project ZIP you supply. It returns a queued job; resolve it with `check_job` when the final URL is needed.
+- `generate_html_video`: Creative Claw's own video agent makes a motion-graphics video. It writes the HyperFrames composition, makes the images, voiceover, music and sound it needs, checks the result, and renders it. You send a prompt, not HTML.
+- `render_html_video`: renders a HyperFrames HTML/CSS/JS composition or project ZIP you supply. It returns a queued job; resolve it with `check_job` when the final URL is needed.
 
-Which one: use `generate` unless the user supplied the HTML or project, or you have HyperFrames authoring skills installed in this session (a `hyperframes` skill in your skill list) and can write and check the composition yourself; in that case author it and use `render`. If the user asks for one of the two, follow that.
+Which video tool: use `generate_html_video` unless the user supplied the HTML or project, or you have HyperFrames authoring skills installed in this session (a `hyperframes` skill in your skill list) and can write and check the composition yourself; in that case author it and use `render_html_video`. If the user asks for one of the two, follow that.
+
+Older clients may not list `generate_html_video`. There the same agent is `render_html_video` with `method: "generate"`, `method: "edit"` (with `cloud_project_id`) and `method: "status"`.
 
 This is an explicit-only route. A poster, banner, social card, overlay, intro, outro, or video that needs text is not by itself a reason to use it. Use `creativeclaw-generate-image` or `creativeclaw-generate-video` unless the user asks for HTML, CSS, HyperFrames, or code-driven rendering, supplies HTML, accepts the method when offered, or explicitly asks for motion graphics, kinetic typography, animated titles, or an animated explainer. If the user names an image or video model, that choice wins.
 
@@ -53,7 +54,7 @@ render_html_image({
 
 ## Make a video with the video agent
 
-`render_html_video` with `method: "generate"` hands the brief to Creative Claw's own cloud agent. It writes the composition with the HyperFrames best practices built in (seekable timelines, text fit, safe zones, audio mixing, beat-synced motion), generates the images, voiceover, music and sound effects the brief calls for, checks the result, and renders the finished MP4 with audio. You write no HTML and read none of the composition references below. Use it when the user explicitly asks for that kind of video: motion graphics, kinetic typography, an animated explainer or promo, a lyric video, or animated captions and titles over supplied media.
+`generate_html_video` hands the brief to Creative Claw's own cloud agent. It writes the composition with the HyperFrames best practices built in (seekable timelines, text fit, safe zones, audio mixing, beat-synced motion), generates the images, voiceover, music and sound effects the brief calls for, checks the result, and renders the finished MP4 with audio. You write no HTML and read none of the composition references below. Use it when the user explicitly asks for that kind of video: motion graphics, kinetic typography, an animated explainer or promo, a lyric video, or animated captions and titles over supplied media.
 
 1. Write the brief as `prompt`: what the video is for, the exact on-screen copy and narration script when the user gave them, the visual style, the music, and the ending. Say what matters most. Pass `duration`, `width` and `height`.
 2. Pass the user's own images, footage, audio and logos as `reference_assets`, each with a `description` of its role. Import local or attached media first.
@@ -62,13 +63,12 @@ render_html_image({
 5. `media_budget_credits` caps what the agent may spend on generated media in the turn (default 200). Pass `0` when the user wants no generated media, or a lower number when they set a limit. The agent is told its budget and plans around it.
 6. The call returns a `cloud_project_id` and a turn takes several minutes. The video card follows progress on its own, then plays the video and offers the download and a Request changes box. One call gives one card for the whole turn, so call nothing to wait.
    - In Review mode the turn does not start: the card shows the request (prompt, assets, effort, media budget, estimated cost) and the result says `status: "awaiting_approval"`. Tell the user it is ready to review and that Generate in the card starts it. One call is enough for the request.
-   - `method: "status"` with the `cloud_project_id` is for you, not the user: it returns the state, the video `url`, the agent's summary, the final cost and the media it generated, and shows the user only a one-line summary. Call it when you need the outcome to answer or continue, never in a loop.
+   - `check_job` with the `cloud_project_id` as `job_id` is for you, not the user: it returns the state, the video `url`, the agent's summary, the final cost and the media it generated, and shows the user nothing; the video card stays their view. Call it when you need the outcome to answer or continue, never in a loop.
    - When the user changes the video from the card, the card updates in place and reports the result to you. Do not repeat their edit.
-7. For changes the user asks for, call `method: "edit"` with the `cloud_project_id` and the feedback as `prompt`. It keeps the project and renders again. Small fixes suit `effort: "light"`.
+7. For changes the user asks for, call `generate_html_video` again with the `cloud_project_id` and the feedback as `prompt`. It keeps the project and renders again. Small fixes suit `effort: "light"`.
 
 ```text
-render_html_video({
-  method: "generate",
+generate_html_video({
   prompt: "A 30-second explainer for a budgeting app: three benefits as bold kinetic titles over clean UI-style graphics, warm upbeat narration in English, light electronic music, end card with the app name and 'Get the app'.",
   duration: 30,
   width: 1920,
@@ -77,7 +77,7 @@ render_html_video({
 })
 ```
 
-Each generate or edit turn holds 200 credits when it starts and settles the real cost when the agent finishes, from the agent's work plus the media it generated. A failed turn is not charged. Tell the user the final cost the result states. For a cost question before starting, use `estimate_generation` with `operation: "html_video"` and `params.method`.
+Each turn, a new video or a change, holds 200 credits when it starts and settles the real cost when the agent finishes, from the agent's work plus the media it generated. A failed turn is not charged. Tell the user the final cost the result states. For a cost question before starting, use `estimate_generation` with `operation: "html_video"` and `params.method` set to `"generate"`, or `"edit"` for a change.
 
 Write and render the HTML yourself (next section) only when the user supplied HTML, wants a project rendered exactly as it is, or needs exact control of the code.
 
@@ -94,7 +94,7 @@ To find a starting point, call `search_examples` with `render_type: "html_video"
 2. For single HTML, import media and use public HTTP(S) URLs. For ZIPs, bundle assets and keep relative paths. For overlays, match the source video's size and aspect ratio.
 3. For branded work, call `get_theme` and use its fonts, colors, logos, and motion style.
 4. Read [composition contract](references/composition-contract.md), then only the references below that apply. Plain finite CSS keyframes work for simple motion; prefer one paused GSAP timeline for orchestration. To silence a source video, put `muted` on its opening `<video>` tag; setting `video.muted = true` later in JavaScript is not enough. Keep narration and music in separate `<audio>` elements.
-5. Call `render_html_video` (default `method: "render"`) with exactly one source (`html`, `project_url`, or `project_asset_id`) and the supported output options (`duration`, `fps`, `width`, `height`, `format`, `name`, `tags`). Do not invent upload, preflight, or dependency parameters.
+5. Call `render_html_video` with exactly one source (`html`, `project_url`, or `project_asset_id`) and the supported output options (`duration`, `fps`, `width`, `height`, `format`, `name`, `tags`). Do not invent upload, preflight, or dependency parameters.
 6. Resolve the job, then check text fit, safe zones, timing, media sync, encoded size, and audio before using the output elsewhere.
 
 Use 24 FPS for a cinematic look, 30 for normal graphics, and 60 only when the smoothness is worth it. Other values are normalized to 24, 30, or 60.
