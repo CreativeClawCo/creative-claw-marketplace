@@ -267,7 +267,6 @@ scripts/
   build-openai-plugin.mjs  # builds the OpenAI plugin ZIP into output/openai/
   build-skill-zips.sh      # builds the Claude skill download and per-skill archives for local evals
 output/                    # local generated ZIPs, ignored by Git
-evals/skill-routing-scenarios.md   # activation and workflow regression suite
 ```
 
 ### Maintaining the two distributions

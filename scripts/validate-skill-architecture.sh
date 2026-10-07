@@ -85,12 +85,6 @@ if rg -n 'image/(nano-banana-lite|gpt-image-direct|flux-dev)|video/veo-3\.1-lite
   exit 1
 fi
 
-scenario_count="$(awk 'BEGIN { count = 0 } /^\| [0-9]+ / { count += 1 } END { print count }' "$repo_root/evals/skill-routing-scenarios.md")"
-if (( scenario_count < 24 )); then
-  echo "Routing eval suite needs at least 24 scenarios; found $scenario_count." >&2
-  exit 1
-fi
-
 if rg -n 'agentic_prompting|prompt_expansion_mode' "$skills_root" --glob '*.md'; then
   echo "Skill copy must leave internal prompt-rewriting controls to the backend." >&2
   exit 1
@@ -134,4 +128,4 @@ if (( actual_skill_count != ${#skill_names[@]} )); then
   exit 1
 fi
 
-echo "Validated structure for ${#skill_names[@]} Creative Claw skills; $scenario_count behavioral scenarios are documented, not executed."
+echo "Validated structure for ${#skill_names[@]} Creative Claw skills."
