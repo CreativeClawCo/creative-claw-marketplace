@@ -20,7 +20,7 @@ Turn supplied footage or audio into a finished derivative. Apply the requested e
 | Shorten a video to one range | `trim_video`: set `start_time` explicitly, including zero, and either `end_time` or `duration`. |
 | Cut, reorder, or reframe several chosen moments | `cut_and_reframe_video`: see [Multi-cut edits](#multi-cut-edits). |
 | Resize or make a vertical version | `scale_video`: even dimensions and an explicit `mode`. `crop` is a center crop, `pad` keeps the full frame, `stretch` distorts. No subject tracking. |
-| Burn automatic captions | `add_subtitles`: transcribes the current video itself. Set the spoken `language`; do not translate unless asked. |
+| Burn captions | `add_subtitles`: transcribes the video itself and fits the font, size, and placement to the frame and language. See [Captions](#captions). |
 | Get a transcript or find a passage | `transcribe`: exactly one of `audio_url` or `video_url`. |
 | Clean a noisy recording | `isolate_audio`: keep and compare the original; cleanup can change speech. |
 | Get still frames | `extract_frames`: check the schema for first/last/sampling controls. |
@@ -41,10 +41,26 @@ Route elsewhere: `creativeclaw-generate-video` for invented footage or a generat
 2. Run the smallest edit chain. Trim a user-given range directly. Transcribe first only if text or timing is needed to choose cuts.
 3. Finish cuts and merges first, then resize to the final framing, then burn captions. Use a center crop only when the subject stays visible; otherwise pad or ask about the framing tradeoff.
 4. Resolve each queued job with `check_job` before passing its result on. On failure, follow [job-recovery.md](references/job-recovery.md) and resume from the last completed derivative.
-5. `add_subtitles` takes style and language settings, not an edited transcript or SRT. Do not promise corrected or translated captions through fields it lacks.
+5. Burn captions last, following [Captions](#captions). Do not translate captions unless asked.
 6. Check final length, framing, speech, caption sync and safe areas, and audio. Name and tag the result, and state any check you could not do.
 
 For "make this a captioned vertical clip": reuse the footage, trim only if a shorter clip was asked for, resize with an explicit mode, then add captions. No model discovery or generation is needed.
+
+## Captions
+
+`add_subtitles` transcribes the video, detects the language, and chooses the font, size, line breaks, and a safe position for the frame. The defaults are white, readable on every aspect ratio and script, and keep emoji. Leave every styling input out unless the user asked for it. Set `language` only when the spoken language is known.
+
+- **Look:** `preset` is `clean` (default), `highlight` (the spoken word in colour), `bold_pop` (large uppercase, three words at a time), `box` (dark box behind the text), `word_box` (a box on the spoken word), `one_word`, `reveal` (words appear as they are spoken), or `cinematic` (small and light). Set one only when the user describes that look.
+- **Let the user choose:** `interactive: true` opens a card with the video, a demo of every look on it, and the price. The user can also set the position, size, and colours there. Nothing is rendered or charged until they pick a look and confirm in the card. Use it when the user wants to see or choose the style. After the call, tell them to pick in the card; do not call `add_subtitles` again for that video.
+- **Known wording:** pass `script` when the user has the text that is spoken; timing still comes from the audio, and a script that does not match the speech is ignored. Pass `captions` (SRT, WebVTT, or a JSON list of `{start, end, text}` in seconds) when they have timed captions, including a translation they asked for; this skips transcription.
+- **Names and jargon:** `terms: ["WonderZap"]` gives the transcriber the right spellings and adds one credit. `corrections: [{ "from": "wonder zap", "to": "WonderZap" }]` replaces a phrase after transcription.
+- **Fix a finished result:** call `add_subtitles` with the same `video_url`, `fix_job_id` set to the job ID of the captioned video, and `corrections` and/or a different `preset`, `position`, `font_size`, or colours. It renders again from the original video without transcribing, at no charge, up to 20 times per video. The user can also edit the lines themselves in the result card's Text tab. Never run `add_subtitles` on an already captioned video to fix it: the old captions stay underneath.
+- **Fonts:** omit `font_name` unless the user names a font. A name is looked up among the workspace's brand theme fonts and uploaded fonts first, then Google Fonts. `font_url` takes a font file directly (TTF, OTF, WOFF, or WOFF2).
+
+```text
+add_subtitles({ video_url: "<video-url>", interactive: true })
+add_subtitles({ video_url: "<video-url>", fix_job_id: "<captioned-job-id>", corrections: [{ from: "wonder zap", to: "WonderZap" }] })
+```
 
 ## Multi-cut edits
 
