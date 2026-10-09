@@ -1,0 +1,206 @@
+# Creative Claw : Seedance 2.5
+
+Read [input modes and reference production](reference-production.md) before preparing media and [Review/Auto handling](review.md) before submission. These shared contracts take precedence over any recipe below. Never combine literal frames with reference arrays on standard routes. Load only this selected model guide, not every guide in the package.
+
+Use the outcome skill's execution guidance for authorization, imports and job recovery.
+
+Use `video/seedance-2.5`, the premium cinematic model, for high-end, long (up to 30 s), reference-rich generation with native synchronized audio. Prefer it when the clip needs more references, more duration, a controlled destination frame, or richer scene direction than the default video route. A 480p request creates a native, usable Pika draft. A completed draft can be finalized at 1080p as the same take within 7 days. To extend an existing clip, `video/minimax-h3-max-extend` is the default; use Seedance 2.5 `extend` for heavy references or a long continuation.
+
+## Core workflow
+
+Check spoken-language support in `get_model_params` before choosing native dialogue. Seedance 2.5 supports English, Chinese and other documented languages; unlisted languages remain unverified even with audio references. For those languages, use the dedicated single-shot or multi-shot route in [spoken languages](spoken-languages.md).
+
+1. Define the deliverable, duration, ratio, shot count, subjects, continuity, audio, and reference roles.
+2. Search for existing assets and import every external image, video, or audio file into Creative Claw.
+3. Follow the reference-first pipeline in [reference production](reference-production.md); skip keyframes only on explicit direct-generation requests. Reuse supplied and approved references.
+4. Create an end frame when the clip needs a precise landing pose, transition, loop, reveal, or match cut.
+5. Call `get_model_params({ model: "video/seedance-2.5" })`. Runtime values override remembered limits. For reference-to-video, choose `extras.omni_reference_task_type` deliberately rather than relying on prompt inference for edits or extensions.
+6. Assign every reference a written role and cite it with the exact `@ImageN`, `@VideoN`, or `@AudioN` token.
+7. Preserve exact quoted copy, reference labels, dialogue, timecodes, colors, and approved layout or edit constraints in the prompt.
+8. Follow the persisted render mode. Review stages an initial 1080p request as a 480p draft approval; Auto renders the requested 1080p directly. Explicit 480p always creates a draft. A 720p request is a new generation.
+9. Inspect the output before merging it into a sequence.
+
+## Current model contract
+
+| Field | Current use |
+| --- | --- |
+| `duration` | Reference/image-to-video/normal generation: `auto` or a whole second from 4 through 30. Edit: omit or use `auto` to preserve the source timeline; Creative Claw sends Pika the required `auto` value. Extend: a whole-number continuation duration from 4 through 30. |
+| `aspect_ratio` | `auto`, `21:9`, `16:9`, `4:3`, `1:1`, `3:4`, or `9:16`. |
+| `image_url` | Literal first frame. Image-to-video follows its framing. |
+| `last_frame_url` | Optional final frame; the model creates the transition. |
+| `image_urls` | Up to 30 reference images, cited as `@Image1`, `@Image2`, and so on. |
+| `video_urls` | Up to 10 reference clips, cited as `@Video1`, `@Video2`, and so on. |
+| `audio_urls` | Up to 10 audio references, cited as `@Audio1`, `@Audio2`, and so on. |
+| `resolution` | `480p`, `720p`, or `1080p`; pass it through the top-level Creative Claw field. |
+| `extras.draft_job_id` | Completed Creative Claw 480p draft `jobId`; finalizes that same take at 1080p within 7 days. |
+| `extras.generate_audio` | Enable synchronized dialogue, ambience, music, and effects. |
+| `extras.omni_reference_task_type` | `auto`, `reference`, `edit`, or `extend`; forwarded only to Pika and used by Creative Claw to normalize both provider routes. |
+
+Reference limits belong to this model, not to `generate_video` globally. Current video and audio references may each be 2-30 seconds, with no more than 30 seconds combined per modality. Audio references require at least one image or video reference. Verify this at runtime.
+
+## Native draft workflow
+
+The Review approval for an initial 1080p request charges only for the 480p draft. It does not automatically submit or pay for a final. The draft has native audio and can be downloaded and used as-is. Auto mode submits an initial 1080p request directly, while an explicit 480p request is a draft in either mode.
+
+When the user wants the same approved take at 1080p, call `generate_video` again with `model: "video/seedance-2.5"`, a meaningful required `prompt`, and `extras: { "draft_job_id": "<completed Creative Claw draft jobId>" }`. The server uses the saved draft prompt and Pika inherits its references, duration, ratio, and audio. Do not supply new creative inputs for finalization. This is a separate paid job. Review mode gives that final its own approval; Auto mode submits an explicitly requested finalization directly. A draft can be finalized more than once within 7 days; use `force_new: true` for an intentional duplicate within the reuse window.
+
+Pika cannot finalize a draft at 720p. To make 720p, start a new generation from the saved inputs and tell the user the shot may differ. A request for changes is another paid 480p draft and requires the user's instruction for that additional generation.
+
+## Reference task modes
+
+Choose the mode from the intended relationship to the source video:
+
+| Mode | Use when | Ratio and duration |
+| --- | --- | --- |
+| `reference` | Creating a new video guided by reference images, video, or audio. | A fixed ratio and explicit duration are allowed. |
+| `edit` | Modifying content inside a source video while retaining its timeline. | Pass `aspect_ratio: "auto"` and omit duration or use `duration: "auto"`. The Pika adapter sends `duration: "auto"`. |
+| `extend` | Continuing before or after a source video boundary. | Pass `aspect_ratio: "auto"` and a numeric continuation duration from 4-30 seconds. |
+| `auto` | Letting Seedance infer the task from the prompt. | Use only with `aspect_ratio: "auto"`. For edit-style prompts with a source video, set `edit` explicitly so Creative Claw can validate the locked-duration contract before charging. |
+
+For `edit` and `extend`, include at least one `video_urls` entry and state the operation explicitly in the prompt, for example `Edit @Video1...` or `Extend @Video1 forward...`. The mode does not replace prompt direction. Creative Claw forwards `omni_reference_task_type` to Pika; on fal it normalizes locked fields, removes the Pika-only parameter, and lets fal infer the task from the prompt. If the prompt looks like an edit but the mode is omitted/`auto`, validation rejects the request before charging with instructions to choose `edit` or `reference`.
+
+### Seedance 2.5 request matrix
+
+| Intent | Required inputs | Duration | Aspect ratio | Audio/references |
+| --- | --- | --- | --- | --- |
+| New text/image video | `prompt`, optional `image_url` | `auto` or 4-30s | Explicit ratio or `auto` | `generate_audio` is enabled by default; `end_image_url` is supported for image-to-video |
+| Reference-guided video | `video_urls`/`image_urls`/`audio_urls`, `@` tokens, and `omni_reference_task_type: "reference"` | `auto` or 4-30s | Explicit ratio or `auto` | Up to 30 images, 10 videos, 10 audio files, 50 total; audio needs an image/video |
+| Edit source video | `video_urls`, explicit `omni_reference_task_type: "edit"` | Omit or `auto` | `auto` | Source must be 4-30s; timeline and framing are preserved |
+| Extend source video | `video_urls`, explicit `omni_reference_task_type: "extend"` | Numeric 4-30s continuation | `auto` | Source/reference duration limits still apply |
+
+The public `generate_video` contract uses `auto`/omission for source-locked edits. Invalid combinations are rejected before submission and before credit charge with a corrective message.
+
+## Preservation-first editing and extension
+
+When the user wants existing footage left unchanged with a new beginning or ending, do not run the whole source as an edit. Keep the original untouched, trim only the smallest useful boundary segment as context, run one `extend` generation, then concatenate the continuation with the original using `merge_media`. Preserve the source audio on the original span and add generated or separately produced audio only to the continuation unless the user requests otherwise.
+
+For a long source that needs a change inside one interval, trim and edit only that interval, then merge it back between untouched spans. This lowers billed input duration and prevents avoidable changes elsewhere. If exact logos, text, numbers, uniforms, or faces are mandatory, state that generative editing cannot guarantee pixel-accurate preservation and prefer deterministic compositing for those details.
+
+## Keyframe-first production
+
+For each shot:
+
+1. Write the shot's dramatic purpose and one visible action.
+2. Generate a clean keyframe at the exact target ratio from the shared anchors. Keep it full bleed and free of labels, panels, captions, arrows, or UI.
+3. Approve the character face, product geometry, wardrobe, environment, and lighting.
+4. Generate a compatible end frame if the motion must arrive somewhere specific.
+5. Collect separate reference images for identity, wardrobe, product details, location, and visual style.
+6. Use motion video references only for movement, camera cadence, blocking, or choreography.
+7. For specified speech in a documented language, follow [voice in video](voice-in-video.md): prepare the recording first with creativeclaw-generate-voiceover, or reuse supplied audio. References can guide dialogue, voice and timing but may produce a different recording. Inspect the words and lip timing; an exact recording requires an audio-driven route or a requested lip-sync repair if the generated performance differs. A soundtrack replacement alone is suitable for off-camera narration, not a repair for mismatched visible lips.
+
+Do not make one image do every job. A start frame controls the opening composition; reference images control identity or style; an end frame controls the destination.
+
+## First and last frames
+
+### Start frame only
+
+Pass the approved image as `image_url`. Describe what changes after that frame:
+
+```text
+Starting from the supplied frame, the runner accelerates toward camera while
+rain splashes outward from each footfall. Her face, jacket, street layout, and
+lighting remain unchanged. Low tracking camera, one continuous shot.
+```
+
+### Start and end frames
+
+Pass the opening image as `image_url` and the destination as `last_frame_url`. Make both frames share the same aspect ratio and a believable identity, environment, and spatial layout.
+
+Prompt the path between them:
+
+```text
+Begin exactly at the first frame and end exactly at the supplied last frame.
+Across ten seconds, the closed package unfolds into the finished display while
+the camera makes one slow clockwise orbit. Every panel moves mechanically and
+continuously; no cuts, teleportation, logo changes, or new objects.
+```
+
+Use end frames for product transformations, pose-to-pose action, match cuts, looping compositions, and multi-clip continuity. Avoid impossible geometry changes between endpoints.
+
+## Reference-token language
+
+Seedance tokens are one-based and include `@`:
+
+```text
+@Image1 = exact face and body identity.
+@Image2 = exact wardrobe.
+@Image3 = product geometry and packaging.
+@Video1 = body movement and camera cadence only.
+@Audio1 = prepared dialogue in the requested language, including words, voice and timing.
+```
+
+State what to copy and what not to copy:
+
+```text
+Preserve the identity from @Image1 and wardrobe from @Image2. Preserve the
+product geometry, materials, colors, and logo placement from @Image3. Follow
+only the motion rhythm and low tracking camera from @Video1; do not copy its
+actor, clothing, or location. Use @Audio1 as the dialogue reference and follow
+its language, exact words, voice, pauses and timing. Do not translate, rephrase
+or add dialogue. The actor crosses the neon station in one continuous shot and sets the product on the
+bench as the final word lands.
+```
+
+Never write `<IMAGE_REF_0>` or `Image 1` for Seedance. Use its exact `@Image1`, `@Video1`, and `@Audio1` syntax.
+
+## Prompt formula
+
+```text
+References: [token → role; exact protected attributes].
+Format: [duration, ratio, one shot or named sequence].
+Opening: [starting composition or supplied first frame].
+Action beats: [ordered visible events with timing].
+Camera: [framing, lens feel, movement, transition behavior].
+Look: [lighting, palette, texture, medium].
+Audio: [quoted dialogue, ambience, effects, music, or silence].
+Ending: [final composition or supplied end frame].
+Continuity: [identity, wardrobe, product, environment].
+Avoid: [specific artifacts, text, unwanted cuts, additions].
+```
+
+For 4-10 seconds, keep one action and one camera move. For 10-30 seconds, use two to five timed beats. Do not compress an entire commercial into a single chaotic sentence.
+
+## Prompt examples
+
+Reference-rich character scene:
+
+```text
+@Image1 is the exact protagonist identity. @Image2 is her exact silver coat.
+@Video1 supplies only the measured walking cadence and sideways tracking camera.
+@Audio1 is the prepared spoken line. Use its voice, exact words and timing in a
+fifteen-second continuous shot in a rain-soaked metro station. She walks beside
+the train, looks toward camera,
+and says exactly, “The future arrives quietly.” Cyan platform light reflects in
+the wet floor. Preserve face, body proportions, coat, and lip timing. No cuts,
+extra people near camera, subtitles, on-screen text, translated or additional
+dialogue, or wardrobe drift.
+```
+
+First-to-last product transformation:
+
+```text
+Start exactly from the supplied closed-box frame and finish exactly at the
+supplied assembled-display frame. Over twelve seconds, the box opens in a
+physically plausible sequence; the product rises, rotates once, and locks into
+the final position. Slow clockwise camera orbit, black studio, warm rim light,
+precise logo and packaging geometry. Synchronized folds, magnetic clicks, and a
+subtle bass swell. One seamless shot; no cuts or extra components.
+```
+
+Audio-reference scene in a documented language (review the delivered words and lip sync):
+
+```text
+@Image1 is the exact performer identity and wardrobe. @Audio1 is the prepared
+Spanish dialogue recording. The performer says exactly, “Esto se siente bien.”
+Use @Audio1 as the speech reference for those Spanish words, voice, pauses,
+and timing. Do not translate, rephrase, or add speech. She stands in a dark
+rehearsal room as a single spotlight brightens. Medium close-up, gentle handheld drift.
+Match mouth movement to @Audio1 and let the light peak on the final phrase.
+Preserve identity and room layout. No music, captions, extra speakers, or cuts.
+```
+
+## Quality and feedback
+
+Check reference-role adherence, endpoint accuracy, identity, lip-sync, audio timing, unwanted subject copying from style references, implausible transitions, extra cuts, flicker, warped hands, and embedded text. Report defects and propose a focused correction. Regenerate a failed shot only when the user explicitly requests that additional attempt; do not regenerate the entire sequence.
+
+When you report a quality issue with `submit_feedback`, include concrete model-specific failures without exposing private media.

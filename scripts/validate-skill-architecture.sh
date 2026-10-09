@@ -23,6 +23,7 @@ skill_names=(
   creativeclaw-submit-feedback
   creativeclaw-clone-voice
   creativeclaw-render-html
+  creativeclaw-setup
 )
 
 for skill_name in "${skill_names[@]}"; do

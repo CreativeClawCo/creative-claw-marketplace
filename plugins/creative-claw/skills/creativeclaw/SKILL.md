@@ -66,6 +66,7 @@ Purchases and plans are handled on the Creative Claw website, not in chat. Do no
 | Select highlights from long footage and create vertical Reels | `creativeclaw-create-reels` |
 | Cut, reorder, and reframe chosen video moments | `creativeclaw-edit-media` (`cut_and_reframe_video`) |
 | Learn what Creative Claw can do | `references/workflows/onboard.md` |
+| Run first-time setup, get started, or take a guided tour | `creativeclaw-setup` |
 
 Use an explicit outcome over a generic modality. If the user names a model, keep the outcome skill in control and use the matching packaged model reference for prompt and reference details. Use this root skill for requests that span outcomes or do not have one clear owner. Read the matching workflow before calling a mutating or paid tool.
 

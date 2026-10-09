@@ -11,7 +11,7 @@ Creative Claw is an AI media studio for Claude, Grok Bot, Hermes, OpenClaw, Curs
 - Import, search, tag, edit, and organize media assets.
 - Guide multi-step character, storyboard, and film workflows.
 
-The plugin contains 17 skills (the `creativeclaw` router plus 16 focused workflows such as `creativeclaw-generate-video`, `creativeclaw-edit-media`, and `creativeclaw-render-html`) and one remote MCP server connection.
+The plugin contains 18 skills (the `creativeclaw` router plus 17 focused workflows such as `creativeclaw-generate-video`, `creativeclaw-edit-media`, and `creativeclaw-render-html`) and one remote MCP server connection.
 
 ## Install
 

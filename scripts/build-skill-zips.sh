@@ -20,6 +20,7 @@ focused_skill_names=(
   creativeclaw-submit-feedback
   creativeclaw-clone-voice
   creativeclaw-render-html
+  creativeclaw-setup
 )
 chatgpt_overlay_root="$repo_root/skill-variants/chatgpt"
 output_dir="$repo_root/output/chatgpt-skills"

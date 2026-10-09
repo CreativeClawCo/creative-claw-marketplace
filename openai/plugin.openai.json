@@ -1,6 +1,6 @@
 {
   "name": "app-6a2528e2c49c8191a8015ba5475f177e",
-  "version": "5.4.1",
+  "version": "5.5.0",
   "keywords": [
     "ai video generator",
     "video generation",
@@ -77,7 +77,7 @@
         "composerIcon": "./assets/icon.png",
         "logo": "./assets/icon.png"
       },
-      "onboardingSkill": "./skills/creativeclaw/SKILL.md",
+      "onboardingSkill": "./skills/creativeclaw-setup/SKILL.md",
       "review": {
         "test_cases": {
           "positive": [
@@ -131,7 +131,7 @@
         "commerce_description": "Creative Claw does not sell anything in ChatGPT. When a feature needs a different plan or more credits, the plugin explains why and links to an informational page about plans."
       },
       "publication": {
-        "release_notes": "Creative Claw Studio: open a workspace from the sidebar or a chat to manage your characters, films, voices, library and the videos waiting for your review. A video agent can make designed, text-led videos such as explainers, promos and motion graphics from a prompt. Video review requests can also be approved from a browser link. Review settings are available on the plugin's settings page, and in Codex you can @mention your characters and films. Music has a new model option, YouTube transcription uses the video's existing captions, and guidance on feedback, approvals and voice cloning is clearer."
+        "release_notes": "Guided setup: after installing, run setup to see what Creative Claw can do, add your own photos, logo or brand references, and go from a preview image to your first video, a designed voice and your workspace in Studio. Captions now come with ready-made looks, a style picker and fonts, and can be restyled from the result card. Creative Claw Studio: open a workspace from the sidebar or a chat to manage your characters, films, voices, library and the videos waiting for your review. A video agent can make designed, text-led videos such as explainers, promos and motion graphics from a prompt. Video review requests can also be approved from a browser link. Review settings are available on the plugin's settings page, and in Codex you can @mention your characters and films. Music has a new model option, YouTube transcription uses the video's existing captions, and guidance on feedback, approvals and voice cloning is clearer."
       }
     }
   }
