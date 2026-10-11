@@ -29,6 +29,7 @@ Read [shared execution guidance](references/workflow-basics.md) before tools. Th
 | An ElevenLabs clone, steady read | [ElevenLabs v2](references/voices/elevenlabs-v2.md) |
 | An ElevenLabs clone, expressive delivery or dialogue | [ElevenLabs v4](references/voices/elevenlabs-v4.md) |
 | An explicitly requested v3 workflow | [ElevenLabs v3](references/voices/elevenlabs-v3.md) |
+| HeyGen public voices or an existing HeyGen instant clone | [HeyGen Voice](references/voices/heygen.md) |
 | A named alternative or a specific dialect/voice match | [MiniMax and xAI](references/voices/alternatives.md) |
 
 Default to ElevenLabs v4 for stock and designed ElevenLabs voices. Speak a clone with its provider's model: Cartesia Sonic for a Cartesia clone; v2 for a steady read or v4 for expressive delivery or dialogue from an ElevenLabs clone. Pass the model explicitly rather than relying on the omitted-model v4 default, and keep it for the whole project. V3 is legacy; use it only when the user asks for it. V2 can use public stock IDs, but v4 is the stock choice. If a user explicitly requests v2 stock speech, use a compatible public `voice_id` instead of silently switching. Do not automatically route stock corporate or long-form narration to v2.

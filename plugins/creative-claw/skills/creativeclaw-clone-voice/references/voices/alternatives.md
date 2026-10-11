@@ -21,3 +21,5 @@ This integration does not promise saved ElevenLabs/Cartesia Character-clone supp
 Both guides are based on Creative Claw's current adapter contracts; refresh get_model_params before using provider-specific parameters.
 
 For full model-specific syntax, read only the selected guide: [MiniMax](minimax-speech-guide.md), [xAI](xai-tts-guide.md), or [Chatterbox one-off matching](chatterbox-guide.md).
+
+For HeyGen stock voices or an existing HeyGen instant clone, read [HeyGen Voice](heygen.md). Its stock and instant-clone controls differ.
