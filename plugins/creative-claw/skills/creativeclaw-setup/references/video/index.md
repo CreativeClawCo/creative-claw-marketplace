@@ -12,7 +12,7 @@ Package access does not mean loading every guide. Honor an explicit model choice
 | Face/person swap or recorded performance transfer, video/kling-3.0-motion-control-pro | [Kling Motion Control Pro](kling-motion-control.md), the preferred model; prepare the source-scene image and bind the replacement face |
 | Explicitly selected multi-person or multi-shot recasting, video/minimax-h3-max-recast | [H3 Max Recast](h3-max-recast.md), an alternative with no guarantee of exact preservation |
 | Veo, Grok, FLUX, Sora, Kling, H3, Hailuo, HappyHorse, HeyGen or another explicitly requested route | [Additional models](other-models.md), model-specific distinctions and live-schema lookup |
-| Lip-sync a finished clip to prepared speech | [HeyGen Lipsync](heygen-lipsync.md) for direct Speed/Precision modes, or [video/sync-3](other-models.md) for manual speaker selection |
+| Lip-sync a finished clip to prepared speech | [HeyGen Lipsync Precision](heygen-lipsync.md), the recommended default; [video/sync-3](other-models.md) for manual speaker selection or an explicit model choice |
 | Talking photo in an unsupported or unverified native-dialogue language | [Spoken languages](spoken-languages.md), H3 Max Lip Sync or HeyGen Avatar 4 with prepared speech |
 
 Read [reference production](reference-production.md) when preparing shot assets, [voice in video](voice-in-video.md) when a shot has speech, and [Review/Auto](review.md) before generation. Model guides do not authorize extra paid drafts, retries or changing providers. Report concrete product or quality issues through `submit_feedback` and say briefly that you did; do not report when the user asks you not to.

@@ -32,7 +32,7 @@ Do not attach unsupported reference arrays or `character_id` to a literal-image 
 
 ## An existing speaking video
 
-For an existing clip and finished replacement speech, use [HeyGen Lipsync](heygen-lipsync.md), `video/heygen-lipsync`, with exactly one `video_urls` and one `audio_urls` input. Direct Speed and Precision modes re-animate the mouth to the supplied recording. This is audio-driven editing, not translation or native generated dialogue. HeyGen does not publish a verified per-language quality list for this endpoint. Use Sync 3 when manual speaker selection is needed.
+For an existing clip and finished replacement speech, use [HeyGen Lipsync](heygen-lipsync.md), `video/heygen-lipsync`, with exactly one `video_urls` and one `audio_urls` input. Precision is the recommended default (6 credits per output second); Speed remains an explicit lower-cost choice (3 credits per output second). Both modes re-animate the mouth to the supplied recording. This is audio-driven editing, not translation or native generated dialogue. HeyGen does not publish a verified per-language quality list for this endpoint. Use Sync 3 when manual speaker selection is needed.
 
 ## Multiple shots, only when the user wants them
 

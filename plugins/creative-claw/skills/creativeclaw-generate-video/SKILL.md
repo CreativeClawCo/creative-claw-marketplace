@@ -39,7 +39,7 @@ Before choosing native dialogue, read the selected model's spoken-language guida
 
 When a Character speaks and the voice is unknown, ask one question: design a new voice from a description (`design_voice`, three auditions), use your own voice (recording plus consent, creativeclaw-clone-voice), or pick a stock voice. If the voice doesn't matter, pick a stock voice and name it. Design auditions use the Character's real lines. In ChatGPT the Voice Studio card saves the choice; read it back from `list_characters` rather than saving again.
 
-Then pick one path per speaking shot from [voice in video](references/video/voice-in-video.md): native dialogue in a documented language for a one-off, or speech first for an exact or recurring voice (a dedicated talking-avatar route, a supported audio-reference model with output review, or `video/sync-3` on a finished clip). Gemini Omni, the default, accepts no audio on the current route: don't make speech first for an Omni shot. Keep lines to at most 2.5 words per clip second.
+Then pick one path per speaking shot from [voice in video](references/video/voice-in-video.md): native dialogue in a documented language for a one-off, or speech first for an exact or recurring voice (a dedicated talking-avatar route, a supported audio-reference model with output review, or `video/heygen-lipsync` Precision on a finished clip, the default lip-sync recommendation; keep Sync 3 for manual speaker selection or an explicit model choice). Gemini Omni, the default, accepts no audio on the current route: don't make speech first for an Omni shot. Keep lines to at most 2.5 words per clip second.
 
 ## Workflow
 

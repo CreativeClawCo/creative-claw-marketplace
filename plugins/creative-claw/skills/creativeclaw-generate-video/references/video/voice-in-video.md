@@ -28,11 +28,11 @@ First read the selected model's spoken-language guidance from `get_model_params(
 
 **B. Exact voice with visible lips:** make the speech first, then one of:
 - Seedance 2.5, H3 Max, or Wan with `audio_urls` plus an image or video reference only when the requested language is documented for the selected model. References condition a new performance and do not guarantee an exact recording. Check the model's own tokens and limits.
-- Any finished speaking clip → [HeyGen Lipsync](heygen-lipsync.md): `video/heygen-lipsync`, one `video_urls` clip and one `audio_urls` recording, `extras.mode` speed or precision. Source framing is retained; inspect dynamic-duration behavior before submitting. Use Sync 3 when manual face selection is required.
-- Alternatively, `video/sync-3`: `video_urls` = [clip], `audio_urls` = [line], equal lengths.
+- Any finished speaking clip → [HeyGen Lipsync](heygen-lipsync.md): `video/heygen-lipsync`, one `video_urls` clip and one `audio_urls` recording, `extras.mode: "precision"` (recommended default, 6 credits per output second); choose Speed explicitly for lower cost at 3 credits per output second. Source framing is retained; inspect dynamic-duration behavior before submitting. Use Sync 3 when manual face selection is required.
+- Keep `video/sync-3` for manual speaker selection, its video-only embedded-audio workflow, or an explicit model choice: `video_urls` = [clip], `audio_urls` = [line], equal lengths. Never silently replace a model the user selected.
 - A single talking head → `video/minimax-h3-max-lip-sync` or `video/heygen-avatar-4`: `image_url` = face, `extras.audio_url` = finished line. Use one generation within the endpoint's limits.
 
-Gemini Omni accepts no audio input on the current route. Don't pay for speech first and then send the shot to Omni; use path A, or a model above. If a generated performance drifts from the prepared recording, replacing its soundtrack does not fix mouth timing. Use a requested lip-sync repair such as `video/sync-3`, or an authorized new audio-driven take. Add an audio overlay alone only for voiceover without visible speech or when matching lip timing has actually been verified.
+Gemini Omni accepts no audio input on the current route. Don't pay for speech first and then send the shot to Omni; use path A, or a model above. If a generated performance drifts from the prepared recording, replacing its soundtrack does not fix mouth timing. Use a requested lip-sync repair with `video/heygen-lipsync` in Precision mode (default), retaining Sync 3 when manual speaker selection is required or the user explicitly selects it, or an authorized new audio-driven take. Add an audio overlay alone only for voiceover without visible speech or when matching lip timing has actually been verified.
 
 **C. Voiceover, no visible speaker:** prompt "no dialogue, no music", then add the speech afterwards.
 
