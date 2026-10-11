@@ -30,6 +30,10 @@ Use the requested script and a speech model/voice that supports its language. Re
 
 Do not attach unsupported reference arrays or `character_id` to a literal-image lip-sync request. Build the likeness into the image first. If the single recording exceeds the selected endpoint's duration limit, explain the necessary split or choose a suitable longer audio-driven route; do not invent extra scenes.
 
+## An existing speaking video
+
+For an existing clip and finished replacement speech, use [HeyGen Lipsync](heygen-lipsync.md), `video/heygen-lipsync`, with exactly one `video_urls` and one `audio_urls` input. Direct Speed and Precision modes re-animate the mouth to the supplied recording. This is audio-driven editing, not translation or native generated dialogue. HeyGen does not publish a verified per-language quality list for this endpoint. Use Sync 3 when manual speaker selection is needed.
+
 ## Multiple shots, only when the user wants them
 
 1. Plan the requested number of shots and camera views. Reuse the same Character face/identity references, wardrobe, product and location anchors throughout. Keep one image model, aspect ratio and look line for the sequence.
@@ -43,6 +47,6 @@ Replacing the soundtrack alone cannot repair visible mouth timing. If repair is 
 
 ## Evidence and maintenance
 
-Primary sources: [MiniMax H3 dialogue languages](https://github.com/MiniMax-AI/MiniMax-H3/blob/main/README.md), [H3 Max's relationship to H3](https://fal.ai/learn/devs/introducing-h3-max-by-fal), [Seedance 2.5 languages](https://docs.volcengine.com/docs/ark/seedance-2-5), [Veo limitations](https://ai.google.dev/gemini-api/docs/veo), [Omni limitations](https://ai.google.dev/gemini-api/docs/omni), [H3 Max Lip Sync](https://fal.ai/h3-max-lip-sync), [HeyGen Avatar 4 audio input](https://developers.heygen.com/reference/create-video).
+Primary sources: [MiniMax H3 dialogue languages](https://github.com/MiniMax-AI/MiniMax-H3/blob/main/README.md), [H3 Max's relationship to H3](https://fal.ai/learn/devs/introducing-h3-max-by-fal), [Seedance 2.5 languages](https://docs.volcengine.com/docs/ark/seedance-2-5), [Veo limitations](https://ai.google.dev/gemini-api/docs/veo), [Omni limitations](https://ai.google.dev/gemini-api/docs/omni), [H3 Max Lip Sync](https://fal.ai/h3-max-lip-sync), [HeyGen Avatar 4 audio input](https://developers.heygen.com/reference/create-video), [HeyGen Lipsync audio-driven editing](https://developers.heygen.com/reference/create-lipsync) (checked 2026-10-11).
 
 When adding or updating a model, recheck the exact version and provider route, update its `get_model_params` language guidance and this compact overview if needed, and synchronize the canonical references. Mark missing evidence unverified, not unsupported. Keep complete language lists in the live model guidance, not duplicated across skills.
