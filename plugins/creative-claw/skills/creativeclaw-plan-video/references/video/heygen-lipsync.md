@@ -2,9 +2,9 @@
 
 ## HeyGen Lipsync usage
 
-Replace a visible speaker's speech in an existing video using finished audio. Supply exactly one public HTTPS video_urls entry and one public HTTPS audio_urls entry. The audio supplies the words, voice, emotion, language, and pacing. The required prompt is a task label and is not sent to HeyGen. Precision is the recommended default at 6 credits per output second; explicitly selected Speed costs 3 credits per output second. Prepare speech first, estimate with the intended settings, submit once, and use check_job for the permanent result saved in the asset library. Review mouth timing and the preserved performance before delivery.
+Replace a visible speaker's speech in an existing video using finished audio. Supply exactly one public HTTPS video_urls entry and one public HTTPS audio_urls entry. The audio supplies the words, voice, emotion, language, and pacing. The required prompt is a task label and is not sent to HeyGen. Within HeyGen, Precision is the default mode at 6 credits per output second; explicitly selected Speed costs 3 credits per output second. Prepare speech first, estimate with the intended settings, submit once, and use check_job for the permanent result saved in the asset library. Review mouth timing and the preserved performance before delivery.
 
-For lip-syncing an existing video to finished speech, recommend video/heygen-lipsync with extras.mode precision (default, 6 credits per output second). Use speed only when explicitly selected for lower cost or faster processing (3 credits per output second). Keep video/sync-3 for manual speaker selection, its video-only embedded-audio workflow, or an explicit user choice. Honor an explicit model choice and never switch or retry a paid generation automatically. HeyGen requires one video_urls and one audio_urls input; prepare or extract the finished audio first.
+For lip-syncing an existing video to finished speech, recommend video/sync-3. Supply one video_urls input and one finished speech recording in audio_urls; if audio_urls is omitted, Creative Claw extracts the source video's embedded audio. Sync 3 supports automatic or manual speaker selection. Keep video/heygen-lipsync as an alternative when explicitly selected; its mode defaults to precision and it requires one video_urls and one audio_urls input. Honor an explicit model choice and never switch or retry a paid generation automatically.
 
 ### When to use it
 
@@ -82,7 +82,7 @@ Task label: `Sync this video to the supplied finished speech.`
 - No duration, resolution, aspect_ratio, images, character_id, seed, voice_id, or emotion control is accepted here. Put media in the top-level arrays and the documented controls in extras. Unknown extras are rejected before submission.
 - Do not invent file-size or duration limits absent from the current endpoint contract. Input measurement, availability, and local validation must succeed before submission.
 
-Spoken languages (checked 2026-10-11, direct HeyGen Lipsync, recommended Precision default for existing-video lip sync): supplied audio drives mouth movements on an existing video. This endpoint does not generate or translate speech. Prepare correct finished speech in the target language; a verified per-language quality list is not published for this endpoint. Do not borrow HeyGen TTS or translation language counts. Review pronunciation, lip timing, and the preserved performance. Source: https://developers.heygen.com/reference/create-lipsync
+Spoken languages (checked 2026-10-11, direct HeyGen Lipsync, Precision default mode): supplied audio drives mouth movements on an existing video. This endpoint does not generate or translate speech. Prepare correct finished speech in the target language; a verified per-language quality list is not published for this endpoint. Do not borrow HeyGen TTS or translation language counts. Review pronunciation, lip timing, and the preserved performance. Source: https://developers.heygen.com/reference/create-lipsync
 
 ### Request examples
 

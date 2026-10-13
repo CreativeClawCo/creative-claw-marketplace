@@ -12,7 +12,7 @@ Check the requested spoken language in `get_model_params` before selecting nativ
 
 First establish or reuse an approved avatar. Use a clean face image, not a labeled character-sheet grid as literal frame zero. Pick the voice path per speaking shot from [voice in video](voice-in-video.md):
 - Native dialogue (path A): quick one-offs. Quote the exact short line and name the speaker. The model invents the voice; a saved Character visual does not bring its voice.
-- Exact or recurring voice (path B): speech first from the saved Character voice, then a supported audio-reference model with output review, `video/heygen-lipsync` in Precision mode (default) on a finished clip, keeping Sync 3 for manual speaker selection or an explicit model choice, or H3 Max Lip Sync / HeyGen Avatar 4 for a single talking head. Never pass a private cloning sample as final narration.
+- Exact or recurring voice (path B): speech first from the saved Character voice, then a supported audio-reference model with output review, the recommended `video/sync-3` on a finished clip, preserving an explicit model choice, or H3 Max Lip Sync / HeyGen Avatar 4 for a single talking head. Never pass a private cloning sample as final narration.
 - Voiceover with no visible speech (path C): laying audio over talking footage does not create lip-sync.
 
 Read the selected model's guide for face/audio inputs and reference-mode exceptions. Keep speech to at most 2.5 words per clip second. Inspect lip movement, pronunciation, expression and likeness. If the model cannot support the intended voice/language, explain and propose a supported path before spending.

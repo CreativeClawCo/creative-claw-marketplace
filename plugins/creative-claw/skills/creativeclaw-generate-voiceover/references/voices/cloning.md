@@ -44,6 +44,6 @@ Ask the user to assess identity, accent, clarity and pacing. Do not claim to hav
 
 Reuse character_id for future generate_speech calls. ElevenLabs v2 and v4 reuse the same ElevenLabs clone. When the user selects Cartesia, a missing Cartesia clone can be created from the retained consented source. Do not re-clone simply to switch models. Never silently substitute providers or stock voices after a failure.
 
-A Character may contain both images and a voice. Its visual use in generated images/videos does not bring its voice into native video audio. For visible speech, make the speech first and use an audio-driven route. For an existing clip, prefer `video/heygen-lipsync` with `extras.mode: "precision"` (default); use Sync 3 for manual speaker selection or an explicit user choice; overlaying speech is not lip-sync. Do not expose private samples.
+A Character may contain both images and a voice. Its visual use in generated images/videos does not bring its voice into native video audio. For visible speech, make the speech first and use an audio-driven route. For an existing clip, recommend `video/sync-3` with supplied or embedded audio and automatic or manual speaker selection; keep HeyGen Lipsync as an alternative when explicitly selected; overlaying speech is not lip-sync. Do not expose private samples.
 
 Recording guidance: [ElevenLabs instant cloning](https://elevenlabs.io/docs/eleven-creative/voices/voice-cloning/instant-voice-cloning).
