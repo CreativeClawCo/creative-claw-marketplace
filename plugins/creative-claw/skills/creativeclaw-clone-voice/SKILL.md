@@ -32,3 +32,5 @@ Speak a clone with its provider's model, and pass the model explicitly.
 - [Language routing](references/voices/languages.md): read for non-English speech, dialect requests, or mixed-language scripts.
 
 Only change provider when the user chooses it. A missing Cartesia clone can be created from the retained consented sample when Cartesia is selected. Replacing the source invalidates both providers' clones, so explain and confirm replacement first. Do not silently substitute a stock voice after a clone fails.
+
+For a Fish clone, use `provider: "fish"` with the private recording and existing consent. Speak with `speech/fish-drama-3`. Read [Fish guidance](references/voices/fish.md) and current `get_model_params`. Selecting Fish for an existing consented Character can create a missing private Fish copy without replacing its other provider copies.

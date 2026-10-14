@@ -11,9 +11,9 @@ Use `design_voice` when the user wants a new synthetic voice from a description 
 ## Preview
 
 Call `design_voice({ prompt, text, provider, character_id })`:
-- `prompt` (20–1,000 characters): age, accent, timbre, pace, attitude and use. Describe the sound, never a real person's name or identity.
-- `text` (100–1,000 characters): one or two of the Character's real lines, about 200 characters. Omit it only when no script exists yet.
-- `provider`: `"elevenlabs"` (default) or `"google"`. For Google, add `language_code`, such as `"he-IL"`.
+- `prompt` (20 to 1,000 characters): age, accent, timbre, pace, attitude and use. Describe the sound, never a real person's name or identity.
+- `text` (100 to 1,000 characters): one or two of the Character's real lines, about 200 characters. Omit it only when no script exists yet.
+- `provider`: `"elevenlabs"` (default), `"google"`, or `"fish"`. For Google or Fish, add `language_code`, such as `"he-IL"`.
 - `character_id`: the Character that should get the voice, when known.
 
 Every preview returns three auditions. Let the user pick one. In ChatGPT the Voice Studio card plays them and saves the choice; read it back with `list_characters` rather than saving again.
@@ -34,5 +34,16 @@ Older clients may not list `voice_preview_id` on `manage_character`. There the s
 Call `generate_speech({ character_id, model, text })`:
 - ElevenLabs design → `speech/elevenlabs-v4`.
 - Google design → `speech/gemini-3.8-flash-tts`.
+- Fish design → `speech/fish-drama-3`.
 
 Pass `voice_option_id` to pick a saved voice that is not the preferred one; `list_characters` shows the options. Keep the same Character, model and settings for every line of a project.
+
+## Fish design
+
+With `provider: "fish"`, the description allows up to 2,000 characters and the audition text must be 1 to 150 characters. Three WAV auditions cost 2 credits total, charged once per request. Defaults: `guidance_scale: 2`, `instruct_guidance_scale: 0`, `speed: 1`, `num_step: 32`; an optional seed is supported. Start with defaults. For Hebrew use `language_code: "he-IL"` and full niqqud on every spoken word.
+
+```json
+{"provider":"fish","prompt":"Warm Israeli female narrator, expressive modern Hebrew, clear diction and an easy conversational pace.","text":"שָׁלוֹם, אֵיזֶה כֵּיף שֶׁאַתֶּם כָּאן. הַיּוֹם נַתְחִיל בְּסִפּוּר קָטָן.","language_code":"he-IL"}
+```
+
+Fish candidate IDs are temporary. Save the selected Creative Claw preview using `manage_character({voice_preview_id})`; this creates a private voice and a Drama 3 Character option. The Character retains its other model voices. Accepted saves with an unknown outcome must not be retried automatically.

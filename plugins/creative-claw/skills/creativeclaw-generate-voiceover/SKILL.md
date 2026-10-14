@@ -17,7 +17,7 @@ Read [shared execution guidance](references/workflow-basics.md) before tools. Th
 - Existing Character voice (cloned, designed or stock): find the Character with `list_characters` and pass `character_id`. Do not clone or design again.
 - Stock voice: fetch the selected model's current `get_model_params` voice catalog and use its exact `voice_id`. For more Cartesia or ElevenLabs choices, call `get_model_params` again with `include_voice_catalog: true`, or read the public Markdown catalog linked in `voiceCatalog.extendedCatalogMarkdownUrl`. Never pass both selectors.
 - Change who is speaking in an existing speech recording while keeping the performance: call `generate_speech` with `model: "speech/cartesia-voice-changer"`, `audio_url` = the workspace speech audio, and a Cartesia `voice_id` or a Character's `character_id`. Pass no `text`.
-- New voice from a description (no recording): call `design_voice({ prompt })` with age, accent, timbre, pace and attitude, never a real person's identity. It returns three auditions; after the user picks, save it with `manage_character({ id | title, voice_preview_id })`, passing the audition's `preview_id` as `voice_preview_id`. Speak with `generate_speech({ character_id })` using `speech/elevenlabs-v4`, or `speech/gemini-3.8-flash-tts` for `provider: "google"`. If the save hits the limit, offer `replace_voice_option_id`; never quote plan prices. For a stock voice use `manage_character({ id, voice_model, voice_id })`. Details: [voice design](references/voices/voice-design.md).
+- New voice from a description (no recording): call `design_voice({ prompt })` with age, accent, timbre, pace and attitude, never a real person's identity. It returns three auditions; after the user picks, save it with `manage_character({ id | title, voice_preview_id })`, passing the audition's `preview_id` as `voice_preview_id`. Speak with `generate_speech({ character_id })` using `speech/elevenlabs-v4`, or `speech/gemini-3.8-flash-tts` for `provider: "google"`, or `speech/fish-drama-3` for `provider: "fish"`. Fish auditions accept up to 150 characters and Hebrew requires full niqqud on every word. If the save hits the limit, offer `replace_voice_option_id`; never quote plan prices. For a stock voice use `manage_character({ id, voice_model, voice_id })`. Details: [voice design](references/voices/voice-design.md).
 
 ## Choose and load one model guide
 
@@ -29,6 +29,7 @@ Read [shared execution guidance](references/workflow-basics.md) before tools. Th
 | An ElevenLabs clone, steady read | [ElevenLabs v2](references/voices/elevenlabs-v2.md) |
 | An ElevenLabs clone, expressive delivery or dialogue | [ElevenLabs v4](references/voices/elevenlabs-v4.md) |
 | An explicitly requested v3 workflow | [ElevenLabs v3](references/voices/elevenlabs-v3.md) |
+| Directed Fish performances, private Fish clones, or multi-speaker scenes | [Fish Drama 3](references/voices/fish.md) |
 | HeyGen public voices or an existing HeyGen instant clone | [HeyGen Voice](references/voices/heygen.md) |
 | A named alternative or a specific dialect/voice match | [MiniMax and xAI](references/voices/alternatives.md) |
 
@@ -36,7 +37,7 @@ Default to ElevenLabs v4 for stock and designed ElevenLabs voices. Speak a clone
 
 ## Multiple speakers in one run
 
-ElevenLabs v4 supports up to 10 voices in one `generate_speech` request through `extras.dialogue`. Pass ordered turns with `speaker`, `text`, and either `voice_id` or a saved Character voice (cloned or designed) `character_id` for each turn. Google Flash and Flash-Lite TTS also support two-speaker dialogue. Read the selected model's current schema and [v4 dialogue examples](references/voices/elevenlabs-v4-guide.md) before submission. Omit top-level voice selectors and `text` for dialogue. If a cached OpenAI tool schema still requires `text`, pass `text: ""`.
+ElevenLabs v4 supports up to 10 voices in one `generate_speech` request through `extras.dialogue`. Pass ordered turns with `speaker`, `text`, and either `voice_id` or a saved Character voice (cloned or designed) `character_id` for each turn. Google Flash and Flash-Lite TTS also support two-speaker dialogue. Fish Drama 3 support ordered turns through the same `extras.dialogue` contract, with a Creative Claw limit of 16 speakers and 100 turns. Read the selected model's current schema and [v4 dialogue examples](references/voices/elevenlabs-v4-guide.md) before submission. Omit top-level voice selectors and `text` for dialogue. If a cached OpenAI tool schema still requires `text`, pass `text: ""`.
 
 For non-English, mixed-language or less common languages, read [language routing](references/voices/languages.md) before selecting a voice. A model supporting a language does not guarantee every stock voice has a native accent.
 
