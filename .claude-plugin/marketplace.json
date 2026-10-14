@@ -9,8 +9,8 @@
     {
       "name": "creative-claw",
       "source": "./plugins/creative-claw",
-      "description": "Make images, videos, voiceovers and music from a chat. Turn a product photo into a video, build UGC-style ads, product photoshoots and multi-shot films, clone or design voices, and keep characters consistent across shots. After adding, open the plugin's Connectors tab and sign in to Creative Claw.",
-      "version": "0.7.25",
+      "description": "AI image and video generation in chat: make images, videos, voiceovers, music and sound effects. Turn product photos into video ads for TikTok, Instagram Reels and YouTube Shorts, with image to video, text to video, text to speech and voice cloning. Build UGC ads, product photoshoots, consistent characters and multi-shot films for social media and marketing. After adding, open the plugin's Connectors tab and sign in to Creative Claw.",
+      "version": "0.7.26",
       "author": {
         "name": "Creative Claw Co."
       },
