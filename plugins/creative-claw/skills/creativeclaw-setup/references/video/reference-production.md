@@ -1,5 +1,7 @@
 # Reference-first video production
 
+For a request to preserve or copy an existing movement, use [motion transfer](motion-transfer.md) first. Keep the driving video as a separate reference alongside the appearance image; the image pipeline below does not replace it.
+
 ## Reference-first video pipeline
 
 Default for every new generative clip: one keyframe image per planned shot, so the video model animates visuals the user has seen instead of inventing them. A face, product, outfit or location that matters must come from an image: reuse one, or make it first. Tell the user how many images that is before making them. Skip them if the user asks for direct text-to-video or supplies a ready shot image. For existing footage, take the frames from the source instead: see [source edit](recipe-source-edit.md).

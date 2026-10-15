@@ -19,6 +19,8 @@ For a permanent watermark on a finished video or a sequence assembled from exist
 
 For worked production flows, read only the relevant recipe: [product ad](references/video/recipe-product-ad.md), [consistent Character scene](references/video/recipe-character-scene.md), or [source edit, person replacement and extension](references/video/recipe-source-edit.md). These explain asset preparation, shot prompting, assembly and output checks, without authorizing extra paid drafts.
 
+For “the same movement,” a copied performance, or a wardrobe variant that should retain an earlier animation, read [motion transfer](references/video/motion-transfer.md) before model selection or image preparation. Resolve the driving video first.
+
 ## Reference-first pipeline
 
 Unless the user asked for direct text-to-video, supplied a ready shot image, or is editing footage, follow this before `generate_video`. New clips start from one keyframe image per shot, so the video model animates images the user has seen instead of inventing the face, product, outfit or location: tell the user how many images that is before making them.

@@ -1,5 +1,7 @@
 # Kling 3.0 Motion Control Pro
 
+For a character copying an existing movement, start with [motion transfer](motion-transfer.md). Use the target appearance image and driving video; facial binding is optional for this simple performance-transfer workflow.
+
 ## Face/person swap workflow
 
 Prefer this model for a face/person swap or transferring a recorded performance. It generates a new video from an appearance image and driving performance, so exact preservation is not guaranteed. Honor an explicit model choice; H3 Max Recast remains an alternative for requested multi-person or multi-shot recasting.
