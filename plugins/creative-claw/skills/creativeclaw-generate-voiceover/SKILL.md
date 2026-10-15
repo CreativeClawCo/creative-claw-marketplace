@@ -13,7 +13,7 @@ Read [shared execution guidance](references/workflow-basics.md) before tools. Th
 
 ## Which voice
 
-- "Clone my voice", "use my recording", or an unsaved personal voice: load creativeclaw-clone-voice when available. If this skill is installed alone, read [the complete cloning workflow](references/voices/cloning.md). Obtain explicit consent, import privately, clone, test and save a reusable Character. Do not send source audio directly to ElevenLabs or Cartesia speech generation as a substitute for cloning.
+- "Clone my voice", "use my recording", or an unsaved personal voice: load creativeclaw-clone-voice when available. If this skill is installed alone, read [the complete cloning workflow](references/voices/cloning.md). Obtain explicit consent once, up front, import privately, clone right after the upload, test and save a reusable Character. Do not send source audio directly to ElevenLabs or Cartesia speech generation as a substitute for cloning.
 - Existing Character voice (cloned, designed or stock): find the Character with `list_characters` and pass `character_id`. Do not clone or design again.
 - Stock voice: fetch the selected model's current `get_model_params` voice catalog and use its exact `voice_id`. For more Cartesia or ElevenLabs choices, call `get_model_params` again with `include_voice_catalog: true`, or read the public Markdown catalog linked in `voiceCatalog.extendedCatalogMarkdownUrl`. Never pass both selectors.
 - Change who is speaking in an existing speech recording while keeping the performance: call `generate_speech` with `model: "speech/cartesia-voice-changer"`, `audio_url` = the workspace speech audio, and a Cartesia `voice_id` or a Character's `character_id`. Pass no `text`.

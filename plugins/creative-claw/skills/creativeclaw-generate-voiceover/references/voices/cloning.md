@@ -6,7 +6,13 @@ Without a consented recording, offer a designed voice instead ([voice design](vo
 
 Ask for at least 60 seconds, preferably 1 to 2 minutes, of natural solo speech. This is Creative Claw's quality recommendation, not a hard minimum shared by all providers. Use a quiet room, a consistent microphone position and a normal speaking voice. Include varied sentences, names and numbers in the intended language. Avoid music, other speakers, echo, clipping, heavy filters and long silences. A clean phone recording is fine.
 
-Explain which provider will process the recording: Cartesia by default, or ElevenLabs or Fish when the user chooses it. Obtain explicit confirmation that this is the user's voice or that the speaker authorized cloning and use. Do not infer permission from an uploaded file. Existing explicit consent for the same scoped use need not be requested again. Never call `clone_voice` or set `consent: true` before that confirmation.
+Ask for consent once, up front, in the same message as the recording request. Name the provider that will process it (Cartesia by default, or ElevenLabs or Fish when the user chooses it), quote this statement in full, and ask for the recording's language:
+
+> I own this recording or have permission to use it, and this is my voice or I have the speaker's explicit permission to clone it and generate speech in this workspace. I authorize Creative Claw and the supported voice providers I select through Creative Claw to process it for this purpose, and accept the [voice-cloning terms](https://creativeclaw.co/terms/#voice-cloning) and [privacy notice](https://creativeclaw.co/privacy/#voice-cloning).
+
+For example: "Reply 'I agree' and tell me the recording's language." One reply that agrees and names the language covers both. Skip the language question when the user already named it. If the recording is already attached, ask the same single question before cloning.
+
+Do not infer permission from an uploaded file. Never call `clone_voice` or set `consent: true` before that agreement. Once given, it is the explicit consent the upload results and `clone_voice` ask for: do not ask again after the upload, and do not ask separately whether it is the user's voice. Ask again only for a different speaker or recording, or when the user hesitates or withdraws.
 
 ## Private upload
 
@@ -32,7 +38,7 @@ Find an existing Character with `list_characters` when the user names one. Reuse
 }
 ```
 
-Call `clone_voice` with these arguments. Set `language` to the recording's language: it defaults to `en`, and Cartesia uses it right away. For an existing Character, use `character_id` instead of creating a new one. Cartesia is the default provider; pass `provider: "elevenlabs"` for an ElevenLabs clone, or `provider: "fish"` for a private Fish clone. The result is saved on the Character automatically, including for a new voice-only Character. No extra save operation is required.
+Call `clone_voice` with these arguments as soon as the upload returns the asset, with no message in between. Set `language` to the recording's language: it defaults to `en`, and Cartesia uses it right away. For an existing Character, use `character_id` instead of creating a new one. Cartesia is the default provider; pass `provider: "elevenlabs"` for an ElevenLabs clone, or `provider: "fish"` for a private Fish clone. The result is saved on the Character automatically, including for a new voice-only Character. No extra save operation is required.
 
 Cloning depends on the workspace's plan and clone capacity. If a tool reports a plan limit, relay its message and link. Replacing a Character's source invalidates its existing provider clones. Identify the Character and obtain explicit replacement direction first.
 
