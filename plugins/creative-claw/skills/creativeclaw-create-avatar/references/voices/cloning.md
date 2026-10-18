@@ -38,7 +38,7 @@ Find an existing Character with `list_characters` when the user names one. Reuse
 }
 ```
 
-Call `clone_voice` with these arguments as soon as the upload returns the asset, with no message in between. Set `language` to the recording's language: it defaults to `en`, and Cartesia uses it right away. For an existing Character, use `character_id` instead of creating a new one. Cartesia is the default provider; pass `provider: "elevenlabs"` for an ElevenLabs clone, or `provider: "fish"` for a private Fish clone. The result is saved on the Character automatically, including for a new voice-only Character. No extra save operation is required.
+Call `clone_voice` with these arguments as soon as the upload returns the asset, with no message in between. Set `language` to the recording's language: it defaults to `en`, and Cartesia uses it right away. For an existing Character, use `character_id` instead of creating a new one. Cartesia is the default provider; set `provider` to `elevenlabs` for an ElevenLabs clone, or to `fish` for a private Fish clone. The result is saved on the Character automatically, including for a new voice-only Character. No extra save operation is required.
 
 Cloning depends on the workspace's plan and clone capacity. If a tool reports a plan limit, relay its message and link. Replacing a Character's source invalidates its existing provider clones. Identify the Character and obtain explicit replacement direction first.
 
