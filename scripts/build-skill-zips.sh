@@ -17,6 +17,7 @@ focused_skill_names=(
   creativeclaw-build-film
   creativeclaw-product-photoshoot
   creativeclaw-create-ugc-ad
+  creativeclaw-ad-variations
   creativeclaw-submit-feedback
   creativeclaw-clone-voice
   creativeclaw-render-html

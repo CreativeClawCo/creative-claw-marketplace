@@ -58,4 +58,4 @@ Write and review the ad in the user's language. Preserve approved product wordin
 
 ## Review
 
-Check the first three seconds, natural delivery, product visibility, claim accuracy, continuity, audio intelligibility, pacing, safe text areas, and CTA clarity. Save multiple hooks as distinct assets only when requested. Set the Film to final only after approval.
+Check the first three seconds, natural delivery, product visibility, claim accuracy, continuity, audio intelligibility, pacing, safe text areas, and CTA clarity. Save multiple hooks as distinct assets only when requested; for a set of hook, voiceover or caption variations of one ad, use `creativeclaw-ad-variations`. Set the Film to final only after approval.

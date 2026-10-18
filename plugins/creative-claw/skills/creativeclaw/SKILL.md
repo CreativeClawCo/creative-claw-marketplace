@@ -47,6 +47,7 @@ Purchases and plans are handled on the Creative Claw website, not in chat. Do no
 | Plan a script, shot list, or storyboard | `creativeclaw-plan-video` |
 | Produce a complete multi-shot film | `creativeclaw-build-film` |
 | Create a creator-style product ad | `creativeclaw-create-ugc-ad` |
+| Make a set of ad variations from one product shot or existing ad (new hooks, voiceovers, voices or captions) | `creativeclaw-ad-variations` |
 | Generate narration, dialogue, or speech | `creativeclaw-generate-voiceover` |
 | Design a new synthetic voice from a description | `creativeclaw-generate-voiceover` (`design_voice`) |
 | Generate a score, music bed, sting, jingle, theme, or song | `creativeclaw-generate-music` |
