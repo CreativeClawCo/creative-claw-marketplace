@@ -56,7 +56,7 @@ Preserve approved wording, quoted copy, dialogue, timecodes, and model-specific 
 
 ## Cost only when relevant to the user
 
-Use `estimate_generation` only when the user asks about cost, balance, affordability, or gives a budget constraint. Pass `operation`, the selected `model`, and the exact planned generation fields inside `params`. Supported operations are `image`, `video`, `speech`, `audio`, and `html_video`; omit `model` for `html_video`. Do not invent estimates for editing, assembly, or cloning operations this tool does not cover.
+Use `estimate_generation` only when the user asks about cost, balance, affordability, or gives a budget constraint. Provide `operation`, the selected `model`, and the exact planned generation fields inside `params`. Supported operations are `image`, `video`, `speech`, `audio`, and `html_video`; omit `model` for `html_video`. Do not invent estimates for editing, assembly, or cloning operations this tool does not cover.
 
 An estimate is information for the user. Answer an estimate-only question without generating; when generation is already requested and fits the user's constraints, share the estimate and continue. State that final cost is confirmed after generation. For a batch, total the planned requests without treating each request's balance check as a separate budget allocation. Identify excluded processing costs and distinguish proposed costs from reported charges/refunds. An estimate does not reserve credits or guarantee a strict maximum charge; disclose that limitation when an exact ceiling is material. Never silently change an explicitly selected model, duration, or quality to fit a budget.
 

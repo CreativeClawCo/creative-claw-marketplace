@@ -34,7 +34,7 @@ For ads, branded content, character work, and multi-clip sequences:
 
 1. Break the concept into short shots with one main action each.
 2. Make each keyframe separately from the shared anchors (same image model, 16:9 or 9:16). Never pass a labeled grid, contact sheet, panels, captions, or prompt text to the video model.
-3. People, several subjects or big motion: pass `image_urls` = [keyframe, identity anchor, product anchor] and cite them with `<IMAGE_REF_N>`. An exact opening such as a product hero: pass the keyframe as `image_url` with no `image_urls` or `character_id`.
+3. People, several subjects or big motion: provide `image_urls` = [keyframe, identity anchor, product anchor] and cite them with `<IMAGE_REF_N>`. An exact opening such as a product hero: pass the keyframe as `image_url` with no `image_urls` or `character_id`.
 4. For the next clip, return to the same anchors and look line. The last frame of clip N is only an extra composition cue for clip N+1, never a replacement for the anchors.
 
 This reduces visual drift and makes revisions local to one shot.
@@ -62,7 +62,7 @@ The weak version invites the model to reinterpret the already-approved frame.
 
 ### End frame
 
-Google's underlying Omni model supports first-to-last interpolation, but Creative Claw's exposed fields can change. Pass `last_frame_url` only when `get_model_params` returns an end-frame field for the current route. Otherwise use Seedance 2.5 or MiniMax H3 Max for controlled first-to-last generation.
+Google's underlying Omni model supports first-to-last interpolation, but Creative Claw's exposed fields can change. Provide `last_frame_url` only when `get_model_params` returns an end-frame field for the current route. Otherwise use Seedance 2.5 or MiniMax H3 Max for controlled first-to-last generation.
 
 When supported, use two frames with the same ratio, subject identity, and plausible spatial continuity. Describe the transition, not two separate scenes:
 

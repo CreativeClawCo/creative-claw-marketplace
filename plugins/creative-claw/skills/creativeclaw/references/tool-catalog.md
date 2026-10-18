@@ -24,7 +24,7 @@ For a model comparison, call `generate_image` once per selected model with the s
 
 | Tool              | Use                                                                                                                 |
 | ----------------- | ------------------------------------------------------------------------------------------------------------------- |
-| `search_examples` | Browse summaries by query, output type, exact model ID, tags, and cursor. Pass `id` (id or slug) to load one example in full. |
+| `search_examples` | Browse summaries by query, output type, exact model ID, tags, and cursor. Provide `id` (id or slug) to load one example in full. |
 
 Search only when the user asks for examples, prompt ideas, or the catalog; see [examples guidance](workflows/examples.md). Do not search before every generation. Variations and user-supplied style references stay with the generation skill.
 
@@ -74,12 +74,12 @@ Read `platform-upload.md` before choosing an import route.
 | `manage_character`                        | Update a Character by `id`: description, reference image, stock voice, or a designed voice with `voice_preview_id`. |
 | `delete_character`                        | `{ id, confirm: true }` permanently deletes a Character and its saved voices, only on explicit request. |
 | `list_characters`                         | Find reusable Characters, their IDs, and saved voice options.                                     |
-| `design_voice`                            | Create a new synthetic voice from a description, no recording needed. ElevenLabs by default; `provider: "google"` for Google. Returns three auditions. Save the pick with `manage_character({ id, voice_preview_id })`, or `create_character({ title, voice_preview_id })` for a new Character. At the saved-voice limit, pass `replace_voice_option_id` to `manage_character` to replace an existing designed voice. |
-| `clone_voice`                             | Clone a consenting speaker's recording with Cartesia (default) or ElevenLabs (`provider: "elevenlabs"`). Attaches to `character_id`, or creates a voice-only Character when none is given. Pass `consent: true` only after the speaker's explicit agreement. |
+| `design_voice`                            | Create a new synthetic voice from a description, no recording needed. ElevenLabs by default; `provider: "google"` for Google. Returns three auditions. Save the pick with `manage_character({ id, voice_preview_id })`, or `create_character({ title, voice_preview_id })` for a new Character. At the saved-voice limit, provide `replace_voice_option_id` to `manage_character` to replace an existing designed voice. |
+| `clone_voice`                             | Clone a consenting speaker's recording with Cartesia (default) or ElevenLabs (`provider: "elevenlabs"`). Attaches to `character_id`, or creates a voice-only Character when none is given. Provide `consent: true` only after the speaker's explicit agreement. |
 | `create_film_project`                     | Create a multi-shot Film project.                                                                 |
 | `update_film_project`                     | Save script, shots, storyboards, clips, audio, and approval state.                                |
 | `get_film_project` / `list_film_projects` | Inspect Film projects.                                                                            |
-| `assemble_film`                           | Concatenate every rendered shot clip into a first cut. By default the project's narration track replaces the shots' audio; pass `with_narration: false` to keep dialogue and sound from the shots. |
+| `assemble_film`                           | Concatenate every rendered shot clip into a first cut. By default the project's narration track replaces the shots' audio; provide `with_narration: false` to keep dialogue and sound from the shots. |
 
 ## Media processing
 

@@ -118,7 +118,7 @@ Use `extras.output_format: "mp3_44100_128"` by default. Use a higher-bitrate MP3
 
 ## Multilingual speech
 
-Write the script in the target language and pass `extras.language_code` when the runtime exposes it. The current Creative Claw schema includes English, Hebrew, Spanish, French, German, Italian, Portuguese, Arabic, Hindi, Mandarin, Japanese, and Korean.
+Write the script in the target language and provide `extras.language_code` when the runtime exposes it. The current Creative Claw schema includes English, Hebrew, Spanish, French, German, Italian, Portuguese, Arabic, Hindi, Mandarin, Japanese, and Korean.
 
 The selected voice's accent can carry into another language. Test names, numbers, and brand terms before generating a long script. Do not promise native pronunciation from an American voice without listening.
 

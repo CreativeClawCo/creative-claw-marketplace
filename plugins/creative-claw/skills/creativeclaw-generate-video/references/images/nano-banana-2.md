@@ -58,7 +58,7 @@ the pose from Image 1. Preserve everything else in Image 1.
 
 Say both what to inherit and what not to inherit. A style reference should not silently contribute its people, objects, text, or layout.
 
-For a saved Character, pass `character_id`; its image becomes the visual anchor when no explicit `image_url` is supplied. Add other references only when they provide a distinct role.
+For a saved Character, provide `character_id`; its image becomes the visual anchor when no explicit `image_url` is supplied. Add other references only when they provide a distinct role.
 
 ## Prompt structure
 

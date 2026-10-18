@@ -40,7 +40,7 @@ After choosing, use the corresponding focused skill for exact prompting and refe
 - `image_url` is the primary source/edit image.
 - Additional references are model-specific. Inspect `get_model_params`; many supported image models accept `extras.image_urls`.
 - Theme reference images describe visual language. Tell the model which attributes to borrow—palette, lighting, composition, material, or typography—and which subject matter not to copy.
-- For a saved Character, pass `character_id` instead of manually repeating its image and description. With an explicit `image_url`, the Character image is not added; put it in `extras.image_urls` yourself.
+- For a saved Character, provide `character_id` instead of manually repeating its image and description. With an explicit `image_url`, the Character image is not added; put it in `extras.image_urls` yourself.
 - Video keyframes: one image model for every keyframe in the project (default `image/nano-banana-2`); a Character sheet made with another model is still a valid anchor. Use `aspect_ratio` = the video's ratio, anchors in `image_url` + `extras.image_urls`, one full-bleed frame with no text.
 - Use a durable Creative Claw URL. Never pass a local path or private attachment URL to a URL-only field.
 

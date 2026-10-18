@@ -38,18 +38,18 @@ For one-off matching from an authorized reference recording, use `speech/chatter
 
 ## Cartesia Sonic
 
-Use cartesia-sonic model reference for the full stock and Character voice workflow. Call `get_model_params({ model: "speech/cartesia-sonic" })` for the curated Featured shortlist and exact IDs. Any other exact public Cartesia Voice Library ID is also supported. Pass `voice_id` for stock speech or `character_id` for a private clone, never both.
+Use cartesia-sonic model reference for the full stock and Character voice workflow. Call `get_model_params({ model: "speech/cartesia-sonic" })` for the curated Featured shortlist and exact IDs. Any other exact public Cartesia Voice Library ID is also supported. Provide `voice_id` for stock speech or `character_id` for a private clone, never both.
 
 ## ElevenLabs Multilingual v2
 
-Use the elevenlabs-v2 model reference for a steady read from an ElevenLabs clone. Use v4 for stock voices and general professional narration, and Cartesia Sonic for a Cartesia clone. V2 detects language from text and has no `language_code`. Pass `extras.voice_settings` with stability, similarity_boost, style, use_speaker_boost and speed. V2 supports `extras.previous_text` and `next_text` for continuity. It is a TTS model, not PVC. Recommend 1 to 2 minute recordings when creating IVC: 1 minute minimum recommended, 3 minutes maximum recommended; these are quality guidelines.
+Use the elevenlabs-v2 model reference for a steady read from an ElevenLabs clone. Use v4 for stock voices and general professional narration, and Cartesia Sonic for a Cartesia clone. V2 detects language from text and has no `language_code`. Provide `extras.voice_settings` with stability, similarity_boost, style, use_speaker_boost and speed. V2 supports `extras.previous_text` and `next_text` for continuity. It is a TTS model, not PVC. Recommend 1 to 2 minute recordings when creating IVC: 1 minute minimum recommended, 3 minutes maximum recommended; these are quality guidelines.
 
 ## ElevenLabs v4
 
 - Read [the v4 guide](../voices/elevenlabs-v4-guide.md) and choose a suitable public `voice_id` or saved `character_id`. Omitting both uses the server's stock default.
 - Use sparse audible tags such as `[whispers]`, `[excited]`, `[laughs]`, or `[long pause]`. Test sound effects and pronunciation.
 - V4 supports Stability and Similarity in `extras.voice_settings`; it does not support speed, style, speaker boost, or SSML in this route.
-- For one request with several speakers, pass `extras.dialogue` as ordered turns, each with a voice selector. Omit top-level `text`, or pass `text: ""` if a cached client schema requires it.
+- For one request with several speakers, provide `extras.dialogue` as ordered turns, each with a voice selector. Omit top-level `text`, or provide `text: ""` if a cached client schema requires it.
 - V3 is legacy. Use it only when the user asks for it, with its [legacy guide](../voices/elevenlabs-v3.md) for its distinct settings.
 
 ## Voice cloning and design

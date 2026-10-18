@@ -8,7 +8,7 @@ Confirm availability with `list_models({ category: "audio" })` or `get_model_par
 
 Use Creative Claw tools and account credits. The upstream CLI, API-key setup, Mureka 8 recommendation, multi-choice defaults, and automatic generation retries do not apply here. No customer Mureka API key or separate installation is needed.
 
-Pass `model`, `prompt`, `lyrics`, and `force_instrumental` directly to `generate_music`, not in `extras`. The live tool and model schemas govern supported inputs.
+Provide `model`, `prompt`, `lyrics`, and `force_instrumental` directly to `generate_music`, not in `extras`. The live tool and model schemas govern supported inputs.
 
 | Desired output | Inputs | Prompt limit | Credits per track |
 | --- | --- | --- | --- |
@@ -18,7 +18,7 @@ Pass `model`, `prompt`, `lyrics`, and `force_instrumental` directly to `generate
 
 All modes require a nonempty `prompt` and produce one MP3. The model chooses length, up to 4 minutes 30 seconds for instrumentals or 5 minutes 30 seconds for vocal songs. Timing described in prose is a creative request, not a duration guarantee. Use ElevenLabs Music for exact duration or short stings.
 
-`lyrics` together with `force_instrumental: true` is invalid. Do not pass `music_length_ms`, `output_format`, `seed`, `n`, image or audio references, vocal or melody IDs, or inference controls. Reference uploads, singing voice cloning, stems, extension, and section editing from the vendor skill are not exposed by this integration.
+`lyrics` together with `force_instrumental: true` is invalid. Do not provide `music_length_ms`, `output_format`, `seed`, `n`, image or audio references, vocal or melody IDs, or inference controls. Reference uploads, singing voice cloning, stems, extension, and section editing from the vendor skill are not exposed by this integration.
 
 ## Write the musical brief
 

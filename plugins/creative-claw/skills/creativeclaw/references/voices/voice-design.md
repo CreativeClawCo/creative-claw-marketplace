@@ -36,7 +36,7 @@ Call `generate_speech({ character_id, model, text })`:
 - Google design → `speech/gemini-3.8-flash-tts`.
 - Fish design → `speech/fish-drama-3`.
 
-Pass `voice_option_id` to pick a saved voice that is not the preferred one; `list_characters` shows the options. Keep the same Character, model and settings for every line of a project.
+Provide `voice_option_id` to pick a saved voice that is not the preferred one; `list_characters` shows the options. Keep the same Character, model and settings for every line of a project.
 
 ## Fish design
 

@@ -31,7 +31,7 @@ Infer the rest (ratio, length, platform) from the request; ask only for what is 
 
 What the variations differ in: the hook angle by default; the voiceover copy, or the voice and delivery when the script is fixed. Change one of these per set so results compare cleanly. A face speaking on screen keeps its own audio: re-voicing it breaks lip sync, so give that ad new hooks, not a new voiceover.
 
-Burn captions onto every variation with `add_subtitles` unless the user says no: the hook then reads on mute. Pass `language` when the ad is not in English, and leave styling fields out unless the user asked for a look.
+Burn captions onto every variation with `add_subtitles` unless the user says no: the hook then reads on mute. Provide `language` when the ad is not in English, and leave styling fields out unless the user asked for a look.
 
 ## 3. Write the set
 

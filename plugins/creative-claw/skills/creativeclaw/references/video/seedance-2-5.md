@@ -53,8 +53,8 @@ Choose the mode from the intended relationship to the source video:
 | Mode | Use when | Ratio and duration |
 | --- | --- | --- |
 | `reference` | Creating a new video guided by reference images, video, or audio. | A fixed ratio and explicit duration are allowed. |
-| `edit` | Modifying content inside a source video while retaining its timeline. | Pass `aspect_ratio: "auto"` and omit duration or use `duration: "auto"`. The source timeline is preserved. |
-| `extend` | Continuing before or after a source video boundary. | Pass `aspect_ratio: "auto"` and a numeric continuation duration from 4-30 seconds. |
+| `edit` | Modifying content inside a source video while retaining its timeline. | Provide `aspect_ratio: "auto"` and omit duration or use `duration: "auto"`. The source timeline is preserved. |
+| `extend` | Continuing before or after a source video boundary. | Provide `aspect_ratio: "auto"` and a numeric continuation duration from 4-30 seconds. |
 | `auto` | Letting Seedance infer the task from the prompt. | Use only with `aspect_ratio: "auto"`. For edit-style prompts with a source video, set `edit` explicitly so Creative Claw can validate the locked-duration contract before charging. |
 
 For `edit` and `extend`, include at least one `video_urls` entry and state the operation explicitly in the prompt, for example `Edit @Video1...` or `Extend @Video1 forward...`. The mode does not replace prompt direction. Creative Claw uses `omni_reference_task_type` to normalize locked fields; state the operation explicitly in the prompt as well. If the prompt looks like an edit but the mode is omitted/`auto`, validation rejects the request before charging with instructions to choose `edit` or `reference`.

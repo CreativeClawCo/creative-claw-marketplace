@@ -60,11 +60,11 @@ render_html_image({
 
 `generate_html_video` hands the brief to Creative Claw's own cloud agent. It writes the composition with the HyperFrames best practices built in (seekable timelines, text fit, safe zones, audio mixing, beat-synced motion), generates the images, voiceover, music and sound effects the brief calls for, checks the result, and renders the finished MP4 with audio. You write no HTML and read none of the composition references below. Use it when the user explicitly asks for that kind of video: motion graphics, kinetic typography, an animated explainer or promo, a lyric video, or animated captions and titles over supplied media.
 
-1. Write the brief as `prompt`: what the video is for, the exact on-screen copy and narration script when the user gave them, the visual style, the music, and the ending. Say what matters most. Pass `duration`, `width` and `height`.
+1. Write the brief as `prompt`: what the video is for, the exact on-screen copy and narration script when the user gave them, the visual style, the music, and the ending. Say what matters most. Provide `duration`, `width` and `height`.
 2. Pass the user's own images, footage, audio and logos as `reference_assets`, each with a `description` of its role. Import local or attached media first.
 3. To start from an existing project instead of a blank one, also pass it as `project_url` (a public ZIP, such as the `zipUrl` of a ZIP example from `search_examples`) or `project_asset_id` (a ZIP in the workspace). It is unpacked as the starting project and the agent builds on it, keeping its scenes and motion and changing what the brief asks. Pass that project's own `duration`, `width` and `height` unless the user wants them changed. This is how to turn a template into the user's video, or to continue a project the user edited elsewhere.
 4. Set `effort` to what the user asks for: `light` for simple changes and basic videos, `medium` (default) for most videos, `high` for complex or polished work. Higher effort is slower and costs more. Do not change it silently.
-5. `media_budget_credits` caps what the agent may spend on generated media in the turn (default 200). Pass `0` when the user wants no generated media, or a lower number when they set a limit. The agent is told its budget and plans around it.
+5. `media_budget_credits` caps what the agent may spend on generated media in the turn (default 200). Provide `0` when the user wants no generated media, or a lower number when they set a limit. The agent is told its budget and plans around it.
 6. The call returns a `cloud_project_id` and a turn takes several minutes. The video card follows progress on its own, then plays the video and offers the download and a Request changes box. One call gives one card for the whole turn, so call nothing to wait.
    - In Review mode the turn does not start: the card shows the request (prompt, assets, effort, media budget, estimated cost) and the result says `status: "awaiting_approval"`. Tell the user it is ready to review and that Generate in the card starts it. One call is enough for the request.
    - `check_job` with the `cloud_project_id` as `job_id` is for you, not the user: it returns the state, the video `url`, the agent's summary, the final cost and the media it generated, and shows the user nothing; the video card stays their view. Call it when you need the outcome to answer or continue, never in a loop.
@@ -89,8 +89,8 @@ Write and render the HTML yourself (next section) only when the user supplied HT
 
 Choose the source:
 
-- **Single HTML (default):** pass `html` for short, self-contained motion.
-- **Full project ZIP:** only for a ZIP example selected from `search_examples` or a HyperFrames project the user already has. Pass `project_url` for an unchanged public ZIP, or `project_asset_id` for an uploaded or edited one. Read [project packaging](references/project-packaging.md). Complexity alone is not a reason to start a ZIP project.
+- **Single HTML (default):** provide `html` for short, self-contained motion.
+- **Full project ZIP:** only for a ZIP example selected from `search_examples` or a HyperFrames project the user already has. Provide `project_url` for an unchanged public ZIP, or `project_asset_id` for an uploaded or edited one. Read [project packaging](references/project-packaging.md). Complexity alone is not a reason to start a ZIP project.
 
 To find a starting point, call `search_examples` with `render_type: "html_video"`, then load one selected result with `search_examples({ id })`. Read [example discovery](references/example-discovery.md). A generative prompt is not HTML.
 

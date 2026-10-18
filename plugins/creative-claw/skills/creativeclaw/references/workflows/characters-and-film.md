@@ -30,7 +30,7 @@ Preserve this exact multi-view instruction. Inspect facial identity and wardrobe
 | `generate_video`  | Appends the saved image to `image_urls` as a reference, never a start frame. Use it in reference mode; omit it with `image_url`/`last_frame_url` (the server rejects that mix). |
 | `generate_speech` | Uses the Character's saved voice for the chosen model: designed ElevenLabs → v4; Google-designed → `speech/gemini-3.8-flash-tts`; Cartesia clone → `speech/cartesia-sonic`; ElevenLabs clone → v2 (steady) or v4 (expressive, dialogue); stock → its saved model. |
 
-Pass `character_id` for saved identity context. For `generate_image`, when a keyframe or edit canvas already occupies `image_url`, add the Character image yourself in `extras.image_urls`; it is not inserted automatically.
+Provide `character_id` for saved identity context. For `generate_image`, when a keyframe or edit canvas already occupies `image_url`, add the Character image yourself in `extras.image_urls`; it is not inserted automatically.
 
 ## Film approval pipeline
 
