@@ -40,11 +40,11 @@ One connection to Creative Claw's MCP server gives the skills live model discove
 | **Image**         | `generate_image` (generate, edit, or repeat across models for comparison), `load_image`                             |
 | **Video**         | `generate_video`, `check_job`                                                                                       |
 | **Speech**        | `generate_speech`, `design_voice`, `clone_voice`, `transcribe`, `isolate_audio`                                     |
-| **Media editing** | `remove_background`, `upscale_media`, `trim_video`, `cut_and_reframe_video`, `scale_video`, `add_subtitles`, `extract_frames`, `merge_media` |
+| **Media editing** | `remove_background`, `upscale_media`, `trim_video`, `cut_and_reframe_video`, `scale_video`, `add_subtitles`, `extract_frames`, `merge_media`, `add_audio_to_video`, `overlay_images`, `stitch_clips` |
 | **Models**        | `list_models`, `get_model_params`, `search_examples`                                                                |
 | **Assets**        | `search_assets`, `update_asset`, `delete_asset`, `upload_asset`, `import_media`, `get_upload_url`, `confirm_upload` |
 | **Brand themes**  | `get_theme`, `list_themes`, `update_theme`                                                                          |
-| **Characters**    | `manage_character`, `list_characters`                                                                               |
+| **Characters**    | `create_character`, `manage_character`, `delete_character`, `list_characters`                                      |
 | **Films**         | `create_film_project`, `update_film_project`, `get_film_project`, `list_film_projects`, `assemble_film`             |
 | **Feedback**      | `submit_feedback`                                                                                                   |
 | **Cost and account** | `estimate_generation`, `manage_account`; `get_credits_balance` where the client exposes it                        |

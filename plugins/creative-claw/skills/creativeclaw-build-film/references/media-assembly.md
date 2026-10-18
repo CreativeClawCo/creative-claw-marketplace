@@ -8,7 +8,7 @@ Each assembly job is its own tool. Use direct Creative Claw asset URLs or other 
 | --- | --- | --- |
 | Replace a video's audio, or layer a track over it | `add_audio_to_video` | `video_url`, `audio_url`; optional `audio_mode` (`replace` default, or `mix`), `original_volume`, `added_volume`, `start_offset` |
 | Join full videos end to end | `merge_media` | Ordered `video_urls`; optional `video_fit`, `canvas_video_index`, `pad_color` |
-| Join audio files end to end | `merge_media` | Ordered `audio_urls`; optional `audio_format` |
+| Join audio files end to end | `merge_media` | Ordered `audio_urls`; optional `audio_format`, `crossfade_seconds` (0–30), `normalize_loudness` |
 | Burn one or more fixed image watermarks onto a finished video | `overlay_images` | `video_url`, `overlays` |
 | Make a video from ordered existing still images and video clips, with optional audio | `stitch_clips` | `clips`; optional `audio`, `content_fit` |
 
@@ -56,7 +56,7 @@ To let added audio run past the end of the clip, use `stitch_clips` with that on
 
 1. Keep the full ordered list of intended segments.
 2. Submit the merge and resolve its job through `check_job`.
-3. If completion returns `continuationRequired: true`, submit `merge_media({ audio_urls: nextAudioUrls })` using the returned list exactly. It places the completed prefix first and the remaining original clips afterward.
+3. If completion returns `continuationRequired: true`, submit `merge_media({ audio_urls: nextAudioUrls })` using the returned list exactly, with the same `audio_format`, `crossfade_seconds` and `normalize_loudness` settings. It places the completed prefix first and the remaining original clips afterward.
 4. Resolve the new job and repeat only while continuation is requested. Never resend the already merged original prefix alongside its merged output.
 5. Verify all intended segments appear in order and the final duration covers the complete narration before delivery.
 

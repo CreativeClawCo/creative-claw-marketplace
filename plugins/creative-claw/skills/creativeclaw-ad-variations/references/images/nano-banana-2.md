@@ -1,0 +1,154 @@
+# Creative Claw, Nano Banana 2
+
+Read [shared execution guidance](../workflow-basics.md) once per task before using tools. It covers existing authorization, model discovery, optional cost checks, imports, and recovery.
+
+Use `image/nano-banana-2`, publicly named Nano Banana 2, as Creative Claw's default for most generation and editing, including targeted corrections that should preserve the existing scene. For a localized edit, keep the source aspect ratio unless reframing is requested, identify the small region to change, and inspect protected details afterward. Exact preservation outside the edited region requires compositing that region back into the original; text instructions alone do not guarantee unchanged pixels.
+
+## Core workflow
+
+1. Define the deliverable, intended placement, aspect ratio, subject, composition, required text, style, and protected brand details.
+2. Search the Creative Claw asset library before creating replacements. Import any ChatGPT attachments or external references into durable Creative Claw URLs.
+3. If references are supplied, assign one explicit role to each: base scene, identity, product, wardrobe, logo, palette, layout, or style.
+4. Call `get_model_params({ model: "image/nano-banana-2" })` before generation when not already fetched for this task. Its current schema overrides remembered limits.
+5. Preserve exact quoted copy, reference labels, dialogue, timecodes, colors, and approved layout or edit constraints in the prompt.
+6. Honor requested resolution and output count. Otherwise generate one image at 1K for a specific direction, or the requested variations for exploration. Add a draft-to-final pass only when that workflow is requested or already authorized.
+7. Inspect text, identity, hands, product geometry, logos, reference roles, composition, and localized copy before calling the result finished.
+8. Prefer a focused edit of the selected result over restarting from text when only one element is wrong.
+
+## Current Creative Claw contract
+
+| Control | Use |
+| --- | --- |
+| `model` | Always `image/nano-banana-2`. |
+| `image_url` | Primary edit source or most important reference; becomes Image 1. |
+| `extras.image_urls` | Additional ordered references; become Image 2 onward. |
+| `aspect_ratio` | Output ratio, such as `1:1`, `4:5`, `9:16`, `16:9`, `21:9`, `3:2`, `4:3`, `3:4`, `2:3`, `4:1`, `1:4`, `8:1`, or `1:8`; `get_model_params` lists the current set. Don't combine it with the legacy `size` or `extras.aspect_ratio`. |
+| `extras.resolution` | `1K`, `2K`, or `4K`; default `1K`. The old `0.5K` tier is unavailable. |
+| `extras.thinking_level` | `minimal`, `medium`, or `high`; `medium` is the default. Use `minimal` for simple images when latency matters. |
+| `extras.enable_web_search` | Enable only when current real-world information is genuinely needed. |
+| `num_images` | 1,4. |
+| `output_format` | Use `png` for text/design and `jpeg` for ordinary photographic delivery. |
+
+Direct Google does not expose seed, safety_tolerance, sync_mode or limit_generations. Creative Claw charges fixed resolution prices of 16 credits at 1K (default), 24 at 2K and 36 at 4K per image, with no separate input, thinking or search surcharge. Thinking cannot be disabled.
+
+## Reference order and roles
+
+All reference-guided calls are image-edit operations in Creative Claw:
+
+- Pass the base image, layout, or most important visual anchor as `image_url`.
+- Pass additional references in `extras.image_urls` in deliberate order.
+- Refer to them in the prompt as `Image 1`, `Image 2`, `Image 3`, and so on.
+- The wrapper removes duplicate URLs while preserving first occurrence order.
+
+Nano Banana 2 supports up to 14 reference images in a workflow. For high-fidelity guidance, keep within the model's practical specialization of up to ten object references and four character references. More references are not automatically better.
+
+Write the role map before the edit:
+
+```text
+Image 1 is the base composition and room geometry.
+Image 2 is the exact product identity, proportions, materials, and logo.
+Image 3 is the lighting and color reference only.
+Image 4 is the exact character face and hair.
+
+Edit Image 1. Replace the object on the table with the product from Image 2.
+Preserve its geometry and logo exactly. Apply only the cool rim lighting and
+deep-blue palette from Image 3. Use the face and hair from Image 4 while keeping
+the pose from Image 1. Preserve everything else in Image 1.
+```
+
+Say both what to inherit and what not to inherit. A style reference should not silently contribute its people, objects, text, or layout.
+
+For a saved Character, pass `character_id`; its image becomes the visual anchor when no explicit `image_url` is supplied. Add other references only when they provide a distinct role.
+
+## Prompt structure
+
+Use natural sentences, not diffusion keywords, weighted tokens, or generic quality boosters.
+
+```text
+Purpose: [where and how the image will be used].
+Subject and action: [specific visible content].
+Environment: [location, surfaces, surrounding objects].
+Composition: [shot size, angle, subject placement, negative space].
+Lighting and camera: [light direction/quality, lens or medium].
+Visual language: [palette, materials, era, texture, art medium].
+Text: [exact quoted copy, language, typography, placement].
+References: [Image N → role and protected details].
+Preserve: [identity, geometry, logo, layout, colors].
+Output: [ratio, clean edge behavior, transparency if processed later].
+```
+
+One to three rich sentences are usually enough for a photograph or illustration. Use labeled sections for infographics, multilingual layouts, or many references.
+
+## Text, brands, and localization
+
+- Put every visible string in double quotes and preserve spelling, capitalization, punctuation, and language exactly.
+- Describe typography and placement separately for each string.
+- Keep visible copy to three to five short elements when possible.
+- Preserve every supplied brand name and hex color verbatim. Pair critical hex values with a color name.
+- For exact palette matching, include a clean color swatch as its own reference and label its role.
+- Generate one locale per image. Do not ask one asset to contain every translation unless the design genuinely requires it.
+- Inspect non-Latin text character by character. Regenerate or overlay legal, pricing, and other accuracy-critical text when exactness is mandatory.
+
+Phrase desired results positively. Replace “no blur” with “crisp focus throughout” and “no crowd” with “an empty plaza.” Use explicit preservation clauses for edits.
+
+## Generation examples
+
+General campaign image:
+
+```json
+{
+  "model": "image/nano-banana-2",
+  "aspect_ratio": "4:5",
+  "num_images": 2,
+  "prompt": "Premium editorial photograph for a skincare launch. A translucent cobalt serum bottle stands on wet black stone, centered slightly below the upper third with clean negative space above. Soft white key light from the left and a narrow blue rim light reveal the glass thickness and condensation. Refined, quiet, tactile, realistic materials; pristine frame.",
+  "extras": { "resolution": "1K" }
+}
+```
+
+Reference-guided product scene:
+
+```json
+{
+  "model": "image/nano-banana-2",
+  "image_url": "<base-scene-url>",
+  "prompt": "Image 1 is the base scene. Image 2 is the exact product. Image 3 is lighting only. Replace the placeholder in Image 1 with the product from Image 2, preserving its proportions, materials, colors, button placement, and logo. Apply only the soft amber edge light from Image 3. Preserve the camera, hands, tabletop, and background from Image 1.",
+  "extras": {
+    "image_urls": ["<product-url>", "<lighting-url>"],
+    "resolution": "2K"
+  }
+}
+```
+
+Localized poster:
+
+```text
+Vertical cultural festival poster with the exact headline "לילה של יצירה" in
+large cream display lettering at the top and "12 בספטמבר · תל אביב" in a clean
+sans-serif below. Midnight blue (#07152E), warm cream (#FFF3D6), and coral
+(#FF6B5E). Abstract paper-cut waves with generous spacing, right-to-left visual
+hierarchy, crisp legible Hebrew, no additional text.
+```
+
+## Grounded and technical visuals
+
+Enable `extras.enable_web_search: true` only for current facts, real-world landmarks, timely diagrams, or data-led imagery. Verify factual labels independently; image generation is not a source of record.
+
+Use `extras.thinking_level: "high"` for dense diagrams, spatial reasoning, complex multilingual layouts, or several reference roles. Omit it for simple product shots and portraits.
+
+## Iteration and quality gate
+
+When an output is close, make one bounded edit:
+
+```text
+Keep the subject, camera, composition, colors, typography, and every other
+element unchanged. Move the bottle 8% lower and increase the empty space above
+it. Do not add new objects or text.
+```
+
+Reject misspelled copy, changed logos, identity drift, reference-role leakage, extra objects, warped anatomy, contradictory shadows, incorrect aspect ratio, and smeared fine detail. Use `submit_feedback` for repeated model-specific failures or unclear controls, including the model ID, reference count, attempted task, and concrete defect.
+
+## Version 2.1 research
+
+Google's October 6, 2026 release retains the natural-language prompting workflow. Keep exact quoted visible text, explicit reference roles, and preservation clauses. Version 2.1 improves typography and multi-turn consistency and fixes tiling artifacts on 1:4, 4:1, 1:8 and 8:1 at 2K/4K. Keep inspecting those outputs.
+
+[Official model](https://ai.google.dev/gemini-api/docs/models/gemini-nano-banana-2.1), [prompting guide](https://ai.google.dev/gemini-api/docs/image-generation), [pricing](https://ai.google.dev/gemini-api/docs/pricing).

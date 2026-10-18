@@ -105,7 +105,8 @@ Omit a bookend that was not requested. Joining videos is a hard cut: no dissolve
 - `audio_mode: "mix"` keeps the clip's own sound and layers the new track over it, at the video's full length. Set `original_volume` and `added_volume` (0–1); about 0.3 keeps music under speech.
 - `stitch_clips` layers one audio track over the clips at full level, and the output can run past the last clip. Use it when the added audio should extend beyond the picture.
 - `merge_media` with `audio_urls` joins files end to end; it does not layer them.
-- There is no ducking, volume automation, or crossfade. Say which operation is missing before creating assets that cannot be assembled as asked.
+- Audio joins can crossfade: `crossfade_seconds` (0–30, try 5 for ambient music) overlaps adjacent tracks and shortens the output by that much per join, and `normalize_loudness: true` evens their levels first. Video joins never crossfade.
+- There is no ducking or volume automation. Say which operation is missing before creating assets that cannot be assembled as asked.
 
 ## Limits
 
