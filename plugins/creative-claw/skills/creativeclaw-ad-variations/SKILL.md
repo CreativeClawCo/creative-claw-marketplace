@@ -25,9 +25,9 @@ Infer the rest (ratio, length, platform) from the request; ask only for what is 
 
 | Variable | Each variation | Tools per variation |
 | --- | --- | --- |
-| Hook (default) | A new opening line, then the unchanged body copy, same voice | `generate_speech`, `merge_media` |
-| Voiceover copy | A whole new script of the same length, same voice | `generate_speech`, `merge_media` |
-| Voice or delivery (default when the script is fixed) | The same words in another voice or tone | `generate_speech`, `merge_media` |
+| Hook (default) | A new opening line, then the unchanged body copy, same voice | `generate_speech`, `add_audio_to_video` |
+| Voiceover copy | A whole new script of the same length, same voice | `generate_speech`, `add_audio_to_video` |
+| Voice or delivery (default when the script is fixed) | The same words in another voice or tone | `generate_speech`, `add_audio_to_video` |
 | Captions | The same audio with another caption look | `add_subtitles` |
 | Opening moment (existing ad with a speaking face, or audio that must stay) | A different moment of the same footage first, then the ad from the end of its hook | `cut_and_reframe_video` |
 
@@ -43,7 +43,7 @@ Change one variable per set so the results compare cleanly. Burn captions onto e
 ## 4. One estimate, one approval
 
 1. Estimate each kind of generation once with `estimate_generation`: the base clip (if any) with its exact model, duration and resolution, and one voiceover with the longest line (speech is priced by characters). Multiply the voiceover by N.
-2. Add the utility prices: `merge_media` `merge_audio_video` 2 credits, `add_subtitles` 6 credits per minute with a 2-credit minimum per video, `trim_video` 2 credits, `cut_and_reframe_video` 2 credits per started 30 s. A short variation is about 6 credits on top of the base clip (voiceover, merge, captions). Final costs are confirmed after each job.
+2. Add the utility prices: `add_audio_to_video` 2 credits, `add_subtitles` 6 credits per minute with a 2-credit minimum per video, `trim_video` 2 credits, `cut_and_reframe_video` 2 credits per started 30 s. A short variation is about 6 credits on top of the base clip (voiceover, merge, captions). Final costs are confirmed after each job.
 3. Show the plan in one message: a numbered table (number, name, the exact line, its length), what stays fixed, the base clip's model, ratio and length, and one total for the set.
 4. Approval, once for the whole set:
    - **Auto:** ask once, unless the user already said to go ahead without seeing the lines. Their yes covers every step in the plan; do not ask again per variation.
@@ -54,7 +54,7 @@ Change one variable per set so the results compare cleanly. Burn captions onto e
 
 1. Start the base clip (if any) and all N voiceovers together; they do not depend on each other. Resolve every job with `check_job`.
 2. Check each voiceover's duration against the footage. If one runs longer, tell the user and offer a shorter line; never cut words or freeze the last frame.
-3. Put each voiceover on the footage with `merge_media` `merge_audio_video`, `audio_mode: "mix"`, `original_volume: 0` and `start_offset` about 0.3 s: the old soundtrack is muted and the video keeps its full length (plain `replace` would end the video at the last word). Keep a base clip's ambience at `original_volume` about 0.2. Muting an existing ad's soundtrack also drops its music; add a bed with `creativeclaw-generate-music` only when asked.
+3. Put each voiceover on the footage with `add_audio_to_video`, `audio_mode: "mix"`, `original_volume: 0` and `start_offset` about 0.3 s: the old soundtrack is muted and the video keeps its full length (plain `replace` would end the video at the last word). Keep a base clip's ambience at `original_volume` about 0.2. Muting an existing ad's soundtrack also drops its music; add a bed with `creativeclaw-generate-music` only when asked.
 4. Opening-moment variations: one `cut_and_reframe_video` each. Cut on sentence boundaries from the transcript's word timings, and keep the source ranges from overlapping: for example the payoff line to the end first, then the start up to that line. Framing `{"mode":"center_crop"}`, `width` and `height` = the source size.
 5. Caption each finished variation with `add_subtitles`, then resolve the jobs.
 6. Name every result with `update_asset` (`Ad variation 1 - problem hook`) and one shared tag such as `ad-variations-<product>`.

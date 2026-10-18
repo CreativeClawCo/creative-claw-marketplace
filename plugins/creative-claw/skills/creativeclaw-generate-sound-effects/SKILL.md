@@ -27,7 +27,7 @@ Use the Music model for a complete musical track even though Sound Effects v2 ca
 4. Use `estimate_generation` with `operation: "audio"` only when the user asks about cost, balance, affordability, or sets a budget. An estimate-only request does not authorize generation.
 5. State consequential settings briefly, then call `generate_sound_effect`. Generate separate effects separately unless the requested output is genuinely one chronological sequence.
 6. Listen for source accuracy, timing, perspective, room character, transient shape, unwanted speech or music, clipping, noise, decay, and loop seams. Propose a focused revision when needed, but do not create an unrequested paid take.
-7. Return the permanent audio asset. Keep it separate until approved before adding it to video or another edit. Follow [media assembly](references/media-assembly.md): `merge_media` `merge_audio_video` with `audio_mode: "mix"` keeps the clip's own sound; the default `replace` discards it.
+7. Return the permanent audio asset. Keep it separate until approved before adding it to video or another edit. Follow [media assembly](references/media-assembly.md): `add_audio_to_video` with `audio_mode: "mix"` keeps the clip's own sound; the default `replace` discards it.
 
 ## Tool contract
 

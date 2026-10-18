@@ -61,7 +61,7 @@ When the user asks about cost or supplies a budget, estimate supported planned g
 
 Use the narration prepared for timing. Read [media-assembly.md](references/media-assembly.md) before combining tracks or clips.
 
-- Per-shot audio: `merge_media` `merge_audio_video` with `audio_mode: "mix"` keeps the shot's own sound and layers the new track at the clip's length (`original_volume`, `added_volume` 0–1; about 0.3 for music under speech). The default `audio_mode: "replace"` discards the shot's audio and ends at the shorter input. Save the result as the shot's `clipUrl` with `patch_shots`.
+- Per-shot audio: `add_audio_to_video` with `audio_mode: "mix"` keeps the shot's own sound and layers the new track at the clip's length (`original_volume`, `added_volume` 0–1; about 0.3 for music under speech). The default `audio_mode: "replace"` discards the shot's audio and ends at the shorter input. Save the result as the shot's `clipUrl` with `patch_shots`.
 - Project narration: set it with `update_film_project({ id, audio_url })`. `assemble_film` narration replaces every shot's audio; use `with_narration: false` when shots carry dialogue, then layer narration or music over the cut with `audio_mode: "mix"`.
 
 ## 5. Assemble and approve

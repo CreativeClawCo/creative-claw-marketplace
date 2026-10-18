@@ -24,7 +24,7 @@ Use generate_image with the selected model, a supported aspect ratio/resolution 
 
 Inspect face/eye shape, hairline, skin tone/detail, body proportions, hands, clothing construction and agreement across views. Check that references did not leak another person or background into the sheet. If inspection is unavailable, state that and ask the user to review, not assert verified likeness.
 
-Ask for approval of likeness and canonical state. Make requested corrections against the original identity anchors while preserving the approved master. Save the sheet with manage_character only after approval; keep the portrait and auxiliary views in the asset library with consistent names/tags.
+Ask for approval of likeness and canonical state. Make requested corrections against the original identity anchors while preserving the approved master. Save the sheet only after approval, with `create_character` for a new Character or `manage_character` with `id` for an existing one; keep the portrait and auxiliary views in the asset library with consistent names/tags.
 
 The current Character API stores one canonical image URL, not a list of every reference. Do not invent fields such as reference_images. Keep auxiliary image IDs/URLs in the project or asset records, resolving them when a downstream task needs them. A Character is a reusable record, not a trained model. Voice is optional and has separate consent.
 

@@ -2,7 +2,7 @@
 
 Use this as routing guidance. Tool availability varies by client; never recite the catalog to the user or invent a missing tool.
 
-Older clients may still show retired tools. Use `search_examples({ id })` instead of `get_example`, `manage_character({ id, delete: true })` instead of `delete_character`, and `generate_music` or `generate_sound_effect` instead of `generate_audio`.
+Older clients may still show retired tools. Use `search_examples({ id })` instead of `get_example`, and `generate_music` or `generate_sound_effect` instead of `generate_audio`. Older clients without `create_character` or `delete_character`: create with `manage_character` without `id`, and delete with `manage_character({ id, delete: true })`. Without `add_audio_to_video`, `overlay_images` or `stitch_clips`, see [assembly guidance](media-assembly.md).
 
 ## Models and generation
 
@@ -39,7 +39,7 @@ Search only when the user asks for examples, prompt ideas, or the catalog; see [
 | `create_template` / `update_template` | Save or change a reusable parameterized layout.                                              |
 | `render_template`   | Render a saved template with provided values.                                                                 |
 
-The image and video renderers are explicit-only choices. Use them when the user asks for HTML/CSS, HyperFrames, code-driven rendering, supplies HTML, or explicitly accepts the method. `render_html_image` can also make an exact text watermark graphic with a transparent background for `merge_media` `overlay_images`. A generic poster, social card, overlay, intro, or outro request is not sufficient by itself.
+The image and video renderers are explicit-only choices. Use them when the user asks for HTML/CSS, HyperFrames, code-driven rendering, supplies HTML, or explicitly accepts the method. `render_html_image` can also make an exact text watermark graphic with a transparent background for `overlay_images`. A generic poster, social card, overlay, intro, or outro request is not sufficient by itself.
 
 ## Themes
 
@@ -70,10 +70,12 @@ Read `platform-upload.md` before choosing an import route.
 
 | Tool                                      | Use                                                                                               |
 | ----------------------------------------- | ------------------------------------------------------------------------------------------------- |
-| `manage_character`                        | Create or update a Character (description, reference image, stock voice, or a designed voice with `voice_preview_id`). `delete: true` with `id` permanently deletes it and its saved voices, only on explicit request. |
+| `create_character`                        | Create a Character with `title` (description, reference image, stock voice, or a designed voice with `voice_preview_id`). |
+| `manage_character`                        | Update a Character by `id`: description, reference image, stock voice, or a designed voice with `voice_preview_id`. |
+| `delete_character`                        | `{ id, confirm: true }` permanently deletes a Character and its saved voices, only on explicit request. |
 | `list_characters`                         | Find reusable Characters, their IDs, and saved voice options.                                     |
-| `design_voice`                            | Create a new synthetic voice from a description, no recording needed. ElevenLabs by default; `provider: "google"` for Google. Returns three auditions. Save the pick with `manage_character({ id \| title, voice_preview_id })`. At the saved-voice limit, pass `replace_voice_option_id` there to replace an existing designed voice. |
-| `clone_voice`                             | Clone a consenting speaker's recording with Cartesia (default) or ElevenLabs (`provider: "elevenlabs"`). Attaches to `character_id`, or creates a voice-only Character when none is given. |
+| `design_voice`                            | Create a new synthetic voice from a description, no recording needed. ElevenLabs by default; `provider: "google"` for Google. Returns three auditions. Save the pick with `manage_character({ id, voice_preview_id })`, or `create_character({ title, voice_preview_id })` for a new Character. At the saved-voice limit, pass `replace_voice_option_id` to `manage_character` to replace an existing designed voice. |
+| `clone_voice`                             | Clone a consenting speaker's recording with Cartesia (default) or ElevenLabs (`provider: "elevenlabs"`). Attaches to `character_id`, or creates a voice-only Character when none is given. Pass `consent: true` only after the speaker's explicit agreement. |
 | `create_film_project`                     | Create a multi-shot Film project.                                                                 |
 | `update_film_project`                     | Save script, shots, storyboards, clips, audio, and approval state.                                |
 | `get_film_project` / `list_film_projects` | Inspect Film projects.                                                                            |
@@ -90,15 +92,18 @@ Read `platform-upload.md` before choosing an import route.
 | `scale_video`           | Resize, crop, or pad video.                                                               |
 | `add_subtitles`         | Burn captions into video.                                                                 |
 | `extract_frames`        | Extract one or more still frames from video.                                              |
-| `merge_media`           | Concatenate media, put audio on a video, burn transparent image watermarks onto finished video (`overlay_images`), or compose timed images and clips with optional audio (`compose_video`). See [assembly guidance](media-assembly.md). |
+| `merge_media`           | Join videos (`video_urls`) or audio files (`audio_urls`) end to end. See [assembly guidance](media-assembly.md). |
+| `add_audio_to_video`    | Put narration or music on a video, replacing or mixing with its sound.                     |
+| `overlay_images`        | Burn transparent image watermarks onto a finished video.                                  |
+| `stitch_clips`          | Stitch existing timed images and clips, with optional audio, into one video. Never generates footage; use `generate_video` for AI video. |
 | `transcribe`            | Timed transcript from `audio_url` or `video_url`. `video_url` also accepts YouTube, Google Drive, and public video pages (TikTok, Instagram, X/Twitter, Facebook, Vimeo, Twitch, Dailymotion, Loom, Reddit), best effort; import the file if a page cannot be fetched. |
 | `isolate_audio`         | Remove noise, music, and reverb from a voice recording. Queued; resolve with `check_job`. |
 
 Audio on video:
 
-- `merge_media` `merge_audio_video` replaces the clip's audio by default and ends at the shorter input.
+- `add_audio_to_video` replaces the clip's audio by default and ends at the shorter input.
 - With `audio_mode: "mix"` it keeps the clip's sound and layers the new track over it at the video's length. `original_volume` and `added_volume` (0–1) set each level; about 0.3 keeps music under speech.
-- `compose_video` layers one audio track over the clips at full level, and the result can run past the last clip.
+- `stitch_clips` layers one audio track over the clips at full level, and the result can run past the last clip.
 
 ## Account and billing
 

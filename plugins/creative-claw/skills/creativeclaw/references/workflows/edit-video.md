@@ -11,9 +11,10 @@ Preserve the original and create clearly named derivatives. Distinguish determin
 | Burn captions                                      | `add_subtitles`                                    |
 | Extract first, middle, last, or regularly spaced frames | `extract_frames`                             |
 | Replace a person in a clip                         | `video/minimax-h3-max-recast`, or edited frames as references: [source edit recipe](../video/recipe-source-edit.md) |
-| Concatenate clips or audio; add audio to video     | `merge_media`                                      |
-| Burn a fixed logo or copyright image onto a finished video | `merge_media` with `operation:"overlay_images"`; see [assembly guidance](../media-assembly.md) |
-| Make a video from timed images, full clips, and optional audio | `merge_media` with `operation:"compose_video"`; see [assembly guidance](../media-assembly.md) |
+| Concatenate clips or audio                         | `merge_media`                                      |
+| Put narration or music on a video                  | `add_audio_to_video`                               |
+| Burn a fixed logo or copyright image onto a finished video | `overlay_images`; see [assembly guidance](../media-assembly.md) |
+| Make a video from timed images, full clips, and optional audio | `stitch_clips`; see [assembly guidance](../media-assembly.md) |
 | Remove a background                                | `remove_background`                                |
 | Upscale                                            | `upscale_media`                                    |
 | Transcribe with timings                            | `transcribe`                                       |

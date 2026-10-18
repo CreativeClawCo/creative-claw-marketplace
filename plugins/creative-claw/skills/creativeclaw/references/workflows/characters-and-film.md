@@ -6,8 +6,8 @@ Characters preserve visual identity across images and video and can carry voices
 
 1. Collect the Character's name, role, appearance, wardrobe, personality, and constraints.
 2. Search for an existing approved reference image or generate one.
-3. Create the Character with `manage_character({ title, description, image_url })`.
-4. For a reusable voice: consenting speaker's recording → `creativeclaw-clone-voice`; description → `design_voice`; stock → `manage_character` with `voice_model`/`voice_id`. Do not clone or replace a voice without explicit consent.
+3. Create the Character with `create_character({ title, description, image_url })`.
+4. For a reusable voice: consenting speaker's recording → `creativeclaw-clone-voice`; description → `design_voice`; stock → `manage_character({ id, voice_model, voice_id })`. Do not clone or replace a voice without explicit consent.
 
 ### Reference image
 
@@ -60,7 +60,7 @@ Honor the requested script, storyboard, and final review stages, and the approva
 4. Start with `video/gemini-omni-flash`; use `video/seedance-2.5` for longer reference-heavy shots or `video/minimax-h3-max` for fast cinematic work with optional boundary frames. Use the curated picker in `video-gen.md`.
 5. Resolve and inspect each clip before patching it into the project.
 6. Keep every shot built from the same anchors; a previous clip's last frame (`extract_frames`) is only an extra composition cue.
-7. Add per-shot audio with `merge_media` `merge_audio_video` (`audio_mode: "mix"` keeps the shot's sound; the default `replace` discards it and ends at the shorter input), or save one approved narration track as the project's `audio_url`. `assemble_film` narration replaces every shot's audio; set `with_narration: false` when shots carry dialogue.
+7. Add per-shot audio with `add_audio_to_video` (`audio_mode: "mix"` keeps the shot's sound; the default `replace` discards it and ends at the shorter input), or save one approved narration track as the project's `audio_url`. `assemble_film` narration replaces every shot's audio; set `with_narration: false` when shots carry dialogue.
 8. Call `assemble_film({ id })` only after every intended shot has an approved `clipUrl`.
 9. Resolve the assembly job with `check_job` before delivering the first cut. Read [media-assembly.md](../media-assembly.md) for duration matching, merge continuations, and track handling. Honor the applicable final review before marking it final; assembly does not add transitions, captions, per-shot audio, or a full sound mix.
 
@@ -75,6 +75,6 @@ Honor the requested script, storyboard, and final review stages, and the approva
 
 ## Tools
 
-- Characters: `manage_character` (delete with `{ id, delete: true }`), `list_characters`, `design_voice`.
+- Characters: `create_character`, `manage_character` (update by `id`), `delete_character` (`{ id, confirm: true }`), `list_characters`, `design_voice`. Older clients without `create_character` or `delete_character`: `manage_character` without `id` creates, and `{ id, delete: true }` deletes.
 - Films: `create_film_project`, `update_film_project`, `get_film_project`, `list_film_projects`, `assemble_film`.
-- Media: `generate_image`, `generate_video`, `generate_speech`, `clone_voice`, `extract_frames`, `merge_media`, `check_job`.
+- Media: `generate_image`, `generate_video`, `generate_speech`, `clone_voice`, `extract_frames`, `merge_media`, `add_audio_to_video`, `check_job`.

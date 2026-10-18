@@ -23,7 +23,7 @@ Older clients may not list `generate_html_video`. There the same agent is `rende
 
 This is an explicit-only route. A poster, banner, social card, overlay, intro, outro, or video that needs text is not by itself a reason to use it. Use `creativeclaw-generate-image` or `creativeclaw-generate-video` unless the user asks for HTML, CSS, HyperFrames, or code-driven rendering, supplies HTML, accepts the method when offered, or explicitly asks for motion graphics, kinetic typography, animated titles, or an animated explainer. If the user names an image or video model, that choice wins.
 
-`creativeclaw-edit-media` owns work on finished videos: burning a watermark (`merge_media` with `operation:"overlay_images"`) and merging intros or outros. This skill can make the parts: a transparent PNG mark or a rendered title card.
+`creativeclaw-edit-media` owns work on finished videos: burning a watermark (`overlay_images`) and merging intros or outros. This skill can make the parts: a transparent PNG mark or a rendered title card.
 
 ## Good uses
 

@@ -20,14 +20,14 @@ Every preview returns three auditions. Let the user pick one. In ChatGPT the Voi
 
 ## Save
 
-`design_voice` only creates the auditions. Save the pick with `manage_character`, passing the audition's `preview_id` as `voice_preview_id`:
+`design_voice` only creates the auditions. Save the pick by passing the audition's `preview_id` as `voice_preview_id`:
 
 - Existing Character: `manage_character({ id, voice_preview_id })`. For an avatar, use the SAME Character `id` so its image and voice stay together.
-- New voice-only Character: `manage_character({ title, voice_preview_id })`.
+- New voice-only Character: `create_character({ title, voice_preview_id })`.
 
 A save keeps the Character's other voices and makes this one preferred for its speech model. If the save hits the limit, relay the tool's message and link, and offer `replace_voice_option_id` to replace a saved designed voice from the same provider. Never quote plan prices.
 
-Older clients may not list `voice_preview_id` on `manage_character`. There the save is `design_voice({ action: "save", preview_id, character_id })`, or `character_name` for a new Character.
+Older clients may not list `voice_preview_id` on `manage_character`. There the save is `design_voice({ action: "save", preview_id, character_id })`, or `character_name` for a new Character. Older clients without `create_character` save a new one with `manage_character({ title, voice_preview_id })`.
 
 ## Speak
 
@@ -46,4 +46,4 @@ With `provider: "fish"`, the description allows up to 2,000 characters and the a
 {"provider":"fish","prompt":"Warm Israeli female narrator, expressive modern Hebrew, clear diction and an easy conversational pace.","text":"שָׁלוֹם, אֵיזֶה כֵּיף שֶׁאַתֶּם כָּאן. הַיּוֹם נַתְחִיל בְּסִפּוּר קָטָן.","language_code":"he-IL"}
 ```
 
-Fish candidate IDs are temporary. Save the selected Creative Claw preview using `manage_character({voice_preview_id})`; this creates a private voice and a Drama 3 Character option. The Character retains its other model voices. Accepted saves with an unknown outcome must not be retried automatically.
+Fish candidate IDs are temporary. Save the selected Creative Claw preview with `manage_character({ id, voice_preview_id })`, or `create_character({ title, voice_preview_id })` for a new Character; this creates a private voice and a Drama 3 Character option. The Character retains its other model voices. Accepted saves with an unknown outcome must not be retried automatically.

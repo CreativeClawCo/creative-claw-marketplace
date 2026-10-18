@@ -24,14 +24,14 @@ Turn supplied footage or audio into a finished derivative. Apply the requested e
 | Get a transcript or find a passage | `transcribe`: exactly one of `audio_url` or `video_url`. |
 | Clean a noisy recording | `isolate_audio`: keep and compare the original; cleanup can change speech. |
 | Get still frames | `extract_frames`: check the schema for first/last/sampling controls. |
-| Put narration or music on a clip | `merge_media` `merge_audio_video`: see [Audio](#audio). |
-| Join clips or audio files in order | `merge_media` `merge_videos` or `merge_audios`. |
-| Burn a logo or copyright mark onto a finished video | `merge_media` `overlay_images` with a transparent image. `remove_background` can prepare a logo. |
-| Build a video from timed images, clips, and optional audio | `merge_media` `compose_video`. |
+| Put narration or music on a clip | `add_audio_to_video`: see [Audio](#audio). |
+| Join clips or audio files in order | `merge_media` with `video_urls` or `audio_urls`. |
+| Burn a logo or copyright mark onto a finished video | `overlay_images` with a transparent image. `remove_background` can prepare a logo. |
+| Build a video from existing timed images, clips, and optional audio | `stitch_clips`. It never generates footage; invented footage goes to `generate_video`. |
 | Add an intro, outro, or both | See [Intros and outros](#intros-and-outros). |
 | Upscale or remove a background | `upscale_media` or `remove_background`, for the media type and parameters they support. |
 
-Read [assembly guidance](references/media-assembly.md) before any `merge_media` call.
+Read [assembly guidance](references/media-assembly.md) before any `merge_media`, `add_audio_to_video`, `overlay_images` or `stitch_clips` call. Older clients that list `operation` on `merge_media` and lack the other three tools: follow the fallback line there.
 
 Route elsewhere: `creativeclaw-generate-video` for invented footage or a generative change to the source; `creativeclaw-create-reels` when the agent must pick highlights from long footage; `creativeclaw-render-html` only when the user explicitly wants HTML or HyperFrames rendering. A caption request alone does not select HTML. For an exact text watermark, `render_html_image` with `transparent_background: true` can make the PNG for `overlay_images`.
 
@@ -90,7 +90,6 @@ Get the bookend segments, then concatenate them around the main video.
 
 ```text
 merge_media({
-  operation: "merge_videos",
   video_urls: ["<intro-url>", "<main-video-url>", "<outro-url>"],
   canvas_video_index: 1,
   video_fit: "pad",
@@ -98,14 +97,14 @@ merge_media({
 })
 ```
 
-Omit a bookend that was not requested. `merge_videos` is a hard cut: no dissolves, crossfades, or audio carried across the join. If the main audio must continue under a bookend or fade across a cut, say so before making segments.
+Omit a bookend that was not requested. Joining videos is a hard cut: no dissolves, crossfades, or audio carried across the join. If the main audio must continue under a bookend or fade across a cut, say so before making segments.
 
 ## Audio
 
-- `merge_audio_video` replaces the clip's audio by default and ends at the shorter input. Check both durations first; do not silently shorten the video to fit a voiceover.
+- `add_audio_to_video` replaces the clip's audio by default and ends at the shorter input. Check both durations first; do not silently shorten the video to fit a voiceover.
 - `audio_mode: "mix"` keeps the clip's own sound and layers the new track over it, at the video's full length. Set `original_volume` and `added_volume` (0–1); about 0.3 keeps music under speech.
-- `compose_video` layers one audio track over the clips at full level, and the output can run past the last clip. Use it when the added audio should extend beyond the picture.
-- `merge_audios` joins files end to end; it does not layer them.
+- `stitch_clips` layers one audio track over the clips at full level, and the output can run past the last clip. Use it when the added audio should extend beyond the picture.
+- `merge_media` with `audio_urls` joins files end to end; it does not layer them.
 - There is no ducking, volume automation, or crossfade. Say which operation is missing before creating assets that cannot be assembled as asked.
 
 ## Limits

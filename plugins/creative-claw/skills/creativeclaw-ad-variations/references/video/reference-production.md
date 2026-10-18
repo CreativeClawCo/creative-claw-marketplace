@@ -47,7 +47,7 @@ For dialogue, narration or an exact voice, pick one path per speaking shot: read
 
 For connected clips, reuse the same Character, product and location anchors, with planned state changes named. Reuse the same voice and speech settings.
 
-Don't let each shot invent its own background music. Prompt for dialogue, ambience and effects only, and say "no music". If the user wants a score or song, make ONE project-level track and layer it after assembly: `merge_media` `merge_audio_video` with `audio_mode: "mix"` keeps the clips' sound (`added_volume` about 0.3 under speech). The default `audio_mode: "replace"` discards clip audio and ends at the shorter input. `assemble_film` narration also replaces every shot's audio; set `with_narration: false` when shots carry dialogue.
+Don't let each shot invent its own background music. Prompt for dialogue, ambience and effects only, and say "no music". If the user wants a score or song, make ONE project-level track and layer it after assembly: `add_audio_to_video` with `audio_mode: "mix"` keeps the clips' sound (`added_volume` about 0.3 under speech). The default `audio_mode: "replace"` discards clip audio and ends at the shorter input. `assemble_film` narration also replaces every shot's audio; set `with_narration: false` when shots carry dialogue.
 
 ## Prompt and deliver
 

@@ -14,7 +14,7 @@ Use video_urls for the source with the selected model's exact input contract. Fo
 
 To replace the interval with a new scene instead of changing it, use `video/minimax-h3-max-insert` on the full source: `extras.start_time` where the new scene begins, `extras.resume_time` where the original resumes, and `duration` for the new scene. It returns the source with the new scene in place.
 
-Resolve the edited interval and concatenate it between untouched spans. Inspect boundary cuts, total duration, identity and color continuity. Preserve original audio unless replacement was requested; if generation altered it, put the original track back with `merge_audio_video` (default replace mode). Generative edits cannot guarantee pixel-perfect logos, numbers or faces; use deterministic edits where exact preservation is essential.
+Resolve the edited interval and concatenate it between untouched spans. Inspect boundary cuts, total duration, identity and color continuity. Preserve original audio unless replacement was requested; if generation altered it, put the original track back with `add_audio_to_video` (default replace mode). Generative edits cannot guarantee pixel-perfect logos, numbers or faces; use deterministic edits where exact preservation is essential.
 
 ## Replace a person
 
@@ -31,7 +31,7 @@ Choose the route by what has to stay.
 3. When editing the next frame, add the first edited frame as a reference so the person and outfit are identical in every shot.
 4. Show the edited frames and get the user's approval of the new look.
 5. Generate the video with a model that takes a source clip and reference images together. For Seedance 2.5, put the source in `video_urls` for motion, camera and timing, and the edited frames plus the Character sheet in `image_urls`, each cited with its token; read its guide for the task mode.
-6. Put the original audio back with `merge_audio_video` if the generation changed it.
+6. Put the original audio back with `add_audio_to_video` if the generation changed it.
 
 Use only photos of a person the user has the right to use.
 

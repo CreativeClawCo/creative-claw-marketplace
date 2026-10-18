@@ -91,7 +91,7 @@ Translate editorial needs into musical events before prompting:
 - Record important cue points, then describe the musical change at each time.
 - Decide whether the ending should resolve before the picture cuts or ring through it.
 - Keep generated music as a separate asset until approved. `generate_music` does not inspect the video or synchronize itself to visible events.
-- There is no ducking control in generation. Ask for a dialogue-safe arrangement, then layer it with `merge_media` `merge_audio_video` and `audio_mode: "mix"` (`added_volume` about 0.3 under speech).
+- There is no ducking control in generation. Ask for a dialogue-safe arrangement, then layer it with `add_audio_to_video` and `audio_mode: "mix"` (`added_volume` about 0.3 under speech).
 
 ## Loop-like beds
 

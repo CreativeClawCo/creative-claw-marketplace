@@ -40,11 +40,11 @@ Gemini Omni accepts no audio input on the current route. Don't pay for speech fi
 
 ## Mix
 
-- `merge_media` `merge_audio_video` with `audio_mode: "mix"` keeps the clip's own sound and layers the new track over it at the video's length. Set `original_volume` and `added_volume` (0–1; about 0.3 for music under speech). `start_offset` delays the new track.
+- `add_audio_to_video` with `audio_mode: "mix"` keeps the clip's own sound and layers the new track over it at the video's length. Set `original_volume` and `added_volume` (0–1; about 0.3 for music under speech). `start_offset` delays the new track.
 - `audio_mode: "replace"` (the default) discards the clip's audio and ends at the shorter input.
-- `compose_video` with one clip plus `audio: { url, start_delay_seconds }` layers the track at full level and can run past the clip's end.
+- `stitch_clips` with one clip plus `audio: { url, start_delay_seconds }` layers the track at full level and can run past the clip's end.
 - `assemble_film` narration replaces every shot's audio. Set `with_narration: false` when shots carry dialogue.
 
 ## Order
 
-Dialogue per shot → `assemble_film` (`with_narration: false` if shots speak) → `add_subtitles` → music bed with `merge_audio_video` `audio_mode: "mix"` → check the duration and that the dialogue survived.
+Dialogue per shot → `assemble_film` (`with_narration: false` if shots speak) → `add_subtitles` → music bed with `add_audio_to_video` `audio_mode: "mix"` → check the duration and that the dialogue survived.
