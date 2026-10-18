@@ -23,7 +23,14 @@ These entries describe Creative Claw workflow guides, not the user's reference m
 
 ## When the Creative Claw tools are missing
 
-Creative Claw tools such as `list_models` and `generate_image` appear only after the server is connected. If none are available, the plugin is installed but not connected yet. Say so, and tell the user to open the plugin's Connectors tab in their app (or the MCP server list in a terminal client), connect Creative Claw and sign in, then ask again. If the app opens an "Add custom connector" dialog, its detected options are already right: the user only presses Add and then signs in. Do not substitute other tools or present a result that was not generated.
+Creative Claw tools such as `list_models` and `generate_image` appear only after the server is connected. If none are available, the plugin is installed but not connected yet. Say so, give the user these steps, and ask them to send the request again once they are signed in:
+
+1. Open the [Creative Claw plugin page](https://claude.ai/customize/plugins/id/3b9e3067-1092-46a5-b613-f52ddf9476ca%40anthropic-plugin-directory/connectors) in Claude (or Customize, then Plugins, then Creative Claw).
+2. Open its **Connectors** tab and press **Connect** next to Creative Claw.
+3. If an "Add custom connector" dialog opens, keep the detected options and press **Add**.
+4. Sign in to Creative Claw, or create an account, on the page that opens.
+
+It takes under a minute. In Claude Code, the user runs `/mcp`, selects Creative Claw and signs in instead; other terminal clients have a similar MCP server list. Do not substitute other tools or present a result that was not generated.
 
 ## Keep simple requests simple
 
