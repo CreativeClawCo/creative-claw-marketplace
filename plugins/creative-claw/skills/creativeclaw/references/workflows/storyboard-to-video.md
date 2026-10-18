@@ -65,9 +65,9 @@ Call `list_models({ category: "video" })` and `get_model_params`.
 - Premium cinematic, long or reference-heavy production → `video/seedance-2.5`. For a cheaper preview, a 480p request is a usable draft, and `extras.draft_job_id` finalizes that same take at 1080p within 7 days (720p starts a new take).
 - Fast cinematic production with optional first/last frames → `video/minimax-h3-max`.
 - Cheap, fast text/start-frame draft, with shared-route references when needed → `video/minimax-h3-max-turbo`.
-- Native-audio single pass of 2–30 s, or a document or webpage brief → `video/wan-3.0`.
+- Native-audio single pass of 4 to 30 seconds, or a document or webpage brief: use `video/seedance-2.5`. Read the brief and prepare a prompt with supported media references; do not pass Wan's direct document/webpage fields. Use Wan only when explicitly requested.
 
-Start with Gemini Omni. Match the approved board's structure to the chosen model's actual input contract when Seedance 2.5, H3 Max, or Wan is a better fit.
+Start with Gemini Omni. Match the approved board's structure to the chosen model's actual input contract when Seedance 2.5 or H3 Max is a better fit.
 
 ## 6. Compose the director prompt
 

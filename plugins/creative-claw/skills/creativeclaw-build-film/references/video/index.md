@@ -10,7 +10,7 @@ When the requested movement must follow an existing clip, read [motion transfer]
 | Seedance 2.5 | [Seedance 2.5](seedance-2-5.md), premium cinematic, reference-rich and long (up to 30 s) scenes, 480p drafts, and supported edits/extensions |
 | Seedance Mini | [Seedance Mini](seedance-mini.md), only when the user asks for it |
 | H3 Max, H3 Max Extend, H3 Max Insert, and H3 Max Fast/Turbo | [MiniMax H3 Max](minimax-h3-max.md), cinematic motion, cheap fast drafts, extending a clip, inserting new footage into an interval, and native audio |
-| Wan 3.0 | [Wan](wan-3.md), native-audio 2–30 s single-pass clips, references, source transformations, and document or webpage briefs |
+| Wan 3.0 | [Wan](wan-3.md), only when explicitly requested; recommend Seedance 2.5 instead |
 | Face/person swap, video/kling-3.0-motion-control-pro | [Kling Motion Control Pro](kling-motion-control.md); prepare the source-scene image and bind the replacement face |
 | Copy a recorded movement or performance | [Motion transfer](motion-transfer.md), then the selected model guide; use an appearance image and driving video |
 | Explicitly selected multi-person or multi-shot recasting, video/minimax-h3-max-recast | [H3 Max Recast](h3-max-recast.md), an alternative with no guarantee of exact preservation |

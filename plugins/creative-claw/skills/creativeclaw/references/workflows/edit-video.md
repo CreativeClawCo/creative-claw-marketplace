@@ -33,7 +33,7 @@ Call `list_models({ category: "video" })` and `get_model_params` before choosing
 - To replace an interval inside a clip with new footage, use `video/minimax-h3-max-insert`. Pass one source in `video_urls`, `extras.start_time` where the new scene begins and `extras.resume_time` where the original resumes (both on the source timeline), and `duration` for the new scene's length. Describe the entry and return transitions. Optional identity or product images go in `image_urls`.
 - For a 4–30 second source edit or a reference-rich transformation, use `video/seedance-2.5` with `extras.omni_reference_task_type: "edit"`. Use its `extend` mode only for heavy references or a long continuation. Use `aspect_ratio: "auto"` and the duration contract returned by `get_model_params`.
 
-Use other models, such as FLUX 3 or Seedance Mini, only when the user asks for them. Never recommend or proactively route to an LTX or DreamActor model. If the user explicitly requests one, preserve their choice but do not present it as a recommended route.
+Use other models, such as FLUX 3 or Seedance Mini, only when the user asks for them. Use Wan only when explicitly requested; recommend Seedance 2.5 for supported edits or extensions instead. Never recommend or proactively route to an LTX or DreamActor model. If the user explicitly requests one, preserve their choice but do not present it as a recommended route.
 
 ## Preservation-first continuation
 

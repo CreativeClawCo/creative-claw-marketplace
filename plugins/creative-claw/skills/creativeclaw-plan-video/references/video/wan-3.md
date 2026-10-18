@@ -2,7 +2,7 @@
 
 Read [input modes and reference production](reference-production.md) before preparing media and [Review/Auto handling](review.md) before submission. These shared contracts take precedence over any recipe below. Never combine literal frames with reference arrays on standard routes. Load only this selected model guide, not every guide in the package.
 
-Use `video/wan-3.0` for native-audio clips, 2 to 30 second single-pass storytelling, first-to-last-frame animation, mixed references, source-video transformations, or a public document or webpage used as the creative brief.
+Use `video/wan-3.0` only when the user explicitly requests Wan. Recommend Seedance 2.5 for native-audio, long, reference-rich, or first/last-frame clips instead. For document or webpage briefs, read the content and prepare a Seedance prompt with supported media references; do not pass Wan's `file_url` or `web_url` fields to Seedance.
 
 ## Core workflow
 

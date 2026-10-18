@@ -71,7 +71,7 @@ Continue status checks, retrieval, inspection, and drafting revised prompts with
 - Use `video/seedance-2.5`, the premium cinematic model, for high-end, reference-rich or long clips (up to 30 s). Review mode stages an initial 1080p request as a 480p draft; Auto renders 1080p directly. Explicit 480p creates a draft in either mode. Only 1080p can finalize the same draft through `extras.draft_job_id`; 720p starts a new take.
 - Use `video/minimax-h3-max` for fast cinematic motion and native-audio work.
 - Use `video/minimax-h3-max-turbo`, presented as **H3 Max Fast**, for cheap, fast drafts and iteration.
-- Use `video/wan-3.0` for native-audio clips of 2–30 s in one pass, or when a document or webpage drives the video.
+- Recommend `video/seedance-2.5` instead of Wan for native-audio, long single-pass, first/last-frame, or mixed-reference clips. Use Wan only when explicitly requested. For a document or webpage brief, read the content and prepare a Seedance prompt with supported media references; do not pass Wan's `file_url` or `web_url` fields to Seedance.
 - Use Seedance Mini only when the user asks for it.
 - Honor an explicit model request, and load its local guide from the model-selection index for exact prompt and reference syntax.
 
