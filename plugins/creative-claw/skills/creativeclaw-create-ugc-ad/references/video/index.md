@@ -14,7 +14,7 @@ When the requested movement must follow an existing clip, read [motion transfer]
 | Face/person swap, video/kling-3.0-motion-control-pro | [Kling Motion Control Pro](kling-motion-control.md); prepare the source-scene image and bind the replacement face |
 | Copy a recorded movement or performance | [Motion transfer](motion-transfer.md), then the selected model guide; use an appearance image and driving video |
 | Explicitly selected multi-person or multi-shot recasting, video/minimax-h3-max-recast | [H3 Max Recast](h3-max-recast.md), an alternative with no guarantee of exact preservation |
-| Veo, Grok, FLUX, Sora, Kling, H3, Hailuo, HappyHorse, HeyGen or another explicitly requested route | [Additional models](other-models.md), model-specific distinctions and live-schema lookup |
+| Veo, Grok, FLUX, Kling, H3, Hailuo, HappyHorse, HeyGen or another explicitly requested route | [Additional models](other-models.md), model-specific distinctions and live-schema lookup |
 | Lip-sync a finished clip to prepared speech | [Sync 3](other-models.md), the recommended model with supplied or embedded audio and automatic or manual speaker selection; [HeyGen Lipsync](heygen-lipsync.md) when explicitly selected |
 | Talking photo in an unsupported or unverified native-dialogue language | [Spoken languages](spoken-languages.md), H3 Max Lip Sync or HeyGen Avatar 4 with prepared speech |
 

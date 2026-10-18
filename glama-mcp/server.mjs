@@ -77,7 +77,7 @@ function createGuidanceResponse(toolName, args) {
       primary_action: "Setup instructions provided above",
       capabilities: [
         "Generate images with FLUX, Gemini, GPT Image, Recraft, and 100+ models",
-        "Create videos with Veo, Sora, Kling, Seedance, MiniMax, Hailuo, and more",
+        "Create videos with Veo, Kling, Seedance, MiniMax, Hailuo, and more",
         "Generate speech with ElevenLabs v3 and voice cloning",
         "Edit media: background removal, upscaling, trimming, subtitles",
         "Manage brand themes, Characters, and multi-shot Films",
@@ -185,7 +185,7 @@ function createGuidanceResponse(toolName, args) {
 // Register tools
 server.tool(
   "how_to_connect",
-  "Learn how to connect to the full Creative Claw MCP server with authentication. Creative Claw is an AI media generation platform supporting 1,000+ models (FLUX, Gemini, Veo, Sora, Kling, Seedance, HeyGen, ElevenLabs) for image, video, and speech generation. This tool explains setup for Claude Desktop, Cursor, ChatGPT, and other MCP clients, plus how to claim free credits.",
+  "Learn how to connect to the full Creative Claw MCP server with authentication. Creative Claw is an AI media generation platform supporting 1,000+ models (FLUX, Gemini, Veo, Kling, Seedance, HeyGen, ElevenLabs) for image, video, and speech generation. This tool explains setup for Claude Desktop, Cursor, ChatGPT, and other MCP clients, plus how to claim free credits.",
   {},
   async () => createGuidanceResponse("how_to_connect", {})
 );
@@ -201,7 +201,7 @@ server.tool(
 
 server.tool(
   "generate_video",
-  "Generate cinematic video content using state-of-the-art models including Gemini Omni, Veo, Sora, Kling, Seedance, MiniMax, and Hailuo. Supports text-to-video, image-to-video animation, reference-based generation, native audio, and multi-shot film production. Handles durations from 2-30+ seconds depending on model. Requires connection to the full Creative Claw MCP server.",
+  "Generate cinematic video content using state-of-the-art models including Gemini Omni, Veo, Kling, Seedance, MiniMax, and Hailuo. Supports text-to-video, image-to-video animation, reference-based generation, native audio, and multi-shot film production. Handles durations from 2-30+ seconds depending on model. Requires connection to the full Creative Claw MCP server.",
   {
     prompt: z.string().describe("Description of the video to generate"),
   },
