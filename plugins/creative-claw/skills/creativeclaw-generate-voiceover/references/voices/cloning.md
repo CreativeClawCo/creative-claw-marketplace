@@ -44,6 +44,8 @@ Cloning depends on the workspace's plan and clone capacity. If a tool reports a 
 
 ## Test and reuse
 
+Prepare every audition and later speech script using [speech localization](speech-localization.md). Fully vowelize every spoken Hebrew word for all providers, preserving the user's wording. The recording itself is not modified by this text-preparation rule.
+
 A Fish clone speaks with `speech/fish-drama-3`, using its private provider copy. Read [Fish guidance](fish.md) and current `get_model_params` before submitting.
 
 A clone speaks with its provider's model: a Cartesia clone with Cartesia Sonic; an ElevenLabs clone with ElevenLabs v2 for a steady read or v4 for expressive delivery or dialogue. Read [language routing](languages.md) and the selected [Cartesia](cartesia.md), [v2](elevenlabs-v2.md) or [v4](elevenlabs-v4.md) guide. Generate a short audition using the returned character_id, never both character_id and voice_id. Include the user's names, numbers and target-language sentence.

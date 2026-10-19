@@ -10,6 +10,8 @@ Use `design_voice` when the user wants a new synthetic voice from a description 
 
 ## Preview
 
+Prepare the audition text using [speech localization](speech-localization.md). Every Hebrew word must have full niqqud for every provider, including ElevenLabs and Google, as well as Fish. Apply the same rule when speaking with the saved voice.
+
 Call `design_voice({ prompt, text, provider, character_id })`:
 - `prompt` (20 to 1,000 characters): age, accent, timbre, pace, attitude and use. Describe the sound, never a real person's name or identity.
 - `text` (100 to 1,000 characters): one or two of the Character's real lines, about 200 characters. Omit it only when no script exists yet.

@@ -1,6 +1,6 @@
 {
   "_comment": "Canonical references live in plugins/creative-claw/skills/creativeclaw/references/. sync-skill-references.mjs copies them into each skill so every skill folder is self-contained. Edit the canonical copy, then run the sync.",
-  "shared": ["workflow-basics.md", "platform-upload.md", "job-recovery.md", "media-assembly.md"],
+  "shared": ["workflow-basics.md", "platform-upload.md", "job-recovery.md", "media-assembly.md", "voices/speech-localization.md"],
   "groups": {
     "images": ["creativeclaw-generate-image", "creativeclaw-product-photoshoot", "creativeclaw-create-avatar", "creativeclaw-create-character", "creativeclaw-plan-video", "creativeclaw-build-film", "creativeclaw-create-ugc-ad", "creativeclaw-generate-video", "creativeclaw-ad-variations", "creativeclaw-setup"],
     "voices": ["creativeclaw-clone-voice", "creativeclaw-generate-voiceover", "creativeclaw-create-avatar"],
@@ -9,6 +9,7 @@
     "edit-contract.md": ["creativeclaw-edit-media", "creativeclaw-create-reels"],
     "video/voice-in-video.md": ["creativeclaw-generate-voiceover", "creativeclaw-create-avatar", "creativeclaw-create-character"],
     "video/spoken-languages.md": ["creativeclaw-generate-voiceover", "creativeclaw-create-avatar", "creativeclaw-create-character"],
+    "video/heygen-lipsync.md": ["creativeclaw-generate-voiceover", "creativeclaw-create-avatar", "creativeclaw-create-character"],
     "voices/voice-design.md": ["creativeclaw-setup"],
     "workflows/brand-theme.md": ["creativeclaw-setup"]
   }

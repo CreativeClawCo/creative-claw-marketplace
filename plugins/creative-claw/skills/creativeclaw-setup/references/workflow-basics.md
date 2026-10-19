@@ -1,5 +1,9 @@
 # Shared execution guidance
 
+## Speech localization
+
+Whenever this workflow generates Hebrew speech, always use full niqqud on every spoken Hebrew word across all supporting providers, including dialogue and voice-design auditions. Preserve the wording. Read [speech localization](voices/speech-localization.md) before preparing Hebrew or other pronunciation-sensitive speech text.
+
 Read once when starting a Creative Claw workflow; reuse it across supporting skills in the same task. Focused copies are generated from the root skill by `scripts/sync-skill-references.mjs`.
 
 ## Optional workflow attribution

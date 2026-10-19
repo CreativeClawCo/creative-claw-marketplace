@@ -11,6 +11,10 @@ For each Creative Claw tool call that exposes it, pass the optional `skills_used
 
 Read [shared execution guidance](references/workflow-basics.md) before tools. The speech tool is `generate_speech`.
 
+## Localize the spoken text
+
+For Hebrew, always send full niqqud on every spoken Hebrew word to every speech model. Apply this to narration, each dialogue turn, clone auditions and voice-design preview text, including user-supplied scripts. Preserve the words and intended meaning while adding vowel points. This rule applies across providers, not only Fish. Before submitting Hebrew or other pronunciation-sensitive text, read [speech localization](references/voices/speech-localization.md).
+
 ## Which voice
 
 - "Clone my voice", "use my recording", or an unsaved personal voice: load creativeclaw-clone-voice when available. If this skill is installed alone, read [the complete cloning workflow](references/voices/cloning.md). Obtain explicit consent once, up front, import privately, clone right after the upload, test and save a reusable Character. Do not send source audio directly to ElevenLabs or Cartesia speech generation as a substitute for cloning.
@@ -43,7 +47,7 @@ For non-English, mixed-language or less common languages, read [language routing
 
 ## Execute and deliver
 
-1. Establish text, target language/accent and delivery. Preserve supplied words unless rewriting is requested.
+1. Establish text, target language/accent and delivery. Preserve supplied words unless rewriting is requested. Prepare the actual speech payload using the localization guidance; Hebrew must be fully vowelized before submission, including every `extras.dialogue[].text`.
 2. Read the selected model's reference and current `get_model_params`. Reuse a current schema already loaded in this task. Use `list_models({ category: "speech" })` only when discovering alternatives.
 3. Select a language-appropriate stock voice or saved Character and only settings accepted by that model. Never copy prompting tags across models.
 4. Generate the requested take. For a new clone or uncertain pronunciation, offer a short audition before a long production, not an unrequested paid model sweep. Do not add IPA or phonemes up front. If one word comes out wrong (an acronym, the stress, a homograph or a loanword), fix only that word as [pronunciation](references/voices/pronunciation.md) describes. Never send IPA to a model that does not decode it.
