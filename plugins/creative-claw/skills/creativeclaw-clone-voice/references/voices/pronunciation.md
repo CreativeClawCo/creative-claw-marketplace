@@ -4,7 +4,7 @@ IPA and phoneme spelling are a repair tool, not a default. Never add them to a s
 
 ## The order to work in
 
-1. **Write the script normally.** Give every Hebrew word full niqqud. Keep acronyms, brands and English words in Latin letters as they are normally written: "AI", not אֵיי-אַיי (v4 read that as "aa").
+1. **Write the script normally.** Give every Hebrew word full niqqud, as [speech localization](speech-localization.md) requires. Keep acronyms, brands and English words in Latin letters as they are normally written: "AI", not אֵיי-אַיי (v4 read that as "aa").
 2. **Generate and check.** Run `transcribe` on the take (see Check the take below). Ask the user to listen when stress or accent matters.
 3. **Only if a word comes out wrong, fix that word.** Try spelling first: correct the niqqud (מִסּוֹכֵן fixed מסוכן being read as "dangerous"). If that is not enough, replace only that word with the selected model's phonetic syntax from the table below. If the model has no phonetic input, respell the word, or speak that line with ElevenLabs v4.
 4. **Keep a fix that worked.** Reuse the same spelling of that word for the rest of the project, on the same model and voice.
