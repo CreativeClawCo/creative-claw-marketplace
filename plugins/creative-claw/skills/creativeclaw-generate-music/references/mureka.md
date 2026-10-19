@@ -38,7 +38,7 @@ Instrumental example:
 
 ## Lyrics and vocal songs
 
-For newly written lyrics, use separate section tags, short singable lines, balanced syllables, deliberate rhymes, and a simple repeated chorus hook. Preserve supplied words; propose edits if delivery needs improvement. Never silently shorten, translate, or omit the user's lyrics.
+For newly written lyrics, use separate section tags, short singable lines, balanced syllables, deliberate rhymes, and a simple repeated chorus hook. Preserve supplied words; propose edits if delivery needs improvement. Never silently shorten, translate, or omit the user's lyrics. Mureka has no phonetic input: do not put IPA or phoneme spellings in `lyrics`. Fix a mispronounced word by spelling, as described in [music prompting](music-prompting.md#pronunciation-in-sung-lyrics). This also applies to `music/mureka-remix` lyrics, and to `music/mureka-region-edit` when the live model list includes it.
 
 Supplied-lyrics example:
 

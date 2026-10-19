@@ -69,6 +69,16 @@ Example:
 
 > Forty-five-second contemporary soul song at 82 BPM, live drums, rounded electric bass, Rhodes chords, muted guitar, and subtle strings. Intimate low female lead vocal in Spanish, conversational verses and a soaring but controlled final refrain, with two soft harmony voices only on the refrain. Eight-second instrumental intro, vocals centered and close-mic'd, warm tape character, no ad-libs over the ending, finish on a held resolved chord.
 
+### Pronunciation in sung lyrics
+
+Work in this order:
+
+1. **Write the lyrics normally.** Give every Hebrew word full niqqud (for example שׁוֹקוֹלָד). Avoid geresh letters (ג׳, צ׳) and English loanwords in Hebrew lyrics. Write acronyms in English lyrics as "A.I." or as they sound ("ay-eye"); Mureka sang both as "AI".
+2. **Generate and check.** Run `transcribe` (Scribe) with the sung language's `language_code`. A transcript confirms the words were recognized; the user judges by ear whether they sound native.
+3. **Only if a word is sung wrong, fix that word.** Respell only that word in the lyric's own script, by syllable if needed, and keep the respelling identical in every repeat. You can also say how to sing it in plain words in the prompt, for example "sing AI as the two letters A-I"; Mureka's own guide recommends stating pronunciation in the prompt, but it is untested here. Latin letters inside Hebrew lyrics are a last resort: Mureka sang Latin "AI" in a Hebrew line as a Hebrew word.
+
+Never put IPA or phoneme spellings in lyrics. No music model documents phonetic input, here or elsewhere (Suno, Udio and ElevenLabs Music included). In testing, acronyms in IPA failed on every model ("AA", "i-i-i"), Lyria sang the symbols as nonsense, and Mureka garbled Hebrew lyrics containing IPA and skipped the chorus that held it. There is no stress control either: move the word to where the melody stresses it, or swap in a word whose stress fits the line.
+
 ## Short-form music
 
 Short pieces need fewer ideas and a deliberate ending. Use `music/elevenlabs-music-v2.5` for anything under 30 seconds.
@@ -109,6 +119,7 @@ Translate editorial needs into musical events before prompting:
 | Weak vocal identity | Add range, timbre, delivery, language, articulation, and harmony direction. |
 | Abrupt or unusable ending | Reserve explicit time for a button, cadence, ring-out, or controlled fade. |
 | Timing drift | Use ElevenLabs Music for exact `music_length_ms`; otherwise simplify sections and clarify chronological cues without promising exact timing. |
+| A word sung wrong | Respell only that word (niqqud for Hebrew, "A.I." or "ay-eye" for acronyms); never IPA. See Pronunciation in sung lyrics. |
 | Style rejection | Remove artist, band, song, and copyrighted-lyric references; describe the musical traits instead. |
 
 ## Model notes
