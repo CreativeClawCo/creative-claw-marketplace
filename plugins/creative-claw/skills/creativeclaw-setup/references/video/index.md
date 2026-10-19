@@ -11,9 +11,10 @@ When the requested movement must follow an existing clip, read [motion transfer]
 | Seedance Mini | [Seedance Mini](seedance-mini.md), only when the user asks for it |
 | H3 Max, H3 Max Extend, H3 Max Insert, and H3 Max Fast/Turbo | [MiniMax H3 Max](minimax-h3-max.md), cinematic motion, cheap fast drafts, extending a clip, inserting new footage into an interval, and native audio |
 | Wan 3.0 | [Wan](wan-3.md), only when explicitly requested; recommend Seedance 2.5 instead |
-| Face/person swap, video/kling-3.0-motion-control-pro | [Kling Motion Control Pro](kling-motion-control.md); prepare the source-scene image and bind the replacement face |
+| Swap, replace or recast people in existing footage, including face-only swaps | `swap_video_characters`, not `generate_video`; it renders with Seedance 2.5 after three free previews |
+| video/kling-3.0-motion-control-pro named for a swap | [Kling Motion Control Pro](kling-motion-control.md); otherwise use `swap_video_characters` |
 | Copy a recorded movement or performance | [Motion transfer](motion-transfer.md), then the selected model guide; use an appearance image and driving video |
-| Explicitly selected multi-person or multi-shot recasting, video/minimax-h3-max-recast | [H3 Max Recast](h3-max-recast.md), an alternative with no guarantee of exact preservation |
+| video/minimax-h3-max-recast requested by name in generate_video | [H3 Max Recast](h3-max-recast.md); otherwise use `swap_video_characters` |
 | Veo, Grok, FLUX, Kling, H3, Hailuo, HappyHorse, HeyGen or another explicitly requested route | [Additional models](other-models.md), model-specific distinctions and live-schema lookup |
 | Lip-sync a finished clip to prepared speech | [Sync 3](other-models.md), the recommended model with supplied or embedded audio and automatic or manual speaker selection; [HeyGen Lipsync](heygen-lipsync.md) when explicitly selected |
 | Talking photo in an unsupported or unverified native-dialogue language | [Spoken languages](spoken-languages.md), H3 Max Lip Sync or HeyGen Avatar 4 with prepared speech |

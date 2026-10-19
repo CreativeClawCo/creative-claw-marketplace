@@ -11,13 +11,18 @@ Creative Claw is an AI media studio for Claude, Grok Bot, Hermes, OpenClaw, Curs
 - Import, search, tag, edit, and organize media assets.
 - Guide multi-step character, storyboard, and film workflows.
 
-The plugin contains 19 skills (the `creativeclaw` router plus 18 focused workflows such as `creativeclaw-generate-video`, `creativeclaw-edit-media`, and `creativeclaw-render-html`) and one remote MCP server connection.
+The plugin contains 20 skills (the `creativeclaw` router plus 19 focused workflows such as `creativeclaw-generate-video`, `creativeclaw-edit-media`, and `creativeclaw-render-html`) and one remote MCP server connection.
 
 ## Install
 
 ### Claude
 
-1. Add **Creative Claw** from the plugin directory: **Customize > Plugins** in Claude, or `/plugin directory` in Claude Code.
+1. Add **Creative Claw** from the plugin directory: **Customize > Plugins** in Claude, or `/plugin directory` in Claude Code. In Claude Code you can also install it in one step:
+
+   ```text
+   /plugin install creative-claw --marketplace CreativeClawCo/creative-claw-marketplace
+   ```
+
 2. Open the plugin's **Connectors** tab and connect Creative Claw. Claude shows an **Add custom connector** dialog with the right options already selected: press **Add**, then sign in. In Claude Code, run `/mcp` and authenticate `creative-claw`.
 
 The skills load as soon as the plugin is added, but nothing can be generated until the server is connected. Then ask for what you want, for example:

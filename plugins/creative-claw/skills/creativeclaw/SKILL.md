@@ -42,7 +42,7 @@ Purchases and plans are handled on the Creative Claw website, not in chat. Do no
 | Generate or edit one general image | `creativeclaw-generate-image` |
 | Create a consistent product image set | `creativeclaw-product-photoshoot` |
 | Make a character copy a recorded performance or retain movement across wardrobe variants | `creativeclaw-generate-video`, starting with [motion transfer](references/video/motion-transfer.md) to resolve the driving video and appearance image |
-| Swap people in existing footage | `creativeclaw-generate-video`, preferring [Kling Motion Control Pro](references/video/kling-motion-control.md) with a prepared scene image and facial binding; [H3 Max Recast](references/video/h3-max-recast.md) is an explicitly selected recasting alternative |
+| Swap, replace or recast people in existing footage: face swaps, "put me in this video", several people at once | `creativeclaw-swap-characters` (`swap_video_characters`) |
 | Generate, extend, reframe, or transform one video clip | `creativeclaw-generate-video` |
 | Plan a script, shot list, or storyboard | `creativeclaw-plan-video` |
 | Produce a complete multi-shot film | `creativeclaw-build-film` |

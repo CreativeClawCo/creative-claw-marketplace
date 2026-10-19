@@ -20,6 +20,7 @@ focused_skill_names=(
   creativeclaw-ad-variations
   creativeclaw-submit-feedback
   creativeclaw-clone-voice
+  creativeclaw-swap-characters
   creativeclaw-render-html
   creativeclaw-setup
 )

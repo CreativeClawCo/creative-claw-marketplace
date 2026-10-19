@@ -10,7 +10,7 @@ Preserve the original and create clearly named derivatives. Distinguish determin
 | Resize, crop, or pad                               | `scale_video`                                      |
 | Burn captions                                      | `add_subtitles`                                    |
 | Extract first, middle, last, or regularly spaced frames | `extract_frames`                             |
-| Replace a person in a clip                         | `video/minimax-h3-max-recast`, or edited frames as references: [source edit recipe](../video/recipe-source-edit.md) |
+| Replace a person or character in a clip            | `swap_video_characters`, whole character by default; ask for "keep their original outfit" to change only who the person is |
 | Concatenate clips or audio                         | `merge_media`                                      |
 | Put narration or music on a video                  | `add_audio_to_video`                               |
 | Burn a fixed logo or copyright image onto a finished video | `overlay_images`; see [assembly guidance](../media-assembly.md) |

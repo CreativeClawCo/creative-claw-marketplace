@@ -15,6 +15,8 @@ If no source is available, ask: “Do you have a video showing the movement you 
 
 Written descriptions, extracted stills, matching start/end frames and a Character sheet do not carry the source performance over time. Keep the actual driving video in the generation request. Naming the original clip in the prompt does not supply it as an input.
 
+To replace a person inside existing footage while its scene stays, use `swap_video_characters` instead; motion transfer makes a new video whose character and scene come from the appearance image.
+
 For character performance transfer, prefer [Kling Motion Control Pro](kling-motion-control.md). Inspect `get_model_params` for current compatibility and limits. Pass one appearance image in `image_urls` and the original performance in `video_urls`. Simple performance transfer does not require the face-swap guide's facial binding. Honor an explicitly chosen model; explain an incompatibility and agree on an alternative before switching.
 
 For a targeted change within existing footage, such as changing a product's fabric while retaining its unfolding movement, use a compatible [source-edit workflow](recipe-source-edit.md) with the source video. Human performance transfer is not a universal solution for product motion, camera moves or every scene edit. Check the chosen operation's supported references instead of applying the general image-only recipe.

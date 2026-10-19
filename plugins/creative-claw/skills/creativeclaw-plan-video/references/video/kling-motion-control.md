@@ -2,9 +2,9 @@
 
 For a character copying an existing movement, start with [motion transfer](motion-transfer.md). Use the target appearance image and driving video; facial binding is optional for this simple performance-transfer workflow.
 
-## Face/person swap workflow
+## Face swap with this model (only when named)
 
-Prefer this model for a face/person swap or transferring a recorded performance. It generates a new video from an appearance image and driving performance, so exact preservation is not guaranteed. Honor an explicit model choice; H3 Max Recast remains an alternative for requested multi-person or multi-shot recasting.
+To swap or recast people in existing footage, including face-only swaps, use `swap_video_characters`: it keeps the scene, shows free previews and handles several people. Follow this workflow only when the user names Kling Motion Control for a swap. This model generates a new video from an appearance image and driving performance, so exact preservation is not guaranteed.
 
 1. Inspect the source and choose a clear frame of the intended person. Prefer a continuous shot with one unobstructed performer. If other people take the foreground, the model may follow the wrong person, change clothing or remove someone. Do not promise that a prompt alone selects a face reliably.
 2. Prepare an appearance image from that source frame, replacing only the target face with the supplied identity while retaining hair, clothing, body, other people, background and framing. Reuse an approved suitable image when available. Include any paid image preparation in the authorized scope. A portrait alone also supplies its clothing and background, so it is insufficient when the wedding scene or original outfit should stay.

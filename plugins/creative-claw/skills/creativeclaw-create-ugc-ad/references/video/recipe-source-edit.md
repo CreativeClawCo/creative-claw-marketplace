@@ -20,11 +20,9 @@ Resolve the edited interval and concatenate it between untouched spans. Inspect 
 
 Example request: "Replace the actor in this clip with my Character."
 
-Choose the route by what has to stay.
+**Swap the person, keep the scene** (one or several people, whole character or face only): call `swap_video_characters`. It picks frames, shows the new people in three free previews, waits for approval in Review mode, and renders with Seedance 2.5 while keeping motion, camera, cuts and audio. Name who becomes whom in `instructions`; the new people get their reference clothes unless the user asks to keep the original outfit. Use Kling Motion Control Pro or H3 Max Recast for a swap only when the user names that model.
 
-**Face/person swap:** prefer `video/kling-3.0-motion-control-pro`. Follow [Kling Motion Control Pro](kling-motion-control.md): prepare a source-scene image with only the target face replaced, pass it in `image_urls` with one 3 to 30 second source in `video_urls`, use video orientation and one facial element with both image fields, and identify the intended target as `@Element1`. Inspect other people, clothing and output duration; exact preservation is not guaranteed. Use H3 Max Recast only when explicitly selected for multi-person or multi-shot recasting, following its [guide](h3-max-recast.md).
-
-**The look changes too** (outfit, setting, style), or the clip is outside those limits: make the new look as images before any video.
+**The setting or style changes too**, beyond the people: make the new look as images before any video.
 
 1. Find the shots with `extract_frames` in timeline mode and view the result with `load_image`. For each shot the person appears in, get one clean frame: `trim_video` to that shot, then `extract_frames` with `mode: "single"`.
 2. Edit that exact frame with `generate_image`: `image_url` = the extracted frame, `extras.image_urls` = the Character sheet and face portrait, roles named. Ask for one change, for example: "Replace only the person in Image 1 with the person in Image 2. Keep the pose, framing, lighting, background and every other detail unchanged."
