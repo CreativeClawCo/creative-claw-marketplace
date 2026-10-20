@@ -14,6 +14,7 @@ Compact orientation, checked 2026-10-06:
 | H3 / H3 Max / H3 Max Fast | H3 documents English, Chinese and several other dialogue languages. Max/Fast use that family baseline as inherited guidance, not separately published language validation. Get the full list from `get_model_params`. |
 | H3 Max Recast and Kling Motion Control Pro | Preserve the source video soundtrack, or remove it where supported. This does not establish native generated-speech or translation support; the recorded language comes from the source. |
 | Seedance 2.5 | English and Chinese, plus other documented languages including Spanish, Japanese and Arabic. Get the complete version-specific list from `get_model_params`; do not assume all Seedance versions share it. |
+| FLUX 3 Max (checked 2026-10-20) | Native audio is documented and fal demonstrates English dialogue. No verified per-language reliability list is published for these exact endpoints. Language-specific reliability remains unverified. Read `get_model_params` and do not borrow a different FLUX version's language list. Source: [fal image-to-video API](https://fal.ai/models/blackforestlabs/flux-3-max/image-to-video/api). |
 
 An audio reference can guide a newly generated voice without preserving its words, language or timing. It does not make an unverified language reliable. Prompt-language support and a brand's TTS or translation language list do not establish video-dialogue support.
 

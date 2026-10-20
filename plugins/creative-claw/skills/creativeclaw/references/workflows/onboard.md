@@ -43,8 +43,8 @@ Do not overwhelm the user with the entire catalog. Offer one recommended model a
 For example:
 
 ```text
-I recommend Nano Banana 2 for this image because it is the most cost-efficient
-default for most cases, with the best overall quality, speed, and cost balance.
+I would use Nano Banana 2 for this image. It is our general default for generation
+and targeted edits, with balanced quality, speed, and cost.
 If exact typography is the priority, GPT Image 2.5 Sunburst is the stronger
 alternative. I can generate one candidate or compare both.
 ```

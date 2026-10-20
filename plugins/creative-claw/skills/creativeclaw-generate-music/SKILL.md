@@ -1,6 +1,6 @@
 ---
 name: creativeclaw-generate-music
-description: "Compose scores, beds, jingles, stings, themes, instrumentals, or vocal songs with Creative Claw (Lyria 3.5, ElevenLabs Music, MiniMax Music, or Mureka V9.5 when available). Use for new music, not speech or isolated non-musical sound effects."
+description: "Compose songs and instrumentals with Mureka V9.5, background or image-inspired music with Lyria 3.5, or exact-duration music with ElevenLabs. Also remix songs or replace selected lyrics. Use for music, not speech or sound effects."
 ---
 
 # Generate Music
@@ -17,12 +17,14 @@ Create a finished music asset with `generate_music`. Route narration or dialogue
 
 | Need | Model | Notes |
 | --- | --- | --- |
-| Most music: songs, instrumentals, beds, scores | `music/lyria-3.5` (default) | About 30 to 180 s; `music_length_ms` is guidance, not exact. Up to 10 `image_urls` as visual inspiration. `force_instrumental` defaults to true. |
+| Full-length vocal songs, expressive musical performances, custom or automatic lyrics, instrumentals | `music/mureka-v9.5` | One MP3, model chooses length. Instrumental or supplied lyrics: 30 credits; automatic lyrics and singing: 100 credits. Optional audio style reference. Read [Mureka guidance](references/mureka.md). |
+| Background beds, scores, or image-inspired tracks | `music/lyria-3.5` (omitted-model default) | About 30 to 180 s; `music_length_ms` is guidance, not exact. Up to 10 `image_urls` as visual inspiration. `force_instrumental` defaults to true. |
 | Exact length, or a sting under 30 s | `music/elevenlabs-music-v2.5` | Exact 3 s to 10 min via `music_length_ms` (default 30 s). Prompt up to 4,100 characters. `output_format` selectable. `force_instrumental` defaults to true. |
-| Lyrics-led vocal song | `music/minimax-music-3` | Requires `lyrics` with section tags ([verse], [chorus], [bridge], [outro]…) each on its own line; text on the tag's line is dropped. Supports `seed` to reproduce or refine a take. No `force_instrumental`. `music_length_ms` is an upper bound (up to 5 min). |
-| Mureka vocal song or instrumental | `music/mureka-v9.5` (when available) | One MP3, model chooses length. Instrumental or supplied lyrics: 30 credits; automatic lyrics and singing: 100 credits. Read [Mureka guidance](references/mureka.md) for modes, limits, and prompting. |
+| Remix an existing song or sung vocal recording | `music/mureka-remix` | Supply `audio_url` with detectable musical tempo, not ordinary speech. Read its current schema. |
+| Replace lyrics in a selected source time range | `music/mureka-region-edit` | Supply `audio_url`, replacement lyrics, and the millisecond edit range from its current schema. |
+| Explicit MiniMax choice or a requirement for its seed/quality controls | `music/minimax-music-3` | Requires `lyrics` with section tags on separate lines. No `force_instrumental`. `music_length_ms` is an upper bound (up to 5 min). |
 
-Honor an explicit model choice. Fetch `get_model_params` for the selected model when its schema is not already known. Confirm Mureka availability through live model discovery or its returned schema before using it; if unavailable, explain and offer an available model without silently substituting it.
+Use Mureka V9.5 for full-length songs and expressive musical performances, Lyria for background or image-inspired tracks, and ElevenLabs for exact duration or format. Honor an explicit model choice. Fetch `get_model_params` for the selected model when its schema is not already known; if unavailable, explain and offer an available model without silently substituting it.
 
 ## Workflow
 
@@ -38,7 +40,7 @@ Honor an explicit model choice. Fetch `get_model_params` for the selected model 
 - Pass only the fields the selected model supports. Do not send sound-effect fields such as `duration_seconds`, `loop`, or `prompt_influence`.
 - For instrumental work, keep `force_instrumental: true` (Lyria, ElevenLabs, Mureka) and say "instrumental, no vocals" in the prompt. For vocals, set it to `false` and describe the vocal role. For Mureka, choose supplied or automatic lyrics deliberately; their costs differ.
 - Describe musical traits, never a named artist, band, song, or copyrighted lyrics.
-- Upstream features that are not tool fields (composition plans, reference audio, inpainting, stems) are unavailable. Don't invent parameters for them.
+- For Mureka style inspiration, pass `audio_url` or `extras.reference_audio_url` as documented by the live schema. Longer references are cut to their first 30 seconds, and the reference replaces the style prompt. Use the separate Remix and Region Edit models for those operations. Do not invent upstream composition-plan, stem, voice-cloning, or extension parameters.
 
 ## Completion standard
 

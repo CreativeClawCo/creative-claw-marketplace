@@ -4,7 +4,7 @@ Read when selecting or prompting `music/mureka-v9.5`. This reference adapts Skyw
 
 ## Availability and controls
 
-Confirm availability with `list_models({ category: "audio" })` or `get_model_params({ model: "music/mureka-v9.5" })`; reuse a schema already returned in this task. This reference does not establish that the connected server supports the model. If unavailable, explain and offer available alternatives. Keep Lyria 3.5 as the general default.
+Use Mureka V9.5 for full-length vocal songs, expressive performances, custom or automatic lyrics, and instrumentals. Use Lyria 3.5 for background or image-inspired music; it remains the tool's omitted-model default. Fetch `get_model_params({ model: "music/mureka-v9.5" })` when its schema is missing from the task. If unavailable, explain and offer available alternatives.
 
 Use Creative Claw tools and account credits. The upstream CLI, API-key setup, Mureka 8 recommendation, multi-choice defaults, and automatic generation retries do not apply here. No customer Mureka API key or separate installation is needed.
 
@@ -18,7 +18,9 @@ Provide `model`, `prompt`, `lyrics`, and `force_instrumental` directly to `gener
 
 All modes require a nonempty `prompt` and produce one MP3. The model chooses length, up to 4 minutes 30 seconds for instrumentals or 5 minutes 30 seconds for vocal songs. Timing described in prose is a creative request, not a duration guarantee. Use ElevenLabs Music for exact duration or short stings.
 
-`lyrics` together with `force_instrumental: true` is invalid. Do not provide `music_length_ms`, `output_format`, `seed`, `n`, image or audio references, vocal or melody IDs, or inference controls. Reference uploads, singing voice cloning, stems, extension, and section editing from the vendor skill are not exposed by this integration.
+`lyrics` together with `force_instrumental: true` is invalid. Do not provide `music_length_ms`, `output_format`, `seed`, `n`, image references, vocal or melody IDs, or inference controls. Singing voice cloning, stems and extension are not exposed here. For remixing or replacing lyrics in a time range, use the separate `music/mureka-remix` or `music/mureka-region-edit` model and its current schema.
+
+For style inspiration, supply `audio_url` or `extras.reference_audio_url` (extras wins when both are supplied). The source must be at least 30 seconds; longer recordings are cut to their first 30 seconds, with a prepared excerpt up to 10 MB. The reference guides style instead of the style prompt and does not guarantee identical melody or voice. Keep the required prompt for context and supplied lyrics in `lyrics`. The mode price is unchanged. Let Creative Claw manage provider uploads.
 
 ## Write the musical brief
 

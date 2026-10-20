@@ -127,7 +127,7 @@ Translate editorial needs into musical events before prompting:
 - **Lyria 3.5 (default):** accepts long prompts with section labels and timestamps. Up to 10 `image_urls` can set the mood; say what to take from them. Length is approximate within about 30 to 180 s.
 - **ElevenLabs Music v2.5:** prompt up to 4,100 characters; exact length from 3 s to 10 min, so use it for stings, idents and picture-locked cues. Strong on vocal-led material, acoustic genres, rock, orchestral and cinematic scores.
 - **MiniMax Music 3:** the `prompt` is the production brief (genre, BPM, key, vocals, instrumentation, mix); the words go in `lyrics`, one section tag per line. Reuse the returned `seed` with the same prompt and lyrics to reproduce or refine a take.
-- **Mureka V9.5 (when available):** read [Mureka guidance](mureka.md). One MP3 with model-chosen length; instrumental or supplied lyrics cost 30 credits, automatic lyrics and singing cost 100. No duration, seed, or reference controls.
+- **Mureka V9.5:** use for full-length vocal songs, expressive musical performances, supplied or automatic lyrics, and instrumentals. Read [Mureka guidance](mureka.md). One MP3 with model-chosen length; instrumental or supplied lyrics cost 30 credits, automatic lyrics and singing cost 100. An audio style reference replaces the style prompt; no duration or seed controls. Use separate Mureka Remix or Region Edit models for those operations.
 
 Upstream features that are not `generate_music` fields (composition plans, audio references, section editing, inpainting) are unavailable. Do not promise or emulate them by inventing parameters.
 

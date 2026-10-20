@@ -22,11 +22,12 @@ Runtime discovery is authoritative. Start here:
 | General generation, references, or source edit | `video/gemini-omni-flash` | Default; fast multimodal 3–10s generation/edit with native audio. |
 | Premium cinematic, reference-rich or long video | `video/seedance-2.5` | 4–30s, native audio, optional first/last frames, and large mixed-reference sets. A 480p request is a usable draft; `extras.draft_job_id` finalizes the same take at 1080p (720p starts a new take). |
 | Fast cinematic generation with strong adherence | `video/minimax-h3-max` | 5–15s, 480p/768p/1080p, native audio, optional first/last frames, and multimodal references. |
+| Text or image-driven video alongside H3 Max | `video/flux-3-max` | 5 to 20 seconds, 720p/1080p, generated audio, first/last frames or up to 10 timed keyframes. No video/audio references. Available before purchase and eligible for the free first video. |
 | Cheap, fast drafts | `video/minimax-h3-max-turbo` | Present as H3 Max Fast; text or start-frame drafts. Reference requests use the shared H3 Max reference route. |
 
 For native-audio single-pass clips and document or webpage briefs, recommend Seedance 2.5. Read the brief and prepare a prompt with supported media references; Seedance does not accept Wan's direct document/webpage fields. Use Wan only when explicitly requested.
 
-Recommend these models first. Use another runtime-listed model, including Seedance Mini, only when the user explicitly requests it or the recommended choices cannot perform the operation.
+Choose among these models by the required inputs, duration and cost. Use another runtime-listed model, including Seedance Mini, when the user explicitly requests it or these choices cannot perform the operation.
 
 For source-video work, use the edit-specific ranking in `edit-video.md` instead of the table above: `video/minimax-h3-max-extend` to extend a clip (Seedance 2.5 `extend` only for heavy references or a long continuation), `video/minimax-h3-max-insert` to replace an interval with new footage, Gemini Omni for targeted edits up to 10 seconds, and Seedance 2.5 for 4–30 second edits. Preserve untouched source spans and generate only the interval or continuation that needs new pixels. Never recommend or proactively route to an LTX or DreamActor model.
 

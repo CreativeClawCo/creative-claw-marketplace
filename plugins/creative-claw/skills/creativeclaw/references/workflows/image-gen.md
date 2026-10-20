@@ -19,19 +19,17 @@ Runtime discovery is authoritative. These are current routing defaults:
 
 | Need                                                                           | Start with              | Why                                                             |
 | ------------------------------------------------------------------------------ | ----------------------- | --------------------------------------------------------------- |
-| General generation or edit                                                     | `image/nano-banana-2`   | Most cost-efficient default: the best quality, speed, and cost balance. |
-| Complex professional asset, precise typography, demanding multi-reference edit | `image/nano-banana-pro` | Higher reasoning and composition quality.                       |
+| General generation or edit                                                     | `image/nano-banana-2`   | Default with balanced quality, speed, and cost. |
+| Complex professional asset, precise typography, demanding multi-reference edit | `image/gpt-image-2.5-sunburst` | Instruction following, text rendering, and controlled editing. |
 | Fast everyday OpenAI image work                                                | `image/gpt-image-2.5-flare` | Faster GPT Image 2.5 generation and editing.                 |
-| Typography, 4K, or strict instruction adherence                                | `image/gpt-image-2.5-sunburst` | Precision-focused text rendering and editing.             |
 | Premium product or marketing imagery                                           | `image/seedream-5-pro`  | Flagship generation and precise multi-reference editing.        |
 | Transparent background | `image/gpt-image-2.5-flare` or `image/gpt-image-2.5-sunburst` | Set `extras.background: "transparent"` with PNG or WebP output. For an existing image, use `remove_background`. |
 
-Recommend Nano Banana 2 first for most image work. Surface the other four only when their specialty materially improves the requested result enough to justify moving beyond the cost-efficient default. Use another runtime-listed model only when the user explicitly requests it or the five recommended models cannot perform the required operation.
+Use Nano Banana 2 for most image work. Choose Sunburst, Flare, or Seedream 5 Pro when their specialty fits the task. Nano Banana Pro remains available when explicitly selected. Use another runtime-listed model when the user asks or these routes cannot perform the operation.
 
 After choosing, use the corresponding focused skill for exact prompting and reference behavior:
 
 - nano-banana-2 model reference — default generation, conversational editing, up to 14 role-mapped references, extreme ratios, and optional search grounding.
-- nano-banana-pro model reference — complex professional layouts, demanding multi-reference composition, and precise multilingual typography.
 - gpt-image-2 model reference — strong instruction following, transparent output, masks when honored by the live route, and up to 16 ordered edit inputs.
 - seedream-5-pro model reference — premium product/editorial work, spatial edits, and up to 10 ordered references.
 
