@@ -11,20 +11,34 @@ For each Creative Claw tool call that exposes it, pass the optional `skills_used
 
 Read [shared execution guidance](references/workflow-basics.md) before tools and [recording, upload, consent and reuse](references/voices/cloning.md) for this workflow.
 
-Ask the user for a recording of at least one minute of clean solo speech, upload it privately, clone it, audition a short sample, and reuse the saved Character. One to two minutes is our onboarding recommendation, not a universal provider API minimum.
-
 Clone only the user's own voice, or a voice whose speaker has given explicit permission. Do not clone a public figure or anyone else without their permission. Without a consented recording, offer design_voice instead ([voice design](references/voices/voice-design.md)).
 
+## Default: the voice card
+
+When the user wants to clone their voice and hasn't given you an audio file, call `clone_voice` without audio: `clone_voice({ consent: false })`, plus `language` when you know it and `character_id` when the voice belongs on an existing Character. Leave out `provider`. Its result is the voice card.
+
+The card does the whole flow: the consent agreement, a one-minute reading script in the user's language (or an uploaded file), the clone on Cartesia, a test line, an optional blind comparison with ElevenLabs and Fish Audio, and saving the voice as a new Character or on one of the user's Characters. It also shows plan and voice-limit messages before anyone records.
+
+- Don't ask for consent or a recording in chat first, and don't send the user to record with another app or a command line; the card collects both.
+- Don't call `clone_voice` for a recording made in the card. Wait for the card's note, which gives the `character_id` and the model to use.
+- Where the host gives the card no microphone, the card offers upload and recording on a phone or in the browser. Nothing to do in chat.
+- If no card shows, the result is `status: "awaiting_sample"` (for example in a terminal) or, from a server without the card, `reason: "voice_sample_not_provided"`. Nothing was charged. Follow its `recoveryOptions` through the file route below.
+
+## When the user already has a recording
+
+For an attached file, a local file or a link:
+
 1. Identify the intended delivery and an existing Character, if any. Reuse an avatar's Character instead of creating a duplicate.
-2. Ask for consent once, up front, in the same message as the recording request: name the provider, quote the full consent statement with its terms and privacy links from [the reference](references/voices/cloning.md), and ask for the recording's language. One "I agree" plus the language covers both. Possessing a recording is not consent.
+2. Ask for consent once, up front: name the provider, quote the full consent statement with its terms and privacy links from [the reference](references/voices/cloning.md), and ask for the recording's language. One "I agree" plus the language covers both. Possessing a recording is not consent.
 3. Import with purpose `voice_clone` to obtain a private `audio_asset_id`. Follow the reference for the current client's upload route.
-4. As soon as the upload returns, call `clone_voice` with that asset, `consent: true`, the recording's `language` code (for example `he`; it defaults to `en`), and `provider: "cartesia"` (the default), or `provider: "elevenlabs"` when the user chooses ElevenLabs. Do not ask for consent or confirmation again: the step 2 agreement is the explicit consent the upload result mentions. Use `character_id` for an existing Character or `character_name` for a new voice-only Character. The tool saves the clone automatically.
-5. Audition using `generate_speech` and the returned `character_id`. Read the selected model reference below. Include a name, number and natural sentence in the intended language. Present the audio for approval before a longer production.
-6. Reuse `character_id`, not the private source recording, for future speech. Never replace a saved voice merely to change speech models.
+4. As soon as the upload returns, call `clone_voice` with that asset, `consent: true`, the recording's `language` code (for example `he`; it defaults to `en`), and `provider: "cartesia"` (the default), or `provider: "elevenlabs"` when the user chooses ElevenLabs. Do not ask for consent or confirmation again. Use `character_id` for an existing Character or `character_name` for a new voice-only Character. The tool saves the clone automatically.
+5. Audition using `generate_speech` and the returned `character_id`. Include a name, number and natural sentence in the intended language. Present the audio for approval before a longer production.
+
+Reuse `character_id`, not the private source recording, for future speech. Never replace a saved voice merely to change speech models.
 
 ## Choose the synthesis model
 
-Speak a clone with its provider's model, and pass the model explicitly.
+Each clone saves its engine on the Character: the clone's own provider, or the one the user picked in the card. `generate_speech` with that `character_id` and no `model` uses it. Pass `model` only to override it, using the matching guide:
 
 - [Cartesia Sonic](references/voices/cartesia.md): a Cartesia clone.
 - [ElevenLabs v2](references/voices/elevenlabs-v2.md): an ElevenLabs clone, steady read in its supported languages.

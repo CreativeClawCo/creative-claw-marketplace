@@ -54,7 +54,7 @@ Use the elevenlabs-v2 model reference for a steady read from an ElevenLabs clone
 
 ## Voice cloning and design
 
-Use `creativeclaw-clone-voice` for the complete consent, recording, import, replacement, cloning, and audition workflow. `clone_voice` makes a Cartesia clone by default, or an ElevenLabs clone with `provider: "elevenlabs"`, and saves it on a Character; without `character_id` it creates a voice-only Character. Reuse it with `generate_speech({ character_id, model, text })` on its provider's model: Cartesia Sonic for a Cartesia clone; ElevenLabs v2 (steady) or v4 (expressive, dialogue) for an ElevenLabs clone.
+Use `creativeclaw-clone-voice` for the complete consent, recording, import, replacement, cloning, and audition workflow. To record a new voice, call `clone_voice` without audio; its voice card collects consent, records, clones, compares and saves on its own. `clone_voice` makes a Cartesia clone by default, or an ElevenLabs clone with `provider: "elevenlabs"`, and saves it on a Character; without `character_id` it creates a voice-only Character. Reuse it with `generate_speech({ character_id, model, text })` on its provider's model: Cartesia Sonic for a Cartesia clone; ElevenLabs v2 (steady) or v4 (expressive, dialogue) for an ElevenLabs clone.
 
 For a new voice from a description, use `design_voice` (see `creativeclaw-generate-voiceover`): three auditions, then save the pick to a Character. Designed ElevenLabs voices speak with v4; Google-designed voices with `speech/gemini-3.8-flash-tts`.
 

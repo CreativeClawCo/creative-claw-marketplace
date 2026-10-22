@@ -1,5 +1,15 @@
 # Record, upload, clone, audition and reuse
 
+## The voice card (default)
+
+To record a new voice, call `clone_voice` without audio: `clone_voice({ consent: false })`, with `language` and `character_id` when known. Its result is the voice card. The card shows the consent statement with a checkbox, a one-minute script in the user's language, recording or upload, the Cartesia clone and a test line, an optional blind comparison with ElevenLabs and Fish Audio, and the save step (a new Character or one of the user's). It shows plan and voice-limit messages itself; at the limit it asks which existing voice to replace.
+
+Don't ask for consent or a recording in chat before opening it, don't send the user to record with another app or a command line, and don't call `clone_voice` for that recording. The card's note gives the `character_id` and the engine; continue from there. Hosts without a microphone in the card get upload, and recording on a phone or in the browser, inside the card. Leave `provider` out: the card compares engines, and a Fish call is refused without `consent: true`.
+
+When no card shows, the result is `status: "awaiting_sample"` (a host that displays no cards, such as a terminal) or `reason: "voice_sample_not_provided"` (a server without the card). Neither means cloning failed, and nothing is charged. Follow its `recoveryOptions` with the route below: ask for consent and the language, upload the recording privately, then call `clone_voice` with the `audio_asset_id` and `consent: true`.
+
+The rest of this page covers a recording the user already has.
+
 ## Recording and consent
 
 Without a consented recording, offer a designed voice instead ([voice design](voice-design.md)).
@@ -17,7 +27,7 @@ Do not infer permission from an uploaded file. Never call `clone_voice` or set `
 ## Private upload
 
 - ChatGPT attachment: `import_chatgpt_media({ media_file: <actual attachment>, purpose: "voice_clone" })`.
-- Upload picker, for a recording the user already has on their device: `import_media({ purpose: "voice_clone" })`.
+- A recording on the user's device: `import_media({ purpose: "voice_clone" })` opens a private picker that returns the `audio_asset_id`.
 - Local file with byte-upload capability: `get_upload_url({ type: "audio", content_type: <MIME>, purpose: "voice_clone" })`, upload bytes, then `confirm_upload`.
 
 Use the resulting private `audio_asset_id`; do not ask the user to copy an ID already returned. Never publish a private sample to obtain a public URL. A user-supplied direct downloadable `audio_url` is accepted by clone_voice and copied privately, but prefer an already imported asset.
@@ -52,7 +62,7 @@ A clone speaks with its provider's model: a Cartesia clone with Cartesia Sonic; 
 
 Ask the user to assess identity, accent, clarity and pacing. Do not claim to have listened unless audio inspection was actually available. Adjust text/pronunciation/settings before replacing a good source. Noise or a consistently wrong identity usually merits a cleaner recording, not repeated paid synthesis.
 
-Reuse character_id for future generate_speech calls. ElevenLabs v2 and v4 reuse the same ElevenLabs clone. When the user selects Cartesia, a missing Cartesia clone can be created from the retained consented source. Selecting Fish can also create its missing private provider copy from the retained consented recording. Do not re-clone simply to switch models. Never silently substitute providers or stock voices after a failure.
+Reuse character_id for future generate_speech calls. Without `model`, generate_speech uses the engine saved on the Character (the clone's own provider, or the user's pick in the card). ElevenLabs v2 and v4 reuse the same ElevenLabs clone. When the user selects Cartesia, a missing Cartesia clone can be created from the retained consented source. Selecting Fish can also create its missing private provider copy from the retained consented recording. Do not re-clone simply to switch models. Never silently substitute providers or stock voices after a failure.
 
 A Character may contain both images and a voice. Its visual use in generated images/videos does not bring its voice into native video audio. For visible speech, make the speech first and use an audio-driven route. For an existing clip, recommend `video/sync-3` with supplied or embedded audio and automatic or manual speaker selection; keep HeyGen Lipsync as an alternative when explicitly selected; overlaying speech is not lip-sync. Do not expose private samples.
 
