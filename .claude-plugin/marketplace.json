@@ -10,7 +10,7 @@
       "name": "creative-claw",
       "source": "./plugins/creative-claw",
       "description": "Turn product photos into video ads and ad variations for TikTok, Instagram Reels and YouTube Shorts. AI image and video generation with Nano Banana, Seedance and Gemini Omni, voiceover and text to speech with ElevenLabs, and music with Mureka. Image to video, text to video, voice cloning, sound effects, UGC ads, product photoshoots, consistent characters and multi-shot films for social media and marketing. After adding, open the plugin's Connectors tab and sign in to Creative Claw.",
-      "version": "0.7.43",
+      "version": "0.7.44",
       "author": {
         "name": "Creative Claw Co."
       },

@@ -12,7 +12,7 @@ When the requested movement must follow an existing clip, read [motion transfer]
 | Seedance Mini | [Seedance Mini](seedance-mini.md), only when the user asks for it |
 | H3 Max, H3 Max Extend, H3 Max Insert, and H3 Max Fast/Turbo | [MiniMax H3 Max](minimax-h3-max.md), cinematic motion, cheap fast drafts, extending a clip, inserting new footage into an interval, and native audio |
 | Wan 3.0 | [Wan](wan-3.md), only when explicitly requested; recommend Seedance 2.5 instead |
-| Swap, replace or recast people in existing footage, including face-only swaps | `swap_video_characters`, not `generate_video`; it renders with Seedance 2.5 after three free previews |
+| Swap, replace or recast people in existing footage, including face-only swaps | `swap_video_characters`, not `generate_video`; three free previews, then Seedance 2.5 by default, or explicitly requested Wan Lite / Kling 4.0 |
 | video/kling-3.0-motion-control-pro named for a swap | [Kling Motion Control Pro](kling-motion-control.md); otherwise use `swap_video_characters` |
 | Copy a recorded movement or performance | [Motion transfer](motion-transfer.md), then the selected model guide; use an appearance image and driving video |
 | video/minimax-h3-max-recast requested by name in generate_video | [H3 Max Recast](h3-max-recast.md); otherwise use `swap_video_characters` |

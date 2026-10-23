@@ -37,3 +37,7 @@ Text/image inputs: 31.4 credits per output second at 720p or 47 at 1080p, rounde
 Video inputs use different billing. Reserve billed seconds = output + max(output, measured combined input-video seconds), counting every video element after cuts. Rate: 18.8 credits per billed second at 720p or 28.2 at 1080p. Final credits follow settled usage within the approved reserve. Use `estimate_generation` with the same inputs and cuts as generation; do not quote the text-only rate for a video-reference request.
 
 Pricing and availability are live facts. Refresh through tools instead of relying on this snapshot.
+
+## Swapping people in existing footage
+
+Use `swap_video_characters` with `video_model: "video/kling-4.0-omni"` for a Kling 4 swap. It provides three free scene previews and the normal Review/Auto flow, then edits the original source with approved previews and identity references. Swap supports 4 to 30 whole seconds, 720p (default) or 1080p, and up to seven combined photo/Character references. Longer or fractional sources are cut without changing speed. There is no 480p or native draft completion. Source audio is restored by default, and silent sources stay silent. Request an estimate with `estimate_generation`, operation `swap_video_characters`, using the same source and resolution. Review visual fidelity after rendering.

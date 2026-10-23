@@ -20,7 +20,7 @@ Resolve the edited interval and concatenate it between untouched spans. Inspect 
 
 Example request: "Replace the actor in this clip with my Character."
 
-**Swap the person, keep the scene** (one or several people, whole character or face only): call `swap_video_characters`. It picks frames, shows the new people in three free previews, waits for approval in Review mode, and renders with Seedance 2.5 while keeping motion, camera, cuts and audio. Name who becomes whom in `instructions`; the new people get their reference clothes unless the user asks to keep the original outfit. Use Kling Motion Control Pro or H3 Max Recast for a swap only when the user names that model.
+**Swap the person, keep the scene** (one or several people, whole character or face only): call `swap_video_characters`. It picks frames, shows the new people in three free previews, waits for approval in Review mode, and renders with Seedance 2.5 by default, or Wan Lite / Kling 4.0 when requested. It aims to keep motion, camera and cuts, and restores source audio by default. Kling accepts 4 to 30 whole seconds at 720p or 1080p with up to seven identity references and no native draft completion. Name who becomes whom in `instructions`; source outfits stay unless the user explicitly requests a wardrobe change. Use Kling Motion Control Pro or H3 Max Recast for a swap only when the user names that model.
 
 **The setting or style changes too**, beyond the people: make the new look as images before any video.
 
