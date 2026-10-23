@@ -21,6 +21,7 @@ Runtime discovery is authoritative. Start here:
 | --- | --- | --- |
 | General generation, references, or source edit | `video/gemini-omni-flash` | Default; fast multimodal 3–10s generation/edit with native audio. |
 | Premium cinematic, reference-rich or long video | `video/seedance-2.5` | 4–30s, native audio, optional first/last frames, and large mixed-reference sets. A 480p request is a usable draft; `extras.draft_job_id` finalizes the same take at 1080p (720p starts a new take). |
+| General Kling generation and editing | `video/kling-4.0-omni` | 3 to 30 whole seconds, 720p/1080p, always-on native audio, first/last frames, mixed references and source edits. Read [Kling 4](../video/kling-4.md) before using advanced elements. |
 | Fast cinematic generation with strong adherence | `video/minimax-h3-max` | 5–15s, 480p/768p/1080p, native audio, optional first/last frames, and multimodal references. |
 | Text or image-driven video alongside H3 Max | `video/flux-3-max` | 5 to 20 seconds, 720p/1080p, generated audio, first/last frames or up to 10 timed keyframes. No video/audio references. Available before purchase and eligible for the free first video. |
 | Cheap, fast drafts | `video/minimax-h3-max-turbo` | Present as H3 Max Fast; text or start-frame drafts. Reference requests use the shared H3 Max reference route. |
@@ -38,7 +39,7 @@ For source-video work, use the edit-specific ranking in `edit-video.md` instead 
 - `last_frame_url` or the model's discovered boundary-frame field controls the end only on compatible models.
 - `image_urls`, `video_urls`, and `audio_urls` are top-level video-tool reference arrays when supported. Do not move them into `extras` unless `get_model_params` explicitly says so.
 - `character_id` appends the saved image to `image_urls` as a reference, never a start frame. Use it in reference mode; omit it with `image_url`/`last_frame_url` (the server rejects that mix).
-- Use the exact token syntax required by the model. Examples include Seedance `@Image1`/`@Video1`/`@Audio1`, Kling `@Element1`, HappyHorse `@character1`, and Grok `<IMAGE_0>`. Verify the current schema and pass the prompt verbatim.
+- Use the exact token syntax required by the model. Examples include Seedance `@Image1`/`@Video1`/`@Audio1`, Kling 4 `@Image1`/`@Video1` or discovered custom `@id` handles, HappyHorse `@character1`, and Grok `<IMAGE_0>`. Verify the current schema and pass the prompt verbatim.
 - Do not feed a labeled storyboard grid to a video model. Use clean, full-bleed generation frames.
 
 ## Model-specific guardrails
