@@ -38,7 +38,7 @@ Reuse `character_id`, not the private source recording, for future speech. Never
 
 ## Choose the synthesis model
 
-Each clone saves its engine on the Character: the clone's own provider, or the one the user picked in the card. `generate_speech` with that `character_id` and no `model` uses it. Pass `model` only to override it, using the matching guide:
+Each clone saves its engine on the Character: the clone's own provider, or the one the user picked in the card. `generate_speech` with that `character_id` and no `model` uses it. Set `model` only to override it, using the matching guide:
 
 - [Cartesia Sonic](references/voices/cartesia.md): a Cartesia clone.
 - [ElevenLabs v2](references/voices/elevenlabs-v2.md): an ElevenLabs clone, steady read in its supported languages.
