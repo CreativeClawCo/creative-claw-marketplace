@@ -40,7 +40,7 @@ Use Mureka V9.5 for full-length songs and expressive musical performances, Lyria
 - Pass only the fields the selected model supports. Do not send sound-effect fields such as `duration_seconds`, `loop`, or `prompt_influence`.
 - For instrumental work, keep `force_instrumental: true` (Lyria, ElevenLabs, Mureka) and say "instrumental, no vocals" in the prompt. For vocals, set it to `false` and describe the vocal role. For Mureka, choose supplied or automatic lyrics deliberately; their costs differ.
 - Describe musical traits, never a named artist, band, song, or copyrighted lyrics.
-- For Mureka style inspiration, pass `audio_url` or `extras.reference_audio_url` as documented by the live schema. Longer references are cut to their first 30 seconds, and the reference replaces the style prompt. Use the separate Remix and Region Edit models for those operations. Do not invent upstream composition-plan, stem, voice-cloning, or extension parameters.
+- For Mureka style inspiration, provide `audio_url` or `extras.reference_audio_url` as documented by the live schema. Longer references are cut to their first 30 seconds, and the reference replaces the style prompt. Use the separate Remix and Region Edit models for those operations. Do not invent upstream composition-plan, stem, voice-cloning, or extension parameters.
 
 ## Completion standard
 
