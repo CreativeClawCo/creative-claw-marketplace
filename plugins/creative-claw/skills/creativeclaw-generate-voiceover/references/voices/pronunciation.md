@@ -7,7 +7,7 @@ IPA and phoneme spelling are a repair tool, not a default. Never add them to a s
 1. **Write the script normally.** Give every Hebrew word full niqqud, as [speech localization](speech-localization.md) requires. Keep acronyms, brands and English words in Latin letters as they are normally written: "AI", not אֵיי-אַיי (v4 read that as "aa").
 2. **Generate and check.** Run `transcribe` on the take (see Check the take below). Ask the user to listen when stress or accent matters.
 3. **Only if a word comes out wrong, fix that word.** Try spelling first: correct the niqqud (מִסּוֹכֵן fixed מסוכן being read as "dangerous"). If that is not enough, replace only that word with the selected model's phonetic syntax from the table below. If the model has no phonetic input, respell the word, or speak that line with ElevenLabs v4.
-4. **Keep a fix that worked.** Reuse the same spelling of that word for the rest of the project, on the same model and voice.
+4. **Keep a fix that worked.** Once the user approves it by ear, offer to save it as a saved pronunciation (below) so every later take uses it automatically. Otherwise reuse the same spelling of that word for the rest of the project, on the same model and voice.
 
 Use IPA up front only when the user asks for it or supplies it, and only on a model that decodes it.
 
@@ -49,6 +49,17 @@ Fish also decoded slashed IPA in English and Hebrew testing, and the Hebrew take
 - Write a failing acronym letter by letter: AI is `/eɪ aɪ/`. Plain Latin capitals ("AI", "A.I.") already work on v4, so try them first.
 - Keep Hebrew prefixes in Hebrew and put only the word in IPA: `וְהַ/eɪ aɪ/`.
 - Use the same transcription every time the word repeats.
+
+## Saved pronunciations
+
+A saved pronunciation is a workspace rule: every later `generate_speech` call on that engine family swaps the word for the approved fix before generating. Save only a fix the user approved after hearing it, never an experiment.
+
+- Save: `add_speech_pronunciations({ entries: [{ family, language, term, replacement, variants }] })`. `family` is the engine the fix was tested on: `elevenlabs` covers v2, v3 and v4, and `cartesia`, `fish` and `google` are separate. `term` is the word or phrase as the user normally writes it. `replacement` is exactly the text that worked, in that model's syntax from the table above. Saving the same term again replaces it.
+- Hebrew: save the term without niqqud. It then matches the word with any niqqud, so the fully vowelized script still triggers it. A prefixed form is a different word: add והדקו or שהדקו as `variants` if the script uses them. Save a pointed term only to keep a homograph apart; it matches only that pointing and beats the plain rule.
+- Rules never cross families. An ElevenLabs IPA rule does nothing on Cartesia; save a separate Cartesia `<< >>` rule only after testing it there.
+- Rules apply automatically, so do not also write the fix into the script. To hear the model without saved rules, for example to retest a word, set top-level `apply_saved_pronunciations: false`.
+- The result's `pronunciationReplacements` lists every swap made. The transcript, word timings and captions keep the original words. Tell the user when a saved rule was used.
+- Inspect with `list_speech_pronunciations({ family, language })` and remove with `delete_speech_pronunciations({ ids })`. Past recordings keep the rules they were made with. If a saved rule misreads the word in a new context, offer to delete it or bypass it for that take.
 
 ## Check the take
 
