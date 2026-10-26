@@ -40,6 +40,7 @@ Send one short message with no tool calls:
 
 - Two or three sentences on what Creative Claw makes from a chat: images and product shots; video clips, ads and multi-shot films; voiceovers, designed voices, music and sound effects; a reusable Character of the user or an invented one; a brand theme that keeps everything on-brand; and edits such as captions, cuts and merges. Lead with what fits the user; do not recite a catalog.
 - Then ask what they want to make first, and invite references in the same message: photos of themselves, a product photo, a logo, or their brand's website. Say references are optional and make the result look like theirs.
+- In the same message, ask whether they want to star in it themselves or have a recurring character, such as a mascot, a pet or an invented hero, that looks the same in every video.
 
 If they have no idea yet, offer three starting points: a clip starring them, a clip for their brand or product, or a surprise. For a surprise, invent one striking subject and scene, not a generic one.
 
@@ -50,13 +51,15 @@ Prepare only what the first video needs; leave the rest for step 6.
 - **Photos of themselves:** import them, make one Character sheet, and save it as a Character once they approve the likeness. Follow [avatar and character-sheet production](references/avatars/identity.md); `creativeclaw-create-avatar` is the full workflow.
 - **Logo, brand files or a website:** import the logo and save a brand theme with it, plus the colors, fonts and notes the user gave or confirmed. Follow [brand themes](references/workflows/brand-theme.md). Do not invent brand values; show anything that is a guess and ask before saving. Keep the exact logo as a source asset.
 - **Product photo:** import it and use it as the product anchor as it is.
-- **Nothing supplied:** skip this step and build the look from their brief.
+- **Nothing supplied:** skip this step and build the look from their brief. If the brief has a person, pet, mascot or hero they will want again, save it as a Character from the approved preview image in step 3.
 
 ## 3. Show how it will look
 
 Before any video, make the preview image: one clean keyframe at the video's aspect ratio with `image/nano-banana-2`, built from the anchors above. Follow [reference-first production](references/video/reference-production.md) and the [image model index](references/images/index.md). Tell the user first that this is the one image the video will be made from.
 
 Show it and ask whether it looks right. Apply one targeted fix when they ask for a change. The video waits until they are happy with the image.
+
+When the approved image shows a recurring subject that is not saved yet (an invented hero, a mascot, a pet), offer once to save it as a Character with `create_character` before the video, so their next videos keep the same look. Save it only when they agree.
 
 ## 4. First video
 
@@ -66,7 +69,7 @@ Use `video/minimax-h3-max` for the first video unless the user names another mod
 - People or several subjects: the keyframe and the identity anchor go in `image_urls`. An exact opening such as a product hero or a logo reveal: the keyframe goes in `image_url` alone.
 - One subject action, one camera move, ambience and effects, no music, and no spoken lines unless the user asked for speech.
 
-Before submitting, tell the user how it starts: in Review mode a card shows the prompt, references and settings, and the video starts only when they press Generate; in Auto it starts right away. Never press Generate for them or resubmit while the card is waiting. One request is one attempt; another take needs their ask.
+Before submitting, tell the user how it starts: in Review mode a card shows the prompt, references and settings, and the video starts only when they press Generate; in Auto it starts right away. If the result says this video already started, tell them it is rendering and that later videos wait for their Generate click in Review mode. Never press Generate for them or resubmit while the card is waiting. One request is one attempt; another take needs their ask.
 
 ## 5. A voice, while the video renders
 
@@ -79,6 +82,7 @@ Once the clip and the voice both exist, offer one use of it: a short line spoken
 Offer, once each, whichever of these is still missing:
 
 - **Appear in their own videos:** a few clear photos of themselves become a Character sheet and a saved Character (step 2).
+- **A recurring character:** a mascot, pet or invented hero saved once as a Character, so it stays the same across videos; `creativeclaw-create-avatar` is the workflow.
 - **Their own voice:** it can be cloned from a recording they make, with their explicit consent. Say that this one needs some account configuration first, and start it only when they ask; `creativeclaw-clone-voice` is the workflow.
 - **Brand theme:** logo, colors and fonts saved once and applied to later work (step 2).
 
