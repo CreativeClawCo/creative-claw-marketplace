@@ -44,7 +44,7 @@ One connection to Creative Claw's MCP server gives the skills live model discove
 | **Models**        | `list_models`, `get_model_params`, `search_examples`                                                                |
 | **Assets**        | `search_assets`, `update_asset`, `delete_asset`, `upload_asset`, `import_media`, `get_upload_url`, `confirm_upload` |
 | **Brand themes**  | `get_theme`, `list_themes`, `update_theme`                                                                          |
-| **Characters**    | `create_character`, `manage_character`, `delete_character`, `list_characters`                                      |
+| **Characters**    | `create_character`, `update_character`, `delete_character`, `list_characters`                                      |
 | **Films**         | `create_film_project`, `update_film_project`, `get_film_project`, `list_film_projects`, `assemble_film`             |
 | **Feedback**      | `submit_feedback`                                                                                                   |
 | **Cost and account** | `estimate_generation`, `manage_account`; `get_credits_balance` where the client exposes it                        |

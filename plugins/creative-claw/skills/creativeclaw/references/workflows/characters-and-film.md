@@ -7,7 +7,7 @@ Characters preserve visual identity across images and video and can carry voices
 1. Collect the Character's name, role, appearance, wardrobe, personality, and constraints.
 2. Search for an existing approved reference image or generate one.
 3. Create the Character with `create_character({ title, description, image_url })`.
-4. For a reusable voice: consenting speaker's recording → `creativeclaw-clone-voice`; description → `design_voice`; stock → `manage_character({ id, voice_model, voice_id })`. Do not clone or replace a voice without explicit consent.
+4. For a reusable voice: consenting speaker's recording → `creativeclaw-clone-voice`; description → `design_voice`; stock → `update_character({ id, voice_model, voice_id })`. Do not clone or replace a voice without explicit consent.
 
 ### Reference image
 
@@ -75,6 +75,6 @@ Honor the requested script, storyboard, and final review stages, and the approva
 
 ## Tools
 
-- Characters: `create_character`, `manage_character` (update by `id`), `delete_character` (`{ id, confirm: true }`), `list_characters`, `design_voice`. Older clients without `create_character` or `delete_character`: `manage_character` without `id` creates, and `{ id, delete: true }` deletes.
+- Characters: `create_character`, `update_character` (update by `id`), `delete_character` (`{ id, confirm: true }`), `list_characters`, `design_voice`. Older clients that expose only `manage_character` can still create without `id`, update with `id`, and delete with `{ id, delete: true }`.
 - Films: `create_film_project`, `update_film_project`, `get_film_project`, `list_film_projects`, `assemble_film`.
 - Media: `generate_image`, `generate_video`, `generate_speech`, `clone_voice`, `extract_frames`, `merge_media`, `add_audio_to_video`, `check_job`.

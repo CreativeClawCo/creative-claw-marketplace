@@ -6,7 +6,7 @@ Use `design_voice` when the user wants a new synthetic voice from a description 
 
 - A consenting speaker's recording → `clone_voice` (creativeclaw-clone-voice).
 - A description → `design_voice`.
-- A stock catalog voice → `manage_character({ id, voice_model, voice_id })`. This saves the choice on the Character without generating anything.
+- A stock catalog voice → `update_character({ id, voice_model, voice_id })`. This saves the choice on the Character without generating anything.
 
 ## Preview
 
@@ -24,12 +24,12 @@ Every preview returns three auditions. Let the user pick one. In ChatGPT the Voi
 
 `design_voice` only creates the auditions. Save the pick by passing the audition's `preview_id` as `voice_preview_id`:
 
-- Existing Character: `manage_character({ id, voice_preview_id })`. For an avatar, use the SAME Character `id` so its image and voice stay together.
+- Existing Character: `update_character({ id, voice_preview_id })`. For an avatar, use the SAME Character `id` so its image and voice stay together.
 - New voice-only Character: `create_character({ title, voice_preview_id })`.
 
 A save keeps the Character's other voices and makes this one preferred for its speech model. If the save hits the limit, relay the tool's message and link, and offer `replace_voice_option_id` to replace a saved designed voice from the same provider. Never quote plan prices.
 
-Older clients may not list `voice_preview_id` on `manage_character`. There the save is `design_voice({ action: "save", preview_id, character_id })`, or `character_name` for a new Character. Older clients without `create_character` save a new one with `manage_character({ title, voice_preview_id })`.
+Use `update_character` and `create_character` when available. Older clients that expose only `manage_character` can still send `voice_preview_id` and `replace_voice_option_id` to it. If its cached schema omits the audition field, use the available `design_voice({ action: "save", preview_id, character_id })` compatibility route, or `character_name` for a new Character. Do not generate new auditions just to save an approved one.
 
 ## Speak
 
@@ -48,4 +48,4 @@ With `provider: "fish"`, the description allows up to 2,000 characters and the a
 {"provider":"fish","prompt":"Warm Israeli female narrator, expressive modern Hebrew, clear diction and an easy conversational pace.","text":"שָׁלוֹם, אֵיזֶה כֵּיף שֶׁאַתֶּם כָּאן. הַיּוֹם נַתְחִיל בְּסִפּוּר קָטָן.","language_code":"he-IL"}
 ```
 
-Fish candidate IDs are temporary. Save the selected Creative Claw preview with `manage_character({ id, voice_preview_id })`, or `create_character({ title, voice_preview_id })` for a new Character; this creates a private voice and a Drama 3 Character option. The Character retains its other model voices. Accepted saves with an unknown outcome must not be retried automatically.
+Fish candidate IDs are temporary. Save the selected Creative Claw preview with `update_character({ id, voice_preview_id })`, or `create_character({ title, voice_preview_id })` for a new Character; this creates a private voice and a Drama 3 Character option. The Character retains its other model voices. Accepted saves with an unknown outcome must not be retried automatically.

@@ -409,6 +409,6 @@ For a fictional voice, call `design_voice` with `provider: "fish"`, a descriptio
 {"provider":"fish","prompt":"A warm Israeli woman in her thirties, clear modern Hebrew, relaxed pace and a lightly smiling conversational delivery.","text":"שָׁלוֹם, אֵיזֶה כֵּיף שֶׁאַתֶּם כָּאן. בּוֹאוּ נַתְחִיל בְּסִפּוּר קָטָן.","language_code":"he-IL"}
 ```
 
-Save the chosen `preview_id` through `create_character({ title, voice_preview_id })`, or `manage_character({ id, voice_preview_id })` for an existing Character. Fish candidate IDs are temporary, not voice IDs. The saved voice is private and model-specific to `speech/fish-drama-3`, and the Character keeps its other voice options.
+Save the chosen `preview_id` through `create_character({ title, voice_preview_id })`, or `update_character({ id, voice_preview_id })` for an existing Character. Fish candidate IDs are temporary, not voice IDs. The saved voice is private and model-specific to `speech/fish-drama-3`, and the Character keeps its other voice options.
 
 For a consenting real speaker, use `clone_voice` with `provider: "fish"`, a private `audio_asset_id` and `consent: true` after the speaker's explicit agreement, then speak using the returned `character_id`. Never supply a raw recording URL to `generate_speech`.

@@ -2,7 +2,7 @@
 
 Use this as routing guidance. Tool availability varies by client; never recite the catalog to the user or invent a missing tool.
 
-Older clients may still show retired tools. Use `search_examples({ id })` instead of `get_example`, and `generate_music` or `generate_sound_effect` instead of `generate_audio`. Older clients without `create_character` or `delete_character`: create with `manage_character` without `id`, and delete with `manage_character({ id, delete: true })`. Without `add_audio_to_video`, `overlay_images` or `stitch_clips`, see [assembly guidance](media-assembly.md).
+Older clients may still show retired tools. Use `search_examples({ id })` instead of `get_example`, and `generate_music` or `generate_sound_effect` instead of `generate_audio`. Use `create_character`, `update_character`, and `delete_character` when available. Older clients that expose only `manage_character` can still create without `id`, update with `id`, and delete with `{ id, delete: true }`. Without `add_audio_to_video`, `overlay_images` or `stitch_clips`, see [assembly guidance](media-assembly.md).
 
 ## Models and generation
 
@@ -71,10 +71,10 @@ Read `platform-upload.md` before choosing an import route.
 | Tool                                      | Use                                                                                               |
 | ----------------------------------------- | ------------------------------------------------------------------------------------------------- |
 | `create_character`                        | Create a Character with `title` (description, reference image, stock voice, or a designed voice with `voice_preview_id`). |
-| `manage_character`                        | Update a Character by `id`: description, reference image, stock voice, or a designed voice with `voice_preview_id`. |
+| `update_character`                        | Update a Character by `id`: description, reference image, stock voice, or a designed voice with `voice_preview_id`. |
 | `delete_character`                        | `{ id, confirm: true }` permanently deletes a Character and its saved voices, only on explicit request. |
 | `list_characters`                         | Find reusable Characters, their IDs, and saved voice options.                                     |
-| `design_voice`                            | Create a new synthetic voice from a description, no recording needed. ElevenLabs by default; `provider: "google"` for Google. Returns three auditions. Save the pick with `manage_character({ id, voice_preview_id })`, or `create_character({ title, voice_preview_id })` for a new Character. At the saved-voice limit, provide `replace_voice_option_id` to `manage_character` to replace an existing designed voice. |
+| `design_voice`                            | Create a new synthetic voice from a description, no recording needed. ElevenLabs by default; `provider: "google"` for Google. Returns three auditions. Save the pick with `update_character({ id, voice_preview_id })`, or `create_character({ title, voice_preview_id })` for a new Character. At the saved-voice limit, provide `replace_voice_option_id` to `update_character` to replace an existing designed voice. |
 | `clone_voice`                             | Clone a consenting speaker's recording with Cartesia (default) or ElevenLabs (`provider: "elevenlabs"`). Attaches to `character_id`, or creates a voice-only Character when none is given. Provide `consent: true` only after the speaker's explicit agreement. Without audio it opens the voice card, which records, clones, compares and saves itself. |
 | `create_film_project`                     | Create a multi-shot Film project.                                                                 |
 | `update_film_project`                     | Save script, shots, storyboards, clips, audio, and approval state.                                |
