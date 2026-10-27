@@ -8,7 +8,7 @@ Older clients may still show retired tools. Use `search_examples({ id })` instea
 
 | Tool               | Use                                                                                                                       |
 | ------------------ | ------------------------------------------------------------------------------------------------------------------------- |
-| `list_models`      | Discover current image, video, speech, and audio models. Filter by category.                                              |
+| `list_models`      | Discover current image, video, speech, audio, and upscale models. Filter by category.                                              |
 | `get_model_params` | Read the chosen model's actual schema, defaults, enums, and extra fields.                                                 |
 | `generate_image`   | Generate an image or edit a source supplied as `image_url`. Additional model-specific references normally go in `extras`. |
 | `generate_video`   | Generate, animate, extend, retake, reframe, edit, or drive video according to model capability and `operation`.           |
@@ -86,7 +86,8 @@ Read `platform-upload.md` before choosing an import route.
 | Tool                    | Use                                                                                       |
 | ----------------------- | ----------------------------------------------------------------------------------------- |
 | `remove_background`     | Remove an image or video background.                                                      |
-| `upscale_media`         | Upscale image or video.                                                                   |
+| `upscale_image`         | Upscale `image_url` with an upscale `model` and its `extras`: `upscale/aura-sr` (default), `upscale/clarity`, `upscale/recraft-crisp`. |
+| `upscale_video`         | Upscale `video_url` with an upscale `model` and its `extras`: `upscale/bytedance` (default, has a pro tier), `upscale/realesrgan`, `upscale/topaz-starlight-precise-2.6`, `upscale/topaz-starlight-hq`, `upscale/topaz-starlight-mini`, `upscale/topaz-starlight-fast-2`. List them with `list_models({ category: "upscale" })`; `get_model_params({ model })` gives the `extras`. Older clients: `upscale_media` upscales either. |
 | `trim_video`            | Cut one time range.                                                                       |
 | `cut_and_reframe_video` | Cut and reorder several chosen ranges of a workspace video in one render, reframe each for any output size, and optionally burn source-timed captions. Does not pick highlights or track faces. |
 | `scale_video`           | Resize, crop, or pad video.                                                               |

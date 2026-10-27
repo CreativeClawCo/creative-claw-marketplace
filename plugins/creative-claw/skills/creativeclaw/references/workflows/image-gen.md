@@ -67,7 +67,7 @@ Use positive instructions for required content and a short negative list for rec
 - For a model comparison, call `generate_image` once per selected model with the same prompt and settings, then present the results together. Use comparisons when the user is choosing a visual direction, not for exact source-image edits.
 - The inline viewer may monitor completion. Use `check_job({ job_id })` only when a later step requires the final URL or no viewer is monitoring.
 - `remove_background` is preferable to regenerating when the only task is a cutout.
-- `upscale_media` is preferable to regenerating an approved image solely for resolution.
+- `upscale_image` (older clients: `upscale_media`) is preferable to regenerating an approved image solely for resolution. `upscale/aura-sr` is the default model; `list_models({ category: "upscale" })` lists the others.
 
 ## Quality gate
 

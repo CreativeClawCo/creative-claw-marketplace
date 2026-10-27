@@ -99,7 +99,7 @@ For Characters, use `character_id` for identity and the theme for art direction.
 ## Asset preparation
 
 - Use `remove_background` for a raster logo that should be transparent.
-- Use `upscale_media` only when a supplied reference is too small; do not overwrite the original.
+- Use `upscale_image` (older clients: `upscale_media`) only when a supplied reference is too small; do not overwrite the original.
 - Preserve light/dark logo variants separately.
 - Record custom font weight, style, and format from the file itself.
 - Give brand assets unique names such as `acme-logo-color` and tags such as `acme`, `brand`, `logo`, `approved`.

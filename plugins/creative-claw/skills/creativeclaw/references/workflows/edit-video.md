@@ -16,7 +16,7 @@ Preserve the original and create clearly named derivatives. Distinguish determin
 | Burn a fixed logo or copyright image onto a finished video | `overlay_images`; see [assembly guidance](../media-assembly.md) |
 | Make a video from timed images, full clips, and optional audio | `stitch_clips`; see [assembly guidance](../media-assembly.md) |
 | Remove a background                                | `remove_background`                                |
-| Upscale                                            | `upscale_media`                                    |
+| Upscale                                            | `upscale_video` with a `list_models({ category: "upscale" })` model (older clients: `upscale_media`) |
 | Transcribe with timings                            | `transcribe`                                       |
 | Clean a voice track                                | `isolate_audio`                                    |
 | Generative source-video edit                       | `generate_video` with a compatible source-edit mode |

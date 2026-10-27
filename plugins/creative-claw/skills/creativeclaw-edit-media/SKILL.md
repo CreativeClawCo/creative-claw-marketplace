@@ -29,7 +29,7 @@ Turn supplied footage or audio into a finished derivative. Apply the requested e
 | Burn a logo or copyright mark onto a finished video | `overlay_images` with a transparent image. `remove_background` can prepare a logo. |
 | Build a video from existing timed images, clips, and optional audio | `stitch_clips`. It never generates footage; invented footage goes to `generate_video`. |
 | Add an intro, outro, or both | See [Intros and outros](#intros-and-outros). |
-| Upscale or remove a background | `upscale_media` or `remove_background`, for the media type and parameters they support. |
+| Upscale or remove a background | `upscale_image` / `upscale_video` (older clients: `upscale_media`) or `remove_background`. Upscalers come from `list_models({ category: "upscale" })`; each model's `get_model_params` settings go in `extras`. |
 
 Read [assembly guidance](references/media-assembly.md) before any `merge_media`, `add_audio_to_video`, `overlay_images` or `stitch_clips` call. Older clients that list `operation` on `merge_media` and lack the other three tools: follow the fallback line there.
 
