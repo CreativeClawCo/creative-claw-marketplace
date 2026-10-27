@@ -39,9 +39,15 @@ Details: [reference production](references/video/reference-production.md). Image
 
 Before choosing native dialogue, read the selected model's spoken-language guidance in `get_model_params({ model })`. For unsupported or unverified languages, use [spoken languages](references/video/spoken-languages.md): one image and one audio-driven generation for a single talking face; consistent character images from the same references and per-shot speech, then concatenation, only for requested multiple shots. Keep the normal workflow for documented languages.
 
-When a Character speaks and the voice is unknown, ask one question: design a new voice from a description (`design_voice`, three auditions), use your own voice (recording plus consent, creativeclaw-clone-voice), or pick a stock voice. If the voice doesn't matter, pick a stock voice and name it. Design auditions use the Character's real lines. In ChatGPT the Voice Studio card saves the choice; read it back from `list_characters` rather than saving again.
+When a Character speaks and the voice is unknown, ask one question: design a new voice from a description (`design_voice`, three auditions), use your own voice (recording plus consent, creativeclaw-clone-voice), or pick a stock voice. If the voice doesn't matter, pick a stock voice and name it. Design auditions use the Character's real lines. In ChatGPT the Voice Studio card saves the choice; read it back from `list_characters` rather than saving again. When the same person will speak in more than one shot or video, including a real person from a supplied photo, settle the voice before the first speaking shot and offer once to save that person with their face and voice as a Character.
 
-Then pick one path per speaking shot from [voice in video](references/video/voice-in-video.md): native dialogue in a documented language for a one-off, or speech first for an exact or recurring voice (a dedicated talking-avatar route, a supported audio-reference model with output review, or `video/sync-3` on a finished clip, the recommended lip-sync model; preserve an explicit model choice). Gemini Omni, the default, accepts no audio on the current route: don't make speech first for an Omni shot. Keep lines to at most 2.5 words per clip second.
+Then pick one path per speaking shot from [voice in video](references/video/voice-in-video.md):
+- **One person saying exact lines, to camera or clearly in view, in any language:** make the line first with `generate_speech`, then `video/minimax-h3-max-lip-sync` with the shot image in `image_url` and the line in `extras.audio_url`. The words come out exactly as recorded. A voice sample or audio cut from an earlier clip is not the line.
+- **Several speakers, or a shot led by body performance or camera movement:** speech first with a supported audio-reference model, then check the result's words, since these models can add, drop or repeat them.
+- **A one-off where the voice may vary:** native dialogue in a documented language.
+- **A finished clip that needs new or corrected speech:** `video/sync-3`, the recommended lip-sync model.
+
+Preserve an explicit model choice. Quote only the spoken words in a prompt for a model that speaks; keep scene numbers and production notes out, since the model can read them aloud. Gemini Omni, the default, accepts no audio on the current route: don't make speech first for an Omni shot. Keep lines to at most 2.5 words per clip second.
 
 ## Workflow
 
@@ -70,6 +76,7 @@ Continue status checks, retrieval, inspection, and drafting revised prompts with
 - Default to `video/gemini-omni-flash` for general generation and short source edits with native audio.
 - Use `video/seedance-2.5`, the premium cinematic model, for high-end, reference-rich or long clips (up to 30 s). Review mode stages an initial 1080p request as a 480p draft; Auto renders 1080p directly. Explicit 480p creates a draft in either mode. Only 1080p can finalize the same draft through `extras.draft_job_id`; 720p starts a new take.
 - Use `video/minimax-h3-max` for fast cinematic motion and native-audio work.
+- Use `video/minimax-h3-max-lip-sync` when one person must say exact lines on camera: the finished line from `generate_speech` drives the approved shot image, so no word is added or changed.
 - Use `video/flux-3-max` alongside H3 Max for text, first/last frames or up to 10 timed image keyframes, 5 to 20 seconds at 720p/1080p with generated audio. It accepts no video/audio references; use H3 Max or Seedance 2.5 for those. It is available before purchase and eligible for the free first video.
 - Use `video/minimax-h3-max-turbo`, presented as **H3 Max Fast**, for cheap, fast drafts and iteration.
 - Recommend `video/seedance-2.5` instead of Wan for native-audio, long single-pass, first/last-frame, or mixed-reference clips. Use Wan only when explicitly requested. For a document or webpage brief, read the content and prepare a Seedance prompt with supported media references; do not pass Wan's `file_url` or `web_url` fields to Seedance.

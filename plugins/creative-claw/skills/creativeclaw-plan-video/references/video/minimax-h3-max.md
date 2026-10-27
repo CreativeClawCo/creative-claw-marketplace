@@ -16,13 +16,15 @@ Do not invent an `h3-max-lite` model ID. The current faster lightweight route is
 
 For native dialogue, get the H3 family language baseline and its evidence status from `get_model_params`. Max/Fast inherit H3's language guidance; separate variant validation is unpublished. For languages outside that baseline, audio references do not establish reliable support: use [spoken languages](spoken-languages.md) with `video/minimax-h3-max-lip-sync` or HeyGen Avatar 4, keeping the user's requested shot count.
 
+When one person must say exact lines on camera, in any language, use `video/minimax-h3-max-lip-sync` with the finished speech instead of reference mode. Reference mode with `audio_urls` performs the line again and can add, drop or repeat words; keep it for several speakers or performance-led shots. See [voice in video](voice-in-video.md).
+
 1. Define one shot: duration, ratio, subject, action, camera, audio, and continuity anchors.
 2. Search or import source assets.
 3. Follow the reference-first pipeline in [reference production](reference-production.md); skip keyframes only on explicit direct-generation requests. Reuse a supplied opening image. Create an end frame only when the transition needs one.
 4. Fetch missing settings with `get_model_params` for the exact selected H3 Max or Turbo model; reuse its schema for unchanged shots.
 5. Choose text, first-frame, first-to-last, or reference mode deliberately.
 6. Assign every reference a role using H3 Max's one-based `Image 1`, `Video 1`, and `Audio 1` language.
-7. Preserve exact quoted copy, reference labels, dialogue, timecodes, colors, and approved layout or edit constraints in the prompt.
+7. Preserve exact quoted copy, reference labels, dialogue, timecodes, colors, and approved layout or edit constraints in the prompt. Keep production labels such as scene numbers or "ONLY" out of it: H3 Max can speak them.
 8. Honor the requested resolution. Offer lower-resolution motion tests only within an authorized draft workflow; do not add paid tests automatically.
 9. Inspect visible motion and synchronized audio before reuse.
 
@@ -37,7 +39,7 @@ For native dialogue, get the H3 family language baseline and its evidence status
 | Continue an existing clip with its look and characters intact | H3 Max Extend with one source in `video_urls` and `duration` for the new footage. |
 | Replace an interval of an existing clip with a new scene | H3 Max Insert with one source in `video_urls`, `extras.start_time` and `extras.resume_time`. |
 | Cheap, fast text/image draft | H3 Max Turbo; its reference mode uses the shared H3 Max route. |
-| Make a clean face image speak finished audio | `video/minimax-h3-max-lip-sync` with `image_url` and `extras.audio_url`; this is a separate route from native-dialogue/reference generation. |
+| One person speaks exact lines, or a clean face image speaks finished audio | `video/minimax-h3-max-lip-sync` with `image_url` and `extras.audio_url` (the finished line, not a voice sample); this is a separate route from native-dialogue/reference generation, and the words come out exactly as recorded. |
 
 H3 Max reference video conditions a new result. It is not a precise source-video editor.
 

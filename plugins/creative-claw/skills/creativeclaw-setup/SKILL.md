@@ -19,7 +19,7 @@ Setup is a short guided first run: learn what the user wants, make it look like 
 - Every step is optional. Offer it once; when the user skips it, move on.
 - Running setup is not a request to generate. Before each step that makes media, say in one line what it will make, and make it when the user agrees. An approval already given for that step counts.
 - Keep the first run small: one image of each kind, one short clip, one round of voice auditions. No variations, comparisons or retakes unless the user asks for them.
-- The moment the user asks for something specific, do that with the matching skill. Return to setup only if they ask.
+- The moment the user asks for something specific, do that with the matching skill. Return to setup only if they ask. This includes everything after the first video: another take, a fix, an edit or the next shot goes to `creativeclaw-generate-video` (or the matching skill), following its model guides and [voice in video](references/video/voice-in-video.md) for any shot with speech.
 - Reuse before creating. At the step that would create a Character, theme or asset, check for an existing one first (`list_characters`, `list_themes`, `search_assets`) and skip what is already there. For a user who already has work here, skip the introduction and offer only the steps they have not done.
 
 ## Account limits
@@ -48,7 +48,7 @@ If they have no idea yet, offer three starting points: a clip starring them, a c
 
 Prepare only what the first video needs; leave the rest for step 6.
 
-- **Photos of themselves:** import them, make one Character sheet, and save it as a Character once they approve the likeness. Follow [avatar and character-sheet production](references/avatars/identity.md); `creativeclaw-create-avatar` is the full workflow.
+- **Photos of themselves, or of a person who presents for them** (a doctor, founder or host): import them, make one Character sheet, and save it as a Character once they approve the likeness. Follow [avatar and character-sheet production](references/avatars/identity.md); `creativeclaw-create-avatar` is the full workflow.
 - **Logo, brand files or a website:** import the logo and save a brand theme with it, plus the colors, fonts and notes the user gave or confirmed. Follow [brand themes](references/workflows/brand-theme.md). Do not invent brand values; show anything that is a guess and ask before saving. Keep the exact logo as a source asset.
 - **Product photo:** import it and use it as the product anchor as it is.
 - **Nothing supplied:** skip this step and build the look from their brief. If the brief has a person, pet, mascot or hero they will want again, save it as a Character from the approved preview image in step 3.
@@ -59,7 +59,7 @@ Before any video, make the preview image: one clean keyframe at the video's aspe
 
 Show it and ask whether it looks right. Apply one targeted fix when they ask for a change. The video waits until they are happy with the image.
 
-When the approved image shows a recurring subject that is not saved yet (an invented hero, a mascot, a pet), offer once to save it as a Character with `create_character` before the video, so their next videos keep the same look. Save it only when they agree.
+When the approved image shows a recurring subject that is not saved yet (a person from their photos who will appear again, an invented hero, a mascot, a pet), offer once to save it as a Character with `create_character` before the video, so their next videos keep the same look. Save it only when they agree.
 
 ## 4. First video
 
@@ -67,13 +67,15 @@ Use `video/minimax-h3-max` for the first video unless the user names another mod
 
 - One shot, 5 seconds, the model's default resolution; 9:16 for social, otherwise 16:9, unless the brief says more.
 - People or several subjects: the keyframe and the identity anchor go in `image_urls`. An exact opening such as a product hero or a logo reveal: the keyframe goes in `image_url` alone.
-- One subject action, one camera move, ambience and effects, no music, and no spoken lines unless the user asked for speech.
+- One subject action, one camera move, ambience and effects, no music, and no spoken lines unless the user asked for speech. For speech, quote only the words to be said, about 10 words for 5 seconds; keep scene numbers and production notes out of the prompt, since the model can read them aloud.
 
 Before submitting, tell the user how it starts: in Review mode a card shows the prompt, references and settings, and the video starts only when they press Generate; in Auto it starts right away. If the result says this video already started, tell them it is rendering and that later videos wait for their Generate click in Review mode. Never press Generate for them or resubmit while the card is waiting. One request is one attempt; another take needs their ask.
 
 ## 5. A voice, while the video renders
 
 Offer to design a voice for their narrator, brand or Character with `design_voice` (ElevenLabs, the default provider): three auditions from a short description, spoken over a line from their project. Follow [voice design](references/voices/voice-design.md). They pick one, and it is saved to their Character or to a new voice-only Character. In ChatGPT the Voice Studio card saves the pick; read it back with `list_characters` instead of saving again.
+
+When a person speaks in their video and will speak again, offer the voice for that person and save it on their Character, so later lines keep the same voice and face. Their next speaking shots are made from that voice: the line first, then the person's image animated to it, as [voice in video](references/video/voice-in-video.md) describes.
 
 Once the clip and the voice both exist, offer one use of it: a short line spoken over the clip, mixed in as described in [media assembly](references/media-assembly.md).
 

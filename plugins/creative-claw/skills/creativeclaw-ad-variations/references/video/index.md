@@ -17,6 +17,7 @@ When the requested movement must follow an existing clip, read [motion transfer]
 | Copy a recorded movement or performance | [Motion transfer](motion-transfer.md), then the selected model guide; use an appearance image and driving video |
 | video/minimax-h3-max-recast requested by name in generate_video | [H3 Max Recast](h3-max-recast.md); otherwise use `swap_video_characters` |
 | Veo, Grok, FLUX, H3, Hailuo, HappyHorse, HeyGen or another explicitly requested route | [Additional models](other-models.md), model-specific distinctions and live-schema lookup |
+| One person speaking exact lines, to camera or clearly in view, in any language | Speech first, then `video/minimax-h3-max-lip-sync` with the shot image; see [voice in video](voice-in-video.md). Several speakers or a performance-led shot keep the reference-mode paths there |
 | Lip-sync a finished clip to prepared speech | [Sync 3](other-models.md), the recommended model with supplied or embedded audio and automatic or manual speaker selection; [HeyGen Lipsync](heygen-lipsync.md) when explicitly selected |
 | Talking photo in an unsupported or unverified native-dialogue language | [Spoken languages](spoken-languages.md), H3 Max Lip Sync or HeyGen Avatar 4 with prepared speech |
 
