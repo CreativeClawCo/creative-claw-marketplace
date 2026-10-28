@@ -87,7 +87,7 @@ function createGuidanceResponse(toolName, args) {
     generate_image: {
       recommended_models: {
         "nano-banana-2": "Default cost-efficient model (Gemini 3.1 Flash)",
-        "nano-banana-pro": "Complex layouts and typography",
+        "gpt-image-2.5-sunburst": "Complex layouts, typography, and controlled edits",
         "gpt-image-2": "Instruction-heavy edits and transparency",
         "seedream-5-pro": "Premium product and commercial imagery",
       },

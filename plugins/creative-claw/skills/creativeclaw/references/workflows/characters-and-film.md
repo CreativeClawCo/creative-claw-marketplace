@@ -11,7 +11,7 @@ Characters preserve visual identity across images and video and can carry voices
 
 ### Reference image
 
-Use a clear image or character sheet with consistent lighting and no labels. For a generated sheet, start with `image/nano-banana-pro` for complex multi-view direction or another current model better suited to the target identity/style.
+Use a clear image or character sheet with consistent lighting and no labels. For a generated sheet, start with `image/gpt-image-2.5-sunburst` for complex multi-view direction or another current model better suited to the target identity/style.
 
 ```text
 Character reference sheet for [name]: [description]. Front, three-quarter,

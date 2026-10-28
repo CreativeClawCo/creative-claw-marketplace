@@ -24,7 +24,7 @@ Use one main action and one camera idea per short beat. For a multi-shot Film pr
 
 ## 2. Create the review board
 
-Use `image/nano-banana-pro` for a complex labeled contact sheet. Consider `image/gpt-image-2.5-sunburst` when exact text is the dominant risk. Verify both at runtime.
+Use `image/gpt-image-2.5-sunburst` for a complex labeled contact sheet; it holds the panel layout and the label text. Verify it at runtime.
 
 Pass exact panel instructions:
 

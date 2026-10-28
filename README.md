@@ -68,9 +68,8 @@ Default to **Gemini 3.1 Flash (Nano Banana 2)** for most image generation and ed
 | Model | Creative Claw ID | Best use |
 | --- | --- | --- |
 | Nano Banana 2 | `image/nano-banana-2` | Default and cost-efficient choice for most generation and editing |
-| Nano Banana Pro | `image/nano-banana-pro` | Complex professional layouts, typography, and demanding composites |
 | GPT Image 2.5 Flare | `image/gpt-image-2.5-flare` | Fast, high-quality everyday OpenAI image generation and editing |
-| GPT Image 2.5 Sunburst | `image/gpt-image-2.5-sunburst` | Precision-focused generation, transparency, and tightly controlled edits |
+| GPT Image 2.5 Sunburst | `image/gpt-image-2.5-sunburst` | Complex professional assets, typography, transparency, and tightly controlled edits |
 | Seedream 5 Pro | `image/seedream-5-pro` | Premium product, fashion, and commercial imagery |
 
 ### Recommended video models
