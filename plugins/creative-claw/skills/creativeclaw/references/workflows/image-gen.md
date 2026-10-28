@@ -21,6 +21,7 @@ Runtime discovery is authoritative. These are current routing defaults:
 | ------------------------------------------------------------------------------ | ----------------------- | --------------------------------------------------------------- |
 | General generation or edit                                                     | `image/nano-banana-2`   | Default with balanced quality, speed, and cost. |
 | Complex professional asset, precise typography, demanding multi-reference edit | `image/gpt-image-2.5-sunburst` | Instruction following, text rendering, and controlled editing. |
+| Layout correction: move, scale, or re-space existing text and logos (safe zones) | `image/gpt-image-2.5-sunburst` | Nano Banana 2 tends to keep the original layout. State target positions as percentages of the canvas height. |
 | Fast everyday OpenAI image work                                                | `image/gpt-image-2.5-flare` | Faster GPT Image 2.5 generation and editing.                 |
 | Premium product or marketing imagery                                           | `image/seedream-5-pro`  | Flagship generation and precise multi-reference editing.        |
 | Transparent background | `image/gpt-image-2.5-flare` or `image/gpt-image-2.5-sunburst` | Set `extras.background: "transparent"` with PNG or WebP output. For an existing image, use `remove_background`. |
