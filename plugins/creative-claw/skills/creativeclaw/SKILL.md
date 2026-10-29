@@ -39,6 +39,7 @@ Purchases and plans are handled on the Creative Claw website, not in chat. Do no
 | User wants | Primary route |
 | --- | --- |
 | Understand balance, past generation costs, or charges and refunds | `manage_account`, following [account guidance](references/workflows/account.md) |
+| Track or report spend per client, job or production; budget projects | `creativeclaw-budget-projects` |
 | Generate or edit one general image | `creativeclaw-generate-image` |
 | Create a consistent product image set | `creativeclaw-product-photoshoot` |
 | Make a character copy a recorded performance or retain movement across wardrobe variants | `creativeclaw-generate-video`, starting with [motion transfer](references/video/motion-transfer.md) to resolve the driving video and appearance image |
