@@ -26,6 +26,7 @@ skill_names=(
   creativeclaw-swap-characters
   creativeclaw-render-html
   creativeclaw-setup
+  creativeclaw-budget-projects
 )
 
 for skill_name in "${skill_names[@]}"; do
