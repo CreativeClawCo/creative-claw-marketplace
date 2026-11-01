@@ -14,6 +14,7 @@ Before speech submission, follow [speech localization](speech-localization.md). 
 | Bengali, Gujarati, Kannada, Malayalam, Marathi, Punjabi, Telugu | Check v4 or Cartesia with the exact returned language code and native voice. Do not choose v2 simply because it supports Hindi. |
 | Cantonese | Check MiniMax with extras.language_boost "Chinese,Yue" and a matching voice. |
 | Regional Arabic, Spanish or Portuguese | xAI exposes regional codes through extras.language, such as ar-EG, es-MX and pt-BR. Match the requested dialect; otherwise compare the native voice catalog of the selected provider without generating unsolicited paid samples. |
+| Swedish | v4 with extras.language_code "sv" and a native Swedish voice, not an American shortlist voice. Sanna Hartfield or Olivia suit conversational and social copy, Elin suits commercials and clear narration, and Adam Composer or Ola Paulakoski suit warm narration. Cartesia Sonic with "sv" and Freja is another option. Audition a short line first. |
 | Mixed languages | Check the selected model's automatic-language behavior. Audition a representative switch and proper names; a forced single-language code may hurt the second language. |
 
 V2's current 29-language set: English, Japanese, Chinese, German, Hindi, French, Korean, Portuguese, Italian, Spanish, Indonesian, Dutch, Turkish, Filipino, Polish, Swedish, Bulgarian, Romanian, Arabic, Czech, Greek, Finnish, Croatian, Malay, Slovak, Danish, Tamil, Ukrainian and Russian.
