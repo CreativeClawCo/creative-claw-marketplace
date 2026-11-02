@@ -13,7 +13,7 @@ Read [shared execution guidance](references/workflow-basics.md) before tools. Th
 
 ## Localize the spoken text
 
-For Hebrew, always send full niqqud on every spoken Hebrew word to every speech model. Apply this to narration, each dialogue turn, clone auditions and voice-design preview text, including user-supplied scripts. Preserve the words and intended meaning while adding vowel points. This rule applies across providers, not only Fish. Before submitting Hebrew or other pronunciation-sensitive text, read [speech localization](references/voices/speech-localization.md).
+For Hebrew, always send full niqqud on every spoken Hebrew word to every speech model. Apply this to narration, each dialogue turn, clone auditions and voice-design preview text, including user-supplied scripts. Preserve the words and intended meaning while adding vowel points. This rule applies across providers, not only Fish. For Arabic, likewise send full tashkeel on every spoken Arabic word, vowelled for the requested dialect (Egyptian, Gulf, Levantine...) rather than Modern Standard Arabic, including user-supplied scripts. Before submitting Hebrew, Arabic or other pronunciation-sensitive text, read [speech localization](references/voices/speech-localization.md).
 
 ## Which voice
 

@@ -25,8 +25,25 @@ Pass only the selected model's exposed settings. For Fish, retain `extras.normal
 
 Niqqud is for the speech payload. Keep captions, transcripts and other displayed copy in the form the user requested. Do not claim vowel points guarantee a native accent or perfect pronunciation. Review the actual audio when inspection is available; another paid take still needs the user's request.
 
+## Arabic: full tashkeel on every spoken word
+
+Arabic has the same problem as Hebrew: without short vowels the model guesses, and it guesses Modern Standard readings. Unvowelled شقق came out "shaqaq" where the speaker wanted شُقَق. Always add full tashkeel (fatha, damma, kasra, sukun, shadda, tanwin) to every spoken Arabic word before sending text to any speech provider that supports Arabic. This is not limited to difficult words.
+
+- Vowel for the requested dialect, not for Modern Standard Arabic. Egyptian, Gulf, Levantine and Maghrebi words take the vowels their speakers actually say, for example Egyptian غَدْوِة in غَدْوِةْ الجُمْعَة. If the user has not said which dialect, infer it from the wording and the target audience, and ask when that is unclear.
+- Keep the user's words, spelling, word order and meaning. Adding tashkeel is speech preparation and needs no separate approval. Do not translate a dialect script into MSA, paraphrase it, or switch to transliteration to avoid vowelling it.
+- Mark case endings only where the speaker would say them. Dialect speech and most ad copy drop them, so end those words with sukun or no mark rather than an MSA ending.
+- When the user corrects a reading in Latin letters (such as "shoqaq not shaqaq" or "ghadwet"), apply it as tashkeel on that word everywhere it appears, then offer to save it as a saved pronunciation.
+- Apply the rule to every Arabic span in mixed-language text, each dialogue turn and each audition. Use `extras.language_code: "ar"` only where the model exposes it; there is no dialect code, so the dialect comes from the voice and the vowelled spelling.
+
+```text
+Original: بيت يبيض الويه قدام ضيوفك. فلل وشقق في أبوظبي.
+Speech text: بَيْت يِبَيِّض الوِيه قِدَّام ضِيُوفَك. فِلَل وشُقَق في أَبُوظَبِي.
+```
+
+As with Hebrew, inspect the final payload before the call, keep captions and displayed copy in the user's own spelling, and do not claim tashkeel guarantees a native accent.
+
 ## Other languages and mixed scripts
 
-Use the intended spoken language and regional accent, independently of the chat language. Preserve native spelling, accents and pronunciation-bearing diacritics. Keep requested romanization intact. Do not apply Hebrew niqqud to other scripts or invent a universal rule requiring optional vowel marks in every language.
+Use the intended spoken language and regional accent, independently of the chat language. Preserve native spelling, accents and pronunciation-bearing diacritics. Keep requested romanization intact. Do not apply Hebrew niqqud or Arabic tashkeel to other scripts or invent a universal rule requiring optional vowel marks in every language.
 
 Resolve names, abbreviations, dates and numbers according to the requested locale and context. Ask about materially ambiguous readings rather than changing approved wording. Use phonemes, pronunciation dictionaries or language selectors only when the selected model's current schema exposes them, with that model's own syntax. A language label alone does not establish a native accent.

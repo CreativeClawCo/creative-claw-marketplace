@@ -4,7 +4,7 @@ This is a routing snapshot from Creative Claw's exposed schemas on 2026-09-22, n
 
 Choose language capability first, then a native-accent voice, then delivery. A multilingual model can speak a language without every voice sounding native. Cloned voices can carry the sample's original accent into other languages.
 
-Before speech submission, follow [speech localization](speech-localization.md). Hebrew always requires full niqqud on every spoken word across all supporting providers, including narration, dialogue turns, clone tests and voice-design auditions. Preserve the intended wording while adding the points.
+Before speech submission, follow [speech localization](speech-localization.md). Hebrew always requires full niqqud on every spoken word across all supporting providers, including narration, dialogue turns, clone tests and voice-design auditions. Preserve the intended wording while adding the points. Arabic always requires full tashkeel on every spoken word in the same places, vowelled for the requested dialect.
 
 | Request | Starting choice and configuration |
 | --- | --- |
@@ -25,6 +25,6 @@ Language selector differences matter:
 - MiniMax: extras.language_boost with names such as "Hebrew" or "Persian", not ISO codes.
 - xAI: extras.language, including regional codes. Current exposed set does not include Hebrew, Persian or Urdu.
 
-Use native script unless the user requests romanization. Preserve approved wording, and audition names, numbers and acronyms. Adding required Hebrew niqqud does not require approval; ask before a phonetic rewrite that changes the words or intended reading. For an unsupported language, explain the limitation and offer a verified alternative rather than guessing a code.
+Use native script unless the user requests romanization. Preserve approved wording, and audition names, numbers and acronyms. Adding required Hebrew niqqud or Arabic tashkeel does not require approval; ask before a phonetic rewrite that changes the words or intended reading. For an unsupported language, explain the limitation and offer a verified alternative rather than guessing a code.
 
 Fish Drama 3 detects language from the transcript. The public Fish catalog has 326 public voices (267 official and 59 pinned community voices) across all 27 catalog languages, including Hebrew stock voices Noa and Itai. `get_model_params` offers a 120-voice shortlist with masculine and feminine choices in each language. Provider language labels do not establish a verified native accent. Use a suitable public voice or a consented clone and audition the target script, using full niqqud on every spoken Hebrew word and `extras.normalize: false`. Preserve the approved wording when adding vowel points. Language-switch tags are experimental on Drama 3. Fish preserves the supplied script and exposes `extras.normalize: false` when needed. Read [Fish guidance](fish.md), with 24 Drama 3 recipes, and current `get_model_params`. Do not send `extras.language` or `extras.language_code`.
