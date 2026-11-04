@@ -32,7 +32,7 @@ For an attached file, a local file or a link:
 2. Ask for consent once, up front: name the provider, quote the full consent statement with its terms and privacy links from [the reference](references/voices/cloning.md), and ask for the recording's language. One "I agree" plus the language covers both. Possessing a recording is not consent.
 3. Import with purpose `voice_clone` to obtain a private `audio_asset_id`. Follow the reference for the current client's upload route.
 4. As soon as the upload returns, call `clone_voice` with that asset, `consent: true`, the recording's `language` code (for example `he`; it defaults to `en`), and `provider: "cartesia"` (the default), or `provider: "elevenlabs"` when the user chooses ElevenLabs. Do not ask for consent or confirmation again. Use `character_id` for an existing Character or `character_name` for a new voice-only Character. The tool saves the clone automatically.
-5. Audition using `generate_speech` and the returned `character_id`. Include a name, number and natural sentence in the intended language. Present the audio for approval before a longer production.
+5. Audition using `generate_speech` and the returned `character_id`. Include a name, number and natural sentence in the intended language. Present the audio for approval before a longer production. If the user says a word sounds wrong (the stress, an acronym, a homograph or a loanword), fix only that word as [pronunciation](references/voices/pronunciation.md) describes and regenerate before suggesting feedback.
 
 Reuse `character_id`, not the private source recording, for future speech. Never replace a saved voice merely to change speech models.
 
