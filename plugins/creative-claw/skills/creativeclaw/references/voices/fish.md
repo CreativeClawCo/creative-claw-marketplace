@@ -403,7 +403,7 @@ Drama 3 uses Fish's timestamped TTS stream. Creative Claw assembles the audio an
 
 ## Design or clone a private voice
 
-For a fictional voice, call `design_voice` with `provider: "fish"`, a description of accent, age, timbre, pace and personality, and an audition script of up to 150 characters. Three candidates cost 2 credits total. Start with `guidance_scale: 2`, `instruct_guidance_scale: 0`, `speed: 1`, `num_step: 32`. Add `language_code: "he-IL"` for a fully vowelized Hebrew audition.
+For a fictional voice, call `design_voice` with `provider: "fish"`, a description of accent, age, timbre, pace and personality, and an audition script of up to 150 characters. Three candidates are charged as one request. Start with `guidance_scale: 2`, `instruct_guidance_scale: 0`, `speed: 1`, `num_step: 32`. Add `language_code: "he-IL"` for a fully vowelized Hebrew audition.
 
 ```json
 {"provider":"fish","prompt":"A warm Israeli woman in her thirties, clear modern Hebrew, relaxed pace and a lightly smiling conversational delivery.","text":"שָׁלוֹם, אֵיזֶה כֵּיף שֶׁאַתֶּם כָּאן. בּוֹאוּ נַתְחִיל בְּסִפּוּר קָטָן.","language_code":"he-IL"}

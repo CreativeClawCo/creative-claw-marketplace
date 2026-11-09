@@ -29,7 +29,7 @@ Use `image/nano-banana-2`, publicly named Nano Banana 2, as Creative Claw's defa
 | `num_images` | 1,4. |
 | `output_format` | Use `png` for text/design and `jpeg` for ordinary photographic delivery. |
 
-Direct Google does not expose seed, safety_tolerance, sync_mode or limit_generations. Creative Claw charges fixed resolution prices of 16 credits at 1K (default), 24 at 2K and 36 at 4K per image, with no separate input, thinking or search surcharge. Thinking cannot be disabled.
+Direct Google does not expose seed, safety_tolerance, sync_mode or limit_generations. Creative Claw charges a fixed price per image for each resolution (1K default, 2K, 4K; check `estimate_generation`), with no separate input, thinking or search surcharge. Thinking cannot be disabled.
 
 ## Reference order and roles
 

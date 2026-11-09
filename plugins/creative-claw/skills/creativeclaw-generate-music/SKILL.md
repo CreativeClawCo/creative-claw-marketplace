@@ -17,7 +17,7 @@ Create a finished music asset with `generate_music`. Route narration or dialogue
 
 | Need | Model | Notes |
 | --- | --- | --- |
-| Full-length vocal songs, expressive musical performances, custom or automatic lyrics, instrumentals | `music/mureka-v9.5` | One MP3, model chooses length. Instrumental or supplied lyrics: 30 credits; automatic lyrics and singing: 100 credits. Optional audio style reference. Read [Mureka guidance](references/mureka.md). |
+| Full-length vocal songs, expressive musical performances, custom or automatic lyrics, instrumentals | `music/mureka-v9.5` | One MP3, model chooses length. Automatic lyrics and singing cost more than an instrumental or supplied lyrics; use `estimate_generation` for the price. Optional audio style reference. Read [Mureka guidance](references/mureka.md). |
 | Background beds, scores, or image-inspired tracks | `music/lyria-3.5` (omitted-model default) | About 30 to 180 s; `music_length_ms` is guidance, not exact. Up to 10 `image_urls` as visual inspiration. `force_instrumental` defaults to true. |
 | Exact length, or a sting under 30 s | `music/elevenlabs-music-v2.5` | Exact 3 s to 10 min via `music_length_ms` (default 30 s). Prompt up to 4,100 characters. `output_format` selectable. `force_instrumental` defaults to true. |
 | Remix an existing song or sung vocal recording | `music/mureka-remix` | Supply `audio_url` with detectable musical tempo, not ordinary speech. Read its current schema. |

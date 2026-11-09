@@ -25,9 +25,9 @@ Infer the rest (ratio, length, platform) from the request; ask only for what is 
 
 | Mode | Each variation | Main cost per variation |
 | --- | --- | --- |
-| New version (default for a product shot or a model) | A whole new clip from the same anchors, its action matched to its line, plus its voiceover | One `generate_video` (Omni 8 s at 720p: 120 credits) |
+| New version (default for a product shot or a model) | A whole new clip from the same anchors, its action matched to its line, plus its voiceover | One `generate_video` per variation |
 | New hook (default for an existing ad) | A new 3 to 5 s opening generated to land on the first frame of the ad's body, then the unchanged body | One short `generate_video` (Omni 3 s: 45, 4 s: 60) |
-| Same footage (cheapest, or when asked) | Only the audio or captions change, on one shared clip or the ad itself | About 6 credits |
+| Same footage (cheapest, or when asked) | Only the audio or captions change, on one shared clip or the ad itself | Utility steps only |
 
 What the variations differ in: the hook angle by default; the voiceover copy, or the voice and delivery when the script is fixed. Change one of these per set so results compare cleanly. A face speaking on screen keeps its own audio: re-voicing it breaks lip sync, so give that ad new hooks, not a new voiceover.
 
@@ -44,7 +44,7 @@ Burn captions onto every variation with `add_subtitles` unless the user says no:
 ## 4. One estimate, one go-ahead
 
 1. Estimate each kind of generation once with `estimate_generation` and multiply: one clip per distinct duration (exact model, duration, resolution, ratio), one voiceover with the longest line (speech is priced by characters), one image when keyframes or opening scenes are needed.
-2. Add the utility prices: `add_audio_to_video` 2 credits per voiceover, `merge_media` 2 credits to join each new hook to the body, `add_subtitles` 6 credits per minute with a 2-credit minimum per video, `trim_video` 2 and `extract_frames` 2 per call. Final costs are confirmed after each job.
+2. Add the utility steps (`add_audio_to_video` per voiceover, `merge_media` to join each new hook to the body, `add_subtitles`, `trim_video`, `extract_frames`) at their current prices from `estimate_generation`. Final costs are confirmed after each job.
 3. Show the plan in one message: a numbered table (number, name, the exact line, the picture, its length), what stays fixed, model, ratio and resolution, and one total for the set.
 4. Approval:
    - **Auto:** ask once, unless the user already said to go ahead without seeing the lines. Their yes covers every step in the plan; do not ask again per variation.

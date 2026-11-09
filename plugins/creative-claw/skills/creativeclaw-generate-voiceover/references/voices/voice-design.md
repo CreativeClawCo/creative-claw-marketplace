@@ -42,7 +42,7 @@ Provide `voice_option_id` to pick a saved voice that is not the preferred one; `
 
 ## Fish design
 
-With `provider: "fish"`, the description allows up to 2,000 characters and the audition text must be 1 to 150 characters. Three WAV auditions cost 2 credits total, charged once per request. Defaults: `guidance_scale: 2`, `instruct_guidance_scale: 0`, `speed: 1`, `num_step: 32`; an optional seed is supported. Start with defaults. For Hebrew use `language_code: "he-IL"` and full niqqud on every spoken word.
+With `provider: "fish"`, the description allows up to 2,000 characters and the audition text must be 1 to 150 characters. Three WAV auditions are charged once per request. Defaults: `guidance_scale: 2`, `instruct_guidance_scale: 0`, `speed: 1`, `num_step: 32`; an optional seed is supported. Start with defaults. For Hebrew use `language_code: "he-IL"` and full niqqud on every spoken word.
 
 ```json
 {"provider":"fish","prompt":"Warm Israeli female narrator, expressive modern Hebrew, clear diction and an easy conversational pace.","text":"שָׁלוֹם, אֵיזֶה כֵּיף שֶׁאַתֶּם כָּאן. הַיּוֹם נַתְחִיל בְּסִפּוּר קָטָן.","language_code":"he-IL"}

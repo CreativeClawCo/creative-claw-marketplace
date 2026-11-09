@@ -2,7 +2,7 @@
 
 ## HeyGen Lipsync usage
 
-Replace a visible speaker's speech in an existing video using finished audio. Supply exactly one public HTTPS video_urls entry and one public HTTPS audio_urls entry. The audio supplies the words, voice, emotion, language, and pacing. The required prompt is a task label and is not sent to HeyGen. Within HeyGen, Precision is the default mode at 6 credits per output second; explicitly selected Speed costs 3 credits per output second. Prepare speech first, estimate with the intended settings, submit once, and use check_job for the permanent result saved in the asset library. Review mouth timing and the preserved performance before delivery.
+Replace a visible speaker's speech in an existing video using finished audio. Supply exactly one public HTTPS video_urls entry and one public HTTPS audio_urls entry. The audio supplies the words, voice, emotion, language, and pacing. The required prompt is a task label and is not sent to HeyGen. Within HeyGen, Precision is the default mode; explicitly selected Speed costs half as much per output second. Prepare speech first, estimate with the intended settings, submit once, and use check_job for the permanent result saved in the asset library. Review mouth timing and the preserved performance before delivery.
 
 For lip-syncing an existing video to finished speech, recommend video/sync-3. Supply one video_urls input and one finished speech recording in audio_urls; if audio_urls is omitted, Creative Claw extracts the source video's embedded audio. Sync 3 supports automatic or manual speaker selection. Keep video/heygen-lipsync as an alternative when explicitly selected; its mode defaults to precision and it requires one video_urls and one audio_urls input. Honor an explicit model choice and never switch or retry a paid generation automatically.
 
@@ -22,8 +22,8 @@ For lip-syncing an existing video to finished speech, recommend video/sync-3. Su
 
 ### Speed or Precision
 
-- Speed: Choose explicitly for quick reviews and cost-sensitive clips. It is the faster, lower-cost mode. 3 credits per output second.
-- Precision: Recommended default for existing-video lip sync, prioritizing mouth fidelity. HeyGen describes higher-fidelity avatar inference. Quality and completion time are not guaranteed. 6 credits per output second.
+- Speed: Choose explicitly for quick reviews and cost-sensitive clips. It is the faster, lower-cost mode.
+- Precision: Recommended default for existing-video lip sync, prioritizing mouth fidelity. HeyGen describes higher-fidelity avatar inference. Quality and completion time are not guaranteed.
 - Use the user's requested mode. If unspecified, use Precision. Do not override an explicit Speed choice or run both modes; each submission is a separate paid generation.
 
 ### How to prompt it
@@ -47,7 +47,7 @@ Task label: `Sync this video to the supplied finished speech.`
 
 ### Feature controls
 
-- extras.mode: precision (default, 6 credits/output second) or explicitly selected speed (3 credits/output second). Select based on the mode guidance above.
+- extras.mode: precision (default) or explicitly selected speed (half the price per output second). Select based on the mode guidance above.
 - extras.keep_the_same_format: true by default, requesting source encoding format, resolution, and bitrate. false lets HeyGen choose; it does not unlock resolution or aspect_ratio parameters.
 - extras.enable_dynamic_duration: true by default, allowing output duration to adjust to the replacement audio. false requests source timing. Prepare speech to fit first and review the delivered length; fixed timing does not guarantee every word will fit naturally.
 - extras.disable_music_track: false by default. true requests removal of source background music. Do not assume it reconstructs clean ambience or provides separate stems. Add a controlled music mix afterward if needed.
@@ -70,7 +70,7 @@ Task label: `Sync this video to the supplied finished speech.`
 
 ### Cost and timing
 
-- Speed: 3 credits per delivered output second. Precision: 6 credits per delivered output second. The whole job's credit total is rounded up once.
+- Both modes are charged per delivered output second; Speed costs half as much as Precision. The whole job's credit total is rounded up once. Use `estimate_generation` for the price.
 - Both input durations are measured before quoting or charging. The reservation uses the longer input when enable_dynamic_duration is true, or source-video duration when false. Final settlement uses measured delivered video duration.
 - A selected mouth-edit interval may retain the full source video. Never quote only end_time minus start_time or promise a shorter exported clip.
 

@@ -40,7 +40,7 @@ Swap in only people who agreed to it: the user, people who gave permission, or f
 
 Use `swap_video_characters`, not a separate `generate_video`, when the user asks for a Kling 4 swap. It edits the original clip and uses the approved scene previews plus up to eight identity references; each person's photos are bound as one face element. The prepared source and output are 4 to 30 whole seconds at 720p or 1080p. A longer or fractional source is cut without changing speed. The general model's 3-second minimum does not lower Swap's 4-second minimum.
 
-Ask `estimate_generation({ operation: "swap_video_characters", model: "video/kling-4.0-omni", params: { video_url, resolution: "720p" } })` for a free estimate. A 10-second input and output is 376 credits at 720p or 564 at 1080p; 30 seconds is 1,128 or 1,692. Credits are rounded up once per job and settled to actual usage. Do not convert credits to dollars or promise a fixed price without checking the actual inputs. The three scene previews remain free.
+Ask `estimate_generation({ operation: "swap_video_characters", model: "video/kling-4.0-omni", params: { video_url, resolution: "720p" } })` for a free estimate. The price scales with the input length and resolution. Credits are rounded up once per job and settled to actual usage. Do not convert credits to dollars or promise a fixed price without checking the actual inputs. The three scene previews remain free.
 
 Kling generates audio, so Swap replaces it with the source soundtrack by default and explicitly mutes silent sources. Timing is checked before delivery, but generative edits can still change motion, identity, camera or cuts. Review the finished result before requesting more. Never switch an existing paid attempt to another engine automatically.
 
