@@ -81,7 +81,7 @@ generate_html_video({
 })
 ```
 
-Each turn, a new video or a change, holds 200 credits when it starts and settles the real cost when the agent finishes, from the agent's work plus the media it generated. A failed turn is not charged. Tell the user the final cost the result states. For a cost question before starting, use `estimate_generation` with `operation: "html_video"` and `params.method` set to `"generate"`, or `"edit"` for a change.
+Each turn, a new video or a change, reserves credits when it starts and settles the real cost when the agent finishes, from the agent's work plus the media it generated. A failed turn is not charged. Tell the user the final cost the result states. For a cost question before starting, use `estimate_generation` with `operation: "html_video"` and `params.method` set to `"generate"`, or `"edit"` for a change.
 
 Write and render the HTML yourself (next section) only when the user supplied HTML, wants a project rendered exactly as it is, or needs exact control of the code.
 

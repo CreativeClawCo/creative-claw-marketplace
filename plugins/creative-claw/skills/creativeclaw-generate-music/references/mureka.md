@@ -10,11 +10,11 @@ Use Creative Claw tools and account credits. The upstream CLI, API-key setup, Mu
 
 Provide `model`, `prompt`, `lyrics`, and `force_instrumental` directly to `generate_music`, not in `extras`. The live tool and model schemas govern supported inputs.
 
-| Desired output | Inputs | Prompt limit | Credits per track |
-| --- | --- | --- | --- |
-| Instrumental | Omit `lyrics`; set `force_instrumental: true` (also the default without lyrics) | 1,024 characters | 30 |
-| Song with supplied lyrics | Nonempty `lyrics`, up to 5,000 characters; omit `force_instrumental` or set `false` | 1,024 characters | 30 |
-| Model writes and sings the lyrics | Omit `lyrics`; set `force_instrumental: false` | 2,000 characters | 100 |
+| Desired output | Inputs | Prompt limit |
+| --- | --- | --- |
+| Instrumental | Omit `lyrics`; set `force_instrumental: true` (also the default without lyrics) | 1,024 characters |
+| Song with supplied lyrics | Nonempty `lyrics`, up to 5,000 characters; omit `force_instrumental` or set `false` | 1,024 characters |
+| Model writes and sings the lyrics | Omit `lyrics`; set `force_instrumental: false` | 2,000 characters |
 
 All modes require a nonempty `prompt` and produce one MP3. The model chooses length, up to 4 minutes 30 seconds for instrumentals or 5 minutes 30 seconds for vocal songs. Timing described in prose is a creative request, not a duration guarantee. Use ElevenLabs Music for exact duration or short stings.
 
