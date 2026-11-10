@@ -62,6 +62,7 @@ Purchases and plans are handled on the Creative Claw website, not in chat. Do no
 | Create or update a reusable Character | `creativeclaw-create-character` |
 | Report product or quality feedback | `creativeclaw-submit-feedback` |
 | Find, import, name, tag, reuse, or delete media | `references/workflows/asset-library.md` |
+| Find reference images on the web (a place, object, style or look) | `search_images`; to see the results, `load_image` with its `search_id`, then `check_job`; import picks with `upload_asset` before using them |
 | Create, inspect, edit, or apply a brand theme | `references/workflows/brand-theme.md` |
 | Trim, resize, caption, transcribe, clean, or combine existing media | `creativeclaw-edit-media` |
 | Burn a transparent logo or copyright image onto a finished video | `creativeclaw-edit-media`, using `overlay_images`; read [assembly guidance](references/media-assembly.md) |

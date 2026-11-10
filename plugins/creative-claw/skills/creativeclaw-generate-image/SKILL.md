@@ -16,7 +16,7 @@ Turn a brief and optional references into a finished image. This is the primary 
 ## Workflow
 
 1. Establish the subject, intended use, aspect ratio, style, text requirements, and which details must remain exact.
-2. Use `search_assets` for likely reusable references. Import attachments or local files with the platform upload flow before generation.
+2. Use `search_assets` for likely reusable references. Import attachments or local files with the platform upload flow before generation. For a real place, object or look the user has no picture of, `search_images` finds web references; import a pick's `image_url` with `upload_asset` and use only as a reference, never to copy a real person.
 3. When the user asks for examples, inspiration, styles, or a close starting point, or an open brief would benefit from concrete choices, call `search_examples` for a small filtered set, then load only the chosen example with `search_examples({ id })`. Do not search automatically for an already precise brief.
 4. For branded work, call `get_theme` and carry the relevant colors, typography, logo treatment, and visual rules into the prompt.
 5. Use `list_models({ category: "image" })` when selection is unresolved; for a known choice, use `get_model_params` directly and reuse its current-task schema.

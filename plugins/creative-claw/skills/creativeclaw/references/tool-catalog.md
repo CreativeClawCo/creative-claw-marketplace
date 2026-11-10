@@ -58,7 +58,8 @@ For conversational setup or edits, prefer `update_theme({ interactive: true })`.
 | `search_assets`                     | Find recent or matching media by type, query, tags, exact name, or source.                             |
 | `update_asset`                      | Set a unique name, replace tags, or update a description.                                              |
 | `delete_asset`                      | Permanently delete an asset; it cannot be restored. Only when explicitly requested.                    |
-| `load_image`                        | Display an image URL inline when exposed.                                                              |
+| `load_image`                        | Display an image URL inline when exposed. With a `search_images` `search_id` (and optional `indices`), starts a job; `check_job` returns one numbered contact sheet. |
+| `search_images`                     | Search the web for reference images (filters for size, type, color, shape, time, license); shows a card where the user picks. Import a pick's `image_url` with `upload_asset` before using it. |
 | `import_chatgpt_media`              | Convert one native ChatGPT attachment into a durable Creative Claw asset when exposed.                 |
 | `import_media`                      | Open the picker when the user still needs to choose a file.                                            |
 | `get_upload_url` + `confirm_upload` | Upload local bytes from clients that can perform an HTTP PUT.                                          |
