@@ -1,6 +1,6 @@
 ---
 name: creativeclaw-swap-characters
-description: "Swap, replace or recast the people in an existing video with Creative Claw: put yourself, a saved Character or a photo into a TikTok, Reel, movie scene or ad while the original motion, camera, cuts and audio stay. Use for character swaps, face swaps, recasting an actor, \"put me in this video\", \"replace her with my grandma\" and multi-person swaps. Not for copying a performance into a new scene (motion transfer) or for new footage."
+description: "Swap, replace or recast the people in an existing video with Creative Claw: put yourself, a saved Character or a photo into a TikTok, Reel, movie scene or ad while the original motion, camera, cuts and audio stay. Use for character swaps, face swaps, recasting an actor, \"put me in this video\", \"replace her with my grandma\" and multi-person swaps, and for swapping a product, prop, garment or sign in a video (swap_video_objects). Not for copying a performance into a new scene (motion transfer) or for new footage."
 ---
 
 # Swap Characters
@@ -18,6 +18,7 @@ Read [shared execution guidance](references/workflow-basics.md) once per task be
 | The user wants | Route |
 | --- | --- |
 | Replace one or more people in a video, recast an actor, a face swap, "me in this scene", a trend video with their own Character | This skill |
+| Replace a product, prop, garment, sign or label in a video, not a person | `swap_video_objects`; see "Object swaps" below |
 | Keep the original clothes and change only who the person is | This skill; say "keep their original outfit" in the instructions |
 | A Character copying a recorded performance in a new scene, or the same movement in another outfit or place | `creativeclaw-generate-video`, motion transfer with Kling Motion Control Pro |
 | New dialogue or a dub on the swapped video | Swap first, then `creativeclaw-generate-voiceover` and lip-sync on the finished clip |
@@ -35,6 +36,10 @@ Swap in only people who agreed to it: the user, people who gave permission, or f
 6. **Adjust a preview (free).** In the card, "Adjust this preview"; or `update_video_workflow({ session_id, preview_index, changes, expected_version })` with the version from the latest result. Describe the change concretely: "his own short dark hair, not curly", "white T-shirt from his reference", "match the warm light and the motion blur". The workflow waits for approval again afterwards.
 7. **Render.** In Review mode the card shows the price and waits for the user to press **Generate video**; when the card is not shown, give the user the review link (`approvalUrl`). Never open the link or approve for the user. In Auto mode the render starts once the previews are ready. Only a Seedance 480p draft can be completed at 1080p later from the card; the result states both prices. Lite and Kling have no native draft completion. Do not promise the same take at a new resolution or call finalize_seedance_draft for Lite or Kling.
 8. **Status.** The session ID is the swap's job ID: `check_job({ job_id: <session ID> })` returns the state, previews and the finished video. Do not poll while the card is showing progress.
+
+## Object swaps
+
+`swap_video_objects` is the same workflow and card for things instead of people: the people, motion, camera, cuts and audio stay, and only the named object changes. Call it with `video_url`, `image_urls` (photos of the new object; several angles help it keep its shape and label) and `instructions` naming which object becomes which, for example "Replace the red soda can in her right hand with the bottle in Image 1. Leave the green can on the table." Name look-alike objects that must stay, and any printed text or logo to keep exact. It takes no `character_ids`. Previews, adjusting with `update_video_workflow`, Review or Auto, engines, resolutions and `check_job` all work as above. Use only product images and footage the user has the right to use.
 
 ## Kling 4.0 option
 
