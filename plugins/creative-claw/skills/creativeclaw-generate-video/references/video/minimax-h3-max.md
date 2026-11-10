@@ -38,7 +38,7 @@ When one person must say exact lines on camera, in any language, use `video/mini
 | Identity, style, motion, or audio references | H3 Max or Turbo with `image_urls`, `video_urls`, and/or `audio_urls`. |
 | Continue an existing clip with its look and characters intact | H3 Max Extend with one source in `video_urls` and `duration` for the new footage. |
 | Replace an interval of an existing clip with a new scene | H3 Max Insert with one source in `video_urls`, `extras.start_time` and `extras.resume_time`. |
-| Cheap, fast text/image draft | H3 Max Turbo; its reference mode uses the shared H3 Max route. |
+| Cheapest text/image draft with no references | H3 Max Turbo; its reference mode uses the shared H3 Max route. Otherwise recommend Seedance 2.0 Mini for cheap drafts, including voice or audio references. |
 | One person speaks exact lines, or a clean face image speaks finished audio | `video/minimax-h3-max-lip-sync` with `image_url` and `extras.audio_url` (the finished line, not a voice sample); this is a separate route from native-dialogue/reference generation, and the words come out exactly as recorded. |
 
 H3 Max reference video conditions a new result. It is not a precise source-video editor.
