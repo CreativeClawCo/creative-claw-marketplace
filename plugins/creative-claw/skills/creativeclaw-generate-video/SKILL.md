@@ -78,9 +78,9 @@ Continue status checks, retrieval, inspection, and drafting revised prompts with
 - Use `video/minimax-h3-max` for fast cinematic motion and native-audio work.
 - Use `video/minimax-h3-max-lip-sync` when one person must say exact lines on camera: the finished line from `generate_speech` drives the approved shot image, so no word is added or changed.
 - Use `video/flux-3-max` alongside H3 Max for text, first/last frames or up to 10 timed image keyframes, 5 to 20 seconds at 720p/1080p with generated audio. It accepts no video/audio references; use H3 Max or Seedance 2.5 for those. It is available before purchase and eligible for the free first video.
-- Use `video/minimax-h3-max-turbo`, presented as **H3 Max Fast**, for cheap, fast drafts and iteration.
+- Recommend `video/seedance-2.0-mini`, presented as **Seedance Mini**, for cheap, fast drafts and iteration with native sound, including drafts that follow voice or audio input references. It is available before purchase and eligible for the free first video.
+- Use `video/minimax-h3-max-turbo`, presented as **H3 Max Fast**, as a cheaper fallback for text or start-frame drafts with no references.
 - Recommend `video/seedance-2.5` instead of Wan for native-audio, long single-pass, first/last-frame, or mixed-reference clips. Use Wan only when explicitly requested. For a document or webpage brief, read the content and prepare a Seedance prompt with supported media references; do not pass Wan's `file_url` or `web_url` fields to Seedance.
-- Use Seedance Mini only when the user asks for it.
 - Honor an explicit model request, and load its local guide from the model-selection index for exact prompt and reference syntax.
 
 For existing footage, do not apply the general generation ranking blindly:

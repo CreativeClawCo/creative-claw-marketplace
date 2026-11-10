@@ -9,8 +9,8 @@ When the requested movement must follow an existing clip, read [motion transfer]
 | Gemini Omni, video/gemini-omni-flash | [Gemini Omni](gemini-omni.md), the existing general default |
 | Seedance 2.5 | [Seedance 2.5](seedance-2-5.md), premium cinematic, reference-rich and long (up to 30 s) scenes, 480p drafts, and supported edits/extensions |
 | Kling 4.0 Omni, video/kling-4.0-omni | [Kling 4.0 Omni](kling-4.md), the recommendation for new general Kling requests: prompt templates for references, first/last frames, timed shots, dialogue and source edits; integration limits and credit estimates |
-| Seedance Mini | [Seedance Mini](seedance-mini.md), only when the user asks for it |
-| H3 Max, H3 Max Extend, H3 Max Insert, and H3 Max Fast/Turbo | [MiniMax H3 Max](minimax-h3-max.md), cinematic motion, cheap fast drafts, extending a clip, inserting new footage into an interval, and native audio |
+| Seedance Mini | [Seedance Mini](seedance-mini.md), the recommended model for cheap, fast drafts and short clips with native sound, including voice or audio input references; free first video |
+| H3 Max, H3 Max Extend, H3 Max Insert, and H3 Max Fast/Turbo | [MiniMax H3 Max](minimax-h3-max.md), cinematic motion, H3 Max Fast drafts with no references, extending a clip, inserting new footage into an interval, and native audio |
 | Wan 3.0 | [Wan](wan-3.md), only when explicitly requested; recommend Seedance 2.5 instead |
 | Swap, replace or recast people in existing footage, including face-only swaps | `swap_video_characters`, not `generate_video`; three free previews, then Seedance 2.5 by default, or explicitly requested Wan Lite / Kling 4.0 |
 | video/kling-3.0-motion-control-pro named for a swap | [Kling Motion Control Pro](kling-motion-control.md); otherwise use `swap_video_characters` |

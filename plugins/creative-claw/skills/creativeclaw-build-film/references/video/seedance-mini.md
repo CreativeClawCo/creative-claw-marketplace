@@ -1,6 +1,6 @@
 # Seedance Mini
 
-Use `video/seedance-2.0-mini` only when the user asks for it. For cheap drafts, use H3 Max Turbo; for a Seedance-quality preview, use Seedance 2.5 at `resolution: "480p"`. Do not silently downgrade an explicit model, resolution or quality choice. Check get_model_params for this exact model; Mini does not inherit Seedance 2.5's larger limits.
+Recommend `video/seedance-2.0-mini` for cheap, fast drafts and short clips with native sound, including drafts that follow voice or audio input references. It is available before purchase and eligible for the free first video. H3 Max Fast (`video/minimax-h3-max-turbo`) is a cheaper fallback for text or start-frame drafts with no references; for a Seedance 2.5-quality preview, use Seedance 2.5 at `resolution: "480p"`. Do not silently downgrade an explicit model, resolution or quality choice. Check get_model_params for this exact model; Mini does not inherit Seedance 2.5's larger limits.
 
 Current local schema: 4 to 15 seconds or auto; 480p or 720p; up to 9 image, 3 video and 3 audio references, at most 12 files total. Each video/audio reference is 2 to 15 seconds, with at most 15 seconds combined per modality. Audio references require an image or video. Live tool validation is authoritative, including end-frame availability.
 
