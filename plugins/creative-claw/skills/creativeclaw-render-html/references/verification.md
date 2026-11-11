@@ -31,7 +31,7 @@ Preserve the failing composition, exact options, job ID/error, and known runtime
 
 ## Bundled example validation status
 
-`assets/webgl-orbit.html` is a complete 640×360, four-second document with a pinned external GSAP script and no other assets. It initializes a visible frame and a paused timeline. In a plain browser, seek with `window.__timelines.orbit.time(2, true)`; a paused initial frame is expected. Submit its file **contents** as `html` with width 640, height 360, duration 4, and FPS 30 when rendering is authorized.
+The [WebGL example](webgl-orbit-example.md) is a complete 640×360, four-second document with a pinned external GSAP script and no other assets. It initializes a visible frame and a paused timeline. In a plain browser, seek with `window.__timelines.orbit.time(2, true)`; a paused initial frame is expected. Submit the HTML inside its code block as `html` with width 640, height 360, duration 4, and FPS 30 when rendering is authorized.
 
 Validated locally on 2026-09-08 with HyperFrames 0.8.30 on macOS/Apple M4 Pro: `check --snapshots` passed with no lint/runtime/layout/motion findings and 5/5 contrast checks. A four-second MP4 rendered successfully at 640×360, 30 FPS, 120 frames. This bundled example has not been rendered remotely; local success does not certify every worker/GPU configuration. The separately reported spiral-galaxy success on local HF 0.8.30 and remote rendering is evidence for that composition only.
 

@@ -1,3 +1,8 @@
+# WebGL example
+
+A complete HTML document to validate locally or adapt into the `html` string of `render_html_video`. Copy the code below; this file path is not a tool input.
+
+```html
 <!doctype html>
 <html lang="en">
 <head>
@@ -92,3 +97,4 @@
   </script>
 </body>
 </html>
+```
