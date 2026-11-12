@@ -152,7 +152,7 @@ Opening: [starting composition or supplied first frame].
 Action beats: [ordered visible events with timing].
 Camera: [framing, lens feel, movement, transition behavior].
 Look: [lighting, palette, texture, medium].
-Audio: [quoted dialogue, ambience, effects, music, or silence].
+Audio: [quoted dialogue, ambience, effects, music, or silence; in a multi-clip film, only dialogue and picture-synced effects, then "no music, no background ambience"].
 Ending: [final composition or supplied end frame].
 Continuity: [identity, wardrobe, product, environment].
 Avoid: [specific artifacts, text, unwanted cuts, additions].

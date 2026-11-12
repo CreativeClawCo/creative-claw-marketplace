@@ -1,6 +1,6 @@
 ---
 name: creativeclaw-build-film
-description: "Produce a complete multi-shot Creative Claw film from planning through an assembled first cut. Use for ads, explainers, music videos, or stories that require several coordinated clips, narration, and approval gates."
+description: "Produce a complete multi-shot Creative Claw film: a full plan the user can review, storyboards and clips with one batch approval, take and scene versioning, and an exported cut. Use for ads, explainers, music videos, or stories that require several coordinated clips."
 ---
 
 # Build Film
@@ -23,7 +23,7 @@ Unless the user asked for direct text-to-video, supplied a ready shot image, or 
 
 1. Anchors, reuse first: `search_assets`, `list_characters`, `get_theme`. Person: Character sheet + face portrait (real person: also their best original photo). Product: real photo or packshot, plus a label/logo close-up when text matters. A recurring person or product with no anchor: create it first (creativeclaw-create-avatar, creativeclaw-product-photoshoot).
 2. Look line: one sentence (palette, light, lens, medium), pasted into every keyframe and video prompt.
-3. Keyframe per shot: `generate_image` with the same image model all project (default `image/nano-banana-2`), `aspect_ratio` = the video's ratio, main anchor in `image_url`, others in `extras.image_urls`, roles named. From shot 2 on, add the first approved keyframe (and the previous one when the scene continues) as a look reference alongside the anchors. One clean full-bleed frame; no text, grid or labels.
+3. Keyframe per shot: in a film plan, `render_film_shots` makes these with the film's own storyboard model, so leave `defaults.image_model` unset unless the user names an image model. For a one-off keyframe outside the plan: `generate_image` with the same image model all project (default `image/nano-banana-2`), `aspect_ratio` = the video's ratio, main anchor in `image_url`, others in `extras.image_urls`, roles named. From shot 2 on, add the first approved keyframe (and the previous one when the scene continues) as a look reference alongside the anchors. Earlier keyframes set the look and place only: name this shot's own shot size and angle in the prompt, or the image copies their framing. One clean full-bleed frame; no text, grid or labels.
 4. Compare it to the anchors (face, label, logo, colors); fix with one targeted edit.
 5. Show keyframes and the plan (model, duration, ratio) in one message. Review mode: call `generate_video` now; the card is the approval. Auto: ask once unless the user said go.
 6. One mode per shot. People, several subjects or big motion: `image_urls` = [keyframe, identity anchor, product anchor], 2–4 total; `character_id` is fine here. Exact opening (product hero, logo reveal): `image_url` = keyframe, no `image_urls` or `character_id`.
@@ -33,10 +33,10 @@ Details: [reference production](references/video/reference-production.md). Image
 
 ## 1. Create and plan
 
-1. Use `list_film_projects` and `get_film_project` to resume an existing project when appropriate; otherwise call `create_film_project` with the name, brief, Character IDs, theme, and target duration.
-2. Follow `creativeclaw-plan-video` to create the script, shot list, model plan, and storyboard.
-3. Save stable shot IDs and patch the project with `update_film_project`. Do not replace approved fields accidentally.
-4. Honor script and storyboard review stages, including approval already given or explicit instructions to proceed through them. Advance `drafting`, `script_ok`, and `storyboard_ok` truthfully.
+1. Use `list_film_projects` and `get_film_project` to resume an existing project when appropriate.
+2. Follow `creativeclaw-plan-video` for the script, shot list and model plan, then save the whole plan in one `create_film_project` call: `defaults` (model, resolution, aspect_ratio, duration, style_refs), `scenes` (id, name), and `shots` with stable ids, `scene`, `prompt`, and `inputs` (`start_frame: "storyboard"`, `image_refs` with URLs or `"shot:<id>"`, `character_ids`, `video_ref`, `audio` lines with `type`, `text` and the speaking `character_id`). When the user asked for the film to be made (not only planned, reviewed first or priced), settle every speaker's voice (section 2) and add `make_storyboards: true`: the same call starts the storyboards and voices the lines, and the film view opens rendering them. Otherwise leave it out and the user reads the complete film in the film view before anything is charged. Give every cut inside a scene a new shot size or angle, and start each shot's `prompt` with them ("High wide shot: …"). Two clips from the same framing back to back jump; make that action one longer or extended clip instead.
+3. Edit the plan with `update_film_project` (`patch_shots` by id, or `shots` to insert, delete or reorder). Every edit keeps the previous plan as a version. Edits don't show the film: call `get_film_project` when the user should see it, once after a set of edits rather than after each one.
+4. `status` is an optional label; progress is tracked from the shot takes, so there are no stages to advance.
 
 ## 2. Establish timing and audio
 
@@ -44,35 +44,44 @@ Read each selected model's spoken-language guidance in `get_model_params({ model
 
 When a Character speaks and the voice is unknown, ask one question: design a new voice from a description (`design_voice`, three auditions), use your own voice (recording plus consent, creativeclaw-clone-voice), or pick a stock voice. If the voice doesn't matter, pick a stock voice and name it. Design auditions use the Character's real lines. In ChatGPT the Voice Studio card saves the choice; read it back from `list_characters` rather than saving again.
 
-Pick one voice path per speaking shot from [voice in video](references/video/voice-in-video.md). Gemini Omni, the default, accepts no audio: native dialogue there, or route exact-voice shots elsewhere. A shot where one person says exact lines goes to `video/minimax-h3-max-lip-sync` with its shot image and the finished line; other exact-voice shots go to an audio-capable model with a check of the delivered words, or to `video/sync-3` on a finished clip (recommended). Preserve an explicit model choice. When a person speaks across shots, save them with their voice as a Character before the first speaking shot. Generate or reuse speech with `creativeclaw-generate-voiceover` before locking shot durations: at most 2.5 words per clip second, about 0.5 s of air at each end, lengths from the audio's `wordTimings`. Do not add separate narration to native-dialogue clips unless requested.
+Pick one voice path per speaking shot from [voice in video](references/video/voice-in-video.md). Gemini Omni, the default, accepts no audio: native dialogue there, or route exact-voice shots elsewhere. A shot where one person says exact lines goes to `video/minimax-h3-max-lip-sync` with its shot image and the finished line; other exact-voice shots go to an audio-capable model with a check of the delivered words, or to `lip_sync_video` on a finished clip. Preserve an explicit model choice. When a person speaks across shots, save them with their voice as a Character before the first speaking shot. Generate or reuse speech with `creativeclaw-generate-voiceover` before locking shot durations: at most 2.5 words per clip second, about 0.5 s of air at each end, lengths from the audio's `wordTimings`. Do not add separate narration to native-dialogue clips unless requested.
 
-Prompt shots for dialogue, ambience and effects only, with no music. Use `creativeclaw-generate-music` once for a requested project score or song and `creativeclaw-generate-sound-effects` for ambience, Foley, and effects.
+In a film plan, give each spoken line its speaker (`character_id`) in the shot's `inputs.audio`; for a conversation, set each line's `at` (seconds into the shot) so the speakers take turns. `render_film_shots({ id, what: "storyboards" })` also makes every line in its speaker's saved voice as a dialogue track on the film timeline, which the film card plays with the shot; `what: "audio"` voices lines added later. Unless `create_film_project` started them, the film view shows what the storyboards and lines will cost before the user starts them; when the balance can't cover a step, nothing starts and the result gives the amount and a purchase link to share, after which the same step continues. Render the clips after that: a model with audio references (Seedance, H3 Max) then speaks the lines in those voices; any other model gets them over the clip, without matching mouths. Relay the warnings `render_film_shots` returns, and offer a model with audio references when matching mouths matter.
+
+Keep continuous sound out of the clips, or every join is audible: each clip invents its own wind, room tone or score. Prompt shots only for dialogue and sounds tied to the picture (footsteps, a door, a key), ending with "no music, no background ambience, no room tone, no transition sounds"; a shot with nothing to sync is silent. Plan `sound` lines are written into each clip's prompt, so keep them to those synced effects; never save wind, rain, crowd or room tone as a shot's sound line. Make one ambience bed per scene with `creativeclaw-generate-sound-effects` (a seamless loop) and, when requested, one score or song for the film with `creativeclaw-generate-music`; both go on the film's timeline as audio tracks (step 4).
 
 When the user asks about cost or supplies a budget, estimate supported planned generations and total them; identify processing costs excluded by `estimate_generation`. Share the total, then continue with the production the user approved.
 
 ## 3. Generate shots
 
-1. Keep approval state truthful. In Review mode, a shot is rendering only after the user submits its card. Honor a separately requested storyboard checkpoint.
-2. For each shot, read the selected local model guide, check current parameters, and call `generate_video` with the approved prompt, model and duration, in one input mode (pipeline step 6).
-3. Maintain Character and product continuity through the same anchors. `character_id` appends the saved image to `image_urls` as a reference, never a start frame. Use it in reference mode; omit it with `image_url`/`last_frame_url` (the server rejects that mix).
-4. On `approval_required`, retain the Recovery Job ID and pause that shot until the user submits it. Resolve submitted jobs needed for assembly with `check_job`, inspect every clip, and write each approved `clipUrl` back to its shot.
+1. Storyboards: unless `make_storyboards` already started them, `render_film_shots({ id, what: "storyboards" })` makes the missing keyframes from each shot's prompt, references and cast (pipeline steps 3–4 still apply to what the plan says). Show them in the film view.
+2. Clips: `render_film_shots({ id, what: "clips" })` builds every request from the saved plan (the storyboard as start frame unless `start_frame` says otherwise, dialogue lines written into the prompt). In Review mode the clips wait for one approval of the whole batch in the film view; tell the user, and never submit them yourself. In Auto they start at once.
+3. Every result saves to its shot as a new take by itself. Do not write clip or storyboard URLs back. For a one-off shot outside the batch, call `generate_video` (or `generate_image`, `generate_speech`) with `film_shot: { film_id, shot_id }` so it lands on that shot too.
+4. Resolve finished work with `get_film_project` or `check_job`, inspect each clip, and report problems per shot.
+
+## Iterate and version
+
+- A scene: `render_film_shots({ id, what: "clips", scene, redo: true, direction })`. It saves what the scene used before the redo as a scene version, adds `direction` to every prompt in the batch, and asks for one approval for just those shots. Use `shot_ids` to redo only some shots.
+- A shot: the newest take is used unless one is picked. `update_film_project({ id, use_take: { take_id } })` picks an older take; `use_take: { shot_id, kind, newest: true }` goes back to the newest.
+- Going back: `update_film_project({ id, use_version: { version_id } })` restores a scene version, an exported cut's takes, or an earlier plan. `get_film_project` lists versions.
+- A clip made without `film_shot` appears in the film view as unsorted; attach it with `update_film_project({ id, add_take: { shot_id, job_id } })`.
 
 ## 4. Combine audio and clips
 
 Use the narration prepared for timing. Read [media-assembly.md](references/media-assembly.md) before combining tracks or clips.
 
-- Per-shot audio: `add_audio_to_video` with `audio_mode: "mix"` keeps the shot's own sound and layers the new track at the clip's length (`original_volume`, `added_volume` 0–1; about 0.3 for music under speech). The default `audio_mode: "replace"` discards the shot's audio and ends at the shorter input. Save the result as the shot's `clipUrl` with `patch_shots`.
+- Per-shot audio: `add_audio_to_video` with `audio_mode: "mix"` keeps the shot's own sound and layers the new track at the clip's length (`original_volume`, `added_volume` 0–1; about 0.3 for music under speech). The default `audio_mode: "replace"` discards the shot's audio and ends at the shorter input. Attach the result to its shot with `add_take` (`url` set to the mixed clip).
 - Project narration: set it with `update_film_project({ id, audio_url })`. `assemble_film` narration replaces every shot's audio; use `with_narration: false` when shots carry dialogue, then layer narration or music over the cut with `audio_mode: "mix"`.
+- Ambience, music, narration and timed effects: put each on the film's timeline as an audio track, not into a clip. Call the generator with `film_track: { film_id, kind, label, start or at: { shot_id, offset_s }, volume, loop, duck }` and the result lands on the timeline by itself; attach audio you already have with `update_film_project` `add_tracks`. One looping bed per location (`loop: true`, about 0.3, `duck: true`), music at about 0.2 under speech, effects `at` the shot they belong to so they follow redos. The user hears the mix in the film card before export, and `assemble_film` renders the same mix. Read [media-assembly.md](references/media-assembly.md) under seamless sound. Listen to every join; a background that changes at a cut means a clip still carries its own bed.
 
-## 5. Assemble and approve
+## 5. Watch and export
 
-1. Verify that every intended shot has an approved `clipUrl` in order.
-2. Call `assemble_film` with `mode: "connect"` by default. It preserves every clip and reports target-duration overage as a warning. Use `mode: "cut_end"` only when the user wants the fully assembled output trimmed at `targetDurationS`.
-3. Resolve the queued job with `check_job`. Only the completed URL is the first cut; completion saves `assembledUrl` and `preview_ok`. Verify playback order, full duration, and audio.
-4. When the user requests opening or closing bookends, use `creativeclaw-edit-media` after the first cut exists. That workflow may offer HTML-rendered cards, but it must not call `render_html_video` unless the user explicitly chooses HTML/HyperFrames/code-driven rendering.
+1. The film view plays the chosen takes back to back for free, with storyboards in the gaps. Let the user watch and fix shots before exporting.
+2. When every intended shot has a clip, call `assemble_film` with `mode: "connect"` by default; `mode: "cut_end"` only when the user wants the output trimmed at `targetDurationS`.
+3. Resolve the queued job with `check_job`. Only the completed URL is the cut; each export is kept as its own cut version. Verify playback order, full duration and audio.
+4. When the user requests opening or closing bookends, use `creativeclaw-edit-media` after the cut exists. That workflow may offer HTML-rendered cards, but it must not call `render_html_video` unless the user explicitly chooses HTML/HyperFrames/code-driven rendering.
 5. Assembly adds no transitions, captions or sound design; make those with the editing tools.
-6. Set `preview_ok` when the first cut exists. Set `final` only after the user has reviewed and approved it.
 
 ## Recovery
 
-Resume from saved project state rather than regenerating approved media. If a shot fails or has a quality issue, report the problem and propose a repair. Require explicit authorization before another generation attempt for that shot; approval of the film or storyboard alone does not authorize replacement takes. After an authorized replacement succeeds, patch only that shot's URL. Do not restart the full film. Never claim completion from queued job IDs.
+Resume from saved project state rather than regenerating approved media. If a shot fails or has a quality issue, report the problem and propose a repair. Require explicit authorization before another generation attempt for that shot; approval of the film or storyboard alone does not authorize replacement takes. Redo only that shot or scene with `render_film_shots`; earlier takes stay available. Do not restart the full film. Never claim completion from queued job IDs.

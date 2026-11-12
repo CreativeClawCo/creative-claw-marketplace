@@ -81,6 +81,7 @@ Read `platform-upload.md` before choosing an import route.
 | `update_film_project`                     | Save script, shots, storyboards, clips, audio, and approval state.                                |
 | `get_film_project` / `list_film_projects` | Inspect Film projects.                                                                            |
 | `assemble_film`                           | Concatenate every rendered shot clip into a first cut. By default the project's narration track replaces the shots' audio; provide `with_narration: false` to keep dialogue and sound from the shots. |
+| `render_film_shots`                       | Make storyboards, clips or dialogue audio for many film shots from the saved plan; clips wait for one batch approval in Review mode, and each result saves to its shot as a take. `scene`, `redo` and `direction` iterate on one scene. |
 
 ## Media processing
 

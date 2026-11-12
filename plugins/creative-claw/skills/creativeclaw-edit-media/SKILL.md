@@ -1,6 +1,6 @@
 ---
 name: creativeclaw-edit-media
-description: "Edit existing video or audio with Creative Claw without regenerating it: trim, cut and reorder chosen moments, resize or reframe, caption, transcribe, clean speech, extract frames, add or mix audio, burn a logo watermark, compose images and clips, or add an intro/outro. Use when the source footage should be kept; use generation skills for invented or transformed footage and create-reels to pick highlights."
+description: "Edit existing video or audio with Creative Claw without regenerating it: trim, cut and reorder chosen moments, resize or reframe, caption, transcribe, clean speech, lip-sync a video to a voice, extract frames, add or mix audio, burn a logo watermark, compose images and clips, or add an intro/outro. Use when the source footage should be kept; use generation skills for invented or transformed footage and create-reels to pick highlights."
 ---
 
 # Edit Existing Media
@@ -25,6 +25,7 @@ Turn supplied footage or audio into a finished derivative. Apply the requested e
 | Clean a noisy recording | `isolate_audio`: keep and compare the original; cleanup can change speech. |
 | Get still frames | `extract_frames`: check the schema for first/last/sampling controls. |
 | Put narration or music on a clip | `add_audio_to_video`: see [Audio](#audio). |
+| Make the mouths in a video match a voice | `lip_sync_video`: `video_url`, `audio_url` (replaces the video's audio; leave it out when the video already has the voice), `prompt` for who says what, `model` left out. Real people, cartoons and animals, one speaker or several. Lines off screen or with the mouth hidden stay as they are and come back in `warnings`. Finishes through `check_job`. `add_audio_to_video` does not move mouths. |
 | Join clips or audio files in order | `merge_media` with `video_urls` or `audio_urls`. |
 | Burn a logo or copyright mark onto a finished video | `overlay_images` with a transparent image. `remove_background` can prepare a logo. |
 | Build a video from existing timed images, clips, and optional audio | `stitch_clips`. It never generates footage; invented footage goes to `generate_video`. |

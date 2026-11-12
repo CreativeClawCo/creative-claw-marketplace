@@ -72,6 +72,22 @@ Store per-shot narration in `audioUrl`, add it to its clip with `add_audio_to_vi
 
 Call `assemble_film` only when every intended shot has its final `clipUrl`. Resolve the assembly job with `check_job`; completion saves `assembledUrl` and advances to `preview_ok`. Do not mark `final` before the applicable user review or prior completion instructions have been satisfied.
 
+### Seamless sound across joined clips
+
+Joined clips butt together with no audio fade, so any change in background sound is heard at the cut. Keep continuous sound out of the clips and add it once over the cut.
+
+**In a film project, sound lives on the film's timeline.** Put each ambience bed, music track, narration line and timed effect on the film as an audio track: `film_track` on `generate_sound_effect`, `generate_music` or `generate_speech` places the result itself (`start` in seconds, or `at: { shot_id, offset_s }` so it moves with the shot; `volume`, `loop`, `fade_in`, `fade_out`, `duck` for beds and music under speech). For audio you already have, use `update_film_project` `add_tracks`; `patch_tracks` moves or re-levels a track and `remove_tracks` takes it off. The film card plays the tracks with the clips before anything is exported, and `assemble_film` mixes them into the cut (ducking under narration and dialogue tracks, loudness about −16 LUFS). Read the film result's `timeline` for each shot's start before placing a sound.
+
+Outside a film project, or by hand:
+
+1. Clips carry only picture-synced sound (dialogue, footsteps, impacts), prompted "no music, no background ambience, no room tone, no transition sounds".
+2. One ambience bed per scene: `generate_sound_effect` with `loop: true` and a stable, constant-density description ("steady low desert wind, no gusts, no voices"). Lengthen it to the scene with `merge_media` `audio_urls` (the loop repeated, `crossfade_seconds` about 1). Join the scene beds in order with a crossfade of about 1 s at each scene change. Crossfades shorten the total, so build the bed a little longer than the cut. A new location gets a new bed; the same location keeps one bed across all its shots.
+3. One music track for the whole film, when requested: `generate_music`, `music/elevenlabs-music-v2.5` with `music_length_ms` set to the cut's length.
+4. `assemble_film` (`with_narration: false` when shots speak), then `add_audio_to_video` `audio_mode: "mix"`: the bed with `original_volume` 1 and `added_volume` about 0.3, then the music in a second pass, `added_volume` about 0.2 under dialogue or 0.5–0.7 with no speech. The mix has no ducking or fades, so choose one music level that sits under the voices.
+5. A clip that came back with its own bed anyway: with no dialogue, drop its audio (or replace it with the bed) before assembly. With dialogue, `isolate_audio` keeps the voice only; lay it back with `add_audio_to_video` `audio_mode: "replace"` and add any needed effects from `generate_sound_effect`. Otherwise lower the bed under that clip so the two backgrounds don't stack.
+
+Listen to every join before delivery: a background that changes level or texture at a cut means a clip still carries its own bed.
+
 Joining videos with `merge_media` and film assembly perform concatenation, not transitions or a full sound mix. Generated music/SFX are separate assets until assembled through a supported method. Do not claim narration, music, and effects were layered by joining audio with `merge_media`.
 
 Check final playback order, duration, cut points, audio presence/sync, and caption timing with available inspection tools. Preserve source clips and completed intermediates so one failed stage can resume without regeneration.

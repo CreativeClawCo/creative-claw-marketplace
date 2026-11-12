@@ -65,6 +65,7 @@ Purchases and plans are handled on the Creative Claw website, not in chat. Do no
 | Find reference images on the web (a place, object, style or look) | `search_images`; to see the results, `load_image` with its `search_id`, then `check_job`; import picks with `upload_asset` before using them |
 | Create, inspect, edit, or apply a brand theme | `references/workflows/brand-theme.md` |
 | Trim, resize, caption, transcribe, clean, or combine existing media | `creativeclaw-edit-media` |
+| Lip-sync an existing video to a voice | `creativeclaw-edit-media` (`lip_sync_video`) |
 | Burn a transparent logo or copyright image onto a finished video | `creativeclaw-edit-media`, using `overlay_images`; read [assembly guidance](references/media-assembly.md) |
 | Make a video from existing timed images, optional video clips, and optional audio | `creativeclaw-edit-media`, using `stitch_clips` (never for new AI footage, which is `generate_video`); read [assembly guidance](references/media-assembly.md) |
 | Select highlights from long footage and create vertical Reels | `creativeclaw-create-reels` |

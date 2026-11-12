@@ -21,7 +21,7 @@ Read [shared execution guidance](references/workflow-basics.md) once per task be
 | Replace a product, prop, garment, sign or label in a video, not a person | `swap_video_objects`; see "Object swaps" below |
 | Keep the original clothes and change only who the person is | This skill; say "keep their original outfit" in the instructions |
 | A Character copying a recorded performance in a new scene, or the same movement in another outfit or place | `creativeclaw-generate-video`, motion transfer with Kling Motion Control Pro |
-| New dialogue or a dub on the swapped video | Swap first, then `creativeclaw-generate-voiceover` and lip-sync on the finished clip |
+| New dialogue or a dub on the swapped video | Swap first, then `creativeclaw-generate-voiceover` and `lip_sync_video` on the finished clip |
 | Cut, trim, reframe or join existing clips | `creativeclaw-edit-media` |
 
 Swap in only people who agreed to it: the user, people who gave permission, or fictional Characters.
@@ -65,6 +65,6 @@ Describe what went wrong in plain words and offer the next step. A failed swap, 
 
 ## Voice after the swap
 
-The swap keeps the original soundtrack. To make a swapped person with a cloned voice also sound like their Character, isolate the clip's speech with `isolate_audio`, change it with `generate_speech` (`speech/cartesia-voice-changer`, the speech in `extras.audio_url`, the Character's `character_id`, no text), then put it back with `add_audio_to_video`. For new lines, use `creativeclaw-generate-voiceover` and lip-sync on the finished clip.
+The swap keeps the original soundtrack. To make a swapped person with a cloned voice also sound like their Character, isolate the clip's speech with `isolate_audio`, change it with `generate_speech` (`speech/cartesia-voice-changer`, the speech in `extras.audio_url`, the Character's `character_id`, no text), then put it back with `add_audio_to_video`. For new lines, use `creativeclaw-generate-voiceover` and `lip_sync_video` on the finished clip.
 
 Conduct the workflow in the user's language.

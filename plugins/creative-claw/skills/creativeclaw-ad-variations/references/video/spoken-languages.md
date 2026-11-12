@@ -34,7 +34,7 @@ Do not attach unsupported reference arrays or `character_id` to a literal-image 
 
 ## An existing speaking video
 
-For an existing clip and finished replacement speech, recommend `video/sync-3` with one `video_urls` and one `audio_urls` input. It also supports embedded audio when `audio_urls` is omitted and automatic or manual speaker selection. This is audio-driven editing, not translation or native generated dialogue. Keep [HeyGen Lipsync](heygen-lipsync.md) as an alternative when explicitly selected; its mode defaults to Precision. A verified per-language quality list is not recorded for either endpoint. Prepare correct speech in the target language and review the delivered lip sync.
+For an existing clip and finished replacement speech, use `lip_sync_video` with `video_url` and `audio_url`, in any language. Leave `audio_url` out when the video already has the voice in it. This is audio-driven editing, not translation or native generated dialogue. Keep [HeyGen Lipsync](heygen-lipsync.md) as an alternative when explicitly selected; its mode defaults to Precision. A verified per-language quality list is not recorded for either route. Prepare correct speech in the target language and review the delivered lip sync.
 
 ## Multiple shots, only when the user wants them
 

@@ -82,7 +82,7 @@ Subject and scene: [who or what, where, opening composition].
 Motion: [one primary action and environmental motion].
 Camera: [shot size, angle, lens feel, one intentional move].
 Look: [lighting, palette, texture, medium].
-Audio: [quoted dialogue, ambience, effects, music, or explicit silence].
+Audio: [quoted dialogue, ambience, effects, music, or explicit silence; in a multi-clip film, only dialogue and picture-synced effects, then "no music, no background ambience"].
 Ending: [final composition or state].
 Preserve: [identity, wardrobe, product, environment].
 Avoid: [specific unwanted changes, cuts, text, artifacts].
@@ -149,3 +149,8 @@ When the original must remain untouched with new footage added, generate only th
 Check the requested duration and ratio, reference-role adherence, character and product consistency, physical continuity, camera path, unintended cuts, dialogue accuracy, lip sync, sound perspective, ending state, duplicate limbs, warped hands, embedded text, and watermark behavior. Revise the smallest failed part rather than broadening the prompt indiscriminately.
 
 When you report a quality issue with `submit_feedback`, include concrete model-specific failures without exposing private media.
+
+
+## Swap Lite
+
+For replacing people inside existing footage, call `swap_video_characters` with `video_model: "video/wan-3.0"` when the user requests Swap Lite or Wan. Keep the shared three free scene previews and Review/Auto flow. Lite accepts up to seven combined reference photos or Characters and prepares at most 15 seconds of source video; longer or fractional clips are shortened transparently without changing speed. Text instructions are supported. A 480p Lite output is a normal completed video, without Seedance native draft completion; request 720p or 1080p at the start for higher resolution. Existing swaps continue to default to Seedance 2.5, up to 30 seconds.

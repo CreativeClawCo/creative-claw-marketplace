@@ -157,7 +157,7 @@ These are integration limits, not every feature of Kling's website. Refresh them
 - Video elements must show a realistic person: MP4/MOV, 3 to 8 seconds, 1920×1080 or 1080×1920, up to 200 MB. Recorded speech can guide vocal identity.
 - Element photos: JPG/PNG, up to 10 MB each, at least 300 pixels on each side, aspect ratio 0.4 to 2.5; a frontal view plus 1 to 3 additional views.
 - Prompt: up to 26,000 characters, also subject to the model's 8,000-token limit. Preserve reference handles when shortening a prompt.
-- Native audio is always generated. No `generate_audio` switch, standalone `audio_urls`, seed, negative-prompt field, CFG, `multi_prompt`, 4K/HDR, Flash selector or extension control. Quiet sound requested in text is not an audio-off guarantee.
+- Native audio is always generated. No `generate_audio` switch, standalone `audio_urls`, seed, negative-prompt field, CFG, `multi_prompt`, 4K/HDR, Flash selector or extension control. Quiet sound requested in text is not an audio-off guarantee: in a multi-clip film, expect a background bed anyway and handle it as [media assembly](../media-assembly.md) describes.
 
 The website's advertised resolution, default duration, voice-upload and timeline controls do not override this route's schema. [Operation specification](https://dev.pika.art/llms/kling/kling-4.0/omni-video)
 
