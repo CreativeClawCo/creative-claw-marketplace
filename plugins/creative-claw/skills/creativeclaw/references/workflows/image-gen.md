@@ -22,16 +22,16 @@ Runtime discovery is authoritative. These are current routing defaults:
 | General generation or edit                                                     | `image/nano-banana-2`   | Default with balanced quality, speed, and cost. |
 | Complex professional asset, precise typography, demanding multi-reference edit | `image/gpt-image-2.5-sunburst` | Instruction following, text rendering, and controlled editing. |
 | Fast everyday OpenAI image work                                                | `image/gpt-image-2.5-flare` | Faster GPT Image 2.5 generation and editing.                 |
-| Premium product or marketing imagery                                           | `image/seedream-5-pro`  | Flagship generation and precise multi-reference editing.        |
+| Premium product or marketing imagery, transparent PNGs, layer splits | `image/seedream-5.5`  | Consistent multi-reference edits, native alpha, editable layers. |
 | Transparent background | `image/gpt-image-2.5-flare` or `image/gpt-image-2.5-sunburst` | Set `extras.background: "transparent"` with PNG or WebP output. For an existing image, use `remove_background`. |
 
-Use Nano Banana 2 for most image work. Choose Sunburst, Flare, or Seedream 5 Pro when their specialty fits the task. Nano Banana Pro remains available when explicitly selected. Use another runtime-listed model when the user asks or these routes cannot perform the operation.
+Use Nano Banana 2 for most image work. Choose Sunburst, Flare, or Seedream 5.5 when their specialty fits the task. Nano Banana Pro remains available when explicitly selected. Use another runtime-listed model when the user asks or these routes cannot perform the operation.
 
 After choosing, use the corresponding focused skill for exact prompting and reference behavior:
 
 - nano-banana-2 model reference — default generation, conversational editing, up to 14 role-mapped references, extreme ratios, and optional search grounding.
 - gpt-image-2 model reference — strong instruction following, transparent output, masks when honored by the live route, and up to 16 ordered edit inputs.
-- seedream-5-pro model reference — premium product/editorial work, spatial edits, and up to 10 ordered references.
+- seedream-5.5 model reference — premium product/editorial work, transparent assets, layer splits, and up to 10 ordered references.
 
 ## Reference handling
 
