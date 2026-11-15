@@ -38,10 +38,10 @@ Honor the requested script, storyboard, and final review stages, and the approva
 
 ### Gate 1: script
 
-1. `create_film_project({ name, brief, character_ids, target_duration_s })`.
-2. Draft a logline and shot list with narration/dialogue.
+1. Draft a logline and the full plan: scenes, and shots with prompts, inputs and dialogue lines.
+2. Save it in one `create_film_project({ name, brief, character_ids, target_duration_s, defaults, scenes, shots })` call so the user sees the whole film first.
 3. Keep each shot within the selected model's duration cap; do not assume every model caps at 15s.
-4. Save with `update_film_project` and show the project.
+4. Edit it with `update_film_project` and show the film view.
 5. Obtain script approval if it has not already been given and the user has not authorized continuing through this stage.
 
 ### Gate 2: storyboards
@@ -50,7 +50,7 @@ Honor the requested script, storyboard, and final review stages, and the approva
 2. Generate one clean keyframe per shot from the shared anchors, with the same image model for the whole project ([reference production](../video/reference-production.md)).
 3. For real-person likeness, compare a leading edit model when uncertain instead of relying on a stale universal rule.
 4. Set `aspect_ratio` to the video's ratio.
-5. Patch each shot with its `storyboardUrl`, show the project, and honor the applicable look-review stage without repeating existing approval.
+5. Make them with `render_film_shots({ id, what: "storyboards" })`; each saves to its shot. Honor the applicable look-review stage without repeating existing approval.
 
 ### Gate 3: clips, audio, and assembly
 
@@ -58,10 +58,10 @@ Honor the requested script, storyboard, and final review stages, and the approva
 2. Call `list_models` and `get_model_params` for the chosen video model.
 3. Generate each clip from its approved storyboard and Character/reference inputs.
 4. Start with `video/gemini-omni-flash`; use `video/seedance-2.5` for longer reference-heavy shots or `video/minimax-h3-max` for fast cinematic work with optional boundary frames. Use the curated picker in `video-gen.md`.
-5. Resolve and inspect each clip before patching it into the project.
+5. Render clips with `render_film_shots({ id, what: "clips" })`: one batch approval in the film view, and each clip saves to its shot as a take. Inspect each clip; redo a shot or scene with `redo: true` (earlier takes stay available).
 6. Keep every shot built from the same anchors; a previous clip's last frame (`extract_frames`) is only an extra composition cue.
 7. Add per-shot audio with `add_audio_to_video` (`audio_mode: "mix"` keeps the shot's sound; the default `replace` discards it and ends at the shorter input), or save one approved narration track as the project's `audio_url`. `assemble_film` narration replaces every shot's audio; set `with_narration: false` when shots carry dialogue.
-8. Call `assemble_film({ id })` only after every intended shot has an approved `clipUrl`.
+8. The film view plays the chosen takes for free. Call `assemble_film({ id })` to export once every intended shot has a clip.
 9. Resolve the assembly job with `check_job` before delivering the first cut. Read [media-assembly.md](../media-assembly.md) for duration matching, merge continuations, and track handling. Honor the applicable final review before marking it final; assembly does not add transitions, captions, per-shot audio, or a full sound mix.
 
 ## Shot rules
@@ -76,5 +76,5 @@ Honor the requested script, storyboard, and final review stages, and the approva
 ## Tools
 
 - Characters: `create_character`, `update_character` (update by `id`), `delete_character` (`{ id, confirm: true }`), `list_characters`, `design_voice`. Older clients that expose only `manage_character` can still create without `id`, update with `id`, and delete with `{ id, delete: true }`.
-- Films: `create_film_project`, `update_film_project`, `get_film_project`, `list_film_projects`, `assemble_film`.
+- Films: `create_film_project`, `update_film_project` (plan, `use_take`, `use_version`, `add_take`), `render_film_shots`, `get_film_project`, `list_film_projects`, `assemble_film`. `film_shot` on generate tools saves one result to a shot.
 - Media: `generate_image`, `generate_video`, `generate_speech`, `clone_voice`, `extract_frames`, `merge_media`, `add_audio_to_video`, `check_job`.

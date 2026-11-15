@@ -58,7 +58,8 @@ For conversational setup or edits, prefer `update_theme({ interactive: true })`.
 | `search_assets`                     | Find recent or matching media by type, query, tags, exact name, or source.                             |
 | `update_asset`                      | Set a unique name, replace tags, or update a description.                                              |
 | `delete_asset`                      | Permanently delete an asset; it cannot be restored. Only when explicitly requested.                    |
-| `load_image`                        | Display an image URL inline when exposed.                                                              |
+| `load_image`                        | Display an image URL inline when exposed. With a `search_images` `search_id` (and optional `indices`), starts a job; `check_job` returns one numbered contact sheet. |
+| `search_images`                     | Search the web for reference images (filters for size, type, color, shape, time, license); shows a card where the user picks. Import a pick's `image_url` with `upload_asset` before using it. |
 | `import_chatgpt_media`              | Convert one native ChatGPT attachment into a durable Creative Claw asset when exposed.                 |
 | `import_media`                      | Open the picker when the user still needs to choose a file.                                            |
 | `get_upload_url` + `confirm_upload` | Upload local bytes from clients that can perform an HTTP PUT.                                          |
@@ -80,6 +81,7 @@ Read `platform-upload.md` before choosing an import route.
 | `update_film_project`                     | Save script, shots, storyboards, clips, audio, and approval state.                                |
 | `get_film_project` / `list_film_projects` | Inspect Film projects.                                                                            |
 | `assemble_film`                           | Concatenate every rendered shot clip into a first cut. By default the project's narration track replaces the shots' audio; provide `with_narration: false` to keep dialogue and sound from the shots. |
+| `render_film_shots`                       | Make storyboards, clips or dialogue audio for many film shots from the saved plan; clips wait for one batch approval in Review mode, and each result saves to its shot as a take. `scene`, `redo` and `direction` iterate on one scene. |
 
 ## Media processing
 

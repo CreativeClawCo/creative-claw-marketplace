@@ -104,7 +104,7 @@ Scene: [subject, environment, composition].
 Action: [one filmable action with visible motion].
 Camera: [framing + one intentional movement].
 Look: [lighting, lens/medium, palette, texture].
-Audio: [dialogue, ambience, effects, music, or explicit silence].
+Audio: [dialogue, ambience, effects, music, or explicit silence; in a multi-clip film, only dialogue and picture-synced effects, then "no music, no background ambience"].
 Timing: [optional natural beats or time ranges].
 Constraints: [identity, product geometry, no cuts/text/subtitles/watermarks].
 ```
@@ -131,6 +131,7 @@ Describe native audio explicitly:
 - “Dialogue, exact line: ‘Ready when you are.’ Natural room tone, no music.”
 - “At five seconds, the percussion enters as the product locks into place.”
 - “Generate a silent clip; no music, speech, ambience, or sound effects.”
+- One shot of a film: “Her footsteps and one door creak. No music, no background ambience, no room tone.” The scene's bed is added once over the cut.
 
 Keep spoken copy short enough to fit naturally. Quote exact lines and preserve the approved wording.
 

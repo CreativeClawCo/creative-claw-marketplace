@@ -14,6 +14,7 @@ Compact orientation, checked 2026-10-06:
 | H3 / H3 Max / H3 Max Fast | H3 documents English, Chinese and several other dialogue languages. Max/Fast use that family baseline as inherited guidance, not separately published language validation. Get the full list from `get_model_params`. |
 | H3 Max Recast and Kling Motion Control Pro | Preserve the source video soundtrack, or remove it where supported. This does not establish native generated-speech or translation support; the recorded language comes from the source. |
 | Seedance 2.5 | English and Chinese, plus other documented languages including Spanish, Japanese and Arabic. Get the complete version-specific list from `get_model_params`; do not assume all Seedance versions share it. |
+| Seedance 2.5 Flash (checked 2026-11-15) | No separate language list is published. Treat English and Chinese as inherited Seedance 2.5 family guidance and every other language as unverified; `get_model_params` reports it as unverified. Source: [BytePlus announcement](https://x.com/BytePlusGlobal/status/2120760891344036304). |
 | Kling 4.0 Omni (checked 2026-10-23) | Native dialogue is documented in English, Chinese and additional languages. Get the full version-specific list from `get_model_params({ model: "video/kling-4.0-omni" })`. Other languages, including Hebrew, remain unverified. Audio is always generated; voice guidance is not an exact supplied soundtrack. Source: [Kling comparison](https://kling.ai/blog/kling-4-vs-3). |
 | FLUX 3 Max (checked 2026-10-20) | Native audio is documented and fal demonstrates English dialogue. No verified per-language reliability list is published for these exact endpoints. Language-specific reliability remains unverified. Read `get_model_params` and do not borrow a different FLUX version's language list. Source: [fal image-to-video API](https://fal.ai/models/blackforestlabs/flux-3-max/image-to-video/api). |
 
@@ -34,7 +35,7 @@ Do not attach unsupported reference arrays or `character_id` to a literal-image 
 
 ## An existing speaking video
 
-For an existing clip and finished replacement speech, recommend `video/sync-3` with one `video_urls` and one `audio_urls` input. It also supports embedded audio when `audio_urls` is omitted and automatic or manual speaker selection. This is audio-driven editing, not translation or native generated dialogue. Keep [HeyGen Lipsync](heygen-lipsync.md) as an alternative when explicitly selected; its mode defaults to Precision. A verified per-language quality list is not recorded for either endpoint. Prepare correct speech in the target language and review the delivered lip sync.
+For an existing clip and finished replacement speech, use `lip_sync_video` with `video_url` and `audio_url`, in any language. Leave `audio_url` out when the video already has the voice in it. This is audio-driven editing, not translation or native generated dialogue. Keep [HeyGen Lipsync](heygen-lipsync.md) as an alternative when explicitly selected; its mode defaults to Precision. A verified per-language quality list is not recorded for either route. Prepare correct speech in the target language and review the delivered lip sync.
 
 ## Multiple shots, only when the user wants them
 

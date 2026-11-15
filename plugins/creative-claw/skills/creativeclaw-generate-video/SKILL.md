@@ -27,7 +27,7 @@ Unless the user asked for direct text-to-video, supplied a ready shot image, or 
 
 1. Anchors, reuse first: `search_assets`, `list_characters`, `get_theme`. Person: Character sheet + face portrait (real person: also their best original photo). Product: real photo or packshot, plus a label/logo close-up when text matters. A recurring person or product with no anchor: create it first (creativeclaw-create-avatar, creativeclaw-product-photoshoot).
 2. Look line: one sentence (palette, light, lens, medium), pasted into every keyframe and video prompt.
-3. Keyframe per shot: `generate_image` with the same image model all project (default `image/nano-banana-2`), `aspect_ratio` = the video's ratio, main anchor in `image_url`, others in `extras.image_urls`, roles named. From shot 2 on, add the first approved keyframe (and the previous one when the scene continues) as a look reference alongside the anchors. One clean full-bleed frame; no text, grid or labels.
+3. Keyframe per shot: `generate_image` with the same image model all project (default `image/nano-banana-2`), `aspect_ratio` = the video's ratio, main anchor in `image_url`, others in `extras.image_urls`, roles named. From shot 2 on, add the first approved keyframe (and the previous one when the scene continues) as a look reference alongside the anchors. Earlier keyframes set the look and place only: name this shot's own shot size and angle in the prompt, or the image copies their framing. One clean full-bleed frame; no text, grid or labels.
 4. Compare it to the anchors (face, label, logo, colors); fix with one targeted edit.
 5. Show keyframes and the plan (model, duration, ratio) in one message. Review mode: call `generate_video` now; the card is the approval. Auto: ask once unless the user said go.
 6. One mode per shot. People, several subjects or big motion: `image_urls` = [keyframe, identity anchor, product anchor], 2–4 total; `character_id` is fine here. Exact opening (product hero, logo reveal): `image_url` = keyframe, no `image_urls` or `character_id`.
@@ -45,7 +45,7 @@ Then pick one path per speaking shot from [voice in video](references/video/voic
 - **One person saying exact lines, to camera or clearly in view, in any language:** make the line first with `generate_speech`, then `video/minimax-h3-max-lip-sync` with the shot image in `image_url` and the line in `extras.audio_url`. The words come out exactly as recorded. A voice sample or audio cut from an earlier clip is not the line.
 - **Several speakers, or a shot led by body performance or camera movement:** speech first with a supported audio-reference model, then check the result's words, since these models can add, drop or repeat them.
 - **A one-off where the voice may vary:** native dialogue in a documented language.
-- **A finished clip that needs new or corrected speech:** `video/sync-3`, the recommended lip-sync model.
+- **A finished clip that needs new or corrected speech, or mouths matched to a voice:** `lip_sync_video`, not `generate_video`, with the clip in `video_url` and the speech in `audio_url`, or no `audio_url` when the clip already has the voice. Say who speaks in `prompt` when several characters are on screen, and leave `model` out.
 
 Preserve an explicit model choice. Quote only the spoken words in a prompt for a model that speaks; keep scene numbers and production notes out, since the model can read them aloud. Gemini Omni, the default, accepts no audio on the current route: don't make speech first for an Omni shot. Keep lines to at most 2.5 words per clip second.
 

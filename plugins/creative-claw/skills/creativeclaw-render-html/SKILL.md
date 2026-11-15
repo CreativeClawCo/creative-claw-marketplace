@@ -112,6 +112,6 @@ Use 24 FPS for a cinematic look, 30 for normal graphics, and 60 only when the sm
 | Examples to start from | [Example discovery](references/example-discovery.md) |
 | Review, local checks, blank frames, timeouts | [Verification and troubleshooting](references/verification.md) |
 
-The [WebGL example](assets/webgl-orbit.html) is a complete document to validate locally or adapt into the `html` string; its file path is not a tool input.
+The [WebGL example](references/webgl-orbit-example.md) is a complete document to validate locally or adapt into the `html` string; its file path is not a tool input.
 
 Use `estimate_generation` with `operation: "html_video"` only when the user asks about cost or gives a budget, with the real duration, size, and FPS in `params`.

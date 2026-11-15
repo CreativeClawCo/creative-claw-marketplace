@@ -4,7 +4,7 @@
 
 Replace a visible speaker's speech in an existing video using finished audio. Supply exactly one public HTTPS video_urls entry and one public HTTPS audio_urls entry. The audio supplies the words, voice, emotion, language, and pacing. The required prompt is a task label and is not sent to HeyGen. Within HeyGen, Precision is the default mode; explicitly selected Speed costs half as much per output second. Prepare speech first, estimate with the intended settings, submit once, and use check_job for the permanent result saved in the asset library. Review mouth timing and the preserved performance before delivery.
 
-For lip-syncing an existing video to finished speech, recommend video/sync-3. Supply one video_urls input and one finished speech recording in audio_urls; if audio_urls is omitted, Creative Claw extracts the source video's embedded audio. Sync 3 supports automatic or manual speaker selection. Keep video/heygen-lipsync as an alternative when explicitly selected; its mode defaults to precision and it requires one video_urls and one audio_urls input. Honor an explicit model choice and never switch or retry a paid generation automatically.
+For lip-syncing an existing video to a voice, use `lip_sync_video`: it takes one `video_url` and an optional `audio_url`, and uses the video's own voice when `audio_url` is omitted. See [voice in video](voice-in-video.md). Keep video/heygen-lipsync as an alternative when explicitly selected; its mode defaults to precision and it requires one video_urls and one audio_urls input. Honor an explicit model choice and never switch or retry a paid generation automatically.
 
 ### When to use it
 
@@ -17,13 +17,13 @@ For lip-syncing an existing video to finished speech, recommend video/sync-3. Su
 - You have a still portrait rather than a video. Use video/heygen-avatar-4 with the image and prepared speech.
 - You need a new scene, camera move, body performance, or background. Generate or edit the footage with a video model first, then lip-sync the finished clip if needed.
 - You only need narration over footage with no visible speaking mouth. Use an audio overlay or editing workflow. Mouth synthesis adds no value here.
-- Several faces are visible and you must explicitly select the speaker. Consider video/sync-3 and inspect its current speaker-selection controls. HeyGen Lipsync exposes no speaker-selection field.
+- Several faces are visible, or the video shows a cartoon or an animal. Use `lip_sync_video` and say who speaks in its `prompt`. HeyGen Lipsync exposes no speaker-selection field.
 - You need translation, text-to-speech, voice cloning, or voice design. Perform that step first, then provide the final recording in audio_urls. A cloning sample is not the replacement dialogue.
 
 ### Speed or Precision
 
 - Speed: Choose explicitly for quick reviews and cost-sensitive clips. It is the faster, lower-cost mode.
-- Precision: Recommended default for existing-video lip sync, prioritizing mouth fidelity. HeyGen describes higher-fidelity avatar inference. Quality and completion time are not guaranteed.
+- Precision: The default within HeyGen, prioritizing mouth fidelity. HeyGen describes higher-fidelity avatar inference. Quality and completion time are not guaranteed.
 - Use the user's requested mode. If unspecified, use Precision. Do not override an explicit Speed choice or run both modes; each submission is a separate paid generation.
 
 ### How to prompt it

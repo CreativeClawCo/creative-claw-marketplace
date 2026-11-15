@@ -5,7 +5,8 @@ Use the outcome skill as the primary workflow, including when the user names a m
 - [nano-banana-2](nano-banana-2.md)
 - [nano-banana-pro](nano-banana-pro.md)
 - [gpt-image-2](gpt-image-2.md)
-- [seedream-5-pro](seedream-5-pro.md)
+- [seedream-5.5](seedream-5.5.md)
+- [seedream-5-pro](seedream-5-pro.md) (older; only when the user asks for it)
 
 These guides do not authorize extra paid drafts. Report concrete product or quality issues through `submit_feedback` and say briefly that you did; do not report when the user asks you not to.
 

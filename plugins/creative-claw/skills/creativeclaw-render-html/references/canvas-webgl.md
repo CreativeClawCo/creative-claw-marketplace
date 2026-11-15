@@ -42,4 +42,4 @@ The documented Three adapter also dispatches `hf-seek` with `event.detail.time` 
 
 Prior validation: the official spiral-galaxy registry example used a GSAP property setter tween with `lazy:false`, `preserveDrawingBuffer:true`, and classic GSAP 3.14.2 / Three.js 0.147 scripts. It succeeded locally on HyperFrames 0.8.30 and remotely. That supports retaining this pattern as a known working reference. Different earlier compositions timed out, possibly on a different worker deployment; the comparison does **not** establish that `onUpdate` caused those timeouts.
 
-[webgl-orbit.html](../assets/webgl-orbit.html) is a small complete example using raw WebGL plus a pinned GSAP script. It includes shader error checks and deterministic redraws. It is not the spiral-galaxy example and does not inherit its validation status. See [verification](verification.md).
+[The WebGL example](webgl-orbit-example.md) is a small complete example using raw WebGL plus a pinned GSAP script. It includes shader error checks and deterministic redraws. It is not the spiral-galaxy example and does not inherit its validation status. See [verification](verification.md).

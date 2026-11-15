@@ -16,7 +16,7 @@ Turn a brief and optional references into a finished image. This is the primary 
 ## Workflow
 
 1. Establish the subject, intended use, aspect ratio, style, text requirements, and which details must remain exact.
-2. Use `search_assets` for likely reusable references. Import attachments or local files with the platform upload flow before generation.
+2. Use `search_assets` for likely reusable references. Import attachments or local files with the platform upload flow before generation. For a real place, object or look the user has no picture of, `search_images` finds web references; import a pick's `image_url` with `upload_asset` and use only as a reference, never to copy a real person.
 3. When the user asks for examples, inspiration, styles, or a close starting point, or an open brief would benefit from concrete choices, call `search_examples` for a small filtered set, then load only the chosen example with `search_examples({ id })`. Do not search automatically for an already precise brief.
 4. For branded work, call `get_theme` and carry the relevant colors, typography, logo treatment, and visual rules into the prompt.
 5. Use `list_models({ category: "image" })` when selection is unresolved; for a known choice, use `get_model_params` directly and reuse its current-task schema.
@@ -30,7 +30,7 @@ Turn a brief and optional references into a finished image. This is the primary 
 - Use `image/gpt-image-2.5-sunburst` for complex professional assets, demanding typography, multi-reference composition, or controlled edits. Nano Banana Pro remains available when explicitly selected.
 - Use `image/gpt-image-2.5-sunburst` for layout corrections that move, scale, or re-space existing text and logos, such as a Story safe-zone fix. Nano Banana 2 tends to return that kind of edit with the layout unchanged. State target positions as percentages of the canvas height, then measure them on the result.
 - Use `image/gpt-image-2.5-flare` for fast, high-quality everyday OpenAI image generation and editing.
-- Use `image/seedream-5-pro` for product and marketing imagery. Keep Nano Banana 2 for precise local edits. After a model moderation refusal, Seedream may also be offered as the tool's suggested alternative, with user confirmation before another paid generation; it applies its own safety checks and may still reject the request.
+- Use `image/seedream-5.5` for product and marketing imagery, transparent PNG assets (`extras.background: "transparent"`), and splitting a flat image into editable layers (`extras.layer_decomposition`). Keep Nano Banana 2 for precise local edits. After a model moderation refusal, Seedream may also be offered as the tool's suggested alternative, with user confirmation before another paid generation; it applies its own safety checks and may still reject the request.
 - For a transparent background, use GPT Image 2.5 (Flare or Sunburst) with `extras.background: "transparent"`, or `remove_background` for an existing image.
 - Honor an explicit model choice. Read [the selected image model guide](references/images/index.md) for exact prompting and reference syntax.
 

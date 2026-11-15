@@ -133,7 +133,7 @@ Subject and environment: [concrete visible facts].
 Action: [two to four ordered filmable beats].
 Camera: [framing, angle, one principal movement].
 Look: [lighting, lens feel, texture, palette].
-Audio: [quoted dialogue, synchronized effects, ambience, music, or silence].
+Audio: [quoted dialogue, synchronized effects, ambience, music, or silence; in a multi-clip film, only dialogue and picture-synced effects, then "no music, no background ambience"].
 Continuity: [identity, wardrobe, geometry, location].
 Avoid: [specific failure modes, text, cuts, additions].
 ```

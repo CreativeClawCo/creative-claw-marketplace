@@ -64,7 +64,7 @@ For source-video work, use the edit-specific ranking in `edit-video.md` instead 
 [0s–Xs] Subject, action, environment, and framing.
 Camera: one intentional movement.
 Look: lighting, lens/medium, palette, texture.
-Audio: dialogue in quotes, ambience, effects, music direction, or explicit silence.
+Audio: dialogue in quotes, ambience, effects, music direction, or explicit silence (for clips that will be joined: dialogue and picture-synced effects only, no music or background ambience).
 Continuity: identity, wardrobe, product geometry, and protected references.
 Constraints: single shot or named cuts; no unwanted text, captions, or watermark.
 ```
