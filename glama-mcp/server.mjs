@@ -33,16 +33,13 @@ function createGuidanceResponse(toolName, args) {
         "Grok Bot",
       ],
       setup_instructions: {
-        claude_desktop: {
-          description: "Add to claude_desktop_config.json",
-          config: {
-            mcpServers: {
-              "creative-claw": {
-                type: "http",
-                url: MCP_APP_URL,
-              },
-            },
-          },
+        claude: {
+          description: "Add the Creative Claw plugin from Claude's plugin directory (claude.ai, Claude Desktop, Cowork, Claude Code)",
+          steps: [
+            "Open https://claude.ai/customize/plugins/id/3b9e3067-1092-46a5-b613-f52ddf9476ca@anthropic-plugin-directory and add the plugin",
+            "Open the plugin's Connectors tab, press Connect, then Add, and sign in",
+            "Do not also add Creative Claw as a custom connector",
+          ],
         },
         cursor: {
           description: "Install from Cursor Marketplace",

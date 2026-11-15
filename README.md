@@ -4,7 +4,7 @@
 
 Creative Claw is an MCP plugin that brings a full AI media studio into Grok Bot, Hermes Agent, OpenClaw, Cursor, Claude Code, Claude Desktop, ChatGPT, and Codex. Generate images, video, and expressive speech; reuse Characters and brand assets; and produce product campaigns, UGC ads, and multi-shot Films through one account. No API keys and no platform switching.
 
-> [creativeclaw.co](https://creativeclaw.co) | [Install in ChatGPT](https://chatgpt.com/plugins/creativeclaw) | [ChatGPT guides](https://creativeclaw.co/chatgpt/) | [Pricing](https://creativeclaw.co/pricing/) | [![Smithery](https://smithery.ai/badge/itay/creativeclaw)](https://smithery.ai/servers/itay/creativeclaw)
+> [creativeclaw.co](https://creativeclaw.co) | [Install in ChatGPT](https://chatgpt.com/plugins/creativeclaw) | [Install in Claude](https://claude.ai/customize/plugins/id/3b9e3067-1092-46a5-b613-f52ddf9476ca@anthropic-plugin-directory) | [ChatGPT guides](https://creativeclaw.co/chatgpt/) | [Pricing](https://creativeclaw.co/pricing/) | [![Smithery](https://smithery.ai/badge/itay/creativeclaw)](https://smithery.ai/servers/itay/creativeclaw)
 
 ---
 
@@ -135,36 +135,28 @@ npx skills add CreativeClawCo/creative-claw-marketplace
 
 The OpenAI Store installs the shared ChatGPT/Codex plugin and skill bundle separately; Store users do not need this command.
 
-### Claude Code
+### Claude (claude.ai, Claude Desktop, Cowork and Claude Code)
+
+1. Open [Creative Claw in Claude's plugin directory](https://claude.ai/customize/plugins/id/3b9e3067-1092-46a5-b613-f52ddf9476ca@anthropic-plugin-directory) and add it.
+2. Open the plugin's **Connectors** tab, press **Connect**, then **Add**, and sign in.
+
+That's all: the plugin brings the skills and the connection, and it updates itself. Don't also add Creative Claw as a custom connector or in `claude_desktop_config.json`. A second connection to the same server makes Claude's sign-in fail with "Couldn't register with Creative Claw's sign-in service".
+
+Seeing two Creative Claw rows in Claude's settings afterwards is normal: one is the plugin, the other is your connection to the server.
+
+<details>
+<summary>Claude Code in a terminal, without the Claude app</summary>
+
+Use this only where the plugin directory isn't available:
 
 ```bash
-# 1. Add the marketplace
 claude plugin marketplace add CreativeClawCo/creative-claw-marketplace
-
-# 2. Install the plugin
 claude plugin install creative-claw@creative-claw-marketplace
-
-# 3. Authenticate — on first use, the MCP server will prompt you to sign in via Clerk OAuth
 ```
 
-That's it. The plugin connects to Creative Claw's MCP server and installs the consolidated `creativeclaw` workflow skill.
+Then run `/mcp` and authenticate `creative-claw`.
 
-### Claude Desktop
-
-Add to your MCP config (`claude_desktop_config.json`):
-
-```json
-{
-  "mcpServers": {
-    "creative-claw": {
-      "type": "http",
-      "url": "https://app.creativeclaw.co/mcp"
-    }
-  }
-}
-```
-
-No API keys needed — auth is handled via Clerk OAuth on first connection.
+</details>
 
 ### Glama / Directory Introspection
 
@@ -323,8 +315,7 @@ ChatGPT, Codex, Claude (Code, Desktop, and web), Cursor, Grok Bot, Hermes Agent,
 
 - **Grok Bot** — via the Cursor marketplace plugin and hosted MCP server
 - **Cursor** — via `.cursor-plugin/plugin.json`
-- **Claude Code** — via `.claude-plugin/plugin.json`
-- **Claude Desktop** — via MCP server config
+- **Claude (claude.ai, Desktop, Cowork, Claude Code)** — via the Claude plugin directory listing (`.claude-plugin/plugin.json`)
 - **Codex and other skill-directory clients** — via the canonical `creativeclaw` skill
 - **OpenAI Store (ChatGPT + Codex)** — build one plugin ZIP with `node scripts/build-openai-plugin.mjs` and upload `output/openai/creative-claw-openai-<version>.zip`
 - **Hermes Agent** — via OAuth MCP setup and portable Agent Plugins v1 manifests
