@@ -33,6 +33,20 @@ The documented Three adapter also dispatches `hf-seek` with `event.detail.time` 
 - Avoid previous-frame feedback, temporal antialiasing, and accumulating trails unless you can deterministically reconstruct their history from any requested time. Use analytic trails or fixed prerecorded data when appropriate.
 - Pin the selected Three.js version and matching addons. Modern ESM needs correctly resolved imports/import maps, including nested bare `three` imports. Classic script examples need an actual global build from a release that provides one. Neither format nor a particular old version is universally required.
 - Load texture/model dependencies before publishing readiness. Textures have CORS/readback constraints even when an image displays in DOM. Prefer supported image textures; do not add `crossorigin` to framework-owned video/audio to work around texture problems.
+- Hold capture while models and textures load. Register the async setup on `window.__hf.buildReady` and build the timeline inside it; the runtime waits for every registered promise before capturing frames. Without it, frames can be captured before a GLTF or texture arrives and come out empty. A promise that never settles times out the render, and one that rejects fails it, so bound each load with a timeout.
+
+```js
+window.__hf = window.__hf || {};
+window.__hf.buildReady = window.__hf.buildReady || {};
+window.__hf.buildReady.scene = (async () => {
+  const gltf = await new THREE.GLTFLoader().loadAsync(MODEL_URL);
+  // add the model, create the AnimationMixer, then build the timeline
+  window.__timelines = window.__timelines || {};
+  window.__timelines.main = tl;
+})();
+```
+
+  For a rigged model, drive its clip from absolute time with `mixer.setTime(t)` in `renderAt(t)`; never `mixer.update(delta)`.
 
 ## HTML as texture and advanced GPU features
 

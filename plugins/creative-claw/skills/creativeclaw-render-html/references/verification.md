@@ -20,7 +20,7 @@ Poll the returned job ID through `check_job` using its actual schema. A queued/i
 | --- | --- |
 | Registration/readiness timeout | First script/load error, unfinished setup promise, exact root/timeline key, premature registration, failed dependency requests. |
 | Static canvas or wrong backward seek | Whether the time driver actually redraws; suppressed callbacks; delta accumulation; stale uniforms/textures; adapter availability. |
-| Blank WebGL or black capture | Context creation, shader/link logs, viewport and canvas size, camera/material visibility, drawing-buffer lifetime, texture access. |
+| Blank WebGL or black capture | Model or texture still loading at capture (no `window.__hf.buildReady` hold), context creation, shader/link logs, viewport and canvas size, camera/material visibility, drawing-buffer lifetime, texture access. |
 | Content collapsed or clipped | Explicit root/ancestor sizes, actual fonts, inline transforms, text wrapping, peak overshoot, z-index. |
 | Missing or unsynchronized media | Worker-accessible direct `src`, audio ID, nested timing, source range, separate audio track, actual encoded sound. |
 | Render expects audio in a video-only asset | Check for a `<video>` tag missing `muted`, even when JavaScript sets `.muted = true` later. |
