@@ -18,9 +18,9 @@ When the requested movement must follow an existing clip, read [motion transfer]
 | Copy a recorded movement or performance | [Motion transfer](motion-transfer.md), then the selected model guide; use an appearance image and driving video |
 | video/minimax-h3-max-recast requested by name in generate_video | [H3 Max Recast](h3-max-recast.md); otherwise use `swap_video_characters` |
 | Veo, Grok, FLUX, H3, Hailuo, HappyHorse, HeyGen or another explicitly requested route | [Additional models](other-models.md), model-specific distinctions and live-schema lookup |
-| One person speaking exact lines, to camera or clearly in view, in any language | Speech first, then `video/minimax-h3-max-lip-sync` with the shot image; see [voice in video](voice-in-video.md). Several speakers or a performance-led shot keep the reference-mode paths there |
+| One person speaking exact lines, to camera or clearly in view, in any language | Speech first, then `video/heygen-avatar-6` with the shot image (Turbo for drafts; `video/minimax-h3-max-lip-sync` before a first credit purchase); see [voice in video](voice-in-video.md). Several speakers or a performance-led shot keep the reference-mode paths there |
 | Lip-sync an existing video to a voice, with one or several speakers, including cartoons and animals | `lip_sync_video`, not `generate_video`; see [voice in video](voice-in-video.md). [HeyGen Lipsync](heygen-lipsync.md) when explicitly selected |
-| Talking photo in an unsupported or unverified native-dialogue language | [Spoken languages](spoken-languages.md), H3 Max Lip Sync or HeyGen Avatar 4 with prepared speech |
+| Talking photo in an unsupported or unverified native-dialogue language | [Spoken languages](spoken-languages.md), HeyGen Avatar 6 with prepared speech (H3 Max Lip Sync before a first credit purchase) |
 
 Read [reference production](reference-production.md) when preparing shot assets, [voice in video](voice-in-video.md) when a shot has speech, and [Review/Auto](review.md) before generation. Model guides do not authorize extra paid drafts, retries or changing providers. Report concrete product or quality issues through `submit_feedback` and say briefly that you did; do not report when the user asks you not to.
 

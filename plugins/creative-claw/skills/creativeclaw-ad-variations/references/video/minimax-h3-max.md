@@ -14,9 +14,9 @@ Do not invent an `h3-max-lite` model ID. The current faster lightweight route is
 
 ## Core workflow
 
-For native dialogue, get the H3 family language baseline and its evidence status from `get_model_params`. Max/Fast inherit H3's language guidance; separate variant validation is unpublished. For languages outside that baseline, audio references do not establish reliable support: use [spoken languages](spoken-languages.md) with `video/minimax-h3-max-lip-sync` or HeyGen Avatar 4, keeping the user's requested shot count.
+For native dialogue, get the H3 family language baseline and its evidence status from `get_model_params`. Max/Fast inherit H3's language guidance; separate variant validation is unpublished. For languages outside that baseline, audio references do not establish reliable support: use [spoken languages](spoken-languages.md) with `video/heygen-avatar-6` (or `video/minimax-h3-max-lip-sync` before a first credit purchase), keeping the user's requested shot count.
 
-When one person must say exact lines on camera, in any language, use `video/minimax-h3-max-lip-sync` with the finished speech instead of reference mode. Reference mode with `audio_urls` performs the line again and can add, drop or repeat words; keep it for several speakers or performance-led shots. See [voice in video](voice-in-video.md).
+When one person must say exact lines on camera, in any language, use `video/heygen-avatar-6` with the finished speech instead of reference mode (`video/minimax-h3-max-lip-sync` before a first credit purchase). Reference mode with `audio_urls` performs the line again and can add, drop or repeat words; keep it for several speakers or performance-led shots. See [voice in video](voice-in-video.md).
 
 1. Define one shot: duration, ratio, subject, action, camera, audio, and continuity anchors.
 2. Search or import source assets.
@@ -39,7 +39,7 @@ When one person must say exact lines on camera, in any language, use `video/mini
 | Continue an existing clip with its look and characters intact | H3 Max Extend with one source in `video_urls` and `duration` for the new footage. |
 | Replace an interval of an existing clip with a new scene | H3 Max Insert with one source in `video_urls`, `extras.start_time` and `extras.resume_time`. |
 | Fast text/image draft in the H3 look | H3 Max Turbo; its reference mode uses the shared H3 Max route. For the cheapest drafts, including voice or audio references, recommend Seedance 2.0 Mini. |
-| One person speaks exact lines, or a clean face image speaks finished audio | `video/minimax-h3-max-lip-sync` with `image_url` and `extras.audio_url` (the finished line, not a voice sample); this is a separate route from native-dialogue/reference generation, and the words come out exactly as recorded. |
+| One person speaks exact lines, or a clean face image speaks finished audio | `video/heygen-avatar-6` (or `video/minimax-h3-max-lip-sync` before a first credit purchase) with `image_url` and `extras.audio_url` (the finished line, not a voice sample); this is a separate route from native-dialogue/reference generation, and the words come out exactly as recorded. |
 
 H3 Max reference video conditions a new result. It is not a precise source-video editor.
 

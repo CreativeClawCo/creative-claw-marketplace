@@ -14,7 +14,7 @@ For lip-syncing an existing video to a voice, use `lip_sync_video`: it takes one
 
 ### When to choose another tool
 
-- You have a still portrait rather than a video. Use video/heygen-avatar-4 with the image and prepared speech.
+- You have a still portrait rather than a video. Use video/heygen-avatar-6 with the image and prepared speech (video/minimax-h3-max-lip-sync before a first credit purchase).
 - You need a new scene, camera move, body performance, or background. Generate or edit the footage with a video model first, then lip-sync the finished clip if needed.
 - You only need narration over footage with no visible speaking mouth. Use an audio overlay or editing workflow. Mouth synthesis adds no value here.
 - Several faces are visible, or the video shows a cartoon or an animal. Use `lip_sync_video` and say who speaks in its `prompt`. HeyGen Lipsync exposes no speaker-selection field.

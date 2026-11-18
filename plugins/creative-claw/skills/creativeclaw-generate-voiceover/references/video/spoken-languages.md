@@ -20,7 +20,7 @@ Compact orientation, checked 2026-10-06:
 
 An audio reference can guide a newly generated voice without preserving its words, language or timing. It does not make an unverified language reliable. Prompt-language support and a brand's TTS or translation language list do not establish video-dialogue support.
 
-Explain the relevant limitation briefly and recommend prepared speech plus `video/minimax-h3-max-lip-sync` or `video/heygen-avatar-4`. H3 Max Lip Sync advertises any language driven by supplied audio; review the actual result. For HeyGen, choose the audio-driven Avatar 4 route, not generic HeyGen Video 1 native generation. Honor an explicit model choice and explain the proposed change before switching.
+Explain the relevant limitation briefly and recommend prepared speech plus `video/heygen-avatar-6` (`video/minimax-h3-max-lip-sync` before a first credit purchase). Both are driven by the supplied audio, so the language comes from the speech; review the actual result. For HeyGen, choose the audio-driven Avatar 6 route, not generic HeyGen Video 1 native generation. Honor an explicit model choice and explain the proposed change before switching.
 
 ## One talking face or one requested shot
 
@@ -28,8 +28,9 @@ Reuse or prepare one clean character image and one finished speech recording, th
 
 Use the requested script and a speech model/voice that supports its language. Reuse supplied finished speech when available. Check the audio and its measured duration before submitting video. Private cloning samples are not final speech.
 
+- HeyGen Avatar 6: `image_url` is one clean single-person shot image, never a character sheet; `extras.audio_url` is the completed speech. Output follows the image's framing at 1080p or 2K. `extras.motion_prompt` directs gestures, expression and camera; the prompt is not sent. `video/heygen-avatar-6-turbo` is the same at half the price.
 - H3 Max Lip Sync: `image_url` is the clean shot image; `extras.audio_url` is the completed speech. Its prompt is not a camera or acting control. Prepare the framing in the image and use the current duration/resolution limits returned by `get_model_params`.
-- HeyGen Avatar 4 uses HeyGen direct: `image_url` is the clean face image and `extras.audio_url` supplies the speech. Supplied audio overrides text-to-speech and voice selection. For script speech, use a HeyGen catalog `extras.voice_id`, not an old fal voice name. Direct resolution is 720p or 1080p. `aspect_ratio: "auto"` preserves source framing; `extras.expressiveness` and `extras.motion_prompt` control performance. Read current parameters before submitting.
+- HeyGen Avatar 4, when selected, uses HeyGen direct: `image_url` is the clean face image and `extras.audio_url` supplies the speech. Supplied audio overrides text-to-speech and voice selection. For script speech, use a HeyGen catalog `extras.voice_id`, not an old fal voice name. Direct resolution is 720p or 1080p. `aspect_ratio: "auto"` preserves source framing; `extras.expressiveness` and `extras.motion_prompt` control performance. Read current parameters before submitting.
 
 Do not attach unsupported reference arrays or `character_id` to a literal-image lip-sync request. Build the likeness into the image first. If the single recording exceeds the selected endpoint's duration limit, explain the necessary split or choose a suitable longer audio-driven route; do not invent extra scenes.
 

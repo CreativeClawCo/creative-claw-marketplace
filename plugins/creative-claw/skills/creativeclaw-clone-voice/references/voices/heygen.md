@@ -31,6 +31,6 @@ Text accepts 1 to 5,000 Unicode characters. Write the exact words in the target 
 
 Professional clone pitch, speed and seed controls, streaming, multi-speaker dialogue, new HeyGen clone creation and novel voice design are not connected by this model. Another provider's Character is not automatically copied into HeyGen. Use an existing HeyGen-cloned Character or a public stock voice.
 
-`generate_speech` returns a queued job. Use the native player to listen, or `check_job` when the completed audio is needed by another step. The output is saved in the workspace media library. Do not submit the same request again while it is running. For an avatar performance, generate speech first and pass the completed audio URL as `extras.audio_url` to `video/heygen-avatar-4`, with a face `image_url`. Keep voice expression and avatar motion controls separate.
+`generate_speech` returns a queued job. Use the native player to listen, or `check_job` when the completed audio is needed by another step. The output is saved in the workspace media library. Do not submit the same request again while it is running. For an avatar performance, generate speech first and pass the completed audio URL as `extras.audio_url` to `video/heygen-avatar-6`, with a single-person face `image_url`. Keep voice expression and avatar motion controls separate.
 
 [HeyGen stock speech guidance](https://developers.heygen.com/docs/voices/speech), [instant clone speech controls](https://developers.heygen.com/docs/voices/heygen-voice-speech).
