@@ -20,11 +20,11 @@ Runtime discovery is authoritative. These are current routing defaults:
 | Need                                                                           | Start with              | Why                                                             |
 | ------------------------------------------------------------------------------ | ----------------------- | --------------------------------------------------------------- |
 | General generation or edit                                                     | `image/nano-banana-2`   | Default with balanced quality, speed, and cost. |
-| Complex professional asset, precise typography, demanding multi-reference edit | `image/gpt-image-2.5-sunburst` | Instruction following, text rendering, and controlled editing. |
-| Layout correction: move, scale, or re-space existing text and logos (safe zones) | `image/gpt-image-2.5-sunburst` | Nano Banana 2 tends to keep the original layout. State target positions as percentages of the canvas height. |
-| Fast everyday OpenAI image work                                                | `image/gpt-image-2.5-flare` | Faster GPT Image 2.5 generation and editing.                 |
+| Complex professional asset, precise typography, demanding multi-reference edit | `image/gpt-image-2.6-sunburst` | Instruction following, text rendering, and controlled editing. |
+| Layout correction: move, scale, or re-space existing text and logos (safe zones) | `image/gpt-image-2.6-sunburst` | Nano Banana 2 tends to keep the original layout. State target positions as percentages of the canvas height. |
+| Fast everyday OpenAI image work                                                | `image/gpt-image-2.6-flare` | Faster GPT Image 2.6 generation and editing.                 |
 | Premium product or marketing imagery, transparent PNGs, layer splits | `image/seedream-5.5`  | Consistent multi-reference edits, native alpha, editable layers. |
-| Transparent background | `image/gpt-image-2.5-flare` or `image/gpt-image-2.5-sunburst` | Set `extras.background: "transparent"` with PNG or WebP output. For an existing image, use `remove_background`. |
+| Transparent background | `image/gpt-image-2.6-flare` or `image/gpt-image-2.6-sunburst` | Set `extras.background: "transparent"` with PNG or WebP output. For an existing image, use `remove_background`. |
 
 Use Nano Banana 2 for most image work. Choose Sunburst, Flare, or Seedream 5.5 when their specialty fits the task. Nano Banana Pro remains available when explicitly selected. Use another runtime-listed model when the user asks or these routes cannot perform the operation.
 

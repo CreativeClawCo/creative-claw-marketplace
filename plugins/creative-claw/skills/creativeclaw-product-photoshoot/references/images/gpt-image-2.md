@@ -2,7 +2,11 @@
 
 Read [shared execution guidance](../workflow-basics.md) once per task before using tools. It covers existing authorization, model discovery, optional cost checks, imports, and recovery.
 
-Choose the explicit variant that matches the job:
+Nano Banana 2 is the everyday default. GPT Image Sunburst is our highest-quality choice. Prefer `image/gpt-image-2.6-sunburst` for demanding likeness, detailed products, typography or tightly controlled edits. If the user dislikes a result, identify what missed, offer Sunburst with the original references and a focused correction, and run the revision when requested. Preserve an explicit model choice. Use `image/gpt-image-2.6-flare` for fast OpenAI image work. Fetch the chosen 2.6 schema before setting quality, format, masks or dimensions.
+
+## GPT Image 2.5 compatibility
+
+The settings and examples below describe the 2.5 variants when selected:
 
 - `image/gpt-image-2.5-flare` for fast, high-quality everyday generation and editing.
 - `image/gpt-image-2.5-sunburst` for maximum editing precision, typography, intricate detail, and controlled production work.

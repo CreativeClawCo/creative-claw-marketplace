@@ -114,3 +114,13 @@ Omit a bookend that was not requested. Joining videos is a hard cut: no dissolve
 - A public YouTube, Google Drive, or social video page can go straight to `transcribe` as `video_url`. It is not a source for trimming, resizing, or subtitles; import the actual file for those.
 - `add_subtitles` already transcribes. Add a separate `transcribe` job only for a transcript the user wants or for choosing cuts.
 - `estimate_generation` does not cover these processing operations. Discuss cost only when it matters to the request, and do not present a partial estimate as the total.
+
+## Motion and cutouts
+
+Use `increase_frame_rate` for a higher playback frame rate or slow motion on finished footage. Inspect the source fps and use the live model schema. Apollo handles general interpolation, Chronos suits camera footage and Aion suits complex action with a longer wait. Check final duration and audio.
+
+For difficult solid image cutouts, use Bria RMBG 3.0 with `remove_background`. For video with translucent fabric, smoke or glow, choose a matting route that supports partial alpha and inspect the edges.
+
+## Edit a song
+
+For a backing track, karaoke or separate instruments, use `separate_music_stems` with the full original song in `audio_url`. Its `max_tracks` presets are 2, 5 or 12. Deliver the labeled outputs actually detected. To change the singing or backing, use `replace_music_track` with the full original song and `track: "vocals"` or `"instrumental"`. Supply lyrics for new vocals. The job returns the complete mix and its component tracks. Use `check_job` for pending outputs.

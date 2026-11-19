@@ -2,7 +2,7 @@
 
 Read [shared execution guidance](../workflow-basics.md) once per task before using tools. It covers existing authorization, model discovery, optional cost checks, imports, and recovery.
 
-Use `image/nano-banana-pro` when explicitly selected. For complex professional assets, typography, and controlled edits, start with `image/gpt-image-2.5-sunburst`; Nano Banana 2 remains the general image default. The guidance below applies when the user chooses Nano Banana Pro.
+Use `image/nano-banana-pro` when explicitly selected. For complex professional assets, typography, and controlled edits, start with `image/gpt-image-2.6-sunburst`; Nano Banana 2 remains the general image default. The guidance below applies when the user chooses Nano Banana Pro.
 
 ## Core workflow
 

@@ -45,7 +45,7 @@ For example:
 ```text
 I would use Nano Banana 2 for this image. It is our general default for generation
 and targeted edits, with balanced quality, speed, and cost.
-If exact typography is the priority, GPT Image 2.5 Sunburst is the stronger
+If exact typography is the priority, GPT Image 2.6 Sunburst is the stronger
 alternative. I can generate one candidate or compare both.
 ```
 

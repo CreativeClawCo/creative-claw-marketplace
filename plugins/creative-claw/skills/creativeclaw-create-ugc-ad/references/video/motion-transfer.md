@@ -28,3 +28,7 @@ Before submission, identify which clip supplies movement and which image supplie
 Example: “Keep the same bounce, but put the avatar in a different outfit.” Retrieve the approved original animation, reuse the approved new-outfit image, and send both through the performance-transfer route. The prompt states what to retain; the video supplies the performance.
 
 Compare the result against the driving clip for movement, rhythm and timing, and against the image for appearance. Reference conditioning improves fidelity but does not guarantee exact preservation. Report mismatches and follow the video skill's authorization rules before another paid take. Convert to GIF only after obtaining the requested video result.
+
+## Use a camera path or product motion
+
+For a product orbit, vehicle move, or photoreal version of a Blender motion study, use Seedance 2.5 reference mode. Provide the prepared shot image and product references in `image_urls`, the driving clip in `video_urls`, and `extras.omni_reference_task_type: "reference"`. Describe the direction, speed and landing point from `@Video1` and the product identity and setting from `@Image1`. Check layout and motion in the requested draft. A body copying a dance in a new scene uses Kling Motion Control. A cast change inside the original dance footage uses Swap.

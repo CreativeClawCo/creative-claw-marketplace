@@ -97,3 +97,5 @@ When `open_studio` is available, open Studio as the last step of setup; the user
 Where `open_studio` is not available, do not mention Studio or pinning; offer to browse examples with `search_examples` instead.
 
 End with two or three next ideas that fit what they said they want, each a sentence they can send as it is: a longer multi-shot film, a creator-style ad, a product photo set, captions on a clip, a music bed.
+
+When the user likes a look or voice during setup, offer to keep it in a named Character. Reuse an existing Character when one matches. For a scene using its saved voice, generate the line with that Character and give Seedance the recording and the prepared shot image. Omni 1.2 remains suitable for clips with no audio input.

@@ -24,6 +24,7 @@ skill_names=(
   creativeclaw-submit-feedback
   creativeclaw-clone-voice
   creativeclaw-swap-characters
+  creativeclaw-create-3d-model
   creativeclaw-render-html
   creativeclaw-setup
   creativeclaw-budget-projects

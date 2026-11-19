@@ -115,3 +115,5 @@ Use 24 FPS for a cinematic look, 30 for normal graphics, and 60 only when the sm
 The [WebGL example](references/webgl-orbit-example.md) is a complete document to validate locally or adapt into the `html` string; its file path is not a tool input.
 
 Use `estimate_generation` with `operation: "html_video"` only when the user asks about cost or gives a budget, with the real duration, size, and FPS in `params`.
+
+For editable titles or diagrams, keep the clean plate and text in separate composition layers. For continued editing, provide the editable project when available. For an editor overlay, deliver an alpha-capable format such as ProRes 4444 MOV when supported and verify transparency over a colored background. For a finished MP4, composite the layers onto the plate. For a turntable of a supplied GLB, wait for the model and textures before capture as described in [canvas and WebGL](references/canvas-webgl.md).

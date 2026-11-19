@@ -45,3 +45,7 @@ Use Mureka V9.5 for full-length songs and expressive musical performances, Lyria
 ## Completion standard
 
 Return the permanent URL and identify the model, requested duration (or model-chosen length for Mureka), vocal or instrumental setting, and intended use. Mention any important mismatch found during review. When a merged video is requested, distinguish the approved music asset from the separately rendered video result.
+
+## Edit a song
+
+For a backing track, karaoke or separate instruments, use `separate_music_stems` with the full original song in `audio_url`. Its `max_tracks` presets are 2, 5 or 12. Deliver the labeled outputs actually detected. To change the singing or backing, use `replace_music_track` with the full original song and `track: "vocals"` or `"instrumental"`. Supply lyrics for new vocals. The job returns the complete mix and its component tracks. Use `check_job` for pending outputs.

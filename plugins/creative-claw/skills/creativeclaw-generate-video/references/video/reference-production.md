@@ -2,28 +2,17 @@
 
 For a request to preserve or copy an existing movement, use [motion transfer](motion-transfer.md) first. Keep the driving video as a separate reference alongside the appearance image; the image pipeline below does not replace it.
 
-## Reference-first video pipeline
+## Prepare the scene before video
 
-Default for every new generative clip: one keyframe image per planned shot, so the video model animates visuals the user has seen instead of inventing them. A face, product, outfit or location that matters must come from an image: reuse one, or make it first. Tell the user how many images that is before making them. Skip them if the user asks for direct text-to-video or supplies a ready shot image. For existing footage, take the frames from the source instead: see [source edit](recipe-source-edit.md).
+1. Make a clean still of the actual opening moment of **each new shot**, at the video's aspect ratio. Use `generate_image`, or Film's storyboard renderer. A ready scene frame supplied by the user serves the same purpose. For a source edit, extension or recorded performance, keep the driving footage. Honor an explicit text-only generation. Planning and estimating alone do not start paid work.
+2. For each recurring location, reuse or generate one empty establishing image that fixes the doors, furniture, landmarks, props and light. For each recurring person, find their saved Character and approved sheet or make the missing sheet before drawing shots. Include real product photos and label details when applicable. Edit incorrect lettering, logos or designs on the source image before using it as an anchor.
+3. Establish the cast's positions in the first occupied wide frame. Record who sits by which landmark, relative height, facing, eyelines and who holds each prop. For example, Maya is on the window bench with the mug in her right hand and Leo stands beside the till. A reverse angle changes their positions on screen while their places in the room stay consistent. Change those places only when the action moves someone.
+4. For **every** shot in that location, supply the set image and each visible recurring person's sheet as actual image-generation inputs. On models exposing it, use top-level `character_ids` for saved sheets, `image_url` for the set and `extras.image_urls` for the occupied wide frame or other references. Name each person's placement and action, the shot size, angle, wardrobe and lighting. Include the previous approved frame for a continuous action. For a new location create a new set and reuse the cast. One full-bleed image per shot, with no grid or labels.
+5. Resolve the finished frame and compare it with the set and sheets for likeness, blocking, props and framing. Keep the same image model across a sequence by default. Nano Banana 2 is the everyday choice. For demanding likeness, layout or a result the user dislikes, recommend GPT Image 2.6 Sunburst for the affected frame. Reuse good frames and anchors. A complaint alone does not authorize a paid retry.
+6. **Send the finished frame URL to the video model.** For reference mode, put the shot frame first in `image_urls`, then include the applicable cast and scene references within the model's limit. Identify each role with that model's tokens. Supply a speaking Character's finished line in `audio_urls` on a compatible Seedance model. For a literal opening use `image_url` and optionally `last_frame_url` where supported. Bake the set and cast into those frames and omit the reference arrays and Character selectors. This applies to Omni even when several people are already visible. A sheet or contact sheet belongs in preparation, never at frame zero.
+7. Keep the shot-to-frame and reference mapping with the plan. Make dependent frames in order. Reuse the existing review mode and any checkpoint the user requested. Tell the user how many new frames and shared assets will be made before starting them.
 
-1. **Anchors (reuse first):** `search_assets`, `list_characters`, `get_theme`.
-   - Person: Character sheet + clean face portrait; real person: also their best original photo.
-   - Product: real photo or approved packshot; add a label/logo close-up when text matters.
-   - Look: theme reference image or the first approved keyframe.
-   - A recurring person or product with no anchor: create it first (creativeclaw-create-avatar, creativeclaw-product-photoshoot).
-2. **Look line:** one sentence (palette, light, lens, medium). Paste it verbatim into every keyframe and video prompt.
-3. **Keyframe per shot:** `generate_image` with the SAME image model all project (default `image/nano-banana-2`), `aspect_ratio` = the video's ratio, `image_url` = main anchor, `extras.image_urls` = other anchors, roles named ("Image 1 = exact face…"). From the second shot on, add the first approved keyframe as a reference, and the previous keyframe too when the scene continues, and say what to take from each ("Image 3 = earlier shot: match its palette, lighting, outfit and location; new pose and framing"). Name this shot's own shot size and angle in the prompt; earlier keyframes otherwise pull the image toward their framing, and two clips from the same framing cut together as a jump. Keep the identity anchors in every call; never build from an earlier keyframe alone. One clean full-bleed frame: no text, grid or labels.
-4. **Check:** `check_job` for the URL; compare to the anchors (face, label, logo, colors); fix with one targeted edit.
-5. **Show** keyframes plus the plan (model, duration, ratio) in one message. Review mode: call `generate_video` now; the card is the approval. Auto: ask once unless the user said go.
-6. **`generate_video`, one mode per shot:**
-   - People, several subjects or big motion: `image_urls` = [keyframe, identity anchor, product anchor] (2–4 total), cited with the model's tokens. `character_id` is fine here (appended last).
-   - Exact opening (product hero, logo reveal): `image_url` = keyframe (+ `last_frame_url` if supported); no `image_urls`, no `character_id`.
-7. **Next shot:** same anchors + look line + the earlier keyframes as references (step 3), so every shot matches the first. A previous clip's last frame is only an extra composition cue.
-8. **Keep a list** (shot → keyframe → anchor URLs, roles, tokens). Save it in the Film project when one exists.
-
-Use 2–4 strong references; more is not better. Existing assets count, so don't pay for extra images to reach a number or exceed a model's limit. For image prompting, read the [image model index](../images/index.md) and only the selected guide. Pass the actual image URLs in the video request; naming them in prose does not condition the model. Keep iteration bounded: planning-only, advice-only and estimate-only requests do not authorize paid images.
-
-A Character sheet is identity guidance, never a literal opening frame. Reuse an approved sheet, or create one with creativeclaw-create-avatar when identity recurs. A sheet made with another image model is still a valid anchor; keyframes stay on the project's one image model.
+The individual video call below applies outside Film. In a Film project, put the cast, blocking and scene references into the plan and use the storyboard and clip batch actions. One Review approval covers the selected clip batch.
 
 ## Review the references once
 

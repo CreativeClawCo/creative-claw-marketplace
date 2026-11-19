@@ -1,6 +1,6 @@
 # Video Review and Auto
 
-Respect the user's persisted render mode. Do not switch modes for them.
+Film uses one approval in the film view for the selected clip batch. The individual request-card rules below apply to clips submitted using `generate_video`. Respect the user's persisted render mode. Do not switch modes for them.
 
 - Review: generate_video can return approval_required with a request card and Recovery Job ID. No video has been submitted or charged. Explain this and pause that generation branch. Do not resubmit, poll while approval is pending, or press Generate for the user.
 - The user reviews the prompt, references, settings and estimate, then presses Generate in the card. Use any updated values and final context returned by the widget.

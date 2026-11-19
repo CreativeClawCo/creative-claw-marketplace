@@ -26,3 +26,5 @@ Do not proactively recommend or route to LTX or DreamActor. If explicitly reques
 - video/dreamactor-v2: motion transfer uses a Character image and one driving video for body motion, facial expression and lip movement. It is not a generic reference-based text-to-video model. Inspect the current driving-video mapping and limits.
 
 For a newly available or explicitly requested legacy model not listed here, use the live model schema and Usage. Do not substitute a recommended model silently or revive hidden models in discovery recommendations.
+
+For a named HappyHorse 1.1 request, check its live settings. It offers 480p, 720p and 1080p.

@@ -4,7 +4,7 @@ Read [input modes and reference production](reference-production.md) before prep
 
 Use the outcome skill's execution guidance for authorization, imports and job recovery.
 
-Use `video/seedance-2.5`, the premium cinematic model, for high-end, long (up to 30 s), reference-rich generation with native synchronized audio. Prefer it when the clip needs more references, more duration, a controlled destination frame, or richer scene direction than the default video route. A 480p request creates a native, usable Seedance draft. A completed draft can be finalized at 1080p as the same take within 7 days. To extend an existing clip, `video/minimax-h3-max-extend` is the default; use Seedance 2.5 `extend` for heavy references or a long continuation.
+Use `video/seedance-2.5`, the premium cinematic model, for high-end, long (up to 30 s), reference-rich generation with native synchronized audio. Prefer it when the clip needs more references, more duration, a controlled destination frame, or richer scene direction than the default video route. A 480p request creates a native, usable Seedance draft. The completed job lists its finishing options. Eligible native drafts can finish at 1080p or requested 4K within seven days. To extend an existing clip, `video/minimax-h3-max-extend` is the default; use Seedance 2.5 `extend` for heavy references or a long continuation.
 
 ## Core workflow
 
@@ -31,8 +31,8 @@ Check spoken-language support in `get_model_params` before choosing native dialo
 | `image_urls` | Up to 30 reference images, cited as `@Image1`, `@Image2`, and so on. |
 | `video_urls` | Up to 10 reference clips, cited as `@Video1`, `@Video2`, and so on. |
 | `audio_urls` | Up to 10 audio references, cited as `@Audio1`, `@Audio2`, and so on. |
-| `resolution` | `480p`, `720p`, or `1080p`; pass it through the top-level Creative Claw field. |
-| `extras.draft_job_id` | Completed Creative Claw 480p draft `jobId`; finalizes that same take at 1080p within 7 days. |
+| `resolution` | `480p`, `720p`, `1080p`, or `4k`; pass it through the top-level Creative Claw field. |
+| `extras.draft_job_id` | Completed Creative Claw 480p draft `jobId`; use the eligible native finishing resolution listed by the completed job within seven days. |
 | `extras.generate_audio` | Enable synchronized dialogue, ambience, music, and effects. |
 | `extras.omni_reference_task_type` | `auto`, `reference`, `edit`, or `extend`; used by Creative Claw to validate and normalize the requested operation. |
 
@@ -44,7 +44,7 @@ The Review approval for an initial 1080p request offers a 480p draft first. Choo
 
 When the user wants the same approved take at 1080p, call `generate_video` again with `model: "video/seedance-2.5"`, a meaningful required `prompt`, and `extras: { "draft_job_id": "<completed Creative Claw draft jobId>" }`. The server uses the saved draft prompt and Seedance inherits its references, duration, ratio, and audio. Do not supply new creative inputs for finalization. This is a separate paid job. Review mode gives that final its own approval; Auto mode submits an explicitly requested finalization directly. A draft can be finalized more than once within 7 days; use `force_new: true` for an intentional duplicate within the reuse window.
 
-Native draft finalization is available at 1080p only. To make 720p, start a new generation from the saved inputs and tell the user the shot may differ. A request for changes is another paid 480p draft and requires the user's instruction for that additional generation.
+Inspect `check_job.finalizationOptions`. For an eligible individual native draft, 1080p is the default. Set top-level `resolution: "4k"` for an offered, requested 4K finish. A draft routed through the upscaler has its own limits and price. Flash and Mini produce separate takes. Film's batch finals action advertises 1080p. To make 720p, start a new generation from the saved inputs and tell the user the shot may differ. A request for changes is another paid 480p draft and requires the user's instruction for that additional generation.
 
 ## Reference task modes
 

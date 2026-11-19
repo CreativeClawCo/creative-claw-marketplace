@@ -1,6 +1,6 @@
 ---
 name: creativeclaw-create-character
-description: Save, inspect or update an existing reusable Creative Claw Character and its visual identity. Use creativeclaw-create-avatar for guided photo-to-avatar and character-sheet creation.
+description: "Save or reuse an approved face, Character sheet, stock or designed voice, or voice-only narrator in Characters. Use to create, inspect or update a named Character and reuse its identity or voice across shots and projects."
 ---
 
 # Manage a reusable Character
@@ -19,3 +19,5 @@ For guided avatar creation from photos, use creativeclaw-create-avatar when avai
 6. Replace an existing visual/voice only as requested. Delete a Character (`delete_character({ id, confirm: true })`, permanent) only on explicit direction, after identifying the exact record. Older clients without `create_character` or `delete_character`: `manage_character` without `id` creates, and `manage_character({ id, delete: true })` deletes. Verify a requested update with list_characters when useful.
 
 An approved Character is reusable reference data, not a newly trained visual model or guaranteed identity lock.
+
+When the user likes a generated look or voice, offer once to save it as a named Character for future work. Check `list_characters` first. An explicit request to save the look or voice is agreement. Update the existing Character or create one when authorized with the approved image or selected voice. Reuse its ID for later shots or speech. A voice-only Character works for a narrator. If the voice card already saved the selection, reuse that record.

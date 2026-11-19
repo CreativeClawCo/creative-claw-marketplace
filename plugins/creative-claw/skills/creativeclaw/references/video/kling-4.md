@@ -173,7 +173,7 @@ Pricing and availability are live facts. These numbers are a snapshot, not a rep
 
 Use `swap_video_characters` with `video_model: "video/kling-4.0-omni"` for a Kling swap, with the source and photo/Character references. Describe who becomes whom and which clothing or visual details should change. Preserve source outfits unless the user requests a wardrobe change. Do not submit a separate `generate_video` for the same swap.
 
-Swap supports 4 to 30 whole seconds, 720p (default) or 1080p, and up to seven combined photo/Character references. Three free scene previews guide the edit, with the normal Review/Auto flow. Long or fractional sources are cut without changing speed. There is no 480p or native draft completion. Source audio is restored by default, and silent sources stay silent. Request a free estimate with `estimate_generation`, operation `swap_video_characters`, using the same model, source and resolution. Review the final identity, motion and camera behavior.
+Swap supports 4 to 30 whole seconds, 720p (default) or 1080p, and up to eight combined photo/Character references. Three or six free scene previews guide the edit, with the normal Review/Auto flow. Long or fractional sources are cut without changing speed. There is no 480p or native draft completion. Source audio is restored by default, and silent sources stay silent. Request a free estimate with `estimate_generation`, operation `swap_video_characters`, using the same model, source and resolution. Review the final identity, motion and camera behavior.
 
 ## Review and revise within authorization
 

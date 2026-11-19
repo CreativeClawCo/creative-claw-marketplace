@@ -56,7 +56,7 @@ Burn captions onto every variation with `add_subtitles` unless the user says no:
 Start every independent job together and resolve each with `check_job` before using its output.
 
 **New version**
-1. All N clips: same start frame or references, each with its own prompt for the action that sells its line, ending with "no speech, no music, no on-screen text". All N voiceovers at the same time (one, reused, when the script is fixed).
+1. Prepare the opening image for each distinct hook using [reference production](references/video/reference-production.md). Reuse one ready shot frame when the variations share that opening. Send each finished frame to its clip, each with its own prompt for the action that sells its line, ending with "no speech, no music, no on-screen text". All N voiceovers at the same time (one, reused, when the script is fixed).
 2. Check each voiceover's duration against its clip. If one runs longer, tell the user and offer a shorter line; never cut words or freeze the last frame.
 3. Add each voiceover with `add_audio_to_video`, `audio_mode: "mix"`, `original_volume` about 0.2 (keeps the clip's ambience) and `start_offset` about 0.3 s. The video keeps its full length; plain `replace` would end it at the last word.
 

@@ -19,15 +19,11 @@ For worked production flows, read only the relevant recipe: [product ad](referen
 
 ## Reference-first pipeline
 
-Unless the user asked for direct text-to-video, supplied a ready shot image, or is editing footage, follow this before `generate_video`. For a planning-only request, show the plan and stop: make keyframes only when the user asked for a visual storyboard, and do not call `generate_video`. New clips start from one keyframe image per shot, so the video model animates images the user has seen instead of inventing the face, product, outfit or location: tell the user how many images that is before making them.
+For a text plan, specify the set, cast, blocking and required frame for each shot and stop there. When the user requests a visual storyboard, produce the frames below. Start video production only when requested.
 
-1. Anchors, reuse first: `search_assets`, `list_characters`, `get_theme`; for a real location, prop or look with no picture, `search_images` (import picks with `upload_asset`). Person: Character sheet + face portrait (real person: also their best original photo). Product: real photo or packshot, plus a label/logo close-up when text matters. A recurring person or product with no anchor: create it first (creativeclaw-create-avatar, creativeclaw-product-photoshoot).
-2. Look line: one sentence (palette, light, lens, medium), pasted into every keyframe and video prompt.
-3. Keyframe per shot: `generate_image` with the same image model all project (default `image/nano-banana-2`), `aspect_ratio` = the video's ratio, main anchor in `image_url`, others in `extras.image_urls`, roles named. From shot 2 on, add the first approved keyframe (and the previous one when the scene continues) as a look reference alongside the anchors. Earlier keyframes set the look and place only: name this shot's own shot size and angle in the prompt, or the image copies their framing. One clean full-bleed frame; no text, grid or labels.
-4. Compare it to the anchors (face, label, logo, colors); fix with one targeted edit.
-5. Show keyframes and the plan (model, duration, ratio) in one message. Review mode: call `generate_video` now; the card is the approval. Auto: ask once unless the user said go.
-6. One mode per shot. People, several subjects or big motion: `image_urls` = [keyframe, identity anchor, product anchor], 2–4 total; `character_id` is fine here. Exact opening (product hero, logo reveal): `image_url` = keyframe, no `image_urls` or `character_id`.
-7. Next shot: same anchors and look line, plus the earlier keyframes as references. A previous clip's last frame is only an extra composition cue.
+Prepare the actual opening frame of every new shot before generating motion. Use an existing ready shot frame or make one at the delivery ratio. For a recurring location, reuse or design one set image and establish where everyone stands or sits in a wide frame. Build each shot image from that set, the sheet of every visible recurring Character (create missing sheets), and the established positions. Change the camera angle while preserving eyelines, wardrobe, props and positions unless the action moves them. Send the finished shot image to video as a literal start frame or a model-supported visual reference. Follow [reference production](references/video/reference-production.md) for the exact fields, including the approved start/end-frame route. Honor an explicit text-only request or an existing-footage edit.
+
+For a generated scene that must use a saved Character voice or supplied dialogue, choose Seedance 2.5, Flash for supported work up to 720p, or Mini for a low-cost draft. Reuse the recording or generate the line in the saved voice. Attach the finished line alongside the shot image in reference mode. Gemini Omni 1.2 Flash remains the general choice when audio input is unnecessary. It can generate its own sound but cannot hear an input recording. For a single talking photo, exact recorded delivery, or an existing clip that needs lip sync, follow [voice in video](references/video/voice-in-video.md).
 
 Details: [reference production](references/video/reference-production.md). Image prompting: [image model index](references/images/index.md) and only the chosen guide.
 
@@ -43,7 +39,7 @@ Write the plan in the user's language and preserve approved dialogue or on-scree
 
 ## Build the storyboard
 
-For a visual storyboard request, create the needed artifacts with `creativeclaw-generate-image`. A text-only plan does not require images; reuse approved frames and skip duplicate review boards when unnecessary:
+For a standalone visual storyboard use `generate_image`. Within a Film project save the plan and use `render_film_shots` for the authorized boards. A text-only plan does not require images; reuse approved frames and skip duplicate review boards when unnecessary:
 
 - A review board or contact sheet for fast approval of composition, pacing, and continuity, only when useful.
 - One clean, text-free keyframe per shot, made as in the pipeline above. Never feed a labeled grid to a video model.
@@ -52,7 +48,7 @@ Preserve Character identity, product geometry, wardrobe, palette, screen directi
 
 ## Optional Film project
 
-If the user intends to continue into production, call `create_film_project` and persist the approved shots with `update_film_project`. Use stable shot IDs and the actual tool fields: `description`, `prompt`, `narration`, `storyboardUrl`, `durationS`, `model`, and `status`. Set the project to `script_ok` only after script approval and `storyboard_ok` only after storyboard approval.
+For an intended Film, save the whole plan with stable scene and shot IDs in `create_film_project`. Give each shot its prompt, cast, reference images, dialogue lines and speaker. Resume or patch an existing plan with `get_film_project` and `update_film_project`. Film tracks boards and clips as takes. A plan-only request ends with the saved plan.
 
 ## Approval gate
 

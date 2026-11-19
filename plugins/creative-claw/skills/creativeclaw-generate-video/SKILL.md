@@ -23,15 +23,9 @@ For “the same movement,” a copied performance, or a wardrobe variant that sh
 
 ## Reference-first pipeline
 
-Unless the user asked for direct text-to-video, supplied a ready shot image, or is editing footage, follow this before `generate_video`. New clips start from one keyframe image per shot, so the video model animates images the user has seen instead of inventing the face, product, outfit or location: tell the user how many images that is before making them.
+Prepare the actual opening frame of every new shot before generating motion. Use an existing ready shot frame or make one at the delivery ratio. For a recurring location, reuse or design one set image and establish where everyone stands or sits in a wide frame. Build each shot image from that set, the sheet of every visible recurring Character (create missing sheets), and the established positions. Change the camera angle while preserving eyelines, wardrobe, props and positions unless the action moves them. Send the finished shot image to video as a literal start frame or a model-supported visual reference. Follow [reference production](references/video/reference-production.md) for the exact fields, including the approved start/end-frame route. Edit any incorrect lettering or logo on the anchor image before animation. Honor an explicit text-only request or an existing-footage edit.
 
-1. Anchors, reuse first: `search_assets`, `list_characters`, `get_theme`. Person: Character sheet + face portrait (real person: also their best original photo). Product: real photo or packshot, plus a label/logo close-up when text matters. A recurring person or product with no anchor: create it first (creativeclaw-create-avatar, creativeclaw-product-photoshoot).
-2. Look line: one sentence (palette, light, lens, medium), pasted into every keyframe and video prompt.
-3. Keyframe per shot: `generate_image` with the same image model all project (default `image/nano-banana-2`), `aspect_ratio` = the video's ratio, main anchor in `image_url`, others in `extras.image_urls`, roles named. From shot 2 on, add the first approved keyframe (and the previous one when the scene continues) as a look reference alongside the anchors. Earlier keyframes set the look and place only: name this shot's own shot size and angle in the prompt, or the image copies their framing. One clean full-bleed frame; no text, grid or labels.
-4. Compare it to the anchors (face, label, logo, colors); fix with one targeted edit.
-5. Show keyframes and the plan (model, duration, ratio) in one message. Review mode: call `generate_video` now; the card is the approval. Auto: ask once unless the user said go.
-6. One mode per shot. People, several subjects or big motion: `image_urls` = [keyframe, identity anchor, product anchor], 2–4 total; `character_id` is fine here. Exact opening (product hero, logo reveal): `image_url` = keyframe, no `image_urls` or `character_id`.
-7. Next shot: same anchors and look line, plus the earlier keyframes as references. A previous clip's last frame is only an extra composition cue.
+For a generated scene that must use a saved Character voice or supplied dialogue, choose Seedance 2.5, Flash for supported work up to 720p, or Mini for a low-cost draft. Reuse the recording or generate the line in the saved voice. Attach the finished line alongside the shot image in reference mode. Gemini Omni 1.2 Flash remains the general choice when audio input is unnecessary. It can generate its own sound but cannot hear an input recording. For a single talking photo, exact recorded delivery, or an existing clip that needs lip sync, follow [voice in video](references/video/voice-in-video.md).
 
 Details: [reference production](references/video/reference-production.md). Image prompting: [image model index](references/images/index.md) and only the chosen guide.
 
@@ -43,7 +37,7 @@ When a Character speaks and the voice is unknown, ask one question: design a new
 
 Then pick one path per speaking shot from [voice in video](references/video/voice-in-video.md):
 - **One person saying exact lines, to camera or clearly in view, in any language:** make the line first with `generate_speech`, then `video/heygen-avatar-6` with one single-person shot image in `image_url` and the line in `extras.audio_url`. The words come out exactly as recorded and gestures follow the script; direct them with `extras.motion_prompt`. Use `video/heygen-avatar-6-turbo` for drafts and `video/minimax-h3-max-lip-sync` before a first credit purchase. A voice sample or audio cut from an earlier clip is not the line.
-- **Several speakers, or a shot led by body performance or camera movement:** speech first with a supported audio-reference model, then check the result's words, since these models can add, drop or repeat them.
+- **Several speakers, or a shot led by body performance or camera movement:** speech first with an audio-capable Seedance model and the shot frame in reference mode, then check the result's words, since these models can add, drop or repeat them.
 - **A one-off where the voice may vary:** native dialogue in a documented language.
 - **A finished clip that needs new or corrected speech, or mouths matched to a voice:** `lip_sync_video`, not `generate_video`, with the clip in `video_url` and the speech in `audio_url`, or no `audio_url` when the clip already has the voice. Say who speaks in `prompt` when several characters are on screen, and leave `model` out.
 
@@ -55,7 +49,7 @@ Preserve an explicit model choice. Quote only the spoken words in a prompt for a
 2. Unless the user asked for direct text-to-video, supplied a ready shot image, or is editing footage, follow the reference-first pipeline above before `generate_video`. Import media the user referred to first.
 3. When the user asks for examples, styles, or similar concepts, or an open brief would benefit from concrete directions, call `search_examples` with `output_type: "video"`, then load only the chosen result with `search_examples({ id })`. Do not search before every clip.
 4. Use `list_models({ category: "video" })` when choosing a model; for a known selection, use `get_model_params` directly. Reuse its current-task durations, resolutions, operations, and reference contract.
-5. Use `estimate_generation` with `operation: "video"` only when the user asks about cost, balance, affordability, or sets a budget. Treat returned alternatives as options; preserve explicitly chosen models, durations, and quality. Estimate-only requests do not authorize generation.
+5. Use `estimate_generation` with `operation: "video"` only when the user asks about cost, balance, affordability, or sets a budget. Use the actual reference clip and requested output duration and resolution so source-priced work is included. Treat returned alternatives as options; preserve explicitly chosen models, durations, and quality. Estimate-only requests do not authorize generation.
 6. State consequential settings briefly and proceed within the requested scope, honoring a generation the user already requested or a production stage they approved.
 7. Write one chronological prompt: opening frame, subject action, camera behavior, environmental motion, audio or dialogue, ending frame, and exclusions.
 8. Call `generate_video`; use `check_job` only when another tool needs the completed URL or no inline viewer is monitoring the job.
@@ -73,8 +67,8 @@ Continue status checks, retrieval, inspection, and drafting revised prompts with
 
 ## Model routing
 
-- Default to `video/gemini-omni-flash` for general generation and short source edits with native audio.
-- Use `video/seedance-2.5`, the premium cinematic model, for high-end, reference-rich or long clips (up to 30 s). Review mode stages an initial 1080p request as a 480p draft; Auto renders 1080p directly. Explicit 480p creates a draft in either mode. Only 1080p can finalize the same draft through `extras.draft_job_id`; 720p starts a new take.
+- Default to `video/gemini-omni-flash` for general generation and short source edits that do not need voice input.
+- Use `video/seedance-2.5`, the premium cinematic model, for high-end, reference-rich or long clips (up to 30 s). Review mode stages an initial 1080p request as a 480p draft; Auto renders 1080p directly. Explicit 480p creates a draft in either mode. Check the completed draft's `finalizationOptions`. Within seven days an eligible native draft can finish at 1080p or, when requested and offered, 4K through `extras.draft_job_id`. 720p starts a new take. Flash and Mini clips are independent renders.
 - Use `video/minimax-h3-max` for fast cinematic motion and native-audio work.
 - Use `video/heygen-avatar-6` when one person must say exact lines on camera: the finished line from `generate_speech` drives the approved shot image, so no word is added or changed.
 - Use `video/flux-3-max` alongside H3 Max for text, first/last frames or up to 10 timed image keyframes, 5 to 20 seconds at 720p/1080p with generated audio. It accepts no video/audio references; use H3 Max or Seedance 2.5 for those. It is available before purchase and eligible for the free first video.

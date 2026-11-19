@@ -87,6 +87,10 @@ Read `platform-upload.md` before choosing an import route.
 
 | Tool                    | Use                                                                                       |
 | ----------------------- | ----------------------------------------------------------------------------------------- |
+| `image_to_3d` | Build a downloadable mesh from one or more views. Use Meshy for humanoid rigs and animation. |
+| `increase_frame_rate` | Interpolate frames for higher fps or slow motion. |
+| `separate_music_stems` | Split a full song into labeled audio files. |
+| `replace_music_track` | Replace singing or backing and return the complete mix. |
 | `remove_background`     | Remove an image or video background.                                                      |
 | `upscale_image`         | Upscale `image_url` with an upscale `model` and its `extras`: `upscale/aura-sr` (default), `upscale/clarity`, `upscale/recraft-crisp`. |
 | `upscale_video`         | Upscale `video_url` with an upscale `model` and its `extras`: `upscale/bytedance` (default, has a pro tier), `upscale/realesrgan`, `upscale/topaz-starlight-precise-2.6`, `upscale/topaz-starlight-hq`, `upscale/topaz-starlight-mini`, `upscale/topaz-starlight-fast-2`. List them with `list_models({ category: "upscale" })`; `get_model_params({ model })` gives the `extras`. Older clients: `upscale_media` upscales either. |

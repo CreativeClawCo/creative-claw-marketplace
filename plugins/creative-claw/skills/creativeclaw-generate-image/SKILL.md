@@ -26,12 +26,14 @@ Turn a brief and optional references into a finished image. This is the primary 
 
 ## Model routing
 
+Nano Banana 2 is the everyday default. GPT Image Sunburst is our highest-quality choice. Prefer `image/gpt-image-2.6-sunburst` for demanding likeness, detailed products, typography or tightly controlled edits. If the user dislikes a result, identify what missed, offer Sunburst with the original references and a focused correction, and run the revision when requested. Preserve an explicit model choice.
+
 - Default to `image/nano-banana-2` (Nano Banana 2) for most generation and editing, including targeted corrections that should preserve the existing scene. Keep the source aspect ratio unless reframing is requested and inspect the result for unintended changes. Exact preservation outside the edited region requires compositing that region back into the original.
-- Use `image/gpt-image-2.5-sunburst` for complex professional assets, demanding typography, multi-reference composition, or controlled edits. Nano Banana Pro remains available when explicitly selected.
-- Use `image/gpt-image-2.5-sunburst` for layout corrections that move, scale, or re-space existing text and logos, such as a Story safe-zone fix. Nano Banana 2 tends to return that kind of edit with the layout unchanged. State target positions as percentages of the canvas height, then measure them on the result.
-- Use `image/gpt-image-2.5-flare` for fast, high-quality everyday OpenAI image generation and editing.
-- Use `image/seedream-5.5` for product and marketing imagery, transparent PNG assets (`extras.background: "transparent"`), and splitting a flat image into editable layers (`extras.layer_decomposition`). Keep Nano Banana 2 for precise local edits. After a model moderation refusal, Seedream may also be offered as the tool's suggested alternative, with user confirmation before another paid generation; it applies its own safety checks and may still reject the request.
-- For a transparent background, use GPT Image 2.5 (Flare or Sunburst) with `extras.background: "transparent"`, or `remove_background` for an existing image.
+- Use `image/gpt-image-2.6-sunburst` for complex professional assets, demanding typography, multi-reference composition, or controlled edits. Nano Banana Pro remains available when explicitly selected.
+- Use `image/gpt-image-2.6-sunburst` for layout corrections that move, scale, or re-space existing text and logos, such as a Story safe-zone fix. Nano Banana 2 tends to return that kind of edit with the layout unchanged. State target positions as percentages of the canvas height, then measure them on the result.
+- Use `image/gpt-image-2.6-flare` for fast, high-quality everyday OpenAI image generation and editing.
+- Use `image/seedream-5.5` for product and marketing imagery, transparent PNG assets (`extras.background: "transparent"`), and splitting a flat image into editable layers (`extras.layer_decomposition`). Use Nano Banana 2 for everyday edits and Sunburst when likeness, lettering or fine detail is the part that failed. After a model moderation refusal, Seedream may also be offered as the tool's suggested alternative, with user confirmation before another paid generation; it applies its own safety checks and may still reject the request.
+- For a transparent background, use GPT Image 2.6 (Flare or Sunburst) with `extras.background: "transparent"`, or `remove_background` for an existing image.
 - Honor an explicit model choice. Read [the selected image model guide](references/images/index.md) for exact prompting and reference syntax.
 
 Use other image models only when the user asks for them.
@@ -44,7 +46,7 @@ Work in the user's language. Keep supplied visible copy verbatim, including spel
 
 - `image_url` is the primary reference. Additional reference support is model-specific, so inspect `get_model_params` instead of assuming a fixed count.
 - Set the output shape with `aspect_ratio`; `size` is legacy.
-- Use a `character_id` for a saved Character. With an explicit `image_url`, the Character image is not added automatically; put it in `extras.image_urls` yourself.
+- When the image tool exposes `character_ids`, supply the visible saved Characters there and name their placements in the prompt. The set image goes in `image_url` and other scene references in `extras.image_urls`. On a route without Character selectors, use the actual sheet URLs as supported image inputs.
 - Video keyframes: use the same image model as the rest of the project, `aspect_ratio` = the video's ratio, anchors in `image_url` + `extras.image_urls` with roles named, one full-bleed frame with no text, grid or labels.
 - Preserve exact quoted copy, reference labels, dialogue, timecodes, colors, and approved layout or edit constraints in the prompt.
 - Never invent unsupported parameters. Use only fields returned by the tool schema and selected model.
@@ -52,3 +54,5 @@ Work in the user's language. Keep supplied visible copy verbatim, including spel
 ## Completion standard
 
 Confirm that subject identity or product geometry, composition, text, crop, and brand rules match the brief. A job ID is not a finished image. Name and tag approved outputs so later video or campaign work can retrieve them.
+
+When the user likes a generated look or voice, offer once to save it as a named Character for future work. Check `list_characters` first. An explicit request to save the look or voice is agreement. Update the existing Character or create one when authorized with the approved image or selected voice. Reuse its ID for later shots or speech. A voice-only Character works for a narrator. If the voice card already saved the selection, reuse that record.
