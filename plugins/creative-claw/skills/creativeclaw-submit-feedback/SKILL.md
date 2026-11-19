@@ -1,6 +1,6 @@
 ---
 name: creativeclaw-submit-feedback
-description: "Send actionable product and quality feedback to the Creative Claw team when the user gives feedback or a concrete issue comes up; not for refund requests or fixing media."
+description: "Send actionable product and quality feedback to the Creative Claw team when the user asks or agrees to send a report; not for refund requests or fixing media."
 ---
 
 # Submit Feedback
@@ -13,11 +13,11 @@ Read [shared execution guidance](references/workflow-basics.md) once per task be
 
 Turn the user's report into one concise, useful `submit_feedback` call. Feedback is a product-feedback channel, not a refund request form, a generation tool, or a promise of compensation, reply, or roadmap commitment.
 
-Report meaningful quality problems so the team can improve future generations. One isolated quality issue is worth reporting; repeated failure is not required. Say briefly that you reported it, and do not report when the user asks you not to.
+Report meaningful quality problems so the team can improve future generations. One isolated quality issue is worth reporting; repeated failure is not required. Send the report only when the user asks you to tell the team or accepts your offer to do so.
 
 ## What can be reported
 
-Report meaningful issues you observe and feedback the user expresses. Respect a request not to report feedback. Topics:
+Offer to report issues you observe or feedback the user expresses. Topics:
 
 - A tool failed, returned the wrong state, or behaved inconsistently.
 - An image, video, or voice result had a concrete quality problem, even on a single attempt.
@@ -40,7 +40,7 @@ For critical issues, users can also contact [support@creativeclaw.co](mailto:sup
 
 Include the user's intended outcome, what happened, expected behavior, useful reproduction details, model or tool involved, and practical impact. Exclude secrets, credentials, unnecessary personal information, and unsupported guesses.
 
-Describe the quality gap without turning it into a refund or compensation request. Do not infer refund intent or suggest compensation. If the user explicitly wants a refund or compensation, direct them to [support@creativeclaw.co](mailto:support@creativeclaw.co) with the relevant job ID. Still report any concrete underlying quality issue as product feedback, without adding a refund request.
+Describe the quality gap without turning it into a refund or compensation request. Do not infer refund intent or suggest compensation. If the user explicitly wants a refund or compensation, direct them to [support@creativeclaw.co](mailto:support@creativeclaw.co) with the relevant job ID. Offer to report any underlying quality issue separately.
 
 Map the report to the exact schema:
 
@@ -52,4 +52,4 @@ Map the report to the exact schema:
 
 ## Submit and continue
 
-Call `submit_feedback` once per distinct issue, unless the user asks you not to report it. Tell the user what category was sent without promising a response. If the user still needs help, continue with a safe workaround or corrected workflow after submitting.
+Call `submit_feedback` once for each issue the user agreed to send. Tell the user what category was sent without promising a response. If the user still needs help, continue with a safe workaround or corrected workflow after submitting.

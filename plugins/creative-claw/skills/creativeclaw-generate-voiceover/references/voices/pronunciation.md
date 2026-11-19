@@ -11,7 +11,7 @@ For another provider, dialogue, or a client without the card, keep the original 
 ## The order to work in
 
 1. **Write the script normally.** Give every Hebrew word full niqqud and every Arabic word full tashkeel, as [speech localization](speech-localization.md) requires. Keep acronyms, brands and English words in Latin letters as they are normally written: "AI", not אֵיי-אַיי (v4 read that as "aa").
-2. **Generate and check.** Run `transcribe` on the take (see Check the take below). Ask the user to listen when stress or accent matters.
+2. **Generate and check.** Use the player to check a take. When the user requests a transcript or transcription-based verification, use the selected take as described below. Ask the user to listen when stress or accent matters.
 3. **Only if a word comes out wrong, fix that word.** Try spelling first: correct the niqqud or tashkeel (מִסּוֹכֵן fixed מסוכן being read as "dangerous"; شُقَق for شقق read as "shaqaq"). If that is not enough, replace only that word with the selected model's phonetic syntax from the table below. If the model has no phonetic input, respell the word, or speak that line with ElevenLabs v4.
 4. **Keep a fix that worked.** Once the user approves it by ear, offer to save it as a saved pronunciation (below) so every later take uses it automatically. Otherwise reuse the same spelling of that word for the rest of the project, on the same model and voice.
 
@@ -58,7 +58,7 @@ Fish also decoded slashed IPA in English and Hebrew testing, and the Hebrew take
 
 ## Saved pronunciations
 
-A saved pronunciation is a workspace rule: every later `generate_speech` call on that engine family swaps the word for the approved fix before generating. Save only a fix the user approved after hearing it, never an experiment.
+A saved pronunciation is a workspace rule: every later `generate_speech` call on that engine family swaps the word for the approved fix before generating. After the user approves the sound, ask whether to apply the fix to future takes in this workspace. Write the rule only when they request that scope.
 
 - Save: `add_speech_pronunciations({ entries: [{ family, language, term, replacement, variants }] })`. `family` is the engine the fix was tested on: `elevenlabs` covers v2, v3 and v4, and `cartesia`, `fish` and `google` are separate. `term` is the word or phrase as the user normally writes it. `replacement` is exactly the text that worked, in that model's syntax from the table above. Saving the same term again replaces it.
 - Hebrew: save the term without niqqud. It then matches the word with any niqqud, so the fully vowelized script still triggers it. A prefixed form is a different word: add והדקו or שהדקו as `variants` if the script uses them. Save a pointed term only to keep a homograph apart; it matches only that pointing and beats the plain rule.
@@ -71,6 +71,6 @@ A saved pronunciation is a workspace rule: every later `generate_speech` call on
 
 ## Check the take
 
-Transcribe with `transcribe` and the right `language_code`. If you see "slash", spelled-out symbols or a nonsense word, the model did not decode the IPA. Remove it and use the fallback. A clean transcript proves the word was recognized, not that the stress or accent is right. A transcript mismatch is a reason to listen to that word in context. Proper names can be transcribed incorrectly even when spoken correctly. Ask the user to judge stress, homographs and accent by ear. IPA is probabilistic and can vary by voice, so audition before a long script.
+For a requested transcription check, use `transcribe` and the right `language_code`. If you see "slash", spelled-out symbols or a nonsense word, the model did not decode the IPA. Remove it and use the fallback. A clean transcript proves the word was recognized, not that the stress or accent is right. A transcript mismatch is a reason to listen to that word in context. Proper names can be transcribed incorrectly even when spoken correctly. Ask the user to judge stress, homographs and accent by ear. IPA is probabilistic and can vary by voice, so audition before a long script.
 
 For sung lyrics, read the music skill's pronunciation guidance. No music model documents IPA input.

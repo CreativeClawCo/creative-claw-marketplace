@@ -182,7 +182,7 @@ Hebrew commercial:
 
 Listen for names, acronyms, numbers, language, accent, tag leakage, emotional fit, abrupt starts or endings, clipped words, volume jumps, and pace. Revise punctuation or one local tag before changing the voice. Keep a seed when comparing small prompt changes if the runtime supports it.
 
-Use `submit_feedback` for repeated pronunciation failures, quality degradation, unavailable voices, missing language support, confusing parameters, or explicit voice requests. Include the voice name/ID, language, settings, and concrete issue without sharing private recordings.
+If the user asks to report a voice issue to Creative Claw, use `submit_feedback` with the model, language and a short description. Exclude the script and audio.
 
 ## Model-specific compatibility
 

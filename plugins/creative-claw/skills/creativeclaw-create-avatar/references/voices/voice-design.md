@@ -22,12 +22,12 @@ Every preview returns three auditions. Let the user pick one. In ChatGPT the Voi
 
 ## Save
 
-`design_voice` only creates the auditions. Save the pick by passing the audition's `preview_id` as `voice_preview_id`:
+`design_voice` only creates the auditions. When the user asks to keep a specific audition, use their chosen Character or new Character name. Choosing a favorite to listen to or use for this take alone does not authorize a workspace save. If the selected model requires saving the audition to synthesize new lines, explain this and wait for their choice. For an authorized save, supply the audition's `preview_id` as `voice_preview_id`:
 
 - Existing Character: `update_character({ id, voice_preview_id })`. For an avatar, use the SAME Character `id` so its image and voice stay together.
 - New voice-only Character: `create_character({ title, voice_preview_id })`.
 
-A save keeps the Character's other voices and makes this one preferred for its speech model. If the save hits the limit, relay the tool's message and link, and offer `replace_voice_option_id` to replace a saved designed voice from the same provider. Never quote plan prices.
+A save keeps the Character's other voices and makes this one preferred for its speech model. If the save hits the limit, relay the tool's message and link, and ask which saved voice from the same provider they want to replace. Use `replace_voice_option_id` only for that selection.
 
 Use `update_character` and `create_character` when available. Older clients that expose only `manage_character` can still send `voice_preview_id` and `replace_voice_option_id` to it. If its cached schema omits the audition field, use the available `design_voice({ action: "save", preview_id, character_id })` compatibility route, or `character_name` for a new Character. Do not generate new auditions just to save an approved one.
 
