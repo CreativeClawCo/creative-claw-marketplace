@@ -15,7 +15,7 @@ Clone only the user's own voice, or a voice whose speaker has given explicit per
 
 ## Default: the voice card
 
-When the user wants to clone their voice and hasn't given you an audio file, call `clone_voice` without audio: `clone_voice({ consent: false })`, plus `language` when you know it and `character_id` when the voice belongs on an existing Character. Leave out `provider`. Its result is the voice card.
+When the user wants to clone their voice and hasn't given you an audio file, call `clone_voice` without audio and without `consent`: `clone_voice({ language })` when you know the language, plus `character_id` when the voice belongs on an existing Character. Provide `consent` only together with an audio file. Leave out `provider`. Its result is the voice card.
 
 The card does the whole flow: the consent agreement, a one-minute reading script in the user's language (or an uploaded file), the clone on Cartesia, a test line, an optional blind comparison with ElevenLabs and Fish Audio, and saving the voice as a new Character or on one of the user's Characters. It also shows plan and voice-limit messages before anyone records.
 

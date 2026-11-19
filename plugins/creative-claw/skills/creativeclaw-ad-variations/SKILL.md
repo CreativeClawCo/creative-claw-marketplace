@@ -44,6 +44,8 @@ Burn captions onto every variation with `add_subtitles` unless the user says no:
 
 ## 4. One estimate, one go-ahead
 
+If the brief supplies an existing ad and asks only to change the product, use `swap_video_objects` with the clip and replacement product photos. Identify the object to replace and what must stay. Reuse its preview session for adjustments before the final render.
+
 1. Estimate each kind of generation once with `estimate_generation` and multiply: one clip per distinct duration (exact model, duration, resolution, ratio), one voiceover with the longest line (speech is priced by characters), one image when keyframes or opening scenes are needed.
 2. Add the utility steps (`add_audio_to_video` per voiceover, `merge_media` to join each new hook to the body, `add_subtitles`, `trim_video`, `extract_frames`) at their current prices from `estimate_generation`. Final costs are confirmed after each job.
 3. Show the plan in one message: a numbered table (number, name, the exact line, the picture, its length), what stays fixed, model, ratio and resolution, and one total for the set.

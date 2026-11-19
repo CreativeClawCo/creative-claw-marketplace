@@ -4,14 +4,14 @@ The OpenAI directory gets the same plugin as every other marketplace, with these
 
 | File | Purpose |
 |---|---|
-| `mcp.json` | Not shipped. The published plugin's MCP server is set in the portal and an upload cannot add, remove or replace it; this file records which one it is and the build checks it. The ChatGPT surface, `https://app.creativeclaw.co/mcp/chatgpt`. It hides checkout tools. The marketplace plugin keeps the general `/mcp` endpoint for Claude, Cursor, OpenClaw and Codex-from-git installs. |
-| `plugin.openai.json` | The plugin `name`, which must be the published plugin's ID (`app-6a25…`) or the portal rejects the upload. Directory version (must be above the last published OpenAI version), discovery keywords, and the full `extensions.com.openai`: listing, onboarding skill, review test cases, commerce statement and release notes. The test cases and the demo recording are checked but not shipped: the portal accepts them in a package only alongside a bundled MCP server, so enter them in the portal's MCP review form. |
-| `assets/` | Icons referenced by the listing. |
+| `mcp.json` | Ships at the ZIP root. It retains the approved Creative Claw server key and the ChatGPT endpoint at `https://app.creativeclaw.co/mcp/chatgpt`. |
+| `plugin.openai.json` | Contains the published package ID, version, listing, translations, onboarding skill, review cases, commerce statement and release notes. The builder adds the reviewer demo URL. |
+| `assets/` | Contains the listing and composer icon. The builder also copies the three 706 × 860 starter images from `chatgpt-draft/screenshots` into `assets/screenshots` in prompt order. The directory documents manifest fields for icons. Confirm starter image placement separately in the listing. |
 
 Build:
 
 ```bash
-node scripts/build-openai-plugin.mjs          # writes output/openai/creative-claw-openai-<version>.zip
+node scripts/build-openai-plugin.mjs          # writes local/submission/creative-claw-openai-<version>.zip
 node scripts/build-openai-plugin.mjs --check  # validate only (runs in CI)
 ```
 

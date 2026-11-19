@@ -12,7 +12,7 @@
 // local/submission/openai-private.json { "demo_recording_url": "..." }.
 //
 // Usage: node scripts/build-openai-plugin.mjs [--check]   (--check validates without zipping)
-// Output: output/openai/creative-claw-openai-<version>.zip
+// Output: local/submission/creative-claw-openai-<version>.zip
 
 import { execFileSync } from "node:child_process";
 import fs from "node:fs";
@@ -123,10 +123,18 @@ if (typeof openai.review?.commerce !== "boolean") fail("review.commerce must be 
 if ("test_credentials" in (openai.review ?? {}) || "reviewer_instructions" in (openai.review ?? {})) fail("credentials and reviewer instructions belong in the dashboard, not the package");
 if (!openai.publication?.release_notes) fail("publication.release_notes is required");
 
+const translations = openai.publication?.translations ?? {};
+for (const [locale, { subtitle, description }] of Object.entries(translations)) {
+  if (!subtitle?.trim() || chars(subtitle) > 30 || /[\r\n]/.test(subtitle)) fail(`Invalid localized subtitle for ${locale}`);
+  if (!description?.trim() || chars(description) > 4000) fail(`Invalid localized description for ${locale}`);
+}
+
 // Exactly one remote MCP server, on the ChatGPT surface.
 const servers = Object.entries(mcp.mcpServers ?? {});
+if (mcp.$schema !== "https://agent-plugins.org/schemas/1.0.0/mcp.schema.json") fail("openai/mcp.json must use the portable MCP schema");
 if (servers.length !== 1) fail("openai/mcp.json must declare exactly one MCP server");
-for (const [, server] of servers) {
+for (const [name, server] of servers) {
+  if (name !== "creative-claw" || server.type !== "streamable-http") fail("MCP must keep the creative-claw streamable-http server");
   if (server.url !== "https://app.creativeclaw.co/mcp/chatgpt") fail(`MCP URL must be the ChatGPT surface, got ${server.url}`);
 }
 
@@ -143,20 +151,24 @@ fs.cpSync(source, packageDir, {
     path.basename(src) !== ".DS_Store" &&
     !(path.dirname(src) === source && EXCLUDE.has(path.basename(src))),
 });
-// The package declares no MCP server (see below), and the portal accepts plugin-level
-// review cases only alongside exactly one. The cases and the demo recording stay in
-// openai/plugin.openai.json as the source for the portal's own MCP review form.
-delete openai.review.test_cases;
-delete openai.review.demo_recording_url;
-
 // The OpenAI package serves ChatGPT and Codex, so the router skill carries the ChatGPT
 // platform notes, exactly as build-skill-zips.sh packages it.
 fs.cpSync(path.join(repo, "skill-variants/chatgpt"), path.join(packageDir, "skills/creativeclaw/references"), { recursive: true });
 fs.writeFileSync(path.join(packageDir, "plugin.json"), JSON.stringify(manifest, null, 2) + "\n");
-// No mcp.json in the package. The published plugin's MCP server is bound to it in the
-// portal, and an upload that declares one is rejected as "adding an MCP server".
-// openai/mcp.json stays as the record of which surface that server is.
+// Portable packages discover root mcp.json automatically. Every update must retain
+// the existing remote MCP, even when its connection already exists in the portal.
+// Use the OpenAI surface, not the marketplace's general /mcp configuration.
+fs.writeFileSync(path.join(packageDir, "mcp.json"), JSON.stringify(mcp, null, 2) + "\n");
 fs.cpSync(path.join(openaiDir, "assets"), path.join(packageDir, "assets"), { recursive: true });
+
+// The directory has no manifest field for prompt screenshots. Keep the three
+// upload-ready images in prompt order for dashboard use.
+const screenshotDir = path.join(repo, "chatgpt-draft/screenshots");
+const gallery = fs.readdirSync(screenshotDir).filter((file) => /^prompt-[123]-.+-706x860\.png$/.test(file)).sort();
+if (gallery.length !== prompts.length) fail("Each starter prompt needs a 706x860 screenshot");
+const galleryDir = path.join(packageDir, "assets/screenshots");
+fs.mkdirSync(galleryDir, { recursive: true });
+for (const file of gallery) fs.copyFileSync(path.join(screenshotDir, file), path.join(galleryDir, file));
 
 for (const entry of fs.readdirSync(packageDir, { recursive: true })) {
   const name = path.basename(entry);
@@ -178,7 +190,7 @@ if (errors.length) {
 if (checkOnly) {
   console.log(`OpenAI package ${manifest.version} is valid (${positive.length}+${negative.length} review cases, ${manifest.keywords.length} keywords).`);
 } else {
-  const outDir = path.join(repo, "output/openai");
+  const outDir = path.join(repo, "local/submission");
   fs.mkdirSync(outDir, { recursive: true });
   const zip = path.join(outDir, `creative-claw-openai-${manifest.version}.zip`);
   fs.rmSync(zip, { force: true });

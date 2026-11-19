@@ -14,6 +14,8 @@ For a request to preserve or copy an existing movement, use [motion transfer](mo
 
 The individual video call below applies outside Film. In a Film project, put the cast, blocking and scene references into the plan and use the storyboard and clip batch actions. One Review approval covers the selected clip batch.
 
+If the user names a real location, architectural style, lighting setup or object and lacks a reference, use `search_images` to ground the shot. Search for a visible feature and choose an appropriate orientation. To inspect a shortlist, use `load_image` with the search ID and selected result indices, then `check_job` for the numbered contact sheet. Import the selected result's full `image_url` with `upload_asset` and use the returned workspace URL to design an original set or shot frame. Reuse that approved frame across the scene. Use supplied product photos and Character sheets for identity.
+
 ## Review the references once
 
 In Review mode, the video's request card is where the user approves the exact references, prompt and settings. Don't call references approved before the user presses Generate. The card does not approve image or audio charges made before it.

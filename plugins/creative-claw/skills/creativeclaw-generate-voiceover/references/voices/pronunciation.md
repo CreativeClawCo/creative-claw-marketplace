@@ -2,6 +2,12 @@
 
 IPA and phoneme spelling are a repair tool, not a default. Never add them to a script up front, and never to a whole line.
 
+## Repair an existing take
+
+On an eligible completed ElevenLabs single-speaker audio card, choose **Fix pronunciation**, tap the affected words, and add a note such as “stress the first syllable.” **Say it yourself** or **Upload recording** supplies a short pronunciation example. **Redo** regenerates the take in its original voice and settings and can use credits. Compare the versions by ear. Saving a workspace rule is a separate choice after the user approves the sound.
+
+For another provider, dialogue, or a client without the card, keep the original voice and delivery. If the intended reading is ambiguous, ask for a stressed spelling, rhyme, or a short example. Try the affected phrase in context before redoing long narration. Keep captions and the written script in the original spelling. Use the steps below for a requested repair.
+
 ## The order to work in
 
 1. **Write the script normally.** Give every Hebrew word full niqqud and every Arabic word full tashkeel, as [speech localization](speech-localization.md) requires. Keep acronyms, brands and English words in Latin letters as they are normally written: "AI", not אֵיי-אַיי (v4 read that as "aa").
@@ -57,6 +63,7 @@ A saved pronunciation is a workspace rule: every later `generate_speech` call on
 - Save: `add_speech_pronunciations({ entries: [{ family, language, term, replacement, variants }] })`. `family` is the engine the fix was tested on: `elevenlabs` covers v2, v3 and v4, and `cartesia`, `fish` and `google` are separate. `term` is the word or phrase as the user normally writes it. `replacement` is exactly the text that worked, in that model's syntax from the table above. Saving the same term again replaces it.
 - Hebrew: save the term without niqqud. It then matches the word with any niqqud, so the fully vowelized script still triggers it. A prefixed form is a different word: add והדקו or שהדקו as `variants` if the script uses them. Save a pointed term only to keep a homograph apart; it matches only that pointing and beats the plain rule.
 - Arabic works the same way: save the term without tashkeel (شقق) and it matches شُقَق or any other vowelling. A word with an attached و، ف، ب، ل or ال is a different word: add وشقق or الشقق as `variants` if the script uses them.
+- A family rule can also reach another version of that engine. For example, v4 inline IPA can be read aloud on ElevenLabs v2. Prefer a tested spelling compatible with the versions the workspace uses, or keep a version-specific fix local to that take.
 - Rules never cross families. An ElevenLabs IPA rule does nothing on Cartesia; save a separate Cartesia `<< >>` rule only after testing it there.
 - Rules apply automatically, so do not also write the fix into the script. To hear the model without saved rules, for example to retest a word, set top-level `apply_saved_pronunciations: false`.
 - The result's `pronunciationReplacements` lists every swap made. The transcript, word timings and captions keep the original words. Tell the user when a saved rule was used.
@@ -64,6 +71,6 @@ A saved pronunciation is a workspace rule: every later `generate_speech` call on
 
 ## Check the take
 
-Transcribe with `transcribe` and the right `language_code`. If you see "slash", spelled-out symbols or a nonsense word, the model did not decode the IPA. Remove it and use the fallback. A clean transcript proves the word was recognized, not that the stress or accent is right. In a 22-take review, the listener agreed with Scribe on every word it caught or missed, so trust a Scribe miss without a second listen; the ear was needed only for stress. Ask the user to judge stress, homographs and accent by ear. IPA is probabilistic and can vary by voice, so audition before a long script.
+Transcribe with `transcribe` and the right `language_code`. If you see "slash", spelled-out symbols or a nonsense word, the model did not decode the IPA. Remove it and use the fallback. A clean transcript proves the word was recognized, not that the stress or accent is right. A transcript mismatch is a reason to listen to that word in context. Proper names can be transcribed incorrectly even when spoken correctly. Ask the user to judge stress, homographs and accent by ear. IPA is probabilistic and can vary by voice, so audition before a long script.
 
 For sung lyrics, read the music skill's pronunciation guidance. No music model documents IPA input.

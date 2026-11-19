@@ -5,9 +5,9 @@ Choose from the material already available. One presenter image and finished spe
 ## Whose voice
 
 When a Character speaks and the voice is unknown and matters, ask one question:
-- **Design** a new voice from a description: `design_voice`, three auditions. Auditions use the Character's real lines as `text`.
+- **Design** a new voice from a description: `design_voice`, three auditions. ElevenLabs and Fish can audition a real line. Google chooses its preview text.
 - **Your own voice:** `clone_voice` without audio opens the voice card, which records and clones it with consent (creativeclaw-clone-voice).
-- **Stock voice:** a catalog voice, saved with `update_character({ id, voice_model, voice_id })`.
+- **Stock voice:** use `search_voices` for the spoken language and requested accent. Use the selected model and voice ID together. With the user's agreement, save the selection with `update_character({ id, voice_model, voice_id })`.
 
 If the voice doesn't matter, pick a stock voice and name it. In ChatGPT the Voice Studio card saves the choice; read it back with `list_characters` rather than saving again.
 

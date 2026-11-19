@@ -28,6 +28,10 @@ Read [reference production](reference-production.md) when preparing shot assets,
 
 Planning-only requests can use this selection index without reading every model guide. Read a specific guide when committing model-specific timing, references or shot constraints. Do not render clips unless production was requested.
 
+## Choosing within a budget
+
+Estimate the actual shot duration, resolution and source clips when cost matters. For inexpensive blocking or timing tests, start with Seedance Mini. For an everyday shot from a prepared frame without supplied speech, start with Omni Flash. Consider H3 Max for cinematic movement on a tighter budget, Seedance Flash for 720p voiced scenes, Kling 4 for directing action or camera beats from references, and full Seedance 2.5 for the performance-critical shot or a draft intended for same-take finishing. Budget speech, reference images and any planned lip sync separately. Choose per shot while reusing the approved cast and set.
+
 ## Worked production recipes
 
 Choose the relevant workflow: [product ad](recipe-product-ad.md), [consistent Character scene](recipe-character-scene.md), or [source edit and extension](recipe-source-edit.md). For creator ads, first choose a [UGC production path](ugc-paths.md).

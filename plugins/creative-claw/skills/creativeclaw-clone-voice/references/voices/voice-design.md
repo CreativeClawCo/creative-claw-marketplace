@@ -15,7 +15,7 @@ Prepare the audition text using [speech localization](speech-localization.md). E
 Call `design_voice({ prompt, text, provider, character_id })`:
 - `prompt` (20 to 1,000 characters): age, accent, timbre, pace, attitude and use. Describe the sound, never a real person's name or identity.
 - `text` (100 to 1,000 characters): one or two of the Character's real lines, about 200 characters. Omit it only when no script exists yet.
-- `provider`: `"elevenlabs"` (default), `"google"`, or `"fish"`. For Google or Fish, add `language_code`, such as `"he-IL"`.
+- Choose `provider: "google"` for the current default design workflow. Google chooses its audition words. For an audition on the actual line, choose ElevenLabs or Fish within their text limits. For Google or Fish, use `extras.language_code`, such as `"he-IL"`. Use the provider returned with the selected preview when choosing its speech model.
 - `character_id`: the Character that should get the voice, when known.
 
 Every preview returns three auditions. Let the user pick one. In ChatGPT the Voice Studio card plays them and saves the choice; read it back with `list_characters` rather than saving again.
@@ -30,6 +30,8 @@ Every preview returns three auditions. Let the user pick one. In ChatGPT the Voi
 A save keeps the Character's other voices and makes this one preferred for its speech model. If the save hits the limit, relay the tool's message and link, and offer `replace_voice_option_id` to replace a saved designed voice from the same provider. Never quote plan prices.
 
 Use `update_character` and `create_character` when available. Older clients that expose only `manage_character` can still send `voice_preview_id` and `replace_voice_option_id` to it. If its cached schema omits the audition field, use the available `design_voice({ action: "save", preview_id, character_id })` compatibility route, or `character_name` for a new Character. Do not generate new auditions just to save an approved one.
+
+If only the saved audition asset is available later, use its asset ID as `voice_preview_id` on a route that accepts it. Reuse the existing selection.
 
 ## Speak
 

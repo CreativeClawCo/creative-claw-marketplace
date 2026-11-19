@@ -67,6 +67,17 @@ For conversational setup or edits, prefer `update_theme({ interactive: true })`.
 
 Read `platform-upload.md` before choosing an import route.
 
+## Browsing and revising existing work
+
+| Tool | Use |
+| --- | --- |
+| `show_media` | Show up to 24 existing workspace items in an ordered gallery by asset ID, job ID or workspace CDN URL. Use when the user asks to see or compare saved outputs. |
+| `open_studio` | Open the requested Studio view for browsing, picking or managing work. Use direct lookup tools when running a production step. |
+| `swap_video_characters` | Replace a person in existing footage and keep the source motion. Use its preview and review flow. |
+| `swap_video_objects` | Replace a particular prop, product, garment or sign in a source clip with replacement photos. Identify similar objects that must stay. |
+| `update_video_workflow` | Revise the selected preview using the existing session and expected version. A model change can start a paid render in Auto. |
+| `lip_sync_video` | Synchronize an existing clip to finished dialogue. Identify the speaker on multi-person shots. |
+
 ## Characters, voices, and films
 
 | Tool                                      | Use                                                                                               |
@@ -75,7 +86,10 @@ Read `platform-upload.md` before choosing an import route.
 | `update_character`                        | Update a Character by `id`: description, reference image, stock voice, or a designed voice with `voice_preview_id`. |
 | `delete_character`                        | `{ id, confirm: true }` permanently deletes a Character and its saved voices, only on explicit request. |
 | `list_characters`                         | Find reusable Characters, their IDs, and saved voice options.                                     |
-| `design_voice`                            | Create a new synthetic voice from a description, no recording needed. ElevenLabs by default; `provider: "google"` for Google. Returns three auditions. Save the pick with `update_character({ id, voice_preview_id })`, or `create_character({ title, voice_preview_id })` for a new Character. At the saved-voice limit, provide `replace_voice_option_id` to `update_character` to replace an existing designed voice. |
+| `search_voices` | Filter stock samples by spoken language, accent, gender, model and style. Reuse the selected model and voice ID. |
+| `list_speech_pronunciations`, `add_speech_pronunciations`, `delete_speech_pronunciations` | Inspect family and language rules, save an approved reading, or remove a selected entry by ID. Changes apply to future speech. |
+| `delete_film_project` | Permanently delete only the explicitly confirmed film. Linked media cleanup requires a separate explicit request. |
+| `design_voice`                            | Create a new synthetic voice from a description, no recording needed. Specify Google for the default design workflow, or choose ElevenLabs or Fish for an audition on supplied words. Returns three auditions. Save the pick with `update_character({ id, voice_preview_id })`, or `create_character({ title, voice_preview_id })` for a new Character. At the saved-voice limit, provide `replace_voice_option_id` to `update_character` to replace an existing designed voice. |
 | `clone_voice`                             | Clone a consenting speaker's recording with Cartesia (default) or ElevenLabs (`provider: "elevenlabs"`). Attaches to `character_id`, or creates a voice-only Character when none is given. Provide `consent: true` only after the speaker's explicit agreement. Without audio it opens the voice card, which records, clones, compares and saves itself. |
 | `create_film_project`                     | Create a multi-shot Film project.                                                                 |
 | `update_film_project`                     | Save script, shots, storyboards, clips, audio, and approval state.                                |
@@ -111,6 +125,10 @@ Audio on video:
 - `add_audio_to_video` replaces the clip's audio by default and ends at the shorter input.
 - With `audio_mode: "mix"` it keeps the clip's sound and layers the new track over it at the video's length. `original_volume` and `added_volume` (0–1) set each level; about 0.3 keeps music under speech.
 - `stitch_clips` layers one audio track over the clips at full level, and the result can run past the last clip.
+
+## Project budgets
+
+`list_budget_projects` finds existing projects. Use `show_budget_project` for recorded project spend, `create_budget_project` for a requested new project, and `update_budget_project` to change one. `assign_to_budget_project` attributes past jobs and their outputs together. Use estimates for planned work.
 
 ## Account and billing
 

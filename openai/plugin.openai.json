@@ -1,6 +1,6 @@
 {
   "name": "app-6a2528e2c49c8191a8015ba5475f177e",
-  "version": "5.7.0",
+  "version": "5.7.1",
   "keywords": [
     "ai video generator",
     "video generation",
@@ -38,16 +38,16 @@
       "interface": {
         "displayName": "Creative Claw",
         "shortDescription": "Create videos & voiceovers",
-        "longDescription": "Create videos, product ads, images and voiceovers in ChatGPT. Animate a photo, turn a script into a multi-scene film, or make a creator-style product ad with narration and captions. Built for marketers, creators and small teams who need on-brand media without leaving the conversation.\n\nPlan shots and storyboards, prepare consistent reference images, generate clips and assemble a first cut. Turn interviews and longer videos into social clips, cut and reorder selected moments, reframe for vertical formats, and add captions. Transcribe audio, video files and public video links. Ask for motion graphics, kinetic typography or an animated explainer, and a video agent designs and renders it with voiceover, music and sound.\n\nCreate a reusable avatar from your photos or a fictional character brief. Review its character sheet, save it as a Character, and reuse its visual references in images and videos. Give a Character a voice: design a new synthetic voice from a description, clone your own voice (or a speaker's voice with their explicit permission) from a clean recording, or choose a stock voice for multilingual narration. Sync speech to on-screen lips, and add music and sound effects to the same project.\n\nGenerate and edit supporting images, product photos and campaign visuals. Use reference images to guide product appearance, character identity, composition and style. Several image, video and voice models are available; availability and settings vary.\n\nVideo Review mode shows the proposed prompt, references and settings before you press Generate. It reviews the request, not a rendered video preview. Auto mode submits the requested generation immediately.\n\nResults, character consistency and voice similarity vary. You can send feedback from the conversation. For help, contact support@creativeclaw.co.",
+        "longDescription": "Turn a product photo into an ad, a script into a short film, or an interview into captioned clips in ChatGPT. Start a film by designing the cast and set. Use the same character sheets and scene images to frame each shot, then animate the shots and assemble a first cut.\n\nGive a recurring Character a voice. Choose a stock voice, design one from a description, or clone your own voice from a clean recording. Get the speaker's permission before cloning someone else's voice. Save a favorite face or voice as a Character and reuse it in later scenes. For dialogue, use a video model that accepts the character's recorded audio.\n\nGenerate and edit images, create product photos or turn reference images into a downloadable 3D model. Recast people in existing footage, guide movement with a reference clip, or build motion graphics with animated type. Trim and reframe video, sync speech to lips, and add narration, music, sound effects or captions.\n\nIn Video Review mode, inspect the prompt, references and settings before pressing Generate. Image preparation can use credits separately. Auto mode sends the requested video generation immediately. For help, contact support@creativeclaw.co.",
         "developerName": "Creative Claw",
         "category": "Creativity",
         "capabilities": [
           "Generate videos from text or images",
-          "Animate photos",
-          "Edit and extend video clips",
+          "Animate photos and transfer motion from a reference video",
+          "Edit, extend or recast video clips",
           "Motion graphics and animated explainers",
           "Generate and edit images",
-          "Product photoshoots",
+          "Product photoshoots and image-to-3D models",
           "Reusable characters and avatars",
           "Storyboards and multi-shot films",
           "UGC-style video ads",
@@ -68,9 +68,9 @@
         "privacyPolicyURL": "https://creativeclaw.co/privacy/",
         "termsOfServiceURL": "https://creativeclaw.co/terms/",
         "defaultPrompt": [
-          "Turn this product photo into a 10-second vertical video ad with a voiceover and captions.",
-          "Create a consistent character and use it in a three-shot video with dialogue.",
-          "Design a warm narrator voice and read this script."
+          "Turn this product photo into a polished on-brand Instagram ad",
+          "Create a 15-second vertical launch video with voiceover and animated captions",
+          "Generate a natural voiceover for this script and add it to my video"
         ],
         "brandColor": "#EE6B4D",
         "brandColorDark": "#EE6B4D",
@@ -82,10 +82,10 @@
         "test_cases": {
           "positive": [
             {
-              "description": "Text-to-video with the account's Review/Auto preference. Needs a demo account with generation credits.",
+              "description": "Create a shot image and animate it with the account's video mode. Requires image and video credits.",
               "prompt": "Create a 5-second vertical video of a paper airplane flying through a bright creative studio.",
-              "tools_triggered": "get_model_params, generate_video; check_job only when needed for completion or a later step",
-              "expected_behavior": "In Review mode, show the request card without submitting or charging until Generate is pressed. In Auto mode, submit the request. Deliver a playable vertical clip once complete; a pending job is not a finished video."
+              "tools_triggered": "get_model_params, generate_image, generate_video, check_job when needed",
+              "expected_behavior": "Create a vertical studio shot with the paper airplane, then pass the completed image into the video request. In Review mode show the video request for approval before charging for video. In Auto mode submit the video request and deliver the finished clip when available."
             },
             {
               "description": "Look up the demo account's saved brand theme. No credits used.",
@@ -131,7 +131,261 @@
         "commerce_description": "Creative Claw does not sell anything in ChatGPT. When a feature needs a different plan or more credits, the plugin explains why and links to an informational page about plans."
       },
       "publication": {
-        "release_notes": "New videos start from a shot image. Films reuse their cast, scene layout and recorded dialogue across cuts. Save a favorite face or voice as a Character, create downloadable 3D models, and choose the right finishing path for Seedance drafts and swaps."
+        "release_notes": "Films reuse character sheets and scene frames. Choose a speaking workflow by shot and language, find stock voices by accent, correct a pronunciation on the speech card, and find visual references for a set. Includes updated motion, swaps and 3D workflows.",
+        "translations": {
+          "de-DE": {
+            "subtitle": "Videos und Voiceovers",
+            "description": "Verwandle ein Produktfoto in eine Anzeige oder ein Skript in einen Kurzfilm mit mehreren Einstellungen. Erstelle Bilder, animiere Szenen und ergänze Musik, Untertitel oder einen gesprochenen Kommentar in ChatGPT.\n\nErstelle und bestätige Referenzbilder vor der Videogenerierung, um konsistentere Ergebnisse zu erzielen. Erstelle aus freigegebenen Fotos oder einer fiktiven Beschreibung einen wiederverwendbaren Avatar und ein Charakterblatt, speichere sie als Charakter und nutze sie szenenübergreifend. Schreibe Skripte und Bildschirmtexte in deiner Sprache. Teste und speichere mit ElevenLabs oder Cartesia einen mit Einwilligung erstellten Stimmenklon, sofern das Modell und die gewünschte Sprache ihn unterstützen."
+          },
+          "es-419": {
+            "subtitle": "Crea videos y voces en off",
+            "description": "Convierte una foto de producto en un anuncio o un guion en un cortometraje de varias tomas. Crea imágenes, anima escenas y agrega música, subtítulos o narración en ChatGPT.\n\nPara obtener videos más consistentes, crea y aprueba imágenes de referencia antes de generar los clips. Diseña un avatar y una hoja de personaje reutilizables a partir de fotos aprobadas o un boceto conceptual, guárdalos como Personaje y vuelve a usarlos en distintas escenas. Escribe guiones y subtítulos en pantalla en tu propio idioma. Prueba y guarda un clon de voz autorizado con ElevenLabs o Cartesia cuando el modelo y el idioma seleccionados sean compatibles."
+          },
+          "es-ES": {
+            "subtitle": "Crea vídeos y voces en off",
+            "description": "Convierte una foto de producto en un anuncio o un guion en un cortometraje de varios planos. Crea imágenes, anima escenas y añade música, subtítulos o narración en ChatGPT.\n\nPara lograr vídeos más coherentes, crea y aprueba imágenes de referencia antes de generar los clips. Diseña un avatar y una ficha de personaje reutilizables a partir de fotos aprobadas o una descripción conceptual, guárdalos como Personaje y vuelve a usarlos en diferentes escenas. Escribe guiones y subtítulos en pantalla en tu propio idioma. Prueba y guarda una clonación de voz autorizada con ElevenLabs o Cartesia siempre que el modelo y el idioma elegidos lo admitan."
+          },
+          "fr-FR": {
+            "subtitle": "Vidéos et voix off",
+            "description": "Transformez une photo de produit en publicité ou un scénario en court métrage de plusieurs plans. Créez des images, animez des scènes et ajoutez de la musique, des sous-titres ou une voix off dans ChatGPT.\n\nPour des vidéos plus cohérentes, créez et validez des images de référence avant de générer des clips. Concevez un avatar et une fiche de personnage réutilisables à partir de photos approuvées ou d'un brief créatif, enregistrez-les en tant que Personnage, puis réutilisez-les dans vos scènes. Rédigez vos scénarios et sous-titres directement dans votre langue. Testez et enregistrez un clone vocal consenti avec ElevenLabs ou Cartesia lorsque le modèle et la langue parlée le permettent."
+          },
+          "pt-BR": {
+            "subtitle": "Crie vídeos e narrações",
+            "description": "Transforme uma foto de produto em anúncio ou um roteiro em um curta com várias tomadas. Crie imagens, anime cenas e adicione música, legendas ou narração no ChatGPT.\n\nPara gerar vídeos mais consistentes, crie e aprove imagens de referência antes de gerar os clipes. Monte um avatar e uma ficha de personagem reutilizáveis a partir de fotos aprovadas ou de um briefing fictício, salve como Personagem e reutilize em diferentes cenas. Escreva roteiros e legendas na tela no seu idioma. Teste e salve uma clonagem de voz autorizada com ElevenLabs ou Cartesia quando houver suporte do modelo e do idioma selecionados."
+          },
+          "it-IT": {
+            "subtitle": "Crea video e voci narranti",
+            "description": "Trasforma una foto di prodotto in una pubblicità o una sceneggiatura in un cortometraggio con più inquadrature. Crea immagini, anima le scene e aggiungi musica, sottotitoli o una voce narrante in ChatGPT.\n\nPer ottenere video più coerenti, crea e approva le immagini di riferimento prima di generare i filmati. Realizza un avatar e una scheda personaggio riutilizzabili da foto approvate o dalla descrizione di un personaggio fittizio, salvali come Personaggio e riutilizzali in varie scene. Scrivi script e sottotitoli a schermo nella tua lingua. Testa e salva un clone vocale autorizzato con ElevenLabs o Cartesia se il modello e la lingua parlata lo supportano."
+          },
+          "ja-JP": {
+            "subtitle": "動画とナレーションを作成",
+            "description": "ChatGPT で商品写真から広告を、脚本から複数のカットをつないだ短編映画を作れます。画像を作って動きをつけ、音楽や字幕、ナレーションを加えられます。\n\nより一貫性のある動画を作成するには、クリップを生成する前に参照画像を生成して承認します。承認された写真や設定資料から再利用可能なアバターとキャラクターシートを作成して「キャラクター」として保存し、複数のシーンで使い回せます。スクリプトや画面上の字幕はお好みの言語で作成可能です。選択したモデルと言語が対応している場合は、同意を得た音声クローンをElevenLabsやCartesiaでテストして保存できます。"
+          },
+          "ko-KR": {
+            "subtitle": "동영상 및 내레이션 제작",
+            "description": "ChatGPT에서 제품 사진으로 광고를 만들거나 대본을 여러 컷으로 구성된 단편 영화로 만드세요. 이미지를 만들고 장면에 움직임을 더한 다음 음악, 자막, 내레이션을 넣을 수 있습니다.\n\n일관성 있는 영상을 만들려면 클립을 생성하기 전에 참조 이미지를 먼저 만들고 승인하세요. 승인된 사진이나 가상의 브리프를 바탕으로 재사용 가능한 아바타와 캐릭터 시트를 제작해 '캐릭터'로 저장한 뒤 여러 장면에서 활용할 수 있습니다. 스크립트와 화면 자막은 사용자의 언어로 작성하세요. 선택한 모델과 음성 언어가 지원하는 경우 ElevenLabs 또는 Cartesia를 통해 동의된 음성 복제를 테스트하고 저장할 수 있습니다."
+          },
+          "zh-CN": {
+            "subtitle": "制作视频和旁白",
+            "description": "在 ChatGPT 中，用产品照片制作广告，或将剧本拍成由多个镜头组成的短片。生成图像，让场景动起来，再配上音乐、字幕和旁白。\n\n为了让视频效果更连贯，请在生成片段前先创建并确认参考图。您可以根据已确认的照片或创意构想，制作可复用的头像和角色图纸并保存为“角色”，以便在不同场景中反复使用。脚本和屏幕字幕均支持使用您选择的语言编写。在所选模型和目标语言支持的情况下，您还可以通过 ElevenLabs 或 Cartesia 测试并保存获得授权的声音克隆。"
+          },
+          "zh-TW": {
+            "subtitle": "製作影片和旁白",
+            "description": "在 ChatGPT 中，把商品照片做成廣告，或將劇本製作成由多個鏡頭組成的短片。產生圖像、讓場景動起來，再加入音樂、字幕和旁白。\n\n為了製作更具一致性的影片，請在生成剪輯前先建立並確認參考圖片。您可以根據已核可的照片或創意設定，打造可重複使用的頭像與角色圖紙並儲存為「角色」，方便在不同場景中再次使用。劇本和螢幕字幕皆支援以您的語言撰寫。在所選模型與目標語言支援的情況下，您還能透過 ElevenLabs 或 Cartesia 測試並儲存獲得授權的聲音複製。"
+          },
+          "ar": {
+            "subtitle": "إنشاء فيديو وتعليق صوتي",
+            "description": "حوّل صورة منتج إلى إعلان أو نصًا إلى فيلم قصير متعدد اللقطات في ChatGPT. أنشئ الصور وحرّك المشاهد وأضف الموسيقى والترجمة والتعليق الصوتي.\n\nللحصول على مقاطع فيديو أكثر اتساقًا، أنشئ الصور المرجعية واعتمدها قبل توليد المقاطع. صمّم صورة رمزية وبطاقة شخصية قابلة للاستخدام من الصور المعتمدة أو من وصف خيالي، ثم احفظها كـ \"شخصية\" لإعادة استخدامها عبر المشاهد المختلفة. اكتب النصوص والتسميات التوضيحية على الشاشة بلغتك. اختبر نسخة صوتية مستنسخة بموافقة صاحب الصوت واحفظها عبر ElevenLabs أو Cartesia عندما يدعم النموذج واللغة المختارة ذلك."
+          },
+          "hi-IN": {
+            "subtitle": "वीडियो और वॉइसओवर बनाएँ",
+            "description": "ChatGPT में किसी उत्पाद की फ़ोटो से विज्ञापन या स्क्रिप्ट से कई शॉट वाली छोटी फ़िल्म बनाएँ। चित्र बनाएँ, दृश्यों को गति दें और संगीत, सबटाइटल या वॉइसओवर जोड़ें।\n\nअधिक सटीक और एकसमान वीडियो बनाने के लिए, क्लिप जनरेट करने से पहले संदर्भ छवियों को बनाएं और स्वीकृत करें। स्वीकृत तस्वीरों या किसी काल्पनिक विवरण से एक पुन: उपयोग योग्य अवतार और कैरेक्टर शीट बनाएं, इसे 'कैरेक्टर' के रूप में सहेजें और विभिन्न दृश्यों में इसका उपयोग करें। अपनी भाषा में स्क्रिप्ट और ऑन-स्क्रीन कैप्शंस लिखें। चुने गए मॉडल और बोली जाने वाली भाषा के समर्थित होने पर ElevenLabs या Cartesia के साथ अनुमति-प्राप्त वॉइस क्लोन का परीक्षण करें और उसे सहेजें।"
+          },
+          "am": {
+            "subtitle": "ቪዲዮና ትረካ ይፍጠሩ",
+            "description": "በChatGPT ውስጥ የምርት ፎቶን ወደ ማስታወቂያ፣ ወይም ስክሪፕትን ወደ አጭር ፊልም ይቀይሩ። ምስሎችን ይፍጠሩ፣ ትዕይንቶችን ያንቀሳቅሱ፣ ሙዚቃ፣ የጽሑፍ መግለጫ ወይም ትረካ ያክሉ።\n\nየበለጠ ተከታታይነት ያላቸው ቪዲዮዎችን ለማዘጋጀት ክሊፖችን ከመፍጠርዎ በፊት የማጣቀሻ ምስሎችን ይፍጠሩ እና ያጽድቁ። ከጸደቁ ፎቶዎች ወይም ከምናባዊ መግለጫዎች እንደገና ጥቅም ላይ ሊውል የሚችል አቫታር እና የባህሪ መግለጫ ወረቀት በመስራት እንደ \"ባህሪ\" አድርገው ያስቀምጡት፤ በልዩ ልዩ ትዕይንቶች ላይም መልሰው ይጠቀሙበት። ስክሪፕቶችን እና በስክሪኑ ላይ የሚታዩ ጽሑፎችን በራስዎ ቋንቋ ይጻፉ። የተመረጠው ሞዴል እና የሚነገረው ቋንቋ ሲደግፉት በፈቃደኝነት የተዘጋጀ የድምፅ ክሎንን በElevenLabs ወይም በCartesia ይሞክሩ እና ያስቀምጡ።"
+          },
+          "bg": {
+            "subtitle": "Видео и дикторски глас",
+            "description": "Превърнете продуктова снимка в реклама или сценарий в късометражен филм с няколко кадъра. Създавайте изображения, анимирайте сцени и добавяйте музика, субтитри или дикторски глас в ChatGPT.\n\nЗа по-последователни видеоклипове, създайте и одобрете референтни изображения, преди да генерирате самите клипове. Създайте многократно използваем аватар и профил на героя от одобрени снимки или творческо задание, запазете го като „Герой“ и го използвайте в различни сцени. Пишете сценарии и субтитри на вашия собствен език. Тествайте и запазете клониран глас с дадено съгласие чрез ElevenLabs или Cartesia, когато избраният модел и говорим език го поддържат."
+          },
+          "bn": {
+            "subtitle": "ভিডিও ও ভয়েসওভার তৈরি করুন",
+            "description": "ChatGPT-তে পণ্যের ছবি থেকে বিজ্ঞাপন বা চিত্রনাট্য থেকে একাধিক শটের স্বল্পদৈর্ঘ্য চলচ্চিত্র তৈরি করুন। ছবি তৈরি করুন, দৃশ্যে গতি আনুন এবং সংগীত, সাবটাইটেল বা ধারাভাষ্য যোগ করুন।\n\nআরও সামঞ্জস্যপূর্ণ ভিডিও তৈরির জন্য ক্লিপ তৈরি করার আগে রেফারেন্স ছবি তৈরি এবং অনুমোদন করুন। অনুমোদিত ছবি বা কাল্পনিক বিবরণ থেকে পুনরায় ব্যবহারযোগ্য অবতার এবং চরিত্র তৈরি করে তা 'Character' হিসেবে সংরক্ষণ করুন এবং বিভিন্ন দৃশ্যে ব্যবহার করুন। আপনার নিজস্ব ভাষায় স্ক্রিপ্ট এবং স্ক্রিন ক্যাপশন লিখুন। নির্বাচিত মডেল এবং ভাষা সমর্থন করলে ElevenLabs বা Cartesia-এর মাধ্যমে অনুমোদিত ভয়েস ক্লোন পরীক্ষা ও সংরক্ষণ করুন।"
+          },
+          "bs": {
+            "subtitle": "Video i naracija",
+            "description": "Pretvorite fotografiju proizvoda u oglas ili scenarij u kratki film s više kadrova. Kreirajte slike, animirajte scene i dodajte muziku, titlove ili naraciju u ChatGPT-u.\n\nZa dosljednije videozapise, kreirajte i odobrite referentne slike prije generisanja samih snimaka. Napravite višekratni avatar i profil lika na osnovu odobrenih fotografija ili idejnog nacrta, sačuvajte ga kao Lik te ga ponovo koristite u različitim scenama. Pišite scenarije i titlove na ekranu na svom jeziku. Testirajte i sačuvajte odobreni klon glasa putem platformi ElevenLabs ili Cartesia kada izabrani model i govorni jezik to podržavaju."
+          },
+          "ca": {
+            "subtitle": "Crea vídeos i veus en off",
+            "description": "Converteix una foto de producte en un anunci o un guió en un curtmetratge amb diversos plans. Crea imatges, anima escenes i afegeix música, subtítols o veu en off al ChatGPT.\n\nPer obtenir vídeos més coherents, crea i aprova imatges de referència abans de generar clips. Construeix un avatar reutilitzable i una fitxa de personatge a partir de fotos aprovades o d'una descripció fictícia, desa'ls com a Personatge i torna'ls a utilitzar en diferents imatges i escenes. Redacta guions i subtítols a la pantalla en el teu idioma. Prova i desa un clon de veu autoritzat amb ElevenLabs o Cartesia quan el model triat i la llengua parlada ho permetin."
+          },
+          "cs": {
+            "subtitle": "Videa a komentáře",
+            "description": "Proměňte fotku produktu v reklamu nebo scénář v krátký film s několika záběry. V ChatGPT můžete vytvářet obrázky, animovat scény a přidat hudbu, titulky nebo mluvený komentář.\n\nPro dosažení konzistentnějších videí nejprve vytvořte a schvalte referenční obrázky, než začnete generovat klipy. Vytvořte opakovaně použitelný avatar a kartu postavy ze schválených fotografií nebo fiktivního zadání, uložte je jako Postavu a používejte napříč obrázky i scénami. Pište scénáře a titulky na obrazovce ve svém jazyce. Pokud to zvolený model a mluvený jazyk podporují, otestujte a uložte schválený hlasový klon pomocí ElevenLabs nebo Cartesia."
+          },
+          "da": {
+            "subtitle": "Lav videoer og speak",
+            "description": "Lav et produktfoto om til en annonce eller et manuskript til en kortfilm med flere indstillinger. Skab billeder, animér scener, og tilføj musik, undertekster eller speak i ChatGPT.\n\nFor at skabe mere ensartede videoer skal du oprette og godkende referencebilleder, før du genererer klip. Byg en genanvendelig avatar og et figurark ud fra godkendte fotos eller et fiktivt oplæg, gem det som en Figur, og genbrug det på tværs af billeder og scener. Skriv manuskripter og undertekster på dit eget sprog. Test og gem en godkendt stemmeklon med ElevenLabs eller Cartesia, når den valgte model og det talte sprog understøtter det."
+          },
+          "el": {
+            "subtitle": "Βίντεο και αφήγηση",
+            "description": "Μετατρέψτε μια φωτογραφία προϊόντος σε διαφήμιση ή ένα σενάριο σε ταινία μικρού μήκους με πολλά πλάνα. Δημιουργήστε εικόνες, δώστε κίνηση στις σκηνές και προσθέστε μουσική, υπότιτλους ή αφήγηση στο ChatGPT.\n\nΓια πιο ομοιόμορφα βίντεο, δημιουργήστε και εγκρίνετε εικόνες αναφοράς πριν από τη δημιουργία κλιπ. Φτιάξτε ένα επαναχρησιμοποιήσιμο αβάταρ και ένα φύλλο χαρακτήρα από εγκεκριμένες φωτογραφίες ή ένα εικονικό σενάριο, αποθηκεύστε τα ως Χαρακτήρα και χρησιμοποιήστε τα ξανά σε διάφορες εικόνες και σκηνές. Γράψτε σενάρια και υπότιτλους οθόνης στη γλώσσα σας. Δοκιμάστε και αποθηκεύστε μια εγκεκριμένη κλωνοποίηση φωνής με το ElevenLabs ή το Cartesia, εφόσον το υποστηρίζουν το επιλεγμένο μοντέλο και η γλώσσα."
+          },
+          "et": {
+            "subtitle": "Videod ja jutustajahääl",
+            "description": "Tee tootefotost reklaam või stsenaariumist mitme võttega lühifilm. Loo ChatGPT-s pilte, pane stseenid liikuma ning lisa muusikat, subtiitreid või jutustajahääl.\n\nÜhtlasemate videote saamiseks loo ja kinnita võrdluspildid enne klippide genereerimist. Loo kinnitatud fotode või väljamõeldud kirjelduse põhjal taaskasutatav avatar ja tegelaskaart, salvesta see Tegelasena ning kasuta seda uuesti erinevates piltides ja stseenides. Kirjuta stsenaariume ja ekraanisubtiitreid oma emakeeles. Testi ja salvesta nõusolekuga loodud häälekloon ElevenLabsi või Cartesiaga, kui valitud mudel ja kõneldav keel seda toetavad."
+          },
+          "fi": {
+            "subtitle": "Videoita ja selostuksia",
+            "description": "Tee tuotekuvasta mainos tai käsikirjoituksesta usean otoksen lyhytelokuva. Luo kuvia, animoi kohtauksia ja lisää musiikkia, tekstityksiä tai selostus ChatGPT:ssä.\n\nLuo ja hyväksy viitekuvat ennen videoleikkeiden luomista, jotta videoista tulee yhtenäisempiä. Rakenna uudelleenkäytettävä hahmo ja hahmokortti hyväksytyistä kuvista tai kuvitteellisesta kuvauksesta, tallenna se Hahmona ja käytä sitä uudelleen eri kuvissa ja kohtauksissa. Kirjoita käsikirjoituksia ja tekstityksiä omalla kielelläsi. Testaa ja tallenna luvallinen ääniklooni ElevenLabsin tai Cartesian avulla, kun valittu malli ja puhuttu kieli tukevat sitä."
+          },
+          "fr-CA": {
+            "subtitle": "Vidéos et narration",
+            "description": "Transformez une photo de produit en publicité ou un scénario en court métrage de plusieurs plans. Dans ChatGPT, créez des images, animez des scènes et ajoutez de la musique, des sous-titres ou une narration.\n\nPour des vidéos plus cohérentes, créez et approuvez des images de référence avant de générer des extraits. Concevez un avatar et une fiche de personnage réutilisables à partir de photos approuvées ou d'un descriptif fictif, enregistrez le tout en tant que Personnage, puis réutilisez-le dans vos images et vos scènes. Rédigez des scénarios et des sous-titres à l'écran dans votre langue. Testez et enregistrez un clone vocal autorisé avec ElevenLabs ou Cartesia lorsque le modèle choisi et la langue parlée le permettent."
+          },
+          "gu": {
+            "subtitle": "વિડિયો અને વૉઇસઓવર",
+            "description": "ChatGPTમાં પ્રોડક્ટના ફોટામાંથી જાહેરાત અથવા સ્ક્રિપ્ટમાંથી અનેક શૉટ ધરાવતી ટૂંકી ફિલ્મ બનાવો. છબીઓ બનાવો, દૃશ્યોને ગતિ આપો અને સંગીત, સબટાઇટલ કે વૉઇસઓવર ઉમેરો.\n\nવધુ સાતત્યપૂર્ણ વિડિઓ માટે, ક્લિપ જનરેટ કરતા પહેલાં સંદર્ભ છબીઓ બનાવો અને તેમને મંજૂર કરો. મંજૂર થયેલા ફોટા અથવા કાલ્પનિક વિગતો પરથી પુનઃઉપયોગી અવતાર અને કેરેક્ટર શીટ તૈયાર કરો, તેને કેરેક્ટર તરીકે સાચવો અને અલગ-અલગ છબીઓ તેમજ દ્રશ્યોમાં તેનો ફરી ઉપયોગ કરો. તમારી ભાષામાં સ્ક્રિપ્ટ અને ઓન-સ્ક્રીન કૅપ્શન લખો. પસંદ કરેલ મોડેલ અને બોલાતી ભાષા સમર્થન આપતી હોય ત્યારે ElevenLabs અથવા Cartesia સાથે મંજૂર કરેલ વોઇસ ક્લોનનું પરીક્ષણ કરો અને તેને સાચવો."
+          },
+          "hr": {
+            "subtitle": "Videozapisi i naracija",
+            "description": "Pretvorite fotografiju proizvoda u oglas ili scenarij u kratki film s više kadrova. Izradite slike, animirajte scene te dodajte glazbu, titlove ili naraciju u ChatGPT-u.\n\nZa dosljednije videozapise stvorite i odobrite referentne slike prije generiranja isječaka. Izradite višekratni avatar i karticu lika od odobrenih fotografija ili fiktivnog opisa, spremite to kao Lik te ih ponovno upotrijebite u slikama i scenama. Pišite scenarije i titlove na zaslonu na svom jeziku. Testirajte i spremite odobreni klon glasa pomoću usluga ElevenLabs ili Cartesia kada to podržavaju odabrani model i govorni jezik."
+          },
+          "hu": {
+            "subtitle": "Videók és narráció",
+            "description": "Készíts termékfotóból hirdetést, forgatókönyvből pedig több beállításból álló rövidfilmet. A ChatGPT-ben képeket hozhatsz létre, jeleneteket animálhatsz, és zenét, feliratot vagy narrációt adhatsz hozzájuk.\n\nA kiegyensúlyozottabb videók érdekében a klipek generálása előtt hozzon létre és hagyjon jóvá referenciaképeket. Építsen fel egy újrahasználható avatárt és karakterlapot a jóváhagyott fotókból vagy egy fiktív leírásból, mentse el Karakterként, majd használja fel újra a különféle képeken és jelenetekben. Írjon forgatókönyveket és képernyőn megjelenő feliratokat a saját nyelvén. Teszteljen és mentsen el egy hozzájárulással létrehozott hangklónt az ElevenLabs vagy a Cartesia segítségével, ha a kiválasztott modell és a beszélt nyelv támogatja azt."
+          },
+          "hy": {
+            "subtitle": "Տեսանյութեր և ձայնապատում",
+            "description": "ChatGPT-ում ապրանքի լուսանկարը վերածեք գովազդի, իսկ սցենարը՝ մի քանի կադրից բաղկացած կարճամետրաժ ֆիլմի։ Ստեղծեք պատկերներ, շարժում հաղորդեք տեսարաններին և ավելացրեք երաժշտություն, ենթագրեր կամ ձայնապատում։\n\nԱվելի համաչափ տեսանյութեր ստանալու համար ստեղծեք և հաստատեք հղումային պատկերները նախքան տեսահոլովակներ գեներացնելը: Ստեղծեք բազմակի օգտագործման ավատար և կերպարի թերթիկ հաստատված լուսանկարներից կամ հնարովի նկարագրությունից, պահպանեք այն որպես Կերպար և օգտագործեք պատկերներում ու տեսարաններում: Գրեք սցենարներ և էկրանային ենթագրեր ձեր լեզվով: Փորձարկեք և պահպանեք համաձայնեցված ձայնային կլոն ElevenLabs-ի կամ Cartesia-ի միջոցով, եթե ընտրված մոդելը և խոսակցական լեզուն աջակցում են դրան։"
+          },
+          "id": {
+            "subtitle": "Buat video dan narasi",
+            "description": "Ubah foto produk menjadi iklan atau naskah menjadi film pendek dengan beberapa pengambilan gambar. Buat gambar, hidupkan adegan, lalu tambahkan musik, takarir, atau narasi di ChatGPT.\n\nUntuk video yang lebih konsisten, buat dan setujui gambar referensi sebelum membuat klip. Buat avatar dan lembar karakter yang dapat digunakan kembali dari foto terverifikasi atau deskripsi fiksi, simpan sebagai Karakter, lalu gunakan kembali di berbagai gambar dan adegan. Tulis skrip dan teks di layar dalam bahasa Anda. Uji dan simpan klon suara berizin menggunakan ElevenLabs atau Cartesia jika model dan bahasa lisan yang dipilih mendukungnya."
+          },
+          "is": {
+            "subtitle": "Myndskeið og talsetning",
+            "description": "Breyttu vörumynd í auglýsingu eða handriti í stuttmynd með mörgum skotum. Búðu til myndir, hreyfðu atriði og bættu við tónlist, skjátexta eða talsetningu í ChatGPT.\n\nTil að fá samræmdari myndbönd skaltu búa til og samþykkja viðmiðunarmyndir áður en þú býrð til myndskeið. Búðu til endurnýtanlega persónumynd og persónublað úr samþykktum ljósmyndum eða skálduðum lýsingum, vistaðu það sem Persónu og notaðu aftur í ólíkum myndum og atriðum. Skrifaðu handrit og texta á skjánum á þínu eigin tungumáli. Prófaðu og vistaðu samþykkta raddhermingu með ElevenLabs eða Cartesia þegar valið líkan og talað tungumál styðja það."
+          },
+          "ka": {
+            "subtitle": "ვიდეოები და გახმოვანება",
+            "description": "ChatGPT-ში პროდუქტის ფოტო რეკლამად აქციეთ, სცენარი კი რამდენიმე კადრისგან შემდგარ მოკლემეტრაჟიან ფილმად. შექმენით სურათები, აამოძრავეთ სცენები და დაამატეთ მუსიკა, სუბტიტრები ან გახმოვანება.\n\nუფრო თანმიმდევრული ვიდეოების შესაქმნელად, კლიპების გენერირებამდე შექმენით და დაამტკიცეთ საკონტროლო გამოსახულებები. შექმენით მრავალჯერადი გამოყენების ავატარი და პერსონაჟის ბარათი დამტკიცებული ფოტოებიდან ან გამოგონილი აღწერილობიდან, შეინახეთ იგი პერსონაჟის სახით და გამოიყენეთ სხვადასხვა გამოსახულებასა და სცენაში. დაწერეთ სცენარები და ეკრანის სუბტიტრები თქვენს ენაზე. შეამოწმეთ და შეინახეთ ნებართვით შექმნილი ხმის კლონი ElevenLabs-ის ან Cartesia-ს მეშვეობით, თუ არჩეული მოდელი და სასაუბრო ენა ამის საშუალებას იძლევა."
+          },
+          "kk": {
+            "subtitle": "Бейне және дыбыстау",
+            "description": "ChatGPT ішінде өнімнің фотосынан жарнама немесе сценарийден бірнеше кадрдан тұратын қысқаметражды фильм жасаңыз. Сурет жасап, көріністерге қозғалыс беріңіз және музыка, субтитр немесе дауыс қосыңыз.\n\nБейнелердің бірізділігін қамтамасыз ету үшін клиптерді жасамас бұрын анықтамалық суреттерді жасап, бекітіңіз. Бекітілген фотосуреттерден немесе ойдан шығарылған сипаттамадан қайта пайдалануға болатын аватар мен кейіпкер парағын құрастырып, оны Кейіпкер ретінде сақтаңыз және әртүрлі суреттер мен сахналарда қайта қолданыңыз. Сценарийлер мен экрандағы субтитрлерді өз тіліңізде жазыңыз. Таңдалған модель мен сөйлеу тілі қолдаған жағдайда, ElevenLabs немесе Cartesia арқылы келісілген дауыс клонын тексеріп, сақтаңыз."
+          },
+          "kn": {
+            "subtitle": "ವೀಡಿಯೊ ಮತ್ತು ನಿರೂಪಣೆ",
+            "description": "ChatGPT ಯಲ್ಲಿ ಉತ್ಪನ್ನದ ಫೋಟೋದಿಂದ ಜಾಹೀರಾತು ಅಥವಾ ಸ್ಕ್ರಿಪ್ಟ್‌ನಿಂದ ಹಲವು ಶಾಟ್‌ಗಳ ಕಿರುಚಿತ್ರ ರಚಿಸಿ. ಚಿತ್ರಗಳನ್ನು ತಯಾರಿಸಿ, ದೃಶ್ಯಗಳಿಗೆ ಚಲನೆ ನೀಡಿ ಮತ್ತು ಸಂಗೀತ, ಉಪಶೀರ್ಷಿಕೆ ಅಥವಾ ನಿರೂಪಣೆ ಸೇರಿಸಿ.\n\nಹೆಚ್ಚು ಸತತವಿರುವ ವೀಡಿಯೊಗಳಿಗಾಗಿ, ಕ್ಲಿಪ್‌ಗಳನ್ನು ರಚಿಸುವ ಮೊದಲು ಉಲ್ಲೇಖದ ಚಿತ್ರಗಳನ್ನು ರಚಿಸಿ ಮತ್ತು ಅನುಮೋದಿಸಿ. ಅನುಮೋದಿತ ಫೋಟೋಗಳು ಅಥವಾ ಕಾಲ್ಪನಿಕ ವಿವರಣೆಯಿಂದ ಮರುಬಳಕೆ ಮಾಡಬಹುದಾದ ಅವತಾರ ಮತ್ತು ಪಾತ್ರದ ಹಾಳೆಯನ್ನು ತಯಾರಿಸಿ, ಅದನ್ನು 'ಪಾತ್ರ'ವಾಗಿ ಉಳಿಸಿ ಮತ್ತು ವಿವಿಧ ಚಿತ್ರಗಳು ಹಾಗೂ ದೃಶ್ಯಗಳಲ್ಲಿ ಮರುಬಳಕೆ ಮಾಡಿ. ನಿಮ್ಮ ಭಾಷೆಯಲ್ಲಿಯೇ ಸ್ಕ್ರಿಪ್ಟ್‌ಗಳನ್ನು ಮತ್ತು ಆನ್‌-ಸ್ಕ್ರೀನ್ ಶೀರ್ಷಿಕೆಗಳನ್ನು ಬರೆಯಿರಿ. ಆಯ್ಕೆಮಾಡಿದ ಮಾಡೆಲ್ ಮತ್ತು ಮಾತನಾಡುವ ಭಾಷೆ ಬೆಂಬಲಿಸಿದಾಗ ElevenLabs ಅಥವಾ Cartesia ಮೂಲಕ ಸಮ್ಮತಿಸಿದ ಧ್ವನಿ ಕ್ಲೋನ್ ಅನ್ನು ಪರೀಕ್ಷಿಸಿ ಮತ್ತು ಉಳಿಸಿ."
+          },
+          "lt": {
+            "subtitle": "Vaizdo įrašai ir įgarsinimas",
+            "description": "Produkto nuotrauką paverskite reklama, o scenarijų paverskite kelių kadrų trumpametražiu filmu. Naudodamiesi „ChatGPT“ kurkite vaizdus, animuokite scenas ir pridėkite muzikos, subtitrų ar įgarsinimą.\n\nNorėdami užtikrinti vaizdo įrašų nuoseklumą, prieš kurdami klipus sukurkite ir patvirtinkite pavyzdinius vaizdus. Iš patvirtintų nuotraukų ar aprašymo sukurkite daugkartinį avatarą bei veikėjo aprašą, išsaugokite jį kaip Veikėją ir naudokite kitose scenose. Rašykite scenarijus bei ekrano titrus savo kalba. Kai pasirinktas modelis ir kalba tai palaiko, išbandykite ir išsaugokite leidimą turintį balso kloną naudodami „ElevenLabs“ arba „Cartesia“."
+          },
+          "lv": {
+            "subtitle": "Video un ierunāts teksts",
+            "description": "Pārvērtiet produkta fotoattēlu reklāmā vai scenāriju īsfilmā ar vairākiem kadriem. Veidojiet attēlus, animējiet ainas un pievienojiet mūziku, subtitrus vai ierunātu tekstu lietotnē ChatGPT.\n\nLai iegūtu konsekventākus video, pirms klipu ģenerēšanas izveidojiet un apstipriniet atsauces attēlus. Izveidojiet atkārtoti izmantojamu iemiesojumu un tēla aprakstu no apstiprinātām fotogrāfijām vai apraksta, saglabājiet to kā Tēlu un izmantojiet citos attēlos un skatos. Rakstiet scenārijus un ekrāna titrus savā valodā. Pārbaudiet un saglabājiet apstiprinātu balss klonu ar ElevenLabs vai Cartesia, ja izvēlētais modelis un runātā valoda to atbalsta."
+          },
+          "mk": {
+            "subtitle": "Видеа и нарација",
+            "description": "Претворете фотографија од производ во реклама или сценарио во краток филм со повеќе кадри. Создајте слики, анимирајте сцени и додајте музика, титлови или нарација во ChatGPT.\n\nЗа поусогласени видеа, креирајте и одобрете референтни слики пред да генерирате клипови. Направете аватар и картичка за ликот за повеќекратна употреба од одобрени фотографии или фиктивен опис, зачувајте ги како Лик и користете ги низ повеќе сцени. Пишувајте скрипти и титли на вашиот јазик. Тестирајте и зачувајте одобрен гласовен клон со ElevenLabs или Cartesia кога избраниот модел и говорен јазик го поддржуваат тоа."
+          },
+          "ml": {
+            "subtitle": "വീഡിയോയും വിവരണവും",
+            "description": "ChatGPT-യിൽ ഉൽപ്പന്നത്തിന്റെ ഫോട്ടോയിൽ നിന്ന് പരസ്യമോ തിരക്കഥയിൽ നിന്ന് ഒന്നിലധികം ഷോട്ടുകളുള്ള ഹ്രസ്വചിത്രമോ സൃഷ്ടിക്കുക. ചിത്രങ്ങൾ തയ്യാറാക്കി ദൃശ്യങ്ങൾക്ക് ചലനം നൽകുക. സംഗീതം, സബ്‌ടൈറ്റിൽ, ശബ്ദവിവരണം എന്നിവ ചേർക്കാം.\n\nകൂടുതൽ സ്ഥിരതയുള്ള വീഡിയോകൾക്കായി, ക്ലിപ്പുകൾ നിർമ്മിക്കുന്നതിന് മുമ്പ് റഫറൻസ് ചിത്രങ്ങൾ ഉണ്ടാക്കി അംഗീകരിക്കുക. അംഗീകൃത ഫോട്ടോകളിൽ നിന്നോ വിവര വിവരണത്തിൽ നിന്നോ വീണ്ടും ഉപയോഗിക്കാവുന്ന ഒരു അവതാറും ക്യാരക്ടർ ഷീറ്റും ഉണ്ടാക്കി ഒരു ക്യാരക്ടറായി സേവ് ചെയ്യുക. നിങ്ങളുടെ ഭാഷയിൽ തിരക്കഥകളും സ്ക്രീൻ സബ്‌ടൈറ്റിലുകളും എഴുതുക. തിരഞ്ഞെടുത്ത മോഡലും സംസാരിക്കുന്ന ഭാഷയും പിന്തുണയ്ക്കുമ്പോൾ, സമ്മതമുള്ള ഒരു വോയ്സ് ക്ലോൺ ElevenLabs അല്ലെങ്കിൽ Cartesia ഉപയോഗിച്ച് ടെസ്റ്റ് ചെയ്ത് സേവ് ചെയ്യുക."
+          },
+          "mn": {
+            "subtitle": "Видео ба дуу оруулга",
+            "description": "ChatGPT дээр бүтээгдэхүүний зургаар сурталчилгаа, зохиолоор олон кадртай богино кино бүтээгээрэй. Зураг үүсгэж, дүрсээ хөдөлгөөнд оруулан, хөгжим, хадмал эсвэл тайлбар дуу нэмээрэй.\n\nИлүү жигд видео хийхийн тулд богино бичлэг бэлтгэхээсээ өмнө жишээ зургуудыг үүсгэж баталгаажуулна уу. Баталгаажуулсан зураг эсвэл зохиомол дүрслэлээс ашиглаж болох аватар болон баатрын загварыг бэлтгэж, Дүр болгон хадгалаад бусад хэсэгт дахин ашиглаарай. Зохиол болон дэлгэцийн хадмал орчуулгыг өөрийн хэлээр бичээрэй. Сонгосон загвар болон ярианы хэл дэмжиж байвал ElevenLabs эсвэл Cartesia ашиглан зөвшөөрөгдсөн дуу хоолойн хувилбарыг туршиж хадгалаарай."
+          },
+          "mr": {
+            "subtitle": "व्हिडिओ आणि व्हॉइसओव्हर",
+            "description": "ChatGPT मध्ये उत्पादनाच्या फोटोवरून जाहिरात किंवा पटकथेवरून अनेक शॉट असलेला लघुपट तयार करा. चित्रे तयार करा, दृश्यांना गती द्या आणि संगीत, उपशीर्षके किंवा निवेदन जोडा.\n\nअधिक सुसंगत व्हिडिओंसाठी, क्लिप्स तयार करण्यापूर्वी संदर्भ प्रतिमा तयार करा आणि त्यांना मंजुरी द्या. मंजूर फोटोंवरून किंवा कल्पित वर्णनावरून पुन्हा वापरता येणारा अवतार आणि कॅरेक्टर शीट तयार करा, ते कॅरेक्टर म्हणून सेव्ह करा आणि वेगवेगळ्या दृश्यांमध्ये वापरा. तुमच्या भाषेत स्क्रिप्ट्स आणि ऑन-स्क्रीन कॅप्सन्स लिहा. निवडलेला मॉडेल आणि बोलली जाणारी भाषा सपोर्ट करत असल्यास, ElevenLabs किंवा Cartesia सह संमती असलेला व्हॉइस क्लोन तपासा आणि सेव्ह करा."
+          },
+          "ms": {
+            "subtitle": "Cipta video dan suara latar",
+            "description": "Tukar foto produk menjadi iklan atau skrip menjadi filem pendek dengan beberapa syot. Cipta imej, hidupkan babak dan tambah muzik, sari kata atau suara latar dalam ChatGPT.\n\nUntuk video yang lebih konsisten, cipta dan sahkan imej rujukan sebelum menjana klip. Bina avatar dan helaian watak boleh guna semula daripada foto yang diluluskan atau draf rekaan, simpan sebagai Watak, dan guna semula dalam pelbagai imej dan babak. Tulis skrip dan kapsyen pada skrin dalam bahasa anda. Uji dan simpan klon suara berizin dengan ElevenLabs atau Cartesia apabila model dan bahasa pertuturan yang dipilih menyokongnya."
+          },
+          "my": {
+            "subtitle": "ဗီဒီယိုနှင့် နောက်ခံစကားသံ",
+            "description": "ChatGPT တွင် ကုန်ပစ္စည်းဓာတ်ပုံတစ်ပုံမှ ကြော်ငြာတစ်ခု သို့မဟုတ် ဇာတ်ညွှန်းတစ်ခုမှ အခန်းများစွာပါသော ဇာတ်ကားတိုတစ်ခု ဖန်တီးပါ။ ပုံများဖန်တီးပြီး မြင်ကွင်းများကို လှုပ်ရှားစေကာ တေးဂီတ၊ စာတန်းထိုး သို့မဟုတ် နောက်ခံစကားသံ ထည့်ပါ။\n\nပိုမိုစနစ်ကျသော ဗီဒီယိုများရရှိရန် ကလစ်မထုတ်လုပ်မီ အညွှန်းပုံများကို အရင်ဖန်တီးပြီး အတည်ပြုပါ။ အတည်ပြုထားသော ဓာတ်ပုံ သို့မဟုတ် ဇာတ်ကောင်ဖော်ပြချက်မှ ပြန်သုံးနိုင်သော အဗာတာနှင့် ဇာတ်ကောင်အသေးစိတ်ကို ပြုလုပ်ပြီး ဇာတ်ကောင်အဖြစ် သိမ်းဆည်းပါ။ ဇာတ်ညွှန်းများနှင့် စာတန်းထိုးများကို သင့်ဘာသာစကားဖြင့် ရေးသားပါ။ ရွေးချယ်ထားသော မော်ဒယ်နှင့် ဘာသာစကားက ပံ့ပိုးပါက ခွင့်ပြုချက်ရ အသံတုကို ElevenLabs သို့မဟုတ် Cartesia ဖြင့် စမ်းသပ်သိမ်းဆည်းပါ။"
+          },
+          "nb": {
+            "subtitle": "Lag video og fortellerstemme",
+            "description": "Gjør et produktbilde om til en annonse eller et manus til en kortfilm med flere opptak. Lag bilder, animer scener og legg til musikk, undertekster eller fortellerstemme i ChatGPT.\n\nFor mer konsistente videoer bør du opprette og godkjenne referansebilder før du genererer klipp. Lag en gjenbrukbar avatar og et karakterark fra godkjente bilder eller et konsept, lagre det som en Karakter, og bruk det om igjen i flere scener. Skriv manus og undertekster på ditt eget språk. Test og lagre en stemmeklon laget med samtykke ved hjelp av ElevenLabs eller Cartesia når den valgte modellen og språket støtter det."
+          },
+          "nl": {
+            "subtitle": "Maak video's en voice-overs",
+            "description": "Maak van een productfoto een advertentie of van een script een korte film met meerdere shots. Genereer beelden, animeer scènes en voeg muziek, ondertitels of een voice-over toe in ChatGPT.\n\nMaak en goedkeur referentie-afbeeldingen voordat je clips genereert voor meer consistente video's. Bouw een herbruikbare avatar en een karakterblad van goedgekeurde foto's of een fictieve beschrijving, sla dit op als Personage en gebruik het opnieuw in verschillende scènes. Schrijf scripts en ondertitels in je eigen taal. Test en bewaar een goedgekeurde stemkloon met ElevenLabs of Cartesia als het gekozen model en de gesproken taal dit ondersteunen."
+          },
+          "pa": {
+            "subtitle": "ਵੀਡੀਓ ਅਤੇ ਵੌਇਸਓਵਰ",
+            "description": "ChatGPT ਵਿੱਚ ਉਤਪਾਦ ਦੀ ਫ਼ੋਟੋ ਤੋਂ ਇਸ਼ਤਿਹਾਰ ਜਾਂ ਸਕ੍ਰਿਪਟ ਤੋਂ ਕਈ ਸ਼ਾਟਾਂ ਵਾਲੀ ਛੋਟੀ ਫ਼ਿਲਮ ਬਣਾਓ। ਤਸਵੀਰਾਂ ਬਣਾਓ, ਦ੍ਰਿਸ਼ਾਂ ਵਿੱਚ ਹਰਕਤ ਲਿਆਓ ਅਤੇ ਸੰਗੀਤ, ਉਪਸਿਰਲੇਖ ਜਾਂ ਵੌਇਸਓਵਰ ਸ਼ਾਮਲ ਕਰੋ।\n\nਹੋਰ ਲਗਾਤਾਰ ਵੀਡੀਓਜ਼ ਲਈ, ਕਲਿੱਪ ਬਣਾਉਣ ਤੋਂ ਪਹਿਲਾਂ ਹਵਾਲਾ ਤਸਵੀਰਾਂ ਬਣਾਓ ਅਤੇ ਮਨਜ਼ੂਰ ਕਰੋ। ਮਨਜ਼ੂਰਸ਼ੁਦਾ ਫੋਟੋਆਂ ਜਾਂ ਕਾਲਪਨਿਕ ਵੇਰਵੇ ਤੋਂ ਇੱਕ ਮੁੜ-ਵਰਤੋਂਯੋਗ ਅਵਤਾਰ ਅਤੇ ਪਾਤਰ ਸ਼ੀਟ ਬਣਾਓ, ਇਸਨੂੰ ਪਾਤਰ ਵਜੋਂ ਸੁਰੱਖਿਅਤ ਕਰੋ ਅਤੇ ਵੱਖ-ਵੱਖ ਦ੍ਰਿਸ਼ਾਂ ਵਿੱਚ ਵਰਤੋ। ਆਪਣੀ ਭਾਸ਼ਾ ਵਿੱਚ ਸਕ੍ਰਿਪਟਾਂ ਅਤੇ ਸਕ੍ਰੀਨ 'ਤੇ ਕੈਪਸ਼ਨ ਲਿਖੋ। ਜਦੋਂ ਚੁਣਿਆ ਗਿਆ ਮਾਡਲ ਅਤੇ ਬੋਲੀ ਜਾਣ ਵਾਲੀ ਭਾਸ਼ਾ ਸਮਰਥਨ ਕਰਦੀ ਹੋਵੇ, ਤਾਂ ElevenLabs ਜਾਂ Cartesia ਨਾਲ ਇੱਕ ਮਨਜ਼ੂਰਸ਼ੁਦਾ ਆਵਾਜ਼ ਕਲੋਨ ਦਾ ਟੈਸਟ ਕਰੋ ਅਤੇ ਸੁਰੱਖਿਅਤ ਕਰੋ।"
+          },
+          "pl": {
+            "subtitle": "Twórz filmy i narracje",
+            "description": "Zamień zdjęcie produktu w reklamę lub scenariusz w krótki film złożony z kilku ujęć. Twórz obrazy, animuj sceny i dodawaj muzykę, napisy lub narrację w ChatGPT.\n\nAby uzyskać spójne wideo, utwórz i zatwierdź obrazy referencyjne przed wygenerowaniem klipów. Stwórz wielokrotnego użytku awatar i kartę postaci na podstawie zatwierdzonych zdjęć lub opisu, zapisz jako Postać i używaj w kolejnych scenach. Pisz scenariusze i napisy w swoim języku. Przetestuj i zapisz zatwierdzony klon głosu za pomocą ElevenLabs lub Cartesia, jeśli wybrany model i język na to pozwalają."
+          },
+          "pt-PT": {
+            "subtitle": "Crie vídeos e narrações",
+            "description": "Transforme uma fotografia de produto num anúncio ou um guião numa curta-metragem com vários planos. Crie imagens, anime cenas e adicione música, legendas ou narração no ChatGPT.\n\nPara obter vídeos mais consistentes, crie e aprove imagens de referência antes de gerar os clipes. Crie um avatar e uma ficha de personagem reutilizáveis a partir de fotos aprovadas ou de um resumo fictício, guarde como Personagem e reutilize em várias cenas. Escreva argumentos e legendas no seu idioma. Teste e guarde um clone de voz consentido com a ElevenLabs ou a Cartesia quando o modelo e o idioma selecionados o suportarem."
+          },
+          "ro": {
+            "subtitle": "Creează videoclipuri și voci",
+            "description": "Transformă o fotografie de produs într-o reclamă sau un scenariu într-un scurtmetraj cu mai multe cadre. Creează imagini, animă scene și adaugă muzică, subtitrări sau narațiune în ChatGPT.\n\nPentru videoclipuri mai uniforme, creați și aprobați imagini de referință înainte de a genera clipuri. Construiți un avatar și o fișă de personaj reutilizabile din fotografii aprobate sau din descrierea unui personaj fictiv, salvați-le ca Personaj și reutilizați-le în alte scene. Scrieți scenarii și subtitrări pe ecran în limba dumneavoastră. Testați și salvați un clon vocal cu consimțământ prin ElevenLabs sau Cartesia atunci când modelul și limba vorbită permit acest lucru."
+          },
+          "ru": {
+            "subtitle": "Видео и закадровый голос",
+            "description": "Превратите фотографию продукта в рекламу, а сценарий в короткометражный фильм из нескольких планов. Создавайте изображения, оживляйте сцены и добавляйте музыку, субтитры или закадровый голос в ChatGPT.\n\nЧтобы видео выглядели более цельно, создайте и утвердите референсные изображения перед генерацией роликов. Сделайте персонажа и его карточку на основе одобренных фото или текстового описания, сохраните и используйте повторно в разных сценах. Пишите сценарии и субтитры на своем языке. Протестируйте и сохраните клон голоса с согласия владельца через ElevenLabs или Cartesia, если выбранная модель и язык это поддерживают."
+          },
+          "sk": {
+            "subtitle": "Videá a hovorený komentár",
+            "description": "Premeňte fotografiu produktu na reklamu alebo scenár na krátky film s viacerými zábermi. V ChatGPT môžete vytvárať obrázky, animovať scény a pridať hudbu, titulky či hovorený komentár.\n\nPre konzistentnejšie videá vytvorte a schváľte referenčné obrázky ešte pred generovaním klipov. Vytvorte opakovane použiteľného avatara a kartu postavy zo schválených fotografií alebo z opisu, uložte ich ako Postavu a používajte v rôznych scénach. Píšte scenáre a titulky vo svojom jazyku. Otestujte a uložte odsúhlasený klon hlasu pomocou ElevenLabs alebo Cartesia, ak to zvolený model a hovorený jazyk podporujú."
+          },
+          "sl": {
+            "subtitle": "Videoposnetki in pripoved",
+            "description": "Fotografijo izdelka spremenite v oglas ali scenarij v kratki film z več kadri. V ChatGPT ustvarite slike, animirajte prizore in dodajte glasbo, podnapise ali pripoved.\n\nZa bolj dosledne videoposnetke ustvarite in potrdite referenčne slike, preden ustvarite posnetke. Iz potrjenih fotografij ali izmišljenega opisa sestavite avatar ter list lika, ga shranite kot Lik in znova uporabite v novih slikah ter prizorih. Napišite scenarije in podnapise v svojem jeziku. Preizkusite in shranite odobreno glasovno kloniranje s storitvijo ElevenLabs ali Cartesia, če izbrani model in govorjeni jezik to podpirata."
+          },
+          "so": {
+            "subtitle": "Muuqaal iyo cod duuban",
+            "description": "ChatGPT ku beddel sawirka badeecad xayeysiis, ama qoraal filim gaaban oo ka kooban dhowr muuqaal. Samee sawirro, dhaqdhaqaaq geli muuqaallada oo ku dar muusig, qoraal-hoosaad ama cod sheeko.\n\nSi fiidyowyadu u yeeshaan muuqaal joogto ah, samee oo ansixi sawirro tixraac ah ka hor intaadan samaynin qaybaha. Sawirrada la ansixiyey ama sharaxaad mala-awaal ah ka dhis avatar iyo xaashi jilaa oo dib loo adeegsan karo, kuna kaydi Character si aad mar kale ugu isticmaasho sawirro iyo muuqaallo. Qor qoraallada iyo cinwaannada shaashadda afkaaga. Haddii moodeelka iyo afka lagu hadlayo ay taageeraan, tijaabi oo kaydi cod la nuqulay oo oggolaansho laga haysto adigoo adeegsanaya ElevenLabs ama Cartesia."
+          },
+          "sq": {
+            "subtitle": "Video dhe narracion",
+            "description": "Kthejeni një fotografi produkti në reklamë ose një skenar në film të shkurtër me disa plane. Krijoni imazhe, animoni skena dhe shtoni muzikë, titra ose narracion në ChatGPT.\n\nPër video më të qëndrueshme, krijoni dhe miratoni imazhe reference përpara se të gjeneroni sekuencat. Ndërtoni një avatar dhe një fletë karakteri të ripërdorshme nga fotot e miratuara ose nga një përshkrim imagjinar, ruajeni atë si Karakter dhe përdoreni sërish nëpër imazhe e skena. Shkruani skenarë dhe titra në ekran në gjuhën tuaj. Testoni dhe ruani një klon zëri me pëlqim përmes ElevenLabs ose Cartesia kur modeli i zgjedhur dhe gjuha e folur e mbështesin këtë."
+          },
+          "sr": {
+            "subtitle": "Видео и нарација",
+            "description": "Претворите фотографију производа у оглас или сценарио у кратки филм са више кадрова. Направите слике, анимирајте сцене и додајте музику, титлове или нарацију у ChatGPT-у.\n\nЗа доследније видео-снимке, креирајте и одобрите референтне слике пре генерисања исечака. Направите визуелни лик и опис за вишекратну употребу од одобрених фотографија или измишљеног описа, сачувајте га као Лик и користите га изнова у сликама и сценама. Пишите сценарије и титлове на свом језику. Тестирајте и сачувајте одобрени клон гласа уз ElevenLabs или Cartesia када изабрани модел и говорни језик то подржавају."
+          },
+          "sv": {
+            "subtitle": "Skapa videor och berättarröst",
+            "description": "Gör om ett produktfoto till en annons eller ett manus till en kortfilm med flera tagningar. Skapa bilder, animera scener och lägg till musik, undertexter eller berättarröst i ChatGPT.\n\nSkapa och godkänn referensbilder innan du genererar klipp för att få mer konsekventa videor. Bygg en återanvändbar avatar och karaktärsbeskrivning från godkända foton eller en fiktiv beskrivning, spara den som en Karaktär och återanvänd den i olika bilder och scener. Skriv manus och undertexter på ditt eget språk. Testa och spara en godkänd röstklon med ElevenLabs eller Cartesia när den valda modellen och det talade språket stöder det."
+          },
+          "sw": {
+            "subtitle": "Video na sauti ya usimulizi",
+            "description": "Geuza picha ya bidhaa kuwa tangazo au hati ya filamu kuwa filamu fupi yenye mikato kadhaa. Unda picha, ongeza mwendo kwenye mandhari kisha uweke muziki, manukuu au sauti ya usimulizi katika ChatGPT.\n\nTengeneza na uidhinishe picha za marejeleo kabla ya kutengeneza klipu ili video ziwe na mwonekano thabiti zaidi. Unda avatari na karatasi ya mhusika inayoweza kutumiwa tena kutoka kwa picha zilizoidhinishwa au maelezo ya kubuni, ihifadhi kama Mhusika, kisha uitumie tena kwenye picha na matukio mbalimbali. Andika hati za video na maandishi ya skrini kwa lugha yako. Jaribu na uhifadhi sauti iliyoklonishwa kwa idhini kupitia ElevenLabs au Cartesia wakati modeli uliyochagua na lugha inayozungumzwa vinapokiunga mkono kipengele hicho."
+          },
+          "ta": {
+            "subtitle": "வீடியோவும் பின்னணிக் குரலும்",
+            "description": "ChatGPT-இல் தயாரிப்புப் புகைப்படத்தை விளம்பரமாகவும் திரைக்கதையைப் பல காட்சிகள் கொண்ட குறும்படமாகவும் மாற்றுங்கள். படங்களை உருவாக்கி, காட்சிகளுக்கு இயக்கம் கொடுத்து, இசை, வசன வரிகள் அல்லது பின்னணிக் குரலைச் சேர்க்கலாம்.\n\nஒரே மாதிரியான வீடியோக்களை உருவாக்க, கிளிப்புகளை உருவாக்கும் முன் குறிப்புப் படங்களை உருவாக்கி ஒப்புதல் பெறுங்கள். ஒப்புதல் பெற்ற புகைப்படங்கள் அல்லது கற்பனைக் குறிப்பிலிருந்து மீண்டும் பயன்படுத்தக்கூடிய அவதாரையும் கதாபாத்திரத் தாளையும் உருவாக்கி, அதை கதாபாத்திரமாகச் சேமித்து பல காட்சிகளில் பயன்படுத்துங்கள். உங்கள் மொழியில் திரைக்கதையும் திரையில் தோன்றும் வசனங்களையும் எழுதுங்கள். தேர்ந்தெடுத்த மாதிரியும் பேசப்படும் மொழியும் ஆதரித்தால், அனுமதி பெற்ற குரல் நகலை ElevenLabs அல்லது Cartesia மூலம் சோதித்து சேமிக்கலாம்."
+          },
+          "te": {
+            "subtitle": "వీడియోలు, వాయిస్‌ఓవర్లు",
+            "description": "ChatGPTలో ఉత్పత్తి ఫోటోతో ప్రకటనను లేదా స్క్రిప్ట్‌తో పలు షాట్లు ఉన్న లఘుచిత్రాన్ని రూపొందించండి. చిత్రాలను సృష్టించి, దృశ్యాలకు కదలిక జోడించి, సంగీతం, ఉపశీర్షికలు లేదా వాయిస్‌ఓవర్‌ను చేర్చండి.\n\nమరింత స్థిరమైన వీడియోల కోసం, క్లిప్‌లను రూపొందించే ముందు రిఫరెన్స్ ఇమేజ్‌లను సృష్టించి, ఆమోదించండి. ఆమోదించబడిన ఫోటోలు లేదా ఊహాజనిత వివరణల నుండి మళ్లీ ఉపయోగించగల అవతార్ మరియు క్యారెక్టర్ షీట్‌ను రూపొందించండి, దానిని క్యారెక్టర్‌గా సేవ్ చేయండి మరియు ఇమేజ్‌లు మరియు సీన్‌లలో మళ్లీ ఉపయోగించండి. మీ స్వంత భాషలో స్క్రిప్ట్‌లు మరియు ఆన్-స్క్రీన్ క్యాప్షన్‌లను రాయండి. ఎంచుకున్న మోడల్ మరియు మాట్లాడే భాష మద్దతు ఇచ్చినప్పుడు ElevenLabs లేదా Cartesiaతో సమ్మతించిన వాయిస్ క్లోన్‌ను పరీక్షించి సేవ్ చేయండి."
+          },
+          "th": {
+            "subtitle": "สร้างวิดีโอและเสียงบรรยาย",
+            "description": "เปลี่ยนภาพสินค้าเป็นโฆษณาหรือเปลี่ยนบทเป็นหนังสั้นหลายช็อตใน ChatGPT สร้างภาพ ทำให้ฉากเคลื่อนไหว แล้วเพิ่มเพลง คำบรรยาย หรือเสียงพากย์\n\nสร้างและอนุมัติภาพอ้างอิงก่อนเริ่มสร้างคลิปเพื่อให้วิดีโอมีความต่อเนื่องมากขึ้น สร้างอวตารและเอกสารข้อมูลตัวละครที่นำกลับมาใช้ใหม่ได้จากรูปถ่ายที่ได้รับอนุมัติหรือจากโจทย์สมมติ แล้วบันทึกไว้เป็น ตัวละคร เพื่อนำไปใช้ซ้ำในภาพและฉากต่างๆ เขียนบทและคำซับไตเติลบนหน้าจอเป็นภาษาของคุณ ทดสอบและบันทึกเสียงโคลนที่ได้รับยินยอมแล้วด้วย ElevenLabs หรือ Cartesia เมื่อโมเดลและภาษาพูดที่เลือกรองรับฟังก์ชันนี้"
+          },
+          "tl": {
+            "subtitle": "Gumawa ng video at voice-over",
+            "description": "Gawing patalastas ang larawan ng produkto o maikling pelikulang may ilang kuha ang isang iskrip. Gumawa ng mga larawan, bigyang-galaw ang mga eksena at magdagdag ng musika, subtitle o voice-over sa ChatGPT.\n\nPara sa mas magkakaugnay na video, gumawa at aprubahan muna ang mga larawang sanggunian bago bumuo ng mga clip. Gumawa ng avatar at character sheet na puwedeng magamit muli mula sa mga inaprubahang larawan o kathang-isip na paglalarawan, i-save bilang Character, at gamitin sa iba't ibang larawan at eksena. Sumulat ng script at on-screen captions sa iyong wika. Subukan at i-save ang voice clone na may pahintulot gamit ang ElevenLabs o Cartesia kung sinusuportahan ito ng napiling modelo at wikang ginagamit."
+          },
+          "tr": {
+            "subtitle": "Video ve seslendirme oluştur",
+            "description": "ChatGPT’de bir ürün fotoğrafını reklama, senaryoyu ise birden fazla plandan oluşan kısa filme dönüştürün. Görseller oluşturun, sahneleri canlandırın ve müzik, altyazı veya seslendirme ekleyin.\n\nDaha tutarlı videolar için klip üretmeden önce referans görseller oluşturup onaylayın. Onaylanmış fotoğraflardan veya kurgusal bir özetten tekrar kullanılabilir bir avatar ile karakter sayfası hazırlayın, bunu Karakter olarak kaydedip farklı görsel ve sahnelerde yeniden kullanın. Kendi dilinizde senaryolar ve ekran alt yazıları yazın. Seçilen model ve konuşulan dil desteklediğinde ElevenLabs veya Cartesia ile izinli bir ses klonunu test edip kaydedin."
+          },
+          "uk": {
+            "subtitle": "Відео й закадровий голос",
+            "description": "Перетворіть фото товару на рекламу або сценарій на короткометражний фільм із кількох планів. Створюйте зображення, анімуйте сцени й додавайте музику, субтитри або закадровий голос у ChatGPT.\n\nЩоб отримати цілісніші відео, створюйте та затверджуйте референтні зображення перед генерацією кліпів. Створіть багаторазовий аватар і картку персонажа із затверджених фотографій або опису, збережіть як Персонаж і використовуйте в інших зображеннях та сценах. Пишіть сценарії та наекранні титри своєю мовою. Тестуйте й зберігайте схвалений клон голосу за допомогою ElevenLabs або Cartesia, якщо обрана модель і мова це підтримують."
+          },
+          "ur": {
+            "subtitle": "ویڈیو اور وائس اوور بنائیں",
+            "description": "ChatGPT میں کسی پروڈکٹ کی تصویر سے اشتہار یا اسکرپٹ سے کئی شاٹس پر مشتمل مختصر فلم بنائیں۔ تصاویر بنائیں، مناظر میں حرکت پیدا کریں اور موسیقی، سب ٹائٹل یا وائس اوور شامل کریں۔\n\nمزید یکساں ویڈیوز کے لیے، کلپس بنانے سے پہلے ریفرنس امیجز تخلیق کریں اور انہیں منظور کریں۔ منظور شدہ تصاویر یا ایک فرضی خاکہ سے دوبارہ استعمال کے قابل اوتار اور کریکٹر شیٹ بنائیں، اسے 'کریکٹر' کے طور پر محفوظ کریں اور مختلف تصاویر اور مناظر میں دوبارہ استعمال کریں۔ اپنی زبان میں اسکرپٹس اور آن اسکرین کیپشنز لکھیں۔ جب منتخب کردہ ماڈل اور بولی جانے والی زبان سپورٹ کرتی ہو تو ElevenLabs یا Cartesia کے ساتھ اجازت شدہ وائس کلون کو ٹیسٹ کریں اور محفوظ کریں۔"
+          },
+          "vi": {
+            "subtitle": "Tạo video và lời thuyết minh",
+            "description": "Biến ảnh sản phẩm thành quảng cáo hoặc kịch bản thành phim ngắn có nhiều cảnh quay. Tạo hình ảnh, thêm chuyển động cho cảnh rồi thêm nhạc, phụ đề hoặc lời thuyết minh trong ChatGPT.\n\nĐể video có tính thống nhất cao hơn, hãy tạo và phê duyệt các hình ảnh tham chiếu trước khi tạo clip. Xây dựng avatar và bảng thông tin nhân vật có thể tái sử dụng từ các bức ảnh đã duyệt hoặc bản tóm tắt hư cấu, lưu lại thành Nhân vật và tái sử dụng trên nhiều hình ảnh lẫn phân cảnh. Viết kịch bản và phụ đề trên màn hình bằng ngôn ngữ của bạn. Thử nghiệm và lưu bản sao giọng nói đã được chấp thuận bằng ElevenLabs hoặc Cartesia khi mô hình đã chọn và ngôn ngữ nói hỗ trợ tính năng này."
+          },
+          "zh-HK": {
+            "subtitle": "製作影片及旁白",
+            "description": "在 ChatGPT 內將產品相片製成廣告，或把劇本製作成由多個鏡頭組成的短片。製作圖像、為場景加入動態效果，再配上音樂、字幕及旁白。\n\n如欲製作風格更一致的影片，請在生成剪輯前先建立並確認參考圖片。你可以根據已獲批准的照片或虛構設定，製作可重複使用的頭像與角色設定頁，將其儲存為「角色」，並應用於不同圖片與場景之中。使用你的語言編寫劇本與螢幕字幕。當所選模型與口語語言支援時，即可透過 ElevenLabs 或 Cartesia 測試並儲存獲得授權的聲音複製。"
+          }
+        }
       }
     }
   }

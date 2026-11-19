@@ -38,7 +38,7 @@ Write and review the ad in the user's language. Preserve approved product wordin
 ## Creator and product anchors
 
 - Strongly recommend `creativeclaw-create-avatar` and its Character sheet for a new recurring creator; use `creativeclaw-create-character` to maintain an existing identity.
-- When a Character speaks and the voice is unknown, ask one question: design a new voice from a description (`design_voice`, three auditions), use your own voice (recording plus consent, creativeclaw-clone-voice), or pick a stock voice. If the voice doesn't matter, pick a stock voice and name it. Design auditions use the Character's real lines. In ChatGPT the Voice Studio card saves the choice; read it back from `list_characters` rather than saving again.
+- When a Character speaks and the voice is unknown, ask one question: design a new voice from a description (`design_voice`, three auditions), use your own voice (recording plus consent, creativeclaw-clone-voice), or pick a stock voice. If the voice doesn't matter, pick a stock voice and name it. ElevenLabs and Fish can audition the Character's line. Google chooses its preview text. In ChatGPT the Voice Studio card saves the choice; read it back from `list_characters` rather than saving again.
 - Use approved product references. For supporting stills or packshots, follow `creativeclaw-product-photoshoot`.
 - Maintain the same creator features, wardrobe, product geometry, location logic, and screen direction across shots.
 
