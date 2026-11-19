@@ -20,7 +20,7 @@ Compact orientation, checked 2026-10-06:
 
 An audio reference can guide a newly generated voice without preserving its words, language or timing. It does not make an unverified language reliable. Prompt-language support and a brand's TTS or translation language list do not establish video-dialogue support.
 
-Explain the relevant limitation briefly and recommend prepared speech plus `video/heygen-avatar-6` (`video/minimax-h3-max-lip-sync` before a first credit purchase). Both are driven by the supplied audio, so the language comes from the speech; review the actual result. For HeyGen, choose the audio-driven Avatar 6 route, not generic HeyGen Video 1 native generation. Honor an explicit model choice and explain the proposed change before switching.
+Explain the relevant limitation briefly and recommend prepared speech plus `video/heygen-avatar-6` (`video/minimax-h3-max-lip-sync` when HeyGen is unavailable for the account). Both are driven by the supplied audio, so the language comes from the speech; review the actual result. For HeyGen, choose the audio-driven Avatar 6 route, not generic HeyGen Video 1 native generation. Honor an explicit model choice and explain the proposed change before switching.
 
 ## A cinematic shot with visible dialogue
 

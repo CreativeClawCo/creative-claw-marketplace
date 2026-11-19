@@ -40,7 +40,7 @@ For critical issues, users can also contact [support@creativeclaw.co](mailto:sup
 
 Include the user's intended outcome, what happened, expected behavior, useful reproduction details, model or tool involved, and practical impact. Exclude secrets, credentials, unnecessary personal information, and unsupported guesses.
 
-Describe the quality gap without turning it into a refund or compensation request. Do not infer refund intent or suggest asking for credits back. If the user explicitly wants a refund or compensation, direct them to [support@creativeclaw.co](mailto:support@creativeclaw.co) with the relevant job ID. Still report any concrete underlying quality issue as product feedback, without adding a refund request.
+Describe the quality gap without turning it into a refund or compensation request. Do not infer refund intent or suggest compensation. If the user explicitly wants a refund or compensation, direct them to [support@creativeclaw.co](mailto:support@creativeclaw.co) with the relevant job ID. Still report any concrete underlying quality issue as product feedback, without adding a refund request.
 
 Map the report to the exact schema:
 

@@ -64,7 +64,7 @@ render_html_image({
 2. Pass the user's own images, footage, audio and logos as `reference_assets`, each with a `description` of its role. Import local or attached media first.
 3. To start from an existing project instead of a blank one, also pass it as `project_url` (a public ZIP, such as the `zipUrl` of a ZIP example from `search_examples`) or `project_asset_id` (a ZIP in the workspace). It is unpacked as the starting project and the agent builds on it, keeping its scenes and motion and changing what the brief asks. Pass that project's own `duration`, `width` and `height` unless the user wants them changed. This is how to turn a template into the user's video, or to continue a project the user edited elsewhere.
 4. Set `effort` to what the user asks for: `light` for simple changes and basic videos, `medium` (default) for most videos, `high` for complex or polished work. Higher effort is slower and costs more. Do not change it silently.
-5. `media_budget_credits` caps what the agent may spend on generated media in the turn (default 200). Provide `0` when the user wants no generated media, or a lower number when they set a limit. The agent is told its budget and plans around it.
+5. Use the per-turn media budget field from the current tool schema. Set it to `0` when the user wants no generated media, or to the limit they specify. The agent is told its budget and plans around it.
 6. The call returns a `cloud_project_id` and a turn takes several minutes. The video card follows progress on its own, then plays the video and offers the download and a Request changes box. One call gives one card for the whole turn, so call nothing to wait.
    - In Review mode the turn does not start: the card shows the request (prompt, assets, effort, media budget, estimated cost) and the result says `status: "awaiting_approval"`. Tell the user it is ready to review and that Generate in the card starts it. One call is enough for the request.
    - `check_job` with the `cloud_project_id` as `job_id` is for you, not the user: it returns the state, the video `url`, the agent's summary, the final cost and the media it generated, and shows the user nothing; the video card stays their view. Call it when you need the outcome to answer or continue, never in a loop.
@@ -81,7 +81,7 @@ generate_html_video({
 })
 ```
 
-Each turn, a new video or a change, reserves credits when it starts and settles the real cost when the agent finishes, from the agent's work plus the media it generated. A failed turn is not charged. Tell the user the final cost the result states. For a cost question before starting, use `estimate_generation` with `operation: "html_video"` and `params.method` set to `"generate"`, or `"edit"` for a change.
+The tool reserves the estimated cost at the start of each turn. Its final cost includes the agent's work and any generated media. A failed turn is not charged. Tell the user the final cost the result states. For a cost question before starting, use `estimate_generation` with `operation: "html_video"` and `params.method` set to `"generate"`, or `"edit"` for a change.
 
 Write and render the HTML yourself (next section) only when the user supplied HTML, wants a project rendered exactly as it is, or needs exact control of the code.
 

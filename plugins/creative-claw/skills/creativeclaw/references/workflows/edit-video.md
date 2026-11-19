@@ -45,7 +45,7 @@ When the user says to leave the original video unchanged and add something befor
 4. Concatenate the untouched original and the approved continuation with `merge_media`.
 5. Preserve the original audio on the original span. Add or mix audio only for the new span unless the user requested a broader audio change.
 
-This is a continuation job, not a full-source edit. Do not spend credits regenerating the original timeline. For an original clip longer than the model's source limit, trimming context is expected and does not require splitting the untouched portion into generative segments.
+This is a continuation job, not a full-source edit. Keep the original timeline intact. For an original clip longer than the model's source limit, trimming context is expected and does not require splitting the untouched portion into generative segments.
 
 ## Long edits and exact details
 

@@ -1,6 +1,6 @@
 # Curated examples
 
-`search_examples` browses Creative Claw's curated image, video, and audio examples. Searching and loading are read-only: they spend no credits and create no media.
+`search_examples` browses Creative Claw's curated image, video, and audio examples. Searching and loading only retrieve existing examples.
 
 ## When to search
 

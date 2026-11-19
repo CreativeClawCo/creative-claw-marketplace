@@ -45,7 +45,7 @@ Swap in only people who agreed to it: the user, people who gave permission, or f
 
 Use `swap_video_characters`, not a separate `generate_video`, when the user asks for a Kling 4 swap. It edits the original clip and uses the approved scene previews plus up to eight identity references; each person's photos are bound as one face element. The prepared source and output are 4 to 30 whole seconds at 720p or 1080p. A longer or fractional source is cut without changing speed. The general model's 3-second minimum does not lower Swap's 4-second minimum.
 
-Ask `estimate_generation({ operation: "swap_video_characters", model: "video/kling-4.0-omni", params: { video_url, resolution: "720p" } })` for a free estimate. The price scales with the input length and resolution. Credits are rounded up once per job and settled to actual usage. Do not convert credits to dollars or promise a fixed price without checking the actual inputs. The scene previews are free.
+Ask `estimate_generation({ operation: "swap_video_characters", model: "video/kling-4.0-omni", params: { video_url, resolution: "720p" } })` for a free estimate. The price scales with the input length and resolution. Use the estimate for the actual inputs and report the final cost returned for the job. The scene previews are free.
 
 Kling generates audio, so Swap replaces it with the source soundtrack by default and explicitly mutes silent sources. Timing is checked before delivery, but generative edits can still change motion, identity, camera or cuts. Review the finished result before requesting more. Never switch an existing paid attempt to another engine automatically.
 
@@ -58,7 +58,7 @@ Kling generates audio, so Swap replaces it with the source soundtrack by default
 | A preview has the wrong hair, the original clothes, or a pasted-in look | Adjust that preview (free) with a specific change. A recurring hair problem usually comes from the Character sheet; a better sheet fixes every future swap. |
 | A person's face is tiny, cropped or turned away in every frame | The swap cannot show an identity on a face that never appears. Use a clip where each target's face is visible at least once. |
 | The video swapped one person but not the other | Check that the previews show both and the instructions name both, then inspect where identity breaks during motion. If it is confined to one shot, offer to repair that interval and rejoin the approved footage with its original audio. A new paid render needs authorization. |
-| The render was blocked under the provider's content rules (for example copyrighted audio) | No credits were charged. Rendering the same clip unchanged is likely to be blocked again; try a clip without the protected soundtrack. |
+| The render was blocked under the provider's content rules (for example copyrighted audio) | Check the job result for any charge. Rendering the same clip unchanged is likely to be blocked again; try a clip without the protected soundtrack. |
 | The clip is longer than 30 seconds | Only the first 30 seconds are swapped. Cut the clip into parts and swap each. |
 
 Describe what went wrong in plain words and offer the next step. A failed swap, a refund or an unused budget does not authorize another paid render; adjusting previews is free, a new render needs the user's go-ahead or their press of Generate video.

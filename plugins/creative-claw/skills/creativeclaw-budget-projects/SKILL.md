@@ -11,7 +11,7 @@ For each Creative Claw tool call that exposes it, set the optional `skills_used`
 
 Read [shared execution guidance](references/workflow-basics.md) once per task before using tools.
 
-A budget project is a cost-tracking label for client work, separate from film projects. Each has a display name ("Papercraft Tarot") and a kebab-case slug (`papercraft-tarot`), both unique in the workspace. A generation's cost counts toward the project named on its paid call. Costs are kept in credits; dollar figures are shown at list price, or the member rate for members.
+A budget project is a cost-tracking label for client work, separate from film projects. Each has a display name ("Papercraft Tarot") and a kebab-case slug (`papercraft-tarot`), both unique in the workspace. A generation's cost counts toward the project named on its paid call. Use the totals and units shown in the project.
 
 ## Start or pick a project
 
@@ -36,6 +36,6 @@ A budget project is a cost-tracking label for client work, separate from film pr
 ## Report costs
 
 - For a quick answer, use `list_budget_projects` (all projects with totals) or `list_budget_projects({ budget_project })` (that project's latest generations with cost and output URLs).
-- When the user wants to see it, call `show_budget_project({ budget_project })`. It opens full screen with the total in credits and dollars, who spent what, a row per charged generation (processing work updates live, failed work shows no cost), a media grid, and videos waiting for the user's approval, which they can approve there. Use `tab: "media"` for finished outputs, `tab: "approvals"` for videos waiting for approval, or omit `budget_project` for all projects.
+- When the user wants to see it, call `show_budget_project({ budget_project })`. It opens full screen with the project total, who spent what, a row per charged generation (processing work updates live, failed work shows no cost), a media grid, and videos waiting for the user's approval, which they can approve there. Use `tab: "media"` for finished outputs, `tab: "approvals"` for videos waiting for approval, or omit `budget_project` for all projects.
 - Rename, change notes, or archive a finished project with `update_budget_project`. Changing a slug breaks saved references to the old one, so ask first.
 - Only Creative Claw generations are tracked. Chat or LLM costs are not recorded; never estimate or invent them.

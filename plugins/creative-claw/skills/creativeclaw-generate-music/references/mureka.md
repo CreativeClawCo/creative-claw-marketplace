@@ -6,7 +6,7 @@ Read when selecting or prompting `music/mureka-v9.5`. This reference adapts Skyw
 
 Use Mureka V9.5 for full-length vocal songs, expressive performances, custom or automatic lyrics, and instrumentals. Use Lyria 3.5 for background or image-inspired music; it remains the tool's omitted-model default. Fetch `get_model_params({ model: "music/mureka-v9.5" })` when its schema is missing from the task. If unavailable, explain and offer available alternatives.
 
-Use Creative Claw tools and account credits. The upstream CLI, API-key setup, Mureka 8 recommendation, multi-choice defaults, and automatic generation retries do not apply here. No customer Mureka API key or separate installation is needed.
+Use the connected Creative Claw tools. The upstream CLI, API-key setup, Mureka 8 recommendation, multi-choice defaults, and automatic generation retries do not apply here. No customer Mureka API key or separate installation is needed.
 
 Provide `model`, `prompt`, `lyrics`, and `force_instrumental` directly to `generate_music`, not in `extras`. The live tool and model schemas govern supported inputs.
 
@@ -53,7 +53,7 @@ Supplied-lyrics example:
 }
 ```
 
-To have Mureka write and sing a song, omit `lyrics`, set `force_instrumental: false`, and specify the theme and sung language in `prompt`. This is the 100-credit mode. If the user asks the assistant to draft lyrics first, write them as text and use the supplied-lyrics mode when generation is authorized. Do not switch modes merely to reduce cost when the user explicitly chose automatic lyrics.
+To have Mureka write and sing a song, omit `lyrics`, set `force_instrumental: false`, and specify the theme and sung language in `prompt`. Estimate this mode with the actual request. If the user asks the assistant to draft lyrics first, write them as text and use the supplied-lyrics mode when generation is authorized. Do not switch modes merely to reduce cost when the user explicitly chose automatic lyrics.
 
 ## Completion and revision
 

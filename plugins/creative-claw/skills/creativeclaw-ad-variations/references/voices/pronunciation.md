@@ -4,7 +4,7 @@ IPA and phoneme spelling are a repair tool, not a default. Never add them to a s
 
 ## Repair an existing take
 
-On an eligible completed ElevenLabs single-speaker audio card, choose **Fix pronunciation**, tap the affected words, and add a note such as “stress the first syllable.” **Say it yourself** or **Upload recording** supplies a short pronunciation example. **Redo** regenerates the take in its original voice and settings and can use credits. Compare the versions by ear. Saving a workspace rule is a separate choice after the user approves the sound.
+On an eligible completed ElevenLabs single-speaker audio card, choose **Fix pronunciation**, tap the affected words, and add a note such as “stress the first syllable.” **Say it yourself** or **Upload recording** supplies a short pronunciation example. **Redo** regenerates the take in its original voice and settings as a new generation. Compare the versions by ear. Saving a workspace rule is a separate choice after the user approves the sound.
 
 For another provider, dialogue, or a client without the card, keep the original voice and delivery. If the intended reading is ambiguous, ask for a stressed spelling, rhyme, or a short example. Try the affected phrase in context before redoing long narration. Keep captions and the written script in the original spelling. Use the steps below for a requested repair.
 

@@ -383,7 +383,7 @@ Replace the Character placeholder with an actual UUID from list_characters or cl
 
 ### Pricing and limits
 
-UTF-8 bytes, including inline directions and generated speaker tags, are prorated and rounded up to whole credits. Hebrew, niqqud and other non-ASCII scripts use multiple bytes per character. Estimate the finished request with estimate_generation before a long production.
+UTF-8 bytes, including inline directions and generated speaker tags, determine the estimated cost. Hebrew, niqqud and other non-ASCII scripts use multiple bytes per character. Estimate the finished request with estimate_generation before a long production.
 Request limit: 50,000 UTF-8 bytes.
 
 ### Troubleshooting

@@ -1,6 +1,6 @@
 {
   "name": "app-6a2528e2c49c8191a8015ba5475f177e",
-  "version": "5.7.1",
+  "version": "5.7.2",
   "keywords": [
     "ai video generator",
     "video generation",
@@ -38,7 +38,7 @@
       "interface": {
         "displayName": "Creative Claw",
         "shortDescription": "Create videos & voiceovers",
-        "longDescription": "Turn a product photo into an ad, a script into a short film, or an interview into captioned clips in ChatGPT. Start a film by designing the cast and set. Use the same character sheets and scene images to frame each shot, then animate the shots and assemble a first cut.\n\nGive a recurring Character a voice. Choose a stock voice, design one from a description, or clone your own voice from a clean recording. Get the speaker's permission before cloning someone else's voice. Save a favorite face or voice as a Character and reuse it in later scenes. For dialogue, use a video model that accepts the character's recorded audio.\n\nGenerate and edit images, create product photos or turn reference images into a downloadable 3D model. Recast people in existing footage, guide movement with a reference clip, or build motion graphics with animated type. Trim and reframe video, sync speech to lips, and add narration, music, sound effects or captions.\n\nIn Video Review mode, inspect the prompt, references and settings before pressing Generate. Image preparation can use credits separately. Auto mode sends the requested video generation immediately. For help, contact support@creativeclaw.co.",
+        "longDescription": "Turn a product photo into an ad, a script into a short film, or an interview into captioned clips in ChatGPT. Start a film by designing the cast and set. Use the same character sheets and scene images to frame each shot, then animate the shots and assemble a first cut.\n\nGive a recurring Character a voice. Choose a stock voice, design one from a description, or clone your own voice from a clean recording. Get the speaker's permission before cloning someone else's voice. Save a favorite face or voice as a Character and reuse it in later scenes. For dialogue, use a video model that accepts the character's recorded audio.\n\nGenerate and edit images, create product photos or turn reference images into a downloadable 3D model. Recast people in existing footage, guide movement with a reference clip, or build motion graphics with animated type. Trim and reframe video, sync speech to lips, and add narration, music, sound effects or captions.\n\nIn Video Review mode, inspect the prompt, references and settings before pressing Generate. Auto mode sends the requested video generation immediately. For help, contact support@creativeclaw.co.",
         "developerName": "Creative Claw",
         "category": "Creativity",
         "capabilities": [

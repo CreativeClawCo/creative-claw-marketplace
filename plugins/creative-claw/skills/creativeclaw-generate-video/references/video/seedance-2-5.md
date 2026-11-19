@@ -40,7 +40,7 @@ Reference limits belong to this model, not to `generate_video` globally. Current
 
 ## Native draft workflow
 
-The Review approval for an initial 1080p request offers a 480p draft first. Choose **See 1080p price** to review a direct 1080p quote instead; switching the quote submits no generation and charges no credits. Approving a draft pays for and renders only the draft. The draft has native audio and can be downloaded and used as-is. Auto mode submits an initial 1080p request directly, while an explicit 480p request is a draft in either mode.
+The Review approval for an initial 1080p request offers a 480p draft first. Choose **See 1080p price** to review a direct 1080p quote instead; switching the quote only updates the estimate. Approving a draft pays for and renders only the draft. The draft has native audio and can be downloaded and used as-is. Auto mode submits an initial 1080p request directly, while an explicit 480p request is a draft in either mode.
 
 When the user wants the same approved take at 1080p, call `generate_video` again with `model: "video/seedance-2.5"`, a meaningful required `prompt`, and `extras: { "draft_job_id": "<completed Creative Claw draft jobId>" }`. The server uses the saved draft prompt and Seedance inherits its references, duration, ratio, and audio. Do not supply new creative inputs for finalization. This is a separate paid job. Review mode gives that final its own approval; Auto mode submits an explicitly requested finalization directly. A draft can be finalized more than once within 7 days; use `force_new: true` for an intentional duplicate within the reuse window.
 
@@ -68,7 +68,7 @@ For `edit` and `extend`, include at least one `video_urls` entry and state the o
 | Edit source video | `video_urls`, explicit `omni_reference_task_type: "edit"` | Omit or `auto` | `auto` | Source must be 4-30s; timeline and framing are preserved |
 | Extend source video | `video_urls`, explicit `omni_reference_task_type: "extend"` | Numeric 4-30s continuation | `auto` | Source/reference duration limits still apply |
 
-The public `generate_video` contract uses `auto`/omission for source-locked edits. Invalid combinations are rejected before submission and before credit charge with a corrective message.
+The public `generate_video` contract uses `auto`/omission for source-locked edits. Invalid combinations are rejected before a job starts with a corrective message.
 
 ## Preservation-first editing and extension
 

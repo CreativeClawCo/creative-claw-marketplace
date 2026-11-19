@@ -10,8 +10,8 @@ When the requested movement must follow an existing clip, read [motion transfer]
 | Seedance 2.5 Flash, video/seedance-2.5-flash | [Seedance 2.5 Flash](seedance-2-5-flash.md), most Seedance work up to 720p: same prompts, references and edits as 2.5, about a third cheaper, no 1080p or drafts; the default swap engine |
 | Supplied dialogue or a saved Character voice in a generated scene | [Voice in video](voice-in-video.md). Prefer Seedance with the prepared shot image and finished line as references. |
 | Seedance 2.5 | [Seedance 2.5](seedance-2-5.md), premium cinematic, reference-rich and long (up to 30 s) scenes, 480p drafts, and supported edits/extensions |
-| Kling 4.0 Omni, video/kling-4.0-omni | [Kling 4.0 Omni](kling-4.md), the recommendation for new general Kling requests: prompt templates for references, first/last frames, timed shots, dialogue and source edits; integration limits and credit estimates |
-| Seedance Mini | [Seedance Mini](seedance-mini.md), the recommended model for cheap, fast drafts and short clips with native sound, including voice or audio input references; free first video |
+| Kling 4.0 Omni, video/kling-4.0-omni | [Kling 4.0 Omni](kling-4.md), the recommendation for new general Kling requests: prompt templates for references, first/last frames, timed shots, dialogue and source edits; integration limits and cost estimates |
+| Seedance Mini | [Seedance Mini](seedance-mini.md), the recommended model for cheap, fast drafts and short clips with native sound, including voice or audio input references |
 | H3 Max, H3 Max Extend, H3 Max Insert, and H3 Max Fast/Turbo | [MiniMax H3 Max](minimax-h3-max.md), cinematic motion, H3 Max Fast drafts with no references, extending a clip, inserting new footage into an interval, and native audio |
 | Wan 3.0 | [Wan](wan-3.md), only when explicitly requested; recommend Seedance 2.5 instead |
 | Swap, replace or recast people in existing footage, including face-only swaps | `swap_video_characters`, not `generate_video`; three or six free previews, then Seedance 2.5 Flash by default, or explicitly requested Seedance 2.5 (1080p or drafts), Wan Lite / Kling 4.0 |
@@ -20,9 +20,9 @@ When the requested movement must follow an existing clip, read [motion transfer]
 | Copy one recorded performer’s gestures, expression and timing | [Motion transfer](motion-transfer.md), then the selected model guide; use an appearance image and driving video |
 | video/minimax-h3-max-recast requested by name in generate_video | [H3 Max Recast](h3-max-recast.md); otherwise use `swap_video_characters` |
 | Veo, Grok, FLUX, H3, Hailuo, HappyHorse, HeyGen or another explicitly requested route | [Additional models](other-models.md), model-specific distinctions and live-schema lookup |
-| One person speaking exact lines, to camera or clearly in view, in any language | Speech first, then `video/heygen-avatar-6` with the shot image (Turbo for drafts; `video/minimax-h3-max-lip-sync` before a first credit purchase); see [voice in video](voice-in-video.md). Several speakers or a performance-led shot keep the reference-mode paths there |
+| One person speaking exact lines, to camera or clearly in view, in any language | Speech first, then `video/heygen-avatar-6` with the shot image (Turbo for drafts; `video/minimax-h3-max-lip-sync` when HeyGen is unavailable for the account); see [voice in video](voice-in-video.md). Several speakers or a performance-led shot keep the reference-mode paths there |
 | Lip-sync an existing video to a voice, with one or several speakers, including cartoons and animals | `lip_sync_video`, not `generate_video`; see [voice in video](voice-in-video.md). [HeyGen Lipsync](heygen-lipsync.md) when explicitly selected |
-| Talking photo in an unsupported or unverified native-dialogue language | [Spoken languages](spoken-languages.md), HeyGen Avatar 6 with prepared speech (H3 Max Lip Sync before a first credit purchase) |
+| Talking photo in an unsupported or unverified native-dialogue language | [Spoken languages](spoken-languages.md), HeyGen Avatar 6 with prepared speech (H3 Max Lip Sync when HeyGen is unavailable for the account) |
 
 Read [reference production](reference-production.md) when preparing shot assets, [voice in video](voice-in-video.md) when a shot has speech, and [Review/Auto](review.md) before generation. Model guides do not authorize extra paid drafts, retries or changing providers. Report concrete product or quality issues through `submit_feedback` and say briefly that you did; do not report when the user asks you not to.
 

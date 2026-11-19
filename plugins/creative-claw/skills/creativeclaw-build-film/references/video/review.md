@@ -10,6 +10,6 @@ Film uses one approval in the film view for the selected clip batch. The individ
 
 The exact references shown with the video request are reviewed in that card, which is where the user approves them. Do not mark them approved before the user submits. A separately requested earlier image checkpoint, Character-save likeness approval and voice-cloning consent still apply. The video Review card does not approve charges for image or audio generation that occurred beforehand.
 
-A storyboard preview is a creative plan; generated stills may cost credits. A Review card is a proposed request, not playable footage. A generated first cut uses paid completed clips. Keep these meanings distinct.
+A storyboard preview is a creative plan; generating storyboard stills is a separate operation with its own estimate. A Review card is a proposed request, not playable footage. A generated first cut uses paid completed clips. Keep these meanings distinct.
 
 Store each shot's job/recovery ID. An approval is single-use and bound to its request. New shots, changed models/references/settings or replacement takes require their own authorized request and applicable Review approval. Status checks are not new generation requests.

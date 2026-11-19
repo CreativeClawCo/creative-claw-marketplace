@@ -26,4 +26,4 @@ Read `isError`, status, and `structuredContent` when present. Prefer normalized 
 
 Obey `requiresUserConfirmation`, `requiresPromptRevision`, and `requiresLikenessRightsConfirmation` when returned. Use `suggestedAction`, `suggestedModel`, and `suggestedModelInput` only if they fit the user's intent and the current schemas. Do not spend on a replacement paid generation without applicable user authorization.
 
-Report `creditsCharged` and `creditsRefunded` only when supplied; missing values are unknown, not zero. Distinguish a returned refund amount from a promised future refund. Explain the failure and the smallest useful next action without dumping raw provider diagnostics. Continue unrelated in-scope work and preserve completed outputs.
+Report charges and refunds only when the result supplies them. A missing amount is unknown. Distinguish a returned refund amount from a promised future refund. Explain the failure and the smallest useful next action without dumping raw provider diagnostics. Continue unrelated in-scope work and preserve completed outputs.

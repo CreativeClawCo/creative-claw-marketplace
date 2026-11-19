@@ -132,9 +132,9 @@ Audio on video:
 
 ## Account and billing
 
-Use `manage_account` to view the connected account, balance, recent generations, and credit activity, including charges and refunds. Open `overview` for the balance, `activity` for a specific generation's recorded cost, or `settings` for generation preferences. The tool is read-only.
+Use `manage_account` to view the connected account, balance, recent generations, charges and refunds. Open `overview` for the balance, `activity` for a specific generation's recorded cost, or `settings` for generation preferences. The tool is read-only.
 
-Purchases and plans are handled on the Creative Claw website, not in chat. Do not start, price, or recommend a purchase; if asked, say so and share only an account link a tool returned.
+For account changes, share the account link returned by the tool only when the user asks.
 
 Read [account guidance](workflows/account.md) to match jobs to charges, distinguish gross charges/refunds/net cost, and handle missing or older records. Use `estimate_generation` for future quotes, not proof of what a past generation cost. A balance question alone is not a feedback submission request.
 
@@ -144,7 +144,6 @@ Read [account guidance](workflows/account.md) to match jobs to charges, distingu
 | --------------------- | -------------------------------------------------------------------- |
 | `check_job`           | Resolve queued work by `job_id` when a completed result is required. |
 | `estimate_generation` | Estimate one planned generation, check the current balance, and return affordable H3 alternatives when needed. The final cost is confirmed after generation finishes. |
-| `get_credits_balance` | Check the balance when exposed.                                      |
 
 ## Product feedback
 

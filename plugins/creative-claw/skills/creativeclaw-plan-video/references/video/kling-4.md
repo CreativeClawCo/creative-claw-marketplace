@@ -163,9 +163,9 @@ The website's advertised resolution, default duration, voice-upload and timeline
 
 ## Estimate with the actual inputs
 
-Text/image inputs: priced per output second, higher at 1080p than 720p, rounded up once per job. Use `estimate_generation` for the price. Requires a first credit purchase.
+Text/image inputs: priced per output second, higher at 1080p than 720p, rounded up once per job. Use `estimate_generation` for the price. Check model availability for the connected account.
 
-With video inputs, reserve billed seconds = output + max(output, measured combined input-video seconds), counting every video element after cuts. Use `estimate_generation` with the same inputs and cuts as generation. Do not quote the text/image-only rate for video-reference work. Final credits follow settled usage within the approved reserve. Credit purchase prices vary; do not convert them to a fixed dollar cost.
+With video inputs, reserve billed seconds = output + max(output, measured combined input-video seconds), counting every video element after cuts. Use `estimate_generation` with the same inputs and cuts as generation. Do not quote the text/image-only rate for video-reference work. Report the final cost from the completed job.
 
 Pricing and availability are live facts. These numbers are a snapshot, not a replacement for the tools.
 
