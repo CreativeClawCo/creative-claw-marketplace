@@ -16,7 +16,8 @@ When the requested movement must follow an existing clip, read [motion transfer]
 | Wan 3.0 | [Wan](wan-3.md), only when explicitly requested; recommend Seedance 2.5 instead |
 | Swap, replace or recast people in existing footage, including face-only swaps | `swap_video_characters`, not `generate_video`; three or six free previews, then Seedance 2.5 Flash by default, or explicitly requested Seedance 2.5 (1080p or drafts), Wan Lite / Kling 4.0 |
 | video/kling-3.0-motion-control-pro named for a swap | [Kling Motion Control Pro](kling-motion-control.md); otherwise use `swap_video_characters` |
-| Copy a recorded movement or performance | [Motion transfer](motion-transfer.md), then the selected model guide; use an appearance image and driving video |
+| Borrow a camera path, action beat or pacing while directing a new shot | [Kling 4.0 Omni](kling-4.md), with each reference assigned a role |
+| Copy one recorded performer’s gestures, expression and timing | [Motion transfer](motion-transfer.md), then the selected model guide; use an appearance image and driving video |
 | video/minimax-h3-max-recast requested by name in generate_video | [H3 Max Recast](h3-max-recast.md); otherwise use `swap_video_characters` |
 | Veo, Grok, FLUX, H3, Hailuo, HappyHorse, HeyGen or another explicitly requested route | [Additional models](other-models.md), model-specific distinctions and live-schema lookup |
 | One person speaking exact lines, to camera or clearly in view, in any language | Speech first, then `video/heygen-avatar-6` with the shot image (Turbo for drafts; `video/minimax-h3-max-lip-sync` before a first credit purchase); see [voice in video](voice-in-video.md). Several speakers or a performance-led shot keep the reference-mode paths there |

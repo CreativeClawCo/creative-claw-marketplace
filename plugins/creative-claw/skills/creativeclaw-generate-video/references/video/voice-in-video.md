@@ -1,6 +1,6 @@
 # Voice in video: one path per speaking shot
 
-For a filmed scene with a saved voice or supplied line, choose an audio-capable Seedance model before storyboarding. Generate each line with the speaking Character's saved voice or reuse their finished recording. Supply the shot frame in `image_urls` and the line in `audio_urls`. Gemini Omni 1.2 Flash generates native sound and accepts no audio input. Off-screen narration can be mixed over a wordless clip afterwards.
+Choose from the material already available. One presenter image and finished speech go to HeyGen Avatar 6. For a new scene with interacting speakers or substantial body or camera movement, choose an audio-capable Seedance model before storyboarding. Use the shot frame in `image_urls` and the prepared line in `audio_urls`, then check the generated words. Existing footage with visible speech goes to `lip_sync_video` when the mouths need matching. Gemini Omni 1.2 Flash generates native sound and accepts no audio input. Mix off-screen narration over the footage.
 
 ## Whose voice
 

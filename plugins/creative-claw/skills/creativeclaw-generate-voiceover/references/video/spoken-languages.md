@@ -22,6 +22,10 @@ An audio reference can guide a newly generated voice without preserving its word
 
 Explain the relevant limitation briefly and recommend prepared speech plus `video/heygen-avatar-6` (`video/minimax-h3-max-lip-sync` before a first credit purchase). Both are driven by the supplied audio, so the language comes from the speech; review the actual result. For HeyGen, choose the audio-driven Avatar 6 route, not generic HeyGen Video 1 native generation. Honor an explicit model choice and explain the proposed change before switching.
 
+## A cinematic shot with visible dialogue
+
+Before rendering, name the model and spoken language. Say whether support is explicitly unavailable or reliable native dialogue is unverified. Offer an audio-driven presenter when the shot allows it. If the shot needs moving actors, interaction or a changing environment, prepare or reuse the approved line, time the action to the recording, and keep the intended speaker's mouth visible. Explain that synchronizing the finished footage to the line is a separately priced step. Include that step in any budget estimate and in the agreed production scope. Check the resulting words, speaker and mouth timing first when the video already contains the requested performance. Apply lip sync only where needed. Off-screen lines only need an audio mix.
+
 ## One talking face or one requested shot
 
 Reuse or prepare one clean character image and one finished speech recording, then make one video generation within the selected endpoint's limits. Keep a single requested camera view. Do not create extra angles, scene variants, or a montage merely because the language is unverified.
