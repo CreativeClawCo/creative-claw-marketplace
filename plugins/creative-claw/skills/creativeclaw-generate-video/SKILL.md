@@ -17,7 +17,7 @@ Create one controlled video clip from text, a start frame, an optional end frame
 
 For a permanent watermark on a finished video or a sequence assembled from existing images, video clips, and optional audio, use `overlay_images` or `stitch_clips` through `creativeclaw-edit-media`; neither generates footage. Read [assembly guidance](references/media-assembly.md). Preserve the existing media instead of generating replacement footage.
 
-For worked production flows, read only the relevant recipe: [product ad](references/video/recipe-product-ad.md), [consistent Character scene](references/video/recipe-character-scene.md), or [source edit, person replacement and extension](references/video/recipe-source-edit.md). These explain asset preparation, shot prompting, assembly and output checks, without authorizing extra paid drafts.
+For worked production flows, read only the relevant recipe: [product ad](references/video/recipe-product-ad.md), [consistent Character scene](references/video/recipe-character-scene.md), [source edit, person replacement and extension](references/video/recipe-source-edit.md), or [house tour from property photos](references/video/recipe-house-tour.md). These explain asset preparation, shot prompting, assembly and output checks, without authorizing extra paid drafts.
 
 For “the same movement,” a copied performance, or a wardrobe variant that should retain an earlier animation, read [motion transfer](references/video/motion-transfer.md) before model selection or image preparation. Resolve the driving video first.
 

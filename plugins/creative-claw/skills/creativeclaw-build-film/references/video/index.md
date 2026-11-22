@@ -34,4 +34,4 @@ Estimate the actual shot duration, resolution and source clips when cost matters
 
 ## Worked production recipes
 
-Choose the relevant workflow: [product ad](recipe-product-ad.md), [consistent Character scene](recipe-character-scene.md), or [source edit and extension](recipe-source-edit.md). For creator ads, first choose a [UGC production path](ugc-paths.md).
+Choose the relevant workflow: [product ad](recipe-product-ad.md), [consistent Character scene](recipe-character-scene.md), [source edit and extension](recipe-source-edit.md), or [house tour from property photos](recipe-house-tour.md). For creator ads, first choose a [UGC production path](ugc-paths.md).
