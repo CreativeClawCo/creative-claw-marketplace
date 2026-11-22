@@ -10,7 +10,7 @@ Use `video/gemini-omni-flash` as Creative Claw's default video model. It is the 
 
 1. Define one clip: purpose, duration, aspect ratio, subject, action, camera, audio, and protected visual details.
 2. Search for reusable assets and import any ChatGPT attachments into Creative Claw before passing them to URL fields.
-3. Follow the reference-first pipeline in [reference production](reference-production.md): one clean keyframe per shot, made at 16:9 or 9:16 (Omni's only ratios), then its per-shot mode rule. Skip keyframes only on an explicit direct-generation request, a ready shot image, or a source edit.
+3. Follow the reference-first pipeline in [reference production](reference-production.md): one clean keyframe per shot, made at 16:9 or 9:16 (Omni's only ratios), then its per-shot mode rule. Skip keyframes only on an explicit direct-generation request or a ready shot image. For a source edit, edit a frame of the clip first ([source edit](recipe-source-edit.md)).
 4. Call `get_model_params({ model: "video/gemini-omni-flash" })` before generation when not already fetched for this task. Treat its current schema as authoritative.
 5. Choose `resolution` from the current schema when output size matters. The direct Google route supports `360p`, `720p` (default), `1080p`, and `4k`; 1080p and 4K are upscaled outputs. Explain the selected duration, ratio, resolution, references, and audio plan when useful. Reuse existing authorization, including an explicitly requested batch; ask only when a material choice is unresolved or the proposed work expands the requested scope.
 6. Call `generate_video` with `model: "video/gemini-omni-flash"`.
@@ -24,7 +24,7 @@ Use `video/gemini-omni-flash` as Creative Claw's default video model. It is the 
 | Direct text-to-video (explicit request only) | `prompt` only | Describe the complete visible scene and sound. |
 | Animate a still | `image_url` | Describe what begins moving after the supplied first frame. |
 | Reference-guided video | `image_urls` | Bind every reference to a role with `<IMAGE_REF_N>`. |
-| Edit a source clip | one item in `video_urls` | Give one short change followed by “Keep everything else the same.” |
+| Edit a source clip | one item in `video_urls`, plus the edited frame in `image_urls` | Give one short change shown in `<IMAGE_REF_0>`, followed by “Keep everything else the same.” |
 
 Do not combine modes casually. Use `image_url` when an image must be the literal first frame. Use `image_urls` when images should guide identity, product appearance, wardrobe, environment, or style without becoming the opening frame.
 
@@ -137,11 +137,11 @@ Keep spoken copy short enough to fit naturally. Quote exact lines and preserve t
 
 ## Source-video editing
 
-Pass one source clip in `video_urls`. Use a concise delta:
+Edit one frame of the clip with `generate_image` first and show it, as [source edit](recipe-source-edit.md) describes. Then put the source clip in `video_urls` and the edited frame in `image_urls`. Use a concise delta:
 
 ```text
-Replace the overcast sky with a warm sunset. Keep the people, timing, camera
-motion, buildings, and every other detail unchanged.
+Replace the overcast sky with the warm sunset sky shown in <IMAGE_REF_0>. Keep
+the people, timing, camera motion, buildings, and every other detail unchanged.
 ```
 
 Avoid redescribing the source. A long prompt increases unintended changes. Omni editing is best for one clear transformation per pass.
@@ -175,9 +175,9 @@ extra people near camera.
 Source edit:
 
 ```text
-Transform the source video into a premium hand-painted anime look. Preserve the
-exact motion, timing, people, composition, and camera path. Keep everything else
-the same. No subtitles or added text.
+Transform the source video into the hand-painted anime look of <IMAGE_REF_0>,
+its restyled first frame. Preserve the exact motion, timing, people, composition,
+and camera path. Keep everything else the same. No subtitles or added text.
 ```
 
 ## Quality and feedback

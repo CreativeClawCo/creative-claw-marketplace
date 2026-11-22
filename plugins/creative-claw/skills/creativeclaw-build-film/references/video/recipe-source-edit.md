@@ -6,11 +6,19 @@ Proposed workflow example. Determine whether the user wants changes INSIDE the s
 
 Example request: "Change the sky in seconds 8 to 13 to sunset; leave the rest alone."
 
-Inspect source duration and identify the exact interval. Preserve the original. Use trim_video to extract the five-second interval, then pass it through a currently supported source-edit route. Do not regenerate the whole video. For Gemini Omni, a concise prompt is:
+Never send the clip with only a text instruction. A video model redraws every frame from the words, so faces, props and places drift, and each correction costs a whole clip. Settle the change on a still first, where a retry costs a fraction of that.
 
-"Replace only the overcast sky with a warm sunset. Keep the people, faces, clothing, camera movement, action timing, buildings and ground unchanged. Preserve the original scene structure. No new objects, text or cuts."
+1. **Find the interval.** Inspect the source duration and the exact seconds that change. Preserve the original and use `trim_video` to cut out only that interval. Do not regenerate the whole video.
+2. **Get the frame.** If the clip was generated from a still (earlier in the conversation, or a start image in its generation record), use that still. Otherwise `extract_frames` in timeline mode finds the moment, then `mode: "single"` or `timestamps` returns the frame where the change shows best.
+3. **Edit the frame** with `generate_image`: `image_url` = the frame, at the clip's aspect ratio. Ask for one change and name what stays. Image models can redraw the whole picture, so compare faces, framing and background with the original frame. For a small change in a wide frame, edit a crop around the subject; where code execution is available, paste back only the changed pixels.
+4. **Show the edited frame** and get the user's go-ahead or changes before any video.
+5. **Make the video from the frame.**
+   - Clip generated from a still: animate the edited still as `image_url` with the same model, settings and prompt, adding only the change. This keeps the look most faithfully and costs one ordinary generation.
+   - Real or long footage: a source edit with the interval in `video_urls` and the edited frame in `image_urls` as the look to match. Gemini Omni (up to 10 seconds) cites it as `<IMAGE_REF_0>`. Seedance 2.5 or Flash cites it as `@Image1` with `extras.omni_reference_task_type: "edit"`, auto aspect ratio and source-locked duration; do not apply those fields to Omni.
 
-Use video_urls for the source with the selected model's exact input contract. For Seedance 2.5, use its explicit edit task mode, auto aspect ratio and source-locked duration as documented. Do not apply those fields to Omni.
+For Gemini Omni, a concise prompt is:
+
+"Replace only the overcast sky with the warm sunset sky shown in <IMAGE_REF_0>. Keep the people, faces, clothing, camera movement, action timing, buildings and ground unchanged. No new objects, text or cuts."
 
 To replace the interval with a new scene instead of changing it, use `video/minimax-h3-max-insert` on the full source: `extras.start_time` where the new scene begins, `extras.resume_time` where the original resumes, and `duration` for the new scene. It returns the source with the new scene in place.
 

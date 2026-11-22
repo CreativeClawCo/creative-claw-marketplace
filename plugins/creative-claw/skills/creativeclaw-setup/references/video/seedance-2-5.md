@@ -59,13 +59,15 @@ Choose the mode from the intended relationship to the source video:
 
 For `edit` and `extend`, include at least one `video_urls` entry and state the operation explicitly in the prompt, for example `Edit @Video1...` or `Extend @Video1 forward...`. The mode does not replace prompt direction. Creative Claw uses `omni_reference_task_type` to normalize locked fields; state the operation explicitly in the prompt as well. If the prompt looks like an edit but the mode is omitted/`auto`, validation rejects the request before charging with instructions to choose `edit` or `reference`.
 
+Never edit from text alone. Edit a frame of the source with `generate_image` and show it first ([source edit](recipe-source-edit.md)), then cite it: `Edit @Video1: change the jacket to the navy rain shell shown in @Image1…`.
+
 ### Seedance 2.5 request matrix
 
 | Intent | Required inputs | Duration | Aspect ratio | Audio/references |
 | --- | --- | --- | --- | --- |
 | New text/image video | `prompt`, optional `image_url` | `auto` or 4-30s | Explicit ratio or `auto` | `generate_audio` is enabled by default; `end_image_url` is supported for image-to-video |
 | Reference-guided video | `video_urls`/`image_urls`/`audio_urls`, `@` tokens, and `omni_reference_task_type: "reference"` | `auto` or 4-30s | Explicit ratio or `auto` | Up to 30 images, 10 videos, 10 audio files, 50 total; audio needs an image/video |
-| Edit source video | `video_urls`, explicit `omni_reference_task_type: "edit"` | Omit or `auto` | `auto` | Source must be 4-30s; timeline and framing are preserved |
+| Edit source video | `video_urls`, the edited frame in `image_urls`, explicit `omni_reference_task_type: "edit"` | Omit or `auto` | `auto` | Source must be 4-30s; timeline and framing are preserved |
 | Extend source video | `video_urls`, explicit `omni_reference_task_type: "extend"` | Numeric 4-30s continuation | `auto` | Source/reference duration limits still apply |
 
 The public `generate_video` contract uses `auto`/omission for source-locked edits. Invalid combinations are rejected before a job starts with a corrective message.

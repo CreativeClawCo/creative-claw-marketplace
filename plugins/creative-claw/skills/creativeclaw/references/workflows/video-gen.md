@@ -5,7 +5,7 @@ Match the model to the shot, reference structure, duration, resolution, audio ne
 ## Workflow
 
 1. Define the deliverable: single shot or sequence, duration, ratio, subject, action, camera, audio, and continuity requirements.
-2. Follow the reference-first pipeline in [reference production](../video/reference-production.md): reuse anchors (`search_assets`, `list_characters`, `get_theme`), write one look line, and make one keyframe per shot with `generate_image` at the video's aspect ratio. Skip keyframes only when the user asks for direct text-to-video, supplies a ready shot image, or is editing footage.
+2. Follow the reference-first pipeline in [reference production](../video/reference-production.md): reuse anchors (`search_assets`, `list_characters`, `get_theme`), write one look line, and make one keyframe per shot with `generate_image` at the video's aspect ratio. Show the keyframes and get the user's go-ahead or changes before the video. Skip keyframes only when the user explicitly asks for text-to-video or supplies a ready shot image. To change existing footage, edit a frame first, as [edit-video](edit-video.md) describes.
 3. Pick one input mode per shot: people, several subjects or big motion → `image_urls` (keyframe + 2–3 anchors); exact opening → `image_url` = keyframe, no `image_urls` or `character_id`. For speech, pick a path from [voice in video](../video/voice-in-video.md).
 4. Use `list_models({ category: "video" })` when discovery is needed and `get_model_params` for missing settings on the selected model; reuse schemas already fetched in this task.
 5. State consequential settings briefly and proceed within what the user asked for. Estimate with `operation: "video"` only for user-requested cost/budget help.

@@ -75,7 +75,7 @@ Choose the mode from the intended relationship to the source video:
 | `extend` | Continuing before or after a source video boundary. | `aspect_ratio: "auto"` and a numeric 4-30 second continuation. |
 | `auto` | Letting Seedance infer the task from the prompt. | Only with `aspect_ratio: "auto"`; set `edit` explicitly for edit-style prompts. |
 
-Start the prompt with the operation and cite the source, for example `Edit @Video1: change the red jacket to a navy rain shell…` or `Extend @Video1 forward by 6 seconds: …`. Describe changes as from A to B, with timestamps for a change in part of the clip. For people or objects replaced across existing footage, use `swap_video_characters` or `swap_video_objects` instead; they prepare approved scene previews and use Flash by default.
+Start the prompt with the operation and cite the source, for example `Edit @Video1: change the red jacket to the navy rain shell shown in @Image1…` or `Extend @Video1 forward by 6 seconds: …`. For an edit, make the edited frame first and put it in `image_urls` ([source edit](recipe-source-edit.md)); never edit from text alone. Describe changes as from A to B, with timestamps for a change in part of the clip. For people or objects replaced across existing footage, use `swap_video_characters` or `swap_video_objects` instead; they prepare approved scene previews and use Flash by default.
 
 For preservation-first edits and extensions (untouched original plus a new boundary, or one interval changed), follow the trim, edit, and `merge_media` approach in the [Seedance 2.5 guide](seedance-2-5.md); the same rules apply on Flash.
 
@@ -113,9 +113,9 @@ consistent. No cuts, no subtitles, no music.
 Source edit:
 
 ```text
-Edit @Video1: change the cyclist's red jacket to a navy rain shell for the
-whole clip. Keep the rider's face, bicycle, route, camera movement, timing
-and the original street unchanged. Add nothing else.
+Edit @Video1: change the cyclist's red jacket to the navy rain shell shown in
+@Image1 for the whole clip. Keep the rider's face, bicycle, route, camera
+movement, timing and the original street unchanged. Add nothing else.
 ```
 
 ## Quality and feedback

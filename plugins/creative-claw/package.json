@@ -1,6 +1,6 @@
 {
   "name": "@creativeclaw/plugin",
-  "version": "0.7.77",
+  "version": "0.7.78",
   "description": "Creative Claw plugin for Grok, Claude, Codex, Hermes, OpenClaw, and compatible agents",
   "type": "module",
   "license": "Apache-2.0",
