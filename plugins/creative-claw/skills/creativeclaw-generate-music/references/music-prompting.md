@@ -97,7 +97,7 @@ Do not overload a three-second sting with verse, build, drop, and outro instruct
 
 Translate editorial needs into musical events before prompting:
 
-- Set `music_length_ms` only when supported. ElevenLabs Music makes that length exactly; Lyria treats it as guidance and MiniMax as an upper bound. Mureka chooses length and does not accept this field.
+- Set `music_length_ms` only when supported. ElevenLabs Music treats it as a target (exact only with `extras.composition_plan`, which is for users who want exact control of duration); Lyria treats it as guidance and MiniMax as an upper bound. Mureka chooses length and does not accept this field.
 - Record important cue points, then describe the musical change at each time.
 - Decide whether the ending should resolve before the picture cuts or ring through it.
 - Keep generated music as a separate asset until approved. `generate_music` does not inspect the video or synchronize itself to visible events.
@@ -118,18 +118,18 @@ Translate editorial needs into musical events before prompting:
 | Unwanted vocals | Keep `force_instrumental: true`; exclude lyrics, speech, chants, and vocal pads. |
 | Weak vocal identity | Add range, timbre, delivery, language, articulation, and harmony direction. |
 | Abrupt or unusable ending | Reserve explicit time for a button, cadence, ring-out, or controlled fade. |
-| Timing drift | Use ElevenLabs Music for exact `music_length_ms`; otherwise simplify sections and clarify chronological cues without promising exact timing. |
+| Timing drift | If the user wants exact control of duration, use ElevenLabs Music with `extras.composition_plan`; otherwise simplify sections and clarify chronological cues without promising exact timing. |
 | A word sung wrong | Respell only that word (niqqud for Hebrew, "A.I." or "ay-eye" for acronyms); never IPA. See Pronunciation in sung lyrics. |
 | Style rejection | Remove artist, band, song, and copyrighted-lyric references; describe the musical traits instead. |
 
 ## Model notes
 
 - **Lyria 3.5 (default):** accepts long prompts with section labels and timestamps. Up to 10 `image_urls` can set the mood; say what to take from them. Length is approximate within about 30 to 180 s.
-- **ElevenLabs Music v2.5:** prompt up to 4,100 characters; exact length from 3 s to 10 min, so use it for stings, idents and picture-locked cues. Strong on vocal-led material, acoustic genres, rock, orchestral and cinematic scores.
+- **ElevenLabs Music v2.5:** prompt up to 4,100 characters. Start with a prompt and `music_length_ms`; a detailed structure can come back longer or shorter than asked. Only when the user wants exact control of duration (a picture-locked cue, a sting that must end on a cut, or set lengths for each section), send `extras.composition_plan`: 1 to 30 chunks of 3 to 120 s, each with `text`, `duration_ms` and `positive_styles` (format and example in `get_model_params`). Strong on vocal-led material, acoustic genres, rock, orchestral and cinematic scores.
 - **MiniMax Music 3:** the `prompt` is the production brief (genre, BPM, key, vocals, instrumentation, mix); the words go in `lyrics`, one section tag per line. Reuse the returned `seed` with the same prompt and lyrics to reproduce or refine a take.
 - **Mureka V9.5:** use for full-length vocal songs, expressive musical performances, supplied or automatic lyrics, and instrumentals. Read [Mureka guidance](mureka.md). One MP3 with model-chosen length; automatic lyrics and singing cost more than an instrumental or supplied lyrics (check `estimate_generation`). An audio style reference replaces the style prompt; no duration or seed controls. Use separate Mureka Remix or Region Edit models for those operations.
 
-Upstream features that are not `generate_music` fields (composition plans, audio references, section editing, inpainting) are unavailable. Do not promise or emulate them by inventing parameters.
+Upstream features that are not `generate_music` fields (ElevenLabs audio references, section editing, inpainting) are unavailable. Do not promise or emulate them by inventing parameters.
 
 ## Source basis
 
