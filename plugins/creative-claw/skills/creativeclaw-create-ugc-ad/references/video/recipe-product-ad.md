@@ -20,7 +20,9 @@ For separate narration, generate the approved script first with the model that m
 
 Example first-shot prompt for an approved literal start frame:
 
-"Five-second vertical product shot beginning at the supplied frame. The bottle stays upright and unchanged as condensation slowly gathers. A gentle 20-degree camera orbit reveals the existing cap. Soft daylight remains from camera left. Finish on a clean hero angle with a short hold. No speech, music or background ambience; the ad's bed is added once after assembly. Preserve product geometry, label and materials. No hands, cuts or new objects."
+"Five-second vertical product shot beginning at the supplied frame. One action: condensation slowly gathers on the bottle. A slow, straight push-in of about 15% over the shot brings the cap closer. Soft daylight remains from camera left. Finish on a clean hero angle with a short hold. No speech, music or background ambience; the ad's bed is added once after assembly. No hands, cuts or new objects. The bottle stays upright and rigid, with the same cap, label and glass, in the same place, from the first frame to the last."
+
+Push in rather than orbit around a product: orbits bend products. End with a line naming the product's parts in the same words used above.
 
 Use image_url for this literal frame and omit reference arrays/character_id. For a reference-only model route instead, assign product and composition roles using its exact tokens and do not claim an exact first frame. Fetch duration/resolution support before submitting. Follow [Review/Auto](review.md) for each requested shot.
 
