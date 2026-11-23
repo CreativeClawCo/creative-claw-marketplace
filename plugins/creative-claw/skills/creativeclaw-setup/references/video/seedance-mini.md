@@ -8,4 +8,6 @@ Read [input modes](reference-production.md). Use image_url for a literal opening
 
 Example: "@Image1 supplies the exact product geometry. @Video1 supplies only the slow orbit, not its subject or background. The bottle stands on a sunlit table as condensation rolls down its side. One continuous shot. No dialogue, no text, no packaging changes."
 
+Finished speech or a song kept with `extras.exact_audio` comes out exactly as recorded, in any language: see [exact audio](voice-in-video.md#exact-audio-keep-finished-speech-or-a-song-as-recorded). Mini runs it in reference mode; the clip is 4–15 s, the last line's end plus 1 s. Without it, audio references are performed anew.
+
 Write ordered action, camera motion, audio and the ending. Keep the scope plausible for the duration. Do not assume 2.5's edit/extend task controls or preservation guarantees apply to Mini. For exact source edits, inspect the current supported operations before promising a result. Read [Review handling](review.md) before generating.

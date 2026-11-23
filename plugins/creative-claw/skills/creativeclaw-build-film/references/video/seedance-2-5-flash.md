@@ -10,7 +10,7 @@ Choose [Seedance 2.5](seedance-2-5.md) instead for 1080p, more than 10 image or 
 
 ## Core workflow
 
-Check spoken-language support in `get_model_params` before choosing native dialogue. Flash has no separately verified language list; for languages that are not documented there, use the dedicated route in [spoken languages](spoken-languages.md).
+Check spoken-language support in `get_model_params` before choosing native dialogue. Flash has no separately verified language list; for languages that are not documented there, use the dedicated route in [spoken languages](spoken-languages.md). Finished speech or a song kept with `extras.exact_audio` comes out exactly as recorded in any language: see [exact audio](voice-in-video.md#exact-audio-keep-finished-speech-or-a-song-as-recorded). Flash runs it as an edit, 4–30 s.
 
 1. Define the deliverable, duration, ratio, shot count, subjects, continuity, audio, and reference roles.
 2. Search for existing assets and import every external image, video, or audio file into Creative Claw.
@@ -31,7 +31,7 @@ Check spoken-language support in `get_model_params` before choosing native dialo
 | `last_frame_url` | Optional final frame; the model creates the transition. |
 | `image_urls` | Up to 10 reference images, cited as `@Image1`, `@Image2`, and so on. |
 | `video_urls` | Up to 5 reference clips, cited as `@Video1`, `@Video2`, and so on. |
-| `audio_urls` | Up to 5 audio references, cited as `@Audio1`, `@Audio2`, and so on. |
+| `audio_urls` | Up to 5 audio references, cited as `@Audio1`, `@Audio2`, and so on. Performed anew unless `extras.exact_audio` keeps them exactly. |
 | `resolution` | `480p` or `720p` (default). Both are finished videos. No 1080p. |
 | `extras.generate_audio` | Synchronized dialogue, ambience, music, and effects; on by default. |
 | `extras.omni_reference_task_type` | `auto`, `reference`, `edit`, or `extend`. |

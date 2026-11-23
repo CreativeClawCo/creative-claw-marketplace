@@ -8,7 +8,7 @@ When the requested movement must follow an existing clip, read [motion transfer]
 | --- | --- |
 | Gemini Omni, video/gemini-omni-flash | [Gemini Omni](gemini-omni.md), general default when a shot needs no input audio |
 | Seedance 2.5 Flash, video/seedance-2.5-flash | [Seedance 2.5 Flash](seedance-2-5-flash.md), most Seedance work up to 720p: same prompts, references and edits as 2.5, about a third cheaper, no 1080p or drafts; the default swap engine |
-| Supplied dialogue or a saved Character voice in a generated scene | [Voice in video](voice-in-video.md). Prefer Seedance with the prepared shot image and finished line as references. |
+| Supplied dialogue, a song or a saved Character voice in a generated scene, in any language | [Voice in video](voice-in-video.md#exact-audio-keep-finished-speech-or-a-song-as-recorded): Seedance 2.5, 2.5 Flash, 2.0 Mini or Kling 4.0 Omni with the finished audio kept by `extras.exact_audio`, no lip-sync pass |
 | Seedance 2.5 | [Seedance 2.5](seedance-2-5.md), premium cinematic, reference-rich and long (up to 30 s) scenes, 480p drafts, and supported edits/extensions |
 | Kling 4.0 Omni, video/kling-4.0-omni | [Kling 4.0 Omni](kling-4.md), the recommendation for new general Kling requests: prompt templates for references, first/last frames, timed shots, dialogue and source edits; integration limits and cost estimates |
 | Seedance Mini | [Seedance Mini](seedance-mini.md), the recommended model for cheap, fast drafts and short clips with native sound, including voice or audio input references |
@@ -20,7 +20,7 @@ When the requested movement must follow an existing clip, read [motion transfer]
 | Copy one recorded performer’s gestures, expression and timing | [Motion transfer](motion-transfer.md), then the selected model guide; use an appearance image and driving video |
 | video/minimax-h3-max-recast requested by name in generate_video | [H3 Max Recast](h3-max-recast.md); otherwise use `swap_video_characters` |
 | Veo, Grok, FLUX, H3, Hailuo, HappyHorse, HeyGen or another explicitly requested route | [Additional models](other-models.md), model-specific distinctions and live-schema lookup |
-| One person speaking exact lines, to camera or clearly in view, in any language | Speech first, then `video/heygen-avatar-6` with the shot image (Turbo for drafts; `video/minimax-h3-max-lip-sync` when HeyGen is unavailable for the account); see [voice in video](voice-in-video.md). Several speakers or a performance-led shot keep the reference-mode paths there |
+| One person speaking exact lines, to camera or clearly in view, in any language | Speech first, then `video/heygen-avatar-6` with the shot image (Turbo for drafts; `video/minimax-h3-max-lip-sync` when HeyGen is unavailable for the account); see [voice in video](voice-in-video.md). Several speakers or a performance-led shot keep their lines with exact audio there |
 | Lip-sync an existing video to a voice, with one or several speakers, including cartoons and animals | `lip_sync_video`, not `generate_video`; see [voice in video](voice-in-video.md). [HeyGen Lipsync](heygen-lipsync.md) when explicitly selected |
 | Talking photo in an unsupported or unverified native-dialogue language | [Spoken languages](spoken-languages.md), HeyGen Avatar 6 with prepared speech (H3 Max Lip Sync when HeyGen is unavailable for the account) |
 

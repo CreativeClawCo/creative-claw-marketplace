@@ -33,7 +33,7 @@ Use Mureka V9.5 for full-length songs and expressive musical performances, Lyria
 3. Use `estimate_generation` with `operation: "audio"` only when the user asks about cost, balance, affordability, or supplies a budget. An estimate-only request does not authorize generation.
 4. State consequential settings briefly, then call `generate_music`. One requested track authorizes one generation. Generate alternatives only when the user asks for a batch or another take. Resolve queued Lyria, MiniMax, and Mureka jobs with `check_job`.
 5. Listen for genre fit, tempo, instrumentation, vocal presence, lyric accuracy, energy arc, mix density, ending, and clipping. A defect can justify a proposed revision, not an unrequested paid regeneration.
-6. Return the permanent audio asset. To put it under a video, keep it separate until approved, then follow [media assembly](references/media-assembly.md): `add_audio_to_video` with `audio_mode: "mix"` keeps the clip's sound (`added_volume` about 0.3 under speech).
+6. Return the permanent audio asset. To put it under a video, keep it separate until approved, then follow [media assembly](references/media-assembly.md): `add_audio_to_video` with `audio_mode: "mix"` keeps the clip's sound (`added_volume` about 0.3 under speech). A song meant to be heard and sung in a video can be kept exactly as recorded with `extras.exact_audio` (`creativeclaw-generate-video`), and a song plus a Character makes a music video (`creativeclaw-build-film`).
 
 ## Tool contract
 

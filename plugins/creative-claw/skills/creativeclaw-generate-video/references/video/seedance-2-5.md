@@ -8,7 +8,7 @@ Use `video/seedance-2.5`, the premium cinematic model, for high-end, long (up to
 
 ## Core workflow
 
-Check spoken-language support in `get_model_params` before choosing native dialogue. Seedance 2.5 supports English, Chinese and other documented languages; unlisted languages remain unverified even with audio references. For those languages, use the dedicated single-shot or multi-shot route in [spoken languages](spoken-languages.md).
+Check spoken-language support in `get_model_params` before choosing native dialogue. Seedance 2.5 supports English, Chinese and other documented languages; unlisted languages remain unverified for native dialogue, even with audio references. Finished speech or a song kept with `extras.exact_audio` comes out exactly as recorded in any language: see [exact audio](voice-in-video.md#exact-audio-keep-finished-speech-or-a-song-as-recorded). Seedance 2.5 runs it as an edit, 4–30 s.
 
 1. Define the deliverable, duration, ratio, shot count, subjects, continuity, audio, and reference roles.
 2. Search for existing assets and import every external image, video, or audio file into Creative Claw.
@@ -88,7 +88,7 @@ For each shot:
 4. Generate a compatible end frame if the motion must arrive somewhere specific.
 5. Collect separate reference images for identity, wardrobe, product details, location, and visual style.
 6. Use motion video references only for movement, camera cadence, blocking, or choreography.
-7. For specified speech in a documented language, follow [voice in video](voice-in-video.md): prepare the recording first with creativeclaw-generate-voiceover, or reuse supplied audio. References can guide dialogue, voice and timing but may produce a different recording. Inspect the words and lip timing; an exact recording requires an audio-driven route or a requested lip-sync repair if the generated performance differs. A soundtrack replacement alone is suitable for off-camera narration, not a repair for mismatched visible lips.
+7. For specified speech, follow [voice in video](voice-in-video.md): prepare the recording first with creativeclaw-generate-voiceover, or reuse supplied audio, and keep it with [exact audio](voice-in-video.md#exact-audio-keep-finished-speech-or-a-song-as-recorded), in any language. Without `extras.exact_audio`, audio references only guide dialogue, voice and timing and may produce a different recording. A soundtrack replacement alone is suitable for off-camera narration, not a repair for mismatched visible lips.
 
 Do not make one image do every job. A start frame controls the opening composition; reference images control identity or style; an end frame controls the destination.
 
@@ -128,7 +128,7 @@ Seedance tokens are one-based and include `@`:
 @Image2 = exact wardrobe.
 @Image3 = product geometry and packaging.
 @Video1 = body movement and camera cadence only.
-@Audio1 = prepared dialogue in the requested language, including words, voice and timing.
+@Audio1 = prepared dialogue; kept exactly with extras.exact_audio, otherwise a reference for words, voice and timing.
 ```
 
 State what to copy and what not to copy:
@@ -189,7 +189,7 @@ precise logo and packaging geometry. Synchronized folds, magnetic clicks, and a
 subtle bass swell. One seamless shot; no cuts or extra components.
 ```
 
-Audio-reference scene in a documented language (review the delivered words and lip sync):
+Audio-reference scene in a documented language, without exact audio (review the delivered words and lip sync; with `extras.exact_audio` the recording is kept as is):
 
 ```text
 @Image1 is the exact performer identity and wardrobe. @Audio1 is the prepared

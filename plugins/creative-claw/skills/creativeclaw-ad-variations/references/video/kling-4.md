@@ -112,7 +112,7 @@ Soft paper movement and quiet bakery ambience under the speech.
 No subtitles or background music.
 ```
 
-Use only the referenced speakers, give each line one owner, and leave room for reactions. Retrieve the exact model's documented spoken languages from `get_model_params`. Unverified languages, including Hebrew, use the [spoken-language workflow](spoken-languages.md) when precise delivery matters. A voice reference guides a new performance; it does not supply an exact recorded soundtrack. A single talking face within limits stays one shot unless the user requested several.
+Use only the referenced speakers, give each line one owner, and leave room for reactions. Retrieve the exact model's documented spoken languages from `get_model_params`. When precise delivery matters, or the language is unverified (Hebrew, for example), make the lines first and keep them with [exact audio](voice-in-video.md#exact-audio-keep-finished-speech-or-a-song-as-recorded): `audio_urls` plus `extras.exact_audio`, run as an edit, 3–30 s. A voice reference guides a new performance; only exact audio keeps the recorded soundtrack. A single talking face within limits stays one shot unless the user requested several.
 
 ### A requested three-shot sequence
 
@@ -157,7 +157,7 @@ These are integration limits, not every feature of Kling's website. Refresh them
 - Video elements must show a realistic person: MP4/MOV, 3 to 8 seconds, 1920×1080 or 1080×1920, up to 200 MB. Recorded speech can guide vocal identity.
 - Element photos: JPG/PNG, up to 10 MB each, at least 300 pixels on each side, aspect ratio 0.4 to 2.5; a frontal view plus 1 to 3 additional views.
 - Prompt: up to 26,000 characters, also subject to the model's 8,000-token limit. Preserve reference handles when shortening a prompt.
-- Native audio is always generated. No `generate_audio` switch, standalone `audio_urls`, seed, negative-prompt field, CFG, `multi_prompt`, 4K/HDR, Flash selector or extension control. Quiet sound requested in text is not an audio-off guarantee: in a multi-clip film, expect a background bed anyway and handle it as [media assembly](../media-assembly.md) describes.
+- Native audio is always generated. No `generate_audio` switch, standalone `audio_urls` (they are accepted only with `extras.exact_audio`), seed, negative-prompt field, CFG, `multi_prompt`, 4K/HDR, Flash selector or extension control. Quiet sound requested in text is not an audio-off guarantee: in a multi-clip film, expect a background bed anyway and handle it as [media assembly](../media-assembly.md) describes.
 
 The website's advertised resolution, default duration, voice-upload and timeline controls do not override this route's schema. [Operation specification](https://dev.pika.art/llms/kling/kling-4.0/omni-video)
 
@@ -185,7 +185,7 @@ Swap supports 4 to 30 whole seconds, 720p (default) or 1080p, and up to eight co
 | Invented subtitles or music | Include no subtitles and no background music in `prompt`; do not invent control fields. |
 | Dialogue is rushed or assigned to the wrong person | Shorten the script, identify the speaker for each quoted line and allocate time for listening and reactions. |
 | Fine text, identity or physics is inconsistent | Inspect the relevant frames and choose a targeted repair; do not promise a prompt can guarantee exact pixels or typography. |
-| Speech or soundtrack must be exact | Use finished speech and an audio-driven lip-sync/avatar route, or a non-generative soundtrack edit. Native audio is a new performance. |
+| Speech or soundtrack must be exact | Make the speech or song first and keep it with [exact audio](voice-in-video.md#exact-audio-keep-finished-speech-or-a-song-as-recorded). Native audio is a new performance. |
 
 A failed attempt or a quality complaint does not authorize another paid generation. Explain the proposed correction and use the outcome skill's existing approval rules.
 
