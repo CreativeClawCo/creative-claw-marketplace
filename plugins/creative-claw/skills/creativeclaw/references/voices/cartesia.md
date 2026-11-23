@@ -8,7 +8,7 @@ Set extras.language_code to a code accepted by the current schema. Use native-sc
 
 Current controls, all inside extras: emotion is neutral, angry, excited, content, sad or scared. speed is 0.6 to 1.5. Start with emotion "neutral" and speed 1.0; try "excited" with 1.05 for an energetic ad, or "content" with 0.96 for a warm read. extras.volume accepts 0.5 to 2.0 and defaults to 1.8; omit it unless a volume override is wanted. Recheck the schema before use.
 
-For Hebrew, the current catalog includes Ayala, Noam, Yarden and Gil; resolve their IDs at runtime and use he. Do not treat Cartesia as supporting Persian or Urdu unless the live schema adds them.
+For Hebrew, use he and find voices with `search_voices` and `language: "he"`. Do not treat Cartesia as supporting Persian or Urdu unless the live schema adds them.
 
 When Cartesia is selected for a Character that only has an ElevenLabs clone, the backend can create the Cartesia provider clone from the retained consented source. Do not replace the Character or re-upload without a concrete source problem. If this fails, report it rather than silently switching provider.
 

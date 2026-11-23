@@ -2,13 +2,13 @@
 
 This is a routing snapshot from Creative Claw's exposed schemas on 2026-09-22, not a promise of every upstream provider capability. get_model_params is authoritative for the current supported languages, selector names and voice IDs.
 
-Choose language capability first, then a native-accent voice, then delivery. A multilingual model can speak a language without every voice sounding native. Cloned voices can carry the sample's original accent into other languages.
+Choose language capability first, then a native-accent voice, then delivery. A multilingual model can speak a language without every voice sounding native. Cloned voices can carry the sample's original accent into other languages. For a stock voice in any language, call `search_voices` with `language` set to the language code first; the rows below cover models, clones and settings.
 
-Before speech submission, follow [speech localization](speech-localization.md). Hebrew always requires full niqqud on every spoken word across all supporting providers, including narration, dialogue turns, clone tests and voice-design auditions. Preserve the intended wording while adding the points. Arabic always requires full tashkeel on every spoken word in the same places, vowelled for the requested dialect.
+Before speech submission, follow [speech localization](speech-localization.md). Hebrew requires full niqqud on every spoken word unless the chosen model's get_model_params says otherwise, including narration, dialogue turns, clone tests and voice-design auditions. Preserve the intended wording while adding the points. Arabic always requires full tashkeel on every spoken word in the same places, vowelled for the requested dialect.
 
 | Request | Starting choice and configuration |
 | --- | --- |
-| Hebrew | Stock speech: v4 with extras.language_code "he" and a native Hebrew voice. A Cartesia clone: Cartesia Sonic with "he". An ElevenLabs clone: v4 with "he". Not v2. |
+| Hebrew | Stock voice: `search_voices` with `language: "he"`, then get_model_params for the returned model before writing the script. A Cartesia clone: Cartesia Sonic with "he". An ElevenLabs clone: v4 with "he". Not v2. |
 | Urdu | v4 with extras.language_code "ur" and a native Urdu voice. For requested Roman Urdu, preserve romanization and audition. Haseeb is a useful energetic candidate if returned by the current catalog. Not v2 or current Cartesia. |
 | Persian | v4 with "fa"; MiniMax can use extras.language_boost "Persian". Not v2 or current Cartesia. |
 | Bengali, Gujarati, Kannada, Malayalam, Marathi, Punjabi, Telugu | Check v4 or Cartesia with the exact returned language code and native voice. Do not choose v2 simply because it supports Hindi. |

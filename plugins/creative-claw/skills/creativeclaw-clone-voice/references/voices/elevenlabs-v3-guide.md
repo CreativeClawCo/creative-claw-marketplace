@@ -19,7 +19,7 @@ Read [shared execution guidance](../workflow-basics.md) once per task before usi
 
 Call `get_model_params({ model: "speech/elevenlabs-v3" })` for current curated IDs and language/accent labels. Match the script language and regional accent first, then tone and speaker profile. Offer at most two fitting choices unless the user asks to browse. A voice speaking another language may retain its original accent; setting `extras.language_code` does not change its native accent.
 
-Use only catalog IDs or the user's saved Character. For Hebrew, the catalog includes Noam, a workspace-designed Israeli Hebrew voice; do not describe an English or MiniMax voice as a second native Hebrew option without evidence. For a reusable custom voice from a recording, use `creativeclaw-clone-voice`, then generate with its `character_id`.
+Use only catalog IDs or the user's saved Character. For Hebrew or another language, find voices with `search_voices` and its `language` code. For a reusable custom voice from a recording, use `creativeclaw-clone-voice`, then generate with its `character_id`.
 
 ## Write for speech
 

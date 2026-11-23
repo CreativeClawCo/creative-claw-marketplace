@@ -2,7 +2,9 @@
 
 ## Speech localization
 
-Whenever this workflow generates Hebrew speech, always use full niqqud on every spoken Hebrew word across all supporting providers, including dialogue and voice-design auditions. Preserve the wording. Read [speech localization](voices/speech-localization.md) before preparing Hebrew or other pronunciation-sensitive speech text.
+Whenever this workflow generates Hebrew speech, use full niqqud on every spoken Hebrew word, including dialogue and voice-design auditions, unless the chosen speech model's `get_model_params` script rules say otherwise. Preserve the wording. Read [speech localization](voices/speech-localization.md) before preparing Hebrew or other pronunciation-sensitive speech text.
+
+To choose a stock voice, call `search_voices` with `language` set to the script's language code, for example `he`, `es` or `en-AU`. This is critical: the language decides which voices come back and which lead, so the voices that speak it best come first; without it the top results may not speak the language natively. Use the returned `model` and `voice_id` together. Then call `get_model_params` for that model before writing the script and follow its script rules (niqqud, English words, numbers, delivery tags). Where they differ from the general guidance here, the model's rules win.
 
 Read once when starting a Creative Claw workflow; reuse it across supporting skills in the same task. Focused copies are generated from the root skill by `scripts/sync-skill-references.mjs`.
 

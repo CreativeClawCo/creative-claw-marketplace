@@ -2,9 +2,11 @@
 
 Apply this guidance to text that will actually be spoken by `generate_speech`, each `extras.dialogue[].text`, and the audition `text` of `design_voice`. It also applies to short clone tests and narration prepared for a video. Audio-only voice conversion has no text to vocalize.
 
+The selected model's `get_model_params` script rules come first. Where they differ from this page, for example plain Hebrew without niqqud or English words written in Hebrew letters, follow the model.
+
 ## Hebrew: full niqqud on every spoken word
 
-Always fully vocalize every spoken Hebrew word before sending text to any speech provider. This is the Creative Claw workflow requirement for Hebrew, including ElevenLabs, Cartesia, Google, Fish, MiniMax and HeyGen whenever the selected model supports Hebrew. It is not limited to Fish or to difficult words. Ordinary sentence punctuation does not replace niqqud.
+Fully vocalize every spoken Hebrew word before sending text to a speech model, unless that model's `get_model_params` script rules ask for plain Hebrew. This is the Creative Claw default for Hebrew, including ElevenLabs, Cartesia, Google, Fish, MiniMax and HeyGen whenever the selected model supports Hebrew. It is not limited to Fish or to difficult words. Ordinary sentence punctuation does not replace niqqud.
 
 - Add contextually correct vowel points throughout the entire Hebrew passage, including names, short words and attached prefixes. Preserve supplied niqqud and explicit pronunciation directions; resolve conflicts with the intended reading before generation.
 - Keep the user's words, spelling, word order and meaning. Adding niqqud is speech preparation and needs no separate approval. Do not translate, paraphrase or replace the text with transliteration to avoid vocalizing it.
@@ -19,7 +21,7 @@ Original: שלום, תודה שבאתם.
 Speech text: שָׁלוֹם, תּוֹדָה שֶׁבָּאתֶם.
 ```
 
-Before calling a tool, inspect the final payload itself: every Hebrew word in `text`, each dialogue turn and each audition must be fully vowelized. A language code, a prompt asking for correct pronunciation or a few pointed sample words does not fulfill this requirement.
+Before calling a tool, inspect the final payload itself: every Hebrew word in `text`, each dialogue turn and each audition must be fully vowelized, unless the model's rules ask for plain Hebrew. A language code, a prompt asking for correct pronunciation or a few pointed sample words does not fulfill this requirement.
 
 Pass only the selected model's exposed settings. For Fish, retain `extras.normalize: false` when sending fully vowelized Hebrew. Do not copy that setting to other providers unless their current schema supports it. Niqqud does not add Hebrew support to a model that lacks it. If a route rejects the vowelized text, explain the incompatibility and offer a verified compatible route; do not silently strip the marks or switch the user's chosen model.
 
