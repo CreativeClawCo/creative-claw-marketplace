@@ -1,6 +1,6 @@
 interface:
-  display_name: "Creative Claw Create Your Avatar"
-  short_description: "Create and save a consistent personal avatar"
+  display_name: "Creative Claw — AI Avatar"
+  short_description: "Create a consistent AI avatar of you"
   default_prompt: "Use $creativeclaw-create-avatar to turn my photos into an approved character sheet and save my reusable avatar."
 dependencies:
   tools:

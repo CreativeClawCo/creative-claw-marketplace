@@ -1,6 +1,6 @@
 interface:
-  display_name: "Creative Claw — Build Film"
-  short_description: "Produce a multi-shot film with approval gates"
+  display_name: "Creative Claw — Short Films"
+  short_description: "Make a short film with consistent characters"
   default_prompt: "Use $creativeclaw-build-film to produce this multi-shot film from planning through an assembled first cut."
 dependencies:
   tools:

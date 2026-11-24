@@ -1,6 +1,6 @@
 interface:
   display_name: "Creative Claw — Plan Video"
-  short_description: "Plan scripts, shots, and clean storyboard frames"
+  short_description: "Plan a script, shot list and storyboard"
   default_prompt: "Use $creativeclaw-plan-video to turn this idea into an approved script, shot list, and storyboard."
 dependencies:
   tools:

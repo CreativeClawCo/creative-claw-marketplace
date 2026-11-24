@@ -1,5 +1,5 @@
 interface:
-  display_name: "Creative Claw — Captions"
+  display_name: "Creative Claw — Captions & Subtitles"
   short_description: "Add styled or animated captions to a video"
   default_prompt: "Use $creativeclaw-captions for this."
 dependencies:

@@ -110,11 +110,11 @@ if rg -n 'agentic_prompting|prompt_expansion_mode' "$skills_root" --glob '*.md';
   exit 1
 fi
 
-# Production steps live on the server: every focused skill except feedback opens its workflow.
+# Every focused skill except feedback gives its task outline and names Creative Claw's guide for it.
 for skill_name in "${skill_names[@]:1}"; do
   [[ "$skill_name" == creativeclaw-submit-feedback ]] && continue
-  if ! rg -q 'Call `get_workflow` with `\{ "name": "[a-z0-9-]+" \}`' "$skills_root/$skill_name/SKILL.md"; then
-    echo "$skill_name must open its server workflow with get_workflow." >&2
+  if ! rg -q '`get_workflow` tool with `\{ "name": "[a-z0-9-]+" \}`' "$skills_root/$skill_name/SKILL.md"; then
+    echo "$skill_name must name its Creative Claw task guide (get_workflow)." >&2
     exit 1
   fi
 done

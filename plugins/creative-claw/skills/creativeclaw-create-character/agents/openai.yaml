@@ -1,6 +1,6 @@
 interface:
   display_name: "Creative Claw — Create Character"
-  short_description: "Create a reusable visual character and voice"
+  short_description: "Save a character's face and voice for reuse"
   default_prompt: "Use $creativeclaw-create-character to create and save a consistent character from my brief and references."
 dependencies:
   tools:

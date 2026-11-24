@@ -1,6 +1,6 @@
 interface:
-  display_name: "Creative Claw — Create UGC Ad"
-  short_description: "Create a scripted UGC product video"
+  display_name: "Creative Claw — UGC Video Ads"
+  short_description: "Make a UGC video ad for your product"
   default_prompt: "Use $creativeclaw-create-ugc-ad to make a convincing UGC product ad from my product and creator references."
 dependencies:
   tools:

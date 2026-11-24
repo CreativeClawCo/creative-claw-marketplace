@@ -1,5 +1,5 @@
 interface:
-  display_name: "Creative Claw — Ad Variations"
+  display_name: "Creative Claw — Video Ad Variations"
   short_description: "Make a numbered set of video ad variations"
   default_prompt: "Use $creativeclaw-ad-variations to turn my product shot into five 9:16 ad variations with different hooks."
 dependencies:

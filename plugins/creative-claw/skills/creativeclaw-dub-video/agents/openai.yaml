@@ -1,5 +1,5 @@
 interface:
-  display_name: "Creative Claw — Dub a Video"
+  display_name: "Creative Claw — Dub & Translate a Video"
   short_description: "Dub a video into other languages"
   default_prompt: "Use $creativeclaw-dub-video for this."
 dependencies:

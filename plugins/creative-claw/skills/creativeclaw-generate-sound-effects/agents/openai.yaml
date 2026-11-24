@@ -1,5 +1,5 @@
 interface:
-  display_name: "Creative Claw: Generate Sound Effects"
+  display_name: "Creative Claw — Sound Effects"
   short_description: "Create Foley, ambience, loops, and sound effects"
   default_prompt: "Use $creativeclaw-generate-sound-effects to create a polished sound effect for this request."
 dependencies:

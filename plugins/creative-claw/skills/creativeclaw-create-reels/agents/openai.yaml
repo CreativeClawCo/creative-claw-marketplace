@@ -1,6 +1,6 @@
 interface:
-  display_name: "Creative Claw — Long Video to Reels"
-  short_description: "Turn long videos into configurable social clips"
+  display_name: "Creative Claw — Shorts & Reels from Long Videos"
+  short_description: "Cut long videos into Shorts, Reels and TikToks"
   default_prompt: "Use $creativeclaw-create-reels to find strong standalone moments in my video and make social clips in my requested format, with captions when appropriate."
 dependencies:
   tools:

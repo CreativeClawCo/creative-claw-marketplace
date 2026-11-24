@@ -1,6 +1,6 @@
 interface:
-  display_name: "Creative Claw — Render HTML"
-  short_description: "Render exact HTML layouts to PNG or video"
+  display_name: "Creative Claw — Motion Graphics"
+  short_description: "Motion graphics, animated titles and HTML renders"
   default_prompt: "Use $creativeclaw-render-html to render my explicit HTML, CSS, or HyperFrames composition as an image or video."
 dependencies:
   tools:

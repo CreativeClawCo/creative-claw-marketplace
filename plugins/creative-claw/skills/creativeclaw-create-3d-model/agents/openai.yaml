@@ -1,5 +1,5 @@
 interface:
-  display_name: "Creative Claw 3D Models"
+  display_name: "Creative Claw — 3D Models"
   short_description: "Make textured 3D assets and rigged characters"
   default_prompt: "Use $creativeclaw-create-3d-model to turn my reference images into a downloadable 3D asset."
 dependencies:

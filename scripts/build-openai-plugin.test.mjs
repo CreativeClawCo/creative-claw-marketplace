@@ -30,6 +30,8 @@ test("OpenAI release ZIP retains the MCP connection and review material", () => 
   assert.ok(Object.keys(listing.publication.translations).length >= 63);
   const gallery = entries.filter(entry => /^assets\/screenshots\/prompt-\d-.*\.png$/.test(entry)).sort();
   assert.equal(gallery.length, listing.interface.defaultPrompt.length);
+  // The dashboard refuses a manifest that lists screenshots.
+  assert.equal("screenshots" in listing.interface, false);
   for (const [index, entry] of gallery.entries()) {
     assert.ok(entry.startsWith(`assets/screenshots/prompt-${index + 1}-`));
     const png = execFileSync("unzip", ["-p", archive, entry]);

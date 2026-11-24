@@ -1,5 +1,5 @@
 interface:
-  display_name: "Creative Claw — Thumbnail"
+  display_name: "Creative Claw — Thumbnails & Reel Covers"
   short_description: "Make a video thumbnail or reel cover"
   default_prompt: "Use $creativeclaw-thumbnail for this."
 dependencies:

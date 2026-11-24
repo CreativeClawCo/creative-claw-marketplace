@@ -1,5 +1,5 @@
 interface:
-  display_name: "Creative Claw Setup"
+  display_name: "Creative Claw — Getting Started"
   short_description: "Guided first run: your first on-brand video"
   default_prompt: "Use $creativeclaw-setup to show me what Creative Claw can do and walk me through my first video."
 dependencies:

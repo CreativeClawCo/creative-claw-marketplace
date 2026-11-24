@@ -1,5 +1,5 @@
 interface:
-  display_name: "Creative Claw — Swap Characters"
+  display_name: "Creative Claw — Swap People in a Video"
   short_description: "Swap people in an existing video with your Characters"
   default_prompt: "Use $creativeclaw-swap-characters to put my Character into this video in place of the person on screen."
 dependencies:

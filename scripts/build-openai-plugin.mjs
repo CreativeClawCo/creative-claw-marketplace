@@ -79,6 +79,11 @@ if (!ui.displayName || chars(ui.displayName) > 30) fail("interface.displayName i
 if (!ui.shortDescription || chars(ui.shortDescription) > 30 || /\n/.test(ui.shortDescription)) fail("interface.shortDescription is required, one line, at most 30 characters");
 if (!ui.longDescription || chars(ui.longDescription) > 4000) fail("interface.longDescription is required, at most 4000 characters");
 if (/\b(free trial|discount|promo(tion)?|\$\d)/i.test(`${ui.shortDescription} ${ui.longDescription}`)) fail("listing text must not advertise pricing, trials, discounts or promotions");
+// The dashboard refuses more than 25 keywords, and flags a name or description that names another AI assistant, model or platform.
+if ((manifest.keywords ?? []).length > 25) fail(`keywords: at most 25 (have ${manifest.keywords.length})`);
+const OTHER_AI = /Seedance|Kling|Gemini|Nano Banana|ElevenLabs|Mureka|Lyria|Claude|Grok|Cartesia|MiniMax|HeyGen|\bVeo\b|\bSora\b/i;
+const listingText = [manifest.description, ui.displayName, ui.shortDescription, ui.longDescription, ...Object.values(openai.publication?.translations ?? {}).flatMap((t) => [t.subtitle, t.description])];
+if (listingText.some((text) => OTHER_AI.test(text ?? ""))) fail("listing name, description and translations must not name another AI assistant, model or platform");
 if (!ui.developerName || chars(ui.developerName) > 80) fail("interface.developerName is required, at most 80 characters");
 if (!ui.category) fail("interface.category is required");
 if (!Array.isArray(ui.capabilities) || ui.capabilities.length > 20 || ui.capabilities.some((c) => chars(c) > 120)) fail("interface.capabilities: at most 20 labels of at most 120 characters");
@@ -154,6 +159,13 @@ fs.cpSync(source, packageDir, {
 });
 // The package serves ChatGPT and Codex: every skill gets their connect step and notes.
 addOpenAINotes(path.join(packageDir, "skills"));
+// One 706x860 image per starter prompt, in prompt order, kept in the package only. The manifest must not
+// list them: the dashboard rejects the upload with "Remove `interface.screenshots` from the plugin manifest",
+// and the store shows no screenshots today.
+const screenshotDir = path.join(repo, "chatgpt-draft/screenshots");
+const gallery = fs.readdirSync(screenshotDir).filter((file) => /^prompt-[123]-.+-706x860\.png$/.test(file)).sort();
+if (gallery.length !== prompts.length) fail("Each starter prompt needs a 706x860 screenshot");
+if ("screenshots" in openai.interface) fail("interface.screenshots is refused by the dashboard: remove it");
 fs.writeFileSync(path.join(packageDir, "plugin.json"), JSON.stringify(manifest, null, 2) + "\n");
 // Portable packages discover root mcp.json automatically. Every update must retain
 // the existing remote MCP, even when its connection already exists in the portal.
@@ -161,11 +173,6 @@ fs.writeFileSync(path.join(packageDir, "plugin.json"), JSON.stringify(manifest, 
 fs.writeFileSync(path.join(packageDir, "mcp.json"), JSON.stringify(mcp, null, 2) + "\n");
 fs.cpSync(path.join(openaiDir, "assets"), path.join(packageDir, "assets"), { recursive: true });
 
-// The directory has no manifest field for prompt screenshots. Keep the three
-// upload-ready images in prompt order for dashboard use.
-const screenshotDir = path.join(repo, "chatgpt-draft/screenshots");
-const gallery = fs.readdirSync(screenshotDir).filter((file) => /^prompt-[123]-.+-706x860\.png$/.test(file)).sort();
-if (gallery.length !== prompts.length) fail("Each starter prompt needs a 706x860 screenshot");
 const galleryDir = path.join(packageDir, "assets/screenshots");
 fs.mkdirSync(galleryDir, { recursive: true });
 for (const file of gallery) fs.copyFileSync(path.join(screenshotDir, file), path.join(galleryDir, file));

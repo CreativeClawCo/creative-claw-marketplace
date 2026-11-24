@@ -1,6 +1,6 @@
 interface:
-  display_name: "Creative Claw — Edit Existing Media"
-  short_description: "Trim, cut, reframe, caption, and add intros to media"
+  display_name: "Creative Claw — Video Editing"
+  short_description: "Trim, reframe, caption and edit video"
   default_prompt: "Use $creativeclaw-edit-media to edit my existing footage or recording (cuts, framing, captions, audio, or an intro/outro) and deliver the finished result."
 dependencies:
   tools:

@@ -1,6 +1,6 @@
 interface:
-  display_name: "Creative Claw — Generate Video"
-  short_description: "Generate or edit one video clip with smart routing"
+  display_name: "Creative Claw — Text & Image to Video"
+  short_description: "Text to video and image to video clips"
   default_prompt: "Use $creativeclaw-generate-video to turn this brief and my references into a polished video clip."
 dependencies:
   tools:

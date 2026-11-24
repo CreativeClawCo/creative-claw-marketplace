@@ -1,6 +1,6 @@
 interface:
-  display_name: "Creative Claw — Generate Image"
-  short_description: "Generate or edit images with smart model routing"
+  display_name: "Creative Claw — AI Image Generator"
+  short_description: "Generate and edit AI images"
   default_prompt: "Use $creativeclaw-generate-image to create or edit this image with the right model."
 dependencies:
   tools:

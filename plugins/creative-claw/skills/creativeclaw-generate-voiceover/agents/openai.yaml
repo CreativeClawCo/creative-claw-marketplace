@@ -1,6 +1,6 @@
 interface:
-  display_name: "Creative Claw — Generate Voiceover"
-  short_description: "Create speech, narration, and new voices"
+  display_name: "Creative Claw — Voiceover & Text to Speech"
+  short_description: "Voiceovers and text to speech in any voice"
   default_prompt: "Use $creativeclaw-generate-voiceover to choose or design a voice and perform this script."
 dependencies:
   tools:

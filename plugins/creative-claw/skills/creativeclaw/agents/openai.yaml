@@ -1,6 +1,6 @@
 interface:
   display_name: "Creative Claw — AI Media Studio"
-  short_description: "Route complete image, video, voice, and film work"
+  short_description: "Make any video, image, voice or music"
   default_prompt: "Use $creativeclaw to choose and run the right Creative Claw workflow for my request."
 dependencies:
   tools:

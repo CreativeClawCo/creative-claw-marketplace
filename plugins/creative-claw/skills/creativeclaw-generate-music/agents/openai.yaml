@@ -1,6 +1,6 @@
 interface:
-  display_name: "Creative Claw: Generate Music"
-  short_description: "Compose music, songs, beds, and stings"
+  display_name: "Creative Claw — Songs & Music"
+  short_description: "Make songs, jingles and background music"
   default_prompt: "Use $creativeclaw-generate-music to compose a polished music track for this request."
 dependencies:
   tools:

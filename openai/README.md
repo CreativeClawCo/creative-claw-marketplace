@@ -6,7 +6,7 @@ The OpenAI directory gets the same plugin as every other marketplace, with these
 |---|---|
 | `mcp.json` | Ships at the ZIP root. It retains the approved Creative Claw server key and the ChatGPT endpoint at `https://app.creativeclaw.co/mcp/chatgpt`. |
 | `plugin.openai.json` | Contains the published package ID, version, listing, translations, onboarding skill, review cases, commerce statement and release notes. The builder adds the reviewer demo URL. |
-| `assets/` | Contains the listing and composer icon. The builder also copies the three 706 × 860 starter images from `chatgpt-draft/screenshots` into `assets/screenshots` in prompt order. The directory documents manifest fields for icons. Confirm starter image placement separately in the listing. |
+| `assets/` | Contains the listing and composer icon. The builder also copies the three 706 × 860 starter images from `chatgpt-draft/screenshots` into `assets/screenshots` in prompt order. They are not listed in the manifest: the dashboard rejects `interface.screenshots`, has no upload for these images, and the store shows none today. |
 
 Build:
 
