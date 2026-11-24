@@ -3,30 +3,11 @@ set -euo pipefail
 
 repo_root="$(cd "$(dirname "$0")/.." && pwd)"
 skill_source="$repo_root/plugins/creative-claw/skills/creativeclaw"
-focused_skill_names=(
-  creativeclaw-generate-image
-  creativeclaw-generate-video
-  creativeclaw-generate-voiceover
-  creativeclaw-generate-music
-  creativeclaw-generate-sound-effects
-  creativeclaw-edit-media
-  creativeclaw-create-reels
-  creativeclaw-create-character
-  creativeclaw-create-avatar
-  creativeclaw-plan-video
-  creativeclaw-build-film
-  creativeclaw-product-photoshoot
-  creativeclaw-create-ugc-ad
-  creativeclaw-ad-variations
-  creativeclaw-submit-feedback
-  creativeclaw-clone-voice
-  creativeclaw-swap-characters
-  creativeclaw-create-3d-model
-  creativeclaw-render-html
-  creativeclaw-setup
-  creativeclaw-budget-projects
-)
-chatgpt_overlay_root="$repo_root/skill-variants/chatgpt"
+# Every focused skill in the plugin, so a new skill is packaged without editing this list.
+focused_skill_names=()
+while IFS= read -r skill_dir; do
+  focused_skill_names+=("$(basename "$skill_dir")")
+done < <(find "$repo_root/plugins/creative-claw/skills" -mindepth 1 -maxdepth 1 -type d -name 'creativeclaw-*' | LC_ALL=C sort)
 output_dir="$repo_root/output/chatgpt-skills"
 temp_root="$(mktemp -d "${TMPDIR:-/tmp}/creativeclaw-skills.XXXXXX")"
 
@@ -35,8 +16,8 @@ cleanup() {
 }
 trap cleanup EXIT
 
-if [[ ! -f "$skill_source/SKILL.md" || ! -d "$chatgpt_overlay_root" ]]; then
-  echo "Missing canonical skill or ChatGPT overlay." >&2
+if [[ ! -f "$skill_source/SKILL.md" ]]; then
+  echo "Missing the router skill." >&2
   exit 1
 fi
 
@@ -52,16 +33,12 @@ bash "$repo_root/scripts/validate-skill-architecture.sh"
 mkdir -p "$temp_root/general/creativeclaw" "$temp_root/chatgpt/creativeclaw"
 cp -R "$skill_source/." "$temp_root/general/creativeclaw/"
 cp -R "$skill_source/." "$temp_root/chatgpt/creativeclaw/"
-cp "$chatgpt_overlay_root"/*.md "$temp_root/chatgpt/creativeclaw/references/"
+# The ChatGPT archives carry the ChatGPT and Codex layer; the general one does not.
+node "$repo_root/scripts/openai-skill-notes.mjs" "$temp_root/chatgpt"
 
 for variant in general chatgpt; do
   package_root="$temp_root/$variant"
   variant_root="$package_root/creativeclaw"
-
-  if [[ ! -f "$variant_root/references/platform-upload.md" || ! -f "$variant_root/references/platform-client.md" ]]; then
-    echo "The $variant skill is missing platform guidance." >&2
-    exit 1
-  fi
 
   # Normalize copied-file mtimes so repeated builds produce stable archives.
   find "$variant_root" -exec touch -t 202601010000 {} +
@@ -84,6 +61,7 @@ for focused_skill_name in "${focused_skill_names[@]}"; do
 
   mkdir -p "$focused_package_root/$focused_skill_name"
   cp -R "$focused_skill_source/." "$focused_package_root/$focused_skill_name/"
+  node "$repo_root/scripts/openai-skill-notes.mjs" "$focused_package_root"
   find "$focused_package_root/$focused_skill_name" -exec touch -t 202601010000 {} +
   (
     cd "$focused_package_root"

@@ -5,51 +5,12 @@ description: "Create a scripted creator-style UGC product ad with Creative Claw.
 
 # Create UGC Ad
 
-For each Creative Claw tool call that exposes it, pass the optional `skills_used` array with `creativeclaw-create-ugc-ad`, any other Creative Claw skills actually followed, and guide entries in the form `<skill-name>/<relative-guide-path>` (for example, `creativeclaw-create-ugc-ad/references/workflow-basics.md`). Include only skills and guides followed for that call. Omit attribution if the user declines tracking or the field is unavailable. Never send other plugin names, private data, or local paths.
+The steps for this live on the Creative Claw server as the `ugc-ad` workflow, so they stay current in every app.
+
+1. Call `get_workflow` with `{ "name": "ugc-ad" }` and follow the workflow it returns, step by step. It says which tools and models to use, how to prompt them and what to check. Read a guide it lists only when the workflow sends you to it.
+2. Read `get_model_params` for each model before you first use it.
+3. On the Creative Claw calls you make, include the optional `skills_used` list: `creativeclaw-create-ugc-ad`, `ugc-ad` and the guides you followed, as `get_workflow` names them. Leave it out if the user declines tracking. Never add other plugin names, private data or local paths.
+
+If the request turns out to be something else, call `find_workflows` with the user's goal and read the workflow that fits. If `get_workflow` is missing while other Creative Claw tools are there, the app still has an older tool list: work directly with the tools, reading `get_model_params` for each model.
 
 **Not connected yet?** If no Creative Claw tools (such as `list_models` or `generate_image`) are available, the plugin is installed but the server is not connected. Stop and give the user the click path: open the [Creative Claw plugin page](https://claude.ai/customize/plugins/id/3b9e3067-1092-46a5-b613-f52ddf9476ca%40anthropic-plugin-directory/connectors) in Claude, then the **Connectors** tab, press **Connect**, press **Add** if an "Add custom connector" dialog opens, and sign in. In Claude Code they run `/mcp` instead. Then they ask again. Do not substitute other tools or describe a result that was not generated.
-
-Read [video model selection](references/video/index.md), then only the selected model's guide. Model families are covered locally, with live-schema guidance for additional models; do not load every guide or require a sibling model skill. Read [Review/Auto handling](references/video/review.md) before submission.
-
-Read [shared execution guidance](references/workflow-basics.md) once per task before using tools. It covers existing authorization, model discovery, optional cost checks, imports, and recovery.
-
-Create a believable social ad with a clear commercial story while keeping product claims and creator identity accurate. This outcome skill coordinates Characters, planning, images, video, voice, and Film tools.
-
-## Reference-first pipeline
-
-Prepare the actual opening frame of every new shot before generating motion. Use an existing ready shot frame or make one at the delivery ratio. For a recurring location, reuse or design one set image and establish where everyone stands or sits in a wide frame. Build each shot image from that set, the sheet of every visible recurring Character (create missing sheets), and the established positions. Change the camera angle while preserving eyelines, wardrobe, props and positions unless the action moves them. Send the finished shot image to video as a literal start frame or a model-supported visual reference. Follow [reference production](references/video/reference-production.md) for the exact fields, including the approved start/end-frame route. Show the frames and let the user change them before any video: a still costs a fraction of a clip, and a clip made from text alone invents its own look on every attempt. Generate from text alone only when the user explicitly asks for it. To change existing footage, edit a frame first and send it with the clip, as [source edit](references/video/recipe-source-edit.md) describes; never send the clip with only a text instruction.
-
-Choose the speaking workflow before selecting the general video model. For one visible presenter delivering a recording or a line in a chosen voice, use HeyGen Avatar 6 with the approved shot image and finished speech (Turbo for drafts, H3 Max Lip Sync when HeyGen is unavailable for the account). For interacting speakers or a shot driven by body or camera movement, make the lines first and use Seedance 2.5, 2.5 Flash, 2.0 Mini or Kling 4.0 Omni with the lines kept by [exact audio](references/video/voice-in-video.md#exact-audio-keep-finished-speech-or-a-song-as-recorded), in any language. Gemini Omni 1.2 Flash is the general choice when audio input is unnecessary. Native dialogue, where the model writes the voice itself, needs a language documented for the exact model in `get_model_params`; if it is unsupported or unverified, say so and offer exact audio. A presenter rendered from audio and a clip with exact audio are already synchronized, so no lip-sync step follows. See [voice in video](references/video/voice-in-video.md). When the same Character speaks in more than one clip, make the voice before the first speaking shot, generate every line in it, and send each line with its shot by exact audio; native dialogue invents a new voice in every clip.
-
-Details: [reference production](references/video/reference-production.md). Image prompting: [image model index](references/images/index.md) and only the chosen guide.
-
-## Choose a production path
-
-Read [UGC production paths](references/video/ugc-paths.md) and choose product-only narration, a visible speaking presenter, or a hands-on demonstration/unboxing. Do not treat these as interchangeable. Use the [product-ad recipe](references/video/recipe-product-ad.md) for an end-to-end example, and use creativeclaw-create-avatar for guided presenter identity creation.
-
-## Brief and script
-
-1. Use known product, audience, platform, duration, ratio, offer, claims, creator style, and CTA details. Infer minor creative defaults; ask only for missing information that materially changes the ad, rather than presenting this list as a questionnaire.
-2. Choose a structure that fits the brief: hook, problem, discovery, demonstration, proof, and CTA. Keep spoken lines conversational: at most 2.5 words per clip second, with about 0.5 s of air at each end.
-3. Treat unverified performance, health, financial, or testimonial claims as claims to remove or qualify, not creative facts.
-
-Write and review the ad in the user's language. Preserve approved product wording, required disclosures, and spoken lines exactly unless the user requests a rewrite or translation.
-
-## Creator and product anchors
-
-- Strongly recommend `creativeclaw-create-avatar` and its Character sheet for a new recurring creator; use `creativeclaw-create-character` to maintain an existing identity.
-- When a Character speaks and the voice is unknown, ask one question: design a new voice from a description (`design_voice`, three auditions), use your own voice (recording plus consent, creativeclaw-clone-voice), or pick a stock voice. If the voice doesn't matter, pick a stock voice and name it. ElevenLabs and Fish can audition the Character's line. Google chooses its preview text. In ChatGPT the Voice Studio card saves the choice; read it back from `list_characters` rather than saving again.
-- Use approved product references. For supporting stills or packshots, follow `creativeclaw-product-photoshoot`.
-- Maintain the same creator features, wardrobe, product geometry, location logic, and screen direction across shots.
-
-## Plan and produce
-
-1. Use `creativeclaw-plan-video` to approve the script, shot list, and clean storyboard frames before costly generation.
-2. Use `create_film_project` for a multi-shot ad, persist shots with `update_film_project`, and honor the script and storyboard approval gates.
-3. Check the selected model's spoken-language guidance in `get_model_params({ model })`, then pick a path from [voice in video](references/video/voice-in-video.md). For unsupported or unverified dialogue languages, follow [spoken languages](references/video/spoken-languages.md): one image and one audio-driven generation for a single talking face; consistent images from the same character references at requested camera positions, per-shot speech and concatenation only for requested multiple shots. For documented languages, keep native dialogue for a quick one-off or speech first when the creator recurs or the script is exact. Make required speech with `creativeclaw-generate-voiceover` and lock durations from its `wordTimings`. Read the selected model guide before calling `generate_video`. Gemini Omni accepts no audio on the current route; exact recordings need an audio-driven route or an authorized `lip_sync_video` pass on a finished clip; preserve an explicit model choice. For one creator speaking an exact script to camera, use the presenter route above.
-4. Reuse the prepared speech. If the user says a word sounds wrong (the stress, an acronym, a homograph or a loanword), fix only that word as [pronunciation](references/voices/pronunciation.md) describes and regenerate before suggesting feedback. Prompt clips with no music; use `creativeclaw-generate-music` only for a requested project track and `creativeclaw-generate-sound-effects` for requested SFX. Read [media-assembly.md](references/media-assembly.md).
-5. Add per-shot voice or music with `add_audio_to_video`: `audio_mode: "mix"` keeps the clip's sound (`added_volume` about 0.3 for music under speech); the default `replace` discards it and ends at the shorter input. `assemble_film` narration replaces every shot's audio; set `with_narration: false` when shots speak. Assembly adds no captions, transitions, or full sound mix.
-
-## Review
-
-Check the first three seconds, natural delivery, product visibility, claim accuracy, continuity, audio intelligibility, pacing, safe text areas, and CTA clarity. Save multiple hooks as distinct assets only when requested; for a set of hook, voiceover or caption variations of one ad, use `creativeclaw-ad-variations`. Set the Film to final only after approval.

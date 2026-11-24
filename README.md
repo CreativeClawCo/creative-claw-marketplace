@@ -53,7 +53,7 @@ Current image, video, speech, music, and sound-effect models (Nano Banana 2, GPT
 
 ### Skills (Creative Workflows)
 
-The **creativeclaw** root skill routes mixed or unclear requests, account questions, and the curated examples catalog. Sixteen focused outcome skills own image, video, voice, music, and sound-effect generation; Characters and avatars; planning, Films, product photoshoots, and UGC ads; editing existing media (cuts, reframing, captions, audio, intros and outros); long-video Reels; explicit HTML rendering; and feedback. Model guides are packaged as references inside the outcome skills that use them; there are no per-model skills.
+The **creativeclaw** root skill finds the right workflow with `find_workflows` and handles account questions and the curated examples catalog. Thirty-six focused skills each open one Creative Claw workflow from the server with `get_workflow`: images, video clips, voiceovers, music, sound effects, Characters, films and music videos, UGC ads and ad variations, product photoshoots and product videos, static ads, dubbing, captions, edits, highlight clips, swaps, restyles, motion graphics and more. The steps and the model guides live on the server, so they stay current without a plugin update.
 
 Every OpenAI skill declares the ChatGPT MCP dependency at `https://app.creativeclaw.co/mcp/chatgpt`, matching the endpoint configured in the plugin draft. A focused skill can therefore activate directly without losing access to Creative Claw's tools.
 
@@ -248,12 +248,11 @@ plugins/
     openclaw.plugin.json   # Native OpenClaw manifest
     skills/
       creativeclaw/
-        SKILL.md           # thin router for mixed and workspace requests
-        references/        # shared asset, theme, upload, and editing workflows
-      creativeclaw-*/      # outcome skills with packaged model references
+        SKILL.md           # router: find_workflows, account and workspace requests
+      creativeclaw-*/      # one skill per outcome; each opens its server workflow with get_workflow
 skill-variants/
-  chatgpt/
-    platform-upload.md     # OpenAI Store routing for ChatGPT attachments and Codex local files
+  openai/
+    chatgpt-and-codex.md   # ChatGPT and Codex layer: uploads, jobs, connect step (OpenAI package only)
 scripts/
   build-openai-plugin.mjs  # builds the OpenAI plugin ZIP into output/openai/
   build-skill-zips.sh      # builds the Claude skill download and per-skill archives for local evals
@@ -262,7 +261,7 @@ output/                    # local generated ZIPs, ignored by Git
 
 ### Maintaining the two distributions
 
-Edit the canonical skill once under `plugins/creative-claw/skills/creativeclaw`. Put only ChatGPT-specific routing differences in `skill-variants/chatgpt/`, then build the OpenAI package:
+Skills are short pointers: the production steps are the server's workflows (`get_workflow`) and model guides (`get_model_params`), so most changes ship with the server, not the plugin. The OpenAI package adds the ChatGPT and Codex layer (`skill-variants/openai/`, applied by `scripts/openai-skill-notes.mjs`) to every skill. After a skill change, build it:
 
 ```bash
 node scripts/build-openai-plugin.mjs

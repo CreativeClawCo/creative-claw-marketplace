@@ -28,6 +28,21 @@ skill_names=(
   creativeclaw-render-html
   creativeclaw-setup
   creativeclaw-budget-projects
+  creativeclaw-adapt-ad
+  creativeclaw-brand-kit
+  creativeclaw-captions
+  creativeclaw-depth-graphics
+  creativeclaw-dub-video
+  creativeclaw-faceless-video
+  creativeclaw-motion-transfer
+  creativeclaw-music-video
+  creativeclaw-photo-effects
+  creativeclaw-product-video
+  creativeclaw-restyle-video
+  creativeclaw-static-ads
+  creativeclaw-talking-head-effects
+  creativeclaw-talking-head-reel
+  creativeclaw-thumbnail
 )
 
 for skill_name in "${skill_names[@]}"; do
@@ -95,15 +110,14 @@ if rg -n 'agentic_prompting|prompt_expansion_mode' "$skills_root" --glob '*.md';
   exit 1
 fi
 
-clone_voice_skill="$skills_root/creativeclaw-clone-voice/SKILL.md"
-if ! rg -q 'audio_asset_id' "$clone_voice_skill"; then
-  echo "Voice cloning must use the private audio_asset_id contract." >&2
-  exit 1
-fi
-if rg -n 'durable public `audio_url`|audio_url: "<durable Creative Claw audio URL>"' "$clone_voice_skill"; then
-  echo "Voice cloning skill still advertises the retired public audio_url contract." >&2
-  exit 1
-fi
+# Production steps live on the server: every focused skill except feedback opens its workflow.
+for skill_name in "${skill_names[@]:1}"; do
+  [[ "$skill_name" == creativeclaw-submit-feedback ]] && continue
+  if ! rg -q 'Call `get_workflow` with `\{ "name": "[a-z0-9-]+" \}`' "$skills_root/$skill_name/SKILL.md"; then
+    echo "$skill_name must open its server workflow with get_workflow." >&2
+    exit 1
+  fi
+done
 
 node "$repo_root/scripts/sync-skill-references.mjs" --check
 

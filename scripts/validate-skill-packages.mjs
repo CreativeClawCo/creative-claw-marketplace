@@ -2,6 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { execFileSync } from 'node:child_process';
 import { repoRoot, skillsRoot, skillNames, syncReferences } from './sync-skill-references.mjs';
+import { NOTE_FILE, noteSource, withOpenAINote } from './openai-skill-notes.mjs';
 
 function filesIn(directory, prefix = '') {
   return fs.readdirSync(directory, { withFileTypes: true }).flatMap(entry => {
@@ -32,15 +33,16 @@ for (const name of skillNames()) {
   // One named skill folder at the archive root, as skill uploaders require.
   if (listed.some(entry => !entry.startsWith(`${name}/`))) throw new Error(`Entries outside the ${name}/ folder: ${archive}`);
   const actual = listed.filter(entry => !entry.endsWith('/')).map(entry => entry.slice(name.length + 1)).sort();
-  const expected = entries;
+  // The ChatGPT archives add the ChatGPT and Codex notes to every skill.
+  const expected = [...entries, NOTE_FILE].sort();
   if (!actual.includes('SKILL.md')) throw new Error(`Missing ${name}/SKILL.md: ${archive}`);
   if (JSON.stringify(actual) !== JSON.stringify(expected)) throw new Error(`Archive entry mismatch: ${archive}`);
-  for (const entry of entries) {
-    let expectedSource = path.join(source, entry);
-    const overlay = path.join(repoRoot, 'skill-variants/chatgpt', path.basename(entry));
-    if (name === 'creativeclaw' && entry.startsWith('references/') && fs.existsSync(overlay)) expectedSource = overlay;
+  for (const entry of expected) {
     const archived = execFileSync('unzip', ['-p', archive, `${name}/${entry}`], { maxBuffer: 8 * 1024 * 1024 });
-    if (!archived.equals(fs.readFileSync(expectedSource))) throw new Error(`Stale archive content: ${name}/${entry}`);
+    const wanted = entry === NOTE_FILE ? fs.readFileSync(noteSource)
+      : entry === 'SKILL.md' ? Buffer.from(withOpenAINote(fs.readFileSync(path.join(source, entry), 'utf8')))
+      : fs.readFileSync(path.join(source, entry));
+    if (!archived.equals(wanted)) throw new Error(`Stale archive content: ${name}/${entry}`);
     filesChecked++;
   }
 }

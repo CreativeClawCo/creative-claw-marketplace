@@ -5,37 +5,12 @@ description: "Create a coherent set of campaign-ready product images with Creati
 
 # Product Photoshoot
 
-For each Creative Claw tool call that exposes it, pass the optional `skills_used` array with `creativeclaw-product-photoshoot`, any other Creative Claw skills actually followed, and guide entries in the form `<skill-name>/<relative-guide-path>` (for example, `creativeclaw-product-photoshoot/references/workflow-basics.md`). Include only skills and guides followed for that call. Omit attribution if the user declines tracking or the field is unavailable. Never send other plugin names, private data, or local paths.
+The steps for this live on the Creative Claw server as the `product-photoshoot` workflow, so they stay current in every app.
+
+1. Call `get_workflow` with `{ "name": "product-photoshoot" }` and follow the workflow it returns, step by step. It says which tools and models to use, how to prompt them and what to check. Read a guide it lists only when the workflow sends you to it.
+2. Read `get_model_params` for each model before you first use it.
+3. On the Creative Claw calls you make, include the optional `skills_used` list: `creativeclaw-product-photoshoot`, `product-photoshoot` and the guides you followed, as `get_workflow` names them. Leave it out if the user declines tracking. Never add other plugin names, private data or local paths.
+
+If the request turns out to be something else, call `find_workflows` with the user's goal and read the workflow that fits. If `get_workflow` is missing while other Creative Claw tools are there, the app still has an older tool list: work directly with the tools, reading `get_model_params` for each model.
 
 **Not connected yet?** If no Creative Claw tools (such as `list_models` or `generate_image`) are available, the plugin is installed but the server is not connected. Stop and give the user the click path: open the [Creative Claw plugin page](https://claude.ai/customize/plugins/id/3b9e3067-1092-46a5-b613-f52ddf9476ca%40anthropic-plugin-directory/connectors) in Claude, then the **Connectors** tab, press **Connect**, press **Add** if an "Add custom connector" dialog opens, and sign in. In Claude Code they run `/mcp` instead. Then they ask again. Do not substitute other tools or describe a result that was not generated.
-
-Read [shared execution guidance](references/workflow-basics.md) once per task before using tools. It covers existing authorization, model discovery, optional cost checks, imports, and recovery.
-
-Produce a consistent image set, not a collection of unrelated prompts. The product's geometry, label, color, materials, and brand treatment are the locked anchors.
-
-## Prepare
-
-1. Confirm the channel, audience, aspect ratios, number of deliverables, background requirements, required copy, and product details that must be exact.
-2. Use `search_assets` to find existing product references, logos, and campaign assets. Import missing references with the platform upload flow.
-3. Call `get_theme` for branded work and identify the usable palette, typography, tone, and logo rules.
-4. Write a compact shot list, such as hero, clean packshot, detail macro, in-use lifestyle, scale/context, and campaign variation. Include only shots the user needs.
-
-Conduct the workflow in the user's language and preserve all approved product and campaign copy exactly.
-
-## Generate
-
-1. Default to `image/nano-banana-2` because it is the cost-efficient recommendation for most product work.
-2. Keep targeted product corrections on `image/nano-banana-2` (Nano Banana 2) first. Escalate to `image/gpt-image-2.6-sunburst` when quality is the priority, a previous result disappoints, or composition or exact typography needs more control. Use `image/seedream-5.5` when the user requests Seedream, needs a transparent product cutout, or wants a flat design split into editable layers. After a model moderation refusal, Seedream may also be offered as the tool's suggested alternative, with user confirmation before another paid generation; it applies its own safety checks and may still reject the request.
-3. Discover with `list_models({ category: "image" })` only when selecting a model; fetch missing settings with `get_model_params` and reuse them across the set. Estimate planned images only when the user asks about cost or sets a budget.
-4. Establish a hero direction, reusing an approved reference when supplied. Follow requested review stages; once the user approves the complete set, generate the remaining shots. Repeat locked product facts and use the selected hero as a reference where supported.
-5. Preserve exact quoted copy, reference labels, dialogue, timecodes, colors, and approved layout or edit constraints in the prompt.
-
-## Quality control
-
-Compare every image against the source product for silhouette, proportions, cap or closure, logo, label text, materials, colors, and reflections. Also check shadows, contact with surfaces, crop safety, and consistency across the set. Reject attractive images that misrepresent the product.
-
-Tag approved assets consistently with product, campaign, shot type, aspect ratio, and status so video and UGC workflows can reuse them.
-
-For video, save a neutral packshot and a label/logo close-up as named anchors. Generate video keyframes at the video's ratio, not the campaign ratio.
-
-For a product used on camera, build one reference sheet from the actual front, side, open, closed and component photos. Check the part count, controls and label orientation. Before animating a handoff or demonstration, prepare the shot image showing the correct grip and product state. Use that frame in the video.

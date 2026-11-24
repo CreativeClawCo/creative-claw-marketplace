@@ -1,6 +1,6 @@
 {
   "name": "app-6a2528e2c49c8191a8015ba5475f177e",
-  "version": "5.7.3",
+  "version": "5.8.0",
   "keywords": [
     "ai video generator",
     "video generation",
@@ -131,7 +131,7 @@
         "commerce_description": "Creative Claw does not sell anything in ChatGPT. When a feature needs a different plan or more credits, the plugin explains why and links to an informational page about plans."
       },
       "publication": {
-        "release_notes": "Films reuse character sheets and scene frames. Choose a speaking workflow by shot and language, find stock voices by accent, correct a pronunciation on the speech card, and find visual references for a set. Includes updated motion, swaps and 3D workflows.",
+        "release_notes": "Every skill now opens its Creative Claw workflow from the server, so the steps stay current without a plugin update. New skills for dubbing, captions, static ads, product videos, thumbnails, music videos, restyles, motion transfer, photo effects, talking-head reels and effects, faceless videos, brand kits, remaking a reference ad, and graphics behind the person.",
         "translations": {
           "de-DE": {
             "subtitle": "Videos und Voiceovers",

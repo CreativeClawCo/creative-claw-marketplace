@@ -1,0 +1,13 @@
+interface:
+  display_name: "Creative Claw — Restyle or Relight a Video"
+  short_description: "Relight your video or turn it into animation"
+  default_prompt: "Use $creativeclaw-restyle-video for this."
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "creative-claw"
+      description: "Creative Claw media, asset, Character, Film, and feedback tools"
+      transport: "streamable_http"
+      url: "https://app.creativeclaw.co/mcp/chatgpt"
+policy:
+  allow_implicit_invocation: true

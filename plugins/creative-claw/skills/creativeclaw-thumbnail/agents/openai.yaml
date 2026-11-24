@@ -1,0 +1,13 @@
+interface:
+  display_name: "Creative Claw — Thumbnail"
+  short_description: "Make a video thumbnail or reel cover"
+  default_prompt: "Use $creativeclaw-thumbnail for this."
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "creative-claw"
+      description: "Creative Claw media, asset, Character, Film, and feedback tools"
+      transport: "streamable_http"
+      url: "https://app.creativeclaw.co/mcp/chatgpt"
+policy:
+  allow_implicit_invocation: true

@@ -1,0 +1,13 @@
+interface:
+  display_name: "Creative Claw — Graphics Behind the Person"
+  short_description: "Titles and logos behind the person in a video"
+  default_prompt: "Use $creativeclaw-depth-graphics for this."
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "creative-claw"
+      description: "Creative Claw media, asset, Character, Film, and feedback tools"
+      transport: "streamable_http"
+      url: "https://app.creativeclaw.co/mcp/chatgpt"
+policy:
+  allow_implicit_invocation: true

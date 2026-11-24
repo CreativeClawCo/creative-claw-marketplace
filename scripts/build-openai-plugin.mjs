@@ -19,6 +19,7 @@ import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { addOpenAINotes } from "./openai-skill-notes.mjs";
 
 const repo = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const source = path.join(repo, "plugins/creative-claw");
@@ -151,9 +152,8 @@ fs.cpSync(source, packageDir, {
     path.basename(src) !== ".DS_Store" &&
     !(path.dirname(src) === source && EXCLUDE.has(path.basename(src))),
 });
-// The OpenAI package serves ChatGPT and Codex, so the router skill carries the ChatGPT
-// platform notes, exactly as build-skill-zips.sh packages it.
-fs.cpSync(path.join(repo, "skill-variants/chatgpt"), path.join(packageDir, "skills/creativeclaw/references"), { recursive: true });
+// The package serves ChatGPT and Codex: every skill gets their connect step and notes.
+addOpenAINotes(path.join(packageDir, "skills"));
 fs.writeFileSync(path.join(packageDir, "plugin.json"), JSON.stringify(manifest, null, 2) + "\n");
 // Portable packages discover root mcp.json automatically. Every update must retain
 // the existing remote MCP, even when its connection already exists in the portal.

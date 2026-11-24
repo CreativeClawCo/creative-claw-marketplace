@@ -9,7 +9,6 @@ For each Creative Claw tool call that exposes it, pass the optional `skills_used
 
 **Not connected yet?** If no Creative Claw tools (such as `list_models` or `generate_image`) are available, the plugin is installed but the server is not connected. Stop and give the user the click path: open the [Creative Claw plugin page](https://claude.ai/customize/plugins/id/3b9e3067-1092-46a5-b613-f52ddf9476ca%40anthropic-plugin-directory/connectors) in Claude, then the **Connectors** tab, press **Connect**, press **Add** if an "Add custom connector" dialog opens, and sign in. In Claude Code they run `/mcp` instead. Then they ask again. Do not substitute other tools or describe a result that was not generated.
 
-Read [shared execution guidance](references/workflow-basics.md) once per task before using tools. It covers existing authorization, model discovery, optional cost checks, imports, and recovery.
 
 Turn the user's report into one concise, useful `submit_feedback` call. Feedback is a product-feedback channel, not a refund request form, a generation tool, or a promise of compensation, reply, or roadmap commitment.
 

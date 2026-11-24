@@ -5,54 +5,12 @@ description: "Generate or edit a single image with Creative Claw and route it to
 
 # Generate Image
 
-For each Creative Claw tool call that exposes it, pass the optional `skills_used` array with `creativeclaw-generate-image`, any other Creative Claw skills actually followed, and guide entries in the form `<skill-name>/<relative-guide-path>` (for example, `creativeclaw-generate-image/references/workflow-basics.md`). Include only skills and guides followed for that call. Omit attribution if the user declines tracking or the field is unavailable. Never send other plugin names, private data, or local paths.
+The steps for this live on the Creative Claw server as the `image` workflow, so they stay current in every app.
+
+1. Call `get_workflow` with `{ "name": "image" }` and follow the workflow it returns, step by step. It says which tools and models to use, how to prompt them and what to check. Read a guide it lists only when the workflow sends you to it.
+2. Read `get_model_params` for each model before you first use it.
+3. On the Creative Claw calls you make, include the optional `skills_used` list: `creativeclaw-generate-image`, `image` and the guides you followed, as `get_workflow` names them. Leave it out if the user declines tracking. Never add other plugin names, private data or local paths.
+
+If the request turns out to be something else, call `find_workflows` with the user's goal and read the workflow that fits. If `get_workflow` is missing while other Creative Claw tools are there, the app still has an older tool list: work directly with the tools, reading `get_model_params` for each model.
 
 **Not connected yet?** If no Creative Claw tools (such as `list_models` or `generate_image`) are available, the plugin is installed but the server is not connected. Stop and give the user the click path: open the [Creative Claw plugin page](https://claude.ai/customize/plugins/id/3b9e3067-1092-46a5-b613-f52ddf9476ca%40anthropic-plugin-directory/connectors) in Claude, then the **Connectors** tab, press **Connect**, press **Add** if an "Add custom connector" dialog opens, and sign in. In Claude Code they run `/mcp` instead. Then they ask again. Do not substitute other tools or describe a result that was not generated.
-
-Read [shared execution guidance](references/workflow-basics.md) once per task before using tools. It covers existing authorization, model discovery, optional cost checks, imports, and recovery.
-
-Turn a brief and optional references into a finished image. This is the primary skill for a clear, general image-generation or image-editing request; the selected packaged model reference supplies deeper prompting advice. If the user explicitly requests HTML/CSS rendering or a deterministic code-based PNG, use `creativeclaw-render-html` instead.
-
-## Workflow
-
-1. Establish the subject, intended use, aspect ratio, style, text requirements, and which details must remain exact.
-2. Use `search_assets` for likely reusable references. Import attachments or local files with the platform upload flow before generation. For a real place, object or look the user has no picture of, `search_images` finds web references. Use the numbered results on the card. When choosing by sight, inspect the contact sheet with `load_image({ search_id, indices })` and `check_job`. Import the selected full-size `image_url` with `upload_asset` and use the workspace URL as a reference for an original image. Preserve a supplied product or Character as the identity reference.
-3. When the user asks for examples, inspiration, styles, or a close starting point, or an open brief would benefit from concrete choices, call `search_examples` for a small filtered set, then load only the chosen example with `search_examples({ id })`. Do not search automatically for an already precise brief.
-4. For branded work, call `get_theme` and carry the relevant colors, typography, logo treatment, and visual rules into the prompt.
-5. Use `list_models({ category: "image" })` when selection is unresolved; for a known choice, use `get_model_params` directly and reuse its current-task schema.
-6. Generate one direction unless several were requested. Estimate with `operation: "image"` only for user-requested cost/budget help.
-7. Call `generate_image`. If a downstream tool needs a queued result URL, use `check_job`; otherwise let the inline viewer monitor it.
-8. Inspect the result against the non-negotiables, revise the smallest failing element, and tag the approved asset.
-
-## Model routing
-
-Nano Banana 2 is the everyday default. GPT Image Sunburst is our highest-quality choice. Prefer `image/gpt-image-2.6-sunburst` for demanding likeness, detailed products, typography or tightly controlled edits. If the user dislikes a result, identify what missed, offer Sunburst with the original references and a focused correction, and run the revision when requested. Preserve an explicit model choice.
-
-- Default to `image/nano-banana-2` (Nano Banana 2) for most generation and editing, including targeted corrections that should preserve the existing scene. Keep the source aspect ratio unless reframing is requested and inspect the result for unintended changes. Exact preservation outside the edited region requires compositing that region back into the original.
-- Use `image/gpt-image-2.6-sunburst` for complex professional assets, demanding typography, multi-reference composition, or controlled edits. Nano Banana Pro remains available when explicitly selected.
-- Use `image/gpt-image-2.6-sunburst` for layout corrections that move, scale, or re-space existing text and logos, such as a Story safe-zone fix. Nano Banana 2 tends to return that kind of edit with the layout unchanged. State target positions as percentages of the canvas height, then measure them on the result.
-- Use `image/gpt-image-2.6-flare` for fast, high-quality everyday OpenAI image generation and editing.
-- Use `image/seedream-5.5` for product and marketing imagery, transparent PNG assets (`extras.background: "transparent"`), and splitting a flat image into editable layers (`extras.layer_decomposition`). Use Nano Banana 2 for everyday edits and Sunburst when likeness, lettering or fine detail is the part that failed. After a model moderation refusal, Seedream may also be offered as the tool's suggested alternative, with user confirmation before another paid generation; it applies its own safety checks and may still reject the request.
-- For a transparent background, use GPT Image 2.6 (Flare or Sunburst) with `extras.background: "transparent"`, or `remove_background` for an existing image.
-- Honor an explicit model choice. Read [the selected image model guide](references/images/index.md) for exact prompting and reference syntax.
-
-Use other image models only when the user asks for them.
-
-## Prompt and reference contract
-
-Build prompts in this order: deliverable and subject; composition; must-preserve facts; environment; lighting and camera; material detail; aesthetic; required text; exclusions.
-
-Work in the user's language. Keep supplied visible copy verbatim, including spelling, punctuation, and script direction; verify the selected model's typography and language support when text accuracy matters.
-
-- `image_url` is the primary reference. Additional reference support is model-specific, so inspect `get_model_params` instead of assuming a fixed count.
-- Set the output shape with `aspect_ratio`; `size` is legacy.
-- When the image tool exposes `character_ids`, supply the visible saved Characters there and name their placements in the prompt. The set image goes in `image_url` and other scene references in `extras.image_urls`. On a route without Character selectors, use the actual sheet URLs as supported image inputs.
-- Video keyframes: use the same image model as the rest of the project, `aspect_ratio` = the video's ratio, anchors in `image_url` + `extras.image_urls` with roles named, one full-bleed frame with no text, grid or labels.
-- Preserve exact quoted copy, reference labels, dialogue, timecodes, colors, and approved layout or edit constraints in the prompt.
-- Never invent unsupported parameters. Use only fields returned by the tool schema and selected model.
-
-## Completion standard
-
-Confirm that subject identity or product geometry, composition, text, crop, and brand rules match the brief. A job ID is not a finished image. Name and tag approved outputs so later video or campaign work can retrieve them.
-
-When the user likes a generated look or voice, offer once to save it as a named Character for future work. Check `list_characters` first. An explicit request to save the look or voice is agreement. Update the existing Character or create one when authorized with the approved image or selected voice. Reuse its ID for later shots or speech. A voice-only Character works for a narrator. If the voice card already saved the selection, reuse that record.
