@@ -1,11 +1,11 @@
 ---
 name: creativeclaw-generate-video
-description: "Generate, animate, extend, reframe, or transform one video clip with Creative Claw. Use for a clear single-clip request when the user has not asked for a storyboard, UGC ad, or complete multi-shot film."
+description: "Generate, animate, extend, reframe, or transform a video of up to 30 seconds with Creative Claw, from one shot to a short scene, story or ad with several cuts in one place, made from approved frames. Use for any video of 30 seconds or less, unless it is a UGC ad."
 ---
 
 # Generate Video
 
-**What comes out:** One generated video clip, about 3 to 30 seconds, made from an approved start frame or references: a new shot, an animated photo, a person saying given lines, or an edit or extension of an existing clip.
+**What comes out:** One generated video of 3 to 30 seconds, one shot or several cuts in one place, made from approved frames: a new shot, a short scene or story, an animated photo, a person saying given lines, or an edit or extension of an existing clip.
 
 **What it needs:** What the clip shows, or the photo or clip to start from. Optional: ratio, length, spoken lines and voice, a saved Character, product photos, a model.
 
@@ -13,7 +13,7 @@ description: "Generate, animate, extend, reframe, or transform one video clip wi
 
 1. Take the brief
 2. Pick the job
-3. Prepare the frames
+3. Make the frames first
 4. Make the speech first
 5. Write the prompt
 6. Settings

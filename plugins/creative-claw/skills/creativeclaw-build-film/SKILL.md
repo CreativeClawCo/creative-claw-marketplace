@@ -1,6 +1,6 @@
 ---
 name: creativeclaw-build-film
-description: "Produce a complete multi-shot Creative Claw film: a full plan the user can review, storyboards and clips with one batch approval, take and scene versioning, and an exported cut. Use for ads, explainers, music videos, or stories that require several coordinated clips."
+description: "Produce a complete multi-shot Creative Claw film: a full plan the user can review, storyboards and clips with one batch approval, take and scene versioning, and an exported cut. Use for films, ads, explainers, music videos, or stories longer than 30 seconds or set in several places; up to 30 seconds in one place is one clip (creativeclaw-generate-video)."
 ---
 
 # Build Film

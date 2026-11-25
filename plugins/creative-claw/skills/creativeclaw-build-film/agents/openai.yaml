@@ -1,7 +1,7 @@
 interface:
   display_name: "Creative Claw — Short Films"
-  short_description: "Make a short film with consistent characters"
-  default_prompt: "Use $creativeclaw-build-film to produce this multi-shot film from planning through an assembled first cut."
+  short_description: "Films over 30 seconds with consistent characters"
+  default_prompt: "Use $creativeclaw-build-film to produce this film from planning through an assembled first cut."
 dependencies:
   tools:
     - type: "mcp"
